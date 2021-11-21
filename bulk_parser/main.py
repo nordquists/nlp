@@ -19,13 +19,14 @@ CURRENT_DIRECTORY = '.'
 
 
 
-DOWNLOAD_LINKS_FILE = 'links_2019.txt'
+DOWNLOAD_LINKS_FILE = ['links_2018.txt','links_2019.txt','links_2020.txt']
 
 file_links = []
 
-with open(DOWNLOAD_LINKS_FILE, 'r') as f:
-    for line in f:
-        file_links.append(line)
+for link in DOWNLOAD_LINKS_FILE:
+    with open(link, 'r') as f:
+        for line in f:
+            file_links.append(line)
 
 for link in file_links:
     print("CURRENT_LINK: " + link)

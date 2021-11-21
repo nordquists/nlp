@@ -1,0 +1,875 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US20110037839A1 - Industrial robot, and methods for determining the position of an industrial robot relative to an object 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA83094127">
+<div class="abstract" id="p-0001" num="0000">The invention relates to methods for determining the position of an industrial robot (<b>1, 81</b>) relative to an object (M, <b>82</b>) as well as correspondingly equipped industrial robots (<b>1, 81</b>). In one of said methods, a 2D camera (<b>17</b>) that is mounted on the industrial robot (<b>1</b>) is moved into at least two different positions, an image (<b>20, 30</b>) of an object (M) that is stationary relative to the surroundings of the industrial robot (<b>1</b>) is generated in each of the positions, the images (<b>20, 30</b>) are displayed, a graphic model (<b>16</b>) of the object (M) is superimposed on the images (<b>20, 30</b>), points (<b>21</b>A, <b>22</b>A, <b>31</b>A, <b>32</b>A) of the graphic model (<b>16</b>) are manually assigned to corresponding points (<b>21</b>A, <b>21</b>B, <b>31</b>A, <b>31</b>B) in the two images (<b>20, 30</b>), and the position of the industrial robot (<b>1</b>) relative to the object (M) is determined on the basis of the points (<b>21</b>A, <b>22</b>A, <b>31</b>A, <b>32</b>A) of the model (<b>16</b>) assigned to the corresponding points (<b>21</b>B, <b>22</b>B, <b>31</b>B, <b>32</b>B).</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><ul class="description" lang="EN" load-source="patent-office" mxw-id="PDES40723283">
+<li> <para-num num="[0001]"> </para-num> <div class="description-line" id="p-0002" num="0001">The invention concerns industrial robots and methods to determine the location of an industrial robot relative to an object.</div>
+</li> <li> <para-num num="[0002]"> </para-num> <div class="description-line" id="p-0003" num="0002">DE 102 49 786 A1 discloses a method for referencing a robot relative to a patient of whom an image is respectively generated from at least two positions with at least one camera attached to the robot. Within the scope of this method, a reference point of the patient is selected in one of the images, a relation of the selected reference point in three-dimensional space is established via position data of the reference point of both images, and the position of the robot relative to the patient is correlated.</div>
+</li> <li> <para-num num="[0003]"> </para-num> <div class="description-line" id="p-0004" num="0003">In order to determine the location of an industrial robot relative to an object, WO 2004/071717 A1 discloses registering and storing a plurality of measurement points on the surface of the object, determining the orientation and the position of a CAD model of the object relative to a coordinate system of the industrial robot and establishing a resulting deviation for at least some of the measurement points and the corresponding points in the model. For the registration of the measurement points, the industrial robot approaches the measurement points with a measurement prod which comprises, for example, a no-contact sensor.</div>
+</li> <li> <para-num num="[0004]"> </para-num> <div class="description-line" id="p-0005" num="0004">A determination of the location of an industrial robot relative to an object that is based on the registration of the measurement points on the surface of the object can, however, be relatively difficult if, for example, necessary measurement points are relatively difficult to reach or cannot even be reached at all with the industrial robot.</div>
+</li> <li> <para-num num="[0005]"> </para-num> <div class="description-line" id="p-0006" num="0005">The object of the invention is therefore to specify a simpler method to determine the location of an industrial robot relative to an object, and a corresponding industrial robot.</div>
+</li> <li> <para-num num="[0006]"> </para-num> <div class="description-line" id="p-0007" num="0006">The object of the invention is achieved via a method to determine the location of an industrial robot relative to an object, possessing the following method steps:
+</div> </li> <ul> <li id="ul0001-0001" num="0000"> <ul> <li id="ul0002-0001" num="0007">movement of a 2D camera attached to an industrial robot into at least two different positions by means of said industrial robot,</li> <li id="ul0002-0002" num="0008">in each of the positions, generation by means of the camera of a two-dimensional image data set associated with an image of an object, wherein the object is immobile relative to the environment of the industrial robot,</li> <li id="ul0002-0003" num="0009">display of the images by means of a display device and superimposition of a graphical model in the displayed images, wherein the graphical model is at least a partial model of the object and is described in coordinates relative to coordinates of the industrial robot,</li> <li id="ul0002-0004" num="0010">manual association of model points of the graphical model with corresponding image points in the two images and</li> <li id="ul0002-0005" num="0011">determination of the location of the industrial robot relative to the object based on the associated model points of the model at the corresponding image points in the images, the positions of the camera that are associated with the images and the position of the camera relative to the industrial robot.</li> </ul> </li> </ul>
+<li> <para-num num="[0012]"> </para-num> <div class="description-line" id="p-0008" num="0012">In the processing of the object (for example a work piece) with the industrial robot, knowledge of the location of the object relative to the industrial robot (for example relative to its base point) is necessary. The location of the industrial robot relative to the object is in particular its position and orientation relative to the industrial robot [sic].</div>
+</li> <li> <para-num num="[0013]"> </para-num> <div class="description-line" id="p-0009" num="0013">In order to determine this location, according to the invention respective images of the object are generated from at least two different positions of the industrial robot, i.e. at least two different image data sets associated with the object are generated by means of the 2D camera. The images can only partially or also completely image the object. Furthermore, more than two images of the object can also be generated with the camera from different positions. Via the use of only one 2D camera (which can be a CCD sensor or a digital camera, for example), the method according to the invention can be implemented relatively cheaply.</div>
+</li> <li> <para-num num="[0014]"> </para-num> <div class="description-line" id="p-0010" num="0014">The 2D camera is attached to an industrial robot (for example on the flange or an axle of the industrial robot) and is accordingly brought into the at least two positions via movement of the industrial robot, i.e. via movement of its axles.</div>
+</li> <li> <para-num num="[0015]"> </para-num> <div class="description-line" id="p-0011" num="0015">The placement of the camera on the industrial robot is known, such that the coordinates of the camera relative to the industrial robot are likewise known or can be calculated based on the axle positions of the axles of the industrial robot at the positions.</div>
+</li> <li> <para-num num="[0016]"> </para-num> <div class="description-line" id="p-0012" num="0016">If the image data sets are generated, the corresponding images are displayed with the display device and the graphical model of the object is overlaid in the images. It is thereby possible that initially only one of the images is displayed and the model is overlaid in this image. However, it is also possible to display all images simultaneously and to overlay the model in all images.</div>
+</li> <li> <para-num num="[0017]"> </para-num> <div class="description-line" id="p-0013" num="0017">The graphical model but does not necessarily need to be a complete model of the object. The model can also be only a partial model of the object.</div>
+</li> <li> <para-num num="[0018]"> </para-num> <div class="description-line" id="p-0014" num="0018">The model can also be what is known as a graphical wire frame model or a partial graphical wire frame model of the object. A wire frame model (which is designated in English as a “wireframe”) in particular models three-dimensional objects in a CAD, wherein surfaces of the object in the wire frame model are represented as lines, and it is also possible in particular to visualize only edges. If the wire frame model is only a partial wire frame model, this then comprises only some of these lines, for example, and in particular particularly prominent lines or corners of the object.</div>
+</li> <li> <para-num num="[0019]"> </para-num> <div class="description-line" id="p-0015" num="0019">According to the invention, manual model points of the model are subsequently associated with corresponding image points in the images.</div>
+</li> <li> <para-num num="[0020]"> </para-num> <div class="description-line" id="p-0016" num="0020">Furthermore, these same model points of the model do not need to be associated with corresponding image points in both images.</div>
+</li> <li> <para-num num="[0021]"> </para-num> <div class="description-line" id="p-0017" num="0021">The association of the model points and image points can, for example, ensue by means of a pointer device with which, for example, a vertex of the wire frame or partial wire frame model is selected. The selection ensues by means of the method known as “object capture” in CAD engineering, for example. The pointer device is a computer mouse, for example.</div>
+</li> <li> <para-num num="[0022]"> </para-num> <div class="description-line" id="p-0018" num="0022">If the model point in the model is selected, this can then be manually dragged with the pointer device to the corresponding image point in one of the images. A manual action has the advantage that a person can in particular relatively easily recognize vertices shown in the images, for example using tapering edges or shadows. The possibility of enlarging an image section comprising the relevant image point or of an emphasis of image edges can support the precision of the association, whereby a possible occurring error in the association can be reduced.</div>
+</li> <li> <para-num num="[0023]"> </para-num> <div class="description-line" id="p-0019" num="0023">The association of the model points and image point can also ensue with what is known as a six-dimensional mouse (space mouse). A space mouse is an input device with which six degrees of freedom can be modified simultaneously. It can be used in the association of the model points and image points in order, for example, to shift the location of the overlaid model relative to the image of the object until a desired coverage is achieved.</div>
+</li> <li> <para-num num="[0024]"> </para-num> <div class="description-line" id="p-0020" num="0024">For the determination of the location of the object relative to the industrial robot, at least four different image points are necessary if the industrial robot has six degrees of freedom and the distances between the camera and the object at the two positions are not known, which will normally be the case. However, it is necessary to associate at least two different image points in at least two images with the model, wherein it is preferred to use an identical number of image points per image. More than the minimum mathematically necessary number of point associations can be made. If an operator communicates the required precision of the relative location of the object that is to be determined, with every additional point association it can be checked and registered until the required precision can be satisfied.</div>
+</li> <li> <para-num num="[0025]"> </para-num> <div class="description-line" id="p-0021" num="0025">If sufficient model points and image points are associated, the location of the industrial robot can then be determined relative to the object since the positions of the camera and the position of the camera relative to the industrial robot are additionally known.</div>
+</li> <li> <para-num num="[0026]"> </para-num> <div class="description-line" id="p-0022" num="0026">In an industrial robot with six degrees of freedom and given a lack of knowledge of the distance between the object and the camera, as already mentioned at least four associated image points are required that are distributed across the at least two images.</div>
+</li> <li> <para-num num="[0027]"> </para-num> <div class="description-line" id="p-0023" num="0027">The location of the object relative to the industrial robot can then, for example, ensue by solving a regular or overdetermined equation system with full rank) by means of which what is known as a 6 DOF (“6 degrees of freedom”) transformation can be implemented. The model in the images can then also be displayed corresponding to the solved transformation.</div>
+</li> <li> <para-num num="[0028]"> </para-num> <div class="description-line" id="p-0024" num="0028">If the number of associated points is not yet sufficient, the model can then be positioned in the images such that it comes to cover the associated points.</div>
+</li> <li> <para-num num="[0029]"> </para-num> <div class="description-line" id="p-0025" num="0029">The transformation can ensue as follows, for example:</div>
+</li> <li> <para-num num="[0030]"> </para-num> <div class="description-line" id="p-0026" num="0030">A selected image point B<sub>i </sub>can be represented as follows in homogeneous coordinate notation in a two-dimensional coordinate system of the camera:</div>
+</li> <li> <div class="description-line" id="p-0027" num="0000">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<msub>
+<mi>B</mi>
+<mi>i</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<mo>(</mo>
+<mtable>
+<mtr>
+<mtd>
+<mi>x</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>y</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>)</mo>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0031]"> </para-num> <div class="description-line" id="p-0028" num="0031">The model point P<sub>i </sub>corresponding to this in the three-dimensional coordinate system of the model can be represented as follows in homogeneous coordinate notation:</div>
+</li> <li> <div class="description-line" id="p-0029" num="0000">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mrow>
+<msub>
+<mi>P</mi>
+<mi>i</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<mo>(</mo>
+<mtable>
+<mtr>
+<mtd>
+<mi>x</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>y</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>z</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>)</mo>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0032]"> </para-num> <div class="description-line" id="p-0030" num="0032">The transformation matrix for a transformation from a coordinate system of the object into the coordinate system of the image in the i-th position of the camera reads:
+</div> </li> <ul> <li id="ul0003-0001" num="0000"> <ul> <li id="ul0004-0001" num="0033">T<sub>i </sub> </li> </ul> </li> </ul>
+<li> <para-num num="[0034]"> </para-num> <div class="description-line" id="p-0031" num="0034">for example, if images are acquired from two positions, then the transformation matrix for the transformation from the coordinate system of the object into the coordinate system of the image in the 1st position reads</div>
+</li> <li> <para-num num="[0035]"> </para-num> <div class="description-line" id="p-0032" num="0035">and the transformation matrix for the transformation from the coordinate system of the object into the coordinate system of the image in the 2nd position reads
+</div> </li> <ul> <li id="ul0005-0001" num="0000"> <ul> <li id="ul0006-0001" num="0036">T<sub>2 </sub> </li> </ul> </li> </ul>
+<li> <para-num num="[0037]"> </para-num> <div class="description-line" id="p-0033" num="0037">The projection matrix for the projection of the coordinates of the i-th image point onto the coordinates of the model reads as follows, for example:</div>
+</li> <li> <div class="description-line" id="p-0034" num="0000">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>Proj</mi>
+<mi>i</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mrow>
+<mn>1</mn>
+<mo>/</mo>
+<msub>
+<mi>d</mi>
+<mi>i</mi>
+</msub>
+</mrow>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>,</mo>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0038]"> </para-num> <div class="description-line" id="p-0035" num="0038">wherein d<sub>i </sub>is a camera position-dependent distance parameter of the position of the camera at the i-th position. The distance parameter d<sub>i </sub>corresponds, for example, to the distance between the focal point of the camera and the projection plane (image plane) of the perspective projection as it is described, for example, by James D. Foley et. al. in “Computer Graphics Principles and Practice”, Addison-Wesley Publishing Company, Reading, Mass., 1992, P. 255.</div>
+</li> <li> <para-num num="[0039]"> </para-num> <div class="description-line" id="p-0036" num="0039">A normalization of the homogeneous coordinate can ensue for the further calculation of the location of the object relative to the industrial robot, such that the distance parameter d<sub>i </sub>of the projection matrix Proj<sub>i </sub>receives the value “1”. This can be mathematically expressed as follows:</div>
+</li> <li> <div class="description-line" id="p-0037" num="0000">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mi>norm</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mover>
+<mi>k</mi>
+<mo>→</mo>
+</mover>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mfrac>
+<mover>
+<mi>k</mi>
+<mo>→</mo>
+</mover>
+<msub>
+<mi>k</mi>
+<mn>4</mn>
+</msub>
+</mfrac>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0040]"> </para-num> <div class="description-line" id="p-0038" num="0040">wherein {right arrow over (k)} is the vector of the fourth line of the projection matrix Proj<sub>i </sub>and k<sub>4 </sub>corresponds to the distance parameter d<sub>i</sub>.</div>
+</li> <li> <para-num num="[0041]"> </para-num> <div class="description-line" id="p-0039" num="0041">The location of the object relative to the industrial robot can ultimately be implemented [sic] by means of optimization, in particular nonlinear optimization such as, for example, Gauss Newton or Levenberg Marquardt [sic]. For example, the following objective function f(x) can be set up for the nonlinear optimization:</div>
+</li> <li> <div class="description-line" id="p-0040" num="0000">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mi>f</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munder>
+<mo>∑</mo>
+<mi>i</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mo></mo>
+<mrow>
+<msub>
+<mi>B</mi>
+<mi>i</mi>
+</msub>
+<mo>-</mo>
+<mrow>
+<mi>norm</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>Proj</mi>
+<mi>i</mi>
+</msub>
+<mo>·</mo>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>i</mi>
+</msub>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>P</mi>
+<mi>i</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0042]"> </para-num> <div class="description-line" id="p-0041" num="0042">with the parameter vector x</div>
+</li> <li> <div class="description-line" id="p-0042" num="0000">
+<maths id="MATH-US-00006" num="00006">
+<math overflow="scroll">
+<mrow>
+<mi>x</mi>
+<mo>=</mo>
+<mrow>
+<mo>(</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mi>T</mi>
+<mi>x</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>T</mi>
+<mi>y</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>T</mi>
+<mi>z</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>R</mi>
+<mi>x</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>R</mi>
+<mi>y</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>R</mi>
+<mi>z</mi>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>)</mo>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0043]"> </para-num> <div class="description-line" id="p-0043" num="0043">Additional unknown parameters are the distance parameters d<sub>i</sub>.</div>
+</li> <li> <para-num num="[0044]"> </para-num> <div class="description-line" id="p-0044" num="0044">According to a variant of the method according to the invention, this possesses the following additional method steps:
+</div> </li> <ul> <li id="ul0007-0001" num="0000"> <ul> <li id="ul0008-0001" num="0045">manual association of a first model point of the model points of the model with a corresponding first image point of one of the two images,</li> <li id="ul0008-0002" num="0046">displacement of the model overlaid in the images so that the first model point and the first image point correspond,</li> <li id="ul0008-0003" num="0047">locking the two corresponding first model and image points,</li> <li id="ul0008-0004" num="0048">manual association of a second model point of the model points of the model with a corresponding second image point of one of the two images,</li> <li id="ul0008-0005" num="0049">displacement of the model overlaid in the images so that the second model point and the second image point likewise correspond,</li> <li id="ul0008-0006" num="0050">locking the two corresponding second model and image points,</li> <li id="ul0008-0007" num="0051">manual association of additional individual model points of the model with corresponding image points in the images until the location of the industrial robot relative to the object can be determined.</li> </ul> </li> </ul>
+<li> <para-num num="[0052]"> </para-num> <div class="description-line" id="p-0045" num="0052">According to this variant of the method according to the invention, the two first points are initially associated and the model displayed in the image is in particular subsequently, automatically shifted such that the two first points coincide. A displacement is in particular a translational displacement, a tilting or a rotation of the overlaid model. Even if the manual association ensues only in one of the images, an in particular automatic displacement of the overlaid model can ensue in all images. A partial location determination of the model can also ensue via the displacement, for example via a partial calculation of the transformation described above.</div>
+</li> <li> <para-num num="[0053]"> </para-num> <div class="description-line" id="p-0046" num="0053">After the displacement of the model in the image or, respectively, the images, the two coinciding points are locked. Via the locking it is in particular achieved that the overlaid model can at most still be rotated or tilted on the locked points in the image.</div>
+</li> <li> <para-num num="[0054]"> </para-num> <div class="description-line" id="p-0047" num="0054">The next point pair (thus a model point of the displayed model and the corresponding image point in one of the images) is subsequently selected, and the overlaid model is displaced such that this point pair also corresponds. This point pair is again locked. Here it can also be provided to displace the overlaid model in all images.</div>
+</li> <li> <para-num num="[0055]"> </para-num> <div class="description-line" id="p-0048" num="0055">The association of point pairs is continued until the location of the industrial robot relative to the object can be determined. For example, this is possible when the overlaid model corresponds in all images of the object.</div>
+</li> <li> <para-num num="[0056]"> </para-num> <div class="description-line" id="p-0049" num="0056">According to one embodiment of the method according to the invention, an automatic size adaptation of the overlaid model is implemented based on a manual association of one of the image points. This is necessary when the measurements of the overlaid model differ from the measurements of the imaged object, which will normally be the case.</div>
+</li> <li> <para-num num="[0057]"> </para-num> <div class="description-line" id="p-0050" num="0057">In addition to the association of points, lines and/or surfaces of the model can also be manually associated with corresponding lines or, respectively, surfaces in at least one of the images. Alternatively, it is also possible to manually associate lines and/or surfaces of the model with corresponding lines or, respectively, surfaces in the images instead of points.</div>
+</li> <li> <para-num num="[0058]"> </para-num> <div class="description-line" id="p-0051" num="0058">In contrast to the point association, given line association other degrees of freedom are established (rotation in the image plane, translation along displacement vector). In contrast to this, in point association two degrees of freedom are established (translation in x and y of the image coordinates).</div>
+</li> <li> <para-num num="[0059]"> </para-num> <div class="description-line" id="p-0052" num="0059">Although degrees of freedom are no longer established in the line association, depending on the shape and view of the object (for example of the work piece) it is sometimes more advantageous to bring lines into congruence as individual points.</div>
+</li> <li> <para-num num="[0060]"> </para-num> <div class="description-line" id="p-0053" num="0060">A lin [sic] (for example an edge) can be selected (for example in a model, in particular in a wire frame model or in a partial wire frame model) with the pointer device using the “object capture” method known from the CAD world. The selected edge can then be dragged onto the corresponding edge in the image. The edges in the image are identified with the image data processing “edge extraction” method, for example. If the pointer of the pointer device is brought into proximity with such an edge, the “snap-to-line” function known from the CAD world can assist the operator.</div>
+</li> <li> <para-num num="[0061]"> </para-num> <div class="description-line" id="p-0054" num="0061">According to a further embodiment of the method according to the invention, it is not the 2D camera that is attached to the industrial robot but rather the object. The 2D camera is then immobile relative to a base coordinate system of the industrial robot and the object is moved into at least two different positions by means of the industrial robot. The location of the industrial robot relative to the object can then be determined based on the associated model points of the model relative to the corresponding image points in the images, the positions of the object associated with the images and the position of the camera relative to the base coordinate system of the industrial robot. Alternatively, the location of the flange of the industrial robot relative to the object can also be determined. Since the location of the flange relative to the base coordinate system of the industrial robot is known, the location of the industrial robot relative to the object can be determined via the location of the flange relative to the object.</div>
+</li> <li> <para-num num="[0062]"> </para-num> <div class="description-line" id="p-0055" num="0062">According to one embodiment of the method according to the invention, the object is arranged on a table plate that can be moved relative to a reference point that is immobile relative to the environment of the industrial robot. The camera is attached to the industrial robot or is set up so as to be immobile relative to a base coordinate system of the industrial robot. The two positions for which the two two-dimensional image data sets are generated result via movement of the industrial robot or the table plate. In order to determine the location of the object relative to the industrial robot, the location of the object relative to the table plate is initially determined based on the model points of the model associated with the corresponding image points in the images, the positions of the table plate associated with the images relative to the industrial robot and the position of the camera relative to the industrial robot.</div>
+</li> <li> <para-num num="[0063]"> </para-num> <div class="description-line" id="p-0056" num="0063">Advantages of the method according to the invention can be the following, among others:</div>
+</li> <li> <para-num num="[0064]"> </para-num> <div class="description-line" id="p-0057" num="0064">Intuitive, interactive, flexible, semi-automatic calibration method, relatively independent of the shape of the object, for location determination using a simple 2D camera.</div>
+</li> <li> <para-num num="[0065]"> </para-num> <div class="description-line" id="p-0058" num="0065">The method according to the invention does not require any teaching of object features as is necessary in conventional image processing solutions. This is primarily connected with a disproportionately large time cost in small series production of many different parts.</div>
+</li> <li> <para-num num="[0066]"> </para-num> <div class="description-line" id="p-0059" num="0066">The method according to the invention utilizes the human spatial association capability about the object to be calibrated. With the aid of a graphical interface for user interaction, the operator can communicate his knowledge about the 3D geometry of the object to the algorithm for calculation of the transformation.</div>
+</li> <li> <para-num num="[0067]"> </para-num> <div class="description-line" id="p-0060" num="0067">The object is also achieved via an industrial robot possessing
+</div> </li> <ul> <li id="ul0009-0001" num="0000"> <ul> <li id="ul0010-0001" num="0068">multiple axles movable by means of actuators,</li> <li id="ul0010-0002" num="0069">a control device to activate the actuators,</li> <li id="ul0010-0003" num="0070">a 2D camera to generate a two-dimensional image data set, wherein the camera is attached at the industrial robot such that it can be moved by the industrial robot,</li> <li id="ul0010-0004" num="0071">a graphical model stored in the control device, which graphical model is at least a partial model of an object and is described in coordinates relative to coordinates of the industrial robot,</li> <li id="ul0010-0005" num="0072">a display device to display images associated with image data sets generated with the camera, and to overlay the model in the displayed images and</li> <li id="ul0010-0006" num="0073">an input device for manual association of points of the graphical model with points in the images,</li> </ul> </li> </ul>
+<li> <para-num num="[0074]"> </para-num> <div class="description-line" id="p-0061" num="0074">wherein the industrial robot is set up such that the method according to the invention can be implemented with it in order to determine the location of the object relative to the industrial robot when the object is arranged immobile relative to the environment of the industrial robot or on a table plate that can be moved relative to a reference point that is immobile relative to the environment of the industrial robot.</div>
+</li> <li> <para-num num="[0075]"> </para-num> <div class="description-line" id="p-0062" num="0075">The object of the invention is also achieved via an industrial robot possessing
+</div> </li> <ul> <li id="ul0011-0001" num="0000"> <ul> <li id="ul0012-0001" num="0076">multiple axles movable by means of actuators,</li> <li id="ul0012-0002" num="0077">a control device to activate the actuators,</li> <li id="ul0012-0003" num="0078">a 2D camera to generate a two-dimensional image data set, wherein the camera is immobile relative to a base coordinate system of the industrial robot,</li> <li id="ul0012-0004" num="0079">a graphical model stored in the control device, which graphical model is at least a partial model of an object and is described in coordinates relative to coordinates of the industrial robot,</li> <li id="ul0012-0005" num="0080">a display device to display images associated with image data sets generated with the camera, and to overlay the model in the displayed images and</li> <li id="ul0012-0006" num="0081">an input device for manual association of points of the graphical model with points in the images,</li> </ul> </li> </ul>
+<li> <para-num num="[0082]"> </para-num> <div class="description-line" id="p-0063" num="0082">wherein the industrial robot is set up such that the method according to the invention can be implemented with it in order to determine the location of the physical object relative to the industrial robot when the object is arranged immobile relative to the industrial robot when the physical object is attached to the industrial robot and can be moved by means of this.</div>
+</li> <li> <para-num num="[0083]"> </para-num> <div class="description-line" id="p-0064" num="0083">The input device is, for example, a pointer device or a space mouse.</div>
+</li> <description-of-drawings>
+<li> <para-num num="[0084]"> </para-num> <div class="description-line" id="p-0065" num="0084">Exemplary embodiments of the invention are shown by way of example in the attached, schematic drawings. Shown are:</div>
+</li> <li> <para-num num="[0085]"> </para-num> <div class="description-line" id="p-0066" num="0085"> <figref idrefs="DRAWINGS">FIG. 1</figref> an industrial robot and a motor block,</div>
+</li> <li> <para-num num="[0086]"> </para-num> <div class="description-line" id="p-0067" num="0086"> <figref idrefs="DRAWINGS">FIGS. 2</figref>, <b>3</b> images of the motor block of <figref idrefs="DRAWINGS">FIG. 1</figref>,</div>
+</li> <li> <para-num num="[0087]"> </para-num> <div class="description-line" id="p-0068" num="0087"> <figref idrefs="DRAWINGS">FIG. 4</figref> a flow chart,</div>
+</li> <li> <para-num num="[0088]"> </para-num> <div class="description-line" id="p-0069" num="0088"> <figref idrefs="DRAWINGS">FIGS. 5-7</figref> additional images of the motor block of <figref idrefs="DRAWINGS">FIG. 1</figref> and</div>
+</li> <li> <para-num num="[0089]"> </para-num> <div class="description-line" id="p-0070" num="0089"> <figref idrefs="DRAWINGS">FIGS. 8-10</figref> additional industrial robots.</div>
+</li> </description-of-drawings>
+<li> <para-num num="[0090]"> </para-num> <div class="description-line" id="p-0071" num="0090"> <figref idrefs="DRAWINGS">FIG. 1</figref> shows a 6-axle industrial robot <b>1</b> with kinematics for movements of the six degrees of freedom and an object that is immobile relative to the environment of the industrial robot <b>1</b>, which object is a motor block M in the case of the present exemplary embodiment.</div>
+</li> <li> <para-num num="[0091]"> </para-num> <div class="description-line" id="p-0072" num="0091">The industrial robot <b>1</b> possesses (in a generally known manner) articulations <b>2</b>-<b>4</b>, levers <b>5</b>-<b>6</b>, six movement axles A<b>1</b>-A<b>6</b> and a flange F. Each of the axles A<b>1</b>-A<b>6</b> is moved by an actuator.</div>
+</li> <li> <para-num num="[0092]"> </para-num> <div class="description-line" id="p-0073" num="0092">In the case of the present exemplary embodiment, the actuators are electrical actuators that respective possess an electrical motor <b>7</b>-<b>12</b>. The motor <b>7</b> thereby moves the axle A<b>1</b>, the motor <b>8</b> moves the axle A<b>2</b>, the motor <b>9</b> moves the axle A<b>3</b> and the motors <b>10</b>-<b>12</b> move the axles A<b>4</b>-A<b>6</b> via gearing (not shown in detail in <figref idrefs="DRAWINGS">FIG. 1</figref> but generally known to the man skilled in the art).</div>
+</li> <li> <para-num num="[0093]"> </para-num> <div class="description-line" id="p-0074" num="0093">The electrical actuators or, respectively, the electrical motors <b>7</b>-<b>12</b> are connected (not shown in detail) with a control computer <b>15</b> on which a computer program that is suitable and known in principle to the man skilled in the art runs, which computer program controls the movements of the industrial robot <b>1</b>. The term “control” should also comprise a regulation in this context.</div>
+</li> <li> <para-num num="[0094]"> </para-num> <div class="description-line" id="p-0075" num="0094">In the case of the present exemplary embodiment, a CAD (Computer Aided Design) model <b>16</b> of the motor block M that is shown in <figref idrefs="DRAWINGS">FIGS. 2 and 3</figref> is stored in the control computer <b>15</b>. In the case of the present exemplary embodiment, the model <b>16</b> was created in a generally known manner by means of a CAD program and can be viewed by a person (not shown in detail in Figures) by means of a monitor <b>14</b> connected with the control computer <b>15</b>.</div>
+</li> <li> <para-num num="[0095]"> </para-num> <div class="description-line" id="p-0076" num="0095">In the case of the present exemplary embodiment, the model <b>16</b> is a partial model of the motor block M, and specifically a partial wire frame model. A wire frame model (designated in English as a “wireframe” model) in particular models three-dimensional objects in a CAD, such as the motor block M in the case of the present exemplary embodiment. Surfaces of the object are thereby represented as lines in a wire frame model, wherein in the present exemplary embodiment only a few vertices and edges of the motor block M are modeled by means of the model <b>16</b>.</div>
+</li> <li> <para-num num="[0096]"> </para-num> <div class="description-line" id="p-0077" num="0096">For the processing of the motor block M by means of the industrial robot <b>1</b>, the industrial robot <b>1</b> must be calibrated relative to the motor block M so that the coordinate system of the model <b>16</b> coincides in relation to the coordinate system of the motor block M, meaning that the location of the motor block M is determined relative to the industrial robot <b>1</b>.</div>
+</li> <li> <para-num num="[0097]"> </para-num> <div class="description-line" id="p-0078" num="0097">The determination of the location of the motor block M relative to the industrial robot <b>1</b> is illustrated by means of a flow chart shown in <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+</li> <li> <para-num num="[0098]"> </para-num> <div class="description-line" id="p-0079" num="0098">In the case of the present exemplary embodiment, a 2D camera <b>17</b> connected (in a manner not shown) with the control computer <b>15</b> is attached to the flange F of the industrial robot <b>1</b>. The 2D camera <b>17</b> is, for example, a CCD sensor or a generally known digital camera. The position of the camera <b>17</b> at the industrial robot <b>1</b> is known.</div>
+</li> <li> <para-num num="[0099]"> </para-num> <div class="description-line" id="p-0080" num="0099">It is the purpose of the camera <b>17</b> to generate at least two 2D images of the motor block M from two different positions. The at least two positions are realized in that the industrial robot <b>1</b> moves the camera <b>17</b> into the two different positions in that its axles A<b>1</b>-A<b>6</b> are moved in a generally known manner (Step S<b>1</b> of the flow diagram of <figref idrefs="DRAWINGS">FIG. 4</figref>).</div>
+</li> <li> <para-num num="[0100]"> </para-num> <div class="description-line" id="p-0081" num="0100">If the camera <b>17</b> is located in the respective position, it respectively generates an image data set whose associated images <b>20</b>, <b>30</b> are shown in <figref idrefs="DRAWINGS">FIGS. 2 and 3</figref> (Step S<b>2</b> of the flow chart). The images <b>20</b>, <b>30</b> are images of the motor block M, wherein in the case of the present exemplary embodiment the entire motor block M is essentially imaged in each of the images <b>20</b>, <b>30</b>. However, this is not absolutely necessary; in at least one of the images, only a portion of the motor block M can also be imaged.</div>
+</li> <li> <para-num num="[0101]"> </para-num> <div class="description-line" id="p-0082" num="0101">After the images <b>20</b>, <b>30</b> are generated, in the case of the present exemplary embodiment they are simultaneously displayed on the monitor <b>14</b>. At the same time, the model <b>16</b> is overlaid in each of the images <b>20</b>, <b>30</b> (Step S<b>3</b> of the flow diagram).</div>
+</li> <li> <para-num num="[0102]"> </para-num> <div class="description-line" id="p-0083" num="0102">A person (not shown in Figures) subsequently selects a point <b>21</b>A of the model <b>16</b> by means of an input device of the control computer <b>15</b> (Step S<b>4</b> of the flow chart).</div>
+</li> <li> <para-num num="[0103]"> </para-num> <div class="description-line" id="p-0084" num="0103">In the case of the present exemplary embodiment, the input device is a pointer device in the form of a computer mouse <b>13</b>, and the point <b>21</b>A of the model <b>16</b> represents an edge of the motor block M. In the case of the present exemplary embodiment, the point <b>21</b>A is selected with what is known as the “object capture” method known from computer graphics. The person subsequently selects the point <b>21</b>B corresponding to the point <b>21</b>A in the first image <b>20</b> of the motor block M.</div>
+</li> <li> <para-num num="[0104]"> </para-num> <div class="description-line" id="p-0085" num="0104">In the case of the present exemplary embodiment, after the association of the point pair comprising the points <b>21</b>A, <b>21</b>B a computer program running on the control computer <b>15</b> automatically moves the model <b>16</b> overlaid in the images <b>20</b>, <b>30</b> such that the points <b>21</b>A, <b>21</b>B coincide in both images <b>20</b>, <b>30</b>, which is indicated with an arrow A. The corresponding points <b>21</b>A, <b>21</b>B are subsequently locked (Step S<b>5</b> of the flow chart).</div>
+</li> <li> <para-num num="[0105]"> </para-num> <div class="description-line" id="p-0086" num="0105">Due to the association of the point pair comprising the points <b>21</b>A, <b>21</b>B and the movement of the model <b>16</b> in the images <b>20</b>, <b>30</b> such that the two points <b>21</b>A, <b>21</b>B overlap, a partial calculation to determine the location of the motor block M relative to the industrial robot <b>1</b> already results.</div>
+</li> <li> <para-num num="[0106]"> </para-num> <div class="description-line" id="p-0087" num="0106">The person subsequently selects an additional point <b>22</b>A of the model <b>16</b> and a point <b>22</b>A in the first image <b>20</b> corresponding to the selected point <b>22</b>A of the model <b>16</b>. The computer program running on the control computer <b>15</b> thereupon again automatically moves the model <b>16</b> overlaid in the images <b>20</b>, <b>30</b> such that the points <b>22</b>A, <b>22</b>B in both images <b>20</b>, <b>30</b> overlap, which is indicated with an arrow B. The model <b>16</b> overlaid in the images <b>20</b>, <b>30</b> is thus now shifted such that the points <b>21</b>A and <b>21</b>B and the points <b>22</b>A and <b>22</b>B overlap and are also locked (Step S<b>6</b> of the flow chart).</div>
+</li> <li> <para-num num="[0107]"> </para-num> <div class="description-line" id="p-0088" num="0107">The person subsequently selects additional corresponding points <b>31</b>A, <b>31</b>B and <b>32</b>A, <b>32</b>B in the second image <b>30</b>. The computer program running on the control computer <b>15</b> thereupon again automatically moves the model <b>16</b> overlaid in the images <b>20</b>, <b>30</b> such that the point pair comprising the points <b>31</b>A and <b>31</b>B and the point pair comprising the points <b>32</b>A and <b>32</b>B also overlap, which is indicated with arrows C, D.</div>
+</li> <li> <para-num num="[0108]"> </para-num> <div class="description-line" id="p-0089" num="0108">Furthermore, in the case of the present exemplary embodiment the computer program running on the control computer <b>15</b> is designed such that it automatically adapts the size of the model <b>16</b> overlaid in the images <b>20</b>, <b>30</b> if it is necessary based on an association of a point pair so that the selected point pairs can overlap.</div>
+</li> <li> <para-num num="[0109]"> </para-num> <div class="description-line" id="p-0090" num="0109">If sufficient point pairs are associated so that the model <b>16</b> is congruent with the images <b>20</b>, <b>30</b> of the motor block M, it is possible to determine the location of the motor block M relative to the industrial robot <b>1</b> (Step S<b>7</b> of the flow chart).</div>
+</li> <li> <para-num num="[0110]"> </para-num> <div class="description-line" id="p-0091" num="0110">The calculation of the location ensues as follows in the case of the present exemplary embodiment:</div>
+</li> <li> <para-num num="[0111]"> </para-num> <div class="description-line" id="p-0092" num="0111">In the case of the present exemplary embodiment, the industrial robot <b>1</b> has six degrees of freedom. Moreover, the respective distances between the camera <b>17</b> and the motor block M at both positions are unknown. Accordingly, at least four different point pairs must be associated in the two images <b>20</b>, <b>30</b> for the calculation of the location of the motor block M relative to the industrial robot <b>1</b>.</div>
+</li> <li> <para-num num="[0112]"> </para-num> <div class="description-line" id="p-0093" num="0112">The location can then be produced with full rank, for example via solving a regular equation system if exactly four different (image) point pairs are present or an overdetermined equation system if more than four point pairs are present, by means of which what is known as a 6 DIF (“6 degrees of freedom”) transformation can be implemented.</div>
+</li> <li> <para-num num="[0113]"> </para-num> <div class="description-line" id="p-0094" num="0113">The transformation can ensue as follows, for example:</div>
+</li> <li> <para-num num="[0114]"> </para-num> <div class="description-line" id="p-0095" num="0114">A selected image point B<sub>i </sub>can be represented as follows in homogeneous coordinate notation in a two-dimensional coordinate system of the camera <b>17</b>:</div>
+</li> <li> <div class="description-line" id="p-0096" num="0000">
+<maths id="MATH-US-00007" num="00007">
+<math overflow="scroll">
+<mrow>
+<msub>
+<mi>B</mi>
+<mi>i</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<mo>(</mo>
+<mtable>
+<mtr>
+<mtd>
+<mi>x</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>y</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>)</mo>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0115]"> </para-num> <div class="description-line" id="p-0097" num="0115">The model point P<sub>i </sub>corresponding to this in the three-dimensional coordinate system of the model <b>16</b> can be represented as follows in homogeneous coordinate notation:</div>
+</li> <li> <div class="description-line" id="p-0098" num="0000">
+<maths id="MATH-US-00008" num="00008">
+<math overflow="scroll">
+<mrow>
+<msub>
+<mi>P</mi>
+<mi>i</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<mo>(</mo>
+<mtable>
+<mtr>
+<mtd>
+<mi>x</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>y</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>z</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>)</mo>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0116]"> </para-num> <div class="description-line" id="p-0099" num="0116">The transformation matrix for a transformation from a coordinate system of the motor block M into the coordinate system of the first image <b>20</b> in the first position of the camera <b>17</b> reads:
+</div> </li> <ul> <li id="ul0013-0001" num="0000"> <ul> <li id="ul0014-0001" num="0117">T<sub>1 </sub> </li> </ul> </li> </ul>
+<li> <para-num num="[0118]"> </para-num> <div class="description-line" id="p-0100" num="0118">and that of the second image <b>30</b> in the second position of the camera <b>17</b> reads
+</div> </li> <ul> <li id="ul0015-0001" num="0000"> <ul> <li id="ul0016-0001" num="0119">T<sub>2 </sub> </li> </ul> </li> </ul>
+<li> <para-num num="[0120]"> </para-num> <div class="description-line" id="p-0101" num="0120">The projection matrix for the projection of the coordinates of the i-th image point onto the coordinates of the model <b>16</b> reads as follows, for example:</div>
+</li> <li> <div class="description-line" id="p-0102" num="0000">
+<maths id="MATH-US-00009" num="00009">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>Proj</mi>
+<mi>i</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mrow>
+<mn>1</mn>
+<mo>/</mo>
+<msub>
+<mi>d</mi>
+<mi>i</mi>
+</msub>
+</mrow>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mo>;</mo>
+<mn>2</mn>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0121]"> </para-num> <div class="description-line" id="p-0103" num="0121">wherein d<sub>i </sub>is a camera position-dependent distance parameter of the position of the camera <b>17</b> at the i-th position, i.e. d<sub>i </sub>is the distance parameter associated with the distance between the camera <b>17</b> and the motor block M in the first position and d<sub>2 </sub>is the distance parameter associated with the distance between the camera <b>17</b> and the motor block M in the second position. The distance parameter d<sub>i </sub>corresponds to the distance between the focal point of the camera <b>17</b> and the projection plane (image plane) of the perspective projection</div>
+</li> <li> <para-num num="[0122]"> </para-num> <div class="description-line" id="p-0104" num="0122">In the case of the present exemplary embodiment, a normalization of the homogeneous coordinate ensues for the further calculation of the location of the motor block M relative to the industrial robot <b>1</b>, such that the distance parameter d<sub>i </sub>of the projection matrix Proj<sub>i </sub>receives the value “1”. This can be mathematically expressed as follows:</div>
+</li> <li> <div class="description-line" id="p-0105" num="0000">
+<maths id="MATH-US-00010" num="00010">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mi>norm</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mover>
+<mi>k</mi>
+<mo>→</mo>
+</mover>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mfrac>
+<mover>
+<mi>k</mi>
+<mo>→</mo>
+</mover>
+<msub>
+<mi>k</mi>
+<mn>4</mn>
+</msub>
+</mfrac>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0123]"> </para-num> <div class="description-line" id="p-0106" num="0123">wherein {right arrow over (k)} is the vector of the fourth line of the projection matrix Proj<sub>i </sub>and k<sub>4 </sub>corresponds to the distance parameter d<sub>i</sub>.</div>
+</li> <li> <para-num num="[0124]"> </para-num> <div class="description-line" id="p-0107" num="0124">In the case of the present exemplary embodiment, the location of the motor block M relative to the industrial robot <b>1</b> is ultimately implemented [sic] by means of optimization, in particular nonlinear optimization such as, for example, Gauss Newton or Levenberg Marquardt [sic]. For example, the following objective function f(x) is set up for the nonlinear optimization:</div>
+</li> <li> <div class="description-line" id="p-0108" num="0000">
+<maths id="MATH-US-00011" num="00011">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mi>f</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munder>
+<mo>∑</mo>
+<mi>i</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mo></mo>
+<mrow>
+<msub>
+<mi>B</mi>
+<mi>i</mi>
+</msub>
+<mo>-</mo>
+<mrow>
+<mi>norm</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>Proj</mi>
+<mi>i</mi>
+</msub>
+<mo>·</mo>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>i</mi>
+</msub>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>P</mi>
+<mi>i</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0125]"> </para-num> <div class="description-line" id="p-0109" num="0125">with the parameter vector x</div>
+</li> <li> <div class="description-line" id="p-0110" num="0000">
+<maths id="MATH-US-00012" num="00012">
+<math overflow="scroll">
+<mrow>
+<mi>x</mi>
+<mo>=</mo>
+<mrow>
+<mo>(</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mi>T</mi>
+<mi>x</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>T</mi>
+<mi>y</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>T</mi>
+<mi>z</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>R</mi>
+<mi>x</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>R</mi>
+<mi>y</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>R</mi>
+<mi>z</mi>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>)</mo>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0126]"> </para-num> <div class="description-line" id="p-0111" num="0126">Additional unknown parameters are the distance parameters d<sub>i</sub>.</div>
+</li> <li> <para-num num="[0127]"> </para-num> <div class="description-line" id="p-0112" num="0127">In the described exemplary embodiment, exactly two images <b>20</b>, <b>30</b> of the motor block M (thus of an object) were generated. This is not absolutely necessary; more than two images of an object can also be generated.</div>
+</li> <li> <para-num num="[0128]"> </para-num> <div class="description-line" id="p-0113" num="0128">A pointer device in the form of a computer mouse <b>13</b> was used as an input device. Other input devices (for example a space mouse) can also be used for the association of the points <b>21</b>A, <b>21</b>B, the points <b>22</b>A, <b>22</b>B, the points <b>31</b>A, <b>31</b>B and the points <b>32</b>A, <b>32</b>B.</div>
+</li> <li> <para-num num="[0129]"> </para-num> <div class="description-line" id="p-0114" num="0129">Instead of or in addition to an association of points, lines or surfaces of the model <b>16</b> can be associated with lines or surfaces in the images of the object.</div>
+</li> <li> <para-num num="[0130]"> </para-num> <div class="description-line" id="p-0115" num="0130"> <figref idrefs="DRAWINGS">FIGS. 5 and 6</figref> show as an example two images <b>50</b>, <b>60</b> acquired from the two positions by means of the camera <b>17</b>, in which two positions a model <b>16</b> <i>a </i>of the motor block M is again overlaid. The image <b>50</b> thereby corresponds to the image <b>20</b> and the image <b>60</b> thereby corresponds to the image <b>30</b>. The model <b>16</b> <i>a </i>is likewise a partial wire frame model of the motor block M and, in the case of the present exemplary embodiment, differs slightly from the model <b>16</b> of <figref idrefs="DRAWINGS">FIGS. 2 and 3</figref>.</div>
+</li> <li> <para-num num="[0131]"> </para-num> <div class="description-line" id="p-0116" num="0131">In the case of the present exemplary embodiment, the person does not select individual points <b>21</b>A, <b>22</b>A, <b>31</b>A, <b>31</b>A [sic] in the model <b>16</b> <i>a </i>with the computer mouse <b>13</b> but rather selects lines <b>51</b>A and <b>52</b>A in the first image <b>50</b> and a line <b>61</b>A in the second image <b>60</b>. In the case of the present exemplary embodiment, the lines <b>51</b>A, <b>52</b>B and <b>61</b>A correspond to edges <b>51</b>B, <b>52</b>B and <b>61</b>B of the motor block M that the person selects in the images <b>50</b>, <b>60</b>.</div>
+</li> <li> <para-num num="[0132]"> </para-num> <div class="description-line" id="p-0117" num="0132">In order to improve the visibility of the <b>51</b>B, <b>52</b>B and <b>61</b>B in the images <b>50</b>, <b>60</b>, in the case of the present exemplary embodiment it is provided to emphasize the edges depicted in the images <b>50</b>, <b>60</b> by means of an image processing algorithm. Suitable image processing algorithms are, for example, edge extraction or Sobel Operator. Detected edges can also be sub-divided into straight-line segments.</div>
+</li> <li> <para-num num="[0133]"> </para-num> <div class="description-line" id="p-0118" num="0133">In the case of the present exemplary embodiment, a relevant lin [sic] <b>51</b>A, <b>52</b>B and <b>61</b>A in the model <b>16</b> <i>a </i>is selected with the computer mouse <b>13</b> using the “object capture” method known from the CAD world. The selected lin [sic] <b>51</b>A, <b>52</b>B, <b>61</b>A, <b>62</b>A and <b>63</b>A is then dragged to the corresponding edges <b>51</b>B, <b>52</b>B and <b>61</b>B in the images <b>50</b>, <b>60</b>. The edge <b>51</b>B, <b>52</b>B and <b>61</b>B in the images <b>50</b>, <b>60</b> are identified with the “edge extraction” image data processing method, for example. If a pointer (moved by means of the computer mouse <b>13</b>) is brought into proximity with such an edge, the “snap-to-line” function known from the CAD world can assist the person.</div>
+</li> <li> <para-num num="[0134]"> </para-num> <div class="description-line" id="p-0119" num="0134">In contrast to the point association, in line association different degrees of freedom are established (rotation in the image plane, translation along displacement vector).</div>
+</li> <li> <para-num num="[0135]"> </para-num> <div class="description-line" id="p-0120" num="0135">Although degrees of freedom can no longer be established in the line association, depending on the shape and view of the object it is sometimes more advantageous to bring lines into correspondence than individual points.</div>
+</li> <li> <para-num num="[0136]"> </para-num> <div class="description-line" id="p-0121" num="0136"> <figref idrefs="DRAWINGS">FIG. 7</figref> shows an additional image <b>70</b> of the motor block M and a model <b>16</b> <i>b </i>of the motor block M. In the case of the present exemplary embodiment, the model <b>16</b> <i>b </i>is a partial model of the motor block M and in particular shows surfaces <b>71</b>A, <b>72</b>A that are associated with surfaces <b>71</b>B and <b>72</b>B of the motor block M. In the case of the present exemplary embodiment, the surfaces <b>71</b>B and <b>72</b>B of the motor block M are recesses of the motor block M.</div>
+</li> <li> <para-num num="[0137]"> </para-num> <div class="description-line" id="p-0122" num="0137">For the exemplary embodiment shown in <figref idrefs="DRAWINGS">FIG. 7</figref>, the surfaces <b>71</b>A, <b>72</b>A are brought into congruence with the surfaces <b>71</b>B and <b>72</b>B shown in image <b>70</b> for the calculation of the location of the motor block M relative to the industrial robot <b>1</b>.</div>
+</li> <li> <para-num num="[0138]"> </para-num> <div class="description-line" id="p-0123" num="0138">In the exemplary embodiments described up to now, the camera <b>17</b> is attached to the flange F of the industrial robot <b>1</b>. However, the camera <b>17</b> can also be attached to one of the axles A<b>1</b>-A<b>6</b> as long as it is moved by the industrial robot <b>1</b>.</div>
+</li> <li> <para-num num="[0139]"> </para-num> <div class="description-line" id="p-0124" num="0139"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows a further industrial robot <b>81</b>. If it is not expressly mentioned, functionally identical modules of the industrial robot <b>1</b> shown in <figref idrefs="DRAWINGS">FIG. 1</figref> are provided with the same reference characters as modules of the industrial robot <b>81</b> shown in <figref idrefs="DRAWINGS">FIG. 8</figref>.</div>
+</li> <li> <para-num num="[0140]"> </para-num> <div class="description-line" id="p-0125" num="0140">The two industrial robots <b>1</b> and <b>81</b> are essentially identical. Instead of the camera <b>17</b>, however, an object <b>82</b> whose location (in particular whose orientation) relative to the industrial robot <b>81</b> should be determined is attached on the flange F of said industrial robot <b>81</b>. In order to achieve this, in the case of the present exemplary embodiment a camera <b>83</b> is set up on the floor (for example immobile on a tripod <b>84</b> relative to the environment of the industrial robot <b>81</b>) and is connected (in a manner not shown) with the control computer <b>15</b> of the industrial robot <b>81</b>.</div>
+</li> <li> <para-num num="[0141]"> </para-num> <div class="description-line" id="p-0126" num="0141">The object <b>81</b> is subsequently brought into at least two different positions by means of the industrial robot <b>81</b>, and a 2D image of the object <b>81</b> is generated for each position. The images are subsequently displayed on the monitor <b>14</b>. Moreover, a model of the object <b>82</b> overlaid is in the images, and the position of the object <b>82</b> relative to the industrial robot <b>81</b> is subsequently calculated as for the first exemplary embodiments.</div>
+</li> <li> <para-num num="[0142]"> </para-num> <div class="description-line" id="p-0127" num="0142"> <figref idrefs="DRAWINGS">FIG. 9</figref> again shows the industrial robot <b>1</b>. In contrast to the scenario presented in <figref idrefs="DRAWINGS">FIG. 1</figref>, in the scenario presented in <figref idrefs="DRAWINGS">FIG. 9</figref> the motor block M lies on a table plate P of a table <b>90</b>.</div>
+</li> <li> <para-num num="[0143]"> </para-num> <div class="description-line" id="p-0128" num="0143">In the case of the present exemplary embodiment, the table foot <b>91</b> of the table <b>90</b> can be pivoted relative to an axis <b>92</b> by means of a motor (not shown in detail). The motor of the table <b>90</b> is connected (in a manner not shown) with the control computer <b>15</b> and is also activated by this so that the position of the table plate P relative to the table foot <b>91</b> is known. Furthermore, the location of the table <b>90</b> or, respectively, of its table foot <b>91</b> relative to the industrial robot <b>1</b> is known. Information about this location is stored in the control computer <b>15</b>.</div>
+</li> <li> <para-num num="[0144]"> </para-num> <div class="description-line" id="p-0129" num="0144">In the case of the present exemplary embodiment, the location of the motor block M on the table plate P is initially unknown since the motor block M was essentially arbitrarily placed on the table plate P. In order to determine the location of the motor block M relative to the industrial robot <b>1</b>, the location of the motor block M relative to the table plate P is initially determined. If this is established, the location of the motor block M relative to the industrial robot <b>1</b> can then also be determined since the position of the table plate P relative to the table foot <b>91</b> and the location of the table foot <b>91</b> relative to the industrial robot <b>1</b> are known.</div>
+</li> <li> <para-num num="[0145]"> </para-num> <div class="description-line" id="p-0130" num="0145">In order to determine the location of the motor block M relative to the table plate P, images are acquired with the camera <b>17</b> from two different positions. The two positions result via a movement of the industrial robot <b>1</b> or, respectively, its flange F and/or via a pivoting of the table plate P relative to the axis <b>92</b>.</div>
+</li> <li> <para-num num="[0146]"> </para-num> <div class="description-line" id="p-0131" num="0146">The model <b>16</b> of the motor block M is subsequently overlaid in the acquired images and points of the model <b>16</b> are associated with points of the image of the motor block M. Based on this association, which is implemented analogous to the association of the point pairs shown in <figref idrefs="DRAWINGS">FIGS. 2 and 3</figref>, the location of the motor block M relative to the table plate P can subsequently be calculated. This calculation is implemented analogous to the calculation of the location of the motor block M relative to the industrial robot <b>1</b> according to the scenario shown in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+</li> <li> <para-num num="[0147]"> </para-num> <div class="description-line" id="p-0132" num="0147">Alternatively, the camera can also be mounted stationary on a tripod <b>84</b>, similar to the scenario shown in <figref idrefs="DRAWINGS">FIG. 8</figref>. Such a scenario is shown in <figref idrefs="DRAWINGS">FIG. 10</figref>, in which the camera has the reference character <b>83</b>. Two different positions for which the camera <b>83</b> acquires images of the motor block M can be set via pivoting of the table plate P on the axis <b>92</b>. The location of the motor block M relative to the table plate P can subsequently be determined according to the scenario shown in <figref idrefs="DRAWINGS">FIG. 9</figref>.</div>
+</li> </ul>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">11</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM34863582">
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text"> <b>1</b>. Method to determine the location of an industrial robot relative to an object, possessing the following method steps:
+<div class="claim-text">movement of a 2D camera (<b>17</b>) attached to an industrial robot (<b>1</b>) into at least two different positions by means of said industrial robot,</div> <div class="claim-text">in each of the positions, generation by means of the camera (<b>17</b>) of a two-dimensional image data set associated with an image (<b>20</b>, <b>30</b>, <b>50</b>, <b>60</b>, <b>70</b>) of an object (M), wherein the object (M) is immobile relative to the environment of the industrial robot (<b>1</b>),</div> <div class="claim-text">display of the images (<b>20</b>, <b>30</b>, <b>50</b>, <b>60</b>, <b>70</b>) by means of a display device (<b>14</b>) and superimposition of a graphical model (<b>16</b>, <b>16</b> <i>a, </i> <b>16</b> <i>b</i>) in the displayed images (<b>20</b>, <b>30</b>, <b>50</b>, <b>60</b>, <b>70</b>), wherein the graphical model (<b>16</b>, <b>16</b> <i>a, </i> <b>16</b> <i>b</i>) is at least a partial model of the object (M) and is described in coordinates relative to coordinates of the industrial robot (<b>1</b>),</div> <div class="claim-text">manual association of model points (<b>21</b>A, <b>22</b>A, <b>31</b>A, <b>32</b>A) of the graphical model (<b>16</b>) with corresponding image points (<b>21</b>B, <b>22</b>B, <b>31</b>B, <b>32</b>B) in the two images (<b>20</b>, <b>30</b>) and</div> <div class="claim-text">determination of the location of the industrial robot (<b>1</b>) relative to the object (M) based on the associated model points (<b>21</b>A, <b>22</b>A, <b>31</b>A, <b>32</b>A) of the model (<b>16</b>) at the corresponding image points (<b>21</b>B, <b>22</b>B, <b>31</b>B, <b>32</b>B) in the images (<b>20</b>, <b>30</b>), the positions of the camera (<b>17</b>) that are associated with the images (<b>20</b>, <b>30</b>) and the position of the camera (<b>17</b>) relative to the industrial robot (<b>1</b>).</div> </div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text"> <b>2</b>. Method to determine the location of an industrial robot relative to an object, possessing the following method steps:
+<div class="claim-text">generation of a respective two-dimensional image data set with a 2D camera (<b>17</b>, <b>83</b>) for two different positions, wherein the image data sets are associated with images of an object (M), the object (M) is arranged on a table plate (P) that is movable relative to a reference point that is immobile relative to the environment of the industrial robot (<b>1</b>), and the camera (<b>17</b>, <b>83</b>) is attached to the industrial robot (<b>1</b>) or is immobile relative to a base coordinate system of the industrial robot (<b>1</b>), wherein the table plate (P) and/or the industrial robot (<b>1</b>) are moved for both positions,</div> <div class="claim-text">display of the images by means of a display device (<b>14</b>) and overlay of a graphical model in the displayed images, wherein the graphical model is at least a partial model of the object (M) and is described in coordinates relative to coordinates of the industrial robot (<b>1</b>),</div> <div class="claim-text">manual association of model points of the graphical model with corresponding image points in the two images,</div> <div class="claim-text">determination of the location of the object (M) relative to the table plate (P) based on the associated model points of the model with the corresponding image points in the images, the location of the reference point of the table plate (P) relative to the industrial robot (<b>1</b>) and the position of the camera (<b>17</b>, <b>83</b>) relative to the industrial robot (<b>1</b>) and</div> <div class="claim-text">determination of the location of the industrial robot (<b>1</b>) relative to the object (M) based on the location of the object relative to the table plate.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text"> <b>3</b>. Method according to <claim-ref idref="CLM-00001">claim 1</claim-ref> or <claim-ref idref="CLM-00002">2</claim-ref>, in which the camera (<b>17</b>) is attached to a flange (F) or an axle (A<b>1</b>-A<b>6</b>) of the industrial robot (<b>1</b>).</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text"> <b>4</b>. Method to determine the location of an industrial robot relative to an object, possessing the following method steps:
+<div class="claim-text">movement of an object (<b>82</b>) attached to an industrial robot (<b>81</b>) into at least two different position [sic] by means of the industrial robot (<b>81</b>),</div> <div class="claim-text">in each of the positions, generation by means of a 2D camera (<b>83</b>) of a two-dimensional image data set associated with an image of an object (<b>82</b>), which 2D camera is immobile relative to a base coordinate system of the industrial robot (<b>81</b>),</div> <div class="claim-text">display of the images by means of a display device (<b>14</b>) and superimposition of a graphical model in the displayed images, wherein the graphical model is at least a partial model of the object (<b>82</b>) and is described in coordinates relative to coordinates of the industrial robot (<b>81</b>),</div> <div class="claim-text">manual association of model points of the graphical model with corresponding image points in the two images and</div> <div class="claim-text">determination of the location of a flange of the industrial robot (<b>1</b>) relative to the object (<b>82</b>) or of the location of the camera (<b>83</b>) relative to the industrial robot (<b>81</b>) based on the associated points of the model at the corresponding points in the images, the positions of the object (<b>82</b>) that are associated with the images and the position of the camera (<b>83</b>) relative to the base coordinate system of the industrial robot (<b>81</b>).</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text"> <b>5</b>. Method according to <claim-ref idref="CLM-00004">claim 4</claim-ref>, in which the object (<b>82</b>) is attached to a flange (F) of the industrial robot (<b>81</b>).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text"> <b>6</b>. Method according to any of the <claim-ref idref="CLM-00001">claims 1</claim-ref> through <b>5</b>, possessing:
+<div class="claim-text">manual association of a first model point (<b>21</b>A) of the model points of the model (<b>16</b>) with a corresponding first image point (<b>21</b>B) of one of the two images (<b>20</b>),</div>
+<div class="claim-text">displacement of the model (<b>16</b>) overlaid in the images (<b>20</b>,<b>30</b>) so that the first model point (<b>21</b>A) and the first image point (<b>21</b>B) correspond,</div>
+<div class="claim-text">locking the two corresponding first model and image points (<b>21</b>A, <b>21</b>B),</div>
+<div class="claim-text">manual association of a second model point (<b>22</b>A) of the model points of the model (<b>16</b>) with a corresponding second image point (<b>22</b>B) of one of the two images (<b>20</b>),</div>
+<div class="claim-text">displacement of the model (<b>16</b>) overlaid in the images (<b>20</b>, <b>30</b>) so that the second model point (<b>22</b>A) and the second image point (<b>22</b>B) likewise correspond,</div>
+<div class="claim-text">locking the two corresponding second model and image points (<b>22</b>A, <b>22</b>B) and</div>
+<div class="claim-text">manual association of additional individual model points (<b>31</b>A, <b>32</b>A) of the model (<b>16</b>) with corresponding image points (<b>31</b>B, <b>32</b>B) in the images (<b>30</b>) until the location of the industrial robot (<b>1</b>) relative to the object (M) can be determined.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text"> <b>7</b>. Method according to any of the <claim-ref idref="CLM-00001">claims 1</claim-ref> through <b>6</b>, also possessing an automatic size adaptation of the overlaid model (<b>16</b>) based on a manual association of at least two different model points.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text"> <b>8</b>. Method according to any of the <claim-ref idref="CLM-00001">claims 1</claim-ref> through <b>7</b>, possessing
+<div class="claim-text">manual association of lines (<b>51</b>A, <b>52</b>A, <b>61</b>A) and/or surfaces (<b>51</b>A, <b>52</b>A, <b>61</b>A) of the model (<b>16</b> <i>a, </i> <b>16</b> <i>b</i>) can also be manually associated with corresponding lines (<b>51</b>B, <b>52</b>B, <b>61</b>B) or, respectively, surfaces (<b>71</b>B, <b>72</b>B) in at least one of the images (<b>50</b>, <b>60</b>, <b>70</b>) or</div>
+<div class="claim-text">manual association of lines (<b>51</b>A, <b>52</b>A, <b>61</b>A) and/or surfaces (<b>51</b>A, <b>52</b>A, <b>61</b>A) of the model (<b>16</b> <i>a, </i> <b>16</b> <i>b</i>) can also be manually associated with corresponding lines (<b>51</b>B, <b>52</b>B, <b>61</b>B) or, respectively, surfaces (<b>71</b>B, <b>72</b>B) in the images (<b>50</b>, <b>60</b>, <b>70</b>) instead of the image points and model points.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text"> <b>9</b>. Method according to any of the <claim-ref idref="CLM-00001">claims 1</claim-ref> through <b>7</b>, in which the model (<b>16</b>, <b>16</b> <i>a</i>) is a graphical wire frame model or a graphical partial wire frame model of the object (M).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text"> <b>10</b>. Industrial robot possessing
+<div class="claim-text">multiple axles (A<b>1</b>-A<b>6</b>) movable by means of actuators (<b>7</b>-<b>12</b>),</div> <div class="claim-text">a control device (<b>15</b>) to activate the actuators (<b>7</b>-<b>12</b>),</div> <div class="claim-text">a 2D camera (<b>17</b>) to generate a two-dimensional image data set, wherein the camera (<b>17</b>) is attached at the industrial robot (<b>1</b>) such that it can be moved by the industrial robot (<b>1</b>),</div> <div class="claim-text">a graphical model (<b>16</b>, <b>16</b> <i>a, </i> <b>16</b> <i>b</i>) stored in the control device (<b>15</b>), which graphical model is at least a partial model of an object (M) and is described in coordinates relative to coordinates of the industrial robot (<b>1</b>),</div> <div class="claim-text">a display device (<b>16</b> [sic]) to display images (<b>20</b>, <b>30</b>, <b>50</b>, <b>70</b>, <b>60</b>) associated with image data sets generated with the camera, and to overlay the model (<b>16</b>, <b>16</b> <i>a, </i> <b>16</b> <i>b</i>) in the displayed images (<b>20</b>, <b>30</b>, <b>50</b>, <b>60</b>, <b>70</b>) and</div> <div class="claim-text">an input device (<b>13</b>) for manual association of points (<b>21</b>A, <b>22</b>A, <b>31</b>A, <b>32</b>A) of the graphical model (<b>16</b>, <b>16</b> <i>a, </i> <b>16</b> <i>b</i>) with points (<b>21</b>B, <b>22</b>B, <b>31</b>B, <b>32</b>B) in the images (<b>20</b>, <b>30</b>)</div> <div class="claim-text">wherein the industrial robot (<b>1</b>) is set up such that the method according to any of the <claim-ref idref="CLM-00001">claims 1</claim-ref> through <b>3</b> or <b>6</b> through <b>9</b> can be implemented with it in order to determine the location of the object (M) relative to the industrial robot (<b>1</b>) when the object (M) is arranged immobile relative to the environment of the industrial robot (<b>1</b>) or on a table plate (P) that can be moved relative to a reference point that is immobile relative to the environment of the industrial robot (<b>1</b>).</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text"> <b>11</b>. Industrial robot possessing
+<div class="claim-text">multiple axles (A<b>1</b>-A<b>6</b>) movable by means of actuators (<b>7</b>-<b>12</b>),</div> <div class="claim-text">a control device (<b>15</b>) to activate the actuators (<b>7</b>-<b>12</b>),</div> <div class="claim-text">a 2D camera (<b>17</b>) to generate a two-dimensional image data set, wherein the camera (<b>83</b>) is immobile relative to a base coordinate system of the industrial robot (<b>81</b>),</div> <div class="claim-text">a graphical model stored in the control device (<b>15</b>), which graphical model is at least a partial model of an object (<b>82</b>) and is described in coordinates relative to coordinates of the industrial robot (<b>81</b>),</div> <div class="claim-text">a display device (<b>14</b>) to display images associated with image data sets generated with the camera (<b>17</b>), and to overlay the model in the displayed images and</div> <div class="claim-text">an input device (<b>13</b>) for manual association of points of the graphical model with points in the images,</div> <div class="claim-text">wherein the industrial robot (<b>81</b>) is set up such that the method according to any of the <claim-ref idref="CLM-00005">claims 5</claim-ref> through <b>9</b> can be implemented with it in order to determine the location of the physical object (<b>82</b>) relative to the industrial robot (<b>81</b>) when the physical object (<b>82</b>) is attached to the industrial robot (<b>81</b>) and can be moved by means of this.</div> </div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

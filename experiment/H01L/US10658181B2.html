@@ -1,0 +1,977 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10658181B2 - Method of spacer-defined direct patterning in semiconductor fabrication 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA396702579" source="national office">
+<div class="abstract">A method of spacer-defined direct patterning in semiconductor fabrication includes: providing a photoresist structure having a target width of lines; trimming the photoresist structures such that a width of each trimmed photoresist structure is smaller than the target width; depositing an oxide film on the template, thereby entirely covering with the oxide film an exposed top surface of the template and the trimmed photoresist structures; etching the oxide film-covered template to remove an unwanted portion of the oxide film without removing the trimmed photoresist structures so as to form vertical spacers isolated from each other, each spacer substantially maintaining the target width and being constituted by the trimmed photoresist structures and a vertical portion of the oxide film covering sidewalls of the trimmed photoresist structures; and etching the spacer-formed template to transfer a pattern constituted by the spacers to the template.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES263921295">
+<heading id="h-0001">BACKGROUND OF THE INVENTION</heading>
+<heading id="h-0002">Field of the Invention</heading>
+<div class="description-paragraph" id="p-0002" num="0001">The present invention generally relates to a method of patterning in semiconductor fabrication, particularly a method of spacer-defined direct patterning in semiconductor fabrication using, e.g., EUV (Extreme Ultra Violet) for photolithography.</div>
+<heading id="h-0003">Description of the Related Art</heading>
+<div class="description-paragraph" id="p-0003" num="0002">To correspond to miniaturization of semiconductor devices, a reduction of wavelength of light source for photolithography progresses, e.g., changing from ArF (Argon Fluoride laser) to EUV. Heretofore, due to low productivity of EUV lithography as discussed below, miniaturization of semiconductor devices has been achieved by using spacer-defined double patterning (SDDP). However, there is a limit of miniaturization by SDDP due to limited exposure accuracy, and also, the prospect of actually using EUV lithography has recently emerged. Accordingly, it is expected that direct patterning using EUV lithography will be placed into practical use in semiconductor fabrication in the future.</div>
+<div class="description-paragraph" id="p-0004" num="0003">EUV lithography enables patterning with a pattern dimension of 10 to 20 nm (the minimum dimension in ArF laser lithography is approximately 40 nm); however, patterning accuracy, which is surface roughness evaluated by LER (Line-Edge Roughness) and LWR (Line-Width Roughness), depends on the characteristics of polymer constituting a resist, and thus, a surface roughness of approximately 5 nm may be the lower limit and has not yet improved. Thus, in fine wiring for microfabrication, undulation or waviness of fine wiring having a width of 5 nm is inevitable and causes line-to-line short circuits. The present inventors have conducted research to improve patterning accuracy in semiconductor fabrication.</div>
+<div class="description-paragraph" id="p-0005" num="0004">Any discussion of problems and solutions in relation to the related art has been included in this disclosure solely for the purposes of providing a context for the present invention, and should not be taken as an admission that any or all of the discussion was known at the time the invention was made.</div>
+<heading id="h-0004">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0006" num="0005">In some embodiments, variations in microfabrication can be reduced by providing a template having a resist patterned by EUV lithography; conducting trimming or etching of the resist using a plasma-enhanced atomic layer deposition (PEALD) apparatus; and depositing a SiO<sub>2 </sub>film on an exposed surface of the template including the trimmed resist at a thickness such that the dimensions of the pre-trimmed resist are resumed so as to cover the trimmed resist having rough surfaces while substantially maintaining the original dimensions of the resist.</div>
+<div class="description-paragraph" id="p-0007" num="0006">For purposes of summarizing aspects of the invention and the advantages achieved over the related art, certain objects and advantages of the invention are described in this disclosure. Of course, it is to be understood that not necessarily all such objects or advantages may be achieved in accordance with any particular embodiment of the invention. Thus, for example, those skilled in the art will recognize that the invention may be embodied or carried out in a manner that achieves or optimizes one advantage or group of advantages as taught herein without necessarily achieving other objects or advantages as may be taught or suggested herein.</div>
+<div class="description-paragraph" id="p-0008" num="0007">Further aspects, features and advantages of this invention will become apparent from the detailed description which follows.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0009" num="0008">These and other features of this invention will now be described with reference to the drawings of preferred embodiments which are intended to illustrate and not to limit the invention. The drawings are greatly simplified for illustrative purposes and are not necessarily to scale.</div>
+<div class="description-paragraph" id="p-0010" num="0009"> <figref idrefs="DRAWINGS">FIG. 1A</figref> is a schematic representation of a PEALD (plasma-enhanced atomic layer deposition) apparatus for depositing a dielectric film usable in an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0011" num="0010"> <figref idrefs="DRAWINGS">FIG. 1B</figref> illustrates a schematic representation of a precursor supply system using a flow-pass system (FPS) usable in an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows STEM photographs of patterned surfaces after EUV lithography without trimming (“After litho”), after 0.5 seconds of trimming (“0.5 s”), after 1.0 seconds of trimming (“1 s”), after 1.5 seconds of trimming (“1.5 s”), and after 2.0 seconds of trimming (“2 s”), wherein lower photos (b) are taken at a higher magnification than that for upper photos (a).</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a graph showing the relationship between CD of a photoresist (“PR CD”) and process times of trimming (“Process time”) according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows a schematic representation of pattern transfer (steps (a) to (f)) using spacer-defined double patterning (SDDP) and a schematic representation of pattern transfer (steps (a′), (b′), and (f′)) using spacer-defined direct patterning.</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows a schematic representation of pattern transfer (steps (a) to (e)) using spacer-defined direct patterning according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 6</figref> shows a schematic representation of pattern transfer (steps (a) to (e), additionally step (a′)) using spacer-defined direct patterning according to another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 7</figref> shows STEM photographs of patterned lines of a photoresist formed by photolithography (“AFTER LITHO” in (a)) and after deposition of an oxide film (“PEALD-SIO2 SPACER DEPOSITION” in (b)) according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows STEM photographs of patterned lines of a photoresist formed by photolithography (“After litho”), after 9 seconds of trimming (“After 9 s trim”), and after deposition of an oxide film (“After spacer dep”) according to an embodiment of the present invention. <figref idrefs="DRAWINGS">FIG. 8</figref> also shows CD, LWR, and LER thereof.</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a graph showing the relationship between LER and LWR of a photoresist (“LER/LWR”) and process times of trimming (“Trim time”) according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a table showing CD corresponding to the measuring points shown in <figref idrefs="DRAWINGS">FIG. 9</figref>.</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 11</figref> shows STEM photographs of cross-sectional views of patterned lines of a photoresist formed by photolithography (“initial” in (a)) and after depositing a SiO layer by ALD thereon (“SiO ALD (˜2 nm)” in (b)) according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 12</figref> shows STEM photographs of cross-sectional views of patterned lines after depositing the SiO layer by ALD shown in (b) of <figref idrefs="DRAWINGS">FIG. 11</figref> (“SiO ALD (˜2 nm)” in (b)), after trimming the patterned lines for 10 seconds (“ALD+trim(10 s)” in (c)), after trimming the patterned lines for 15 seconds (“ALD+trim(15 s)” in (d)), and after trimming the patterned lines for 20 seconds (“ALD+trim(20 s)” in (e)) according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a graph showing changes in height and CD (nm) of the patterned lines when the trimming time changed according to the embodiment shown in <figref idrefs="DRAWINGS">FIG. 12</figref>.</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 14</figref> is a graph showing changes in height, width (nm), and LWR (nm) of patterned lines when the trimming time changed according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 15</figref> shows STEM photographs of cross-sectional views of patterned lines before depositing the SiO layer by ALD in (a) corresponding to “initial” in <figref idrefs="DRAWINGS">FIG. 14</figref>, after depositing the SiO layer by ALD in (b) corresponding to “Deposition” in <figref idrefs="DRAWINGS">FIG. 14</figref>, after trimming the patterned lines for 10 seconds in (c) corresponding to “Deposition+Trimming (10 s)” in <figref idrefs="DRAWINGS">FIG. 14</figref>, and after trimming the patterned lines for 15 seconds in (d) corresponding to “Deposition+Trimming (15 s)” in <figref idrefs="DRAWINGS">FIG. 14</figref>.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION OF EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0026" num="0025">In this disclosure, “gas” may include vaporized solid and/or liquid and may be constituted by a single gas or a mixture of gases, depending on the context. Likewise, an article “a” or “an” refers to a species or a genus including multiple species, depending on the context. In this disclosure, a process gas introduced to a reaction chamber through a showerhead may be comprised of, consist essentially of, or consist of a silicon-containing precursor and an additive gas. The additive gas may include a reactant gas for nitriding and/or carbonizing the precursor, and an inert gas (e.g., noble gas) for exciting the precursor, when RF power is applied to the additive gas. The inert gas may be fed to a reaction chamber as a carrier gas and/or a dilution gas. Further, in some embodiments, no reactant gas is used, and only noble gas (as a carrier gas and/or a dilution gas) is used. The precursor and the additive gas can be introduced as a mixed gas or separately to a reaction space. The precursor can be introduced with a carrier gas such as a rare gas or nitrogen. A gas other than the process gas, i.e., a gas introduced without passing through the showerhead, may be used for, e.g., sealing the reaction space, which includes a seal gas such as a rare gas. In some embodiments, the term “precursor” refers generally to a compound that participates in the chemical reaction that produces another compound, and particularly to a compound that constitutes a film matrix or a main skeleton of a film, whereas the term “reactant” refers to a compound, other than precursors, that activates a precursor, modifies a precursor, or catalyzes a reaction of a precursor, wherein the reactant may provide an element (such as N, C) to a film matrix and become a part of the film matrix, when RF power is applied. The term “inert gas” refers to a gas that excites a precursor when RF power is applied, but unlike a reactant, it does not become a part of a film matrix.</div>
+<div class="description-paragraph" id="p-0027" num="0026">In some embodiments, “film” refers to a layer continuously extending in a direction perpendicular to a thickness direction substantially without pinholes to cover an entire target or concerned surface, or simply a layer covering a target or concerned surface. In some embodiments, “layer” refers to a structure having a certain thickness formed on a surface or a synonym of film or a non-film structure. A film or layer may be constituted by a discrete single film or layer having certain characteristics or multiple films or layers, and a boundary between adjacent films or layers may or may not be clear and may be established based on physical, chemical, and/or any other characteristics, formation processes or sequence, and/or functions or purposes of the adjacent films or layers. Further, in this disclosure, any two numbers of a variable can constitute a workable range of the variable as the workable range can be determined based on routine work, and any ranges indicated may include or exclude the endpoints. Additionally, any values of variables indicated (regardless of whether they are indicated with “about” or not) may refer to precise values or approximate values and include equivalents, and may refer to average, median, representative, majority, etc. in some embodiments. Further, in this disclosure, the terms “constituted by” and “having” refer independently to “typically or broadly comprising”, “comprising”, “consisting essentially of”, or “consisting of” in some embodiments. In this disclosure, any defined meanings do not necessarily exclude ordinary and customary meanings in some embodiments.</div>
+<div class="description-paragraph" id="p-0028" num="0027">In the present disclosure where conditions and/or structures are not specified, the skilled artisan in the art can readily provide such conditions and/or structures, in view of the present disclosure, as a matter of routine experimentation.</div>
+<div class="description-paragraph" id="p-0029" num="0028">In all of the disclosed embodiments, any element used in an embodiment can be replaced with any elements equivalent thereto, including those explicitly, necessarily, or inherently disclosed herein, for the intended purposes. Further, the present invention can equally be applied to apparatuses and methods.</div>
+<div class="description-paragraph" id="p-0030" num="0029">The embodiments will be explained with respect to preferred embodiments. However, the present invention is not limited to the preferred embodiments.</div>
+<div class="description-paragraph" id="p-0031" num="0030">In some embodiments, a method of spacer-defined direct patterning in semiconductor fabrication, comprises: (i) presetting a target width of lines to be patterned in a template using photoresist structures formed by photolithography on the template; (ii) providing the template having the photoresist structures patterned thereon; (iii) trimming the photoresist structures such that a width of each trimmed photoresist structure is smaller than the target width; (iv) depositing an oxide film on the template, thereby entirely covering with the oxide film an exposed top surface of the template and the trimmed photoresist structures; (v) etching the oxide film-covered template to remove an unwanted portion of the oxide film without removing the trimmed photoresist structures so as to form vertical spacers isolated from each other, each spacer substantially maintaining the target width and being constituted by the trimmed photoresist structures and a vertical portion of the oxide film covering sidewalls of the trimmed photoresist structures; and (vi) etching the spacer-formed template to transfer a pattern constituted by the spacers to the template.</div>
+<div class="description-paragraph" id="p-0032" num="0031">In some embodiments, the target width is typically 5 nm to 30 nm, preferably 10 nm to 20 nm. In some embodiments, in step (iii), the trimming amount in the width direction is typically 1 nm to 5 nm per side (i.e., the width of the photoresist structure is reduced by 2 nm to 10 nm in step (iii)). In some embodiments, the trimming amount in the height direction is also 1 nm to 5 nm which is substantially equal to that in the width direction since trimming is performed mainly using radicals (however, when step (iia) of depositing a thin oxide film prior to step (iii) discussed later is performed, trimming is performed using not only radicals but also ion bombardment). In some embodiments, a SiO<sub>2 </sub>pre-coat can be deposited on a top surface of each photoresist structure prior to step (iii) so that the trimming can be performed predominantly in the width direction, not in the height direction.</div>
+<div class="description-paragraph" id="p-0033" num="0032">In some embodiments, the photoresist structures in step (ii) have a width substantially the same as the target width. In the disclosure, “substantially the same”, “substantially uniform”, or the like may refer to an immaterial difference or a difference recognized by a skilled artisan such as those of less than 30%, less than 10%, less than 5%, or any ranges thereof in some embodiments, depending on the subject technology (in some embodiments, even though a difference between the two is as high as about 50%, the two would be considered to be substantially the same). Alternatively, in some embodiments, the photoresist structures in step (ii) have a width substantially greater than the target width, since the photoresist structures are subjected to following trimming process. In the disclosure, “substantially greater”, “substantially different”, or the like may refer to a material difference or a difference recognized by a skilled artisan such as those of at least 1%, 5%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, or any ranges thereof in some embodiments, depending on the subject technology.</div>
+<div class="description-paragraph" id="p-0034" num="0033">In some embodiments, the oxide film deposited in step (iv) has a thickness such that each oxide film-covered trimmed photoresist structure has a width substantially the same as the target width, since it is expected that the thickness of the oxide film-covered trimmed photoresist structure is substantially maintained during step (v), i.e., the etching step. In some embodiments, the oxide film deposited in step (iv) has a thickness such that each oxide film-covered trimmed photoresist structure has a width slightly greater than the target width in the event that the thickness of the oxide film-covered trimmed photoresist structure is slightly reduced during step (v), i.e., the etching step (“slightly” may refer to a difference of less than 10%, depending on the embodiment).</div>
+<div class="description-paragraph" id="p-0035" num="0034">In some embodiments, in step (iv), the oxide film is a conformal film deposited by plasma-enhanced atomic layer deposition (PEALD), since the oxide film-covered trimmed photoresist structures are used as vertical spacers. In some embodiments, in step (iv), the oxide film is deposited by plasma-enhanced atomic layer deposition (PEALD) wherein pressure, temperature, and/or RF power are/is controlled so that a dry etch rate of a portion of the oxide film deposited on a top surface of each trimmed photoresist structure is higher than (e.g., two or more times) that of a portion of the oxide film deposited on sidewalls of each trimmed photoresist structure, so that in step (v), vertical spacers can be formed while substantially maintaining the height of the trimmed photoresist structures (e.g., 20 nm to 150 nm, preferably 30 nm to 80 nm).</div>
+<div class="description-paragraph" id="p-0036" num="0035">In some embodiments, each photoresist structure is trimmed in step (iii) so as to reduce its width by 1 nm to 5 nm on each side of the photoresist structure. By reducing the width of the photoresist structures, CD, LER, and LWR of patterned lines can be improved. However, if a reduction of the width exceeds 5 nm, CD, LER, and LWR may no longer be improved; rather they begin to degrade.</div>
+<div class="description-paragraph" id="p-0037" num="0036">In some embodiments, the photoresist structures are formed on an anti-reflective layer of the template, and in step (v), when the unwanted portion of the oxide film is removed, a portion of the anti-reflective layer formed underneath the unwanted portion of the oxide film is also removed, so that the patterned anti-reflective layer can be used as a mask to transfer the pattern to the template. In some embodiments, the unwanted portion of the oxide film includes a portion of the oxide film deposited on the top of the photoresist structure, and a portion of the oxide film deposited on the exposed surface of the anti-reflective layer, i.e., horizontally extending portions of the oxide film. In the above, in some embodiments, the portion of the oxide film deposited on the top of the photoresist structure has chemical resistance (e.g., low dry etch rate) so that the portion is not entirely removed before the portion of the oxide film deposited on the exposed surface of the anti-reflective layer and the anti-reflective layer are removed, thereby preventing stripping the photoresist structure covered with the oxide film in step (iv).</div>
+<div class="description-paragraph" id="p-0038" num="0037">In some embodiments, in step (i), the preset target width is in the range of 10 nm to 20 nm. In some embodiments, step (ii) comprises forming the photoresist structures by photolithography using EUV (Extreme Ultra Violet) light. Since the preset target width can be as small as 10 nm to 20 nm by using EUV lithography or other lithography equivalent thereto, spacer-defined direct patterning can effectively be accomplished.</div>
+<div class="description-paragraph" id="p-0039" num="0038">In some embodiments, the method further comprises, prior to step (iii), (iia) depositing by plasma-enhanced atomic layer deposition (PEALD) a thin oxide film having a thickness of about 2 nm or less on the template, thereby entirely covering with the thin oxide film an exposed top surface of the template and the photoresist structures. As described later, by conducting step (iia), the “loading effect” can effectively be ameliorated, thereby improving CD, LER, and LWR even when photoresist structures are a mixture of sparsely arranged photoresist structures and densely arranged photoresist structures.</div>
+<div class="description-paragraph" id="p-0040" num="0039">In some embodiments, when step (iia) is conducted, the trimming in step (iii) is conducted by direct plasma etching. Since direct plasma contains not only radicals but also ions, unlike remote plasma, the “loading effect” can be more effectively ameliorated.</div>
+<div class="description-paragraph" id="p-0041" num="0040">In some embodiments, the thin oxide film in step (iia) and the oxide film in step (iv) are constituted by a same material and deposited under the same conditions except for the duration of deposition process, i.e., the thickness of film (typically the thickness of the oxide film in step (iia) is 2 nm or less whereas that of the oxide film in step (iv) is more than 2 nm) so that efficient operation can be realized. In some embodiments, the thin oxide film in step (iia) and the oxide film in step (iv) are independently constituted by SiO<sub>2</sub>, TiO, HfO, or AlO, which can be deposited under conventional conditions such as those disclosed in U.S. Pat. Nos. 8,252,691, and 8,298,951, each disclosure of which is incorporated herein by reference in its entirety.</div>
+<div class="description-paragraph" id="p-0042" num="0041">In some embodiments, the photoresist structures in step (ii) are constituted by sparely and densely arranged photoresist structures having different line spaces.</div>
+<div class="description-paragraph" id="p-0043" num="0042">In some embodiments, the photoresist structures have an LER (Line-Edge Roughness) of more than 5 nm, and an LWR (Line-Width Roughness) of more than 3.5 nm prior to step (iii). The measuring method of LER and LWR is known in the industry (for example, J. S. Villarrubia and B. D. Bunday, “Unbiased Estimation of Linewidth Roughness”, Proc. of SPIE Vol 5752, 480 (2005), the disclosure of which is incorporated herein by reference in its entirety).</div>
+<div class="description-paragraph" id="p-0044" num="0043">In some embodiments, the trimmed photoresist structures have an LER of less than 5 nm, and an LWR of less than 3.5 nm prior to step (iv). In some embodiments, the oxide film-covered trimmed photoresist structures have an LER of 4 nm or less, and an LWR of 3 nm or less prior to step (v).</div>
+<div class="description-paragraph" id="p-0045" num="0044">Although the process conditions are discussed later, some embodiments are characterized in that a reactant gas used in step (iii) comprises no oxygen, steps (ii) to (v) are conducted at a temperature of 150° C. or lower, and/or steps (ii) to (iv) are continuously conducted in a same reaction chamber.</div>
+<div class="description-paragraph" id="p-0046" num="0045">The embodiments will be explained with respect to embodiments illustrated in the drawings. However, the present invention is not limited thereto.</div>
+<div class="description-paragraph" id="p-0047" num="0046"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows a schematic representation of pattern transfer (steps (a) to (f)) using advanced spacer-defined double patterning (SDDP) and a schematic representation of pattern transfer (steps (a′), (b′), and (f′)) using spacer-defined direct patterning.</div>
+<div class="description-paragraph" id="p-0048" num="0047">In advanced SDDP, step (b) is additionally conducted in order to lower the CD of a resist pattern, since it is difficult to form a resist pattern having a width of about 20 nm or smaller using ArF laser lithography. In step (a), a layered structure is constituted by an amorphous carbon layer (αC) <b>45</b> as a target layer (which is formed on a substrate (not shown), for example) prepared typically by a spin-on or CVD process, a silicon nitride layer (SiN) <b>44</b> deposited thereon to be used as an etch hard mask, an amorphous silicon layer (αSi) <b>43</b> deposited thereon to be used as a spacer, an amorphous carbon layer (αC) <b>48</b> as a template for double patterning, a silicon-containing anti-reflective coating (SiARC) <b>42</b> deposited thereon, a bottom anti-reflective coating (BARC) <b>41</b> (typically made of organic material) deposited thereon, and a photoresist pattern <b>46</b> (constituted by e.g., JSR3030, ARX 2014, or ARX 15327E manufactured by JSR Corporation, Tokyo, or a material equivalent thereto) formed typically by ArF laser lithography. The photoresist pattern <b>46</b> formed by ArF laser lithography has a width of 45 nm, for example.</div>
+<div class="description-paragraph" id="p-0049" num="0048">In the advanced SDDP process, step (b) is performed to trim the resist <b>46</b> by dry etching (using e.g., O<sub>2</sub>, N<sub>2</sub>O, CO<sub>2</sub>, H<sub>2</sub>, or Ar, or a mixture of any two or more of the foregoing as an etchant gas, selected depending on the material constituting the resist) to reduce the CD of the resist pattern by reducing its width from 45 nm to 22.5 nm, thereby forming a trimmed resist <b>46</b>′. The BARC <b>41</b> is also trimmed in the photoresist pattern to form a trimmed BARC <b>41</b>′ in step (b) which is a step of transferring a pattern to the αC <b>48</b> used as a template. In step (c), by using the trimmed resist <b>46</b>′ and the trimmed BARC <b>41</b>′, the SiARC <b>42</b> and the αC <b>48</b> are etched (using e.g., for silicon: HBr, Cl<sub>2</sub>, BCl<sub>3</sub>, Ar, O<sub>2</sub>, fluorine-containing gas (fluorocarbon, SF<sub>6</sub>, NF<sub>3</sub>); for carbon: O<sub>2</sub>, N<sub>2</sub>O, CO<sub>2</sub>, H<sub>2</sub>, Ar, H<sub>2</sub>, fluorine-containing gas (fluorocarbon, SF<sub>6</sub>, NF<sub>3</sub>) as an etchant gas) so as to transfer the pattern of the timed resist <b>46</b>′ to the SiARC <b>42</b> and the αC <b>48</b>, forming an etched SiARC <b>42</b>′ and an etched αC <b>48</b>′. In this embodiment, the BARC <b>41</b>, SiARC <b>42</b>, and αC <b>48</b> are used; however, these layers can be treated collectively as an anti-reflective layer used as a template which may be constituted by a single layer or multiple layers.</div>
+<div class="description-paragraph" id="p-0050" num="0049">In step (d), a metal oxide layer (LT-SiO2) <b>47</b> (constituted by e.g., silicon oxide) is deposited at a relatively low temperature, followed by etching in step (e) which is a spacer RIE (reactive ion etch) step (using e.g., HBr, Cl<sub>2</sub>, BCl<sub>3</sub>, Ar, O<sub>2</sub>, fluorine-containing gas (fluorocarbon, SF<sub>6</sub>, NF<sub>3</sub>) as an etchant gas) to etch the metal oxide layer <b>47</b>, forming an etched LT-SiO2 <b>47</b>′. By stripping the material of the etched SiARC <b>42</b>′ and the etched αC <b>48</b>′ by ashing, the etched LT-SiO2 <b>47</b>′ is left on the αSi <b>43</b> as vertical spacers <b>84</b>. Since the metal oxide spacer (<b>47</b>′) has high etch selectivity, the etched SiARC <b>42</b>′ and the etched αC <b>48</b> (the template) for forming the spacer thereon can be thin and the metal oxide spacer (<b>47</b>′) can be sustained during etching. In some embodiments, the thickness of the antireflective layers (constituted collectively by the BARC <b>41</b>, the SiARC <b>42</b>, and the αC <b>48</b>) is about 5 to 50 nm (typically 10 to 30 nm), and the thickness of the metal oxide layer (LT-SiO2 <b>47</b>) is about 5 to 50 nm (typically 10 to 20 nm). In step (f), by using the etched LT-SiO2 <b>47</b>′, the αSi <b>43</b> is etched (using e.g., HBr, Cl<sub>2</sub>, BCl<sub>3</sub>, Ar, O<sub>2</sub>, fluorine-containing gas (fluorocarbon, SF<sub>6</sub>, NF<sub>3</sub>) as an etchant gas), forming an etched αSi <b>43</b>′ which has a line width of 22.5 nm, for example, which can be used as a second template. As such, according to advanced SDDP, it is possible to form a template having a line width of about 22.5 nm, for example, even using ArF laser lithography.</div>
+<div class="description-paragraph" id="p-0051" num="0050">However, as discussed above in relation to steps (a) to (f) in <figref idrefs="DRAWINGS">FIG. 4</figref>, advanced SDDP requires an intermediate template (e.g., the αC <b>48</b>) and associated steps (c) to (e) involving additional etching and deposition steps. In contrast, in spacer-defined direct patterning as shown in steps (a′), (b′), and (f) in <figref idrefs="DRAWINGS">FIG. 4</figref>, additional steps (c) to (e) and also the intermediate template (e.g., the αC <b>48</b>) can entirely be eliminated.</div>
+<div class="description-paragraph" id="p-0052" num="0051">In direct patterning, in step (a′), by using EUV lithography, a resist pattern <b>56</b> having a line width of about 20 nm, for example, is formed on a layered structure constituted by layers <b>55</b>, <b>54</b>, <b>53</b>, <b>52</b>, and <b>51</b>, which correspond or are equivalent to the amorphous carbon layer (αC) <b>45</b>, the silicon nitride layer (SiN) <b>44</b>, the amorphous silicon layer (αSi) <b>43</b>, the silicon-containing anti-reflective coating (SiARC) <b>42</b>, and the bottom anti-reflective coating (BARC) <b>41</b>. In step (a′), the BARC <b>51</b> is trimmed in the resist pattern in step (a′), forming a trimmed BARC <b>51</b>′, and by using the trimmed BARC <b>51</b>′, the SiARC <b>52</b> and the αSi <b>53</b> are etched to transfer the resist pattern in step (b′) to the αSi <b>53</b>, forming an etched αSi <b>53</b>′ having a line width of 20 nm, for example, in step (f′). Accordingly, by using EUV lithography, a resist pattern having a line width of 10 nm to 20 nm can directly be transferred to a template without using an intermediate template.</div>
+<div class="description-paragraph" id="p-0053" num="0052">However, as mentioned earlier, although EUV lithography enables patterning with a pattern dimension of 10 to 20 nm, patterning accuracy, which is surface roughness evaluated by LER (Line-Edge Roughness) and LWR (Line-Width Roughness), depends on the characteristics of polymer constituting a resist, and thus, a surface roughness of approximately 5 nm may be the lower limit and has not yet improved.</div>
+<div class="description-paragraph" id="p-0054" num="0053"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows a schematic representation of pattern transfer (steps (a) to (e)) using spacer-defined direct patterning according to an embodiment of the present invention, in which the above described problem can effectively be resolved.</div>
+<div class="description-paragraph" id="p-0055" num="0054">In direct patterning according to this embodiment, in step (a), by using EUV lithography, a resist pattern <b>36</b> having a line width of about 20 nm, for example (typically 10 nm to 20 nm), is formed on a layered structure constituted by layers <b>35</b>, <b>34</b>, <b>33</b>, <b>32</b>, and <b>31</b>, which correspond or are equivalent to the amorphous carbon layer (αC) <b>55</b>, the silicon nitride layer (SiN) <b>54</b>, the amorphous silicon layer (αSi) <b>53</b>, the silicon-containing anti-reflective coating (SiARC) <b>52</b>, and the bottom anti-reflective coating (BARC) <b>51</b> in <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0056" num="0055">When using EUV lithography or equivalent thereto, a line width of a resist pattern can be as small as 20 nm or lower. However, LER (Line-Edge Roughness) and LWR (Line-Width Roughness) of the resist pattern are typically more than 3.5 nm and more than 5 nm, respectively, which are higher than desired LER and LWR for microfabrication of semiconductor devices, which are, for example, 3.5 nm or less (preferably 3 nm or less) and 5 nm or less (preferably 4 nm or less), respectively. In step (a) in <figref idrefs="DRAWINGS">FIG. 5</figref>, the LER and the LWR are, for example, 3.87 nm and 5.26 nm, respectively (see an Example described later).</div>
+<div class="description-paragraph" id="p-0057" num="0056">According to this embodiment, in step (b) in <figref idrefs="DRAWINGS">FIG. 5</figref>, the resist <b>36</b> is trimmed so that the width of the resist <b>36</b> is reduced from 20 nm to 10 nm (typically 5 nm to 10 nm), forming a trimmed resist <b>36</b>′. Through this dry etching process, the LER and the LWR can significantly be improved. For example, the LER and the LWR are reduced from 4.1 nm and 3.07 nm, respectively, to 5.26 nm and 3.87 nm, respectively, in step (b). In some embodiments, trimming can be performed under conditions shown in Table 1 below.</div>
+<div class="description-paragraph" id="p-0058" num="0057">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">General</td>
+<td class="description-td">Typical</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Temperature</td>
+<td class="description-td">30° C. to 100° C.</td>
+<td class="description-td">30° to 50° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pressure</td>
+<td class="description-td">100 Pa to 1000 Pa</td>
+<td class="description-td">200 Pa to 600 Pa</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Etchant</td>
+<td class="description-td">O<sub>2</sub>, N<sub>2</sub>O, CO<sub>2</sub>, H<sub>2</sub>, Ar</td>
+<td class="description-td">Selected depending on</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the resist material</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Etchant flow</td>
+<td class="description-td">1 to 10 SLM</td>
+<td class="description-td">Selected depending on</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the resist material</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">RF power for a</td>
+<td class="description-td">10 W to 500 W</td>
+<td class="description-td">30 W to 100 W</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">300-mm wafer</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration</td>
+<td class="description-td">1 to 20 seconds</td>
+<td class="description-td">5 to 10 seconds</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Trimming rate in</td>
+<td class="description-td">10 nm to 100 nm/min</td>
+<td class="description-td">20 nm to 50 nm/min</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">width direction</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Trimming rate in</td>
+<td class="description-td">10 nm to 100 nm/min</td>
+<td class="description-td">20 nm to 50 nm/min</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">height direction</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0059" num="0058">In this disclosure, any indicated RF power for a 300-mm wafer can be converted to W/cm<sup>2 </sup>(wattage per unit area of a wafer) which can apply to a wafer having a different diameter such as 200 mm or 450 mm.</div>
+<div class="description-paragraph" id="p-0060" num="0059">According to this embodiment, in step (c), a conformal metal oxide layer (LT-SiO2) <b>37</b> (constituted by, e.g., silicon oxide) is deposited by, e.g., PEALD at a relatively low temperature, on an exposed surface to compensate for the reduction of the width of the trimmed resist <b>36</b>′, so that the width of the line constituted by the trimmed resist <b>36</b>′ can be increased to or rebuilt to 20 nm, for example (typically 10 nm to 25 nm, which can be substantially the same as, thicker than, or thinner than the width of the resist in step (a)), by the deposited LT-SiO2 <b>37</b> having a thickness of 5 nm (typically 2 nm to 10 nm). Since the LT-SiO2 <b>37</b> is deposited by PEALD or the like and has a high conformality, it can cover the trimmed resist <b>36</b>′ uniformly at a uniform thickness, so that it can increase the width of the line without lowering its surface roughness. For example, the LER and the LWR of the line constituted by the oxide-covered trimmed resist are 2.63 nm and 3.64 nm, respectively. Since the LER and the LWR are expected to be maintained while transferring the line pattern to a template in step (e) in <figref idrefs="DRAWINGS">FIG. 5</figref>, the lines of the template can possess desirable LER and LWR.</div>
+<div class="description-paragraph" id="p-0061" num="0060">In some embodiments, the oxide film in step (c) is constituted by SiO<sub>2</sub>, TiO, HfO, or AlO, which can be deposited under conventional conditions such as those disclosed in U.S. Pat. Nos. 8,252,691, and 8,298,951, each disclosure of which is incorporated herein by reference in its entirety. In some embodiments, the precursor for PEALD is an alkylaminosilane. In some embodiments, the alkylaminosilane is selected from the group consisting of bisdiethylaminosilane (BDEAS), bisdimethylaminosilane (BDMAS), hexylethylaminosilane (HEAD), tetraethylaminosilane (TEAS), tert-butylaminosilane (TBAS), bistert-butylaminosilane (BTBAS), bisdimethylaminodimethylaminosilane (BDMADMS), heptametyldisilazane (HIVIDS), trimethysylyldiethlamine (TMSDEA), trimethylsyledimethlamine (TMSDMA), trimethyltoribinylcycletrisilazane (TMTVCTS), tri strimetylhydroxyamine (TTMSHA), bisdimethylsaminomethylsilane (BDMAMS), and dimetyhlsilyldimethlamine (DMSDMA). The precursor can be constituted by a single precursor or a mixture of two or more precursors. In some embodiments, the oxide film has a conformality of 80% to 100% (typically about 90% or higher) wherein the “conformality” is determined by comparing film thickness deposited at some point (typically a midway point) on a sidewall or on a bottom of a recess to film thickness deposited on a flat surface just outside the recess.</div>
+<div class="description-paragraph" id="p-0062" num="0061">In step (d) in <figref idrefs="DRAWINGS">FIG. 5</figref>, the BARC <b>31</b> is trimmed in the resist pattern in step (c), forming a trimmed BARC <b>31</b>′, and by using the trimmed BARC <b>31</b>′, the SiARC <b>32</b> and the αSi <b>33</b> are etched to transfer the resist pattern in step (c) to the αSi <b>33</b>, forming an etched αSi <b>33</b>′ having a line width of 20 nm, for example, in step (e). According to this embodiment, by using EUV lithography, a resist pattern having a line width of 10 nm to 20 nm can directly be transferred to a template while improving the LER and LWR. In some embodiments, etching in step (d) following step (c) can be performed under conditions shown in Table 2 below.</div>
+<div class="description-paragraph" id="p-0063" num="0062">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">General</td>
+<td class="description-td">Typical</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Temperature</td>
+<td class="description-td">20° C. to 100° C.</td>
+<td class="description-td">40° C. to 60° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pressure</td>
+<td class="description-td">3 Pa to 10 Pa</td>
+<td class="description-td">4 Pa to 8 Pa</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Etchant</td>
+<td class="description-td">O<sub>2</sub>, N<sub>2</sub>O, CO<sub>2</sub>, H<sub>2</sub>, Ar</td>
+<td class="description-td">Selected depending on</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the materials of oxide</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">and anti-reflective layer</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Etchant flow</td>
+<td class="description-td">0.01 to 0.3 SLM</td>
+<td class="description-td">Selected depending on</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the materials of oxide</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">and anti-reflective layer</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">RF power for a</td>
+<td class="description-td">100 W to 1000 W</td>
+<td class="description-td">300 W to 500 W</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">300-mm wafer</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration</td>
+<td class="description-td">5 to 120 seconds</td>
+<td class="description-td">10 to 30 seconds</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Trimming rate in</td>
+<td class="description-td">0.3 nm to 10 nm/min</td>
+<td class="description-td">0.5 nm to 2 nm/min</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">width direction</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Trimming rate in</td>
+<td class="description-td">30 nm to 300 nm/min</td>
+<td class="description-td">50 nm to 100 nm/min</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">height direction</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0064" num="0063">In step (c) in <figref idrefs="DRAWINGS">FIG. 5</figref>, in some embodiments, the film profile and film quality of the metal oxide layer <b>37</b> can be manipulated in order to achieve a desired result in steps (d) and (e), i.e., when transferring the resist pattern to the template. For example, by depositing the metal oxide film <b>37</b> in a manner where a film deposited on a top surface of the trimmed resist <b>36</b>′ has selectively a thickness greater than that of a film deposited on side surfaces of the trimmed resist <b>36</b>′ and/or a chemical resistance (represented by dry etch rate and/or wet etch rate) higher than that of the film deposited on the side surfaces of the trimmed resist <b>36</b>′ so that the height of the oxide-covered trimmed resist can be maintained while dry or wet etching of the BARC <b>31</b> progresses in step (d). For example, the wet etch rate of the film deposited on the side surfaces is at least two times (e.g., 2 to 5 times) the wet etch rate of the film deposited on the top surface. Such selective tuning of thickness and quality of the film can be achieved according to the technology disclosed in, e.g., U.S. Ser. No. 15/048,422, filed Feb. 19, 2016, U.S. Ser. No. 15/592,730, filed May 11, 2017, and U.S. Ser. No. 15/650,686, filed Jul. 14, 2017, by the same applicant as in the instant application, each disclosure of which is incorporated herein by reference in its entirety.</div>
+<div class="description-paragraph" id="p-0065" num="0064">In step (b) in <figref idrefs="DRAWINGS">FIG. 5</figref>, the trimming process can be conducted by conventional methods. However, because the trimming speed of the resist is controlled mainly by the radical density surrounding the resist, the trimming speed varies depending on the density of the resist pattern, i.e., whether the pattern is sparse or dense defined by, e.g., a distances or intervals between lines. A variation of trimming speed depending on the density of a pattern is called the “loading effect.” Thus, due to the loading effect, when the resist pattern is constituted by lines arranged at different pitches or intervals, the trimming speed of lines densely arranged is lower than that of lines sparsely arranged (fewer radicals enter into narrow valleys (trenches) than into wide valleys (trenches)), resulting in variations of line width or CD.</div>
+<div class="description-paragraph" id="p-0066" num="0065">In this disclosure, a recess between adjacent photoresist lines, vertical spacers, and any other recess pattern is referred to as a “line space”. In some embodiments, the pattern is constituted by lines having different line spaces varying from about 10 nm to about 100 nm (typically about 20 nm to about 50 nm). In that case, the “loading effect” emerges, resulting in varying the line width and lowering LER/LWR.</div>
+<div class="description-paragraph" id="p-0067" num="0066"> <figref idrefs="DRAWINGS">FIG. 6</figref> shows a schematic representation of pattern transfer (steps (a) to (e) with additional step (a′)) using spacer-defined direct patterning according to another embodiment of the present invention, in which steps (a) to (e) are equivalent to those shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, except for step (a′). Considering the above-discussed problem in the conventional trimming method, in this embodiment, step (a′) is additionally conducted, in which a conformal thin metal oxide layer (LT-SiO2, constituted by, e.g., silicon oxide) 38 is deposited by PEALD at a relatively low temperature at a small thickness (typically 0.5 nm to 5 nm, e.g., 2 nm or less, more typically 1 nm to 2 nm). By depositing the thin oxide layer <b>38</b> contacting and covering the exposed surface of the resist <b>36</b>, when the oxide-covered resist is exposed to oxygen radicals in step (b), the trimming speed of the resist is not predominantly or directly controlled by the radical density since the thin oxide layer covers the resist surface, but is rather controlled by the diffusion speed of oxygen radicals through the thin oxide layer and/or the quantity of reactive oxygen (free radicals) generated by ion bombardment to the thin oxide layer, thereby alleviating the loading effect and improving uniformity of line width and line space throughout the pattern. The thickness of the thin oxide layer can be determined based on the compatibility or affinity between the resist and the oxide layer, etc.; however, when the thickness of the oxide layer is more than 5 nm, radicals cannot reach the resist surface through the oxide layer, and thus, trimming cannot effectively be performed. When the thin oxide layer is exposed to oxygen radicals, the thin oxide layer functions as a buffer layer, and oxygen radicals are regenerated through the thin oxide layer, trimming the resist, in which when trimming progresses, the width of the resist gradually decreases while keeping the thin oxide layer attached to the resist wherein the thickness of the thin oxide layer also gradually decreases. In some embodiments, trimming in step (b) following step (a′) can be performed under conditions shown in Table 3 below.</div>
+<div class="description-paragraph" id="p-0068" num="0067">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">General</td>
+<td class="description-td">Typical</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Temperature</td>
+<td class="description-td">30° C. to 100° C.</td>
+<td class="description-td">30° C. to 75° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pressure</td>
+<td class="description-td">100 Pa to 1000 Pa</td>
+<td class="description-td">200 Pa to 600 Pa</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Etchant</td>
+<td class="description-td">O<sub>2</sub>, N<sub>2</sub>O, CO<sub>2</sub>, H<sub>2</sub>, Ar</td>
+<td class="description-td">Selected depending on</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the materials of oxide</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">and resist</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Etchant flow</td>
+<td class="description-td">0.01 to 2 SLM</td>
+<td class="description-td">Selected depending on</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the materials of oxide</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">and resist</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">RF power for a</td>
+<td class="description-td">10 W to 500 W</td>
+<td class="description-td">30 W to 100 W</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">300-mm wafer</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration</td>
+<td class="description-td">5 to 300 seconds</td>
+<td class="description-td">10 to 30 seconds</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Trimming rate in</td>
+<td class="description-td">1 nm to 50 nm/min</td>
+<td class="description-td">5 nm to 15 nm/min</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">width direction</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Trimming rate in</td>
+<td class="description-td">0 nm to 10 nm/min</td>
+<td class="description-td">0 nm to 5 nm/min</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">height direction</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0069" num="0068">It should be noted that when depositing the thin oxide layer by PEALD on the resist, since PEALD generates more radicals and creates more ion bombardment than does thermal ALD or radical ALD (remote plasma), the resist surface is trimmed to a certain extent in step (a′), although such a phenomenon is not illustrated in step (a′) in <figref idrefs="DRAWINGS">FIG. 6</figref> (Plasma CVD may not be suitable for depositing the oxide layer because it is not suitable for depositing a conformal layer). Thus, the width of the resist is reduced not only in step (b) but also in step (a′). The above-described phenomenon (trimming takes place while depositing) can be seen or confirmed by observing a STEM photograph of a cross section of the resist or by measuring an increase of the line width in step (a′) which is lower than that in the case where the same layer is deposited under the same conditions except that the layer is deposited on a chemically stable non-resist material. When step (a′) serves as the above-discussed trimming/depositing step, the trimmed quantity of the resist can be controlled using the substrate temperature and the plasma power as process parameters wherein the trimmed quantity becomes higher when the substrate temperature is higher (the reactivity of oxygen is higher) and the plasma power is higher (also the reactivity of oxygen is higher).</div>
+<div class="description-paragraph" id="p-0070" num="0069">In some embodiments, the oxide layer deposited in step (a′) is identical to or different from the oxide layer deposited in step (c). In some embodiments, steps (a) through (c) in <figref idrefs="DRAWINGS">FIG. 6</figref> are continuously conducted in the same reaction chamber of a PEALD apparatus, and then steps (d) and (e) are continuously conducted in an etching apparatus. In the above, “continuously” refers to without moving the substrate from the same chamber, without a materially different intervening step, or without an intervening step of a materially different recipe. In some embodiments, the trimming in step (b) is typically conducted by using direct plasma (in situ plasma etching), and alternatively, it can be conducted using remote plasma or the like as long as the resist can be exposed directly to a plasma. However, direct plasma is preferable when the trimming in step (b) is conducted after step (a′) in <figref idrefs="DRAWINGS">FIG. 6</figref>, as compared with the trimming in step (b) without step (a′) in <figref idrefs="DRAWINGS">FIG. 5</figref>, because direct plasma contains not only radicals but also a significant quantity of ions, as compared with remote plasma (steps (a′) followed by step (b) requires both radicals and ions). In some embodiments, the trimming in step (b) is conducted using an Ar/N<sub>2 </sub>plasma, rather than an O<sub>2 </sub>plasma, because an Ar/N<sub>2 </sub>plasma etching involves slow etching speed and thus, it is easier to control or manipulate the trimmed quantity. On the other hand, the deposition of the oxide layer in step (a′) (and in some embodiments, also in step (c)) is conducted using an oxygen plasma.</div>
+<div class="description-paragraph" id="p-0071" num="0070">The process sequence from step (b) to step (d) in <figref idrefs="DRAWINGS">FIG. 5</figref> and that from step (a′) to step (d) in <figref idrefs="DRAWINGS">FIG. 6</figref> can be conducted continuously in the same reaction chamber, wherein each step is controlled by a particular recipe, and a purging/gas stabilization step may be conducted between different recipes, without transferring a substrate from the reaction chamber or without exposing the substrate to outside air. These processes can be performed using any suitable apparatus including an apparatus illustrated in <figref idrefs="DRAWINGS">FIG. 1</figref>, for example. <figref idrefs="DRAWINGS">FIG. 1</figref> is a schematic view of a PEALD apparatus, desirably in conjunction with controls programmed to conduct the sequences described below, usable in some embodiments of the present invention. In this figure, by providing a pair of electrically conductive flat-plate electrodes <b>4</b>, <b>2</b> in parallel and facing each other in the interior <b>11</b> (reaction zone) of a reaction chamber <b>3</b>, applying HRF power (13.56 MHz or 27 MHz) 25 to one side, and electrically grounding the other side <b>12</b>, a plasma is excited between the electrodes. A temperature regulator is provided in a lower stage <b>2</b> (the lower electrode), and a temperature of a substrate <b>1</b> placed thereon is kept constant at a given temperature. The upper electrode <b>4</b> serves as a shower plate as well, and reactant gas and/or dilution gas, if any, and precursor gas and etchant gas are introduced separately into the reaction chamber <b>3</b> through a gas line <b>21</b> and a gas line <b>22</b> (other gas line(s) are omitted), and through the shower plate <b>4</b>, according to a given recipe set for each step. Additionally, in the reaction chamber <b>3</b>, a circular duct <b>13</b> with an exhaust line <b>7</b> is provided, through which gas in the interior <b>11</b> of the reaction chamber <b>3</b> is exhausted. Additionally, a transfer chamber <b>5</b> disposed below the reaction chamber <b>3</b> is provided with a seal gas line <b>24</b> to introduce seal gas into the interior <b>11</b> of the reaction chamber <b>3</b> via the interior <b>16</b> (transfer zone) of the transfer chamber <b>5</b> wherein a separation plate <b>14</b> for separating the reaction zone and the transfer zone is provided (a gate valve through which a wafer is transferred into or from the transfer chamber <b>5</b> is omitted from this figure). The transfer chamber is also provided with an exhaust line <b>6</b>.</div>
+<div class="description-paragraph" id="p-0072" num="0071">In some embodiments, step (e) (etching step) can be conducted in any etching apparatus including a conventional apparatus. Depending on the material constituting a layer to be removed, i.e., depending on its resistance or sensitivity to e.g., HF, HCl, and TMAH wet etch; e.g. to BCl<sub>3</sub>, BCl<sub>3</sub>/Ar, dry etch; or e.g., to oxidation, a combination of wetetch chemistry alternating oxidizing and HF (common in semiconductor processing), or dry etch based on oxygen or CF<sub>4</sub>, for example, the etching conditions are selected, and etching is conducted accordingly.</div>
+<div class="description-paragraph" id="p-0073" num="0072">A skilled artisan will appreciate that the apparatus includes one or more controller(s) (not shown) programmed or otherwise configured to cause the deposition and reactor cleaning processes described elsewhere herein to be conducted. The controller(s) are communicated with the various power sources, heating systems, pumps, robotics and gas flow controllers or valves of the reactor, as will be appreciated by the skilled artisan.</div>
+<div class="description-paragraph" id="p-0074" num="0073">In some embodiments, a dual chamber reactor (two sections or compartments for processing wafers disposed closely to each other) can be used, wherein a reactant gas and a noble gas can be supplied through a shared line whereas a precursor gas is supplied through unshared lines.</div>
+<div class="description-paragraph" id="p-0075" num="0074">The present invention is further explained with reference to working examples below. However, the examples are not intended to limit the present invention. In the examples where conditions and/or structures are not specified, the skilled artisan in the art can readily provide such conditions and/or structures, in view of the present disclosure, as a matter of routine experimentation. Also, the numbers applied in the specific examples can be modified by a range of at least ±50% in some embodiments, and the numbers are approximate.</div>
+<heading id="h-0007">EXAMPLES</heading>
+<heading id="h-0008">Example 1</heading>
+<div class="description-paragraph" id="p-0076" num="0075">A photoresist pattern (constituted by e.g., Novolacs designed for EUV lithography) formed on a SiOC layer of a 300-mm substrate and having an initial CD of about 35 nm was subjected to trimming using a PEALD apparatus illustrated in <figref idrefs="DRAWINGS">FIG. 1A</figref> under conditions shown in Table 4 below.</div>
+<div class="description-paragraph" id="p-0077" num="0076">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conditions for trimming</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Resist material</td>
+<td class="description-td">EUV resist</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Temperature</td>
+<td class="description-td">75°</td>
+<td class="description-td">C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure</td>
+<td class="description-td">200</td>
+<td class="description-td">Pa</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant</td>
+<td class="description-td">O<sub>2</sub> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant flow</td>
+<td class="description-td">1</td>
+<td class="description-td">SLM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">RF power for a 300-mm wafer</td>
+<td class="description-td">30</td>
+<td class="description-td">W</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration</td>
+<td class="description-td">Varied (see FIG. 2)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Trimming rate in width direction</td>
+<td class="description-td">1.4</td>
+<td class="description-td">nm/sec</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Trimming rate in height direction</td>
+<td class="description-td">2</td>
+<td class="description-td">nm/sec</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0078" num="0077"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a graph showing the relationship between CD of the photoresist (“PR CD”) and process times of trimming (“Process time”). It is confirmed that CD of the photoresist was reduced linearly as a function of process time of trimming at least to the degree that CD was as low as about 20 nm.</div>
+<heading id="h-0009">Example 2</heading>
+<div class="description-paragraph" id="p-0079" num="0078">Even though EUV lithography has higher exposure accuracy than ArF laser, it is difficult to reduce the CD (Critical Dimension) of a resist pattern to the degree which is as low as 12 nm or lower. In this example, a photoresist was subjected to trimming in a manner substantially similar to that in Example 1 except that the initial CD of the photoresist was about 17.9 nm. <figref idrefs="DRAWINGS">FIG. 2</figref> shows SEM photographs of patterned surfaces after EUV lithography without trimming (“After litho”), after 0.5 seconds of trimming (“0.5 s”), after 1.0 seconds of trimming (“1 s”), after 1.5 seconds of trimming (“1.5 s”), and after 2.0 seconds of trimming (“2 s”), wherein the lower photos (b) are taken at a higher magnification than that for the upper photos (a).</div>
+<div class="description-paragraph" id="p-0080" num="0079">As can be seen in <figref idrefs="DRAWINGS">FIG. 2</figref>, as trimming of the resist pattern progressed, the CD of the resist pattern was reduced from about 17.9 nm (without trimming), about 16 nm (0.5 sec. of trimming), about 15.1 nm (1 sec. of trimming), about 14.5 nm (1.5 sec. of trimming), and about 12.3 nm (2 sec. of trimming). However, as can also be seen in <figref idrefs="DRAWINGS">FIG. 2</figref>, the contrast between line areas and non-line areas became low as the trimming progressed, i.e., starting the occurrence of line interruption. It is confirmed that it was difficult to reduce the CD of the resist pattern to about 12 nm or lower.</div>
+<heading id="h-0010">Example 3</heading>
+<div class="description-paragraph" id="p-0081" num="0080">In this example, a photoresist (ArF resist with an initial CD of about 7.90 nm (mean)) was subjected to trimming in a manner similar to that in Example 1 under the conditions shown in Table 5 below.</div>
+<div class="description-paragraph" id="p-0082" num="0081">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 5</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conditions for trimming</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Resist material</td>
+<td class="description-td">ArF resist</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Temperature</td>
+<td class="description-td">75°</td>
+<td class="description-td">C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure</td>
+<td class="description-td">200</td>
+<td class="description-td">Pa</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant</td>
+<td class="description-td">O<sub>2</sub> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant flow</td>
+<td class="description-td">2</td>
+<td class="description-td">SLM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">RF power for a 300-mm wafer</td>
+<td class="description-td">30</td>
+<td class="description-td">W</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration</td>
+<td class="description-td">13.2</td>
+<td class="description-td">seconds</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Trimming rate in width direction</td>
+<td class="description-td">0.93</td>
+<td class="description-td">nm/sec</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Trimming rate in height direction</td>
+<td class="description-td">Not measured</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0083" num="0082">The trimmed resist pattern was then subjected to SiO<sub>2 </sub>deposition by PEALD which was conducted under the conditions shown in Table 6 below.</div>
+<div class="description-paragraph" id="p-0084" num="0083">
+<tables id="TABLE-US-00006" num="00006">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 6</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conditions for PEALD</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Substrate temperature</td>
+<td class="description-td">75°</td>
+<td class="description-td">C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Electrode gap (a thickness of a substrate is</td>
+<td class="description-td">10</td>
+<td class="description-td">mm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">about 0.7 mm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pressure</td>
+<td class="description-td">500</td>
+<td class="description-td">Pa</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Precursor</td>
+<td class="description-td">BDEAS</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Carrier gas/Dilution gas</td>
+<td class="description-td">Ar</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Flow rate of carrier gas (continuous)</td>
+<td class="description-td">1000</td>
+<td class="description-td">sccm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of dilution gas (continuous)</td>
+<td class="description-td">1000</td>
+<td class="description-td">sccm</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Flow rate of precursor</td>
+<td class="description-td">Corresponding to the flow</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">rate of carrier gas</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">RF power (13.56 MHz) for a 300-mm wafer</td>
+<td class="description-td">50</td>
+<td class="description-td">W</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Feed”</td>
+<td class="description-td">0.2</td>
+<td class="description-td">sec.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Purge 1”</td>
+<td class="description-td">0.2</td>
+<td class="description-td">sec.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “RF”</td>
+<td class="description-td">0.2</td>
+<td class="description-td">sec.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Purge 2”</td>
+<td class="description-td">0.2</td>
+<td class="description-td">sec.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of one cycle</td>
+<td class="description-td">0.8</td>
+<td class="description-td">sec.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">GPC ({acute over (Å)}/cycle)</td>
+<td class="description-td">1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Thickness of the film</td>
+<td class="description-td">17.6</td>
+<td class="description-td">nm</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0085" num="0084"> <figref idrefs="DRAWINGS">FIG. 7</figref> shows STEM photographs of patterned lines of a photoresist formed by photolithography (“AFTER LITHO” in (a)) and after deposition of a silicon oxide film (“PEALD-SIO2 SPACER DEPOSITION” in (b)) wherein “3σ” stands for 3 standard deviation of the mean). In this example, although the initial CD of the resist pattern was about 38 nm (mean) as shown in (a) of <figref idrefs="DRAWINGS">FIG. 7</figref>, whereas the CD of the oxide-covered trimmed resist was about 29 nm (mean) as shown in (b) of <figref idrefs="DRAWINGS">FIG. 7</figref>, the width of the oxide-covered trimmed resist pattern is considered to be substantially the same as that of the initial resist (since the width of the trimmed resist pattern was about 9 nm and that of the oxide-covered trimmed resist pattern was about 29 nm, which was considered to be substantial size recovery with reference to a width of 38 nm). As shown in <figref idrefs="DRAWINGS">FIG. 7</figref>, the oxide-covered trimmed resist pattern manifested significant improvement on LWR and LER, as compared with the initial resist pattern.</div>
+<heading id="h-0011">Example 4</heading>
+<div class="description-paragraph" id="p-0086" num="0085">In this example, a photoresist was subjected to trimming, followed by oxide deposition, in a manner substantially similar to that in Example 3 except that the initial CD of the photoresist was about 44.5 nm, the trimming was conducted for 9 seconds, and the CD of the oxide-covered trimmed resist was recovered to about 62.8 nm. Although the initial CD of the resist pattern was about 45 nm, whereas the CD of the oxide-covered trimmed resist was about 63 nm, the width of the oxide-covered trimmed resist pattern is considered to be substantially the same as that of the initial resist (since the width of the trimmed resist pattern was about 28 nm and that of the oxide-covered trimmed resist pattern was about 63 nm, which was considered to be substantial size recovery with reference to a width of about 45 nm).</div>
+<div class="description-paragraph" id="p-0087" num="0086"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows STEM photographs of patterned lines of a photoresist formed by photolithography (“After litho”), after 9 seconds of trimming (“After 9 s trim”), and after deposition of an oxide film (“After spacer dep”). <figref idrefs="DRAWINGS">FIG. 8</figref> also shows CD, LWR, and LER thereof. As shown in <figref idrefs="DRAWINGS">FIG. 8</figref>, the oxide-covered trimmed resist pattern manifested significant improvement on LWR and LER, as compared with the initial resist pattern.</div>
+<heading id="h-0012">Example 5</heading>
+<div class="description-paragraph" id="p-0088" num="0087">In this example, a photoresist was subjected to trimming in a manner substantially similar to that in Example 4 except that the trim time was varied as shown in <figref idrefs="DRAWINGS">FIG. 9</figref>. <figref idrefs="DRAWINGS">FIG. 9</figref> is a graph showing the relationship between LER and LWR of a photoresist (“LER/LWR”) and process times of trimming (“Trim time”) wherein “POR” refers to “point of reference”. As shown in <figref idrefs="DRAWINGS">FIG. 9</figref>, the trimmed resist pattern manifested significant improvement on LWR and LER until reaching a plateau when increasing the trim time. <figref idrefs="DRAWINGS">FIG. 10</figref> is a table showing CD corresponding to the measuring points shown in <figref idrefs="DRAWINGS">FIG. 9</figref>. As shown in <figref idrefs="DRAWINGS">FIG. 10</figref>, CD also was decreased by increasing the process time of trimming.</div>
+<heading id="h-0013">Example 6</heading>
+<div class="description-paragraph" id="p-0089" num="0088">In this example, a photoresist (EUV resist with an initial CD of about 11 nm) was subjected to SiO deposition by PEALD in a manner substantially similar to that in Example 3 except that the film thickness was about 2 nm, followed by trimming in a manner substantially similar to that in Example 1 except that the trim time was varied as shown in <figref idrefs="DRAWINGS">FIG. 12</figref>. <figref idrefs="DRAWINGS">FIG. 11</figref> shows STEM photographs of cross-sectional views of patterned lines of a photoresist formed by photolithography (“initial” in (a)) and after depositing a SiO layer by ALD thereon (“SiO ALD (˜2 nm)” in (b)). <figref idrefs="DRAWINGS">FIG. 12</figref> shows STEM photographs of cross-sectional views of patterned lines after depositing the SiO layer by ALD shown in (b) of <figref idrefs="DRAWINGS">FIG. 11</figref> (“SiO ALD (˜2 nm)” in (b)), after trimming the patterned lines for 10 seconds (“ALD+trim(10 s)” in (c)), after trimming the patterned lines for 15 seconds (“ALD+trim(15 s)” in (d)), and after trimming the patterned lines for 20 seconds (“ALD+trim(20 s)” in (e)). <figref idrefs="DRAWINGS">FIG. 13</figref> is a graph showing changes in height and CD (nm) of the patterned lines when the trimming time changed as shown in <figref idrefs="DRAWINGS">FIG. 12</figref>.</div>
+<div class="description-paragraph" id="p-0090" num="0089">As shown in <figref idrefs="DRAWINGS">FIG. 11</figref>, a conformal SiO thin film (having a thickness of about 2 nm) was deposited evenly over the resist pattern including sidewalls and bottom areas thereof. As shown in <figref idrefs="DRAWINGS">FIG. 12</figref>, it was confirmed that trimming could be performed without substantially lowering the height of the spacers (the patterned resist). This appeared to be because the SiO thin film could serve as a source of active species such as oxygen radicals generated and supplied to underlying surfaces of the resist for etching when being exposed to a plasma. That is, the SiO thin film could significantly protect the resist by mitigating strikes by ion bombardment of a plasma, thereby suppressing predominant etching at the top and bottom areas of the resist, and could release active species rather evenly to the resist surfaces for etching, thereby etching the sidewall areas more than the top and bottom areas of the resist since the sidewall areas are much less chemical-resistant than the top and bottom areas (e.g., the sidewall layer is less densified and has a twice or higher WER than the top and bottom layers, which can also represent DER). For the same reason, the loading effect could be ameliorated (i.e., uniform etching could be conducted regardless of whether the resist pattern had narrow intervals or wide intervals), thereby decreasing CD of the resist pattern without lowering the height of the pattern. However, as shown in <figref idrefs="DRAWINGS">FIG. 13</figref>, when the trim time exceeded 20 seconds, the height of the pattern tended to start decreasing.</div>
+<heading id="h-0014">Example 7</heading>
+<div class="description-paragraph" id="p-0091" num="0090">In this example, a photoresist (EUV resist with an initial CD of about 11 nm) was subjected to SiO deposition by PEALD, followed by trimming, in a manner substantially similar to that in Example 6. <figref idrefs="DRAWINGS">FIG. 14</figref> is a graph showing changes in height, width (nm), and LWR (nm) of patterned lines when the trimming time changed. <figref idrefs="DRAWINGS">FIG. 15</figref> shows STEM photographs of cross-sectional views of patterned lines before depositing the SiO layer by ALD in (a) corresponding to the “initial” in <figref idrefs="DRAWINGS">FIG. 14</figref>, after depositing the SiO layer by ALD in (b) corresponding to the “Deposition” in <figref idrefs="DRAWINGS">FIG. 14</figref>, after trimming the patterned lines for 10 seconds in (c) corresponding to the “Deposition+Trimming (10 s)” in <figref idrefs="DRAWINGS">FIG. 14</figref>, and after trimming the patterned lines for 15 seconds in (d) corresponding to the “Deposition+Trimming (15 s)” in <figref idrefs="DRAWINGS">FIG. 14</figref>. As shown in <figref idrefs="DRAWINGS">FIG. 14</figref>, the results were similar to those shown in Example 6. In addition, as shown in <figref idrefs="DRAWINGS">FIG. 14</figref>, LWR was improved by depositing the SiO thin film and remained improved while trimming the spacers (the patterned resist).</div>
+<heading id="h-0015">Prophetic Example 1</heading>
+<div class="description-paragraph" id="p-0092" num="0091">According to the sequence shown in <figref idrefs="DRAWINGS">FIG. 6</figref>, first, a substrate with a resist pattern (EUV resist) <b>36</b> is prepared, which has a layer structure shown in (a) of <figref idrefs="DRAWINGS">FIG. 6</figref>. Next, the resist pattern is subjected to deposition of SiO thin film <b>38</b> at a low temperature in a manner substantially similar to that shown in Example 3 (the deposition time or the like may be adjusted), as shown in (a′) of <figref idrefs="DRAWINGS">FIG. 6</figref>. The oxide-covered resist pattern is then subjected to trimming in a manner substantially similar to that shown in Example 1 (the trim time or the like may be adjusted), obtaining the resist pattern <b>36</b>′ having a narrow width without lowering the height, as shown in (b) of <figref idrefs="DRAWINGS">FIG. 6</figref>. Thereafter, the trimmed resist pattern is subjected to SiO deposition in a manner substantially similar to that shown in Example 3 (the deposition time or the like may be adjusted) so as to cover the trimmed resist with SiO film <b>37</b> (referred to as “spacers”) to render the width of the spacers <b>37</b> substantially the same as that of the initial resist <b>36</b>, as shown in (c) of <figref idrefs="DRAWINGS">FIG. 6</figref>. Next, the spacers <b>36</b> are subjected to template etching (anisotropic etching) to etch the BARC layer <b>31</b> using the spacers as an etching mask, under conditions shown in Table 7 below, as shown in (d) of <figref idrefs="DRAWINGS">FIG. 6</figref>. Next, using the etching mask constituted by the spacers <b>37</b>′ and the etched BARC <b>31</b>′, the template is further subjected to anisotropic etching under conditions shown in Table 8 below so as to transfer the etching mask pattern to the αSi layer <b>33</b> to obtain a patterned αSi layer <b>33</b>′, as shown in (e) of <figref idrefs="DRAWINGS">FIG. 6</figref>.</div>
+<div class="description-paragraph" id="p-0093" num="0092">
+<tables id="TABLE-US-00007" num="00007">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 7</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Temperature</td>
+<td class="description-td">60°</td>
+<td class="description-td">C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure</td>
+<td class="description-td">5</td>
+<td class="description-td">Pa</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant</td>
+<td class="description-td">Ar/O<sub>2</sub>/CF<sub>4</sub> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant flow</td>
+<td class="description-td">200/50/20</td>
+<td class="description-td">sccm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">RF power for a 300-mm wafer</td>
+<td class="description-td">200</td>
+<td class="description-td">W</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration</td>
+<td class="description-td">20</td>
+<td class="description-td">seconds</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Trimming rate in width direction</td>
+<td class="description-td">Substantially zero</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0094" num="0093">
+<tables id="TABLE-US-00008" num="00008">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 8</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Temperature</td>
+<td class="description-td">60°</td>
+<td class="description-td">C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure</td>
+<td class="description-td">1</td>
+<td class="description-td">Pa</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant</td>
+<td class="description-td">Ar/O<sub>2</sub> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant flow</td>
+<td class="description-td">200/200</td>
+<td class="description-td">sccm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">RF power for a 300-mm wafer</td>
+<td class="description-td">500</td>
+<td class="description-td">W</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration</td>
+<td class="description-td">60</td>
+<td class="description-td">seconds</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Trimming rate in width direction</td>
+<td class="description-td">Substantially zero</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0095" num="0094">As a result, the patterned αSi <b>33</b>′ having substantially the same CD as that of the initial resist pattern <b>36</b> with significantly improved (reduced) LWR and LER can be obtained, confirming that direct patterning as shown in (a′), (b′), and (f) of <figref idrefs="DRAWINGS">FIG. 4</figref> is successfully performed.</div>
+<heading id="h-0016">Prophetic Example 2</heading>
+<div class="description-paragraph" id="p-0096" num="0095">According to the sequence shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, a resist pattern (EUV resist) <b>36</b> is transferred to an αSi layer <b>33</b> of a template in a manner substantially similar to that in Prophetic Example 1 except that step (a′) of Prophetic Example 1 was omitted.</div>
+<div class="description-paragraph" id="p-0097" num="0096">As a result, the patterned αSi <b>33</b>′ having substantially the same CD as that of the initial resist pattern <b>36</b> with significantly improved (reduced) LWR and LER can be obtained, confirming that direct patterning as shown in (a′), (b′), and (f) of <figref idrefs="DRAWINGS">FIG. 4</figref> is successfully performed.</div>
+<div class="description-paragraph" id="p-0098" num="0097">It will be understood by those of skill in the art that numerous and various modifications can be made without departing from the spirit of the present invention. Therefore, it should be clearly understood that the forms of the present invention are illustrative only and are not intended to limit the scope of the present invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM259032683">
+<claim-statement>We claim:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method of spacer-defined direct patterning in semiconductor fabrication, comprising:
+<div class="claim-text">(i) presetting a target width of lines to be patterned in a template using photoresist structures formed by photolithography on the template;</div>
+<div class="claim-text">(ii) providing the template having the photoresist structures patterned thereon;</div>
+<div class="claim-text">(iii) trimming the photoresist structures such that a width of each trimmed photoresist structure is smaller than the target width;</div>
+<div class="claim-text">(iv) depositing an oxide film on the template, thereby entirely covering with the oxide film an exposed top surface of the template and the trimmed photoresist structures;</div>
+<div class="claim-text">(v) etching the oxide film-covered template to remove an unwanted portion of the oxide film without removing the trimmed photoresist structures so as to form vertical spacers isolated from each other on the template which is referred to as a spacer-formed template, each vertical spacer substantially maintaining the target width and being constituted by the trimmed photoresist structures and a vertical portion of the oxide film covering sidewalls of the trimmed photoresist structures; and</div>
+<div class="claim-text">(vi) etching the spacer-formed template to transfer a pattern constituted by the vertical spacers in their entireties to the template to form lines with the target width.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the photoresist structures in step (ii) have a width substantially the same as the target width.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the oxide film deposited in step (iv) has a thickness such that each oxide film-covered trimmed photoresist structure has a width substantially the same as the target width.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein in step (iv), the oxide film is a conformal film deposited by plasma-enhanced atomic layer deposition (PEALD).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein in step (iv), the oxide film is deposited by plasma-enhanced atomic layer deposition (PEALD) wherein pressure, temperature, and/or RF power are/is controlled so that a dry etch rate of a portion of the oxide film deposited on a top surface of each trimmed photoresist structure is higher than that of a portion of the oxide film deposited on sidewalls of each trimmed photoresist structure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein each photoresist structure is trimmed in step (iii) so as to reduce its width by 1 nm to 5 nm on each side of the photoresist structure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the photoresist structures are formed on an anti-reflective layer of the template, and in step (v), when the unwanted portion of the oxide film is removed, a portion of the anti-reflective layer formed underneath the unwanted portion of the oxide film is also removed.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein in step (i), the preset target width is in the range of 10 nm to 20 nm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein step (ii) comprises forming the photoresist structures by photolithography using EUV (Extrema Ultra Violet) light.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising, prior to step (iii):
+<div class="claim-text">(iia) depositing by plasma-enhanced atomic layer deposition (PEALD) a thin oxide film having a thickness of about 2 nm or less on the template, thereby entirely covering with the thin oxide film an exposed top surface of the template and the photoresist structures.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method according to <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the trimming in step (iii) is conducted by direct plasma etching.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method according to <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the thin oxide film in step (iia) and the oxide film in step (iv) are constituted by a same material.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method according to <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the photoresist structures in step (ii) are constituted by sparely and densely arranged photoresist structures having different line spaces.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method according to <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the thin oxide film in step (iia) is constituted by SiO<sub>2</sub>, TiO, HfO, or AlO.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the photoresist structures have an LER (Line-Edge Roughness) of more than 3.5 nm, and an LWR (Line-Width Roughness) of more than 5 nm prior to step (iii).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The method according to <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the trimmed photoresist structures have an LER of less than 3.5 nm, and an LWR of less than 5 nm prior to step (iv).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The method according to <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein the oxide film-covered trimmed photoresist structures have an LER of 3 nm or less, and an LWR of 4 nm or less prior to step (v).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a reactant gas used in step (iii) comprises no oxygen.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The method according <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein steps (ii) to (v) are conducted at a temperature of 150° C. or lower.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein steps (ii) to (iv) are continuously conducted in a same reaction chamber.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

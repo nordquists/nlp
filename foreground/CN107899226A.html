@@ -1,0 +1,384 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">CN107899226A - A kind of table tennis ball positioning method and system based on Mapping Resolution pretreatment 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA314415409">
+<div class="abstract" num="0001">The invention discloses a kind of table tennis ball positioning method and system based on Mapping Resolution pretreatment.Its system includes establishing mapped plan coordinate system module, obtain Mapping Resolution pretreatment image and judge table tennis whether in mapping area module, calculate table tennis in the position of each mapping graph picture and conversion coordinate system module, the locus module of calculating table tennis.The present invention is on the premise of without using curtain, gray scale camera is shot under ninsolid color background obtains image, using the means accurate judgement object mapping position on the image of background pretreatment, realize that table tennis positions according to the mapping position of the position of multigroup gray scale camera and its correspondence image.The present invention solves the problems, such as the real time position that the table tennis system based on Internet of Things cannot simply and effectively calculate the table tennis being kept in motion.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES214759908">
+<invention-title id="tilte1" lang="EN">A kind of table tennis ball positioning method and system based on Mapping Resolution pretreatment</invention-title>
+<technical-field>
+<div class="description-paragraph" id="p0001" num="0001">Technical field</div>
+<div class="description-paragraph" id="p0002" num="0002">The invention belongs to smart table tennis Motion Technology field, more particularly to a kind of table tennis based on Mapping Resolution pretreatment
+Pang ball positioning method and system.</div>
+</technical-field>
+<background-art>
+<div class="description-paragraph" id="p0003" num="0003">Background technology</div>
+<div class="description-paragraph" id="p0004" num="0004">Mainly there are two classes to the scheme of table tennis positioning at present, one kind is computer vision analysis method, Yi Zhongshi
+Signal triggers determination methods.</div>
+<div class="description-paragraph" id="p0005" num="0005">Computer vision analysis method mainly gathers record during table tennis in real time by more high speed high-definition cameras
+Picture, data are formed after target identification and space orientation are carried out to each image in video recording, then calculate table tennis by filtering and tracking
+The shortcomings that position of pang ball, this method is computation complexity height.</div>
+<div class="description-paragraph" id="p0006" num="0006">Signal triggering determination methods are to be obtained by the piezoelectric transducer installed in table tennis table and net because being rattled
+Ball impact and the vibration signal produced, the intensity and generation time of more multiple vibration signals, so as to calculate hitting for table tennis
+Hit position and movement locus substantially, the shortcomings that program is cannot to position the skyborne position of table tennis.</div>
+</background-art>
+<disclosure>
+<div class="description-paragraph" id="p0007" num="0007">The content of the invention</div>
+<div class="description-paragraph" id="p0008" num="0008">The technical problems to be solved by the invention are that the table tennis system based on Internet of Things cannot be counted simply and effectively
+The problem of real time position for the table tennis being kept in motion, propose a kind of table tennis positioning based on Mapping Resolution pretreatment
+Method and system.</div>
+<div class="description-paragraph" id="p0009" num="0009">Mapping Resolution positioning refers to figure of the acquisition object on curtain of taking pictures with gray scale camera by background of pure color curtain
+Picture, determines mapping position of the object on curtain, and object is realized according to the position of multigroup camera and its corresponding mapping position
+Positioning.It is difficult that table tennis is oriented in captured mapping graph picture if not having curtain to be carried as background in Mapping Resolution positioning
+Pang ball position, if using curtain, adds the cost and complexity for disposing table tennis system.The present invention is based on such as Fig. 1
+Shown table tennis system, does not install curtain, is pre-processed above ping-pong table with additional background on the gray scale camera of side
+Device, by the pretreated table tennis image of background, is then forwarded to server, server completes the storage and calculating of data.</div>
+<div class="description-paragraph" id="p0010" num="0010">The present invention antecedent basis be to have established three-dimensional coordinate system, three-dimensional coordinate system origin for ping-pong table just
+Center, x-axis and y-axis composition horizontal plane, z-axis are upward perpendicular to desktop.Surface gray scale camera and side gray scale camera are remembered respectively
+For camera 1 and camera 2, the x-y-z three dimensional space coordinates value for recording camera 1 and camera 2 is (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (X<sub>2</sub>,Y<sub>2</sub>,Z<sub>2</sub>).If
+Sampling time interval T is put, the average time interval that sampling time interval T is less than table tennis impact bead table (is united according to historical data
+Meter obtains).</div>
+<div class="description-paragraph" id="p0011" num="0011">The table tennis alignment system based on Mapping Resolution pretreatment of the present invention, including establish mapped plan coordinate system mould
+Block, obtain Mapping Resolution pretreatment image and judge table tennis whether mapping area internal module, calculating table tennis in mapping graph
+The position of picture and conversion coordinate system module, the locus module for calculating table tennis.</div>
+<div class="description-paragraph" id="p0012" num="0012">Establish mapped plan coordinate system module：The gray scale camera of directly over ball table and side is denoted as camera 1 and camera 2, root
+Mapped plan is set according to the coverage of camera 1 and camera 2, is denoted as plane 1 and plane 2, plane is set according to the size of plane 1
+Coordinate system, is denoted as m-n coordinate systems, long side m, short side n, and origin is located at the upper left corner of plane；Set according to the size of plane 2
+Plane coordinate system, is denoted as j-k coordinate systems, long side j, short side k, and origin is located at the upper left corner of plane.</div>
+<div class="description-paragraph" id="p0013" num="0013">Obtain Mapping Resolution pretreatment image and judge table tennis whether in mapping area internal module：Gray scale camera 1 and ash
+Spend camera 2 and shoot gray level image according to sampling time interval T set in advance, it is (such as high using mapping image pre-processing method
+Contrast shape judges algorithm) the complex background interference of the non-table tennis figure in coverage is removed into (image preprocessing),
+Then pretreated image is sent to server, server and obtains image, calculated according to the images match based on Gray-scale Matching
+Method judges to whether there is the gray scale figure of table tennis in gray level image, and if so, table tennis is judged in mapping area, into
+Enter to calculate position module of the table tennis in each mapping graph picture；Otherwise judge that table tennis not in mapping area, returns to acquisition and reflects
+Whether radiolysis analyses pretreatment image and judges table tennis in mapping area internal module.</div>
+<div class="description-paragraph" id="p0014" num="0014">Table tennis is calculated in the position of mapping graph picture and conversion coordinate system module：The gray level image that camera 1 and camera 2 obtain
+Image 1 and image 2 are denoted as respectively；Table tennis in cross-correlation measurement criterion calculation image 1 in Image Matching algorithm
+The coordinate value of central point is (m, n)；Table tennis in cross-correlation measurement criterion calculation image 2 in Image Matching algorithm
+The coordinate value of central point is (j, k)；According to the position of image 1 and 2 place plane of image in x-y-z three dimensions system, will scheme
+As the coordinate value (m, n) of table tennis ball's dead center and (j, k) are converted into x-y-z three dimensional space coordinate values (x in 1 and image 2<sub>1</sub>,y<sub>1</sub>,
+z<sub>1</sub>) and (x<sub>2</sub>,y<sub>2</sub>,z<sub>2</sub>)。</div>
+<div class="description-paragraph" id="p0015" num="0015">Calculate the locus module of table tennis：The x-y-z three dimensional space coordinates value of camera 1 and camera 2 is fixed value, note
+For (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (X<sub>2</sub>,Y<sub>2</sub>,Z<sub>2</sub>), note camera 1 and the line for ball's dead center of rattling in image 1 are line segment 1, note camera 2 and figure
+The line of table tennis ball's dead center is line segment 2 in picture 2；The fitting of the fitting number M and line segment 2 of line segment 1 are set according to setting accuracy
+Number N, M and N are positive integer；M match point is uniformly chosen on line segment 1, calculates the three dimensional space coordinate value of M match point,
+Specifically, according to (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (x<sub>1</sub>,y<sub>1</sub>,z<sub>1</sub>) calculate triaxial coordinate difference be Δ x<sub>1</sub>=x<sub>1</sub>-X<sub>1</sub>, Δ y<sub>1</sub>=y<sub>1</sub>-Y<sub>1</sub>, Δ z<sub>1</sub>=z<sub>1</sub>-
+Z<sub>1</sub>, by triaxial coordinate difference M deciles and in (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) on the basis of be sequentially overlapped, obtain M match point three dimensions
+Coordinate value；N number of match point is uniformly chosen on line segment 2, calculates the three dimensional space coordinate value of N number of match point；Calculate M on line segment 1
+Minimum range in a match point and line segment 2 between N number of match point, then with the corresponding two match point coordinate values of minimum range
+Average value is the three dimensional space coordinate value of table tennis；Return and obtain Mapping Resolution pretreatment image and judge whether table tennis is reflecting
+Penetrate region internal module.</div>
+<div class="description-paragraph" id="p0016" num="0016">The system block diagram of table tennis alignment system based on Mapping Resolution pretreatment is as shown in Figure 2.</div>
+<div class="description-paragraph" id="p0017" num="0017">The table tennis ball positioning method based on Mapping Resolution pretreatment of the present invention is according to the following steps：</div>
+<div class="description-paragraph" id="p0018" num="0018">Step 1, establish mapped plan coordinate system and arrange parameter.</div>
+<div class="description-paragraph" id="p0019" num="0019">The gray scale camera of directly over ball table and side is denoted as camera 1 and camera 2, according to the coverage of camera 1 and camera 2
+Mapped plan is set, is denoted as plane 1 and plane 2, plane coordinate system is set according to the size of plane 1, is denoted as m-n coordinate systems, it is long
+While being m, short side n, origin is located at the upper left corner of plane；Plane coordinate system is set according to the size of plane 2, is denoted as j-k coordinates
+System, long side j, short side k, origin are located at the upper left corner of plane；Sampling time interval T, sampling time interval T is set to be less than table tennis
+The average time interval (counted and obtained according to historical data) of pang ball impact ball table；It is three-dimensional in x-y-z to record camera 1 and camera 2
+Position coordinate value in the system of space is (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (X<sub>2</sub>,Y<sub>2</sub>,Z<sub>2</sub>)。</div>
+<div class="description-paragraph" id="p0020" num="0020">Whether step 2, obtain Mapping Resolution pretreatment image and judge table tennis in mapping area.</div>
+<div class="description-paragraph" id="p0021" num="0021">Gray scale camera 1 and gray scale camera 2 shoot gray level image according to sampling time interval T set in advance, using mapping
+The complex background interference of non-table tennis figure in coverage is removed (image preprocessing) by image pre-processing method, then will
+Pretreated image sends to server, server and obtains image, is judged according to the image matching algorithm based on Gray-scale Matching
+It whether there is the gray scale figure of table tennis in gray level image, and if so, judging that table tennis in mapping area, enters step
+3；Otherwise table tennis is judged not in mapping area, return to step 2.</div>
+<div class="description-paragraph" id="p0022" num="0022">Step 3, calculate table tennis in the position of mapping graph picture and conversion coordinate system.</div>
+<div class="description-paragraph" id="p0023" num="0023">The gray level image that camera 1 and camera 2 obtain is denoted as image 1 and image 2 respectively；According in Image Matching algorithm
+Cross-correlation measurement criterion calculation image 1 in the rattle coordinate value of ball's dead center be (m, n)；According in Image Matching algorithm
+Cross-correlation measurement criterion calculation image 2 in the rattle coordinate value of ball's dead center be (j, k)；It is flat according to where image 1 and image 2
+Position of the face in x-y-z three dimensions system, by the coordinate value (m, n) and (j, k) of ball's dead center of rattling in image 1 and image 2
+It is converted into x-y-z three dimensional space coordinate values (x<sub>1</sub>,y<sub>1</sub>,z<sub>1</sub>) and (x<sub>2</sub>,y<sub>2</sub>,z<sub>2</sub>)。</div>
+<div class="description-paragraph" id="p0024" num="0024">Step 4, the locus for calculating table tennis.</div>
+<div class="description-paragraph" id="p0025" num="0025">Remember that camera 1 and the line for ball's dead center of rattling in image 1 are line segment 1, note camera 2 and the ball center that rattles in image 2
+The line of point is line segment 2；It is just whole to set the fitting number M of line segment 1 and fitting the number N, M and N of line segment 2 according to setting accuracy
+Number；M match point is uniformly chosen on line segment 1, the three dimensional space coordinate value of M match point is calculated, specifically, according to (X<sub>1</sub>,Y<sub>1</sub>,
+Z<sub>1</sub>) and (x<sub>1</sub>,y<sub>1</sub>,z<sub>1</sub>) calculate triaxial coordinate difference be Δ x<sub>1</sub>=x<sub>1</sub>-X<sub>1</sub>, Δ y<sub>1</sub>=y<sub>1</sub>-Y<sub>1</sub>, Δ z<sub>1</sub>=z<sub>1</sub>-Z<sub>1</sub>, by triaxial coordinate difference M
+Decile and in (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) on the basis of be sequentially overlapped, obtain M match point three dimensional space coordinate value；On line segment 2
+N number of match point is uniformly chosen, calculates the three dimensional space coordinate value of N number of match point；Calculate on line segment 1 in M match point and line segment 2
+Minimum range L between N number of match point, then using the average value of the corresponding two match point coordinate values of minimum range L as table tennis
+Three dimensional space coordinate value；Return to step 2.</div>
+<div class="description-paragraph" id="p0026" num="0026">The table tennis ball positioning method flow chart pre-processed based on Mapping Resolution, as shown in Figure 3.</div>
+<div class="description-paragraph" id="p0027" num="0027">The method and system of the present invention this have the advantage that：</div>
+<div class="description-paragraph" id="p0028" num="0028">(1) using Mapping Resolution pretreatment location technology, simplify the hardware composition of table tennis alignment system, be conducive to technology
+Practice.</div>
+<div class="description-paragraph" id="p0029" num="0029">(2) Mapping Resolution positioning is carried out using the algorithm of line segment fitting, reduces the complexity for calculating table tennis ball position.</div>
+</disclosure>
+<description-of-drawings>
+<div class="description-paragraph" id="p0030" num="0030">Brief description of the drawings</div>
+<div class="description-paragraph" id="p0031" num="0031">Fig. 1 is the structural representation of the table tennis system based on Mapping Resolution pretreatment table tennis positioning of the present invention
+Figure；</div>
+<div class="description-paragraph" id="p0032" num="0032">Fig. 2 is the table tennis alignment system block diagram based on Mapping Resolution pretreatment of the present invention；</div>
+<div class="description-paragraph" id="p0033" num="0033">Fig. 3 is the table tennis ball positioning method flow chart based on Mapping Resolution pretreatment of the present invention；</div>
+<div class="description-paragraph" id="p0034" num="0034">Fig. 4 is the table-tennis system table tennis locus schematic diagram of the embodiment of the present invention；</div>
+</description-of-drawings>
+<mode-for-invention>
+<div class="description-paragraph" id="p0035" num="0035">Embodiment</div>
+<div class="description-paragraph" id="p0036" num="0036">Elaborate below to the preferred embodiment of the present invention.</div>
+<div class="description-paragraph" id="p0037" num="0037">The present invention is based on Mapping Resolution location technology.Mapping Resolution positioning refers to gray scale camera using pure color curtain as background
+Take pictures and obtain image of the object on curtain, mapping position of the object on curtain is determined, according to the position of multigroup camera
+And its corresponding mapping position realizes that object positions.If there is no curtain to be carried as background in Mapping Resolution positioning, it is difficult to
+Orient table tennis ball position in captured mapping graph picture, if using curtain, add deployment table tennis system into
+Sheet and complexity.In table tennis system as shown in Figure 1, the gray scale of curtain, ping-pong table top and side is not installed
+Additional background pretreatment unit on camera, by the pretreated table tennis image of background, is then forwarded to server, server is complete
+Into the storage and calculating of data.For the present invention on the premise of without using curtain, gray scale camera shoots acquisition under ninsolid color background
+Image, using the means accurate judgement object mapping position on the image of background pretreatment, according to the position of multigroup gray scale camera
+Put and its mapping position of correspondence image realizes that table tennis positions.</div>
+<div class="description-paragraph" id="p0038" num="0038">The present invention antecedent basis be to have established three-dimensional coordinate system, three-dimensional coordinate system origin for ping-pong table just
+Center, x-axis and y-axis composition horizontal plane, z-axis are upward perpendicular to desktop.Surface gray scale camera and side gray scale camera are remembered respectively
+For camera 1 and camera 2, the x-y-z three dimensional space coordinates value for recording camera 1 and camera 2 is (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (X<sub>2</sub>,Y<sub>2</sub>,Z<sub>2</sub>).If
+Sampling time interval T is put, the average time interval that sampling time interval T is less than table tennis impact bead table (is united according to historical data
+Meter obtains).In the present embodiment, the origin of three-dimensional coordinate system is ping-pong table center, and ping-pong table center refers to table tennis
+The intersection point of pang net central shaft and ping-pong table, x-axis is parallel to ping-pong table narrow side, and y-axis is parallel to ping-pong table long side, z-axis
+It is upward perpendicular to desktop, as shown in Figure 4.Surface gray scale camera and side gray scale camera are denoted as camera 1 and camera 2, phase respectively
+The three dimensional space coordinate value of machine 1 is (0,0,2), and the three dimensional space coordinate value of camera 2 is (2.4,0,0), and unit is rice.Setting is adopted
+Sample time interval T=1 microseconds.</div>
+<div class="description-paragraph" id="p0039" num="0039">The table tennis alignment system based on Mapping Resolution pretreatment of the present invention, including establish mapped plan coordinate system mould
+Block, obtain Mapping Resolution pretreatment image and judge table tennis whether mapping area internal module, calculating table tennis in mapping graph
+The position of picture and conversion coordinate system module, the locus module for calculating table tennis.</div>
+<div class="description-paragraph" id="p0040" num="0040">Establish mapped plan coordinate system module：The gray scale camera of directly over ball table and side is denoted as camera 1 and camera 2, root
+Mapped plan is set according to the coverage of camera 1 and camera 2, is denoted as plane 1 and plane 2, plane is set according to the size of plane 1
+Coordinate system, is denoted as m-n coordinate systems, long side m, short side n, and origin is located at the upper left corner of plane；Set according to the size of plane 2
+Plane coordinate system, is denoted as j-k coordinate systems, long side j, short side k, and origin is located at the upper left corner of plane.In the present embodiment, camera
+1 and camera 2 use 3.6 millimeters of (mm) focal lengths, plane 1 is the positive image of ping-pong table, and plane 2 is the figure of table tennis side
+Ping-pong table is completely covered in picture, wherein plane 1, and size is 2740mm × 1525mm, and plane 2 is apart from 1 meter of ping-pong table, top
+Highly it is above the ground level 3 meters, size is 2740mm × 2500mm, and plane coordinate system is set according to the size of plane 1, is denoted as m-n seats
+Mark system, long side m, short side n, origin are located at the upper left corner of plane；Plane coordinate system is set according to the size of plane 2, is denoted as
+J-k coordinate systems, long side j, short side k, origin are located at the upper left corner of plane.</div>
+<div class="description-paragraph" id="p0041" num="0041">Obtain Mapping Resolution pretreatment image and judge table tennis whether in mapping area internal module：Gray scale camera 1 and ash
+Spend camera 2 and shoot gray level image according to sampling time interval T set in advance, it is (such as high using mapping image pre-processing method
+Contrast shape judges algorithm) the complex background interference of the non-table tennis figure in coverage is removed into (image preprocessing),
+Then pretreated image is sent to server, server and obtains image, calculated according to the images match based on Gray-scale Matching
+Method judges to whether there is the gray scale figure of table tennis in gray level image, and if so, table tennis is judged in mapping area, into
+Enter to calculate position module of the table tennis in each mapping graph picture；Otherwise judge that table tennis not in mapping area, returns to acquisition and reflects
+Whether radiolysis analyses pretreatment image and judges table tennis in mapping area internal module.In the present embodiment, between the sampling time of setting
+Every T=1 microseconds, gray scale camera gathers gray level image according to sampling time interval, is then pre-processed in real time, pretreatment mode
+For：According to the shape of continuous high contrast figure in the image matching algorithm extraction gray level image based on Gray-scale Matching, if
+Shape is not circular or ellipse then carries out interference elimination treatment, then sends the image after processing to server, server
+The area of contrast diff area is calculated according to the image matching algorithm based on Gray-scale Matching, if area is arrived at 0.0015 square metre
+Between 0.002 square metre, then it is determined as in gray level image there are table tennis figure, the image that two gray scale cameras of certain moment obtain
+In, when pretreatment eliminate it is fixed in plane 2 existing for strip shape high contrast figure, then image is sent to clothes
+Be engaged in device, by image matching algorithm, in two images the area of contrast difference large area be respectively 0.0016 square metre and
+0.0018 square metre, between 0.0015 square metre to 0.002 square metre, then it is determined as table tennis in mapping area, into
+Enter to calculate position and conversion coordinate system module of the table tennis in each mapping graph picture.</div>
+<div class="description-paragraph" id="p0042" num="0042">Table tennis is calculated in the position of mapping graph picture and conversion coordinate system module：The gray level image that camera 1 and camera 2 obtain
+Image 1 and image 2 are denoted as respectively；Table tennis in cross-correlation measurement criterion calculation image 1 in Image Matching algorithm
+The coordinate value of central point is (m, n)；Table tennis in cross-correlation measurement criterion calculation image 2 in Image Matching algorithm
+The coordinate value of central point is (j, k)；According to the position of image 1 and 2 place plane of image in x-y-z three dimensions system, will scheme
+As the coordinate value (m, n) of table tennis ball's dead center and (j, k) are converted into x-y-z three dimensional space coordinate values (x in 1 and image 2<sub>1</sub>,y<sub>1</sub>,
+z<sub>1</sub>) and (x<sub>2</sub>,y<sub>2</sub>,z<sub>2</sub>).In the present embodiment, image 1 is the positive image of ping-pong table, and image 2 is the figure of ping-pong table side
+Picture, according to existing cross-correlation module in Image Matching algorithm, calculates and obtains cross-correlation function maximum with image 1
+The coordinate points of value are the coordinate value (2.7,1.2) of table tennis ball's dead center in image 1, calculate and image 2 obtains cross-correlation function
+The coordinate points of maximum are the coordinate value (2.65,0.24) of table tennis ball's dead center in image 2.Plane 1 is in x-y-z three dimensions system
+In position be table tennis desktop position, then the three dimensional space coordinate value of table tennis is (1.2,2.7,0) in image 1,2 ruler of plane
+Very little is 2740 millimeters × 2500 millimeters, is 1 meter apart from ping-pong table distance, highest point is then rattled apart from 3 meters of ground in image 2
+The three dimensional space coordinate value of ball is (- 1.7625,2.65,2).</div>
+<div class="description-paragraph" id="p0043" num="0043">Calculate the locus module of table tennis：The x-y-z three dimensional space coordinates value of camera 1 and camera 2 is fixed value, note
+For (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (X<sub>2</sub>,Y<sub>2</sub>,Z<sub>2</sub>), note camera 1 and the line for ball's dead center of rattling in image 1 are line segment 1, note camera 2 and figure
+The line of table tennis ball's dead center is line segment 2 in picture 2；The fitting of the fitting number M and line segment 2 of line segment 1 are set according to setting accuracy
+Number N, M and N are positive integer；M match point is uniformly chosen on line segment 1, calculates the three dimensional space coordinate value of M match point,
+Specifically, according to (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (x<sub>1</sub>,y<sub>1</sub>,z<sub>1</sub>) calculate triaxial coordinate difference be Δ x<sub>1</sub>=x<sub>1</sub>-X<sub>1</sub>, Δ y<sub>1</sub>=y<sub>1</sub>-Y<sub>1</sub>, Δ z<sub>1</sub>=z<sub>1</sub>-
+Z<sub>1</sub>, by triaxial coordinate difference M deciles and in (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) on the basis of be sequentially overlapped, obtain M match point three dimensions
+Coordinate value；N number of match point is uniformly chosen on line segment 2, calculates the three dimensional space coordinate value of N number of match point；Calculate M on line segment 1
+Minimum range in a match point and line segment 2 between N number of match point, then with the corresponding two match point coordinate values of minimum range
+Average value is the three dimensional space coordinate value of table tennis；Return and obtain Mapping Resolution pretreatment image and judge whether table tennis is reflecting
+Penetrate region internal module.In the present embodiment, the three dimensional space coordinate value of camera 1 is (0,0,2), the three dimensional space coordinate value of camera 2
+For (2.4,0,0), the three dimensional space coordinate value of table tennis is (1.2,2.7,0) in image 1, the three-dimensional space of table tennis in image 2
+Between coordinate value be (- 1.7625,2.65,2), line segment 1 and line segment 2 as shown in figure 4, according to positioning accuracy (Centimeter Level) roughly set
+Its match point number is 10, i.e. M=N=10.Then the triaxial coordinate of line segment 1 is poor：Δx<sub>1</sub>=1.2, Δ y<sub>1</sub>=2.7, Δ z<sub>1</sub>=-
+2, in line segment 1 the three dimensional space coordinate value of 10 match points be respectively (0.12,0.27,1.8), (0.24,0.54,1.6),
+(0.36,0.81,1.4)、(0.48,1.08,1.2)、(0.6,1.35,1)、(0.72,1.62,0.8)、(0.84,1.89,0.6)、
+(0.96,2.16,0)、(1.08,2.43,0)、(1.2,2.7,0)；Similarly the triaxial coordinate of line segment 2 is poor：Δx<sub>2</sub>=-4.16, Δ y<sub>2</sub>
+=2.65, Δ z<sub>2</sub>=2, then in line segment 2 10 match points three dimensional space coordinate value be respectively (1.984,0.265,0.2),
+(1.568,0.53,0.4)、(1.152,0.795,0.6)、(0.736,1.06,0.8)、(0.32,1.325,1)、(-0.096,
+1.59,1.2)、(-0.512,1.855,1.4)、(-0.928,2.12,1.6)、(-1.344,2.385,1.8)、(-1.7625,
+2.65,2)；Calculate the minimum range L=0.28m, L of each point each point into line segment 2 in line segment 1 by coordinate value (0.6,1.35,
+1) and (0.32,1.325,1) obtain, calculate (0.6,1.35,1) and (0.32,1.325,1) average value (x, y, z)=
+(0.46,1.3375,1), in this, as table tennis three dimensional space coordinate value；Return and obtain Mapping Resolution pretreatment image and judgement
+Whether table tennis is in mapping area internal module.</div>
+<div class="description-paragraph" id="p0044" num="0044">The table tennis ball positioning method based on Mapping Resolution pretreatment of the present invention is according to the following steps：</div>
+<div class="description-paragraph" id="p0045" num="0045">Step 1, establish mapped plan coordinate system and arrange parameter.</div>
+<div class="description-paragraph" id="p0046" num="0046">The gray scale camera of directly over ball table and side is denoted as camera 1 and camera 2, according to the coverage of camera 1 and camera 2
+Mapped plan is set, is denoted as plane 1 and plane 2, plane coordinate system is set according to the size of plane 1, is denoted as m-n coordinate systems, it is long
+While being m, short side n, origin is located at the upper left corner of plane；Plane coordinate system is set according to the size of plane 2, is denoted as j-k coordinates
+System, long side j, short side k, origin are located at the upper left corner of plane；Sampling time interval T, sampling time interval T is set to be less than table tennis
+The average time interval (counted and obtained according to historical data) of pang ball impact ball table；It is three-dimensional in x-y-z to record camera 1 and camera 2
+Position coordinate value in the system of space is (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (X<sub>2</sub>,Y<sub>2</sub>,Z<sub>2</sub>).In the present embodiment, camera 1 and camera 2 are using 3.6 millis
+Rice (mm) focal length, plane 1 are the positive image of ping-pong table, and plane 2 is the image of table tennis side, and wherein plane 1 is covered completely
+Lid ping-pong table, size are 2740mm × 1525mm, and plane 2 is apart from 1 meter of ping-pong table, and top is highly above the ground level 3 meters, ruler
+Very little is 2740mm × 2500mm, sets plane coordinate system according to the size of plane 1, is denoted as m-n coordinate systems, long side m, short side is
+N, origin are located at the upper left corner of plane；Plane coordinate system is set according to the size of plane 2, is denoted as j-k coordinate systems, long side j is short
+While being k, origin is located at the upper left corner of plane.Sampling time interval T=1 microseconds are set.Record the three dimensional space coordinate value of camera 1
+For (0,0,2), the three dimensional space coordinate value of camera 2 is (2.4,0,0), and unit is rice.</div>
+<div class="description-paragraph" id="p0047" num="0047">Whether step 2, obtain Mapping Resolution pretreatment image and judge table tennis in mapping area.</div>
+<div class="description-paragraph" id="p0048" num="0048">Gray scale camera 1 and gray scale camera 2 shoot gray level image according to sampling time interval T set in advance, using mapping
+The complex background interference of non-table tennis figure in coverage is removed (image preprocessing) by image pre-processing method, then will
+Pretreated image sends to server, server and obtains image, is judged according to the image matching algorithm based on Gray-scale Matching
+It whether there is the gray scale figure of table tennis in gray level image, and if so, judging that table tennis in mapping area, enters step
+3；Otherwise table tennis is judged not in mapping area, return to step 2.In the present embodiment, the sampling time interval T=1 of setting is micro-
+Second, gray scale camera gathers gray level image according to sampling time interval, is then pre-processed in real time, pretreatment mode is：According to
+The shape of continuous high contrast figure in image matching algorithm extraction gray level image based on Gray-scale Matching, if shape is not
+Circular or ellipse then carries out interference elimination treatment, then sends the image after processing to server, and server is according to being based on
+The image matching algorithm of Gray-scale Matching calculates the area of contrast diff area, if area is flat to 0.002 at 0.0015 square metre
+Between square rice, then it is determined as in gray level image there are table tennis figure, in the image that two gray scale cameras of certain moment obtain, pre- place
+The high contrast figure of strip shape existing for being fixed in plane 2 is eliminated during reason, then sends image to server, warp
+Cross image matching algorithm, the area of contrast difference large area is respectively that 0.0016 square metre and 0.0018 are flat in two images
+Square rice, between 0.0015 square metre to 0.002 square metre, is then determined as that table tennis in mapping area, enters step 3.</div>
+<div class="description-paragraph" id="p0049" num="0049">Step 3, calculate table tennis in the position of mapping graph picture and conversion coordinate system.</div>
+<div class="description-paragraph" id="p0050" num="0050">The gray level image that camera 1 and camera 2 obtain is denoted as image 1 and image 2 respectively；According in Image Matching algorithm
+Cross-correlation measurement criterion calculation image 1 in the rattle coordinate value of ball's dead center be (m, n)；According in Image Matching algorithm
+Cross-correlation measurement criterion calculation image 2 in the rattle coordinate value of ball's dead center be (j, k)；It is flat according to where image 1 and image 2
+Position of the face in x-y-z three dimensions system, by the coordinate value (m, n) and (j, k) of ball's dead center of rattling in image 1 and image 2
+It is converted into x-y-z three dimensional space coordinate values (x<sub>1</sub>,y<sub>1</sub>,z<sub>1</sub>) and (x<sub>2</sub>,y<sub>2</sub>,z<sub>2</sub>).In the present embodiment, image 1 is ping-pong table front
+Image, image 2 is the image of ping-pong table side, according to existing cross-correlation module in Image Matching algorithm,
+Calculate with image 1 obtain cross-correlation function maximum coordinate points be image 1 in rattle ball's dead center coordinate value (2.7,
+1.2) coordinate value for ball's dead center of rattling in image 2 with the coordinate points of the acquirement cross-correlation function maximum of image 2, is calculated
+(2.65,0.24).Position of the plane 1 in x-y-z three dimensions system is table tennis desktop position, then table tennis in image 1
+Three dimensional space coordinate value is (1.2,2.7,0), and 2 size of plane is 2740 millimeters × 2500 millimeters, is 1 apart from ping-pong table distance
+Rice, highest point is apart from 3 meters of ground, then the three dimensional space coordinate value of table tennis is (- 1.7625,2.65,2) in image 2.</div>
+<div class="description-paragraph" id="p0051" num="0051">Step 4, the locus for calculating table tennis.</div>
+<div class="description-paragraph" id="p0052" num="0052">Remember that camera 1 and the line for ball's dead center of rattling in image 1 are line segment 1, note camera 2 and the ball center that rattles in image 2
+The line of point is line segment 2；It is just whole to set the fitting number M of line segment 1 and fitting the number N, M and N of line segment 2 according to setting accuracy
+Number；M match point is uniformly chosen on line segment 1, the three dimensional space coordinate value of M match point is calculated, specifically, according to (X<sub>1</sub>,Y<sub>1</sub>,
+Z<sub>1</sub>) and (x<sub>1</sub>,y<sub>1</sub>,z<sub>1</sub>) calculate triaxial coordinate difference be Δ x<sub>1</sub>=x<sub>1</sub>-X<sub>1</sub>, Δ y<sub>1</sub>=y<sub>1</sub>-Y<sub>1</sub>, Δ z<sub>1</sub>=z<sub>1</sub>-Z<sub>1</sub>, by triaxial coordinate difference M
+Decile and in (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) on the basis of be sequentially overlapped, obtain M match point three dimensional space coordinate value；On line segment 2
+N number of match point is uniformly chosen, calculates the three dimensional space coordinate value of N number of match point；Calculate on line segment 1 in M match point and line segment 2
+Minimum range L between N number of match point, then using the average value of the corresponding two match point coordinate values of minimum range L as table tennis
+Three dimensional space coordinate value；Return to step 2.In the present embodiment, the three dimensional space coordinate value of camera 1 is (0,0,2), camera 2
+Three dimensional space coordinate value is (2.4,0,0), and the three dimensional space coordinate value of table tennis is (1.2,2.7,0) in image 1, in image 2
+The three dimensional space coordinate value of table tennis is (- 1.7625,2.65,2), and line segment 1 and line segment 2 are as shown in figure 4, according to positioning accuracy
+It is 10 that (Centimeter Level), which sets roughly its match point number, i.e. M=N=10.Then the triaxial coordinate of line segment 1 is poor：Δx<sub>1</sub>=1.2,
+Δy<sub>1</sub>=2.7, Δ z<sub>1</sub>=-2, in line segment 1 the three dimensional space coordinate value of 10 match points be respectively (0.12,0.27,1.8),
+(0.24,0.54,1.6)、(0.36,0.81,1.4)、(0.48,1.08,1.2)、(0.6,1.35,1)、(0.72,1.62,0.8)、
+(0.84,1.89,0.6)、(0.96,2.16,0)、(1.08,2.43,0)、(1.2,2.7,0)；The similarly triaxial coordinate of line segment 2
+Difference：Δx<sub>2</sub>=-4.16, Δ y<sub>2</sub>=2.65, Δ z<sub>2</sub>=2, then the three dimensional space coordinate value of 10 match points is respectively in line segment 2
+(1.984,0.265,0.2)、(1.568,0.53,0.4)、(1.152,0.795,0.6)、(0.736,1.06,0.8)、(0.32,
+1.325,1)、(-0.096,1.59,1.2)、(-0.512,1.855,1.4)、(-0.928,2.12,1.6)、(-1.344,
+2.385,1.8)、(-1.7625,2.65,2)；The minimum range L=0.28m of each point each point into line segment 2 in line segment 1 is calculated,
+L is obtained by coordinate value (0.6,1.35,1) and (0.32,1.325,1), is calculated (0.6,1.35,1) and (0.32,1.325,1)
+Average value (x, y, z)=(0.46,1.3375,1), in this, as table tennis three dimensional space coordinate value；Return to step 2.</div>
+<div class="description-paragraph" id="p0053" num="0053">Certainly, those of ordinary skill in the art is it should be appreciated that above example is intended merely to illustrate this hair
+Bright, and limitation of the invention is not intended as, as long as within the scope of the invention, change, modification to above example are all
+Protection scope of the present invention will be fallen into.</div>
+</mode-for-invention>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">10</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM208822154">
+<div class="claim"> <div class="claim" id="en-cl0001" num="0001">
+<div class="claim-text">1. a kind of table tennis alignment system based on Mapping Resolution pretreatment, it is characterised in that including establishing mapped plan coordinate system
+Module, obtain Mapping Resolution pretreatment image and judge whether table tennis is mapping in mapping area internal module, calculating table tennis
+The position of image and conversion coordinate system module, the locus module for calculating table tennis.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0002" num="0002">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">2. the table tennis alignment system according to claim 1 based on Mapping Resolution pretreatment, it establishes mapped plan seat
+Mark system module is characterized in that：The gray scale camera of directly over ball table and side is denoted as camera 1 and camera 2, according to camera 1 and camera
+2 coverage setting mapped plan, is denoted as plane 1 and plane 2, sets plane coordinate system according to the size of plane 1, be denoted as m-
+N coordinate systems, long side m, short side n, origin are located at the upper left corner of plane；Plane coordinate system, note are set according to the size of plane 2
+For j-k coordinate systems, long side j, short side k, origin is located at the upper left corner of plane.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0003" num="0003">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">3. the table tennis alignment system according to claim 1 based on Mapping Resolution pretreatment, it is pre- that it obtains Mapping Resolution
+Handle image and judge whether table tennis is characterized in that in mapping area internal module：Gray scale camera 1 and gray scale camera 2 are according to thing
+The sampling time interval T shooting gray level images first set, then carry out image preprocessing, pretreated image are sent to clothes
+Business device, server judges to whether there is the gray scale figure of table tennis in gray level image after obtaining image, and if so, judging table tennis
+Pang ball is in mapping area, into position module of the calculating table tennis in each mapping graph picture；Otherwise judge that table tennis is not reflecting
+Penetrate in region, return and obtain Mapping Resolution pretreatment image and judge table tennis whether in mapping area internal module.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0004" num="0004">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">4. the table tennis alignment system according to claim 1 based on Mapping Resolution pretreatment, it calculates table tennis and is reflecting
+The position and conversion coordinate system module for penetrating image are characterized in that：The gray level image that camera 1 and camera 2 obtain is denoted as image respectively
+1 and image 2；The coordinate value for calculating ball's dead center of rattling in image 1 is (m, n), calculates the coordinate for ball's dead center of rattling in image 2
+It is worth for (j, k)；According to the position of image 1 and 2 place plane of image in x-y-z three dimensions system, by image 1 and image 2
+The coordinate value (m, n) and (j, k) of table tennis ball's dead center are converted into x-y-z three dimensional space coordinate values (x<sub>1</sub>,y<sub>1</sub>,z<sub>1</sub>) and (x<sub>2</sub>,y<sub>2</sub>,
+z<sub>2</sub>)。</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0005" num="0005">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">5. the table tennis alignment system according to claim 1 based on Mapping Resolution pretreatment, it calculates the sky of table tennis
+Between position module be characterized in that：The x-y-z three dimensional space coordinates value of camera 1 and camera 2 is fixed value, is denoted as (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>)
+(X<sub>2</sub>,Y<sub>2</sub>,Z<sub>2</sub>), note camera 1 and the line for ball's dead center of rattling in image 1 are line segment 1, note camera 2 and table tennis in image 2
+The line of central point is line segment 2；Fitting number N, M and N according to the fitting number M of setting accuracy setting line segment 1 and line segment 2 are
+Positive integer；M match point is uniformly chosen on line segment 1, calculates the three dimensional space coordinate value of M match point；On line segment 2 uniformly
+N number of match point is chosen, calculates the three dimensional space coordinate value of N number of match point；Calculate line segment 1 on M match point with it is N number of on line segment 2
+Minimum range between match point, the then three-dimensional using the average value of the corresponding two match point coordinate values of minimum range as table tennis
+Spatial value；Return and obtain Mapping Resolution pretreatment image and judge table tennis whether in mapping area internal module.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="en-cl0006" num="0006">
+<div class="claim-text">A kind of 6. table tennis ball positioning method based on Mapping Resolution pretreatment, it is characterised in that including：</div>
+<div class="claim-text">Step 1, establish mapped plan coordinate system and arrange parameter；</div>
+<div class="claim-text">Whether step 2, obtain Mapping Resolution pretreatment image and judge table tennis in mapping area；</div>
+<div class="claim-text">Step 3, calculate table tennis in the position of mapping graph picture and conversion coordinate system；</div>
+<div class="claim-text">Step 4, the locus for calculating table tennis.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0007" num="0007">
+<div class="claim-text">
+<claim-ref idref="en-cl0006"> </claim-ref>
+</div>
+<div class="claim-text">7. the table tennis ball positioning method according to claim 6 based on Mapping Resolution pretreatment, the feature of its step 1 exist
+In：The gray scale camera of directly over ball table and side is denoted as camera 1 and camera 2, is set according to the coverage of camera 1 and camera 2
+Mapped plan, is denoted as plane 1 and plane 2, sets plane coordinate system according to the size of plane 1, is denoted as m-n coordinate systems, long side is
+M, short side n, origin are located at the upper left corner of plane；Plane coordinate system is set according to the size of plane 2, is denoted as j-k coordinate systems, it is long
+While being j, short side k, origin is located at the upper left corner of plane；Sampling time interval T is set；Camera 1 and camera 2 are recorded in x-y-z
+Position coordinate value in three dimensions system is (X<sub>1</sub>,Y<sub>1</sub>,Z<sub>1</sub>) and (X<sub>2</sub>,Y<sub>2</sub>,Z<sub>2</sub>)。</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0008" num="0008">
+<div class="claim-text">
+<claim-ref idref="en-cl0006"> </claim-ref>
+</div>
+<div class="claim-text">8. the table tennis ball positioning method according to claim 6 based on Mapping Resolution pretreatment, the feature of its step 2 exist
+In：Gray scale camera 1 and gray scale camera 2 shoot gray level image according to sampling time interval T set in advance, and it is pre- then to carry out image
+Processing, pretreated image is sent to server, and server is judged in gray level image with the presence or absence of table tennis after obtaining image
+The gray scale figure of ball, and if so, judging that table tennis in mapping area, enters step 3；Otherwise judge that table tennis is not reflecting
+Penetrate in region, return to step 2.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0009" num="0009">
+<div class="claim-text">
+<claim-ref idref="en-cl0006"> </claim-ref>
+</div>
+<div class="claim-text">9. the table tennis ball positioning method according to claim 6 based on Mapping Resolution pretreatment, the feature of its step 3 exist
+In：The gray level image that camera 1 and camera 2 obtain is denoted as image 1 and image 2 respectively；Calculate the seat for ball's dead center of rattling in image 1
+Scale value is (m, n), and the coordinate value for calculating ball's dead center of rattling in image 2 is (j, k)；Existed according to image 1 and 2 place plane of image
+Position in x-y-z three dimensions system, the coordinate value (m, n) for ball's dead center of rattling in image 1 and image 2 and (j, k) are converted
+For x-y-z three dimensional space coordinate values (x<sub>1</sub>,y<sub>1</sub>,z<sub>1</sub>) and (x<sub>2</sub>,y<sub>2</sub>,z<sub>2</sub>)。</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0010" num="0010">
+<div class="claim-text">
+<claim-ref idref="en-cl0006"> </claim-ref>
+</div>
+<div class="claim-text">10. the table tennis ball positioning method according to claim 6 based on Mapping Resolution pretreatment, the feature of its step 4 exist
+In：Remember that camera 1 and the line for ball's dead center of rattling in image 1 are line segment 1, the company of note camera 2 and ball's dead center of rattling in image 2
+Line is line segment 2；It is positive integer to set the fitting number M of line segment 1 and fitting the number N, M and N of line segment 2 according to setting accuracy；
+M match point is uniformly chosen on line segment 1, calculates the three dimensional space coordinate value of M match point；N number of plan is uniformly chosen on line segment 2
+Chalaza, calculates the three dimensional space coordinate value of N number of match point；Calculate on line segment 1 on M match point and line segment 2 between N number of match point
+Minimum range, then the three dimensional space coordinate using the average value of the corresponding two match point coordinate values of minimum range as table tennis
+Value；Return to step 2.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

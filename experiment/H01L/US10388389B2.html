@@ -1,0 +1,564 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10388389B2 - Flash memory array with individual memory cell read, program and erase 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA308645468" source="national office">
+<div class="abstract">A memory device that provides individual memory cell read, write and erase. In an array of memory cells arranged in rows and columns, each column of memory cells includes a column bit line, a first column control gate line for even row cells and a second column control gate line for odd row cells. Each row of memory cells includes a row source line. In another embodiment, each column of memory cells includes a column bit line and a column source line. Each row of memory cells includes a row control gate line. In yet another embodiment, each column of memory cells includes a column bit line and a column erase gate line. Each row of memory cells includes a row source line, a row control gate line, and a row select gate line.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES199216661">
+<heading id="h-0001">RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a divisional of U.S. patent application Ser. No. 15/374,588, filed Dec. 9, 2016, which claims the benefit of U.S. Provisional Application No. 62/337,751, filed May 17, 2016, which are incorporated herein by reference.</div>
+<heading id="h-0002">FIELD OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention relates to non-volatile memory arrays.</div>
+<heading id="h-0003">BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0004" num="0003">Split gate non-volatile memory cells, and arrays of such cells, are well known. For example, U.S. Pat. No. 5,029,130 (“the '130 patent”) discloses an array of split gate non-volatile memory cells, and is incorporated herein by reference for all purposes. The memory cell is shown in <figref idrefs="DRAWINGS">FIG. 1</figref>. Each memory cell <b>10</b> includes source and drain regions <b>14</b>/<b>16</b> formed in a semiconductor substrate <b>12</b>, with a channel region <b>18</b> there between. A floating gate <b>20</b> is formed over and insulated from (and controls the conductivity of) a first portion of the channel region <b>18</b>, and over a portion of the drain region <b>16</b>. A control gate <b>22</b> has a first portion <b>22</b> <i>a </i>that is disposed over and insulated from (and controls the conductivity of) a second portion of the channel region <b>18</b>, and a second portion <b>22</b> <i>b </i>that extends up and over the floating gate <b>20</b>. The floating gate <b>20</b> and control gate <b>22</b> are insulated from the substrate <b>12</b> by a gate oxide <b>26</b>.</div>
+<div class="description-paragraph" id="p-0005" num="0004">The memory cell is erased (where electrons are removed from the floating gate) by placing a high positive voltage on the control gate <b>22</b>, which causes electrons on the floating gate <b>20</b> to tunnel through the intermediate insulation <b>24</b> from the floating gate <b>20</b> to the control gate <b>22</b> via Fowler-Nordheim tunneling.</div>
+<div class="description-paragraph" id="p-0006" num="0005">The memory cell is programmed (where electrons are placed on the floating gate) by placing a positive voltage on the control gate <b>22</b>, and a positive voltage on the drain <b>16</b>. Electron current will flow from the source <b>14</b> towards the drain <b>16</b>. The electrons will accelerate and become heated when they reach the gap between the control gate <b>22</b> and the floating gate <b>20</b>. Some of the heated electrons will be injected through the gate oxide <b>26</b> onto the floating gate <b>20</b> due to the attractive electrostatic force from the floating gate <b>20</b>.</div>
+<div class="description-paragraph" id="p-0007" num="0006">The memory cell is read by placing positive read voltages on the drain <b>16</b> and control gate <b>22</b> (which turns on the channel region under the control gate). If the floating gate <b>20</b> is positively charged (i.e. erased of electrons and positively coupled to the drain <b>16</b>), then the portion of the channel region under the floating gate <b>20</b> is turned on as well, and current will flow across the channel region <b>18</b>, which is sensed as the erased or “1” state. If the floating gate <b>20</b> is negatively charged (i.e. programmed with electrons), then the portion of the channel region under the floating gate <b>20</b> is mostly or entirely turned off, and current will not flow (or there will be little flow) across the channel region <b>18</b>, which is sensed as the programmed or “0” state.</div>
+<div class="description-paragraph" id="p-0008" num="0007">The architecture of the memory array is shown in <figref idrefs="DRAWINGS">FIG. 2</figref>. The memory cells <b>10</b> are arranged in rows and columns. In each column, the memory cells are arranged end to end in mirror fashion, so that they are formed as pairs of memory cells each sharing a common source region <b>14</b> (S), and each adjacent set of memory cell pairs sharing a common drain region <b>16</b> (D). All the source regions <b>14</b> for any given row of memory cells are electrically connected together by a source line <b>14</b> <i>a</i>. All the drain regions <b>16</b> for any given column of memory cells are electrically connected together by a bit line <b>16</b> <i>a</i>. All the control gates <b>22</b> for any given row of memory cells are electrically connected together by a control gate line <b>22</b> <i>a</i>. Therefore, while the memory cells can be individually programmed and read, memory cell erasure is performed row by row (each row of memory cells is erased together, by the application of a high voltage on the control gate line <b>22</b> <i>a</i>). If a particular memory cell is to be erased, all the memory cells in the same row must also be erased.</div>
+<div class="description-paragraph" id="p-0009" num="0008">Those skilled in the art understand that the source and drain can be interchangeable, where the floating gate can extend partially over the source instead of the drain, as shown in <figref idrefs="DRAWINGS">FIG. 3</figref>. <figref idrefs="DRAWINGS">FIG. 4</figref> best illustrates the corresponding memory cell architecture, including the memory cells <b>10</b>, the source lines <b>14</b> <i>a</i>, the bit lines <b>16</b> <i>a</i>, and the control gate lines <b>22</b> <i>a</i>. As is evident from the figures, memory cells <b>10</b> of the same row share the same source line <b>14</b> <i>a </i>and the same control gate line <b>22</b> <i>a</i>, while the drains of all cells of the same column are electrically connected to the same bit line <b>16</b> <i>a</i>. The array design is optimized for digital applications, and permits individual programming of the selected cells, e.g., by applying 1.6 V and 7.6 V to the selected control gate line <b>22</b> <i>a </i>and source line <b>14</b> <i>a</i>, respectively, and grounding the selected bit line <b>16</b> <i>a</i>. Disturbing the non-selected memory cell in the same pair is avoided by applying a voltage greater than 2 volts on the unselected bit lines <b>16</b> <i>a </i>and grounding the remaining lines. The memory cells <b>10</b> cannot be erased individually because the process responsible for erasure (the Fowler-Nordheim tunneling of electrons from the floating gate <b>20</b> to the control gate <b>22</b>) is only weakly affected by the drain voltage (i.e., the only voltage which may be different for two adjacent cells in the row direction sharing the same source line <b>14</b> <i>a</i>).</div>
+<div class="description-paragraph" id="p-0010" num="0009">Split gate memory cells having more than two gates are also known. For example, memory cells have source region <b>14</b>, drain region <b>16</b>, floating gate <b>20</b> over a first portion of channel region <b>18</b>, a select gate <b>28</b> over a second portion of the channel region <b>18</b>, a control gate <b>22</b> over the floating gate <b>20</b>, and an erase gate <b>30</b> over the source region <b>14</b> are known, as shown in <figref idrefs="DRAWINGS">FIG. 5</figref>. Programming is shown by heated electrons from the channel region <b>18</b> injecting themselves onto the floating gate <b>20</b>. Erasing is shown by electrons tunneling from the floating gate <b>20</b> to the erase gate <b>30</b>.</div>
+<div class="description-paragraph" id="p-0011" num="0010">The architecture for a four-gate memory cell array can be configured as shown in <figref idrefs="DRAWINGS">FIG. 6</figref>. In this embodiment, each horizontal select gate line <b>28</b> <i>a </i>electrically connects together all the select gates <b>28</b> for that row of memory cells. Each horizontal control gate line <b>22</b> <i>a </i>electrically connects together all the control gates <b>22</b> for that row of memory cells. Each horizontal source line <b>14</b> <i>a </i>electrically connects together all the source regions <b>14</b> for two rows of memory cells that share the source regions <b>14</b>. Each bit line <b>16</b> <i>a </i>electrically connects together all the drain regions <b>16</b> for that column of memory cells. Each erase gate line <b>30</b> <i>a </i>electrically connects together all the erase gates <b>30</b> for two rows of memory cells that share the erase gate <b>30</b>. As with the previous architecture, individual memory cells can be independently programmed and read. However, there is no way to erase cells individually. Erasing is performed by placing a high positive voltage on the erase gate line <b>30</b> <i>a</i>, which results in the simultaneous erasing of both rows of the memory cells that share the same erase gate line <b>30</b> <i>a</i>. Exemplary operating voltages can include those in Table 1 below (in this embodiment, select gate lines <b>28</b> <i>a </i>can be referred to as word lines WL):</div>
+<div class="description-paragraph" id="p-0012" num="0011">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="6" nameend="5" namest="offset" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="6" nameend="5" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">WL</td>
+<td class="description-td">BL</td>
+<td class="description-td">SL</td>
+<td class="description-td">CG</td>
+<td class="description-td">EG</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Sel.</td>
+<td class="description-td">Unsel.</td>
+<td class="description-td">Sel.</td>
+<td class="description-td">Unsel.</td>
+<td class="description-td">Sel.</td>
+<td class="description-td">Unsel.</td>
+<td class="description-td">Sel.</td>
+<td class="description-td">Unsel.</td>
+<td class="description-td">Sel.</td>
+<td class="description-td">Unsel.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="11" nameend="10" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Erase</td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">11.5 V  </td>
+<td class="description-td">0 V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Read</td>
+<td class="description-td">2.5 V  </td>
+<td class="description-td">0 V</td>
+<td class="description-td">0.8 V  </td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">2.5 V  </td>
+<td class="description-td">2.5 V  </td>
+<td class="description-td">0 V</td>
+<td class="description-td">0 V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Program</td>
+<td class="description-td">1 V</td>
+<td class="description-td">0 V</td>
+<td class="description-td">  1 μA</td>
+<td class="description-td">2.5 V  </td>
+<td class="description-td">4.5 V  </td>
+<td class="description-td">0.5 V  </td>
+<td class="description-td">10.5 V  </td>
+<td class="description-td">0/2.5 V  </td>
+<td class="description-td">4.5 V  </td>
+<td class="description-td">0.5 V  </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0013" num="0012">Recently, new applications for split gate non-volatile memory cells have been developed that requires true single bit operation (i.e. each memory cell can be individually programmed, read, and erased, without any interference from or disturbing the programming state of adjacent memory cells). Therefore, there is a need for an array of split gate non-volatile memory cells which can be independently programmed, read and erased.</div>
+<heading id="h-0004">BRIEF SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0014" num="0013">The aforementioned problems and needs are addressed by a memory device that includes a substrate of semiconductor material and a plurality of memory cells formed on the substrate and arranged in an array of rows and columns. Each of the memory cells includes spaced apart source and drain regions in the substrate, with a channel region in the substrate extending there between, a floating gate disposed over and insulated from a first portion of the channel region adjacent the source region, and a control gate disposed over and insulated from a second portion of the channel region adjacent the drain region. Each of the columns of memory cells includes a source line that electrically connects together all the source regions for the column of memory cells. Each of the columns of memory cells includes a bit line that electrically connects together all the drain regions for the column of memory cells. Each of the rows of memory cells includes a control gate line that electrically connects together all the control gates for the row of memory cells.</div>
+<div class="description-paragraph" id="p-0015" num="0014">A method of erasing the above described memory device includes applying a positive voltage to one of the control gate lines that is electrically connected to the control gate of the selected memory cell, and a ground voltage to all the others of the control gate lines, applying a ground voltage to one of the source lines that is electrically connected to the source region of the selected memory cell, and a positive voltage to all the others of the source lines; and applying a ground voltage to all of the bit lines.</div>
+<div class="description-paragraph" id="p-0016" num="0015">Other objects and features of the present invention will become apparent by a review of the specification, claims and appended figures.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a side cross sectional view of a conventional 2-gate non-volatile memory cell.</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a schematic drawing of a conventional architecture of the 2-gate non-volatile memory cell of <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a side cross sectional view of a conventional pair of 2-gate non-volatile memory cells.</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a schematic drawing of a conventional architecture of the 2-gate non-volatile memory cells of <figref idrefs="DRAWINGS">FIG. 3</figref>.</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a side cross sectional view of a conventional 4-gate non-volatile memory cell.</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a schematic drawing of a conventional architecture of the 4-gate non-volatile memory cell of <figref idrefs="DRAWINGS">FIG. 5</figref>.</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a schematic drawing of the 2-gate non-volatile memory cell architecture of the present invention.</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a schematic drawing of an alternate embodiment of the 2-gate non-volatile memory cell architecture of the present invention.</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a schematic drawing of the 4-gate non-volatile memory cell architecture of the present invention.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0026" num="0025">The present invention involves new architecture configurations for arrays of split-gate non-volatile memory cells that provide unique (random order) programming, reading and erasing of single memory cells (i.e., true single bit operation).</div>
+<div class="description-paragraph" id="p-0027" num="0026">For the two-gate cell of <figref idrefs="DRAWINGS">FIGS. 1 and 3</figref>, the memory cell array architecture that provides true single bit operation is shown in <figref idrefs="DRAWINGS">FIG. 7</figref>. The main difference between the 2-gate single bit operation architecture of <figref idrefs="DRAWINGS">FIG. 7</figref>, and the conventional 2-gate architecture discussed above with respect to <figref idrefs="DRAWINGS">FIGS. 2 and 4</figref>, is that the horizontal control gate lines <b>22</b> <i>a </i>(one for each row of memory cells) have been replaced with vertical control gate lines <b>22</b> <i>b </i>and <b>22</b> <i>c </i>(i.e., two control gate lines for each column of memory cells). Specifically, each column of memory cells includes two control gate lines: a first control gate line <b>22</b> <i>b </i>electrically connecting together all the control gates <b>22</b> of the odd row memory cells (i.e., those memory cells in odd rows 1, 3, 5, etc.), and a second control gate line <b>22</b> <i>c </i>electrically connecting together all the control gates <b>22</b> of the even row memory cells (i.e., those memory cells in even rows 2, 4, 6, etc.). By reorienting the control gate lines in this manner, any memory cell in the array can be individually programmed, erased and read without adversely affecting the memory state of adjacent memory cells. Exemplary (non-limiting) operational voltages to erase, program or read any given target memory cell are shown in Table 2 below:</div>
+<div class="description-paragraph" id="p-0028" num="0027">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">CG 22</td>
+<td class="description-td">Drain 16</td>
+<td class="description-td">Source 14</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">sel</td>
+<td class="description-td">unsel</td>
+<td class="description-td">sel</td>
+<td class="description-td">unsel</td>
+<td class="description-td">sel</td>
+<td class="description-td">unsel</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="7" nameend="6" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Erase</td>
+<td class="description-td">VGerase</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VSerinhibit</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Program</td>
+<td class="description-td">VGprg</td>
+<td class="description-td">gnd</td>
+<td class="description-td">Iprog</td>
+<td class="description-td">VDprginh</td>
+<td class="description-td">VSprg</td>
+<td class="description-td">gnd</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Read</td>
+<td class="description-td">VGrd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VDrd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VSrd</td>
+<td class="description-td">float/gnd</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="7" nameend="7" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td align="left" class="description-td" colspan="7" id="FOO-00001" nameend="7" namest="1">(sel = line that intersects target memory cell)</td>
+</tr>
+<tr class="description-tr">
+<td align="left" class="description-td" colspan="7" id="FOO-00002" nameend="7" namest="1">(unsel = line that does not intersect target memory cell).</td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0029" num="0028">Numerical (non-limiting) examples are shown in Table 3 below:</div>
+<div class="description-paragraph" id="p-0030" num="0029">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1">TABLE 3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VGerase</td>
+<td class="description-td">5-9</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VSerinhibit</td>
+<td class="description-td">3-4</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VGprg</td>
+<td class="description-td">1.2-1.7</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VDprginh</td>
+<td class="description-td">1.5-2.5</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Iprog</td>
+<td class="description-td">2-5</td>
+<td class="description-td">ua</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VSprg</td>
+<td class="description-td">4-8</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VGrd</td>
+<td class="description-td">0.4-2.5</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VDrd</td>
+<td class="description-td">1-2</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VSrd</td>
+<td class="description-td">0-0.6</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0031" num="0030">During erase, only the selected cell will have a high voltage on its control gate <b>22</b> in combination with its source region <b>14</b> being at ground, so that electrons will tunnel off the floating gate <b>20</b>. Any unselected cells in the same column that have a high voltage applied to their control gates <b>22</b> will also have an inhibit voltage applied to their source regions <b>14</b> that is sufficiently high to inhibit any tunneling of electrons off of the floating gate (i.e. the electrons will see positive voltages in two opposing directions).</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates an alternate embodiment of the 2-gate single bit operation architecture. The main difference between the 2-gate single bit operation architecture of <figref idrefs="DRAWINGS">FIG. 8</figref>, and the conventional 2-gate architecture discussed above with respect to <figref idrefs="DRAWINGS">FIGS. 2 and 4</figref>, is that the horizontal source lines <b>14</b> <i>a </i>(one for each row) have been replaced with vertical source lines <b>14</b> <i>b </i>(one for each column). Specifically, each column of memory cells includes a source line <b>14</b> <i>b </i>electrically connecting together all the source regions <b>14</b> for all the memory cells <b>10</b> in that column. By reorienting the source lines in this manner, any memory cell in the array can be individually programmed, erased and read without adversely affecting the memory state of adjacent memory cells. The Table 2 operational values equally apply to this embodiment.</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 9</figref> illustrates a 4-gate single bit operation architecture for the memory cell of <figref idrefs="DRAWINGS">FIG. 6</figref>. The main difference between the 4-gate single bit operation architecture of <figref idrefs="DRAWINGS">FIG. 9</figref>, and the conventional 4-gate architecture discussed above with respect to <figref idrefs="DRAWINGS">FIG. 6</figref>, is that the horizontal erase gate lines <b>30</b> <i>a </i>(one for each pair of memory cell pairs) have been replaced with vertical erase gate lines <b>30</b> <i>b</i>. Specifically, each column of memory cells includes an erase gate line <b>30</b> <i>b </i>that electrically connects together all the erase gates <b>30</b> for the column of memory cells. By reorienting the erase gate lines in this manner, any memory cell in the array can be individually programmed, erased and read. Exemplary operational voltages to erase, program or read any given target memory cell are shown in Table 4 below:</div>
+<div class="description-paragraph" id="p-0034" num="0033">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="6" nameend="5" namest="offset" rowsep="1">TABLE 4</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="6" nameend="5" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">EG</td>
+<td class="description-td">WL</td>
+<td class="description-td">CG</td>
+<td class="description-td">BL</td>
+<td class="description-td">S</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">sel</td>
+<td class="description-td">unsel</td>
+<td class="description-td">sel</td>
+<td class="description-td">unsel</td>
+<td class="description-td">sel</td>
+<td class="description-td">unsel</td>
+<td class="description-td">sel</td>
+<td class="description-td">unsel</td>
+<td class="description-td">sel</td>
+<td class="description-td">unsel</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="11" nameend="10" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Erase</td>
+<td class="description-td">VEGerase</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VCGerinhibit</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Program</td>
+<td class="description-td">VEGprg/</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VWLprg</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VCGprg</td>
+<td class="description-td">gnd</td>
+<td class="description-td">Iprog</td>
+<td class="description-td">VBLprginh</td>
+<td class="description-td">VSprg</td>
+<td class="description-td">Float/</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">gnd</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">gnd/0.5 v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Read</td>
+<td class="description-td">gnd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VWLrd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VCGrd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VBLrd</td>
+<td class="description-td">gnd</td>
+<td class="description-td">VSrd</td>
+<td class="description-td">float/gnd</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td align="left" class="description-td" colspan="11" id="FOO-00003" nameend="11" namest="1">(sel = line that intersects target memory cell)</td>
+</tr>
+<tr class="description-tr">
+<td align="left" class="description-td" colspan="11" id="FOO-00004" nameend="11" namest="1">(unsel = line that does not intersect target memory cell).</td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0035" num="0034">Numerical (non-limiting) examples are shown in Table 5 below:</div>
+<div class="description-paragraph" id="p-0036" num="0035">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1">TABLE 5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VEGerase</td>
+<td class="description-td">8-11.5</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VCGerinhibit</td>
+<td class="description-td">3.5-8</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VEGprg</td>
+<td class="description-td">4-6</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VWLprg</td>
+<td class="description-td">0.8-1.2</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VCGprg</td>
+<td class="description-td">6-10</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VBLprginh</td>
+<td class="description-td">1-2.5</td>
+<td class="description-td">v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Iprog</td>
+<td class="description-td">0.2-1</td>
+<td class="description-td">ua</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VSprg</td>
+<td class="description-td">3-5</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VWLrd</td>
+<td class="description-td">0.4-2.0</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VCGrd</td>
+<td class="description-td">1-2.5</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VBLrd</td>
+<td class="description-td">0.8-2</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">VSrd</td>
+<td class="description-td">0-0.6</td>
+<td class="description-td">V</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0037" num="0036">It is to be understood that the present invention is not limited to the embodiment(s) described above and illustrated herein, but encompasses any and all variations falling within the scope of any claims. For example, references to the present invention herein are not intended to limit the scope of any claim or claim term, but instead merely make reference to one or more features that may be covered by one or more claims. Materials, processes and numerical examples described above are exemplary only, and should not be deemed to limit the claims. Lastly, single layers of material could be formed as multiple layers of such or similar materials, and vice versa.</div>
+<div class="description-paragraph" id="p-0038" num="0037">It should be noted that, as used herein, the terms “over” and “on” both inclusively include “directly on” (no intermediate materials, elements or space disposed therebetween) and “indirectly on” (intermediate materials, elements or space disposed therebetween). Likewise, the term “adjacent” includes “directly adjacent” (no intermediate materials, elements or space disposed therebetween) and “indirectly adjacent” (intermediate materials, elements or space disposed there between), “mounted to” includes “directly mounted to” (no intermediate materials, elements or space disposed there between) and “indirectly mounted to” (intermediate materials, elements or spaced disposed there between), and “electrically coupled” includes “directly electrically coupled to” (no intermediate materials or elements there between that electrically connect the elements together) and “indirectly electrically coupled to” (intermediate materials or elements there between that electrically connect the elements together). For example, forming an element “over a substrate” can include forming the element directly on the substrate with no intermediate materials/elements therebetween, as well as forming the element indirectly on the substrate with one or more intermediate materials/elements therebetween.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">7</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM192797418">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A memory device, comprising:
+<div class="claim-text">a substrate of semiconductor material;</div>
+<div class="claim-text">a plurality of memory cells formed on the substrate and arranged in an array of rows and columns;</div>
+<div class="claim-text">each of the memory cells includes:
+<div class="claim-text">spaced apart source and drain regions in the substrate, with a channel region in the substrate extending there between,</div>
+<div class="claim-text">a floating gate disposed over and insulated from a first portion of the channel region adjacent the source region, and</div>
+<div class="claim-text">a control gate disposed over and insulated from a second portion of the channel region adjacent the drain region;</div>
+</div>
+<div class="claim-text">each of the columns of memory cells includes a source line that electrically connects together all the source regions for the column of memory cells;</div>
+<div class="claim-text">each of the columns of memory cells includes a bit line that electrically connects together all the drain regions for the column of memory cells; and</div>
+<div class="claim-text">each of the rows of memory cells includes a control gate line that electrically connects together all the control gates for the row of memory cells.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The memory device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein for each of the memory cells, the floating gate extends over and is insulated from a portion of the source region.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The memory device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein:
+<div class="claim-text">the memory cells are arranged in pairs of the memory cells; and</div>
+<div class="claim-text">each of the pairs of memory cells shares one of the source regions and one of the source lines.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The memory device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein for each of the memory cells, the control gate comprises a first portion laterally adjacent to the floating gate and a second portion that extends up and over the floating gate.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. A method of erasing a selected memory cell of a memory device, wherein the memory device comprises:
+<div class="claim-text">a substrate of semiconductor material;</div>
+<div class="claim-text">a plurality of memory cells formed on the substrate and arranged in an array of rows and columns, wherein one of the plurality of memory cells is a selected memory cell;</div>
+<div class="claim-text">each of the memory cells includes:
+<div class="claim-text">spaced apart source and drain regions in the substrate, with a channel region in the substrate extending there between,</div>
+<div class="claim-text">a floating gate disposed over and insulated from a first portion of the channel region adjacent the source region, and</div>
+<div class="claim-text">a control gate disposed over and insulated from a second portion of the channel region adjacent the drain region;</div>
+</div>
+<div class="claim-text">each of the columns of memory cells includes a source line that electrically connects together all the source regions for the column of memory cells;</div>
+<div class="claim-text">each of the columns of memory cells includes a bit line that electrically connects together all the drain regions for the column of memory cells; and</div>
+<div class="claim-text">each of the rows of memory cells includes a control gate line that electrically connects together all the control gates for the row of memory cells;</div>
+<div class="claim-text">the method comprising:
+<div class="claim-text">applying a positive voltage to one of the control gate lines that is electrically connected to the control gate of the selected memory cell, and a ground voltage to all the others of the control gate lines;</div>
+<div class="claim-text">applying a ground voltage to one of the source lines that is electrically connected to the source region of the selected memory cell, and a positive voltage to all the others of the source lines; and</div>
+<div class="claim-text">applying a ground voltage to all of the bit lines.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein the positive voltage applied to the one control gate line is greater than the positive voltage applied to the others of the source lines.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein the positive voltage applied to the one control gate line is at least double than that of the positive voltage applied to the others of the source lines.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

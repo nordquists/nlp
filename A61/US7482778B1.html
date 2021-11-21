@@ -1,0 +1,237 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US7482778B1 - Fuel cell power system having a master control unit and a plurality of fuel cell power units 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA51417197">
+<div class="abstract" num="p-0001">A fuel cell power module is provided. The module comprises (a) power production unit, (b) a power conditioning and protection unit, and (c) a control unit, each unit being modules and integrated into a module for independent removal. Multiple modules are networked so that each module is connected to a master controller so that if one module is removed from operation, the other is able to continue operation.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES16540567">
+<heading>RELATED APPLICATION</heading>
+<div class="description-paragraph" num="p-0002">This application is a divisional of application Ser. No. 11/186,327, filed Jul. 21, 2005 (now U.S. Pat. No. 7,166,985), which is a divisional of application Ser. No. 10/382,549, filed Mar. 5, 2003 (now U.S. Pat. No. 6,989,651), which claims priority to U.S. Provisional Application Ser. No. 60/362,559, filed Mar. 5, 2002. This application also claims priority to U.S. Provisional Application Ser. No. 60/362,559.</div>
+<heading>FIELD OF THE INVENTION</heading>
+<div class="description-paragraph" num="p-0003">This invention relates to a network power system using fuel cell technology to provide a source of reliable, clean electricity useful for mmning computer-related systems and other electricity-using systems.</div>
+<heading>BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" num="p-0004">Communication infrastructure facilities, banks and business customers with mission-critical processes require high-quality and reliable power that the current electrical grid is unable to provide. These applications use the grid backed up by an Uninterruptible Power Systems (UPS), which generally uses a battery and diesel generator supplement to ensure uninterrupted power. The UPS is also available to “clean” the power (e.g. by reducing harmonics), whether originating from the grid or from the diesel generator to ensure quality and reliability of electrical power.</div>
+<div class="description-paragraph" num="p-0005">We have now invented a network of fuel cells that may be used to supplement the use of the power grid or replace it (along with the UPS and back up power). The network will be capable of sustaining faults without affecting the quality of the electricity supplied, resulting in high system reliability.</div>
+<heading>SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" num="p-0006">A network of fuel cell power modules, also referred to as rack power modules (RPMs), supplied with hydrogen (or other appropriate fuel), whose operation is overseen by a central control system, allows for a system of power sources that feed into common electrical buses.</div>
+<div class="description-paragraph" num="p-0007">One aspect of this invention is a fuel cell power module that comprises (a) a power production unit, (b) a power conditioning and protection unit, and (c) a control unit, each unit being modular in nature and being integrated into the fuel cell power module so that an individual unit can be independently removed during operation of the module. Preferably the fuel cell power module comprises an active module having units (a), (b), and (c) contained therein and a back plane module having connections communicating with units (a), (b), and (c). Generally the back plane module has fluid, power, and data interfaces that interconnect to corresponding fluid, power, and data interfaces of the active unit, preferably in a single action.</div>
+<div class="description-paragraph" num="p-0008">Another aspect of the invention is a networked fuel cell power system that comprises at least two fuel cell power modules wherein each power module is in communication with a computer master controller unit that communicates with the control unit of each fuel cell power module so that if one fuel cell power module is removed from operation, the other is able to provide the power required by automatically increasing its power output. The networked fuel cell power system may be connected to a DC/DC converter or a DC/AC inverter through the power production units to ensure a regulated voltage output.</div>
+<div class="description-paragraph" num="p-0009">Another aspect of the invention is the networked fuel cell power system wherein hydrogen is supplied to the power production units and the control unit monitors control the operation of the power production units resulting in autonomous operation of the active module. Preferably the system is designed so that a failure of any one fuel cell power module will result in the remaining power modules automatically raising their output power without affecting the voltage of the power buses associated with the system.</div>
+<div class="description-paragraph" num="p-0010">Where the hydrogen is the fuel for the system, it may be stored as gas or derived from a primary or secondary hydride.</div>
+<div class="description-paragraph" num="p-0011">The network power system may use dual feed hydrogen supply manifolds wherein actuated valves are used to segment the manifolds allowing isolation of individual sections of the manifold by shutting down valves while continuing supply of hydrogen to the individual fuel cell power modules.</div>
+<div class="description-paragraph" num="p-0012">Dual hydrogen exhaust manifolds may be used wherein actuated valves are used to segment the manifolds allowing isolation of individual sections of the manifold while allowing all the fuel cell power modules to purge hydrogen. Similarly dual coolant pumps are used to supply coolant to dual feed inlet and outlet manifolds that connect to the individual fuel cell power modules.</div>
+<div class="description-paragraph" num="p-0013">The system is designed so that failure of computer master controllers results in transfer of all control functions to the individual rack power systems resulting in continued operation of the rack power systems.</div>
+<description-of-drawings>
+<heading>BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" num="p-0014"> <figref idrefs="DRAWINGS">FIG. 1</figref> represents a view of the rack power module with the active and back plane modules.</div>
+<div class="description-paragraph" num="p-0015"> <figref idrefs="DRAWINGS">FIG. 2</figref> represents the schematic of fluid, electrical power and control flows and terminals in the back plane module.</div>
+<div class="description-paragraph" num="p-0016"> <figref idrefs="DRAWINGS">FIG. 3</figref> represents the connection between two back plane modules which aids in creating the fluid distribution manifolds and the power and control buses.</div>
+<div class="description-paragraph" num="p-0017"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a view of the active module of the rack power module that shows the power production subsystem, power conditioning and protection subsystem and the control subsystem.</div>
+<div class="description-paragraph" num="p-0018"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a view of the active module of the rack power module that represents the power conditioning and protection subsystem in an inactive position along with a cutaway view of the connection interface to the power conditioning and protection subsystem.</div>
+<div class="description-paragraph" num="p-0019"> <figref idrefs="DRAWINGS">FIG. 6</figref> <i>a </i>is a schematic that represents the fluid and electrical connections of the power production subsystem.</div>
+<div class="description-paragraph" num="p-0020"> <figref idrefs="DRAWINGS">FIG. 6B</figref> is a schematic of the electrical connections of the power conditioning and protection subsystem.</div>
+<div class="description-paragraph" num="p-0021"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a schematic of the electrical connections of 4 rack power modules connected together to form a fault tolerant power network feeding <b>4</b> electrical loads.</div>
+<div class="description-paragraph" num="p-0022"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a schematic of the hydrogen supply system that feeds the group of 4 rack power modules that are electrically connected together to form the fault tolerant power network.</div>
+<div class="description-paragraph" num="p-0023"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a schematic of the coolant recirculation system that manages the heat produced by the rack power modules that are electrically connected together to form the fault-tolerant power network.</div>
+<div class="description-paragraph" num="p-0024"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a schematic of the control communication system that ensures the communication between the central control and the individual rack power modules.</div>
+</description-of-drawings>
+<heading>DETAILED DESCRIPTION OF THE INVENTION AND PREFERRED EMBODIMENTS</heading>
+<div class="description-paragraph" num="p-0025">Fuel cell types are generally characterized by electrolyte material. The electrolyte is the substance between the positive and negative terminals, serving as the bridge for the ion exchange that generates electrical current.</div>
+<div class="description-paragraph" num="p-0026">While there are dozens of types of fuel cells to which this invention may apply, there are six principle kinds of fuel cell types that are particularly useful.</div>
+<div class="description-paragraph" num="p-0027">1. Alkaline Fuel Cell (AFC)</div>
+<div class="description-paragraph" num="p-0028">2. Molten Carbonate Fuel Cell (MCFC)</div>
+<div class="description-paragraph" num="p-0029">3. Phosphoric Acid Fuel Cell (PAFC)</div>
+<div class="description-paragraph" num="p-0030">4. Proton Exchange Membrane Fuel Cell (PEMFC)</div>
+<div class="description-paragraph" num="p-0031">5. Solid Oxide Fuel Cell (SOFC)</div>
+<div class="description-paragraph" num="p-0032">6. Direct Methanol Fuel Cell</div>
+<div class="description-paragraph" num="p-0033">The details of this invention will be described primarily with the preferred PEMFC in mind using hydrogen as a fuel source.</div>
+<div class="description-paragraph" num="p-0034">One aspect of this invention is a fuel cell power module that comprises (a) a power production unit, (b) a power conditioning and protection unit, and (c) a control unit, each unit being modular in nature and being integrated into the module so that an individual unit can be independently removed during operation of the module.</div>
+<div class="description-paragraph" num="p-0035">The fuel cell power module also is referred to as rack power module (<b>50</b>). The modules can be electrically connected together to form a fault-tolerant power network. See <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" num="p-0036">In one embodiment the rack power module (<b>50</b>) is made up of two parts; see <figref idrefs="DRAWINGS">FIG. 1</figref>, the active module (<b>51</b>,A) and a back plane module (<b>51</b>B). Preferably the active module (<b>51</b>A) can be attached to or detached from the back plane module (<b>51</b>B) by a single action, effectively isolating the active module (<b>51</b>A) from the back plane module (<b>51</b>B). Generally, the back plane module (<b>51</b>B) provides the hardware that creates the interconnection of the RPM (<b>50</b>) to the electrical power buses (<b>18</b>,<b>19</b>), the hydrogen manifolds (<b>15</b>,<b>16</b>), the coolant manifolds (<b>8</b>,<b>9</b>) and the control bus (<b>17</b>). See <figref idrefs="DRAWINGS">FIG. 2</figref>.</div>
+<div class="description-paragraph" num="p-0037">Two or more back planes (<b>51</b>B, <b>51</b>AB) can be connected together, see <figref idrefs="DRAWINGS">FIGS. 2 &amp; 3</figref>. In this embodiment the connection between the coolant manifolds (<b>1</b>A, <b>201</b>B, <b>2</b>A, <b>202</b>B) extends the coolant distribution manifolds (<b>8</b>,<b>9</b>). The connection between the hydrogen manifolds (<b>3</b>A, <b>203</b>B, <b>4</b>A, <b>204</b>B) extends the hydrogen manifolds (<b>15</b>,<b>16</b>), the connection between the power connectors (<b>21</b>,<b>221</b>) extends the electrical buses (<b>18</b>,<b>19</b>) and the connection between the control connectors (<b>5</b>A, <b>205</b>B) extends the control bus (<b>17</b>).</div>
+<div class="description-paragraph" num="p-0038">Two or more back plane modules (<b>51</b>B, <b>51</b>AB) can be mated together by ensuring the respective connectors (<b>1</b>A, <b>201</b>B, <b>2</b>A, <b>202</b>B, <b>3</b>A, <b>203</b>B, <b>4</b>A, <b>204</b>B, <b>21</b>,<b>221</b>, <b>5</b>A, <b>205</b>B) mate together to extend the respective manifolds (<b>8</b>,<b>9</b>,<b>15</b>,<b>16</b>) and buses (<b>18</b>,<b>19</b>, <b>17</b>). The two backplanes (<b>51</b>B, <b>51</b>AB) can be interconnected using extensions that complete the respective connections (<b>1</b>A, <b>201</b>B, <b>2</b>A, <b>202</b>B, <b>3</b>A, <b>203</b>B, <b>4</b>A, <b>204</b>B, <b>21</b>,<b>221</b>, <b>5</b>A, <b>205</b>B) between the two backplanes (<b>51</b>B, <b>51</b>AB). Manual valves (<b>11</b>, <b>12</b>, <b>13</b>, <b>14</b>) are used to isolate the fluids in the backplane module (<b>51</b>B) from the active module (<b>51</b>A). The active module (<b>51</b>A) consists of three functional subsystems; the power production unit (<b>53</b>), the power conditioning &amp; protection unit (<b>54</b>) and the control unit (<b>52</b>). See <figref idrefs="DRAWINGS">FIG. 4</figref>. In one embodiment the three subsystems (<b>52</b>, <b>53</b>, <b>54</b>) are modular in nature and any one of the three subsystems (<b>52</b>, <b>53</b>, <b>54</b>) can be removed from the active module (<b>51</b>A) by a single action. The three subsystems (<b>52</b>,<b>53</b>,<b>54</b>) can be accessed from the front of the active module (<b>51</b>A) and each of the subsystems can be removed and replaced easily by pulling on the respective handles (<b>90</b>A,<b>90</b>B,<b>91</b>A,<b>91</b>B,<b>92</b>A,<b>92</b>B). See <figref idrefs="DRAWINGS">FIG. 5</figref>. The power conditioning and protection subsystem (<b>54</b>) can slide on guide ways (<b>98</b>A, <b>98</b>B) with corresponding guides connected to the framework of the active module (<b>51</b>A) not shown here. When this subsystem (<b>54</b>) is fully set into the active module (<b>51</b>A) the required connectors (<b>99</b>, <b>62</b>C, <b>63</b>C) complete all required connections of the subsystem (<b>54</b>) with the active module (<b>51</b>A). See <figref idrefs="DRAWINGS">FIG. 5</figref>. Other embodiments for connection of the power production subsystem (<b>53</b>) and the control subsystem (<b>52</b>) are not shown here but are accomplished in the same manner as the power conditioning and protection subsystem (<b>54</b>)</div>
+<div class="description-paragraph" num="p-0039">In another embodiment the whole active module (<b>51</b>A) along with the subsystems (<b>52</b>, <b>53</b>, <b>54</b>) are contained within an enclosure (<b>59</b>A). See <figref idrefs="DRAWINGS">FIG. 4</figref>. The enclosure (<b>59</b>A) has vents (<b>47</b>) that allow unused air supplied to the power production subsystem (<b>53</b>) to be expended out of the active module (<b>51</b>A). The power production subsystem (<b>53</b>) consists of a fuel cell stack (<b>20</b>) that is supplied with hydrogen and air. <figref idrefs="DRAWINGS">FIG. 6A</figref> is a schematic that represents the main components of such a subsystem (<b>53</b>).</div>
+<div class="description-paragraph" num="p-0040">Hydrogen to the power production subsystem (<b>53</b>) is fed through a connector (<b>35</b>A). Within this embodiment a solenoid valve (<b>31</b>) controls the flow of hydrogen to the fuel cell stack (<b>20</b>). A filter (<b>32</b>) is used between the solenoid valve (<b>31</b>) and the fuel cell stack (<b>20</b>) to ensure purity of hydrogen fed to the fuel cell stack (<b>20</b>). An exit path for hydrogen from the power production subsystem (<b>53</b>) is created via a solenoid valve (<b>34</b>) and a outlet connector (<b>36</b>A). A condenser (<b>33</b>) may be placed between the fuel cell stack (<b>20</b>) and the exit solenoid valve (<b>34</b>) to remove any water in the exiting hydrogen stream. The exit solenoid valve (<b>34</b>) controls the hydrogen exit from the power production subsystem (<b>53</b>). One or more fans (<b>45</b>) are used to feed air to the fuel cell stack (<b>20</b>). The exiting air stream (<b>46</b>) from the stack (<b>20</b>) is vented into the environment via the vents (<b>47</b>) on the enclosure of the active module (<b>51</b>A). A coolant, such as de-ionized water or any other coolant with a similar dielectric strength, is used to cool the fuel cell stack (<b>20</b>). The coolant is fed to the power production subsystem (<b>53</b>) via a connector (<b>74</b>A). Within this embodiment a solenoid valve (<b>71</b>) controls the flow of the coolant through the fuel cell stack (<b>20</b>). A valve (<b>73</b>) is connected to the coolant exit from the fuel cell stack (<b>20</b>). This valve (<b>73</b>) is open during operation and closed only when the subsystem (<b>53</b>) is being removed. The coolant exits the power production subsystem (<b>53</b>) via a fluid connector (<b>75</b>A). Preferably all the fluid connectors (<b>35</b>A, <b>36</b>A, <b>74</b>A, <b>75</b>A) are self-sealing quick-connect/disconnect type connectors.</div>
+<div class="description-paragraph" num="p-0041">The electrical power from the fuel cell stack (<b>20</b>) is routed to connectors (<b>62</b>A, <b>63</b>A) that carry the power from the power production subsystem (<b>53</b>) to the power conditioning and protection subsystem (<b>54</b>). A double-pole single-throw contactor with two poles (<b>61</b>A,<b>61</b>B) is used between the fuel cells stack (<b>20</b>) and the connectors (<b>62</b>A, <b>63</b>A). The contactor has poles (<b>61</b>A,<b>61</b>B) that are normally open. During operation the poles (<b>61</b>A, <b>61</b>B) are closed to transfer power from the power production subsystem (<b>53</b>). The contactor with poles (<b>61</b>A, <b>61</b>B) can isolate the power production subsystem electrically from the balance of the system.</div>
+<div class="description-paragraph" num="p-0042">The power conditioning and protection subsystem (<b>54</b>) connects to the power production subsystem (<b>53</b>) via connectors (<b>62</b>A,<b>62</b>B, <b>63</b>A,<b>63</b>B).</div>
+<div class="description-paragraph" num="p-0043">The power conditioning and protection subsystem (<b>54</b>) has a voltage conditioning device (<b>65</b>) that regulates the output voltage of the power production subsystem (<b>53</b>). See <figref idrefs="DRAWINGS">FIG. 6B</figref>. The voltage conditioning device (<b>65</b>) is a DC-DC converter that regulates the DC voltage produced by the fuel cell stack (<b>20</b>) within a tight tolerance. In another embodiment the voltage conditioning device (<b>65</b>) is a DC-AC inverter that converts the DC voltage produced by the fuel cell stack (<b>20</b>) to the required AC voltage that complies with the CBEMA standards. Fuses (<b>64</b>A, <b>64</b>B) or other protection devices, such as circuit breakers, are used to protect the converter from overloads. The output of the converter (<b>65</b>) is sent out to electrical connectors (<b>62</b>C,<b>63</b>C). Preferably a double-pole single-throw contactor with poles (<b>66</b>A, <b>66</b>B), which is same as the contactor with poles (<b>61</b>A, <b>61</b>B) used in the power production subsystem (<b>53</b>), is used between the converter (<b>65</b>) and the connectors (<b>62</b>C, <b>63</b>C).</div>
+<div class="description-paragraph" num="p-0044">The control subsystem (<b>52</b>) ensures the proper operation and control of the various devices within the RPM by interfacing with both the power production subsystem (<b>53</b>) and the power control and protection subsystem (<b>54</b>). The control subsystem (<b>52</b>) controls the operation of the solenoid valves (<b>31</b>,<b>34</b>,<b>71</b>), fans (<b>45</b>), contactors (<b>61</b>A, <b>61</b>B, <b>66</b>A, <b>66</b>B) and the converter (<b>65</b>) based on data it collects from the fuel cell stack (<b>20</b>).</div>
+<div class="description-paragraph" num="p-0045">Two or more RPMs are connected electrically in parallel to DC bus-bars (<b>111</b>, <b>112</b>). The current embodiment in <figref idrefs="DRAWINGS">FIG. 7</figref> is shown with 4 RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) connected electrically in parallel between DC busbars (<b>111</b>,<b>112</b>). Electrical loads (<b>101</b>A, <b>101</b>B, <b>101</b>C, <b>101</b>D) are also connected between the same bus-bars (<b>111</b>, <b>112</b>) in this embodiment. See <figref idrefs="DRAWINGS">FIG. 7</figref>.</div>
+<div class="description-paragraph" num="p-0046">If any one of the RPMs (SOA) fails, the remaining RPMs (<b>50</b>B, <b>50</b>C, <b>50</b>D) increase their power production and continue to supply the loads (<b>101</b>A, <b>101</b>B, <b>101</b>C, <b>101</b>D) without varying the quality of the power supplied. Within this embodiment if any two of the RPMs (<b>50</b>A, <b>50</b>B) fail the remaining RPMs (<b>50</b>C, <b>50</b>D) increase their power production and continue to supply the loads (<b>101</b>A, <b>101</b>B, <b>101</b>C, <b>101</b>D). Within this embodiment if any three of the RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C) fail the remaining RPM (SOD) will increase its power production to supply the loads (<b>101</b>A, <b>101</b>B, <b>101</b>C, <b>101</b>D). The fault tolerance capability built into the network can be modified by changing the number of RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) connected and/or by changing the peak power capability of each RPM (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D). If any one of the loads (<b>101</b>A, <b>101</b>B, <b>101</b>C, <b>101</b>D) needs AC power an inverter may be connected to the bus-bars (<b>111</b>, <b>112</b>) to create AC power from DC.</div>
+<div class="description-paragraph" num="p-0047">Hydrogen is fed to the RPMs (SOA, <b>50</b>B, <b>50</b>C, <b>50</b>D) by common hydrogen inlet manifolds (<b>131</b>A, <b>131</b>B) from a hydrogen source like a storage tank or a reformer or a combination of the two (<b>130</b>). See <figref idrefs="DRAWINGS">FIG. 8</figref>. Solenoid valves (<b>132</b>, <b>133</b>, <b>136</b>) are used to segment sections of the manifold such that any individual section can be isolated from hydrogen flow. Outlet manifolds (<b>139</b>A, <b>139</b>B) are used to allow hydrogen to flow through the RPMs (SOA, <b>50</b>B, <b>50</b>C, <b>50</b>D) and be vented if required during operation. Solenoid valves (<b>134</b>, <b>135</b>, <b>137</b>) are used to segment sections of the outlet manifold between (<b>139</b>A, <b>139</b>B) such that any individual section can be isolated from hydrogen flow. A hydrogen storage system (<b>140</b>A, <b>140</b>B, <b>140</b>C,<b>140</b>D) containing hydrogen, hydrogen rich gas mixture or a compound from which hydrogen can be readily produced, is used as a backup source of hydrogen for the respective RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, SOD). Solenoid valves (<b>141</b>A, <b>141</b>B, <b>141</b>C, <b>141</b>D) are used between the RPM and the hydrogen storage devices (<b>140</b>A, <b>140</b>B, <b>140</b>C, <b>140</b>D) to control the flow of hydrogen from the storage device (<b>140</b>A, <b>140</b>B, <b>140</b>C, <b>140</b>D) to the RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D). If a leak occurs in one of the hydrogen inlet manifolds (<b>131</b>A), it can be shut off and the RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) will still receive hydrogen to continue operation. If a leak occurs in the inlet manifold segment between two solenoid valves (<b>132</b>, <b>136</b>) it can be isolated from supply operations by turning off the respective solenoid valves (<b>132</b>, <b>136</b>, <b>241</b>C, <b>241</b>D) and switching to the hydrogen from the backup supply systems (<b>140</b>C, <b>140</b>D) by turning on their respective solenoid valves (<b>141</b>C, <b>141</b>D). If no hydrogen backup system (<b>140</b>C, <b>140</b>D) is available the two RPMs (<b>50</b>C, <b>50</b>D) are shutdown and the remaining RPMs (<b>50</b>A, <b>50</b>B) automatically increase their output to supply the required power.</div>
+<div class="description-paragraph" num="p-0048">A coolant such as de-ionized water, is circulated through the RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) and the heat produced during operation of these RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) is exchanged via heat exchangers (<b>179</b>, <b>180</b>). See <figref idrefs="DRAWINGS">FIG. 9</figref>. Pumps (<b>177</b>, <b>178</b>) are used to circulate the coolant through the RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) and the heat exchangers (<b>179</b>, <b>180</b>). Solenoid valves (<b>171</b>, <b>172</b>, <b>173</b>, <b>174</b>, <b>175</b>, <b>176</b>) are used to control the flow of coolant through the RPMs and isolate individual sections of the coolant system. Under normal operation two of the central solenoid valves (<b>175</b>, <b>176</b>) between the two inlet manifolds (<b>181</b>A, <b>181</b>B) and between the two outlet manifolds (<b>170</b>A, <b>170</b>B) are in the off position while the remaining solenoid valves (<b>171</b>, <b>172</b>, <b>173</b>, <b>174</b>) are in the on position. If one of the pumps (<b>177</b>) fails that section of the coolant loop is isolated by turning off the respective solenoid valves (<b>172</b>, <b>174</b>) and opening the central solenoid valves (<b>175</b>, <b>176</b>) effectively circulating all the coolant using a single pump (<b>178</b>) and exchanging the heat using a single heat exchanger (<b>180</b>).</div>
+<div class="description-paragraph" num="p-0049">Two computer master controllers (<b>190</b>A, <b>190</b>B) are networked with the control subsystem (<b>52</b>) of the individual RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) via a control bus (<b>191</b>). See <figref idrefs="DRAWINGS">FIG. 10</figref>. The computer master controllers (<b>190</b>A, <b>190</b>B) act as servers in a network and the individual RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) act as clients to operate the fault tolerant power network. If any one of the computer master controllers (<b>190</b>A) fails, the other master controller (<b>190</b>B) is capable of maintaining the operation of the power network. If both the master controllers (<b>190</b>A, <b>190</b>B) fail, the control subsystem (<b>52</b>) of the individual RPMs (<b>50</b>A, <b>50</b>B, <b>50</b>C, <b>50</b>D) can ensure the operation of the fault tolerant power network. The master controllers (<b>190</b>A, <b>190</b>B) may be connected to a communication gateway like the internet or dedicated communication lines such as a T-1 line or ISDN line to provide remote monitoring capability. More than two master controllers (<b>180</b>A, <b>180</b>B) can be used in this network to improve the fault tolerance capability of the power network.</div>
+<div class="description-paragraph" num="p-0050">Another aspect the invention can be viewed as</div>
+<div class="description-paragraph" num="p-0051">a. a rack power module that consists of a fuel cell power production subsystem, a power management subsystem and a control subsystem;</div>
+<div class="description-paragraph" num="p-0052">b. a hydrogen supply manifold that supplies hydrogen to the rack power modules;</div>
+<div class="description-paragraph" num="p-0053">c. a hydrogen return manifold that removes any exhausted hydrogen away from the stack;</div>
+<div class="description-paragraph" num="p-0054">d. individual hydrogen storage systems that back up hydrogen supply to each RPM;</div>
+<div class="description-paragraph" num="p-0055">e. coolant supply and return manifolds that circulate a coolant, such as deionized water, to expend the heat produced in the fuel cell stack to an external location using a heat exchanger;</div>
+<div class="description-paragraph" num="p-0056">f. control subsystems within the rack power module that control the operation of the rack power module;</div>
+<div class="description-paragraph" num="p-0057">g. a master control system that interacts with the control subsystems within each rack power module to maintain supervisory control of the entire system and provides the gateway for remote health monitoring;</div>
+<div class="description-paragraph" num="p-0058">h. a data bus that provides a method for the master control system to interact with the control subsystems within each rack power module; and</div>
+<div class="description-paragraph" num="p-0059">i. a pair of DC buses that represent the electrically-positive and electrically negative terminals of the impressed DC voltage.</div>
+<div class="description-paragraph" num="p-0060">All the current embodiments have been described for a power network of four RPMs, however, the embodiments can be applied to larger networks with tens, hundreds or thousands of networked systems.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">34</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM9518023">
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A fuel cell power system comprising:
+<div class="claim-text">a plurality of fuel cell power units, coupled to one or more power busses, to provide electrical power on the one or more power busses, wherein each fuel cell power unit includes:
+<div class="claim-text">a fuel cell stack;</div>
+<div class="claim-text">a voltage conditioning device, coupled to the fuel cell stack, to output power on the one or more power busses; and</div>
+<div class="claim-text">a control unit;</div>
+<div class="claim-text">one or more hydrogen storage sources coupled to each fuel cell power unit; and</div>
+</div>
+</div>
+<div class="claim-text">wherein, in response to a cessation of operation of a master control unit, the control unit of at least one of the other fuel cell power units of the plurality of fuel cell power units controls the operation of the fuel cell power system.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the voltage conditioning device of each fuel cell power unit includes a DC-DC converter or a DC-AC inverter.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> further including a plurality of back planes, wherein each back plane includes connections to communicate with plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The fuel cell power system of <claim-ref idref="CLM-00003">claim 3</claim-ref> wherein each back plane includes one or more of a fluid, data and power interfaces that connect to an associated fluid, data and power interface of the plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The fuel cell power system of <claim-ref idref="CLM-00003">claim 3</claim-ref> wherein each back plane is a module.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The fuel cell power system of <claim-ref idref="CLM-00003">claim 3</claim-ref> wherein each back plane includes two or more of a fluid, data and power interfaces that connect to an associated fluid, data and power interface of the plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the master control unit controls or manages operation of at least one aspect of the plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The fuel cell power system of <claim-ref idref="CLM-00007">claim 7</claim-ref> wherein the at least one aspect of the operation of the plurality of fuel cell power units includes power production.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the fuel cell stack, the voltage conditioning device, and the control unit of each fuel cell power unit are independently removable during operation of the fuel cell power system.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the one or more hydrogen storage sources include a plurality of local hydrogen storage sources wherein at least one local hydrogen storage source is coupled to the fuel cell stack of an associated fuel cell power unit.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The fuel cell power system of <claim-ref idref="CLM-00010">claim 10</claim-ref> wherein the one or more hydrogen storage sources further include a common hydrogen storage source coupled to the fuel cell stack of a plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the one or more hydrogen storage sources include a common hydrogen storage source coupled to the fuel cell stack of a plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The fuel cell power system of <claim-ref idref="CLM-00011">claim 11</claim-ref> wherein the local hydrogen storage source and/or the common hydrogen storage source (i) contains hydrogen, in gas or liquid form, and/or (ii) derives hydrogen from any hydrogen containing compound.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the one or more hydrogen storage sources include a common hydrogen storage source, coupled to the fuel cell stack of a plurality of fuel cell power units, and wherein the fuel cell power system further includes:
+<div class="claim-text">a dual feed hydrogen supply manifold to connect the common hydrogen storage source to the plurality of fuel cell power units; and</div>
+<div class="claim-text">a first set of valves, disposed within the supply manifold, to segment the supply manifold, wherein the first set of valves, in response to control signals, isolates one or more sections of the supply manifold.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> further including:
+<div class="claim-text">a dual hydrogen exhaust manifold coupled to the fuel cell power units; and</div>
+<div class="claim-text">a set of valves, disposed within the dual hydrogen exhaust manifold, to segment the dual hydrogen exhaust manifold, wherein the set of valves, in response to control signals, isolates one or more sections of the dual hydrogen exhaust manifold.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the one or more hydrogen storage sources include a common hydrogen storage source, coupled to the fuel cell stacks of a plurality of fuel cell power units, and wherein the fuel cell power system further includes:
+<div class="claim-text">a dual feed hydrogen supply manifold to connect the common hydrogen storage source to the plurality of fuel cell power units;</div>
+<div class="claim-text">a first set of valves, disposed within the supply manifold, to segment the supply manifold, wherein the first set of valves, in response to control signals, isolates individual sections of the supply manifold;</div>
+<div class="claim-text">a dual hydrogen exhaust manifold coupled to the fuel cell power units; and</div>
+<div class="claim-text">a second set of valves, disposed within the exhaust manifold, to segment the exhaust manifold, wherein the second set of valves, in response to control signals, isolates one or more sections of the exhaust manifold.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. A fuel cell power system comprising:
+<div class="claim-text">a plurality of fuel cell power units, coupled to one or more power busses, to provide electrical power on the one or more power busses, wherein each fuel cell power unit includes:</div>
+<div class="claim-text">a fuel cell stack;</div>
+<div class="claim-text">a voltage conditioning device, coupled to the fuel cell stack, to output power on the one or more power busses; and</div>
+<div class="claim-text">a control unit;</div>
+<div class="claim-text">one or more hydrogen storage sources coupled to each fuel cell power unit; and</div>
+<div class="claim-text">wherein, in response to a cessation of operation of one or more of the fuel cell power units, at least one of the other fuel cell power units of the plurality of fuel cell power units automatically adjust its output power.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> wherein the voltage conditioning device of each fuel cell power unit includes a DC-DC converter or a DC-AC inverter.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> further including a plurality of back planes, wherein each back plane includes connections to communicate with plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The fuel cell power system of <claim-ref idref="CLM-00019">claim 19</claim-ref> wherein each back plane includes one or more of a fluid, data and power interfaces that connect to an associated fluid, data and power interface of the plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The fuel cell power system of <claim-ref idref="CLM-00019">claim 19</claim-ref> wherein each back plane is a module.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The fuel cell power system of <claim-ref idref="CLM-00019">claim 19</claim-ref> wherein each back plane includes two or more of a fluid, data and power interfaces that connect to an associated fluid, data and power interface of the plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> wherein the master control unit controls or manages operation of at least one aspect of the plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The fuel cell power system of <claim-ref idref="CLM-00023">claim 23</claim-ref> wherein the at least one aspect of the operation of the plurality of fuel cell power units includes power production.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00025" num="00025">
+<div class="claim-text">25. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> wherein the fuel cell stack, the voltage conditioning device, and the control unit of each fuel cell power unit are independently removable during operation of the fuel cell power system.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00026" num="00026">
+<div class="claim-text">26. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> wherein the one or more hydrogen storage sources include a plurality of local hydrogen storage sources wherein at least one local hydrogen storage source is coupled to the fuel cell stack of an associated fuel cell power unit.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00027" num="00027">
+<div class="claim-text">27. The fuel cell power system of <claim-ref idref="CLM-00026">claim 26</claim-ref> wherein the one or more hydrogen storage sources further include a common hydrogen storage source coupled to the fuel cell stack of a plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00028" num="00028">
+<div class="claim-text">28. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> wherein the one or more hydrogen storage sources include a common hydrogen storage source coupled to the fuel cell stack of a plurality of fuel cell power units.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00029" num="00029">
+<div class="claim-text">29. The fuel cell power system of <claim-ref idref="CLM-00028">claim 28</claim-ref> wherein:
+<div class="claim-text">the one or more hydrogen storage sources further include a plurality of local hydrogen storage sources wherein at least one local hydrogen storage source is coupled to the fuel cell stack of an associated fuel cell power unit, and</div>
+<div class="claim-text">the local hydrogen storage source and/or the common hydrogen storage source (i) contains hydrogen, in gas or liquid form, and/or (ii) derives hydrogen from any hydrogen containing compound.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00030" num="00030">
+<div class="claim-text">30. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> wherein the one or more hydrogen storage sources include a common hydrogen storage source, coupled to the fuel cell stack of a plurality of fuel cell power units, and wherein the fuel cell power system further includes:
+<div class="claim-text">a dual feed hydrogen supply manifold to connect the common hydrogen storage source to the plurality of fuel cell power units; and</div>
+<div class="claim-text">a first set of valves, disposed within the supply manifold, to segment the supply manifold, wherein the first set of valves, in response to control signals, isolates one or more sections of the supply manifold.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00031" num="00031">
+<div class="claim-text">31. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> further including:
+<div class="claim-text">a dual hydrogen exhaust manifold coupled to the fuel cell power units; and</div>
+<div class="claim-text">a set of valves, disposed within the dual hydrogen exhaust manifold, to segment the dual hydrogen exhaust manifold, wherein the set of valves, in response to control signals, isolates one or more sections of the dual hydrogen exhaust manifold.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00032" num="00032">
+<div class="claim-text">32. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> wherein the one or more hydrogen storage sources include a common hydrogen storage source, coupled to the fuel cell stacks of a plurality of fuel cell power units, and wherein the fuel cell power system further includes:
+<div class="claim-text">a dual feed hydrogen supply manifold to connect the common hydrogen storage source to the plurality of fuel cell power units;</div>
+<div class="claim-text">a first set of valves, disposed within the supply manifold, to segment the supply manifold, wherein the first set of valves, in response to control signals, isolates individual sections of the supply manifold;</div>
+<div class="claim-text">a dual hydrogen exhaust manifold coupled to the fuel cell power units; and</div>
+<div class="claim-text">a second set of valves, disposed within the exhaust manifold, to segment the exhaust manifold, wherein the second set of valves, in response to control signals, isolates one or more sections of the exhaust manifold.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00033" num="00033">
+<div class="claim-text">33. The fuel cell power system of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein each fuel cell power unit of the plurality of fuel cell power unit is a modular.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00034" num="00034">
+<div class="claim-text">34. The fuel cell power system of <claim-ref idref="CLM-00017">claim 17</claim-ref> wherein each fuel cell power unit of the plurality of fuel cell power unit is a modular.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

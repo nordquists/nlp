@@ -1,0 +1,174 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US7132323B2 - CMOS well structure and method of forming the same 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA51065440">
+<div class="abstract" num="p-0001">A method for forming a CMOS well structure including forming a plurality of first conductivity type wells over a substrate, each of the plurality of first conductivity type wells formed in a respective opening in a first mask. A cap is formed over each of the first conductivity type wells, and the first mask is removed. Sidewall spacers are formed on sidewalls of each of the first conductivity type wells. A plurality of second conductivity type wells are formed, each of the plurality of second conductivity type wells are formed between respective first conductivity type wells. A plurality of shallow trench isolations are formed between the first conductivity type wells and second conductive type wells. The plurality of first conductivity type wells are formed by a first selective epitaxial growth process, and the plurality of second conductivity type wells are formed by a second selective epitaxial growth process.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES16135448">
+<heading>BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" num="p-0002">1. Field of the Invention</div>
+<div class="description-paragraph" num="p-0003">The present invention relates to semiconductor devices, and more particularly to integrated semiconductor devices, such as complementary metal oxide semiconductor (CMOS) devices.</div>
+<div class="description-paragraph" num="p-0004">2. Description of the Related Art</div>
+<div class="description-paragraph" num="p-0005">In CMOS integration, i.e. NMOS and PMOS on the same chip, at least one well is needed on a silicon substrate. For example, when using a p-type substrate, NMOS can be fabricated on the substrate, while PMOS must be fabricated on an n-well in the substrate. Alternatively, when using an n-type substrate, PMOS can be fabricated on the substrate, while NMOS must be fabricated on a p-well in the substrate. Further, in order to avoid problems associated with latch-up, a dual-well approach is usually employed. The dual-well approach involves forming NMOS on a p-well and PMOS on an n-well, regardless of the type of starting substrate. The dopant concentrations of both wells are tailored so that the latch-up situation does not occur.</div>
+<div class="description-paragraph" num="p-0006">In order to completely isolate both wells from the starting substrate, one extra well is often employed. This is called the “triple-well” structure. In this case, for example, when an n-well is formed in an n-type substrate, unless the bottom and the surrounding of the n-well is sealed by p-dopant material, it is not possible to isolate the n-well and bias it differently from the substrate. One common example is the formation of a DRAM array having NMOS transfer gates on a p-doped silicon substrate. Without using a triple-well structure, the DRAM array can not be biased with a voltage which is different from ground. A negative bias “Vbb” is generally applied to the buried well so that charge retention can be preserved. Triple well structures are also desirable for placing analog devices which either generate either a high level of noise, or demand a very quiet environment, and are also applicable to devices or circuits which require a separate body bias.</div>
+<div class="description-paragraph" num="p-0007">A great challenge in well formation has been experienced as CMOS technology is scaled beyond deep sub-micron and into the nanometer groundrule regime. As devices are getting smaller, the ground rules such as well-to-well and device-to-well dimensions are also expected to scale accordingly. However, the same scaling factors which apply to the transistor may not apply to conventional wells which are formed by ion implantation. One problem associated with using ion implantation to form wells is the well proximity effect, wherein the doping profile at the edges of a well is not uniform across the breadth of the well. This phenomenon is due to ion scattering from high energy, high dose ion implantation. As a result, devices that are disposed closer to the edges of a well have a different threshold voltage Vt than devices disposed away from the edges of the well. One simple solution to this problem is to keep devices away from the edges of the wells. However, this approach is not suitbale in a 6-T SRAM array where memory cells must be closely packed. Specifically, keeping devices away from the edges of wells obviously wastes chip space, and if the resultant threshold voltage is unacceptable to the SRAM cell, then an additional mask must be added to the process to properly center the threshold voltage, resulting in additional cost and complexity.</div>
+<heading>SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" num="p-0008">An object of the invention is to enable well scalability, so that well-to-well and device-to-well dimensions can be scaled according to technology ground rules.</div>
+<div class="description-paragraph" num="p-0009">Another object of the invention is to completely isolate different conductivity type wells by using both deep and shallow trench isolation.</div>
+<div class="description-paragraph" num="p-0010">Another object of the invention is to form a multiple and isolated well structure on a bulk substrate using a fully self-aligned, low temperature epitaxial growth process.</div>
+<div class="description-paragraph" num="p-0011">A method for forming a CMOS well structure according to the invention incudes forming a first mask on a substrate, the first mask having a plurality of openings. A plurality of first conductivity type wells are formed over the substrate, each of the plurality of first conductivity type wells formed in a respective opening in the first mask. A cap is formed over each of the first conductivity type wells, and the first mask is removed. Sidewall spacers are formed on sidewalls of each of the first conductivity type wells. A plurality of second conductivity type wells are formed, each of the plurality of second conductivity type wells are formed between respective first conductivity type wells. A plurality of shallow trench isolations are formed between the first conductivity type wells and second conductive type wells. At least one second conductivity type MOS device is formed inside each of the plurality of first conductivity type wells, and at least one first conductivity type MOS device is formed inside each of the plurality of second conductivity type wells.</div>
+<div class="description-paragraph" num="p-0012">In at least one embodiment of the invention, the plurality of first conductivity type wells are formed by a first selective epitaxial growth process, and the plurality of second conductivity type wells are formed by a second selective epitaxial growth process.</div>
+<div class="description-paragraph" num="p-0013">At least one embodiment of the invention includes etching the substrate between the plurality of openings in the first mask to a predetermined depth before forming a plurality of first conductivity type wells over the substrate. A plurality of first conductivity type implant regions are formed in the substrate before the step of forming sidewall spacers, each of the plurality of first conductivity type implant regions formed in a respective exposed surface of the substrate. The plurality of first conductivity type wells are formed by a first selective epitaxial growth process, and the plurality of second conductivity type wells are formed by a second selective epitaxial growth process over exposed surfaces of the first conductivity type implant regions.</div>
+<div class="description-paragraph" num="p-0014">These and other objects and features of the present invention will become apparent from the following detailed description of illustrative embodiments thereof, which is to be read in connection with the accompanying drawings.</div>
+<description-of-drawings>
+<heading>BRIEF DESCRIPTION OF DRAWINGS</heading>
+<div class="description-paragraph" num="p-0015">The invention will be described in detail in the following description of preferred embodiments with reference to the following figures wherein:</div>
+<div class="description-paragraph" num="p-0016"> <figref idrefs="DRAWINGS">FIGS. 1–11</figref> are cross sectional views showing various steps of a method for forming a CMOS structure according to an embodiment of the invention;</div>
+<div class="description-paragraph" num="p-0017"> <figref idrefs="DRAWINGS">FIGS. 12–24</figref> are cross sectional views showing various steps of a method for forming a CMOS structure according to another embodiment of the invention; and</div>
+<div class="description-paragraph" num="p-0018"> <figref idrefs="DRAWINGS">FIG. 25</figref> is a cross sectional view of a CMOS structure according to an embodiment of the invention.</div>
+</description-of-drawings>
+<heading>DESCRIPTION OF PREFERRED EMBODIMENTS</heading>
+<div class="description-paragraph" num="p-0019">In various exemplary embodiments of the invention, a vertical sidewall well is formed in a bulk silicon wafer. Consecutive low-temperature selective epitaxy processes are used to form the vertical sidewall single well, double well and triple well structures, so that proximity effect due to ion scattering is eliminated. In the absence of the proximity effect, minimum distance can be kept between devices all the way to the well boundary. The various exemplary embodiments of the invention use both deep and shallow trench isolation. Spacer-type thin vertical deep trenches are formed at the boundary of the wells using side-wall spacer techniques, while the shallow trenches are used not only to isolate the devices within the wells, but also to remove defects at the well boundary caused by selective epitaxy.</div>
+<div class="description-paragraph" num="p-0020"> <figref idrefs="DRAWINGS">FIGS. 1–11</figref> are cross sectional views showing various steps of a method for forming a CMOS structure according to an exemplary embodiment of the invention. The present embodiment forms a CMOS dual well structure. As shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, an n-well mask <b>10</b> is formed over a p-type substrate <b>15</b>. The n-well mask <b>10</b> has a plurality of openings <b>12</b> that expose the upper surface of the p-type substrate <b>15</b>. The mask <b>10</b> is formed by depositing a mask layer over the p-type substrate <b>15</b> and patterning the mask layer. The mask <b>10</b> can be made of any suitable material, such as, for example, polysilicon, silicon dioxide (SiO<sub>2</sub>) or silicon nitride (SiN). The first mask is preferably formed to a thickness of about 50 nm to about 500 nm.</div>
+<div class="description-paragraph" num="p-0021">As shown in <figref idrefs="DRAWINGS">FIG. 2</figref>, n-well regions <b>16</b> are formed over the p-type substrate <b>15</b> within the openings <b>12</b> of the n-well mask <b>10</b>. The n-well regions <b>16</b> are formed by an n-type selective epitaxial growth process. The n-well regions <b>16</b> are in-situ doped with an n-type dopant having a concentration of about 1×10<sup>17</sup>/cm<sup>3 </sup>to about 1×10<sup>20</sup>/cm<sup>3</sup>. The n-well regions <b>16</b> are preferably formed with a certain amount of overgrowth f above the mask <b>10</b> to avoid corner faceting.</div>
+<div class="description-paragraph" num="p-0022">As shown in <figref idrefs="DRAWINGS">FIG. 3</figref>, the upper surface of the n-well regions <b>16</b> are planarized and epitaxial overgrowth material is removed. This step can be carried out using any suitable polishing process, such as a chemical mechanical polishing process (CMP).</div>
+<div class="description-paragraph" num="p-0023">As shown in <figref idrefs="DRAWINGS">FIG. 4</figref>, upper portions of the n-well regions <b>16</b> are recessed back to a predetermined depth b. In this step, the n-well regions <b>16</b> are subjected to an etching process, such as, for example, a wet etching process.</div>
+<div class="description-paragraph" num="p-0024">As shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, the n-well regions <b>16</b> are covered with caps <b>21</b>. The caps <b>21</b> can be formed by any suitable process, such as, for example, chemical vapor deposition (CVD) or thermal oxidation. The caps <b>21</b> can be made of, for example, silicon dioxide. The first mask <b>10</b> is removed by, for example, nitride wet etching, to achieve the structure shown in <figref idrefs="DRAWINGS">FIG. 6</figref>.</div>
+<div class="description-paragraph" num="p-0025">As shown in <figref idrefs="DRAWINGS">FIG. 7</figref>, spacers <b>28</b> are formed on the vertical side walls of the n-well regions <b>16</b>. The spacers <b>28</b> can be formed by a CVD process in which nitride is deposited to a thickness in the range of about 5 to 30 nm. The spacers <b>28</b> seal the sidewalls of the n-well regions <b>16</b> to avoid out-diffusion or cross-contamination.</div>
+<div class="description-paragraph" num="p-0026">As shown in <figref idrefs="DRAWINGS">FIG. 8</figref>, p-well regions <b>30</b> are formed over substrate <b>15</b> between the n-well regions <b>16</b>. The p-well regions <b>30</b> are formed by a p-type selective epitaxial growth process with an in-situ doping concentration in the range of about 1×10<sup>17</sup>/cm<sup>3 </sup>to about 1×10<sup>20</sup>/cm<sup>3</sup>. The p-well regions <b>30</b> are preferably formed with a certain amount of overgrowth h above the caps <b>21</b> to avoid corner faceting.</div>
+<div class="description-paragraph" num="p-0027">As shown in <figref idrefs="DRAWINGS">FIG. 9</figref>, the upper surface of the p-well regions <b>30</b> are planarized and epitaxial overgrowth material is removed. This step can be carried out using any suitable polishing process, such as a chemical mechanical polishing process (CMP).</div>
+<div class="description-paragraph" num="p-0028">As shown in <figref idrefs="DRAWINGS">FIG. 10</figref>, the p-well regions <b>30</b> are covered with caps <b>31</b>. The caps <b>31</b> can be formed by any suitable process, such as, for example, chemical vapor deposition (CVD) or thermal oxidation. The caps <b>31</b> can be made of, for example, silicon dioxide.</div>
+<div class="description-paragraph" num="p-0029">As shown in <figref idrefs="DRAWINGS">FIG. 11</figref>, Shallow Trench Isolations (STIs) <b>32</b> are formed for device isolation and well boundary formation. The STIs <b>32</b> are formed using standard shallow trench process steps that are well known to those skilled in the art. The STIs <b>32</b> isolate device regions <b>34</b> in the n-well regions <b>16</b> and device regions <b>36</b> in the p-well regions <b>30</b>.</div>
+<div class="description-paragraph" num="p-0030">In various exemplary embodiments of the invention, different types of semiconductor devices can be formed in the device regions <b>34</b> and <b>36</b>. In at least one embodiment of the invention, PMOS devices <b>40</b> are formed in the n-well device regions <b>16</b> and nMOS devices <b>42</b> are formed in the p-well device regions <b>36</b> using standard CMOS processing steps that are well known to those skilled in the art. Each MOS device <b>40</b> and <b>42</b> includes a gate dielectric <b>44</b>, a gate conductor <b>46</b>, an optional hard mask <b>48</b> formed on top of the gate conductors <b>46</b>, and spacers <b>50</b> formed on at least the side walls of the gate conductors <b>46</b>. P+ junctions <b>52</b> are formed in the n-well device regions <b>16</b> for the pMOS devices <b>40</b> and n+ junctions <b>54</b> are formed in the p-well device regions <b>36</b> for the nMOS devices <b>42</b>.</div>
+<div class="description-paragraph" num="p-0031"> <figref idrefs="DRAWINGS">FIGS. 12–24</figref> are cross sectional views showing various steps of a method for forming a CMOS structure according to another exemplary embodiment of the invention. The present embodiment of the invention forms a CMOS triple well structure. As shown in <figref idrefs="DRAWINGS">FIG. 12</figref>, an n-well mask <b>10</b> is formed over a p-type substrate <b>15</b>. The n-well mask <b>10</b> has a plurality of openings <b>12</b> that expose the upper surface of the p-type substrate <b>15</b>. The mask <b>10</b> is formed by depositing a mask layer over the p-type substrate <b>15</b> and patterning the mask layer. The mask <b>10</b> can be made of any suitable material, such as, for example, photoresist, polysilicon, silicon dioxide (SiO2) or silicon nitride (SiN).</div>
+<div class="description-paragraph" num="p-0032">As shown in <figref idrefs="DRAWINGS">FIG. 13</figref>, portions of the p-type substrate <b>15</b> exposed by the openings <b>12</b> in the n-well mask <b>10</b> are etched to form openings <b>20</b> having a depth d in the p-type substrate <b>15</b>. The depth d is preferably in the range of about 20 nm to about 500 nm. The p-type substrate <b>15</b> is preferably anisotropically etched using a Cl<sub>2 </sub>based RIE (Reactive Ion Etching) process. In order to avoid damage to the substrate <b>15</b>, low-powered plasma should be used in the etching process, followed by an annealing or cleaning step.</div>
+<div class="description-paragraph" num="p-0033">As shown in <figref idrefs="DRAWINGS">FIG. 14</figref>, n-well regions <b>16</b> are formed over the openings <b>20</b> in the p-type substrate <b>15</b>. The n-well regions <b>16</b> are formed by an n-type selective epitaxial growth process. The n-well regions <b>16</b> are preferably formed with a certain amount of overgrowth f above the mask <b>10</b> to avoid corner faceting.</div>
+<div class="description-paragraph" num="p-0034">As shown in <figref idrefs="DRAWINGS">FIG. 15</figref>, the upper surface of the n-well regions <b>16</b> are planarized and epitaxial overgrowth material is removed. This step can be carried out using any suitable polishing process, such as a chemical mechanical polishing process (CMP).</div>
+<div class="description-paragraph" num="p-0035">As shown in <figref idrefs="DRAWINGS">FIG. 16</figref>, upper portions of the n-well regions <b>16</b> are removed to a predetermined depth b. In this step, the n-well regions <b>16</b> are subjected to an etching process, such as, for example, a wet etching process.</div>
+<div class="description-paragraph" num="p-0036">As shown in <figref idrefs="DRAWINGS">FIG. 17</figref>, the n-well regions <b>16</b> are covered with caps <b>21</b>. The caps <b>21</b> can be formed by any suitable process, such as, for example, chemical vapor deposition (CVD) or thermal oxidation. The caps <b>21</b> can be made of, for example, silicon dioxide. The first mask <b>10</b> is removed by, for example, nitride wet etching, to achieve the structure shown in <figref idrefs="DRAWINGS">FIG. 18</figref>.</div>
+<div class="description-paragraph" num="p-0037">As shown in <figref idrefs="DRAWINGS">FIG. 19</figref>, n+ implant regions <b>26</b> are formed in the substrate <b>15</b> between the n-well regions <b>16</b>. The n+implant regions <b>26</b> are formed by any known technique, such as, for example, ion implantation. The surface implantation doping concentration is preferably in the range of about 1×10<sup>19</sup>/cm<sup>3 </sup>to about 1×10<sup>21</sup>/cm<sup>3</sup>. After annealing, the final buried n+ implant regions <b>26</b> have a thickness of about 20 nm to about 600 nm.</div>
+<div class="description-paragraph" num="p-0038">As shown in <figref idrefs="DRAWINGS">FIG. 20</figref>, spacers <b>28</b> are formed on the vertical side walls of the n-well regions <b>16</b>. The spacers <b>28</b> are can be formed by a CVD process in which nitride is deposited to a thickness in the range of about 5 to 30 nm. The spacers <b>28</b> seal the sidewalls of the n-well regions <b>16</b> to avoid out-diffusion or cross-contamination.</div>
+<div class="description-paragraph" num="p-0039">As shown in <figref idrefs="DRAWINGS">FIG. 21</figref>, p-well regions <b>30</b> are formed over substrate <b>15</b> between the n-well regions <b>16</b>. The p-well regions <b>30</b> are formed by a p-type selective epitaxial growth process with a doping concentration in the range of about 1×10<sup>17</sup>/cm<sup>3 </sup>to 1×10<sup>20</sup>/cm<sup>3</sup>. The p-well regions <b>30</b> are preferably formed with a certain amount of overgrowth above the caps <b>21</b> to avoid corner faceting.</div>
+<div class="description-paragraph" num="p-0040">As shown in <figref idrefs="DRAWINGS">FIG. 22</figref>, the upper surface of the p-well regions <b>30</b> are planarized and epitaxial overgrowth material is removed. This step can be carried out using any suitable polishing process, such as a chemical mechanical polishing process (CMP).</div>
+<div class="description-paragraph" num="p-0041">As shown in <figref idrefs="DRAWINGS">FIG. 23</figref>, the p-well regions <b>30</b> are covered with caps <b>31</b>. The caps <b>31</b> can be formed by any suitable process, such as, for example, chemical vapor deposition (CVD) or thermal oxidation. The caps <b>31</b> can be made of, for example, silicon dioxide.</div>
+<div class="description-paragraph" num="p-0042">As shown in <figref idrefs="DRAWINGS">FIG. 24</figref>, Shallow Trench Isolations (STIs) <b>32</b> are formed for device isolation and well boundary formation. The STIs <b>32</b> are formed using standard shallow trench process steps that are well known to those skilled in the art. The STIs <b>32</b> isolate device regions <b>34</b> in the n-well regions <b>16</b> and device regions <b>36</b> in the p-well regions <b>30</b>.</div>
+<div class="description-paragraph" num="p-0043">In various exemplary embodiments of the invention, different types of semiconductor devices can be formed in the device regions <b>34</b> and <b>36</b>. In at least one embodiment of the invention, pMOS devices <b>40</b> are formed in the n-well device regions <b>16</b> and nMOS devices <b>42</b> are formed in the p-well device regions <b>36</b> using standard CMOS processing steps that are well known to those skilled in the art. Each MOS device <b>40</b> and <b>42</b> includes a gate dielectric <b>44</b>, a gate conductor <b>46</b>, an optional hard mask <b>48</b> formed on top of the gate conductors <b>46</b>, and spacers <b>50</b> formed on at least the side walls of the gate conductors <b>46</b>. P+ junctions <b>52</b> are formed in the n-well device regions <b>16</b> for the PMOS devices <b>40</b> and n+ 54 junctions are formed in the p-well device regions <b>36</b> for the nMOS devices <b>42</b>.</div>
+<div class="description-paragraph" num="p-0044">In other embodiments of the invention, at least one of the plurality of first conductivity type wells is a dummy first conductivity well that terminates at least one second conductivity type well. For example, <figref idrefs="DRAWINGS">FIG. 25</figref> is a cross sectional view of a CMOS structure according to an embodiment of the invention. In this embodiment, a dummy n-well region <b>16</b>A is formed at an edge of a p-well region <b>30</b> to isolate the p-well region <b>30</b>. In other embodiments, a dummy p-well region (not shown) can be formed at an edge of an n-well region to isolate the n-well region.</div>
+<div class="description-paragraph" num="p-0045">Although the illustrative embodiments have been described herein with reference to the accompanying drawings, it is to be understood that the present invention and method are not limited to those precise embodiments, and that various other changes and modifications may be affected therein by one of ordinary skill in the related art without departing from the scope or spirit of the invention. All such changes and modifications are intended to be included within the scope of the invention as defined by the appended claims.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">25</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM9112904">
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method for forming a CMOS well structure, comprising:
+<div class="claim-text">forming a first mask on a substrate, the first mask having a plurality of openings;</div>
+<div class="claim-text">forming a plurality of first conductivity type wells over the substrate, each of the plurality of first conductivity type wells being formed by filling respective openings in the first mask with a first conductivity type material;</div>
+<div class="claim-text">forming a cap over each of the first conductivity type wells;</div>
+<div class="claim-text">removing the first mask;</div>
+<div class="claim-text">forming sidewall spacers on sidewalls of each of the first conductivity type wells; and</div>
+<div class="claim-text">forming a plurality of second conductivity type wells over the substrates, each of the plurality of second conductivity type wells being formed by filling spaces between respective first conductivity type wells with second conductivity type material.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">forming a plurality of shallow trench isolations between the first conductivity type wells and second conductive type wells;</div>
+<div class="claim-text">forming at least one second conductivity type MOS device inside each of the plurality of first conductivity type wells; and</div>
+<div class="claim-text">forming at least one first conductivity type MOS device inside each of the plurality of second conductivity type wells.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the plurality of first conductivity type wells are formed by a first selective epitaxial growth process, and the plurality of second conductivity type wells are formed by a second selective epitaxial growth process.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the first mask is a low-temperature chemical vapor deposition nitride.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the thickness of the first mask is in the range of about 50 nm to about 500 nm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein the step of forming a plurality of first conductivity type wells comprises forming a first epitaxial layer in-situ doped with a first conductivity dopant.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the doping concentration of the first conductivity dopant is in the range of about 1×10<sup>17</sup>/cm<sup>3 </sup>to about 1×10<sup>20</sup>/cm<sup>3</sup>.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, further comprising:
+<div class="claim-text">forming the first epitaxial layer to a larger thickness than that of the first mask to avoid epitaxial faceting; and</div>
+<div class="claim-text">etching back the first epitaxial layer to a smaller thickness than that of the first mask.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein the step of forming a plurality of second conductivity type wells comprises forming a second epitaxial layer in-situ doped with a second conductivity dopant.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method of <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein the doping concentration of the second conductivity dopant is in the range of about 1×10<sup>17</sup>/cm<sup>3 </sup>to about 1×10<sup>20</sup>/cm<sup>3</sup>.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method of <claim-ref idref="CLM-00009">claim 9</claim-ref>, further comprising:
+<div class="claim-text">forming the second epitaxial layer to a larger thickness than that of the first conductivity type wells to avoid corner faceting; and</div>
+<div class="claim-text">planarizing the second epitaxial layer.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein step of forming a cap comprises thermal oxidation.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the step of forming sidewall spacers comprises chemical vapor deposition.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the sidewall spacers are made of nitride.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the thickness of the sidewalls spacers is in the range of about 5 nm to about 30 nm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the first conductivity type is n-type and the second conductivity type is p-type.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">etching the substrate between the plurality of openings in the first mask to a predetermined depth before forming a plurality of first conductivity type wells over the substrate.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The method of <claim-ref idref="CLM-00017">claim 17</claim-ref>, further comprising:
+<div class="claim-text">forming a plurality of first conductivity type implant regions in the substrate before the step of forming sidewall spacers, each of the plurality of first conductivity type implant regions formed in a respective exposed surface of the substrate.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The method of <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the plurality of first conductivity type wells are formed by a first selective epitaxial growth process, and the plurality of second conductivity type wells are formed by a second selective epitaxial growth process over exposed surfaces of the first conductivity type implant regions.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The method of <claim-ref idref="CLM-00017">claim 17</claim-ref>, wherein the predetermined depth is in the range of about 20 nm to about 500 nm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The method of <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein a doping concentration of the first conductivity type implant regions are in the range of about 1×10<sup>19</sup>/cm<sup>3 </sup>to about 1×10<sup>21</sup>/cm<sup>3</sup>.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The method of <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the plurality of first conductivity type implant regions are formed in the substrate to a depth of about 20 nm to about 600 nm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. The method of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein at least one of the plurality of first conductivity type wells is a dummy first conductivity well that terminates at least one second conductivity type well.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The method of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein at least one of the plurality of second conductivity type wells is a dummy second conductivity well that terminates at least one first conductivity type well.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00025" num="00025">
+<div class="claim-text">25. The method of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the first conductivity type is n-type and the second conductivity type is p-type.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

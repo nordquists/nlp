@@ -1,0 +1,416 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">JP6527238B2 - Table tennis competition progress system including a plurality of shock sensing sensors and table tennis competition score display method using the same 
+      - Google Patents</h1><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="google" mxw-id="PDES193091026">
+<technical-field>
+<div class="description-paragraph" num="0001">
+The present invention relates to a table tennis competition progress system and a table tennis competition score display method using the same, and more specifically, a sensing signal received by an impact detection sensor installed for each area on a table tennis table and sensed The present invention relates to a table tennis competition progression system including a score calculation terminal for calculating and displaying a table tennis competition score according to an input pattern of a signal, and a table tennis competition score display method using the same.
+</div>
+</technical-field>
+<background-art>
+<div class="description-paragraph" num="0002">
+In general, the table tennis competition is divided into a singles in which two players play and a doubles in which four players play, and the singles are played while the one side player and the other side player alternately hit one ball at a time. The doubles have to be one team with two teams, and one team and the other team must alternately hit once, and each player of the team must alternately hit each other.
+</div>
+<div class="description-paragraph" num="0003">
+In addition, table tennis competitions have a 21 point win system and an 11 point win system, and there are two game progression methods, but in recent years the tournament has been managed mainly by adopting an 11 point win system.
+</div>
+<div class="description-paragraph" num="0004">
+In the above 11 points win system, players who take 11 points for each set are the winners of the set, and a set of 3 sets of 5 sets, 7 sets and 9 sets of rules is prepared for each tournament. ing.
+</div>
+<div class="description-paragraph" num="0005">
+In the 11 points first win system, every time there is a change of two points, the service right is alternated with each other, and in a 10 to 10 situation, as a so-called deuce, it wins by taking two consecutive points first.
+</div>
+<div class="description-paragraph" num="0006">
+Table tennis with the above-mentioned rule is located in a life sport that anyone, young and old, can enjoy.
+</div>
+<div class="description-paragraph" num="0007">
+By the way, the rules of the table tennis match mentioned above are relatively complicated, and in the official tournament where the table tennis players participate, the referee and the score record clerk naturally attend each match to judge the gain or loss of the score and score Management of records, but when ordinary people play table tennis at table tennis, etc., there is no other referee or score record clerk, and each party playing a table tennis match determines the gain or loss of their own score There is a drawback that you can not concentrate on the game because you have to execute score calculation.
+</div>
+<div class="description-paragraph" num="0008">
+In order to eliminate these drawbacks, in the past table tennis or tennis match, a score input / output device that allows each party in the game to display their score in a wireless manner via a remote control to facilitate score management Although known in Japanese Patent No. 292529, this prior art is merely a technique that can not conveniently execute the above-mentioned scoring judgment and score calculation as a simple technique for changing one's score wirelessly.
+</div>
+</background-art>
+<summary-of-invention>
+<tech-problem>
+<div class="description-paragraph" num="0009">The present invention was devised to solve the above-mentioned problems of the prior art, and score judgment and score calculation are automatic even if a referee or a scorer is not present at a table tennis game. System of the table tennis competition to be executed periodically and the composition of the score display method of the table tennis competition using the same are provided. <br/> </div>
+</tech-problem>
+<tech-solution>
+<div class="description-paragraph" num="0010">
+The configuration of the table tennis competition progression system of the present invention for achieving the above-mentioned technical problems is a component (tablet racket, table tennis platform, net, etc.) of table tennis competition with an impact detection sensor installed in each area of the table tennis table It is characterized by including a score calculation terminal which receives an impact signal with a table tennis ball and calculates and displays a score of a table tennis competition according to an input pattern of the received sensing signal.
+</div>
+<div class="description-paragraph" num="0011">
+<u style="single">In order to solve the above technical problems, the present invention relates to a table tennis table 10, a first racket 20, a second racket 30, a net unit 50 and a net detection sensor 51, a first racket sensor 21, a second racket sensor 31, It is installed in the first area 11 and the second area 12 divided around the net unit 50, and executed by the first detection sensor 41, the second detection sensor 42, and the score calculation terminal 100 for detecting the impact of the area. In the table tennis competition score display method for singles, the sensor and the score calculation terminal 100 are initialized and the score calculation terminal 100 determines the presence or absence of the first racket sensor 21 and the second racket sensor 31 in step S100. S101; When a competition is performed with the racket provided with the sensors 21 and 31, when the competition starts, the score calculation terminal 100 receives an impact detection signal from the net detection sensor 51 of the net unit 50. If the shock detection signal is input from the net detection sensor 51, the net unit 50 is continuously monitored, and if the shock detection signal is not input from the net detection sensor 51, the rackets 20 of both players, An input pattern of an impact detection signal generated by each of the 30 sensors 21, 31 and the first sensor 41 in the first area 11 and the second sensor 42 in the second area 12 of the table tennis table 10 is the storage unit of the score calculation terminal 100 In step S103, it is determined whether or not an impact detection signal is input in the above normal pattern, it is determined that a player on one side or a player on the other side scored , Step S104 of calculating and displaying the score of the player via the display unit 130; the score of the player of one side and the player of the other side increased by the score calculation terminal 100 satisfies the end score of the set If it is S105, the above Core calculation terminal 100 steps S106 to inform through the display unit 130 and the audio output unit 140 that the set has been completed; characterized in that it is configured to include.</u>
+</div>
+<div class="description-paragraph" num="0012">
+<u style="single">Preferably, according to the present invention, if the set does not satisfy the end score in the step S105, the score calculation terminal 100 determines that the score of the player on one side and the score of the player on the other side according to the definition of table tennis. If there is a difference in the score, it is necessary to change the order of services through the display unit 130 and the voice output unit 140 of the score calculation terminal 100 based on the table tennis rule The method further comprises the step of: S108 notifying each player of the fact.</u>
+</div>
+<div class="description-paragraph" num="0013">
+<u style="single">More preferably, according to the present invention, in the above configuration, if the racquet held by the players is a racquet not equipped with the sensors 21 and 31 as a result of the judgment in the step S101, the above score is calculated when the competition starts. The calculation terminal 100 determines whether or not an impact detection signal is input from the net detection sensor 51 of the net unit 50, and continues to monitor the net unit 50 when an impact detection signal is input from the net detection sensor 51. When no impact detection signal is input from the detection sensor 51, the shock detection signal transmitted from the first detection sensor 41 of the first area 11 and the second detection sensor 42 of the second area 12 of the table tennis table 10 is a score calculation terminal In step S110, it is determined whether the normal pattern set in advance is input to the storage unit 170 in step S110; if the impact detection signal is not input in the preset pattern, the player on one side or the other side Characterized in that it is configured further include a; determines that the player has scored, step S111 to display through the display unit 130 calculates the score of the player.</u>
+</div>
+<div class="description-paragraph" num="0014">
+<u style="single">On the other hand, according to the present invention, the table tennis table 10, the first racket 20, the second racket 30, the third racket 60, the fourth racket 70, the net unit 50 and the net detection sensor 51, the first racket sensor 21, the second racket sensor 31, the third racket sensor 61, the fourth racket sensor 71, installed in the first area 11 and the second area 12 divided around the net portion 50, and divided around the center line 13 of the area In the table tennis competition score display method for doubles executed by the first sensing sensor 41, the second sensing sensor 42, the third sensing sensor 43, the fourth sensing sensor 44 and the score calculation terminal 100 installed in each area, the sensors The score calculation terminal 100 is initialized S200, and when the competition starts, the score calculation terminal 100 determines whether an impact detection signal is input from the net detection sensor 51 of the net unit 50; S201 from the net detection sensor 51 If the shock detection signal is input, the net unit 50 is continuously monitored, and if the shock detection signal is not input from the net detection sensor 51, it is determined whether the doubles service has been normally performed S202; both teams Of each player's racket 20, 30, 60, 70, the first sensor 41, the second sensor 42, the third sensor 43 and the fourth sensor 44 of the table tennis table 10 Determining whether the input pattern of the impact detection signal to be generated is input in the normal pattern set in advance in the storage unit 170 of the score calculation terminal 100: Step S203: The impact detection signal is not input in the preset pattern In this case, it is determined that one team or the other team has scored, the score of the team is calculated, and displayed via the display unit 130; step S204; the one team whose score calculation terminal 100 is increased Or Qi on the other side Is characterized by including S205 if the score satisfies the end score of the set, and S206 of informing the end of the set via the display unit 130 or the voice output unit 140. I assume.</u>
+</div>
+<div class="description-paragraph" num="0015">
+<u style="single">More preferably, according to the present invention, in the above configuration, if the set does not have a score satisfying the end score, the score calculation terminal 100 determines the score of the player on one side and the score of the player on the other side according to the definition of table tennis. If there is a difference in the score, it is necessary to change the order of services through the display unit 130 and the voice output unit 140 of the score calculation terminal 100 to each player. Informing step S208; is further included.</u>
+</div>
+<div class="description-paragraph" num="0016">
+<u style="single">More preferably, in the above configuration, the present invention determines whether the service of the doubles has been normally performed in step S202, the first sensing sensor 41, the third sensing sensor 43, and the second sensing sensor 42. It is characterized in that it is determined that the table tennis ball falls in the area on the sensing sensor side where the input time of the impact detection signal inputted from the fourth sensing sensor 44 to the score calculation terminal 100 is faster.</u>
+</div>
+<div class="description-paragraph" num="0017">
+<u style="single">More preferably, in the above configuration, the step S202 of determining whether the service of the doubles is normally performed according to the present invention comprises the first sensing sensor 41, the third sensing sensor 43, the second sensing sensor 42, and the second sensing sensor 42. It is characterized in that it is determined that the table tennis ball has fallen into the area on the sensing sensor side where the signal strength of the shock detection signal input from the fourth sensing sensor 44 to the score calculation terminal 100 is larger.</u>
+</div>
+</tech-solution>
+<advantageous-effects>
+<div class="description-paragraph" num="0018">
+The table tennis competition progress system according to the present invention having the above-described configuration automatically calculates and displays the score of each party who plays the competition, even without the presence of a referee or a score clerk as in the prior art. There is an effect that it is possible to concentrate solely on table tennis competitions and to help improve the table tennis competence, without the need for the parties to separately determine the score loss and score calculation.
+</div>
+<div class="description-paragraph" num="0019">In addition, information about the progress of table tennis competition is transmitted to an external communication device via the communication unit of the score calculation terminal, and the effect is that many users can view the competition while sharing the progress of table tennis competition in real time. is there. <br/> </div>
+</advantageous-effects>
+</summary-of-invention>
+<description-of-drawings>
+<div class="description-paragraph" num="0020">FIG. 1 is a block diagram of an embodiment of a table tennis competition proceeding system for singles in the present invention. <br/> FIG. 2 is a block diagram of an embodiment of a table tennis competition progression system for doubles in the present invention. <br/> FIG. 3 is a block diagram of a racket of the table tennis competition progression system in the present invention. <br/> FIG. 4 is a block diagram of a score calculation terminal of the table tennis competition progression system in the present invention. <br/> 5 and 6 are flowcharts for controlling the table tennis competition progressing system in the present invention, FIG. 5 is a flowchart at the singles competition, and FIG. 6 is a flowchart at the doubles competition.</div>
+</description-of-drawings>
+<description-of-embodiments>
+<div class="description-paragraph" num="0021">
+Hereinafter, with reference to the drawings, configurations and operations of a table tennis competition progress system of the present invention and a table tennis competition score display method using the same will be described.
+</div>
+<div class="description-paragraph" num="0022">
+However, the disclosed drawings are provided as an example to fully convey the spirit of the present invention to those skilled in the art. Accordingly, the present invention is not limited to the drawings presented below, but can be embodied in other forms.
+</div>
+<div class="description-paragraph" num="0023">
+Also, unless otherwise defined in the terms used in the specification of the present invention, it has the meaning commonly understood by one of ordinary skill in the art to which the present invention belongs, and the following description and The detailed description of known functions and configurations that may unnecessarily obscure the subject matter of the present invention will be omitted from the attached drawings.
+</div>
+<div class="description-paragraph" num="0024">
+FIG. 1 is a block diagram of an embodiment of a table tennis competition proceeding system for singles in the present invention.
+</div>
+<div class="description-paragraph" num="0025">
+Referring to the drawings, the table tennis competition progression system 1 for singles according to the present invention has a first area 11 divided by the same area centering on a net unit 50 installed vertically at the center of the table tennis table 10. It is installed on a table tennis table 10 having a second area 12.
+</div>
+<div class="description-paragraph" num="0026">
+Specifically, the system of the present invention is installed in the first area 11 of the table tennis table 10 to detect the impact applied to the first area 11, and the second sensor 12 of the table tennis table 10. A second sensing sensor 42 is installed to sense an impact applied to the second area 12.
+</div>
+<div class="description-paragraph" num="0027">
+In addition, the system of the present invention further includes a first racket 20 used by a player on one side and a second racket 30 used by a player on the other side performing a competition with a player on one side.
+</div>
+<div class="description-paragraph" num="0028">
+Here, the first racket 20 includes a first racket sensor 21 that detects an impact applied to the racket, and the second racket 30 includes a second racket sensor 31 that detects an impact applied to the racket.
+</div>
+<div class="description-paragraph" num="0029">
+In addition, the net unit 50 of the table tennis table 10 is provided with a net sensor 51 for detecting an impact applied to the net.
+</div>
+<div class="description-paragraph" num="0030">
+Here, at least one or more of the first sensor 41, the second sensor 42, the first racket sensor 21, the second racket sensor 31, and the net sensor 51 may be installed to improve the sensitivity of the sensor. It is desirable that the installation position of these sensors be set at a position that maximizes the sensitivity of the sensors.
+</div>
+<div class="description-paragraph" num="0031">
+In addition, a score calculation terminal 100 is installed at one side of the table tennis table 10. The score calculation terminal 100 receives the impact detection signals distributed from the sensors 41, 42, 21, 31, 51 at the singles competition and determines whether the players on both sides have scored or not, and both sides are determined according to the result of the determination. This section displays the player's score and outputs information such as the displayed score by voice, and a more detailed configuration will be described later.
+</div>
+<div class="description-paragraph" num="0032">
+On the other hand, the system 1 of the first embodiment described above does not use the sensors 21 and 31 provided on the first racket 20 and the second racket 30 according to the determination method for the presence or absence of the score of the score calculation terminal 100. You can also.
+</div>
+<div class="description-paragraph" num="0033">
+FIG. 2 is a block diagram of an embodiment of a table tennis competition progression system for doubles in the present invention. Referring to the drawings, the table tennis competition proceeding system 2 for doubles according to the present invention has a plane respectively corresponding to the first area 11 and the second zone 12 of the table tennis table 10 in comparison with the table tennis competition proceeding system 1 for singles mentioned above. The first area right side 11a, the first area left side 11b, the second area right side 12a, and the second area left side 12b, which are sectioned left and right in the direction, are further provided with a sensor for detecting an impact applied to the area. This is to determine whether or not the score is scored in the subs on the doubles rule of table tennis competition.
+</div>
+<div class="description-paragraph" num="0034">
+In addition, the table tennis doubles must be a team of two, and one team and the other team must alternately hit once, and the players of that team must alternately hit each other Therefore, in order to determine whether the game is executed according to such a rule, a sensor for detecting shock is attached to each player's racket of each team.
+</div>
+<div class="description-paragraph" num="0035">
+The configuration of the table tennis competition progression system 2 for doubles according to the present invention described above will be described in more detail as follows.
+</div>
+<div class="description-paragraph" num="0036">
+First, the traveling system 2 for doubles according to the present invention is a table tennis table having a first area 11 and a second area 12 divided by the same area centering on a net portion 50 vertically installed at the center of the table tennis table 10 It is a system installed at 10.
+</div>
+<div class="description-paragraph" num="0037">
+The first area 11 is composed of a first area right side 11a and a first area left side 11b which are divided into right and left with reference to the center line 13 in the plane direction, and the second area 12 is a center line in the plane direction It consists of the 2nd section right side 12a and the 2nd section left part 12b divided into right and left with 13 as a standard.
+</div>
+<div class="description-paragraph" num="0038">
+Here, the table tennis competition progress system 2 of the present invention is installed in the first area right side 11a and detects the impact applied to the first area right side 11a, and the first area left side 11b. And a third sensing sensor 43 for sensing an impact applied to the first area left side portion 11b.
+</div>
+<div class="description-paragraph" num="0039">
+And, the table tennis competition progress system 2 of the present invention is installed in the second area right side 12a and detects the impact applied to the second area right side 12a, and the second area left side 12b. It includes a fourth sensor 44 which is installed and senses an impact applied to the second area left side portion 12b.
+</div>
+<div class="description-paragraph" num="0040">
+Here, in order to advance the doubles, to which region of the left and right sides 11a and 11b of the first area 11 and the left and right sides 12a and 12b of the second area 12 the table tennis ball is contacted The distance between the first sensing sensor 41 and the third sensing sensor 43 from the center line 13 and the second sensing sensor 42 and the fourth sensing sensor 44 have to be discriminated. The distance from the center line 13 must be maintained the same distance.
+</div>
+<div class="description-paragraph" num="0041">
+In addition, the system of the present invention includes the first racket 20 and the third racket 60 used by the players of the one-side team according to the doubles rule of table tennis competition, and the other two-side team It includes a second racket 30 and a fourth racket 70 used by team players.
+</div>
+<div class="description-paragraph" num="0042">
+The first racket 20 used by players on one team has a first racket sensor 21 for detecting an impact applied to the racket, and a third racket sensor for detecting an impact applied to the racket. 61 is provided.
+</div>
+<div class="description-paragraph" num="0043">
+In addition, the second racket 30 used by players on the other team has a second racket sensor 31 that detects an impact applied to the racket, and the fourth racket 70 detects a fourth racket sensor 71 that detects an impact applied to the racket. Equipped with
+</div>
+<div class="description-paragraph" num="0044">
+Similar to the above-described embodiment, the net unit 50 of the table tennis table 10 is provided with a net sensor 51 for detecting an impact applied to the net.
+</div>
+<div class="description-paragraph" num="0045">
+In addition, the first sensing sensor 41, the second sensing sensor 42, the third sensing sensor 43, the fourth sensing sensor 44 and the first racket sensor 21, the second racket sensor 31, the third racket sensor 61, the fourth racket sensor 71 and net sensor 51 can be installed at least one or more in order to improve the sensitivity of the sensor, and the installation position of these sensors is set at a position that maximizes the sensitivity of the sensor. Is desirable.
+</div>
+<div class="description-paragraph" num="0046">
+In addition, a score calculation terminal 100 is installed at one side of the table tennis table 10. The score calculation terminal 100 receives an impact detection signal distributed from the sensors 41, 42, 43, 44, 21, 31, 61, 71, 51 during doubles competition and determines whether players on both sides have scored A more detailed configuration will be described later as a portion for displaying the scores of the players on both sides according to the result of the determination.
+</div>
+<div class="description-paragraph" num="0047">
+Meanwhile, the sensing sensors 41, 42, 43, 44, the racket sensors 21, 31, 61, 71 and the net sensor 51 according to the present invention are acceleration sensors (accelerometers) or MEMS microphones for acoustic sensing that are widely used as impact sensors. Although it is possible to use (microphone) or a pressure sensor for pressure sensing (pressure sensor), it is desirable to use an acceleration sensor that is relatively inexpensive and has good durability.
+</div>
+<div class="description-paragraph" num="0048">
+FIG. 3 illustrates an embodiment of the racket of the table tennis competition advancing system according to the present invention described above, and illustrates only the first racket 20, and the second racket 30, the third racket 60, and the fourth racket described above. 70 also has the same configuration as the first racket 20 shown.
+</div>
+<div class="description-paragraph" num="0049">
+The first racket 20 comprises a handle 25 gripped by the user's hand and a plate 24 attached to the handle 25 so that the table tennis ball is hit, and the racket according to the embodiment of the present invention is directly connected to the table tennis ball. It is desirable for the sensor to be installed at the part of the handle 25 rather than the part of the plate 24 that is in contact with the.
+</div>
+<div class="description-paragraph" num="0050">
+That is, as shown in the drawing, a space 26 having a predetermined depth is formed at the end of the handle 25 opposed to the plate 24, and the first racket sensor 21 senses an impact applied to the racket in the space 26 The transmitter 22 for wirelessly transmitting the impact detection signal generated by the first racket sensor 21 to the score calculation terminal 100 is mounted, and the space portion 26 of the handle 25 is shielded using the cover 23. The cover 23 can be fixed to the end portion of the handle using an adhesive or a screw (not shown).
+</div>
+<div class="description-paragraph" num="0051">
+FIG. 4 is a block diagram of the score calculation terminal 100 of the table tennis competition progression system in the present invention. The score calculation terminal 100 according to the present invention receives the impact detection signal of each sensor installed on the table tennis table 10, determines whether each player who executes the table tennis competition has scored, and according to the determined result The score of each player is calculated and displayed through the display unit, and the function of notifying the progress of the competition such as the change of the service right is performed by voice. The score calculation terminal 100 of the present invention as described above will be described in more detail as follows. It is manufactured as a dedicated hardware device as follows.
+</div>
+<div class="description-paragraph" num="0052">
+However, according to the embodiment, the present invention is not limited to this, and may be a smart phone or a tablet PC that can be installed and executed with an application program that executes the function of each component described below. General-purpose smart devices can be used, and hardware configurations such as the central processing unit, power supply unit, memory, communication I / F, user I / F, etc. of the general-purpose smart devices can be used. The functions of the sensor input unit 120, the display unit 130, the audio output unit 140, the communication unit 150, the power supply unit 160, and the storage unit 170 may be implemented.
+</div>
+<div class="description-paragraph" num="0053">
+The control unit 110 may control each sensor 41, 42, 21, 31, 51 of the singles system or each sensor 41, 42, 43, 44, 21, 31, 61, 71, 51 of the doubles system. It is a part which receives the impact detection signal distributed from and determines whether each player scored, and calculates the score which each player scored according to the result of determination.
+</div>
+<div class="description-paragraph" num="0054">
+In the present embodiment, the control unit 110 is in the form of a microcomputer (MICOM) board on which a usual microprocessor unit (MCU) and its peripheral circuits are mounted.
+</div>
+<div class="description-paragraph" num="0055">
+In addition, the score calculation terminal 100 of the system of the present invention includes a sensor input unit 120 that collects shock detection signals generated by the sensor in an integrated manner and transmits the signals to the control unit 110.
+</div>
+<div class="description-paragraph" num="0056">
+The sensor input unit 120 receives an impact detection signal generated by the sensors 41, 42, 43, 44, 21, 31, 61, 71, 51 used in the system of the present invention for singles or doubles competitions. It is also possible to amplify the current or voltage of the shock detection signal for signal processing, or to perform an analog-to-digital converter (AD converter).
+</div>
+<div class="description-paragraph" num="0057">
+Further, the shock detection signal is distributed between the sensor input unit 120 and the sensors 41, 42, 43, 44, 21, 31, 61, 71, 51 by a known wired communication method or wireless communication method.
+</div>
+<div class="description-paragraph" num="0058">
+The above communication method is preferably performed by a wireless communication method rather than a wired communication method so as not to complicate the table tennis table 10, and as such a wireless communication method, a wireless Internet method or Bluetooth (registered trademark) It is possible to adopt a method and an RFID method. In particular, when the RFID system is adopted, the communication means of the racket is configured with a passive RFID chip to reduce the power consumption of the racket, and do not require a battery or the like, or extend the replacement cycle thereof. Can.
+</div>
+<div class="description-paragraph" num="0059">
+Moreover, the score calculation terminal 100 of this invention contains the display part 130 which displays the score of each player which the said control part 110 calculated.
+</div>
+<div class="description-paragraph" num="0060">
+Here, in addition to the score display of each player, the display unit 130 displays a server that executes a service, changes in the cumulative score of each player, round characters or square characters for classification of each player, or Colors can be displayed together.
+</div>
+<div class="description-paragraph" num="0061">
+Then, the score calculation terminal 100 of the present invention outputs by voice the score of each player calculated by the control unit 110, the guidance of the start and the end of the competition, the guidance of change of serving right, and whether each player scored. An audio output unit 140 is included.
+</div>
+<div class="description-paragraph" num="0062">
+The control unit 110 of the score calculation terminal 100 according to the present invention is based on the score information of each player, the score information for each player currently in the ongoing table tennis competition, the situation information for each set, the past of the player Can be generated and stored in the storage unit 170 linked to the control unit 110, and can be managed by a normal database management method.
+</div>
+<div class="description-paragraph" num="0063">
+Further, the score calculation terminal 100 of the present invention includes the communication unit 150, and the score information for each current player of the table tennis competition stored in the storage unit 170 via the communication unit 150, situation information for each set Score information for each current player transmitted by the communication device 200 connected to the network N by transmitting the past game record information of the player to the external network N by a known wired or wireless communication method It is possible to view situation information for each set, past game record information of the player, and the like. These communication units allow sharing of competition status and records with other devices or systems.
+</div>
+<div class="description-paragraph" num="0064">
+The communication system between the communication unit 150 and the network N is preferably a wired or wireless Internet system, a Bluetooth system, an RFID system, or a short distance wireless communication system or a system using these in combination. Can.
+</div>
+<div class="description-paragraph" num="0065">
+Therefore, the score of the table tennis competition performed using the table tennis competition progress system of the present invention can be grasped in real time even at a remote place via the communication device 200 connected to the network N, and the past game record information of the player It is also queryable, enabling sharing of competition status and records with other devices and systems.
+</div>
+<div class="description-paragraph" num="0066">
+Here, the communication device 200 may be installed with an application program capable of querying and browsing various information provided by the table tennis competition progression system of the present invention, and may be executed by a smart phone or the like. It is desirable to be a smart device such as a tablet PC.
+</div>
+<div class="description-paragraph" num="0067">
+On the other hand, reference numeral 160 which is not described is a power supply unit 160 for applying driving power to the score calculation terminal 100 of the present invention, and a user interface (such as a button for operating the score display terminal 100, a touch screen) Can be configured separately.
+</div>
+<div class="description-paragraph" num="0068">
+Hereinafter, the control method of the table tennis competition progress system of the present invention configured as described above will be described. FIG. 5 is a flowchart of a singles competition, and FIG. 6 is a flowchart of a doubles competition.
+</div>
+<div class="description-paragraph" num="0069">
+Control of the table tennis competition progress system of the present invention is performed by the table tennis table 10, the rackets 20, 30, 60, 70, the net unit 50, and the respective sensors 21, 31, 41, 42, 43, 44 of the system of the present invention described above. , 51, 61, 71 and by the score calculation terminal 100, the control procedure at the time of a singles competition will be described with reference to FIG.
+</div>
+<div class="description-paragraph" num="0070">
+First, each sensor of the system of the present invention and the score calculation terminal 100 are initialized S100, and simultaneously with the initialization, the score calculation terminal 100 determines the presence or absence of the first racket sensor 21 and the second racket sensor 31 In step S101, it is determined whether the players play a game with the racket equipped with the sensors 21 and 31.
+</div>
+<div class="description-paragraph" num="0071">
+As a result of the above determination, control is performed separately in the case where the racquets held by the players are racquets equipped with the sensors 21 and 31 and in the case where the competition is performed with the racquets lacking the sensors 21 and 31.
+</div>
+<div class="description-paragraph" num="0072">
+That is, when the competition is performed with the racket provided with the sensors 21 and 31, when the competition is started by the first attack service of the player on one side, the score calculation terminal 100 detects an impact detection signal from the net detection sensor 51 of the net unit 50. It is judged whether S is input S102.
+</div>
+<div class="description-paragraph" num="0073">
+When an impact detection signal is input from the net detection sensor 51, the table tennis ball being serviced is on the net unit 50, so the score calculation terminal 100 waits for the service of one side player to be started again. While monitoring the net unit 50 continuously.
+</div>
+<div class="description-paragraph" num="0074">
+However, if the impact detection signal is not input from the net detection sensor 51, the table tennis ball being serviced is not placed on the net portion 50 and has been transferred to the other player normally, so the rackets 20 of both players are subsequently continued. , Input patterns of shock detection signals generated by the first sensor 41 and the second sensor 42 of the first area 11 and the second area 12 of the table tennis table 10 are stored in the score calculation terminal 100. It is determined whether a pattern set in advance in the section 170 is input, and it is determined whether a table tennis competition rally is advanced in a normal procedure (S103).
+</div>
+<div class="description-paragraph" num="0075">
+That is, the shock detection signal by the sensor 21 of the first racket 20 of one player is A, the shock detection signal by the sensor 31 of the second racket 30 of the other player is B, and the player at one side is located Assuming that the shock detection signal by the first sensing sensor 41 of the first area 11 is C, and the shock sensing signal by the second sensor 42 of the second area 12 in which the player on the other side is located is D, Shock detection signal is in the order of A-&gt; C-&gt; D-&gt; B-&gt; C-&gt; A-&gt; D-&gt; B-&gt; C-&gt; A-&gt; D-&gt; B-&gt; C In the score calculation terminal 100, if the input order satisfies the input pattern of the shock detection signal preset in the storage unit 170, the score calculation terminal 100 normally crosses the table tennis ball normally by both players. Judging that it is a rally situation, it will monitor whether the table tennis rally is performed continuously.
+</div>
+<div class="description-paragraph" num="0076">
+Meanwhile, if the impact detection signal is not input in the normal rally situation, that is, if the impact detection signal is not input in a preset pattern, the player on one side or the player on the other side Is determined to have scored, the score of the player is calculated, and displayed via the display unit 130 (S104).
+</div>
+<div class="description-paragraph" num="0077">For example, as described above, the shock detection signal is in the order of A-&gt;C-&gt;D-&gt;B-&gt;C-&gt;A-&gt;D-&gt;B-&gt;C-&gt;A-&gt;D-&gt;B-&gt; C. If the shock detection signal B by the second player's racket 30 of the other player is not inputted in the middle, the table tennis ball is not in contact with the second player's second racket 30, and the shock is not received. The score calculation terminal 100 scored such a situation in the score calculation terminal 100 because the detection signal was not generated and the player on the other side could not fight back the table tennis ball hit by the player on one side. The score can be calculated by a method of increasing the score of one player by one point. <br/> Subsequently, if the score of the player on one side or the player on the other side, which the score calculation terminal 100 has increased, is a score (for example, 11 points) satisfying the end score of the set, the set is ended. S106 which notifies via the display part 130, the audio | voice output part 140, or these both 130 and 140 that.</div>
+<div class="description-paragraph" num="0078">
+In the step S105, if the set is not a score that satisfies the end score, does the score calculation terminal 100 generate a difference between the score of one player and the score of the other player based on table tennis rules? If the score difference is generated (for example, 2 points difference), it is necessary to change the service order via the display unit 130 or the voice output unit 140 of the score calculation terminal 100 according to the rule of table tennis. After notifying each player, the process returns to step S108 and the above step S102 to determine the next rally.
+</div>
+<div class="description-paragraph" num="0079">
+On the other hand, as a result of the determination in step S101, in the case where the racquets held by the players are racquets not provided with the sensors 21 and 31, the following control is performed.
+</div>
+<div class="description-paragraph" num="0080">
+That is, when the competition is started in the first attack service of the player on one side, the score calculation terminal 100 determines whether or not an impact detection signal is input from the net detection sensor 51 of the net unit 50, S109, the net detection sensor 51. When an impact detection signal is input from the terminal, the score calculation terminal 100 continues monitoring the net unit 50 while waiting for the service of the player on one side to start again as described in the above-mentioned step S102, and the net detection sensor When no shock detection signal is input from the terminal 51, the shock detection signal transmitted from the first sensor 41 in the first area 11 and the second sensor 42 in the second area 12 of the table tennis table 10 is the score calculation terminal 100 It is determined whether it is input in a pattern set in advance in the storage unit 170, and it is determined whether a table tennis rally is normally advanced (S110).
+</div>
+<div class="description-paragraph" num="0081">
+That is, the shock detection signal by the first sensor 41 in the first area 11 where one player is located is C, and the shock detection signal by the second sensor 42 in the second area 12 where the other player is located is D. Then, if the player on the other side executes the service first, the shock detection signal is scored in order of C-&gt; D-&gt; C-&gt; D-&gt; C-&gt; D-&gt; C-&gt; D If it is input to the calculation terminal 100 and the input order satisfies the pattern set in advance in the storage unit 170, the score calculation terminal 100 is in a rally situation in which both players normally exchange table tennis balls. Judging, it will monitor whether the table tennis rally is performed continuously.
+</div>
+<div class="description-paragraph" num="0082">
+Meanwhile, if the impact detection signal is not input in the normal rally situation, that is, if the impact detection signal is not input in a preset pattern, one player or the other It is determined that the player has scored, the score of the player is calculated, and displayed via the display unit 130 (S111).
+</div>
+<div class="description-paragraph" num="0083">
+For example, as described above, while the shock detection signal sequentially enters in the order of C-&gt; D-&gt; C-&gt; D-&gt; D-&gt; C-&gt; D-&gt; C-&gt; D, the second zone of the other player If the sensing signal D of 12 is not inputted, this means that the table tennis ball is not in contact with the second zone 12 of the other player, this means that the table tennis ball hit by the one player is on the other side. Since the player is out of the second zone 12 of the player, the score calculation terminal 100 determines that such a situation has been scored by one side player, and increases the score of the other side player by one point. Can be calculated.
+</div>
+<div class="description-paragraph" num="0084">
+The steps after step S111 are performed in the same manner as steps S105 to S108 described above, and thus detailed description will be omitted.
+</div>
+<div class="description-paragraph" num="0085">
+Next, with reference to FIG. 6, the control procedure of the table tennis competition progress system of the present invention at the time of doubles competition will be described.
+</div>
+<div class="description-paragraph" num="0086">
+First, each sensor of the system of the present invention and the score calculation terminal 100 are initialized S200, and at the same time as the initialization, the score calculation terminal 100 has a competition in the first attack service of the players of the one team When started, the score calculation terminal 100 determines whether an impact detection signal is input from the net detection sensor 51 of the net unit 50 (S201).
+</div>
+<div class="description-paragraph" num="0087">
+When an impact detection signal is input from the net detection sensor 51, since the table tennis ball being serviced is on the net unit 50, the score calculation terminal 100 waits for the service of one team to be started again. While monitoring the net unit 50 continuously.
+</div>
+<div class="description-paragraph" num="0088">
+However, if no impact detection signal is input from the net detection sensor 51, this is because the serviced table tennis ball has not been applied to the net portion 50 and has been transferred to the other player normally, so in this case S202 which judges whether the service on a table tennis rule was performed normally.
+</div>
+<div class="description-paragraph" num="0089">
+That is, since the service by the server must always be performed in the diagonal direction of the server under the rules of the doubles competition, the first sensing sensor 41 of the first area right side 11a and the third sensing sensor of the first area left side 11b 43 and the second detection sensor 42 of the second area right side 12a and the fourth detection sensor 44 of the second area left side 12b, the input time difference of the shock detection signal input to the score calculation terminal 100 and the shock transmitted to each sensor It is possible to determine the hitting position of the service through the amount.
+</div>
+<div class="description-paragraph" num="0090">
+For example, assuming that the impact detection signal of the first detection sensor 41 of the first area right side portion 11a is C1 and the impact detection signal of the third detection sensor 43 of the first area left side portion 11b is C2, the score calculation terminal of the impact detection signal If the order input to 100 is C1-&gt; C2 order, the first sensing sensor 41 of the first area right side portion 11a first senses the impact accompanying the fall of the table tennis ball, so the position at which the table tennis ball falls is It becomes 1st area | region right side part 11a (that is, the dropping point of a ball becomes the left side).
+</div>
+<div class="description-paragraph" num="0091">
+Then, if the order input to the score detection terminal 100 of the impact detection signal is C2-&gt; C1 order in reverse, the third sensing sensor 43 of the first area left side portion 11b first detects the impact accompanying the fall of the table tennis ball As a result, the position where the table tennis ball falls is the first area left side portion 11b.
+</div>
+<div class="description-paragraph" num="0092">
+If the sensor sensing signals of the first sensing sensor 41 and the third sensing sensor 43 are generated at the same time, the table tennis ball is dropped to the middle area between the first area right side 11a and the first area left side 11b. The score can be calculated by a method of reflecting this on the score pros and cons according to the rules of table tennis.
+</div>
+<div class="description-paragraph" num="0093">
+Furthermore, in addition to the above-described input time difference of impact detection signals, it is possible to determine the hitting position of the service through the amount of impact transmitted to the sensor.
+</div>
+<div class="description-paragraph" num="0094">
+That is, the shock detection signal of the first sensing sensor 41 of the first area right side portion 11a is C1, the shock detection signal of the third sensing sensor 43 of the first area left side portion 11b is C2, and the signal strength of the shock detection signal is C1. In the case of C2, the falling point of the table tennis ball is closer to the first sensor 41 than the second sensor 43. If the values of C1 and C2 are the same, it can be determined that a drop has occurred at a midpoint between the first area right side portion 11a and the first area left side portion 11b.
+</div>
+<div class="description-paragraph" num="0095">
+Therefore, the accuracy of the determination can be improved by simultaneously reflecting the shock detection signal and the shock amount information input from each sensor as described above.
+</div>
+<div class="description-paragraph" num="0096">
+Next, the sensors 21, 31, 61, 71 of the rackets 20, 30, 60, 70 of the players of both teams and the first sensing sensor 41, the second sensing sensor 42, the third sensing sensor 43 of the table tennis table 10 It is determined whether the input pattern of the impact detection signal generated by the fourth detection sensor 44 is input in the storage unit 170 of the score calculation terminal 100 in a preset pattern, and the table tennis competition rally is advanced in a normal procedure. (S203).
+</div>
+<div class="description-paragraph" num="0097">
+That is, the shock detection signal by the sensor 21 of the first racket 20 of one player of the one team is A, and the shock detection signal by the sensor 61 of the third racket 60 of the other player of the one team is B. The shock detection signal by the sensor 31 of the second racket 30 of one team player is C, and the shock detection signal by the sensor 71 of the fourth racket 70 of the other team player is D. A shock detection signal of the first detection sensor 41 is E, a shock detection signal of the third detection sensor 43 in the first area 11 is F, and a shock detection signal of the second detection sensor 42 in the second area 12 is G. Assuming that the shock detection signal of the fourth sensing sensor 44 in the area 12 is H, if the service is normally performed when the first player of the one team is in charge, the shock detection signal by the rally of both teams is A hitting ball-&gt; G or H-&gt; C hitting-&gt; E or F-&gt; B hitting-&gt; G or H-&gt; D hitting-&gt; E or F-&gt; A hitting-&gt; G or H-&gt; C The hit ball-&gt; E or F-&gt; B hit ball-&gt; G or H-&gt; D hit ball-&gt; E or F is sequentially input to the score calculation terminal 100 in the order of (one side player and the other side team When one player hits as a player), the score calculation terminal 100 is currently a rally where both players normally exchange table tennis balls if their input order satisfies the input pattern of the impact detection signal preset in the storage unit 170. (Rally) Judging that it is a situation, it will monitor whether a table tennis rally is performed continuously.
+</div>
+<div class="description-paragraph" num="0098">
+Meanwhile, if the impact detection signal is not input in the normal rally situation, that is, if the impact detection signal is not input in a preset pattern, the team on one side or the team on the other side The score of the team is calculated by a method of judging that it has scored, and displayed via the display unit 130 (S204).
+</div>
+<div class="description-paragraph" num="0099">
+For example, during the shock detection signal input as described above, if the shock detection signal of the first racket 20 or the third racket 30 of the players of the one side team is not input in the middle, this is the first one of the team The table tennis ball is not in contact with the first racket 20 or the third racket 30, so that no shock detection signal is generated, which means that one player could not fight back the table tennis ball hit by the other player Then, the score calculation terminal 100 can calculate the score by a method of judging that such a situation has been scored by the other player and increasing the score of the other player by one point.
+</div>
+<div class="description-paragraph" num="0100">
+Subsequently, if the score of the one side team or the other side team increased by the score calculation terminal 100 is a score (for example, 11 points) satisfying the end score of the set, S205, that the set has ended S206 notified via the display unit 130, the audio output unit 140, or both of them 130 and 140.
+</div>
+<div class="description-paragraph" num="0101">
+If the set is not a score that satisfies the end score in the step S205, the score calculation terminal 100 determines whether a difference between the score of one player and the score of the other player has occurred based on the rules of table tennis. Then, if there is a score difference (for example, a two-point difference) in S207, each player must change the service order via the display unit 130 or the voice output unit 140 of the score calculation terminal 100 according to the table tennis rules. After notifying the step S208, the process returns to the step S201 to judge the next rally.
+</div>
+<div class="description-paragraph" num="0102">
+On the other hand, the score calculation terminal 100 of the present invention executes the following judgment method in preparation for various situations that can occur during table tennis competition, and this is applied immediately when the situation occurs.
+</div>
+<div class="description-paragraph" num="0103">1) The score calculation terminal 100 is a filter that analyzes the impact frequency of the input impact detection signal in order to distinguish the impact of table tennis ball and the impact due to other things (for example, the impact of touching the table tennis table with a hand) By providing (not shown), it separates the impact of table tennis balls from the impact of other things. If it is classified as not being a preset impact, even if an impact is input, it can be set to distinguish it and not reflect it in the score calculation. <br/> 2) Recognize that the ping-pong racket strikes the ping-pong table when the ping-pong racket and the ping-pong table shock simultaneously occur during the competition. <br/> 3) When the player puts the serve, the ball does not hit the racket, and if the player hits the table tennis table, it is judged that the player plays the ball on the table tennis table at the preparation stage of the serve. <br/> 4) When the player puts in a serve, the table tennis ball hits the racket, and if the table tennis table is not shocked and hits the racket again, it is recognized that it is an action to play the ball on the floor at the preparation stage of the serve. <br/> Although the table tennis competition progress system of the present invention and the table tennis competition score display method using the same have been described in detail with reference to the attached drawings, various modifications, changes and substitutions may be made by those skilled in the art. It is possible that these modifications, changes and substitutions should be construed as falling within the protection scope of the present invention.</div>
+</description-of-embodiments>
+<industrial-applicability>
+<div class="description-paragraph" num="0104">Since the table tennis competition progress system according to the present invention automatically calculates and displays the score of each player who has played the competition without having a referee or a score clerk as in the prior art, the players of the game judge whether the score is lost or not There is no need to separately calculate the score and you can focus on table tennis competitions alone, which helps to improve the table tennis ability. <br/> In addition, the progress of table tennis competition and related information are transmitted to an external communication device through the communication unit of the score calculation terminal, and a large number of users can watch the competition while sharing the progress of the table tennis competition in real time There is.</div>
+</industrial-applicability>
+<reference-signs-list>
+<div class="description-paragraph" num="0105">1; table tennis competition progress system according to the first embodiment of the present invention <br/> 2; table tennis competition progress system according to the second embodiment of the present invention <br/> 10; table tennis table <br/> 11; 1st area <br/> 11a; 1st section right side <br/> 11b; 1st section left side <br/> 12; Second area <br/> 12a; 2nd section right side <br/> 12b; second section left side <br/> 20; 1st racket <br/> 21; 1st racket sensor <br/> 30; Second racket <br/> 31; 2nd racket sensor <br/> 41; first sensor <br/> 42; second sensor <br/> 43; Third sensing sensor <br/> 44; 4th sensor <br/> 50; Net section <br/> 51; Net sensing sensor <br/> 60; third racket <br/> 61; 3rd racket sensor <br/> 70; Fourth racket <br/> 71; 4th racket sensor <br/> 100; score calculation terminal <br/> 110; Control unit <br/> 120; Sensor input <br/> 130; Display <br/> 140; voice output unit <br/> 150; Communication department <br/> 160; Power supply <br/> 170; storage unit <br/> 200; Communication device <br/> N; Communication network</div>
+</reference-signs-list>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">7</span>)</h2>
+<div html="" itemprop="content"><ol class="claims" lang="EN" load-source="google" mxw-id="PCLM186962368">
+<li class="claim"> <div class="claim" num="1">
+<div class="claim-text">
+<u>A table tennis table 10, a first racket 20, a second racket 30, a net unit 50 and a net detection sensor 51, a first racket sensor 21, a second racket sensor 31, and a first area 11 divided about the net unit 50 In the table tennis competition score display method for singles executed by the first sensing sensor 41, the second sensing sensor 42 and the score calculation terminal 100 installed in the second area 12 and in the second area 12, respectively,</u>
+<br/>
+<u>  The sensor and the score calculation terminal 100 are initialized S100, and the score calculation terminal 100 determines the presence or absence of the first racket sensor 21 and the second racket sensor 31;</u>
+<br/>
+<u>  When a competition is performed with the racket provided with the sensors 21 and 31, when the competition starts, the score calculation terminal 100 determines whether an impact detection signal is input from the net detection sensor 51 of the net unit 50;</u>
+<br/>
+<u>  When an impact detection signal is input from the net detection sensor 51, monitoring of the net unit 50 is continued, and when an impact detection signal is not input from the net detection sensor 51, each sensor 21 of the rackets 20 and 30 of both players 31 and an input pattern of an impact detection signal generated by the first sensing sensor 41 of the first area 11 and the second sensing sensor 42 of the second area 12 of the table tennis table 10 are preset in the storage unit 170 of the score calculation terminal 100 Determining whether a normal pattern is input S103;</u>
+<br/>
+<u>  If the impact detection signal is not input in the normal pattern, it is determined that the player on one side or the player on the other side scored, and the score of the player is calculated and displayed through the display unit 130;</u>
+<br/>
+<u>  If the score of the player on the one side or the player on the other side that the score calculation terminal 100 has increased is the score that satisfies the end score of the set, S105, the score calculation terminal 100 displays that the set has ended 130. A table tennis competition score display method comprising: S130 and informing through the voice output unit 140; and S106.</u>
+<br/>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="2">
+<div class="claim-text">
+<u>If the set does not satisfy the end score in step S105, the score calculation terminal 100 determines whether the difference between the score of the player on one side and the score of the player on the other side according to the rule of table tennis has occurred. Step S107: Informing each player that it is necessary to change the order of service through the display unit 130 and the voice output unit 140 of the score calculation terminal 100 based on the table tennis regulations, when a difference in the score occurs. The table tennis competition score display method according to claim 1, further comprising S108;</u>
+<br/>
+</div>
+</div>
+</li> <li class="claim"> <div class="claim" num="3">
+<div class="claim-text">
+<u>As a result of the judgment in the above-mentioned step S101, when the rackets held by the players are rackets not equipped with the sensors 21 and 31,</u>
+<br/>
+<u>  When the competition starts, the score calculation terminal 100 determines whether an impact detection signal is input from the net detection sensor 51 of the net unit 50, and if the impact detection signal is input from the net detection sensor 51, the net unit 50. Keep monitoring</u>
+<br/>
+<u>  When no impact detection signal is input from the net detection sensor 51, the impact detection signal transmitted from the first detection sensor 41 in the first area 11 and the second detection sensor 42 in the second area 12 of the table tennis table 10 is score calculation Determining whether a normal pattern set in advance is stored in the storage unit 170 of the terminal 100;</u>
+<br/>
+<u>  If the shock detection signal is not input in a preset pattern, it is determined that one player or the other player scored, and the score of the player is calculated and displayed through the display unit 130 (step S111). And further comprising:.</u>
+<br/>
+<u>The table tennis competition score display method as described in.</u>
+<br/>
+</div>
+</div>
+</li> <li class="claim"> <div class="claim" num="4">
+<div class="claim-text">
+<u>Table tennis table 10, first racket 20, second racket 30, third racket 60, fourth racket 70, net unit 50 and net detection sensor 51, first racket sensor 21, second racket sensor 31, third racket sensor 61, the fourth racket sensor 71, installed in the first area 11 and the second area 12 divided around the net portion 50, respectively installed in each area divided around the center line 13 of the area In the table tennis competition score display method for doubles performed by the first sensing sensor 41, the second sensing sensor 42, the third sensing sensor 43, the fourth sensing sensor 44 and the score calculation terminal 100,</u>
+<br/>
+<u>  The sensor and score calculation terminal 100 are initialized S200, and when the competition starts, the score calculation terminal 100 determines whether an impact detection signal is input from the net detection sensor 51 of the net unit 50;</u>
+<br/>
+<u>  If an impact detection signal is input from the net detection sensor 51, monitoring of the net unit 50 is continued, and if an impact detection signal is not input from the net detection sensor 51, it is determined whether the doubles service has been normally performed. Stage S202;</u>
+<br/>
+<u>  The sensors 21, 31, 61, 71 of the rackets 20, 30, 60, 70 of the players of both teams and the first sensor 41, the second sensor 42, the third sensor 43 and the fourth sensor of the table tennis table 10 Determining whether an input pattern of an impact detection signal generated by the F.44 is input in a normal pattern preset in the storage unit 170 of the score calculation terminal 100;</u>
+<br/>
+<u>  If a shock detection signal is not input in a preset pattern, it is determined that one team or the other team scored, and the score of the team is calculated and displayed through the display unit 130 (step S204). ;</u>
+<br/>
+<u>  If the score of the team on one side or the team on the other side that the score calculation terminal 100 has increased is the score that satisfies the end score of the set, S205, the display unit 130 or the voice output unit 140 that the set is ended. A table tennis competition score display method comprising: informing step S206;</u>
+<br/>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="5">
+<div class="claim-text">
+<u>If the set does not satisfy the end score, the score calculation terminal 100 determines whether the difference between the score of the player on one side and the score of the player on the other side according to the definition of table tennis has occurred, S207, Informing each player that it is necessary to change the order of the service through the display unit 130 or the voice output unit 140 of the score calculation terminal 100 when the difference in the score occurs, further comprising: The table tennis competition score display method according to claim 4, characterized in that:</u>
+<br/>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="6">
+<div class="claim-text">
+<u>In step S202, it is determined whether the doubles service has been successfully performed.</u>
+<br/>
+<u>  The input time of the shock detection signal input to the score calculation terminal 100 from the first sensing sensor 41, the third sensing sensor 43, the second sensing sensor 42, and the fourth sensing sensor 44 has a faster sensing sensor The table tennis competition score display method according to claim 4, wherein it is determined that the table tennis ball has fallen into the area.</u>
+<br/>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="7">
+<div class="claim-text">
+<u>In step S202, it is determined whether the doubles service has been successfully performed.</u>
+<br/>
+<u>  The area on the sensing sensor side where the signal strength of the shock detection signal input to the score calculation terminal 100 from the first sensing sensor 41, the third sensing sensor 43, the second sensing sensor 42, and the fourth sensing sensor 44 is larger The table tennis competition score display method according to claim 4, wherein it is determined that the table tennis ball has fallen.</u>
+</div>
+</div>
+</li> </ol>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

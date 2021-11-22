@@ -1,0 +1,422 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">CN107670250A - Table tennis judges whether that effectively service and ball move towards system and method after hitting table 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA314185045">
+<div class="abstract" num="0001">Judge whether that effectively service and ball move towards system and method after hitting table the invention discloses table tennis.Its system include read historical data and determine whether effectively service module, obtain ball table pressure sensing data and judge table tennis whether impact bead table module, obtain net pressure sensing data and judge table tennis whether hit net module, acquisition racket pressure sensing data and judge table tennis whether by racket shock module, judge whether table tennis lands module.After table tennis impact bead table, server determines whether effectively to serve a ball according to the historical data before hitting table, and the trend of table tennis is identified according to the pressure sensing data for hitting table tennis desktop after table, pressure sensor is sent on racket face and net face.The present invention solves the problems, such as that the existing table tennis system based on Internet of Things does not have and judges that table tennis hits the function that whether effectively service and ball move towards after table.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES216936447">
+<invention-title id="tilte1" lang="EN">Table tennis judges whether that effectively service and ball move towards system and method after hitting table</invention-title>
+<technical-field>
+<div class="description-paragraph" id="p0001" num="0001">Technical field</div>
+<div class="description-paragraph" id="p0002" num="0002">The invention belongs to smart table tennis Motion Technology field, judges whether effectively to send out after hitting table more particularly to table tennis
+Ball and ball move towards system and method.</div>
+</technical-field>
+<background-art>
+<div class="description-paragraph" id="p0003" num="0003">Background technology</div>
+<div class="description-paragraph" id="p0004" num="0004">Whether the existing table tennis system based on Internet of Things effectively serves a ball after table and ball without judging that table tennis is hit
+The function of trend.It is proposed that table tennis judges whether that effectively service and ball move towards system and method after hitting table for this.</div>
+</background-art>
+<disclosure>
+<div class="description-paragraph" id="p0005" num="0005">The content of the invention</div>
+<div class="description-paragraph" id="p0006" num="0006">The technical problems to be solved by the invention are the existing table tennis systems based on Internet of Things without judgement table tennis
+Pang ball hits the function that whether effectively service and ball move towards after table, proposes that table tennis judges whether effectively service and ball trend after hitting table
+System and method.</div>
+<div class="description-paragraph" id="p0007" num="0007">Applying pressure sensor of the present invention, pressure sensor after object pressure by deforming upon so as to produce pressure sensing
+Data.As shown in figure 1, disposing pressure sensor respectively in table tennis desktop, racket face and net face obtains pressure sensing data,
+Server is then forwarded to, server obtains the pressure sensing data of same sampling instant, judges whether table tennis hits table, by ball
+Clap and hit or hit net.After table tennis impact bead table, determine whether effectively to serve a ball according to the historical data before table is hit, according to hitting table
+The trend for the pressure sensing data identification table tennis that pressure sensor is sent on table tennis desktop, racket face and net face afterwards.This
+It is the summary that net is hit to table tennis that the described table tennis of invention, which hits net,；The table of the present invention that hits is to table tennis impact bead
+The summary of table.</div>
+<div class="description-paragraph" id="p0008" num="0008">Table tennis both sides' numbering of playing a game is that A and B, then ball table and racket numbering are the numbering of its corresponding side of playing a game.In ball
+Pressure sensor is disposed in desktop, net face and racket face respectively, and pressure sensitive region is covered each by whole desktop, wire side and bat
+Face.Sampling time interval T is set, and its value is less than the average time interval that middle table tennis hits twice of playing a game (according to historical data
+Statistics obtains)；Positive integer N is set；The threshold X for judging table tennis ball impact is set.State that variable i represents service, when table tennis quilt
+Racket hits when being service, then i=1, otherwise i=0；Statement variable j represents that table tennis hits table, when table tennis impact bead table,
+Then j=1, otherwise j=0.</div>
+<div class="description-paragraph" id="p0009" num="0009">The pressure sensor for being deployed in racket face and ball desktop obtains pressure sensing data according to sampling time interval T, so
+After send to server；Server obtains the pressure sensing data of same sampling instant, according to racket and the pressure sensing of ball table
+Data calculate each sampling instant variable i and variable j value and record.</div>
+<div class="description-paragraph" id="p0010" num="0010">The table tennis of the present invention judges whether that effectively service and ball move towards system after hitting table, including reads historical data and sentence
+It is disconnected whether be effective service module, obtain the pressure sensing data of ball table and judge table tennis whether impact bead table module, acquisition
+The pressure sensing data of net and judge table tennis whether hit net module, obtain racket pressure sensing data and judge table tennis
+Whether by racket hit module, judge whether table tennis lands module.</div>
+<div class="description-paragraph" id="p0011" num="0011">Read historical data and determine whether module of effectively serving a ball：Remember the ball table numbering that variable x is table tennis ball impact；Read
+Take and hit continuous N number of sampling instant variable i and variable j value before the table moment；Variable i and variable j value are according to sampling instant from rear
+Order before arriving forms 2 × N matrix H (the 1st behavior corresponds to the value of variable i, value of the 2nd behavior to dependent variable j), number of serving a ball
+n<sub>1</sub>The element number of variable i=1 as in matrix H, note variable y are the racket numbering of the last service；Hit table frequency n<sub>2</sub>As
+Variable j=1 element number in matrix H；Meet n when simultaneously<sub>1</sub>=1, n<sub>2</sub>=0, during x=y, then judge it is effectively to serve a ball, set and become
+Measure k=1, at the same enter the pressure sensing data for obtaining ball table and judge table tennis whether impact bead table module, acquisition net
+Pressure sensing data and judge table tennis whether hit net module and obtain racket pressure sensing data and whether judge table tennis
+Module is hit by racket；Otherwise judge it is not effectively to serve a ball.</div>
+<div class="description-paragraph" id="p0012" num="0012">Obtain ball table pressure sensing data and judge table tennis whether impact bead table module：It is deployed in the pressure of ball desktop
+Sensor obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server.Server
+The pressure sensing data of same sampling instant are obtained, when having and only a pressure sensing data are more than X, then judge table tennis
+Impact bead table, note variable p is the ball table numbering hit, if x=p, table tennis hits one's own side's table again after judging effectively service
+Face；If x ≠ p, table tennis directly hits other side's desktop after judging effectively service.Otherwise judge without generation table tennis impact bead
+Table.</div>
+<div class="description-paragraph" id="p0013" num="0013">Obtain the pressure sensing data of net and judge whether table tennis hits net module：It is deployed in the pressure sensing in net face
+Device obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server.Server obtains
+The pressure sensing data of same sampling instant, when having and only a pressure sensing data are more than X, then after judging effectively service
+Table tennis hits net；Otherwise judge to hit net without generation table tennis.</div>
+<div class="description-paragraph" id="p0014" num="0014">Obtain the pressure sensing data of racket and judge whether table tennis by racket hits module：It is deployed in the pressure in racket face
+Force snesor obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server.Service
+Device obtains the pressure sensing data of same sampling instant, when having and only a pressure sensing data are more than X, then judges table tennis
+Ball is hit by racket, and note variable q is the racket numbering for hitting table tennis, and table tennis is by one's own side after judging effectively service if the x=q
+Racket hits；Table tennis is hit by other side's racket after effectively service is judged if x ≠ q.Otherwise judge table tennis not by racket
+Hit.</div>
+<div class="description-paragraph" id="p0015" num="0015">Judge whether table tennis lands module：When table tennis does not have impact bead table and without shock net and not by racket
+During shock, judge whether k is less than N.If k&lt;N, then k=k+1 is made, while return to the pressure sensing data for obtaining ball table and judge table tennis
+Pang ball whether impact bead table module, obtain net pressure sensing data and judge table tennis whether hit net module and acquisition racket
+Pressure sensing data and judge whether table tennis by racket hits module；Otherwise table tennis directly falls after judging effectively service
+Ground.</div>
+<div class="description-paragraph" id="p0016" num="0016">Table tennis hit judge whether after table effectively service and ball move towards system system block diagram it is as shown in Figure 2.Each module
+Logical order as shown in Fig. 2 wherein obtain ball table pressure sensing data and judge table tennis whether impact bead table module, acquisition
+The pressure sensing data of net and judge table tennis whether hit net module and obtain racket pressure sensing data and judge table tennis
+Whether ball hits module by racket.</div>
+<div class="description-paragraph" id="p0017" num="0017">The table tennis of the present invention judges whether that effectively service and ball move towards method according to the following steps after hitting table：</div>
+<div class="description-paragraph" id="p0018" num="0018">Step 1, the numbering and correlated variables that racket and ball table are set.</div>
+<div class="description-paragraph" id="p0019" num="0019">Table tennis both sides' numbering of playing a game is that A and B, then ball table and racket numbering are the numbering of its corresponding side of playing a game；In ball
+Pressure sensor is disposed in desktop, net face and racket face respectively, and pressure sensitive region is covered each by whole desktop, wire side and bat
+Face；Sampling time interval T is set, and its value is less than the average time interval that middle table tennis hits twice of playing a game (according to historical data
+Statistics obtains)；Positive integer N is set；The threshold X for judging table tennis ball impact is set；State that variable i represents service, when table tennis quilt
+Racket hits when being service, then i=1, otherwise i=0；Variable j represents that table tennis hits table, when table tennis impact bead table, then j=
+1, otherwise j=0.</div>
+<div class="description-paragraph" id="p0020" num="0020">The value of step 2, record variable i and variable j.</div>
+<div class="description-paragraph" id="p0021" num="0021">The pressure sensor for being deployed in racket face and ball desktop obtains pressure sensing data according to sampling time interval T, so
+After send to server；Server obtains the pressure sensing data of same sampling instant, according to racket and the pressure sensing of ball table
+Data calculate each sampling instant variable i and variable j value and record；As variable j=1, then ball table numbering is recorded, into step
+Rapid 3；Otherwise return to step 2.</div>
+<div class="description-paragraph" id="p0022" num="0022">Step 3, read historical data and determine whether effectively to serve a ball.</div>
+<div class="description-paragraph" id="p0023" num="0023">Remember the ball table numbering that variable x is table tennis ball impact；Continuous N number of sampling instant variable i and change before the table moment are hit in reading
+Measure j value；Variable i and variable j value form 2 × N matrix H, frequency n of serving a ball according to the order of sampling instant from back to front<sub>1</sub>
+The element number of variable i=1 as in matrix H, note variable y are the racket numbering of the last service；Hit table frequency n<sub>2</sub>As
+Variable j=1 element number in matrix H；Meet n when simultaneously<sub>1</sub>=1, n<sub>2</sub>=0, during x=y, then judge it is effectively to serve a ball, set and become
+K=1 is measured, into step 4；Otherwise judge it is not effectively to serve a ball.</div>
+<div class="description-paragraph" id="p0024" num="0024">Step 4 at the same obtain the pressure sensing data of ball table, net and racket and judge table tennis whether impact bead table,
+Net or racket.Perform step 4.1, step 4.2 and step 4.3 simultaneously.</div>
+<div class="description-paragraph" id="p0025" num="0025">Step 4.1, obtain ball table pressure sensing data and judge table tennis whether impact bead table.</div>
+<div class="description-paragraph" id="p0026" num="0026">The pressure sensor for being deployed in ball desktop obtains the pressure sensing number hit after the table moment according to sampling time interval T
+According to being then forwarded to server.Server obtains the pressure sensing data of same sampling instant, when having and only a pressure passes
+When sense data are more than X, then table tennis impact bead table is judged, note variable p is the ball table numbering hit, if x=p, is judged effective
+Table tennis hits one's own side's desktop again after service, terminates；If x ≠ p, table tennis is directly hit to square table after judging effectively service
+Face, terminate.Otherwise judge without generation table tennis impact bead table.</div>
+<div class="description-paragraph" id="p0027" num="0027">Step 4.2, obtain net pressure sensing data and judge whether table tennis hits net.</div>
+<div class="description-paragraph" id="p0028" num="0028">The pressure sensor for being deployed in net face obtains the pressure sensing number hit after the table moment according to sampling time interval T
+According to being then forwarded to server.Server obtains the pressure sensing data of same sampling instant, when having and only a pressure passes
+When sense data are more than X, then table tennis hits net after judging effectively service, terminates；Otherwise judge to hit net without generation table tennis.</div>
+<div class="description-paragraph" id="p0029" num="0029">Step 4.3, obtain racket pressure sensing data and judge whether table tennis is hit by racket.</div>
+<div class="description-paragraph" id="p0030" num="0030">The pressure sensor for being deployed in racket face obtains the pressure sensing number hit after the table moment according to sampling time interval T
+According to being then forwarded to server.Server obtains the pressure sensing data of same sampling instant, when having and only a pressure passes
+When sense data are more than X, then judge that table tennis is hit by racket, note variable q is the racket numbering for hitting table tennis, is sentenced if x=q
+Table tennis is hit by one's own side's racket after fixed effectively service, terminates；Table tennis is by other side's racket after effectively service is judged if x ≠ q
+Hit.Otherwise judge that table tennis is not hit by racket.</div>
+<div class="description-paragraph" id="p0031" num="0031">Step 5, judge whether table tennis lands.</div>
+<div class="description-paragraph" id="p0032" num="0032">Judge whether k is less than N, if k&lt;N, then make k=k+1, return to step 4；Otherwise ping-pong after effectively serving a ball is judged
+Landing is connect, is terminated.</div>
+<div class="description-paragraph" id="p0033" num="0033">Table tennis judges whether that effectively service and ball move towards method flow diagram after hitting table, as shown in Figure 3.For convenience of display,
+The related content of step 4.1, step 4.2 and step 4.3 is shown in order in figure 3, is actually to perform simultaneously.</div>
+<div class="description-paragraph" id="p0034" num="0034">The system and method for the present invention this have the advantage that：</div>
+<div class="description-paragraph" id="p0035" num="0035">(1) applying pressure sensor can simply and effectively judge table tennis impact bead table, the racket when table tennis is played a game
+Time and position with net.</div>
+<div class="description-paragraph" id="p0036" num="0036">(2) identification that table tennis moves towards after effectively being served a ball when table tennis is played a game is realized using Internet of Things network method, can be simple
+Efficiently identify state of the table tennis when playing a game.</div>
+</disclosure>
+<description-of-drawings>
+<div class="description-paragraph" id="p0037" num="0037">Brief description of the drawings</div>
+<div class="description-paragraph" id="p0038" num="0038">Fig. 1 is the structural representation of the table tennis system based on pressure sensor of the present invention；</div>
+<div class="description-paragraph" id="p0039" num="0039">Fig. 2 is to judge whether that effectively service and ball move towards system block diagram after the table tennis of the present invention hits table；</div>
+<div class="description-paragraph" id="p0040" num="0040">Fig. 3 is to judge whether that effectively service and ball move towards method flow diagram after the table tennis of the present invention hits table；</div>
+<div class="description-paragraph" id="p0041" num="0041">Fig. 4 is the ping-pong table numbering and racket numbering schematic diagram of the embodiment of the present invention.</div>
+</description-of-drawings>
+<mode-for-invention>
+<div class="description-paragraph" id="p0042" num="0042">Embodiment</div>
+<div class="description-paragraph" id="p0043" num="0043">The preferred embodiment of the present invention is elaborated below.</div>
+<div class="description-paragraph" id="p0044" num="0044">Applying pressure sensor of the present invention, pressure sensor after object pressure by deforming upon so as to produce pressure sensing
+Data.As shown in figure 1, disposing pressure sensor respectively in table tennis desktop, racket face and net face obtains pressure sensing data,
+Server is then forwarded to, server obtains the pressure sensing data of same sampling instant, judges whether table tennis hits table, by ball
+Clap and hit or hit net.After table tennis impact bead table, server determines whether effectively to serve a ball according to the historical data before hitting table, root
+According to hit table tennis desktop after table, pressure sensor is sent on racket face and net face pressure sensing data identification table tennis is walked
+To.It is the summary that net is hit to table tennis that table tennis of the present invention, which hits net,；The table of the present invention that hits is to table tennis
+The summary of impact bead table.</div>
+<div class="description-paragraph" id="p0045" num="0045">Table tennis both sides' numbering of playing a game is that A and B, then ball table and racket numbering are the numbering of its corresponding side of playing a game.In ball
+Pressure sensor is disposed in desktop, net face and racket face respectively, and pressure sensitive region is covered each by whole desktop, wire side and bat
+Face.Sampling time interval T is set, and its value is less than the average time interval that middle table tennis hits twice of playing a game (according to historical data
+Statistics obtains)；Positive integer N is set；The threshold X for judging table tennis ball impact is set.State that variable i represents service, when table tennis quilt
+Racket hits when being service, then i=1, otherwise i=0；Variable j represents that table tennis hits table, when table tennis impact bead table, then j=
+1, otherwise j=0.In the present embodiment, the both sides that play a game numbering is A and B, and ping-pong table both sides are numbered respectively according to its corresponding side of playing a game
+For A and B, corresponding racket numbering is A and B, as shown in Figure 4；36 piezoelectric film sensors are affixed one's name on table tennis desktop top,
+12 piezoelectric film sensors of racket face administration, in 8 piezoelectric film sensors of net face administration.Between setting data sampling time
+Every T=10 milliseconds；Positive integer N=50 is set；Threshold X=5 millivolt (mV) for judging table tennis ball impact are set；State variable i table
+Show service, when table tennis by racket hit be service when, then i=1, otherwise i=0；Variable j represents that table tennis hits table, works as table tennis
+During ball impact ball table, then j=1, otherwise j=0.</div>
+<div class="description-paragraph" id="p0046" num="0046">The pressure sensor for being deployed in racket face and ball desktop obtains pressure sensing data according to sampling time interval T, so
+After send to server；Server obtains the pressure sensing data of same sampling instant, according to racket and the pressure sensing of ball table
+Data calculate each sampling instant variable i and variable j value and record.In the present embodiment, the pressure of ball desktop and racket face administration
+Force snesor obtains voltage data according to sampling time interval T respectively, is then forwarded to server, server is according to respective voltage
+Data calculate variable i and variable j value；The variable j=1 that server sampling instant calculates.</div>
+<div class="description-paragraph" id="p0047" num="0047">The table tennis of the present invention judges whether that effectively service and ball move towards system after hitting table, including reads historical data and sentence
+It is disconnected whether be effective service module, obtain the pressure sensing data of ball table and judge table tennis whether impact bead table module, acquisition
+The pressure sensing data of net and judge table tennis whether hit net module, obtain racket pressure sensing data and judge table tennis
+Whether by racket hit module, judge whether table tennis lands module.</div>
+<div class="description-paragraph" id="p0048" num="0048">Read historical data and determine whether module of effectively serving a ball：Remember the ball table numbering that variable x is table tennis ball impact；Read
+Take and hit continuous N number of sampling instant variable i and variable j value before the table moment；Variable i and variable j value are according to sampling instant from rear
+Order before arriving forms 2 × N matrix H (the 1st behavior corresponds to the value of variable i, value of the 2nd behavior to dependent variable j), number of serving a ball
+n<sub>1</sub>The element number of variable i=1 as in matrix H, note variable y are the racket numbering of the last service；Hit table frequency n<sub>2</sub>As
+Variable j=1 element number in matrix H；Meet n when simultaneously<sub>1</sub>=1, n<sub>2</sub>=0, during x=y, then judge it is effectively to serve a ball, set and become
+Measure k=1, at the same enter the pressure sensing data for obtaining ball table and judge table tennis whether impact bead table module, acquisition net
+Pressure sensing data and judge table tennis whether hit net module and obtain racket pressure sensing data and whether judge table tennis
+Module is hit by racket；Otherwise judge it is not effectively to serve a ball.In the present embodiment, the ball table numbering for ball impact of rattling is A, i.e. x=
+A；Continuous 50 sampling instant variable is and variable j value before the table moment are hit in reading, according to the order structure of sampling instant from back to front
+Into 2 × 50 matrix H, the element of wherein variable i=1 only has one, for the element of the 15th row, i.e. n<sub>1</sub>=1, the last time service
+Racket numbering be A, i.e. y=A；There is no variable j=1 element, i.e. n<sub>2</sub>=0.Now meet n simultaneously<sub>1</sub>=1, n<sub>2</sub>=0, x=y,
+Then judge it is effectively to serve a ball, variable k=1 is set, while enter the pressure sensing data for obtaining ball table and whether judge table tennis
+Impact bead table module, obtain net pressure sensing data and judge table tennis whether hit net module and obtain racket pressure biography
+Sense data and judge whether table tennis by racket hits module.</div>
+<div class="description-paragraph" id="p0049" num="0049">Obtain ball table pressure sensing data and judge table tennis whether impact bead table module：It is deployed in the pressure of ball desktop
+Sensor obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server.Server
+The pressure sensing data of same sampling instant are obtained, when having and only a pressure sensing data are more than X, then judge table tennis
+Impact bead table, note variable p is the ball table numbering hit, if x=p, table tennis hits one's own side's table again after judging effectively service
+Face；If x ≠ p, table tennis directly hits other side's desktop after judging effectively service.Otherwise judge without generation table tennis impact bead
+Table.In the present embodiment, it is deployed in after 36 pressure sensors of ball desktop obtain according to sampling time interval T and hit the table moment
+Voltage data, it is then forwarded to server；Server according to the sampling instant voltage data judge table tennis whether impact bead table.
+During k=1, table tennis impact bead table does not occur.</div>
+<div class="description-paragraph" id="p0050" num="0050">Obtain the pressure sensing data of net and judge whether table tennis hits net module：It is deployed in the pressure sensing in net face
+Device obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server.Server obtains
+The pressure sensing data of same sampling instant, when having and only a pressure sensing data are more than X, then after judging effectively service
+Table tennis hits net；Otherwise judge to hit net without generation table tennis.In the present embodiment, 8 pressure for being deployed in net face pass
+Sensor obtains the voltage data hit after the table moment according to sampling time interval T, is then forwarded to server；Server is according to this
+Sampling instant voltage data judges whether table tennis hits net.During k=1, table tennis does not occur and hits net.</div>
+<div class="description-paragraph" id="p0051" num="0051">Obtain the pressure sensing data of racket and judge whether table tennis by racket hits module：It is deployed in the pressure in racket face
+Force snesor obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server.Service
+Device obtains the pressure sensing data of same sampling instant, when having and only a pressure sensing data are more than X, then judges table tennis
+Ball is hit by racket, and note variable q is the racket numbering for hitting table tennis, and table tennis is by one's own side after judging effectively service if the x=q
+Racket hits；Table tennis is hit by other side's racket after effectively service is judged if x ≠ q.Otherwise judge table tennis not by racket
+Hit.In the present embodiment, it is deployed in after 12 pressure sensors in racket face obtain according to sampling time interval T and hit the table moment
+Voltage data, be then forwarded to server；Whether server judges table tennis by racket according to the sampling instant voltage data
+Hit.During k=1, table tennis does not occur and is hit by racket.</div>
+<div class="description-paragraph" id="p0052" num="0052">Judge whether table tennis lands module：When table tennis does not have impact bead table and without shock net and not by racket
+During shock, judge whether k is less than N.If k&lt;N, then k=k+1 is made, while return to the pressure sensing data for obtaining ball table and judge table tennis
+Pang ball whether impact bead table module, obtain net pressure sensing data and judge table tennis whether hit net module and acquisition racket
+Pressure sensing data and judge whether table tennis by racket hits module；Otherwise table tennis directly falls after judging effectively service
+Ground.In the present embodiment, during k=1, k&lt;N=50, make k=k+1=2.The pressure sensing data for obtaining ball table and judgement are returned simultaneously
+Table tennis whether impact bead table module, obtain net pressure sensing data and judge table tennis whether hit net module and acquisition ball
+The pressure sensing data of bat and judge whether table tennis by racket hits module.</div>
+<div class="description-paragraph" id="p0053" num="0053">During k=2, by the sampling instant pressure sensing data judge table tennis do not have impact bead table, without hit net,
+Do not hit by racket.k&lt;N=50, make k=k+1=3.The pressure sensing data for obtaining ball table are returned simultaneously and judge table tennis
+Whether impact bead table module, obtain net pressure sensing data and judge table tennis whether hit net module and acquisition racket pressure
+Power sensing data and judge whether table tennis by racket hits module.</div>
+<div class="description-paragraph" id="p0054" num="0054">During k=3, table tennis impact bead table, the ball table of shock are judged by the pressure sensing data of the ball table sampling instant
+Numbering is A, i.e. p=A, x=p, then table tennis hits one's own side's desktop again after judging effectively service.Now system operation terminates.</div>
+<div class="description-paragraph" id="p0055" num="0055">The table tennis of the present invention judges whether that effectively service and ball move towards method according to the following steps after hitting table：</div>
+<div class="description-paragraph" id="p0056" num="0056">Step 1, the numbering and correlated variables that racket and ball table are set.</div>
+<div class="description-paragraph" id="p0057" num="0057">Table tennis both sides' numbering of playing a game is that A and B, then ball table and racket numbering are the numbering of its corresponding side of playing a game；In ball
+Pressure sensor is disposed in desktop, net face and racket face respectively, and pressure sensitive region is covered each by whole desktop, wire side and bat
+Face；Sampling time interval T is set, and its value is less than the average time interval that middle table tennis hits twice of playing a game (according to historical data
+Statistics obtains)；Positive integer N is set；The threshold X for judging table tennis ball impact is set；State that variable i represents service, when table tennis quilt
+Racket hits when being service, then i=1, otherwise i=0；Variable j represents that table tennis hits table, when table tennis impact bead table, then j=
+1, otherwise j=0.In the present embodiment, the both sides that play a game numbering is A and B, and ping-pong table both sides are numbered respectively according to its corresponding side of playing a game
+For A and B, corresponding racket numbering is A and B, as shown in Figure 4；36 piezoelectric film sensors are affixed one's name on table tennis desktop top,
+12 piezoelectric film sensors of racket face administration, in 8 piezoelectric film sensors of net face administration.Between setting data sampling time
+Every T=10 milliseconds；Positive integer N=50 is set；Threshold X=5 millivolt (mV) for judging table tennis ball impact are set；State variable i table
+Show service, when table tennis by racket hit be service when, then i=1, otherwise i=0；Variable j represents that table tennis hits table, works as table tennis
+During ball impact ball table, then j=1, otherwise j=0.</div>
+<div class="description-paragraph" id="p0058" num="0058">The value of step 2, record variable i and variable j.</div>
+<div class="description-paragraph" id="p0059" num="0059">The pressure sensor for being deployed in racket face and ball desktop obtains pressure sensing data according to sampling time interval T, so
+After send to server；Server obtains the pressure sensing data of same sampling instant, according to racket and the pressure sensing of ball table
+Data calculate each sampling instant variable i and variable j value and record；As variable j=1, then ball table numbering is recorded, into step
+Rapid 3；Otherwise return to step 2.In the present embodiment, the pressure sensor of ball desktop and racket face administration is respectively according between the sampling time
+Voltage data is obtained every T, is then forwarded to server, server calculates variable i and variable j value according to respective voltage data；
+The variable j=1 that server sampling instant calculates, record ball table numbering is A, into step 3.</div>
+<div class="description-paragraph" id="p0060" num="0060">Step 3, read historical data and determine whether effectively to serve a ball.</div>
+<div class="description-paragraph" id="p0061" num="0061">Remember the ball table numbering that variable x is table tennis ball impact；Continuous N number of sampling instant variable i and change before the table moment are hit in reading
+Measure j value；Variable i and variable j value form 2 × N matrix H, frequency n of serving a ball according to the order of sampling instant from back to front<sub>1</sub>
+The element number of variable i=1 as in matrix H, note variable y are the racket numbering of the last service；Hit table frequency n<sub>2</sub>As
+Variable j=1 element number in matrix H；Meet n when simultaneously<sub>1</sub>=1, n<sub>2</sub>=0, during x=y, then judge it is effectively to serve a ball, set and become
+K=1 is measured, into step 4；Otherwise judge it is not effectively to serve a ball.In the present embodiment, the ball table numbering for ball impact of rattling is A, i.e. x
+=A；Continuous 50 sampling instant variable is and variable j value before the table moment are hit in reading, according to the order of sampling instant from back to front
+2 × 50 matrix H is formed, the element of wherein variable i=1 only has one, for the element of the 15th row, i.e. n<sub>1</sub>=1, the last time hair
+The racket numbering of ball is A, i.e. y=A；There is no variable j=1 element, i.e. n<sub>2</sub>=0.Now meet n simultaneously<sub>1</sub>=1, n<sub>2</sub>=0, x=
+Y, then judge it is effectively to serve a ball, variable k=1 is set, into step 4.</div>
+<div class="description-paragraph" id="p0062" num="0062">Step 4 at the same obtain the pressure sensing data of ball table, net and racket and judge table tennis whether impact bead table,
+Net or racket.</div>
+<div class="description-paragraph" id="p0063" num="0063">Step 4.1, obtain ball table pressure sensing data and judge table tennis whether impact bead table.</div>
+<div class="description-paragraph" id="p0064" num="0064">The pressure sensor for being deployed in ball desktop obtains the pressure sensing number hit after the table moment according to sampling time interval T
+According to being then forwarded to server.Server obtains the pressure sensing data of same sampling instant, when having and only a pressure passes
+When sense data are more than X, then table tennis impact bead table is judged, note variable p is the ball table numbering hit, if x=p, is judged effective
+Table tennis hits one's own side's desktop again after service, terminates；If x ≠ p, table tennis is directly hit to square table after judging effectively service
+Face, terminate.Otherwise judge without generation table tennis impact bead table.In the present embodiment, 36 pressure sensings of ball desktop are deployed in
+Device obtains the voltage data hit after the table moment according to sampling time interval T, is then forwarded to server；Server is adopted according to this
+Sample moment voltage data judge table tennis whether impact bead table.During k=1, table tennis impact bead table does not occur.</div>
+<div class="description-paragraph" id="p0065" num="0065">Step 4.2, obtain net pressure sensing data and judge whether table tennis hits net.</div>
+<div class="description-paragraph" id="p0066" num="0066">The pressure sensor for being deployed in net face obtains the pressure sensing number hit after the table moment according to sampling time interval T
+According to being then forwarded to server.Server obtains the pressure sensing data of same sampling instant, when having and only a pressure passes
+When sense data are more than X, then table tennis hits net after judging effectively service, terminates；Otherwise judge to hit net without generation table tennis.
+In the present embodiment, 8 pressure sensors for being deployed in net face obtain the voltage hit after the table moment according to sampling time interval T
+Data, it is then forwarded to server；Server judges whether table tennis hits net according to the sampling instant voltage data.During k=1,
+Table tennis does not occur and hits net.</div>
+<div class="description-paragraph" id="p0067" num="0067">Step 4.3, obtain racket pressure sensing data and judge whether table tennis is hit by racket.</div>
+<div class="description-paragraph" id="p0068" num="0068">The pressure sensor for being deployed in racket face obtains the pressure sensing number hit after the table moment according to sampling time interval T
+According to being then forwarded to server.Server obtains the pressure sensing data of same sampling instant, when having and only a pressure passes
+When sense data are more than X, then judge that table tennis is hit by racket, note variable q is the racket numbering for hitting table tennis, is sentenced if x=q
+Table tennis is hit by one's own side's racket after fixed effectively service, terminates；Table tennis is by other side's racket after effectively service is judged if x ≠ q
+Hit.Otherwise judge that table tennis is not hit by racket.In the present embodiment, be deployed in 12 pressure sensors in racket face according to
+Sampling time interval T obtains the voltage data hit after the table moment, is then forwarded to server；Server is according to the sampling instant
+Voltage data judges whether table tennis is hit by racket.During k=1, table tennis does not occur and is hit by racket.</div>
+<div class="description-paragraph" id="p0069" num="0069">Step 5, judge whether table tennis lands.</div>
+<div class="description-paragraph" id="p0070" num="0070">Judge whether k is less than N, if k&lt;N, then make k=k+1, return to step 4；Otherwise ping-pong after effectively serving a ball is judged
+Landing is connect, is terminated.In the present embodiment, during k=1, k&lt;N=50, make k=k+1=2.Return to step 4.</div>
+<div class="description-paragraph" id="p0071" num="0071">During k=2, by the sampling instant pressure sensing data judge table tennis do not have impact bead table, without hit net,
+Do not hit by racket.k&lt;N=50, make k=k+1=3.Return to step 4.</div>
+<div class="description-paragraph" id="p0072" num="0072">During k=3, table tennis impact bead table, the ball table of shock are judged by the pressure sensing data of the ball table sampling instant
+Numbering is A, i.e. p=A, x=p, then table tennis hits one's own side's desktop again after judging effectively service.Now method is performed and terminated.</div>
+<div class="description-paragraph" id="p0073" num="0073">Certainly, those of ordinary skill in the art is it should be appreciated that above example is intended merely to illustrate this hair
+Bright, and limitation of the invention is not intended as, as long as within the scope of the invention, change, modification to above example are all
+Protection scope of the present invention will be fallen into.</div>
+</mode-for-invention>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">10</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM211109189">
+<div class="claim"> <div class="claim" id="en-cl0001" num="0001">
+<div class="claim-text">1. table tennis judges whether that effectively service and ball move towards system after hitting table, it is characterised in that including reading historical data and sentencing
+It is disconnected whether be effective service module, obtain the pressure sensing data of ball table and judge table tennis whether impact bead table module, acquisition
+The pressure sensing data of net and judge table tennis whether hit net module, obtain racket pressure sensing data and judge table tennis
+Whether by racket hit module, judge whether table tennis lands module.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0002" num="0002">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">2. table tennis according to claim 1 judges whether that effectively service and ball move towards system after hitting table, it reads history
+Data and determining whether module of effectively serving a ball is characterised by：Remember the ball table numbering that variable x is table tennis ball impact；Table is hit in reading
+Continuous N number of sampling instant variable i and variable j value before moment, wherein N are positive integers, and variable i represents service, when table tennis quilt
+Racket hits when being service, then i=1, otherwise i=0；Variable j represents that table tennis hits table, when table tennis impact bead table, then j=
+1, otherwise j=0；Variable i and variable j value form 2 × N matrix H, number of serving a ball according to the order of sampling instant from back to front
+n<sub>1</sub>The element number of variable i=1 as in matrix H, note variable y are the racket numbering of the last service；Hit table frequency n<sub>2</sub>As
+Variable j=1 element number in matrix H；Meet n when simultaneously<sub>1</sub>=1, n<sub>2</sub>=0, during x=y, then judge it is effectively to serve a ball, set and become
+Measure k=1, at the same enter the pressure sensing data for obtaining ball table and judge table tennis whether impact bead table module, acquisition net
+Pressure sensing data and judge table tennis whether hit net module and obtain racket pressure sensing data and whether judge table tennis
+Module is hit by racket, otherwise judges it is not effectively to serve a ball.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0003" num="0003">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">3. table tennis according to claim 1 judges whether that effectively service and ball move towards system after hitting table, it obtains ball table
+Pressure sensing data and judge whether impact bead table module is characterised by table tennis：It is deployed in the pressure sensor of ball desktop
+The pressure sensing data after the table moment are hit in sampling time interval T acquisitions according to setting in advance, are then forwarded to server；Clothes
+Business device obtains the pressure sensing data of same sampling instant, and when having and only a pressure sensing data are more than X, wherein X is
+The threshold value of the judgement table tennis ball impact set in advance, then judging table tennis impact bead table, note variable p is the ball table numbering hit,
+If x=p, table tennis hits one's own side's desktop again after judging effectively service, if x ≠ p, judges ping-pong after effectively service
+Connect and hit other side's desktop；Otherwise judge without generation table tennis impact bead table.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0004" num="0004">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">4. table tennis according to claim 1 judges whether that effectively service and ball move towards system after hitting table, it obtains net
+Pressure sensing data and judge whether table tennis hits net module and be characterised by：Be deployed in the pressure sensor in net face according to
+Sampling time interval T obtains the pressure sensing data hit after the table moment, is then forwarded to server；Server obtains same adopt
+The pressure sensing data at sample moment, when having and only a pressure sensing data are more than X, then judge table tennis after effectively service
+Net is hit, otherwise judges to hit net without generation table tennis.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0005" num="0005">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">5. table tennis according to claim 1 judges whether that effectively service and ball move towards system after hitting table, it obtains racket
+Pressure sensing data and judge table tennis whether by racket hit module be characterised by：It is deployed in the pressure sensing in racket face
+Device obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server；Server obtains
+The pressure sensing data of same sampling instant, when having and only a pressure sensing data are more than X, then judge table tennis by ball
+Clap and hit, note variable q is the racket numbering for hitting table tennis, and table tennis is hit by one's own side's racket after judging effectively service if the x=q
+Hit, table tennis is hit by other side's racket after effectively service is judged if x ≠ q；Otherwise judge that table tennis is not hit by racket.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0006" num="0006">
+<div class="claim-text">
+<claim-ref idref="en-cl0001"> </claim-ref>
+</div>
+<div class="claim-text">6. table tennis according to claim 1 judges whether that effectively service and ball move towards system after hitting table, it judges table tennis
+Whether ball, which lands module, is characterised by：When table tennis does not have impact bead table and not shock net and is not hit by racket
+When, then judge whether k is less than N；If k&lt;N, then k=k+1 is made, while return to the pressure sensing data for obtaining ball table and judge table tennis
+Ball whether impact bead table module, obtain the pressure sensing data of net and judge whether table tennis hits net module and acquisition racket
+Pressure sensing data and judge whether table tennis by racket hits module, table tennis directly lands after otherwise judging effectively service.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="en-cl0007" num="0007">
+<div class="claim-text">7. table tennis judges whether that effectively service and ball move towards method after hitting table, it is characterised in that：</div>
+<div class="claim-text">Step 1, the numbering and correlated variables that racket and ball table are set；</div>
+<div class="claim-text">The value of step 2, record variable i and variable j；</div>
+<div class="claim-text">Step 3, read historical data and determine whether effectively to serve a ball；</div>
+<div class="claim-text">Step 4 at the same obtain the pressure sensing data of ball table, net and racket and judge table tennis whether impact bead table, net
+Or racket；</div>
+<div class="claim-text">Step 5, judge whether table tennis lands.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0008" num="0008">
+<div class="claim-text">
+<claim-ref idref="en-cl0007"> </claim-ref>
+</div>
+<div class="claim-text">8. table tennis according to claim 7 judges whether that effectively service and ball move towards method after hitting table, its step 1, step
+Rapid 2 and step 3 be characterised by：</div>
+<div class="claim-text">Step 1：Table tennis both sides' numbering of playing a game is that A and B, then ball table and racket numbering are the numbering of its corresponding side of playing a game；
+Pressure sensor is disposed in ball desktop, net face and racket face respectively, and pressure sensitive region is covered each by whole desktop, wire side and bat
+Face；Sampling time interval T is set；Positive integer N is set；The threshold X for judging table tennis ball impact is set；State that variable i represents service,
+When table tennis by racket hit be service when, then i=1, otherwise i=0；Variable j represents that table tennis hits table, when table tennis impact bead
+During table, then j=1, otherwise j=0；</div>
+<div class="claim-text">Step 2：The pressure sensor for being deployed in racket face and ball desktop obtains pressure sensing data according to sampling time interval T,
+It is then forwarded to server；Server obtains the pressure sensing data of same sampling instant, is passed according to the pressure of racket and ball table
+Feel data and calculate each sampling instant variable i and variable j value and record；As variable j=1, then ball table numbering is recorded, is entered
+Step 3；Otherwise return to step 2；</div>
+<div class="claim-text">Step 3：Remember the ball table numbering that variable x is table tennis ball impact；Reading hit before the table moment continuous N number of sampling instant variable i and
+Variable j value；Variable i and variable j value form 2 × N matrix H, number of serving a ball according to the order of sampling instant from back to front
+n<sub>1</sub>The element number of variable i=1 as in matrix H, note variable y are the racket numbering of the last service；Hit table frequency n<sub>2</sub>As
+Variable j=1 element number in matrix H；Meet n when simultaneously<sub>1</sub>=1, n<sub>2</sub>=0, during x=y, then judge it is effectively to serve a ball, set and become
+K=1 is measured, into step 4, otherwise judges it is not effectively to serve a ball.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0009" num="0009">
+<div class="claim-text">
+<claim-ref idref="en-cl0007"> </claim-ref>
+</div>
+<div class="claim-text">9. table tennis according to claim 7 judges whether that effectively service and ball move towards method after hitting table, the spy of its step 4
+Sign is：Perform step 4.1, step 4.2 and step 4.3 simultaneously；</div>
+<div class="claim-text">Step 4.1, obtain ball table pressure sensing data and judge table tennis whether impact bead table：It is deployed in the pressure of ball desktop
+Sensor obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server；Server
+The pressure sensing data of same sampling instant are obtained, when having and only a pressure sensing data are more than X, then judge table tennis
+Impact bead table, note variable p is the ball table numbering hit, if x=p, table tennis hits one's own side's table again after judging effectively service
+Face, terminate, if x ≠ p, table tennis directly hits other side's desktop after judging effectively service, terminates；Otherwise judge without generation table tennis
+Pang ball impact ball table；</div>
+<div class="claim-text">Step 4.2, obtain net pressure sensing data and judge whether table tennis hits net：It is deployed in the pressure sensing in net face
+Device obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server；Server obtains
+The pressure sensing data of same sampling instant, when having and only a pressure sensing data are more than X, then after judging effectively service
+Table tennis hits net, terminates, and otherwise judges to hit net without generation table tennis；</div>
+<div class="claim-text">Step 4.3, obtain racket pressure sensing data and judge whether table tennis is hit by racket：It is deployed in the pressure in racket face
+Force snesor obtains the pressure sensing data hit after the table moment according to sampling time interval T, is then forwarded to server；Service
+Device obtains the pressure sensing data of same sampling instant, when having and only a pressure sensing data are more than X, then judges table tennis
+Ball is hit by racket, and note variable q is the racket numbering for hitting table tennis, and table tennis is by one's own side after judging effectively service if the x=q
+Racket hits, and terminates, and table tennis is hit by other side's racket after effectively service is judged if x ≠ q；Otherwise judge table tennis not by
+Racket hits.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="en-cl0010" num="0010">
+<div class="claim-text">
+<claim-ref idref="en-cl0007"> </claim-ref>
+</div>
+<div class="claim-text">10. table tennis according to claim 7 judges whether that effectively service and ball move towards method after hitting table, its step 5
+It is characterised by：Judge whether k is less than N, if k&lt;N, then make k=k+1, return to step 4；Otherwise ping-pong after effectively serving a ball is judged
+Landing is connect, is terminated.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

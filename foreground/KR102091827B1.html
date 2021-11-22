@@ -1,0 +1,392 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">KR102091827B1 - Swing accuracy and change discriminating device of table tennis racket 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA403575543" source="national office">
+<div class="abstract">The present invention comprises: a table tennis racket including a handle for a grip and a hitting part connected to the handle and hitting a table tennis ball; a detection sensor unit installed on the handle and repeatedly storing acceleration information and angular velocity information generated when the table tennis racket swings; a determination unit for determining swing accuracy through calculating and comparing a swing trajectory of the table tennis racket based on the detection information detected by the detection sensor unit; and a replacement decision unit that calculates and stores the amount of impact applied to the hitting part, detects a change in the amount of impact, and guides the decision of replacement timing of the hitting part.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="google" mxw-id="PDES249386774">
+<invention-title lang="KO">
+<span class="notranslate"> <span class="google-src-text">탁구 라켓의 스윙 정확도 및 교체 판별 장치{Swing accuracy and change discriminating device of table tennis racket}</span>Swing accuracy and change discriminating device of table tennis racket</span>
+</invention-title>
+<technical-field>
+<div class="description-paragraph" num="0001">
+<span class="notranslate"> <span class="google-src-text">본 발명은 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 관한 것으로서, 더욱 상세하게는 기술 별 탁구 라켓의 스윙 궤적 분석을 통해 스윙의 정확성 여부를 판단하고, 탁구 라켓의 교체 시점을 정확하게 판단할 수 있는 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 관한 것이다.</span>The present invention relates to a swing accuracy and replacement discrimination device for a table tennis racket, and more specifically, to determine whether the swing is accurate through analysis of a swing trajectory of a table tennis racket for each technology, and table tennis capable of accurately determining a replacement time of the table tennis racket It relates to a racket swing accuracy and replacement discrimination device.</span>
+</div>
+</technical-field>
+<background-art>
+<div class="description-paragraph" num="0002">
+<span class="notranslate"> <span class="google-src-text">일반적으로, 탁구는 탁구대의 중앙에 그물을 치고 상대편 지역으로 작고 가벼운 탁구공을 라켓으로 쳐 넘겨 승부를 가리는 구기 경기로서, 작고 가벼운 공을 라켓으로 쳐 넘기는 경기의 특성으로 인해 경기자의 정확한 스윙동작 제어와 스윙의 힘 조절이 아주 중요한 경기이며, 이러한 특성으로 인해 스윙동작을 지속적으로 반복연습하여 기술을 습득하고 숙련하여야 하고, 이와 함께 포핸드 스윙과 백핸드 스윙의 자연스러운 변환동작 또한 지속적으로 반복 연습하여 기술을 습득하고 숙련하여야 한다.</span>In general, ping-pong is a ball game that covers the net by hitting a net in the center of the table tennis table and hitting a small and light ping pong ball with a racket to the other side, and the player's precise swinging motion is controlled due to the nature of the game of passing a small and light ball with a racket It is a very important game to control the power of swing and swing. Due to these characteristics, you need to learn and practice skills by continuously practicing the swinging motion.At the same time, the natural conversion of the forehand swing and the backhand swing is also practiced repeatedly. Must be mastered and skilled.</span>
+</div>
+<div class="description-paragraph" num="0003">
+<span class="notranslate"> <span class="google-src-text">예컨대, 탁구 경기의 시작이라 할 수 있는 서비스와 리시브 조차도, 서비스 자에 따라 탁구공의 높이와 속도, 방향이 달라 지속적인 연습을 통해서만이 효과적인 리시브가 가능하고, 나아가 공격으로도 전환이 가능한 것이다.</span>For example, even a service and a reception that can be said to be the start of a table tennis game, the height, speed, and direction of a table tennis ball vary depending on the service provider, so effective reception is possible only through continuous practice, and furthermore, it can be converted into an attack.</span>
+</div>
+<div class="description-paragraph" num="0004">
+<span class="notranslate"> <span class="google-src-text">따라서, 최근에는 이러한 문제점을 보완하기 위해 여러 형태의 연습장치가 개발되고 있으며, 탁구 연습 장치의 일예로서는 등록특허 제10-1114595호 "탁구 게임 로봇" 등이 있다.</span>Therefore, in recent years, various types of exercise devices have been developed to compensate for this problem, and as an example of the table tennis practice devices, there is a registered patent No. 10-1114595 "Table tennis game robot".</span>
+</div>
+<div class="description-paragraph" num="0005">
+<span class="notranslate"> <span class="google-src-text">위 특허문헌에 개시된 탁구 게임 로봇은 탁구공 발사가 가능한 탁구로봇과, 연습자가 친 공이 부딪히는 탁구 테이블 상에 얇은 막의 형태로 제작된 감응시트센서를 구비를 구비하고 있으며, 이와 같은 구성을 갖는 종래의 기술은 탁구로봇에서 사용자를 향해 공을 발사하고, 감응시트센서로서 연습자가 라켓으로 타격한 탁구공의 착지점을 감지하여 탁구로봇에서 발사할 탁구공의 거리, 각도, 방향을 제어하도록 되어 있다.</span>The table tennis game robot disclosed in the above patent document is provided with a table tennis robot capable of launching a table tennis ball and a sensitive sheet sensor made in the form of a thin film on a table tennis table where a ball hit by a practitioner has a conventional structure having such a configuration. The technology launches the ball toward the user from the table tennis robot, and as a sensitive seat sensor, the practitioner senses the landing point of the table tennis ball hit by the racket and controls the distance, angle, and direction of the table tennis ball to be launched by the table tennis robot.</span>
+</div>
+<div class="description-paragraph" num="0006">
+<span class="notranslate"> <span class="google-src-text">그러나, 상기 탁구게임로봇은 사용자가 타격한 공에 대응되게 사용자에게 탁구공을 재발사하긴 하나 사용자의 스윙 상태를 판별하고, 사용자에게 피드백하기 어려운 단점이 있다.</span>However, although the table tennis game robot re-initiates the table tennis ball to the user in response to the ball hit by the user, it is difficult to determine the user's swing state and to provide feedback to the user.</span>
+</div>
+</background-art>
+<summary-of-invention>
+<tech-problem>
+<div class="description-paragraph" num="0007">
+<span class="notranslate"> <span class="google-src-text">본 발명의 목적은, 스윙 궤적 중 미리 설정된 지점에서 충격량 발생 시 탁구 공을 정확하게 타격한 것으로 판단하여 스윙의 정확성을 확인할 수 있으며, 이때의 충격량을 연속적으로 저장, 만일 충격량 값이 작아지면 탁구 라켓에 결합된 러버가 소모된 것으로 판단함으로써, 러버의 교체 시기를 정확하게 판단할 수 있도록 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치를 제공함에 있다.</span>The object of the present invention is to determine the accuracy of the swing by determining that the table tennis ball was hit accurately when an impact amount occurs at a predetermined point in the swing trajectory, and continuously store the amount of impact at this time, if the impact amount value decreases to the table tennis racket It is to provide a swing accuracy and replacement discrimination device for a table tennis racket to accurately determine the replacement time of a rubber by determining that the combined rubber is consumed.</span>
+</div>
+</tech-problem>
+<tech-solution>
+<div class="description-paragraph" num="0008">
+<span class="notranslate"> <span class="google-src-text">본 발명에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치는 파지가 이루어지는 손잡이와, 상기 손잡이에 연결되며 탁구공을 타격하는 타격부를 포함하는 탁구 라켓과, 상기 손잡이에 설치되며, 상기 탁구 라켓의 스윙 시 발생되는 가속도 정보 및 각속도 정보를 반복적으로 저장하는 감지 센서 유닛과, 상기 감지 센서 유닛을 통해 감지된 감지정보를 바탕으로 상기 탁구 라켓의 스윙 궤적을 산출 및 비교를 통해 스윙 정확도를 판별하는 판별 유닛 및 상기 타격부로 가해지는 충격량을 산출하여 저장하며, 충격량 변화를 감지, 상기 타격부에 대한 교체 시점의 판단을 가이드 하는 교체 판단 유닛을 포함하는 것을 특징으로 한다.</span>The swing accuracy and replacement discrimination device of the table tennis racket according to the present invention includes a handle for gripping, a table tennis racket connected to the handle and including a striking part hitting a table tennis ball, and installed on the handle, when swinging the table tennis racket A detection sensor unit that repeatedly stores generated acceleration information and angular velocity information, and a determination unit for determining swing accuracy through calculating and comparing a swing trajectory of the table tennis racket based on the detection information detected through the detection sensor unit, and And calculating and storing the amount of impact applied to the hitting unit, and detecting a change in the amount of impact, and including a replacement determining unit that guides the determination of the replacement time for the hitting unit.</span>
+</div>
+<div class="description-paragraph" num="0009">
+<span class="notranslate"> <span class="google-src-text">여기서, 상기 교체 판단 유닛은 상기 타격부에 설치되며, 탁구공을 타격함에 따라 발생되는 진동을 감지하여 충격량으로 산출하는 감지부 및 상기 감지부와 전기적으로 연결되고, 상기 감지부를 통해 충격량이 작아지기 시작하는 시점에서 상기 타격부 교체 시점에 대한 판단이 이루어지도록 하며, 상기 타격부를 촬영하기 위한 촬영 수단을 구비하는 측정부를 구비한다.</span>Here, the replacement determination unit is installed in the hitting portion, the sensing unit for detecting the vibration generated by hitting the table tennis ball and calculating the amount of impact is electrically connected to the detecting unit, and the impact amount is reduced through the detecting unit At the starting point, a determination is made as to when to replace the striking unit, and a measuring unit having photographing means for photographing the striking unit is provided.</span>
+</div>
+<div class="description-paragraph" num="0010">
+<span class="notranslate"> <span class="google-src-text">이러한 상기 측정부는 상기 촬영 수단을 통해 상기 타격부를 촬영하여 상기 타격부에 형성된 패턴 영역부를 수집하고, 상기 패턴 영역부를 미리 설정된 기준 패턴 영역부와 비교하여 상기 타격부에 대한 교체 시점을 판단하도록 한다.</span>The measuring unit photographs the hitting portion through the photographing means to collect the pattern area portion formed in the hitting portion, and compares the pattern region portion with a preset reference pattern region portion to determine a replacement time point for the hitting portion.</span>
+</div>
+<div class="description-paragraph" num="0011">
+<span class="notranslate"> <span class="google-src-text">그리고, 상기 측정부는 상기 타격부에 안착되도록 형성되며, 상기 타격부의 마찰력이 감소함에 따라 상기 탁구 라켓과 지면 사이의 각도 변경 시 상기 타격부에서 미끄려져 이동하도록 마련되는 판단 수단을 구비한다.</span>In addition, the measuring unit is formed to be seated on the striking portion, and as the frictional force of the striking portion decreases, it is provided with a judgment means provided to slide and move in the striking portion when the angle between the table tennis racket and the ground changes.</span>
+</div>
+<div class="description-paragraph" num="0012">
+<span class="notranslate"> <span class="google-src-text">또한, 상기 측정부는 상기 촬영 수단을 통해 상기 판단 수단이 상기 타격 부에서 벗어난 시점의 상기 타격부와 지면과의 각도를 촬영하고, 미리 설정된 기준 교체 각도와 비교하여 상기 타격부에 대한 교체 시점을 판단하도록 한다.</span>In addition, the measuring unit photographs the angle between the hitting unit and the ground at the time when the determining unit deviates from the hitting unit through the photographing means, and compares it with a preset reference replacement angle to determine a replacement time for the hitting unit Do it.</span>
+</div>
+<div class="description-paragraph" num="0013">
+<span class="notranslate"> <span class="google-src-text">한편, 상기 판별 유닛은 상기 감지 센서 유닛의 감지 정보를 바탕으로 상기 탁구 라켓의 스윙 궤적을 산출하는 궤적 산출부와, 상기 궤적 산출부를 통해 산출된 스윙 궤적 중 상기 탁구 라켓이 탁구공을 타격하는 타격 지점을 판별하는 타격 판별부 및 상기 타격 판별부로부터 판별된 타격 지점 위치에 따라 상기 탁구 라켓의 스윙에 대한 적정여부를 판단 및 분석하는 스윙 분석부를 구비한다.</span>On the other hand, the determination unit is a trajectory calculating unit for calculating the swing trajectory of the table tennis racket based on the detection information of the detection sensor unit, and the swing trajectory of the swing trajectory calculated by the trajectory calculation unit hitting the table tennis ball It has a hitting discrimination unit for determining a point and a swing analysis unit for determining and analyzing whether the table tennis racket is suitable for swing according to the hitting point location determined from the hitting discrimination unit.</span>
+</div>
+<div class="description-paragraph" num="0014">
+<span class="notranslate"> <span class="google-src-text">여기서, 상기 판별 유닛은 상기 궤적 산출부에서 산출된 스윙 궤적 패턴을 분석하여 상기 탁구 라켓의 스윙 종류를 판별하는 종류 판별부를 더 구비하고, 상기 스윙 분석부는 메모리로부터 상기 종류 판별부에서 판별된 스윙의 종류에 대응되는 표준 스윙 궤적 데이터를 제공받아 상기 궤적 산출부를 통해 산출된 상기 탁구 라켓의 스윙 궤적을 비교한다.</span>Here, the discrimination unit further includes a type discrimination unit for discriminating the swing type of the table tennis racket by analyzing the swing trajectory pattern calculated by the trajectory calculation unit, and the swing analysis unit is configured to determine the swing of the swing discriminated from the type discrimination unit from memory. The standard swing trajectory data corresponding to the type is provided to compare the swing trajectory of the table tennis racket calculated through the trajectory calculation unit.</span>
+</div>
+<div class="description-paragraph" num="0015">
+<span class="notranslate"> <span class="google-src-text">그리고, 상기 판별 유닛은 상기 탁구 라켓의 스윙 종류에 따른 서로 다른 표준 스윙 궤적 데이터가 저장되는 메모리를 더 구비하고, 상기 스윙 분석부는, 상기 메모리에 미리 저장된 표준 스윙 궤적 데이터와 상기 궤적 산출부를 통해 산출된 상기 탁구 라켓의 스윙 궤적을 비교하여 사용자의 스윙 정확도를 판별한다.</span>In addition, the discrimination unit further includes a memory in which different standard swing trajectory data according to the swing type of the table tennis racket is stored, and the swing analysis unit calculates through the standard swing trajectory data and the trajectory calculation unit previously stored in the memory. The swing trajectory of the table tennis racket is compared to determine the user's swing accuracy.</span>
+</div>
+<div class="description-paragraph" num="0016">
+<span class="notranslate"> <span class="google-src-text">이러한 상기 궤적 산출부는 상기 감지 센서 유닛의 감지 정보를 토대로 상기 탁구 라켓의 이동 궤적을 산출하는 궤적 추적부와, 상기 감지 센서 유닛의 감지 정보를 토대로 상기 궤적 추적부에서 산출된 상기 탁구 라켓의 이동 궤적에서 스윙이 시작되는 스윙의 시작점 및 스윙이 종료되는 스윙의 종료점을 각각 산출하는 기점 산출부 및 상기 기점 산출부에서 산출된 스윙의 시작점과 종료점 사이의 이동 궤적을 상기 탁구 라켓에 대한 스윙 궤적으로 산출하는 스윙궤적 판단부를 구비한다.</span>The trajectory calculation unit includes a trajectory tracking unit that calculates a movement trajectory of the table tennis racket based on detection information of the detection sensor unit, and a movement trajectory of the table tennis racket calculated by the trajectory tracking unit based on the detection information of the detection sensor unit. The starting point calculation unit for calculating the starting point of the swing at which the swing starts and the ending point of the swing at which the swing ends are calculated, and a movement trajectory between the starting point and the ending point of the swing calculated by the starting point calculation unit is calculated as a swing trajectory for the table tennis racket. It has a swing trajectory determination unit.</span>
+</div>
+<div class="description-paragraph" num="0017">
+<span class="notranslate"> <span class="google-src-text">그리고, 상기 감지 센서 유닛은 상기 탁구 라켓의 가속도 및 이동 방향을 감지하고, 상기 기점 산출부는, 상기 궤적 추적부에서 산출된 이동 궤적에서 상기 탁구 라켓의 이동방향이 변경되고, 상기 탁구 라켓의 가속도가 미리 설정된 제1가속도 이하인 지점을 스윙의 시작점으로 판단하며, 스윙 시작점 이후에 상기 탁구 라켓의 가속도가 미리 설정된 제2가속도 이하인 지점을 스윙의 종료점으로 판단한다.</span>In addition, the sensing sensor unit senses the acceleration and the moving direction of the table tennis racket, and the origin calculating unit changes the moving direction of the table tennis racket in the movement trajectory calculated by the trajectory tracking unit, and the acceleration of the table tennis racket It is determined that the point below the preset first acceleration is the starting point of the swing, and after the swing starting point, the point where the acceleration of the table tennis racket is below the preset second acceleration is determined as the ending point of the swing.</span>
+</div>
+</tech-solution>
+<advantageous-effects>
+<div class="description-paragraph" num="0018">
+<span class="notranslate"> <span class="google-src-text">본 발명은, 스윙 가속도 및 스윙 각도 정보가 포함된 기술 별 기준이 되는 전문가의 스윙 데이터를 미리 저장하고, 전문가의 스윙 데이터와 사용자의 스윙 데이터를 비교, 점수로 환산하여 제공함으로써, 점수 비교를 통해 효과적으로 스윙 정확성 여부를 판단할 수 있는 효과를 갖는다.</span>The present invention, by storing the swing data of the expert, which is a standard for each technology including swing acceleration and swing angle information, and comparing the swing data of the expert with the swing data of the user, and converting the swing data into scores, through score comparison It has the effect of effectively determining whether or not the swing is correct.</span>
+</div>
+<div class="description-paragraph" num="0019">
+<span class="notranslate"> <span class="google-src-text">그리고, 본 발명은 스윙 궤적 중 미리 설정된 지점에서 충격량 발생 시 탁구 공을 정확하게 타격한 것으로 판단하여 스윙의 정확성을 확인할 수 있으며, 이때의 충격량을 연속적으로 저장, 만일 충격량 값이 작아지면 탁구 라켓에 결합된 러버가 소모된 것으로 판단할 수 있는 효과를 갖는다.</span>In addition, the present invention can determine the accuracy of the swing by determining that the table tennis ball has been hit accurately when an impact amount occurs at a predetermined point in the swing trajectory, and continuously stores the amount of impact at this time, and if the impact amount value is small, it is coupled to the table tennis racket It has the effect of judging that the used rubber is consumed.</span>
+</div>
+<div class="description-paragraph" num="0020">
+<span class="notranslate"> <span class="google-src-text">또한, 본 발명은 러버가 소모된 것으로 판단되는 경우 촬영 수단을 이용하여 마모에 따른 패턴 분포를 파악함과 동시에, 탁구 라켓에 올려진 테스트 플레이트의 미끄러짐 시 탁구 라켓과 지면과의 각도를 측정하여 미리 설정된 판단 데이터와 비교, 러버의 교체 시기를 정확하게 판단할 수 있도록 하는 효과를 갖는다.</span>In addition, in the present invention, when it is determined that the rubber is consumed, the pattern distribution according to wear is grasped by using a photographing means, and at the same time, the angle between the table tennis racket and the ground is measured by sliding the test plate on the table tennis racket. Compared with the set judgment data, it has the effect of accurately determining the replacement time of the rubber.</span>
+</div>
+</advantageous-effects>
+</summary-of-invention>
+<description-of-drawings>
+<div class="description-paragraph" num="0021">
+<span class="notranslate"> <span class="google-src-text">도 1 은 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치를 개략적으로 보여주는 도면이다.<br/>
+도 2 는 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 대한 구성을 보여주는 블록도이다.<br/>
+도 3 은 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 대한 교체 판단 유닛을 보여주는 도면이다.<br/>
+도 4 는 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 대한 교체 시점 판단의 일 실시예를 설명하기 위한 도면이다.<br/>
+도 5 는 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 대한 교체 시점 판단의 다른 실시예를 설명하기 위한 도면이다.</span>1 is a view schematically showing a swing accuracy and replacement discrimination device of a table tennis racket according to an embodiment of the present invention. <br/> 2 is a block diagram showing a configuration for a swing accuracy and replacement discrimination device of a table tennis racket according to an embodiment of the present invention. <br/> 3 is a view showing a replacement determination unit for the swing accuracy and replacement determination device of a table tennis racket according to an embodiment of the present invention. <br/> 4 is a view for explaining an embodiment of determining the timing of replacement for the swing accuracy and replacement determination device of a table tennis racket according to an embodiment of the present invention. <br/> 5 is a view for explaining another embodiment of determining the timing of replacement for the swing accuracy and replacement determination device of a table tennis racket according to an embodiment of the present invention.</span>
+</div>
+</description-of-drawings>
+<description-of-embodiments>
+<div class="description-paragraph" num="0022">
+<span class="notranslate"> <span class="google-src-text">이하, 첨부된 도면을 참조하면서 본 발명에 따른 바람직한 실시 예를 상세히 설명하기로 한다.</span>Hereinafter, preferred embodiments of the present invention will be described in detail with reference to the accompanying drawings.</span>
+</div>
+<div class="description-paragraph" num="0023">
+<span class="notranslate"> <span class="google-src-text">본 발명의 이점 및 특징, 그리고 그것을 달성하는 방법은 첨부된 도면과 함께 상세하게 후술 되어 있는 실시 예들을 참조하면 명확해질 것이다.</span>Advantages and features of the present invention, and a method of achieving the advantages and features will be clarified with reference to embodiments described below in detail together with the accompanying drawings.</span>
+</div>
+<div class="description-paragraph" num="0024">
+<span class="notranslate"> <span class="google-src-text">그러나, 본 발명은 이하에 개시되는 실시 예들에 의해 한정되는 것이 아니라 서로 다른 다양한 형태로 구현될 것이며, 단지 본 실시 예들은 본 발명의 개시가 완전하도록 하며, 본 발명이 속하는 기술분야에서 통상의 지식을 가진 자에게 발명의 범주를 완전하게 알려주기 위해 제공되는 것이며, 본 발명은 청구항의 범주에 의해 정의될 뿐이다.</span>However, the present invention is not limited by the embodiments disclosed below, but will be implemented in various different forms, and only these embodiments allow the disclosure of the present invention to be complete, and common knowledge in the art to which the present invention pertains. It is provided to completely inform the person having the scope of the invention, and the present invention is only defined by the scope of the claims.</span>
+</div>
+<div class="description-paragraph" num="0025">
+<span class="notranslate"> <span class="google-src-text">또한, 본 발명을 설명함에 있어 관련된 공지 기술 등이 본 발명의 요지를 흐리게 할 수 있다고 판단되는 경우 그에 관한 자세한 설명은 생략하기로 한다.</span>In addition, in the description of the present invention, if it is determined that related known technologies may obscure the subject matter of the present invention, detailed descriptions thereof will be omitted.</span>
+</div>
+<div class="description-paragraph" num="0026">
+<span class="notranslate"> <span class="google-src-text">도 1 은 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치를 개략적으로 보여주는 도면이고, 도 2 는 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 대한 구성을 보여주는 블록도이다.</span>1 is a view schematically showing a swing accuracy and replacement determination device of a table tennis racket according to an embodiment of the present invention, and FIG. 2 shows a configuration for a swing accuracy and replacement determination device of a table tennis racket according to an embodiment of the present invention It is a block diagram.</span>
+</div>
+<div class="description-paragraph" num="0027">
+<span class="notranslate"> <span class="google-src-text">또한, 도 3 은 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 대한 교체 판단 유닛을 보여주는 도면이고, 도 4 는 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 대한 교체 시점 판단의 일 실시예를 설명하기 위한 도면이며, 도 5 는 본 발명의 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에 대한 교체 시점 판단의 다른 실시예를 설명하기 위한 도면이다.</span>In addition, Figure 3 is a view showing a swing accuracy and replacement determination unit for the swing accuracy and replacement determination device of the table tennis racket according to an embodiment of the present invention, Figure 4 is a swing accuracy and replacement determination device of the table tennis racket according to an embodiment of the present invention FIG. 5 is a view for explaining an embodiment of determining a replacement time for a swing accuracy of a table tennis racket according to an embodiment of the present invention, and another embodiment of determining a replacement time for a replacement determination device. .</span>
+</div>
+<div class="description-paragraph" num="0028">
+<span class="notranslate"> <span class="google-src-text">도 1에 도시된 바와 같이, 본 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치는 탁구 라켓(100), 감지 센서 유닛(200), 판별 유닛(300) 및 교체 판단 유닛(400)을 포함한다.</span>As shown in FIG. 1, the swing accuracy and replacement discrimination device of the table tennis racket according to this embodiment includes a table tennis racket 100, a detection sensor unit 200, a determination unit 300, and a replacement determination unit 400 do.</span>
+</div>
+<div class="description-paragraph" num="0029">
+<span class="notranslate"> <span class="google-src-text">탁구 라켓(100)은 파지가 이루어지는 손잡이(110)와, 이러한 손잡이(110)에 연결되며 탁구공을 타격하는 타격부(120)를 포함한다.</span>The table tennis racket 100 includes a handle 110 for gripping and a striking part 120 connected to the handle 110 and hitting a table tennis ball.</span>
+</div>
+<div class="description-paragraph" num="0030">
+<span class="notranslate"> <span class="google-src-text">즉, 탁구 라켓(100)은 사용자의 파지가 가능하도록 전후 방향으로 소정의 길이를 가지며 연장 형성되며, 또한 타격부(120)는 손잡이(110)의 전단부에 연결된 베이스 플레이트(122)와, 베이스 플레이트(122)의 상면에 마련된 타격 러버(124)를 구비한다.</span>That is, the table tennis racket 100 is formed to have a predetermined length and extend in the front-rear direction to enable the user to grip, and also the striking portion 120 is a base plate 122 and a base connected to the front end of the handle 110, It has a hitting rubber 124 provided on the upper surface of the plate 122.</span>
+</div>
+<div class="description-paragraph" num="0031">
+<span class="notranslate"> <span class="google-src-text">여기서, 타격 러버(124)는 베이스 플레이트(122)의 상면을 덮도록 형성되고, 소정의 탄성을 갖는 고무와 같은 소재로 형성되는 것이 바람직하며, 이때 타격 러버(124)는 그 표면이 매우 점도가 높은 것을 사용하여 사용자가 타격부(120)로 탁구공을 가격할 때 탁구공에 높은 회전력을 줄 수 있도록 하여 드라이브 또는 컷트와 같은 탁구의 고급기술을 자유롭게 구사할 수 있다.</span>Here, the hitting rubber 124 is formed to cover the upper surface of the base plate 122, and is preferably formed of a rubber-like material having a predetermined elasticity, wherein the hitting rubber 124 has a very viscous surface. By using a high one, when the user strikes the ping pong ball with the striking unit 120, a high rotational force can be applied to the ping pong ball, so that advanced technology of a table tennis such as a drive or cut can be freely used.</span>
+</div>
+<div class="description-paragraph" num="0032">
+<span class="notranslate"> <span class="google-src-text">본 실시예에서는 타격 러버(124)가 베이스 플레이트(122)의 상면에 마련된 구조로 도시되어 있으나, 이에 한정되는 것은 아니며, 탁구 라켓(100)의 종류에 따라 베이스 플레이트(122)의 상, 하면에 각각 마련될 수도 있다.</span>In this embodiment, the hitting rubber 124 is shown in a structure provided on the upper surface of the base plate 122, but is not limited thereto, and is provided on the upper and lower surfaces of the base plate 122 according to the type of the table tennis racket 100. Each may be provided.</span>
+</div>
+<div class="description-paragraph" num="0033">
+<span class="notranslate"> <span class="google-src-text">한편, 감지 센서 유닛(200)은 탁구 라켓(100)의 손잡이(110) 내부에 설치되며, 탁구 라켓(100)의 가속도, 이동 방향 또는 위치정보를 감지한다.</span>On the other hand, the sensing sensor unit 200 is installed inside the handle 110 of the table tennis racket 100, and detects the acceleration, movement direction or location information of the table tennis racket 100.</span>
+</div>
+<div class="description-paragraph" num="0034">
+<span class="notranslate"> <span class="google-src-text">감지 센서 유닛(200)은 도면에 도시되진 않았지만, 특정 방향 직선운동에 대한 속도의 증감비를 계산하여 움직임을 감지할 수 있는 가속도 센서, 지구 자기장을 이용해 방위각을 탐지하여 탁구 라켓(100)의 방향을 감지하는 지자기 센서, 또는 한 축을 기준으로 단위 시간에 물체가 회전한 각도의 값을 수치로 방향을 감지할 수 있는 자이로 센서 중 적어도 하나로 구성되는 것이 바람직하다.</span>Although the detection sensor unit 200 is not shown in the drawing, the direction of the table tennis racket 100 by detecting the azimuth using an acceleration sensor that can detect the movement by calculating the increase / decrease ratio of the speed for linear motion in a specific direction and the earth magnetic field It is preferably composed of at least one of a geomagnetic sensor for sensing, or a gyro sensor capable of sensing a direction based on a value of an angle at which an object rotates in a unit time based on one axis.</span>
+</div>
+<div class="description-paragraph" num="0035">
+<span class="notranslate"> <span class="google-src-text">여기서, 상기와 같은 가속도 센서, 지자기 센서 및 자이로 센서는 종래에 일반적으로 사용되는 가속도 센서, 지자기 센서 및 자이로 센서와 동일한 것이므로, 그에 따른 상세한 설명은 생략하기로 한다.</span>Here, since the acceleration sensor, the geomagnetic sensor, and the gyro sensor are the same as the acceleration sensors, the geomagnetic sensor, and the gyro sensor generally used in the related art, detailed descriptions thereof will be omitted.</span>
+</div>
+<div class="description-paragraph" num="0036">
+<span class="notranslate"> <span class="google-src-text">또한, 감지 센서 유닛(200)은 탁구 라켓(100)의 움직임에 대한 정보를 무선으로 송출하기 위해 제1통신모듈(미도시)를 구비할 수 있다.</span>In addition, the sensing sensor unit 200 may include a first communication module (not shown) to wirelessly transmit information about the movement of the table tennis racket 100.</span>
+</div>
+<div class="description-paragraph" num="0037">
+<span class="notranslate"> <span class="google-src-text">본 실시예에서는 감지 센서 유닛(200)이 손잡이(110)의 후단부에 설치된 구조가 도시되어 있으나, 감지 센서 유닛(200)은 손잡이(110)의 전단부 또는 타격부(120)에 설치될 수도 있다.</span>Although the structure in which the sensing sensor unit 200 is installed at the rear end of the handle 110 is illustrated in the present embodiment, the sensing sensor unit 200 may be installed at the front end or the striking part 120 of the handle 110. have.</span>
+</div>
+<div class="description-paragraph" num="0038">
+<span class="notranslate"> <span class="google-src-text">한편, 판별 유닛(300)은 감지 센서 유닛(200)의 감지 정보를 토대로 탁구 라켓(100)의 스윙 궤적을 산출하는 궤적 산출부(310)와, 탁구의 스윙 종류별로 표준 스윙 궤적 데이터가 저장된 메모리(350)와, 궤적 산출부(310)에서 산출된 스윙 궤적의 패턴을 분석하여 탁구 라켓(100)의 스윙 종류를 판별하는 종류 판별부(340)와, 궤적 산출부(310)를 통해 산출된 스윙 궤적에서 탁구 라켓(100)이 탁구공을 타격하는 타격 지점을 판별하는 타격 판별부(320)와, 메모리(350)에 저장된 표준 궤적 데이터와 궤적 산출부(310)를 통해 산출된 탁구 라켓(100)의 스윙 궤적을 비교하여 사용자의 스윙 정확도를 판별하는 스윙 분석부(330)를 구비한다.</span>On the other hand, the discrimination unit 300 is a trajectory calculating unit 310 for calculating the swing trajectory of the table tennis racket 100 based on the detection information of the sensing sensor unit 200, and a memory in which standard swing trajectory data is stored for each swing type of table tennis (350), a type determination unit 340 for analyzing the swing trajectory pattern calculated by the trajectory calculation unit 310 to determine the swing type of the table tennis racket 100, and the trajectory calculation unit 310 Table tennis racket (100) calculated through the trajectory determination unit (320) for determining the hitting point where the table tennis racket (100) hits the table tennis ball in the swing trajectory, and the standard trajectory data and the trajectory calculation unit (310) stored in the memory (350) A swing analysis unit 330 is provided to compare the swing trajectory of 100) and determine the swing accuracy of the user.</span>
+</div>
+<div class="description-paragraph" num="0039">
+<span class="notranslate"> <span class="google-src-text">한편, 판별 유닛(300)은 도면에 도시되진 않았지만, 센서 감지 유닛(200)의 제1통신모듈(미도시)을 통해 전송된 센서 감지부의 감지 정보를 수신할 수 있도록 제2통신모듈(미도시)을 더 구비한다.</span>On the other hand, although the determination unit 300 is not shown in the drawing, a second communication module (not shown) to receive detection information of the sensor detection unit transmitted through the first communication module (not shown) of the sensor detection unit 200. ).</span>
+</div>
+<div class="description-paragraph" num="0040">
+<span class="notranslate"> <span class="google-src-text">궤적 산출부(310)는 궤적 추적부(312), 기점 산출부(314) 및 스윙궤적 판단부(316)를 구비한다.</span>The trajectory calculation unit 310 includes a trajectory tracking unit 312, a starting point calculation unit 314, and a swing trajectory determination unit 316.</span>
+</div>
+<div class="description-paragraph" num="0041">
+<span class="notranslate"> <span class="google-src-text">궤적 추적부(312)는 감지 센서 유닛(200)의 감지정보를 토대로 탁구 라켓(100)의 이동 궤적을 산출한다.</span>The trajectory tracking unit 312 calculates the movement trajectory of the table tennis racket 100 based on the detection information of the detection sensor unit 200.</span>
+</div>
+<div class="description-paragraph" num="0042">
+<span class="notranslate"> <span class="google-src-text">궤적 추적부(312)는 감지 센서 유닛(200)으로부터 제공받은 탁구 라켓(100)의 가속도 정보, 이동방향 정보 또는 위치정보를 토대로 사용자가 탁구 라켓(100)을 움직인 이동 궤적을 산출한다.</span>The trajectory tracking unit 312 calculates a movement trajectory in which the user moves the table tennis racket 100 based on acceleration information, movement direction information, or location information of the table tennis racket 100 provided from the detection sensor unit 200.</span>
+</div>
+<div class="description-paragraph" num="0043">
+<span class="notranslate"> <span class="google-src-text">이때, 궤적 추적부(312)는 사용자가 운동을 시작한 시점부터 종료한 시점까지 탁구라켓(100)의 이동 궤적을 산출하는 것이 바람직하다.</span>At this time, it is preferable that the trajectory tracking unit 312 calculates the movement trajectory of the table tennis racket 100 from the time when the user starts exercising to the time when the movement is started.</span>
+</div>
+<div class="description-paragraph" num="0044">
+<span class="notranslate"> <span class="google-src-text">기점 산출부(314)는 감지 센서 유닛(200)의 감지 정보를 토대로 궤적 추적부(310)에서 산출된 탁구 라켓(100)의 이동 궤적에서 스윙이 시작되는 스윙의 시작점 및 스윙이 종료되는 스윙의 종료점을 각각 산출한다.</span>The starting point calculation unit 314 is based on the detection information of the detection sensor unit 200, the starting point of the swing at which the swing starts and the swing at which the swing ends at the movement trajectory of the table tennis racket 100 calculated by the trajectory tracking unit 310 Calculate each end point.</span>
+</div>
+<div class="description-paragraph" num="0045">
+<span class="notranslate"> <span class="google-src-text">즉, 사용자가 탁구 라켓(100)의 스윙을 시작할 경우, 정지된 대기 자세에서 탁구공의 궤적을 예상하여 탁구 라켓(100)을 휘두르는데, 이때 탁구 라켓(100)은 정지 상태에서 가속도가 증가하고, 탁구공의 궤적에 따라 방향이 급격하게 변경되므로, 그에 따라 기점 산출부(314)는 궤적 추적부(312)에서 산출된 이동 궤적에서 탁구 라켓(100)의 이동방향이 변경되고, 탁구 라켓(100)의 가속도가 미리 설정된 제1가속도 이하인 지점을 스윙의 시작점으로 판단한다.</span>That is, when the user starts swinging the table tennis racket 100, the table tennis racket 100 is swinging in anticipation of the trajectory of the table tennis ball in a stopped waiting posture. At this time, the table tennis racket 100 increases in acceleration while stopped. , Since the direction is rapidly changed according to the trajectory of the table tennis ball, the starting point calculating unit 314 changes the moving direction of the table tennis racket 100 from the movement trajectory calculated by the trajectory tracking unit 312, and the table tennis racket ( The point at which the acceleration of 100) is equal to or less than the preset first acceleration is determined as the starting point of the swing.</span>
+</div>
+<div class="description-paragraph" num="0046">
+<span class="notranslate"> <span class="google-src-text">여기서, 제1가속도는 0 내지 1 cm/s<sup>2 </sup>가 적용되는 것이 바람직하다.</span>Here, it is preferable that 0 to 1 cm / s <sup>2</sup> is applied to the first acceleration.</span>
+</div>
+<div class="description-paragraph" num="0047">
+<span class="notranslate"> <span class="google-src-text">또한, 기점 산출부(314)는 스윙의 시작점 이후에 탁구 라켓(100)의 가속도가 미리 설정된 제2가속도 이하인 이동 궤적의 지점을 스윙의 종료점으로 판단하고, 사용자가 탁구 라켓(100)의 스윙을 완료할 경우, 탁구공을 타격한 다음이므로 사용자는 정지된 대기 자세를 취하고, 상대방의 타구를 관찰한다. </span>In addition, the starting point calculating unit 314 determines the point of the movement trajectory at which the acceleration of the table tennis racket 100 is equal to or less than a preset second acceleration after the starting point of the swing as the end point of the swing, and the user determines the swing of the table tennis racket 100 When completed, the user is in a stand-by position and observes the other player's hitting ball because it is after hitting the table tennis ball.</span>
+</div>
+<div class="description-paragraph" num="0048">
+<span class="notranslate"> <span class="google-src-text">따라서, 스윙이 종료되는 순간, 사용자의 탁구 라켓(100)은 정지되고, 탁구 라켓(100)의 가속도는 급감한다.</span>Therefore, the moment the swing ends, the user's table tennis racket 100 is stopped, and the acceleration of the table tennis racket 100 decreases rapidly.</span>
+</div>
+<div class="description-paragraph" num="0049">
+<span class="notranslate"> <span class="google-src-text">그러므로, 기점 산출부(314)는 스윙의 시작점 이후에 탁구 라켓(100)의 가속도가 제2가속도 이하로 급감하는 지점을 스윙의 종료점으로 판단할 수 있으며, 이때 제2가속도는 0 내지 1 cm/s<sup>2 </sup>가 적용되는 것이 바람직하다.</span>Therefore, the starting point calculation unit 314 may determine the point at which the acceleration of the table tennis racket 100 suddenly decreases below the second acceleration after the starting point of the swing as the end point of the swing, wherein the second acceleration is 0 to 1 cm / It is preferred that s <sup>2</sup> is applied.</span>
+</div>
+<div class="description-paragraph" num="0050">
+<span class="notranslate"> <span class="google-src-text">스윙궤적 판단부(316)는 기점 산출부(314)에서 산출된 스윙의 시작점과 종료점 사이의 이동 궤적을 탁구 라켓(100)의 스윙 궤적으로 산출한다.</span>The swing trajectory determination unit 316 calculates the movement trajectory between the start and end points of the swing calculated by the origin calculation unit 314 as the swing trajectory of the table tennis racket 100.</span>
+</div>
+<div class="description-paragraph" num="0051">
+<span class="notranslate"> <span class="google-src-text">스윙궤적 판단부(316)는 산출된 탁구 라켓(100)의 스윙궤적 데이터를 종류 판별부(340), 타격 판별부(320) 및 스윙 분석부(330)에 제공한다.</span>The swing trajectory determination unit 316 provides the calculated swing trajectory data of the table tennis racket 100 to the type determination unit 340, the hitting determination unit 320, and the swing analysis unit 330.</span>
+</div>
+<div class="description-paragraph" num="0052">
+<span class="notranslate"> <span class="google-src-text">메모리(350)에는 탁구의 스윙 종류별로 표준 스윙 궤적 데이터가 저장, 다시 말해 메모리(350)에는 드라이브, 쇼트, 커트, 스트로크 등과 같은 스윙의 종류별로 각각 표준이 되는 표준 스윙 궤적 데이터가 저장되어 있다.</span>Standard swing trajectory data is stored in the memory 350 for each swing type of table tennis, that is, standard swing trajectory data that is standard for each swing type such as drive, short, cut, and stroke is stored in the memory 350.</span>
+</div>
+<div class="description-paragraph" num="0053">
+<span class="notranslate"> <span class="google-src-text">종류 판별부(340)는 궤적 산출부(310)로부터 탁구 라켓(100)의 스윙 궤적을 제공받아 스윙 궤적의 패턴을 분석하여 탁구 라켓(100)의 스윙 종류를 판별한다.</span>The type determining unit 340 receives the swing trajectory of the table tennis racket 100 from the trajectory calculating unit 310 and analyzes the pattern of the swing trajectory to determine the swing type of the table tennis racket 100.</span>
+</div>
+<div class="description-paragraph" num="0054">
+<span class="notranslate"> <span class="google-src-text">종류 판별부(340)는 스윙 궤적의 전체 길이, 형상 또는 진행 방향 등을 분석하여 상기 스윙 궤적이 드라이브, 쇼트, 커트, 스트로크 중 어느 스윙에 해당하는지 판별한다.</span>The type discrimination unit 340 analyzes the entire length, shape, or direction of the swing trajectory to determine which swing of the drive trajectory corresponds to a drive, short, cut, or stroke.</span>
+</div>
+<div class="description-paragraph" num="0055">
+<span class="notranslate"> <span class="google-src-text">종류 판별부(340)는 판별된 스윙의 종류 정보를 스윙 분석부(330)에 제공한다.</span>The type determining unit 340 provides the determined swing type information to the swing analysis unit 330.</span>
+</div>
+<div class="description-paragraph" num="0056">
+<span class="notranslate"> <span class="google-src-text">타격 판별부(320)는 궤적 산출부(310)를 통해 산출된 스윙 궤적에서 탁구 라켓(100)이 탁구공을 타격하는 타격 지점을 판별하고, 이때 사용자가 탁구 라켓(100)의 스윙 중에 탁구공이 탁구 라켓(100)에 충돌하면, 탁구 라켓(100)의 가속도가 탁구공에 의해 감소하는데, 이러한 탁구 라켓(100)의 가속도 감소 시점을 탁구공의 타격 지점으로 판단할 수 있다.</span>The hitting discrimination unit 320 determines a hitting point at which the table tennis racket 100 hits the table tennis ball in the swing trajectory calculated by the trajectory calculating unit 310, and at this time, when the user swings the table tennis racket 100, the table tennis ball When colliding with the table tennis racket 100, the acceleration of the table tennis racket 100 decreases by the table tennis ball, and it is possible to determine the point at which the acceleration of the table tennis racket 100 decreases as the hitting point of the table tennis ball.</span>
+</div>
+<div class="description-paragraph" num="0057">
+<span class="notranslate"> <span class="google-src-text">따라서, 타격 판별부(320)는 감지 센서 유닛(200)으로부터 제공되는 감지 정보를 토대로 궤적 산출부(310)에서 산출된 스윙 궤적에서 탁구 라켓(100)의 가속도가 감소하는 지점을 타격 지점으로 판단한다.</span>Accordingly, the hitting determination unit 320 determines a point at which the acceleration of the table tennis racket 100 decreases in the swing trajectory calculated by the trajectory calculation unit 310 based on the detection information provided from the detection sensor unit 200 as a hitting point do.</span>
+</div>
+<div class="description-paragraph" num="0058">
+<span class="notranslate"> <span class="google-src-text">스윙 분석부(330)는 메모리(350)에 저장된 표준 궤적 데이터와 궤적 산출부(310)를 통해 산출된 탁구 라켓(100)의 스윙 궤적을 비교하여, 사용자의 스윙 정확도를 판별한다.</span>The swing analysis unit 330 compares the standard trajectory data stored in the memory 350 with the swing trajectory of the table tennis racket 100 calculated through the trajectory calculation unit 310 to determine a user's swing accuracy.</span>
+</div>
+<div class="description-paragraph" num="0059">
+<span class="notranslate"> <span class="google-src-text">이때, 스윙 분석부(330)는 종류 판별부(340)로부터 제공된 스윙 궤적의 스윙 종류 정보를 토대로 메모리(350)에 저장된 표준 스윙 궤적 데이터들 중 스윙 궤적의 스윙 종류에 해당되는 표준 스윙 궤적 데이터를 제공받아 궤적 산출부(310)를 통해 산출된 탁구 라켓(100)의 스윙 궤적을 비교한다.</span>At this time, the swing analysis unit 330 based on the swing type information of the swing trajectory provided from the type determination unit 340, the standard swing trajectory data corresponding to the swing type of the swing trajectory among the standard swing trajectory data stored in the memory 350 The swing trajectory of the table tennis racket 100 calculated by the trajectory calculating unit 310 provided is compared.</span>
+</div>
+<div class="description-paragraph" num="0060">
+<span class="notranslate"> <span class="google-src-text">또한, 스윙 분석부(330)는 도면에 도시되진 않았지만, 표준 스윙 궤적 데이터와 궤적 산출부(310)로부터 제공받은 탁구 라켓(100)의 스윙 궤적의 비교 결과를 표시할 수 있도록 모니터와 같은 디스플레이부(미도시)를 더 구비한다.</span>In addition, although the swing analysis unit 330 is not shown in the drawing, a display unit such as a monitor to display a comparison result of the swing trajectory of the table tennis racket 100 provided from the standard swing trajectory data and the trajectory calculation unit 310 (Not shown) is further provided.</span>
+</div>
+<div class="description-paragraph" num="0061">
+<span class="notranslate"> <span class="google-src-text">디스플레이부는 표준 스윙 궤적 데이터에 대한 궤적 산출부(310)의 스윙 궤적의 일치도를 숫자로 표시하거나, 표준 스윙 궤적 데이터와 궤적 산출부(310)의 스윙 궤적을 상호 중첩되게 표시할 수도 있다.</span>The display unit may display the degree of matching of the swing trajectory of the trajectory calculating unit 310 with respect to the standard swing trajectory data as a number, or may display the standard swing trajectory data and the swing trajectories of the trajectory calculating unit 310 overlapping each other.</span>
+</div>
+<div class="description-paragraph" num="0062">
+<span class="notranslate"> <span class="google-src-text">한편, 스윙 분석부(330)는 스윙 궤적에서 타격 판별부(320)로부터 판별된 타격지점의 위치에 따라 탁구 라켓(100)의 스윙의 적정여부를 판단 분석한다.</span>Meanwhile, the swing analysis unit 330 determines and analyzes whether the swing of the table tennis racket 100 is appropriate according to the position of the hitting point determined by the hitting determination unit 320 in the swing trajectory.</span>
+</div>
+<div class="description-paragraph" num="0063">
+<span class="notranslate"> <span class="google-src-text">여기서, 스윙 분석부(330)는 만일 궤적 산출부(310)에서 산출된 스윙 궤적에서 스윙 시작점으로부터 미리 설정된 기준 지점까지의 범위를 미숙 범위로 설정하고, 타격 지점이 미숙 범위 내에 위치하면 사용자의 스윙이 미숙한 상태로 판단하고, 또한 만일 타격 지점이 미숙 범위를 벗어나면 사용자의 스윙이 우수한 상태로 판단하며, 이 판단 결과를 디스플레이부를 통해 표시한다.</span>Here, the swing analysis unit 330 sets the range from the swing trajectory calculated from the trajectory calculation unit 310 to the preset reference point as the immature range, and the user's swing when the hitting point is located within the immature range It is judged as the immature state, and if the hitting point is out of the immature range, the user's swing is judged to be excellent, and the result of the determination is displayed on the display unit.</span>
+</div>
+<div class="description-paragraph" num="0064">
+<span class="notranslate"> <span class="google-src-text">여기서, 스윙 궤적에서 탁구 라켓(100)이 탁구공을 타격하는 가장 바람직한 지점은 스윙의 시작점으로부터 전체 스윙 길이의 2/3 내지 3/3 사이로 이격된 지점인데, 이는 스윙 궤적에서 스윙의 시작점으로부터 전체 스윙 길이의 2/3만큼 이격된 지점 이전에 탁구 라켓(100)이 탁구공을 타격하게 되면 탁구 라켓(100)의 스윙을 통한 충분한 운동 에너지가 발생되기 전인 시점이므로, 탁구공에 비교적 작은 힘만이 전달되기 때문에, 스윙 분석부(330)는 궤적 산출부(310)에서 산출된 스윙 궤적의 전체 길이의 65% 내지 70%에 대응되는 이격거리 만큼 스윙 시작점으로부터 이격된 위치의 상기 스윙 궤적에 상기 기준지점을 설정하는 것이 바람직하다.</span>Here, the most preferable point where the table tennis racket 100 hits the table tennis ball in the swing trajectory is a point spaced between 2/3 to 3/3 of the total swing length from the starting point of the swing, which is the entire point from the starting point of the swing in the swing trajectory. If the table tennis racket 100 hits the table tennis ball before the point spaced by 2/3 of the swing length, it is the time before sufficient kinetic energy is generated through the swing of the table tennis racket 100, so only a relatively small force is applied to the table tennis ball. Since it is transmitted, the swing analysis unit 330 is the reference to the swing trajectory of the position spaced from the swing start point by a separation distance corresponding to 65% to 70% of the total length of the swing trajectory calculated by the trajectory calculation unit 310. It is desirable to set a point.</span>
+</div>
+<div class="description-paragraph" num="0065">
+<span class="notranslate"> <span class="google-src-text">한편, 판별 유닛(300)은 도시된 예에서는 컴퓨터가 적용되었으나, 이에 한정하는 것이 아니라 노트북, PDA, 스마트 폰과 같은 정보처리기기가 적용될 수도 있다.</span>Meanwhile, in the illustrated example, the computer is applied in the illustrated example, but is not limited thereto, and an information processing device such as a laptop, PDA, or smart phone may be applied.</span>
+</div>
+<div class="description-paragraph" num="0066">
+<span class="notranslate"> <span class="google-src-text">상술된 바와 같이 구성된 본 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치에서 스윙 정확도 분석을 위한 작동을 상세히 설명하면 다음과 같다.</span>The operation for swing accuracy analysis in the swing accuracy and replacement discrimination device of the table tennis racket according to the present embodiment configured as described above will be described in detail as follows.</span>
+</div>
+<div class="description-paragraph" num="0067">
+<span class="notranslate"> <span class="google-src-text">먼저, 사용자는 감지 센서 유닛(200)이 설치된 탁구 라켓(100)을 이용하여 탁구 경기 또는 연습을 시작한다.</span>First, the user starts a table tennis game or practice using the table tennis racket 100 on which the detection sensor unit 200 is installed.</span>
+</div>
+<div class="description-paragraph" num="0068">
+<span class="notranslate"> <span class="google-src-text">이때, 궤적 산출부(310)의 궤적 추적부(312)는 탁구 라켓(100)의 이동 궤적을 산출하고, 기점 산출부(314)와 스윙궤적 판단부(316)는 감지 센서 유닛(200)을 통해 제공되는 감지 정보를 토대로 스윙의 시작점 및 종료점을 판별하며, 스윙의 시작점 및 종료점을 기준으로 탁구 라켓(100)의 이동 궤적에서 다수의 스윙 궤적을 산출한다.</span>At this time, the trajectory tracking unit 312 of the trajectory calculation unit 310 calculates the movement trajectory of the table tennis racket 100, and the origin calculation unit 314 and the swing trajectory determination unit 316 use the detection sensor unit 200. Based on the detection information provided, the start and end points of the swing are determined, and a plurality of swing trajectories are calculated from the movement trajectory of the table tennis racket 100 based on the start and end points of the swing.</span>
+</div>
+<div class="description-paragraph" num="0069">
+<span class="notranslate"> <span class="google-src-text">이때, 궤적 산출부(310)를 통해 산출된 스윙 궤적은 스윙 분석부(330)에 제공되고, 스윙 분석부(330)는 종류 판별부(340)를 통해 판별된 각 스윙 궤적의 스윙 종류에 대응되는 표준 스윙 궤적 데이터를 메모리(350)로부터 제공받아 각 스윙 궤적과 비교한다.</span>At this time, the swing trajectory calculated through the trajectory calculation unit 310 is provided to the swing analysis unit 330, and the swing analysis unit 330 corresponds to the swing type of each swing trajectory determined through the type determination unit 340. The standard swing trajectory data is provided from the memory 350 and compared with each swing trajectory.</span>
+</div>
+<div class="description-paragraph" num="0070">
+<span class="notranslate"> <span class="google-src-text">이때, 스윙 분석부(330)는 표준 스윙 궤적 데이터에 대한 궤적 산출부(310)의 스윙 궤적의 일치도 정보나 표준 스윙 궤적 데이터와 궤적 산출부(310)의 스윙 궤적이 상호 중첩된 그래프 정보를 디스플레이부(미도시)에 표시할 수도 있다.</span>At this time, the swing analysis unit 330 displays graph information of the matching of the swing trajectory of the trajectory calculation unit 310 to the standard swing trajectory data or the standard swing trajectory data and the swing trajectory of the trajectory calculation unit 310. It can also be displayed in a sub (not shown).</span>
+</div>
+<div class="description-paragraph" num="0071">
+<span class="notranslate"> <span class="google-src-text">또한, 스윙 분석부(330)는 타격 판별부(320)를 통해 판별된 탁구공의 타격 지점 정보를 토대로 탁구 라켓(100)의 스윙의 상태를 분석한다.</span>In addition, the swing analysis unit 330 analyzes the state of the swing of the table tennis racket 100 based on the hitting point information of the table tennis ball determined through the hitting determination unit 320.</span>
+</div>
+<div class="description-paragraph" num="0072">
+<span class="notranslate"> <span class="google-src-text">즉, 스윙 분석부(330)는 전체 스윙에서 탁구공을 타격하는 타격 지점이 바람직한지를 판단하고, 판단결과를 디스플레이부(미도시)를 통해 출력한다.</span>That is, the swing analysis unit 330 determines whether a hitting point hitting the table tennis ball is desirable in the entire swing, and outputs the determination result through the display unit (not shown).</span>
+</div>
+<div class="description-paragraph" num="0073">
+<span class="notranslate"> <span class="google-src-text">상술된 바와 같이 본 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치는 탁구 라켓(100)에 설치된 감지 센서 유닛(200)을 통해 탁구 라켓(100)의 스윙 궤적을 산출하여 스윙의 상태를 판별할 수 있으므로, 사용자가 올바른 스윙 자세를 보다 용이하게 습득할 수 있는 장점이 있다.</span>As described above, the swing accuracy and replacement determination device of the table tennis racket according to the present embodiment calculates the swing trajectory of the table tennis racket 100 through the detection sensor unit 200 installed on the table tennis racket 100 to determine the swing state Since it can be, there is an advantage that the user can more easily learn the correct swing posture.</span>
+</div>
+<div class="description-paragraph" num="0074">
+<span class="notranslate"> <span class="google-src-text">한편, 본 실시예에 따른 탁구 라켓의 스윙 정확도 및 교체 판별 장치는 교체 판단 유닛(400)을 더 포함한다.</span>Meanwhile, the swing accuracy and replacement determination device of the table tennis racket according to this embodiment further includes a replacement determination unit 400.</span>
+</div>
+<div class="description-paragraph" num="0075">
+<span class="notranslate"> <span class="google-src-text">교체 판단 유닛(400)은 탁구공에 의해 타격부(120)로 가해지는 충격량을 산출하여 저장하며, 또한 충격량 변화를 감지하여 타격부(120), 더 구체적으로는 타격부(120)를 구성하는 타격 러버(124)에 대한 교체 시점의 판단을 가이드 할 수 있다.</span>The replacement determination unit 400 calculates and stores the amount of impact applied to the hitting portion 120 by the table tennis ball, and also detects the impact amount change and configures the hitting portion 120, more specifically the hitting portion 120 It is possible to guide the determination of the replacement time for the hitting rubber 124.</span>
+</div>
+<div class="description-paragraph" num="0076">
+<span class="notranslate"> <span class="google-src-text">이를 위해, 교체 판단 유닛(400)은 감지부(410) 및 측정부(420)를 구비한다.</span>To this end, the replacement determination unit 400 includes a detection unit 410 and a measurement unit 420.</span>
+</div>
+<div class="description-paragraph" num="0077">
+<span class="notranslate"> <span class="google-src-text">먼저, 감지부(410)는 타격부(120)에 설치되며, 탁구공을 타격함에 따라 발생되는 진동을 감지하여 충격량으로 산출한다.</span>First, the sensing unit 410 is installed in the striking unit 120, and detects the vibration generated by hitting the table tennis ball and calculates it as an impact amount.</span>
+</div>
+<div class="description-paragraph" num="0078">
+<span class="notranslate"> <span class="google-src-text">바람직하게는, 감지부(410)는 진동센서로 이루어지며, 손잡이(110)와의 경계 사이에 설치되어 탁구공과의 직접적인 충돌을 최소화하면서도, 효과적으로 충돌 시 발생되는 진동에 따른 충격량을 산출할 수 있다.</span>Preferably, the sensing unit 410 is made of a vibration sensor, it is installed between the handle 110 and the border while minimizing direct collision with the table tennis ball, it is possible to effectively calculate the amount of impact due to the vibration generated during the collision.</span>
+</div>
+<div class="description-paragraph" num="0079">
+<span class="notranslate"> <span class="google-src-text">측정부(420)는 감지부(410)와 전기적으로 연결되고, 감지부(410)를 통해 충격량이 작아지기 시작하는 시점에서 타격 러버(124)의 교체 시점에 대한 판단이 이루어지도록 한다.</span>The measurement unit 420 is electrically connected to the detection unit 410, and the determination of the replacement time of the hitting rubber 124 is made at the time when the impact amount starts to decrease through the detection unit 410.</span>
+</div>
+<div class="description-paragraph" num="0080">
+<span class="notranslate"> <span class="google-src-text">이러한 측정부(420)는 타격 러버(124)를 촬영하기 위한 촬영 수단(420a)을 구비하며, 또한 스마트 폰의 형태로 이루어져 판별 유닛(300)과 별도로 마련되거나, 또는 판별 유닛(300)이 스마트 폰인 경우 해당되는 어플리케이션과 함께 촬영 수단(420a)이 내장된 형태로 이루어질 수도 있다.</span>The measuring unit 420 is provided with a photographing means 420a for photographing the hitting rubber 124, and is also provided in the form of a smart phone and is provided separately from the discrimination unit 300, or the discrimination unit 300 is smart. In the case of a phone, the photographing means 420a may be formed in a built-in form together with a corresponding application.</span>
+</div>
+<div class="description-paragraph" num="0081">
+<span class="notranslate"> <span class="google-src-text">여기서, 측정부(420)는 촬영 수단(420a)을 통해 타격 러버(124)를 촬영하여 도 4에 도시된 바와 같이 타격 러버(124)에 형성된 패턴 영역부(A)를 수집하고, 이러한 패턴 영역부(A)를 미리 설정된 기준 패턴 영역부와 비교하여 타격 러버(124)에 대한 교체 시점을 판단할 수 있다.</span>Here, the measurement unit 420 photographs the hitting rubber 124 through the photographing means 420a to collect the pattern area portion A formed in the hitting rubber 124 as shown in FIG. 4, and this pattern area The replacement point for the hitting rubber 124 may be determined by comparing the portion A with a preset reference pattern area portion.</span>
+</div>
+<div class="description-paragraph" num="0082">
+<span class="notranslate"> <span class="google-src-text">즉, 타격 러버(124)는 벌집 형태의 패턴 영역부(A)가 내부에 형성된 상태에서 그 상면에 추가적으로 러버가 코팅된 형태로 이루어지는데, 이러한 패턴 영역부(A)는 탁구 라켓(100)을 장기간 사용함에 따라 탁구공과 타격 러버(124)의 충돌로 인하여 서서히 탁구 라켓(100)의 표면으로 드러나게 되며, 이러한 패턴 영역부(A)가 타격 러버(124)에 넓은 범위로 퍼져있게 되면, 그 만큼 수명이 오래된 것을 의미한다.</span>That is, the hitting rubber 124 is made of a form in which a rubber is additionally coated on its upper surface in a state in which a pattern area portion A in the form of a honeycomb is formed therein, and the pattern region portion A uses the table tennis racket 100 As it is used for a long time, it is gradually exposed to the surface of the table tennis racket 100 due to the collision of the table tennis ball and the hitting rubber 124, and when the pattern area portion A is spread over a wide range of the hitting rubber 124, that much It means that the life is old.</span>
+</div>
+<div class="description-paragraph" num="0083">
+<span class="notranslate"> <span class="google-src-text">따라서, 측정부(420)는 먼저 감지부(410)를 통해 타격 러버(124)로 가해지는 충격량이 일정하게 유지되다가, 만일 충격량이 작아지게 되면, 측정부(420)를 통해 해당 어플리케이션을 실행시켜 타격 러버(124)의 교체 여부를 판단하도록 하는데, 이와 같이 어플리케이션을 실행시키게 되면, 촬영 수단(420a)의 동작이 활성화되고, 그에 따라 촬영 수단(420a)을 이용하여 타격 러버(124)의 표면을 촬영하게 되면, 해당 타격 러버(124)의 표면에 패턴 영역부(A)가 전체 면적에 대하여 어느 정도의 범위로 퍼져있는지 그 수치가 % 형태로 디스플레이 된다.</span>Accordingly, the measurement unit 420 first maintains a constant amount of impact applied to the hitting rubber 124 through the detection unit 410, and if the impact amount decreases, the application is executed through the measurement unit 420. To determine whether or not the replacement of the hitting rubber 124, when the application is executed as described above, the operation of the shooting means 420a is activated, and accordingly the surface of the hitting rubber 124 is used using the shooting means 420a. When photographing, the numerical value of the range of the pattern area A spread over the entire area is displayed on the surface of the hitting rubber 124 in the form of%.</span>
+</div>
+<div class="description-paragraph" num="0084">
+<span class="notranslate"> <span class="google-src-text">일례로, 만일 타격 러버(124) 전체 영역에 대하여 40% 이상의 범위로 패턴 영역부(A)가 퍼져있는 것으로 디스플레이 되면, 패턴 영역부(A) 상면에 추가적으로 코팅된 러버가 마모되어 그에 따른 마찰력이 상실된 것으로 판단, 타격 러버(12)의 교체가 이루어져야 하는 시점이 도래한 것으로 해석하여 해당 내용을 사용자에게 진동 등과 같은 형태로 알려 타격 러버(124)의 교체 시점을 정확하게 파악할 수 있도록 한다.</span>For example, if it is displayed that the pattern area portion A is spread in the range of 40% or more with respect to the entire area of the hitting rubber 124, the rubber coated additionally on the upper surface of the pattern area portion A is worn and frictional force is caused. It is judged to have been lost, and it is interpreted that the time point at which the replacement of the hitting rubber 12 has to be made has arrived, so that the user is informed of the content in the form of vibration or the like so that the replacement time of the hitting rubber 124 can be accurately identified.</span>
+</div>
+<div class="description-paragraph" num="0085">
+<span class="notranslate"> <span class="google-src-text">상기와 같은 방법 이외에도, 판단 수단(422)을 이용하여 타격 러버(124)의 교체 시점을 파악할 수도 있는데, 판단 수단(422)은 타격 러버(124)에 안착되도록 형성되며, 타격 러버(124)의 마찰력이 감소함에 따라 도 5에 도시된 바와 같이, 탁구 라켓(100)과 지면 사이의 각도(θ) 변경 시 타격 러버(124)에서 미끄러져 이동하도록 마련된다.</span>In addition to the above method, it is also possible to grasp the replacement time of the hitting rubber 124 using the determining means 422, the determining means 422 is formed to be seated on the hitting rubber 124, the hitting rubber 124 As shown in FIG. 5, as the frictional force decreases, it is provided to slide and move in the hitting rubber 124 when the angle θ between the table tennis racket 100 and the ground changes.</span>
+</div>
+<div class="description-paragraph" num="0086">
+<span class="notranslate"> <span class="google-src-text">다시 말해, 전술된 실시예에서와 동일하게 만일 감지부(410)를 통해 타격 러버(124)로 가해지는 충격량이 일정하게 유지되다가, 충격량이 작아지게 되면, 측정부(420)를 통해 해당 어플리케이션을 실행시켜 타격 러버(124)의 교체 여부를 판단하도록 하는데, 이와 같이 어플리케이션을 실행시키게 되면, 촬영 수단(420a) 동작이 활성화되고, 촬영 수단(420a)을 통해 판단 수단(422)이 타격 러버(124)에서 미끄러져 이동하는 시점에서의 탁구 라켓(100)과 지면과의 각도(θ)를 측정하도록 함으로써, 정확하게 타격 러버(124)에 대한 교체 시점을 파악할 수 있다.</span>In other words, as in the above-described embodiment, if the impact amount applied to the hitting rubber 124 through the sensing unit 410 is kept constant and the impact amount is decreased, the corresponding application is applied through the measurement unit 420. It is executed to determine whether or not the hitting rubber 124 is replaced. When the application is executed as described above, the operation of the shooting means 420a is activated, and the determination means 422 through the shooting means 420a causes the hitting rubber 124 to be determined. ) By measuring the angle θ between the table tennis racket 100 and the ground at the time of sliding, it is possible to accurately grasp the replacement time for the hitting rubber 124.</span>
+</div>
+<div class="description-paragraph" num="0087">
+<span class="notranslate"> <span class="google-src-text">더 자세히 설명하면, 촬영 수단(420a)을 통해 판단 수단(422)이 타격 러버(124)에서 벗어난 시점의 탁구 라켓(100)과 지면과의 각도(θ)를 촬영하고, 이를 미리 설정된 기준 교체 각도와 비교, 일례로 45도 이하로 설정된 기준 교체 각도에서 판단 수단(422)이 타격 러버(124)에서 이동하는 것으로 확인되면, 타격 러버(124)에 대한 마찰력이 감소한 것으로 판단하여 해당 내용을 사용자에게 진동 등과 같은 형태로 알려 타격 러버(124)의 교체 시점을 정확하게 파악할 수 있도록 한다.</span>In more detail, the angle θ between the table tennis racket 100 and the ground when the determination means 422 deviates from the hitting rubber 124 through the shooting means 420a is photographed, and this is a preset reference replacement angle. Compared with, for example, when it is confirmed that the determination means 422 moves from the hitting rubber 124 at a reference replacement angle set to 45 degrees or less, it is determined that the frictional force with respect to the hitting rubber 124 has decreased, and the content is transmitted to the user. Known in the form of vibration, etc., it is possible to accurately grasp the replacement timing of the hitting rubber 124.</span>
+</div>
+<div class="description-paragraph" num="0088">
+<span class="notranslate"> <span class="google-src-text">결과적으로는, 상기와 같은 실시예들을 통해 본 발명은 타격 러버(124)의 교체 시기를 정확하게 판단할 수 있으며, 그에 따라 항상 탁구 라켓(100)에 포함된 타격 러버(124)가 최상의 상태를 유지할 수 있도록 한다,</span>As a result, through the above embodiments, the present invention can accurately determine the replacement timing of the hitting rubber 124, and accordingly the hitting rubber 124 included in the table tennis racket 100 always maintains the best condition. Make it possible,</span>
+</div>
+<div class="description-paragraph" num="0089">
+<span class="notranslate"> <span class="google-src-text">본 발명은, 스윙 가속도 및 스윙 각도 정보가 포함된 기술 별 기준이 되는 전문가의 스윙 데이터를 미리 저장하고, 전문가의 스윙 데이터와 사용자의 스윙 데이터를 비교, 점수로 환산하여 제공함으로써, 점수 비교를 통해 효과적으로 스윙 정확성 여부를 판단할 수 있는 효과를 갖는다.</span>The present invention, by storing the swing data of the expert, which is a standard for each technology including swing acceleration and swing angle information, and comparing the swing data of the expert with the swing data of the user, and converting the swing data into scores, through score comparison It has the effect of effectively determining whether or not the swing is correct.</span>
+</div>
+<div class="description-paragraph" num="0090">
+<span class="notranslate"> <span class="google-src-text">그리고, 본 발명은 스윙 궤적 중 미리 설정된 지점에서 충격량 발생 시 탁구 공을 정확하게 타격한 것으로 판단하여 스윙의 정확성을 확인할 수 있으며, 이때의 충격량을 연속적으로 저장, 만일 충격량 값이 작아지면 탁구 라켓에 결합된 러버가 소모된 것으로 판단할 수 있는 효과를 갖는다.</span>In addition, the present invention can determine the accuracy of the swing by determining that the table tennis ball was hit accurately when an impact amount occurs at a predetermined point in the swing trajectory, and continuously stores the amount of impact at this time, if the value of the impact amount decreases, it is coupled to the table tennis racket It has the effect of judging that the used rubber is consumed.</span>
+</div>
+<div class="description-paragraph" num="0091">
+<span class="notranslate"> <span class="google-src-text">또한, 본 발명은 러버가 소모된 것으로 판단되는 경우 촬영 수단을 이용하여 마모에 따른 패턴 분포를 파악함과 동시에, 탁구 라켓에 올려진 테스트 플레이트의 미끄러짐 시 탁구 라켓과 지면과의 각도를 측정하여 미리 설정된 판단 데이터와 비교, 러버의 교체 시기를 정확하게 판단할 수 있도록 하는 효과를 갖는다.</span>In addition, in the present invention, when it is determined that the rubber is consumed, the pattern distribution according to wear is grasped using a photographing means, and at the same time, the angle between the table tennis racket and the ground is measured by sliding the test plate on the table tennis racket. Compared with the set judgment data, it has the effect of accurately determining the replacement time of the rubber.</span>
+</div>
+<div class="description-paragraph" num="0092">
+<span class="notranslate"> <span class="google-src-text">이상의 본 발명은 도면에 도시된 실시 예(들)를 참고로 설명되었으나 이는 예시적인 것에 불과하며, 본 기술 분야의 통상의 지식을 가진 자라면 이로부터 다양한 변형이 이루어질 수 있으며, 상기 설명된 실시예(들)의 전부 또는 일부가 선택적으로 조합되어 구성될 수도 있다는 점을 이해할 것이다. 따라서, 본 발명의 진정한 기술적 보호 범위는 첨부된 청구범위의 기술적 사상에 의해 정해여야 할 것이다.</span>The present invention has been described above with reference to the embodiment (s) shown in the drawings, but this is merely exemplary, and those skilled in the art can make various modifications therefrom, and the above-described embodiment It will be understood that all or a portion of the (s) may be configured by selectively combining. Therefore, the true technical protection scope of the present invention should be defined by the technical spirit of the appended claims.</span>
+</div>
+</description-of-embodiments>
+<reference-signs-list>
+<div class="description-paragraph" num="0093">
+<span class="notranslate"> <span class="google-src-text">100 : 탁구 라켓				110 : 손잡이<br/>
+120 : 타격부				122 : 베이스 플레이트<br/>
+124 : 타격 러버				200 : 감지 센서 유닛<br/>
+300 : 판별 유닛				310 : 궤적 산출부<br/>
+312 : 궤적 추적부				314 : 기점 산출부<br/>
+316 : 스윙궤적 산출부			320 : 타격 판별부<br/>
+330 : 스윙 분석부				340 : 종류 판별부<br/>
+350 : 메모리				400 : 교체 판단 유닛<br/>
+410 : 감지부				420 : 측정부<br/>
+420a : 촬영 수단				422 : 판단 수단<br/>
+A : 패턴 영역부</span>100: table tennis racket 110: handle <br/> 120: striking part 122: base plate <br/> 124: hitting rubber 200: detection sensor unit <br/> 300: discrimination unit 310: trajectory calculation unit <br/> 312: trajectory tracking unit 314: starting point calculation unit <br/> 316: swing trajectory calculating unit 320: hitting discrimination unit <br/> 330: swing analysis unit 340: type discrimination unit <br/> 350: memory 400: replacement judgment unit <br/> 410: detection unit 420: measurement unit <br/> 420a: Shooting means 422: Judgment means <br/> A: Pattern area part</span>
+</div>
+</reference-signs-list>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">10</span>)</h2>
+<div html="" itemprop="content"><ol class="claims" lang="EN" load-source="google" mxw-id="PCLM244371127">
+<li class="claim"> <div class="claim" num="1">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">파지가 이루어지는 손잡이와, 상기 손잡이에 연결되며 탁구공을 타격하는 타격부를 포함하는 탁구 라켓;<br/>상기 손잡이에 설치되며, 상기 탁구 라켓의 스윙 시 발생되는 가속도 정보 및 각속도 정보를 반복적으로 저장하는 감지 센서 유닛;<br/>상기 감지 센서 유닛을 통해 감지된 감지정보를 바탕으로 상기 탁구 라켓의 스윙 궤적을 산출 및 비교를 통해 스윙 정확도를 판별하는 판별 유닛; 및<br/>상기 타격부로 가해지는 충격량을 산출하여 저장하며, 충격량 변화를 감지, 상기 타격부에 대한 교체 시점의 판단을 가이드 하는 교체 판단 유닛을 포함하며,<br/>상기 교체 판단 유닛은,<br/>상기 타격부에 설치되며, 탁구공을 타격함에 따라 발생되는 진동을 감지하여 충격량으로 산출하는 감지부; 및<br/>상기 감지부와 전기적으로 연결되고, 상기 감지부를 통해 상기 타격부의 교체 시점에 대한 판단이 이루어지도록 하며, 상기 타격부를 촬영하기 위한 촬영 수단을 구비하는 측정부;를 구비하고,<br/>상기 측정부는,<br/>상기 촬영 수단을 통해 상기 타격부를 촬영하여 상기 타격부에 형성된 패턴 영역부를 수집하고, 상기 패턴 영역부를 미리 설정된 기준 패턴 영역부와 비교하여 상기 타격부에 대한 교체 시점을 판단하도록 하는 것을 특징으로 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치.<br/> </span>A table tennis racket including a handle made of a grip and a hitting part connected to the handle and hitting a table tennis ball; <br/> A sensing sensor unit installed on the handle and repeatedly storing acceleration information and angular velocity information generated when the table tennis racket swings; <br/> A determination unit for determining swing accuracy through calculating and comparing a swing trajectory of the table tennis racket based on the detection information sensed by the detection sensor unit; And <br/> Calculating and storing the amount of impact applied to the striking portion, and includes a replacement determining unit that detects a change in the amount of impact and guides the determination of the replacement time for the striking portion, <br/> The replacement determination unit, <br/> A sensing unit installed in the hitting unit and detecting vibration generated by hitting a table tennis ball to calculate an impact amount; And <br/> It is electrically connected to the detection unit, and through the detection unit to determine whether the replacement time of the hitting unit, the measuring unit having a shooting means for photographing the hitting unit; <br/> The measuring unit, <br/> Table tennis characterized in that to collect the pattern region formed on the hitting portion by photographing the hitting portion through the photographing means, and to determine the replacement time for the hitting portion by comparing the patterned region portion with a preset reference pattern region portion Racket swing accuracy and replacement discrimination device. <br/> </span>
+</div>
+</div>
+</li> <li class="claim"> <div class="claim" num="2">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">삭제</span>delete</span>
+</div>
+</div>
+</li> <li class="claim"> <div class="claim" num="3">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">삭제</span>delete</span>
+</div>
+</div>
+</li> <li class="claim"> <div class="claim" num="4">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">파지가 이루어지는 손잡이와, 상기 손잡이에 연결되며 탁구공을 타격하는 타격부를 포함하는 탁구 라켓;<br/>상기 손잡이에 설치되며, 상기 탁구 라켓의 스윙 시 발생되는 가속도 정보 및 각속도 정보를 반복적으로 저장하는 감지 센서 유닛;<br/>상기 감지 센서 유닛을 통해 감지된 감지정보를 바탕으로 상기 탁구 라켓의 스윙 궤적을 산출 및 비교를 통해 스윙 정확도를 판별하는 판별 유닛; 및<br/>상기 타격부로 가해지는 충격량을 산출하여 저장하며, 충격량 변화를 감지, 상기 타격부에 대한 교체 시점의 판단을 가이드 하는 교체 판단 유닛을 포함하며,<br/>상기 교체 판단 유닛은,<br/>상기 타격부에 설치되며, 탁구공을 타격함에 따라 발생되는 진동을 감지하여 충격량으로 산출하는 감지부; 및<br/>상기 감지부와 전기적으로 연결되고, 상기 감지부를 통해 상기 타격부의 교체 시점에 대한 판단이 이루어지도록 하며, 상기 타격부를 촬영하기 위한 촬영 수단을 구비하는 측정부;를 구비하고,<br/>상기 측정부는,<br/>상기 타격부에 안착되도록 형성되며, 상기 타격부의 마찰력이 감소함에 따라 상기 탁구 라켓과 지면 사이의 각도 변경 시 상기 타격부에서 미끄려져 이동하도록 마련되는 판단 수단을 구비하는 것을 특징으로 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치.<br/> </span>A table tennis racket including a handle made of a grip and a hitting part connected to the handle and hitting a table tennis ball; <br/> A sensing sensor unit installed on the handle and repeatedly storing acceleration information and angular velocity information generated when the table tennis racket swings; <br/> A determination unit for determining swing accuracy through calculating and comparing a swing trajectory of the table tennis racket based on the detection information sensed by the detection sensor unit; And <br/> Calculating and storing the amount of impact applied to the striking portion, and includes a replacement determining unit that detects a change in the amount of impact and guides the determination of the replacement time for the striking portion, <br/> The replacement determination unit, <br/> A sensing unit installed on the hitting unit and detecting vibration generated by hitting a table tennis ball and calculating an impact amount; And <br/> It is electrically connected to the detection unit, and through the detection unit to determine whether the replacement time of the hitting unit, the measuring unit having a shooting means for photographing the hitting unit; <br/> The measuring unit, <br/> Swing of the table tennis racket, characterized in that it is formed to be seated on the striking portion, and has a determination means provided to slide and move from the striking portion when the angle between the table tennis racket and the ground changes as the frictional force of the striking portion decreases. Accuracy and replacement discrimination device. <br/> </span>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="5">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">제 4 항에 있어서,<br/>상기 측정부는,<br/>상기 촬영 수단을 통해 상기 판단 수단이 상기 타격부에서 벗어난 시점의 상기 타격부와 지면과의 각도를 촬영하고, 미리 설정된 기준 교체 각도와 비교하여 상기 타격부에 대한 교체 시점을 판단하도록 하는 것을 특징으로 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치.<br/> </span>The method of claim 4, <br/> The measuring unit, <br/> Through the photographing means, the determination means photographs the angle between the striking portion and the ground at the time when it deviates from the striking portion, and compares it with a preset reference replacement angle to determine the replacement timing for the striking portion. Swing accuracy and replacement discrimination device for table tennis rackets. <br/> </span>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="6">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">제 1 항 또는 제 4 항 중 어느 한 항에 있어서,<br/>상기 판별 유닛은,<br/>상기 감지 센서 유닛의 감지 정보를 바탕으로 상기 탁구 라켓의 스윙 궤적을 산출하는 궤적 산출부;<br/>상기 궤적 산출부를 통해 산출된 스윙 궤적 중 상기 탁구 라켓이 탁구공을 타격하는 타격 지점을 판별하는 타격 판별부; 및<br/>상기 타격 판별부로부터 판별된 타격 지점 위치에 따라 상기 탁구 라켓의 스윙에 대한 적정여부를 판단 및 분석하는 스윙 분석부;를 구비하는 것을 특징으로 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치.<br/> </span>The method according to claim 1 or 4, <br/> The discrimination unit, <br/> A trajectory calculating unit calculating a swing trajectory of the table tennis racket based on the sensing information of the sensing sensor unit; <br/> A hitting discrimination unit for determining a hitting point where the table tennis racket hits a table tennis ball among swing trajectories calculated through the trajectory calculating unit; And <br/> Swing accuracy and replacement discrimination device of the table tennis racket, characterized in that it comprises; a swing analysis unit for determining and analyzing whether the swing of the table tennis racket according to the location of the hitting point determined by the hitting determination unit. <br/> </span>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="7">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">제 6 항에 있어서,<br/>상기 판별 유닛은,<br/>상기 궤적 산출부에서 산출된 스윙 궤적 패턴을 분석하여 상기 탁구 라켓의 스윙 종류를 판별하는 종류 판별부를 더 구비하고,<br/>상기 스윙 분석부는, 메모리로부터 상기 종류 판별부에서 판별된 스윙의 종류에 대응되는 표준 스윙 궤적 데이터를 제공받아 상기 궤적 산출부를 통해 산출된 상기 탁구 라켓의 스윙 궤적을 비교하는 것을 특징으로 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치.<br/> </span>The method of claim 6, <br/> The discrimination unit, <br/> Further comprising a type discrimination unit for determining the swing type of the table tennis racket by analyzing the swing trajectory pattern calculated by the trajectory calculation unit, <br/> The swing analysis unit receives standard swing trajectory data corresponding to the type of swing determined by the type determination unit from a memory, and compares the swing trajectory of the table tennis racket calculated through the trajectory calculation unit. Swing accuracy and rotation discrimination device. <br/> </span>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="8">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">제 6 항에 있어서,<br/>상기 판별 유닛은,<br/>상기 탁구 라켓의 스윙 종류에 따른 서로 다른 표준 스윙 궤적 데이터가 저장되는 메모리;를 더 구비하고,<br/>상기 스윙 분석부는, 상기 메모리에 미리 저장된 표준 스윙 궤적 데이터와 상기 궤적 산출부를 통해 산출된 상기 탁구 라켓의 스윙 궤적을 비교하여 사용자의 스윙 정확도를 판별하는 것을 특징으로 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치.<br/> </span>The method of claim 6, <br/> The discrimination unit, <br/> Further comprising a memory for storing different standard swing trajectory data according to the swing type of the table tennis racket, <br/> The swing analysis unit determines the swing accuracy and replacement of the table tennis racket, characterized by comparing a swing swing data of the table tennis racket calculated through the trajectory calculation unit with standard swing trajectory data previously stored in the memory. Device. <br/> </span>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="9">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">제 8 항에 있어서,<br/>상기 궤적 산출부는,<br/>상기 감지 센서 유닛의 감지 정보를 토대로 상기 탁구 라켓의 이동 궤적을 산출하는 궤적 추적부;<br/>상기 감지 센서 유닛의 감지 정보를 토대로 상기 궤적 추적부에서 산출된 상기 탁구 라켓의 이동 궤적에서 스윙이 시작되는 스윙의 시작점 및 스윙이 종료되는 스윙의 종료점을 각각 산출하는 기점 산출부; 및<br/>상기 기점 산출부에서 산출된 스윙의 시작점과 종료점 사이의 이동 궤적을 상기 탁구 라켓에 대한 스윙 궤적으로 산출하는 스윙궤적 판단부;를 구비하는 것을 특징으로 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치.<br/> </span>The method of claim 8, <br/> The trajectory calculation unit, <br/> A trajectory tracking unit for calculating a movement trajectory of the table tennis racket based on the detection information of the detection sensor unit; <br/> A base point calculating unit that calculates a starting point of a swing at which swing starts and an ending point of a swing at which swing ends at the movement trajectory of the table tennis racket calculated by the trajectory tracking unit based on the sensing information of the sensing sensor unit; And <br/> And a swing trajectory determination unit for calculating a movement trajectory between the start point and the end point of the swing calculated by the origin calculation unit as a swing trajectory for the table tennis racket. <br/> </span>
+</div>
+</div>
+</li> <li class="claim-dependent"> <div class="claim" num="10">
+<div class="claim-text">
+<span class="notranslate"> <span class="google-src-text">제 9 항에 있어서,<br/>상기 감지 센서 유닛은,<br/>상기 탁구 라켓의 가속도 및 이동 방향을 감지하고,<br/>상기 기점 산출부는, 상기 궤적 추적부에서 산출된 이동 궤적에서 상기 탁구 라켓의 이동방향이 변경되고, 상기 탁구 라켓의 가속도가 미리 설정된 제1가속도 이하인 지점을 스윙의 시작점으로 판단하며, 스윙 시작점 이후에 상기 탁구 라켓의 가속도가 미리 설정된 제2가속도 이하인 지점을 스윙의 종료점으로 판단하는 것을 특징으로 하는 탁구 라켓의 스윙 정확도 및 교체 판별 장치.</span>The method of claim 9, <br/> The detection sensor unit, <br/> Sensing the acceleration and direction of movement of the table tennis racket, <br/> In the starting point calculating unit, the moving direction of the table tennis racket is changed in the movement trajectory calculated by the trajectory tracking unit, and the point at which the acceleration of the table tennis racket is equal to or less than a preset first acceleration is determined as the starting point of the swing. A swing accuracy and replacement discrimination device for a table tennis racket, characterized in that a point at which the acceleration of the table tennis racket is equal to or less than a preset second acceleration is determined as an end point of the swing.</span>
+</div>
+</div>
+</li> </ol>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

@@ -1,0 +1,332 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10975494B2 - Ingot growth control device and control method thereof 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA442822783" source="national office">
+<div class="abstract">In the ingot growth control device and a control method thereof according to the present invention, when an input unit provides diameter data obtained by filtering a diameter measurement value of an ingot, a diameter controller reflects the diameter data to control a pulling speed of the ingot, while a temperature controller reflects the diameter data to control power of a heater.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES289496172">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATION(S)</heading>
+<div class="description-paragraph" id="p-0003" num="0001">This application is a U.S. National Phase Patent Application of International Application Number PCT/KR2017/005635, filed on May 30, 2017, which claims priority of Korean Patent Application Number 10-2016-0165509, filed on Dec. 7, 2016, the entire contents of all of which are incorporated herein by reference.</div>
+<heading id="h-0002">Technical Field</heading>
+<div class="description-paragraph" id="p-0004" num="0002">The present invention relates to an ingot growth control device capable of quickly and accurately controlling a diameter of an ingot during an ingot growing process and improving quality of the ingot, and a control method thereof.</div>
+<heading id="h-0003">Background Art</heading>
+<div class="description-paragraph" id="p-0005" num="0003">In order to fabricate a wafer, a single crystal silicon should be grown in an ingot form, and quality of the wafer is directly affected by quality of a silicon ingot, and thus an advanced process control technology from the time of growing the single crystal ingot is required.</div>
+<div class="description-paragraph" id="p-0006" num="0004">The Czochralski (CZ) crystal growth method is mainly used for growing a silicon single crystal ingot. An important factor that directly affects quality of a grown single crystal by using this method is known as V/G which is a ratio of a crystal growth speed (V) and a temperature gradient (G) at a solid-liquid interface. Therefore, it is important to control the V/G to a target trajectory value set over the entire zone of a crystal growth.</div>
+<div class="description-paragraph" id="p-0007" num="0005">A control system according to the CZ method is basically configured to change an actual pulling speed to match a target pulling speed by a change amount read by a current diameter monitoring system and a calculation through a PID controller.</div>
+<div class="description-paragraph" id="p-0008" num="0006">Normally, a basic principle is that a diameter (Dia) of an ingot is measured during a single crystal ingot growing process, and when there is a difference between the measured diameter (Dia) and a target diameter (T_Dia), a pulling speed (P/S) of the ingot is corrected to make the diameter (Dia) of the ingot close to a reference value.</div>
+<div class="description-paragraph" id="p-0009" num="0007">Therefore, the ingot growth control system may be expressed by the pulling speed control according to a change in the diameter of the ingot.</div>
+<div class="description-paragraph" id="p-0010" num="0008">Korean Laid-open Patent Publication No. 2013-0008175 discloses an ingot growth control device in which a high-resolution temperature controller corrects heater power in real time by reflecting an error between an average pulling speed calculated by a diameter controller and a target pulling speed input separately.</div>
+<div class="description-paragraph" id="p-0011" num="0009">Korean Laid-Open Patent Publication No. 2014-0113175 discloses a temperature control device of an ingot growth device that a temperature automatic design controller considers quantitatively a pulling speed error (ΔP/S<sub>0</sub>) and an actual temperature profile (Act ATC<sub>0</sub>) of a previous ingot growing process and an actual temperature profile (Act ATC1) of a current ingot growing process by reflecting an error between an average pulling speed calculated by a diameter controller and a target pulling speed input separately to automatically design a target temperature profile (Target ATC) of a current ingot growing process.</div>
+<div class="description-paragraph" id="p-0012" num="0010"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a configuration diagram illustrating an example of an ingot growth control device according to the related art.</div>
+<div class="description-paragraph" id="p-0013" num="0011">As shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, when the ingot growth control device according to the related art measures a diameter (Dia) of an ingot and inputs the measured diameter (Dia) and a target diameter (T_Dia) to an auto diameter controller <b>1</b>, the auto diameter controller <b>1</b> controls the diameter of the ingot by outputting the measured diameter (Dia) and the target diameter (T_Dia) at an actual pulling speed (P/S) and controlling a pulling speed of the ingot.</div>
+<div class="description-paragraph" id="p-0014" num="0012">Next, when an average pulling speed (Avg. P/S) obtained by averaging the actual pulling speeds from the auto diameter controller <b>1</b> is input to an auto growth controller <b>2</b>, the auto growth controller <b>2</b> outputs a temperature correction amount.</div>
+<div class="description-paragraph" id="p-0015" num="0013">Next, when the temperature correction amount is input from the auto growth controller <b>2</b> to an auto temperature controller <b>3</b>, the auto temperature controller <b>3</b> outputs heater power to control power of a heater, thereby controlling quality of the ingot. As described above, even though the diameter (Dia) of the ingot is measured in order to control the diameter and the quality of the ingot, there is a problem that a response time required to control the diameter and the quality of the ingot actually increases because it takes several steps to reflect a diameter error (ΔDia) and to correct the power of the heater.</div>
+<div class="description-paragraph" id="p-0016" num="0014">In addition, according to the related art, it takes about 1 to 5 minutes to control the diameter of the ingot by changing the pulling speed to reflect the diameter error of the ingot. On the other hand, even though the power of the heater is controlled to reflect the diameter error of the ingot, it takes about 20 minutes to affect the actual ingot.</div>
+<div class="description-paragraph" id="p-0017" num="0015">Therefore, since a temperature environment further affects the ingot after the diameter of the ingot is controlled, the diameter and the quality of the ingot are overcorrected, and thus it is difficult to obtain a desired ingot diameter and quality.</div>
+<heading id="h-0004">DISCLOSURE</heading>
+<heading id="h-0005">Technical Problem</heading>
+<div class="description-paragraph" id="p-0018" num="0016">The present invention is directed to solving the above described problems in the related art and providing an ingot growth control device capable of quickly and accurately controlling a diameter of an ingot during an ingot growing process and improving quality of the ingot, and a control method thereof.</div>
+<heading id="h-0006">Technical Solution</heading>
+<div class="description-paragraph" id="p-0019" num="0017">According to the present invention, there is provided an ingot growth control device for heating a raw material accommodated in a crucible in a melt state and growing an ingot from a melt accommodated in the crucible to a target diameter, including: an input unit for inputting diameter data of an ingot grown from the crucible; a diameter controller for controlling a pulling speed (P/S) of the ingot in consideration of a previously inputted target pulling speed (T_P/S) in order to reduce an error between diameter data provided by the input unit and a previously inputted target diameter (T_Dia); and a temperature controller for controlling heater power in consideration of a previously inputted target temperature (T_temp) in order to reduce the error between the diameter data provided by the input unit and the previously inputted target diameter (T_Dia).</div>
+<div class="description-paragraph" id="p-0020" num="0018">In addition, according to the present invention, there is provided an ingot growth control method for heating a raw material accommodated in a crucible in a melt state and growing an ingot from a melt accommodated in the crucible to a target diameter, including: a first step of inputting diameter data of an ingot grown from the crucible; a second step of controlling a pulling speed (P/S) of the ingot in consideration of a previously inputted target pulling speed (T_P/S) in order to reduce an error between the diameter data provided in the first step and a previously inputted target diameter (T_Dia); and a third step of controlling heater power in consideration of a previously inputted target temperature (T_temp) in order to reduce an error between the diameter data provided in the first step and the previously inputted target diameter (T_Dia), and the second and third steps are performed simultaneously.</div>
+<heading id="h-0007">Advantageous Effects</heading>
+<div class="description-paragraph" id="p-0021" num="0019">In an ingot growth control device and a control method thereof according to the present invention, when an input unit provides diameter data obtained by filtering a diameter measurement value of an ingot, a diameter controller controls a pulling speed of the ingot by reflecting the diameter data, while a temperature controller controls power of a heater by reflecting the diameter data.</div>
+<div class="description-paragraph" id="p-0022" num="0020">Accordingly, the pulling speed of the ingot and the power of the heater are controlled independently by the diameter controller and the temperature controller, thereby controlling the diameter and quality of the ingot quickly and accurately.</div>
+<div class="description-paragraph" id="p-0023" num="0021">In addition, a dispersion of the diameter of the ingot may be improved, and a variation of the pulling speed for controlling the diameter of the ingot may be reduced, thereby improving a crystal quality level.</div>
+<description-of-drawings>
+<heading id="h-0008">DESCRIPTION OF DRAWINGS</heading>
+<div class="description-paragraph" id="p-0024" num="0022"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a configuration diagram illustrating an example of an ingot growth control device according to the related art.</div>
+<div class="description-paragraph" id="p-0025" num="0023"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a view illustrating an ingot growth device according to the present invention.</div>
+<div class="description-paragraph" id="p-0026" num="0024"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a configuration diagram illustrating an ingot growth control device applied to <figref idrefs="DRAWINGS">FIG. 2</figref>.</div>
+<div class="description-paragraph" id="p-0027" num="0025"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a flowchart illustrating an ingot growth control method according to the present invention.</div>
+<div class="description-paragraph" id="p-0028" num="0026"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a graph illustrating a diameter of an ingot during a process according to the related art and the present invention.</div>
+<div class="description-paragraph" id="p-0029" num="0027"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a graph illustrating an error of a pulling speed during a process according to the related art and the present invention.</div>
+<div class="description-paragraph" id="p-0030" num="0028"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a view illustrating crystal quality results of an ingot grown according to the related art and the present invention.</div>
+</description-of-drawings>
+<heading id="h-0009">MODES OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0031" num="0029">Hereinafter, embodiments will be described in detail with reference to the accompanying drawings. However, the scope of the spirit of the present invention may be determined from the matters disclosed in the embodiments, and the spirit of the present invention of the embodiments include practical modifications such as addition, deletion, modification, and the like of components to the following proposed embodiments.</div>
+<div class="description-paragraph" id="p-0032" num="0030"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a view illustrating an ingot growth device according to the present invention.</div>
+<div class="description-paragraph" id="p-0033" num="0031">The ingot growth device of the present invention, as shown in <figref idrefs="DRAWINGS">FIG. 2</figref>, includes a crucible <b>110</b> accommodating a silicon melt (SM) for growing a single crystal silicon ingot (IG) in a chamber <b>100</b>, a heater <b>120</b> for heating the crucible <b>110</b>, a pulling device <b>130</b> for pulling while rotating the single crystal ingot (IG), a diameter measurement sensor <b>140</b> for measuring a diameter of the single crystal ingot (IG), and an ingot growth control device <b>200</b> for controlling the same.</div>
+<div class="description-paragraph" id="p-0034" num="0032">In detail, the ingot growth control device <b>200</b> is configured to provide directly a pulling speed (P/S) for pulling up an ingot to the pulling device <b>130</b> and heater power which is power supplied to the heater <b>120</b>.</div>
+<div class="description-paragraph" id="p-0035" num="0033">At this time, the ingot growth control device <b>200</b> provides a diameter measured by the diameter measurement sensor <b>140</b> as diameter data (Dia data), and controls simultaneously the pulling speed (P/S) and the heater power in order to reduce an error between the diameter data (Dia data) and a previously inputted target diameter (T_Dia).</div>
+<div class="description-paragraph" id="p-0036" num="0034">Of course, according to quality of the ingot, the target diameter (T_Dia), a target pulling speed (T_P/S), and a target temperature (T_temp) are inputted to the ingot growth control device <b>200</b> in advance, and the diameter (Dia), the pulling speed (P/S), and the heater power are controlled according to a target value.</div>
+<div class="description-paragraph" id="p-0037" num="0035">Accordingly, the ingot growth control device <b>200</b> controls independently the ingot pulling speed (P/S) and the heater power by using the diameter data (Dia data), thereby controlling the diameter and the quality of the ingot quickly and accurately.</div>
+<div class="description-paragraph" id="p-0038" num="0036"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a configuration diagram illustrating an ingot growth control device applied to <figref idrefs="DRAWINGS">FIG. 2</figref>.</div>
+<div class="description-paragraph" id="p-0039" num="0037">The growth control device of the present invention, as shown in <figref idrefs="DRAWINGS">FIG. 3</figref>, includes an input unit <b>210</b> for providing diameter data, a diameter controller <b>220</b> for controlling a pulling speed (P/S) in consideration of diameter data (Dia data) provided from the input unit <b>210</b>, and a temperature controller for controlling heater power in consideration of the diameter data provided from the input unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0040" num="0038">The input unit <b>210</b> includes a diameter measurement sensor <b>211</b> for measuring a diameter of an ingot in an ingot growing process and a sensor filter <b>212</b> for processing a diameter measurement value measured by the diameter measurement sensor <b>211</b> into diameter data.</div>
+<div class="description-paragraph" id="p-0041" num="0039">In detail, the diameter measurement sensor <b>211</b> may be configured as a kind of infrared camera or a CCD camera, and may measure the diameter of the ingot by measuring a position of a meniscus which is an interface between an ingot and a silicon melt, but is not limited thereto.</div>
+<div class="description-paragraph" id="p-0042" num="0040">Of course, in the diameter measurement sensor <b>211</b>, the diameter measurement value may be changed according to sensitivity of the sensor itself and an external noise, an installation position, and the like. In consideration of this, it is preferable that the diameter measurement value is calculated as the diameter data through a filtering process by the sensor filter <b>212</b> and is used for a control described below.</div>
+<div class="description-paragraph" id="p-0043" num="0041">In addition, the sensor filter <b>212</b> includes a polynomial filter, an average filter, an actual filter, and a prediction filter, and in consideration of matters described in Table 1 below, one may be selected and applied according to the purpose of use.</div>
+<div class="description-paragraph" id="p-0044" num="0042">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="6" nameend="6" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Input</td>
+<td class="description-td">Output </td>
+<td class="description-td">Node </td>
+<td class="description-td">External </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">intensity</td>
+<td class="description-td">intensity</td>
+<td class="description-td">intensity</td>
+<td class="description-td">noise</td>
+<td class="description-td">Response </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">reduction</td>
+<td class="description-td">reduction</td>
+<td class="description-td">reduction</td>
+<td class="description-td">reduction</td>
+<td class="description-td">speed</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Kinds</td>
+<td class="description-td">level</td>
+<td class="description-td">level</td>
+<td class="description-td">level</td>
+<td class="description-td">level</td>
+<td class="description-td">level</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Polynomial</td>
+<td class="description-td">medium</td>
+<td class="description-td">medium</td>
+<td class="description-td">medium</td>
+<td class="description-td">large</td>
+<td class="description-td">medium</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">filter</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Average</td>
+<td class="description-td">large</td>
+<td class="description-td">large</td>
+<td class="description-td">large</td>
+<td class="description-td">large</td>
+<td class="description-td">slow</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">filter</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Actual</td>
+<td class="description-td">small</td>
+<td class="description-td">small</td>
+<td class="description-td">small</td>
+<td class="description-td">small</td>
+<td class="description-td">fast</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">filter</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Prediction</td>
+<td class="description-td">medium</td>
+<td class="description-td">medium</td>
+<td class="description-td">large</td>
+<td class="description-td">large</td>
+<td class="description-td">fast</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">filter</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0045" num="0043">At this time, the polynomial filter may increase a response speed by calculating the diameter measurement value by using a polynomial equation and calculating the diameter data in accordance with the polynomial equation, as compared with the related art of calculating as the diameter data by reflecting the large trend of the diameter measurement value.</div>
+<div class="description-paragraph" id="p-0046" num="0044">In addition, the prediction filter may increase the response speed by calculating a predicted diameter value of a single crystal ingot from which a noise reflecting a single crystal growth environment has been removed by using a correlation equation and calculating the diameter data according to the correlation equation, as the related art of calculating as the diameter data by reflecting the predicted value of the diameter measurement value.</div>
+<div class="description-paragraph" id="p-0047" num="0045">Of course, the average filter goes through the process of averaging the diameter measurement values, and the actual filter uses the diameter measurement value as it is, and they are widely applied in the related art.</div>
+<div class="description-paragraph" id="p-0048" num="0046">As described above, the input unit <b>210</b> measures the diameter of the ingot, and then appropriately filters and provides the diameter as the diameter data, thereby reducing the response speed and improving the reliability of the diameter data.</div>
+<div class="description-paragraph" id="p-0049" num="0047">In addition, although the input unit <b>210</b> may provide the diameter data as it is, a diameter error (ΔDia) is calculated by comparing the diameter data with a previously input target diameter (T_Dia), and such a diameter error (ΔDia) may be provided to the diameter controller <b>220</b> and the temperature controller <b>230</b>, but the present invention is not limited thereto.</div>
+<div class="description-paragraph" id="p-0050" num="0048">The diameter controller <b>220</b> not only eliminates the diameter error (ΔDia) input from the input unit <b>210</b> but also controls the pulling speed (P/S) in accordance with the previously inputted target pulling speed (T_P/S), and includes a pulling speed calculation part <b>221</b> for calculating a pulling speed (P/S) in consideration of the diameter error (ΔDia) and the target pulling speed (T_P/S) and a pulling speed output part <b>222</b> for outputting the pulling speed (P/S) calculated by the pulling speed calculation part <b>221</b> to the pulling device <b>130</b>.</div>
+<div class="description-paragraph" id="p-0051" num="0049">In detail, the pulling speed calculation part <b>221</b> calculates the pulling speed (P/S) of the ingot according to input of the target pulling speed (T_P/S) through a pulling speed PID (Proportional, Integral, Differential) equation, wherein the pulling speed PID equation includes a function of a first delay time and a first reaction time, and the first delay time and the first reaction time are inputted in advance as a first delay set value and a first reaction set value separately.</div>
+<div class="description-paragraph" id="p-0052" num="0050">In an embodiment, the pulling speed PID equation is constructed with a second order polynomial, and may include a sine function, but is not limited thereto.</div>
+<div class="description-paragraph" id="p-0053" num="0051">However, the diameter controller <b>220</b> accumulates and stores a time from a time point (t<b>0</b>) when the pulling speed (P/S) of the ingot is output from the pulling speed output part <b>222</b> to a time point (t<b>1</b>) when a diameter of an actual ingot begins to be controlled thereby as first delay time data, and accumulates and stores a time from the time point (t<b>1</b>) when the diameter of the actual ingot begins to be controlled to a time point (t<b>2</b>) when the diameter of the actual ingot is controlled by about 63% of a final converging diameter as first reaction time data.</div>
+<div class="description-paragraph" id="p-0054" num="0052">At this time, the pulling speed calculation part <b>221</b> compares the first delay time data accumulated and stored as described above with the first delay set value, and when the error occurs less than 10 times, the first delay set value is maintained as it is as the first delay time in the pulling speed PID equation, but when the error occurs 10 times or more, the accumulated and stored first delay time data is applied to the pulling speed PID equation as the first delay time.</div>
+<div class="description-paragraph" id="p-0055" num="0053">In addition, the pulling speed calculation part <b>221</b> compares the first reaction time data accumulated as described above with the first reaction set value, and as described above, the first reaction set value is maintained as it is, or the first reaction time data is applied to the pulling speed PID equation as the first reaction time according to the number of occurrences of the error.</div>
+<div class="description-paragraph" id="p-0056" num="0054">As described above, the diameter controller <b>220</b> controls the pulling speed (P/S) by using the pulling speed PID equation which is a function of the first delay time and the first reaction time, and the response speed of the diameter control according to the pulling speed may be increased by automatically optimizing the first delay time and the first reaction time to control the pulling speed (P/S).</div>
+<div class="description-paragraph" id="p-0057" num="0055">The temperature controller <b>230</b> not only eliminates the diameter error (ΔDia) input from the input unit <b>210</b> but also controls heater power in accordance with the previously inputted target temperature (T_temp), and includes a heater power calculation part <b>231</b> for calculating the heat power in consideration of the diameter error (ΔDia) and the target temperature (T_temp) and a heater power output part <b>232</b> for outputting the heater power calculated by the heater power calculation part <b>231</b> to the heater <b>120</b>.</div>
+<div class="description-paragraph" id="p-0058" num="0056">In detail, the heater power calculation part <b>231</b> calculates the heater power according to an input of the target temperature (T_temp) through a heater power PID (Proportional, Integral, Differential) equation, wherein the heater power PID equation includes a function of a second delay time and a second reaction time, and the second delay time and the second reaction time are input previously as a second delay set value and a second reaction set value separately.</div>
+<div class="description-paragraph" id="p-0059" num="0057">Likewise, the temperature controller <b>230</b>, like the diameter controller <b>220</b>, accumulates and stores a time from a time point (t<b>0</b>) when the heater power is output from the heater power output part <b>232</b> to a time point (t<b>1</b>) when the diameter of the actual ingot begins to be controlled thereby as second delay time data, and accumulates and stores a time from the time point (t<b>1</b>) when the diameter of the actual ingot begins to be controlled to a time point (t<b>2</b>) when the diameter of the actual ingot is controlled by about 63% of a final converging diameter as second reaction time data.</div>
+<div class="description-paragraph" id="p-0060" num="0058">At this time, the heater power calculation part <b>231</b>, like the pulling speed calculation part <b>221</b>, compares the second delay time data and the second reaction time data that are accumulated and stored with the second delay time set value and the second reaction time set value that are set in advance, and as described above, the second delay set value and the second reaction set value are maintained as they are, or the second delay time data and the second reaction time data are applied to the heater power PID equation as the second delay time and the second reaction time according to the number of occurrences of the error.</div>
+<div class="description-paragraph" id="p-0061" num="0059">As described above, the temperature controller <b>230</b> controls the heater power by using the heater power PID equation which is a function of the second delay time and the second reaction time, and the response time of the quality control according to the heater power may be increased by automatically optimizing the second delay time and the second reaction time to control the heater power.</div>
+<div class="description-paragraph" id="p-0062" num="0060">However, the diameter controller <b>220</b> and the temperature controller <b>230</b> independently control the pulling speed and the heater power, but since a change in heat amount of the heater greatly affects a single crystal growth interface, it affects not only the quality of the ingot but also the diameter of the ingot.</div>
+<div class="description-paragraph" id="p-0063" num="0061">Accordingly, when the pulling speed (P/S) of the ingot excessively deviates from a tolerance range of the target pulling speed (T_P/S), it is preferable to control the heater power in conjunction with the pulling speed (P/S) of the ingot. For this, the temperature controller <b>230</b> applies an output multiple proportional to the pulling speed error of the diameter controller <b>220</b> to the previously calculated heater power.</div>
+<div class="description-paragraph" id="p-0064" num="0062">In an embodiment, when the pulling speed (P/S) of the single crystal ingot controlled by the diameter controller <b>220</b> deviates from an error range of 1 to 10% of the target pulling speed (T_P/S), the temperature controller <b>230</b> applies an output multiple to the previously calculated heater power, and the output multiple may be determined to be −100 times to +100 times so as to be proportional to a degree of deviation from an error range, but the present invention is not limited thereto.</div>
+<div class="description-paragraph" id="p-0065" num="0063"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a flowchart illustrating an ingot growth control method according to the present invention.</div>
+<div class="description-paragraph" id="p-0066" num="0064">The ingot growth control method according to the present invention measures a diameter of an ingot as shown in <figref idrefs="DRAWINGS">FIG. 4</figref>, and calculates diameter data by filtering a diameter measurement value (see S<b>1</b> and S<b>2</b>).</div>
+<div class="description-paragraph" id="p-0067" num="0065">In an embodiment, the diameter of the ingot at a silicon melt interface may be measured by a diameter measurement sensor such as an infrared camera or a CCD camera.</div>
+<div class="description-paragraph" id="p-0068" num="0066">In an embodiment, accuracy and reliability of the diameter data may be increased and simultaneously, a response speed may be increased by calculating a diameter measurement value as the diameter data by a sensor filter such as a polynomial filter or a prediction filter.</div>
+<div class="description-paragraph" id="p-0069" num="0067">Next, a diameter error (ΔDia) according to the diameter data and a previously inputted target diameter (T_Dia) is calculated, and the diameter error (ΔDia) is provided for simultaneously controlling a pulling speed (P/S) and heater power (see S<b>3</b>).</div>
+<div class="description-paragraph" id="p-0070" num="0068">Next, the pulling speed (P/S) is calculated and output according to the diameter error (ΔDia) and a target pulling speed (T_P/S) (see S<b>4</b> and S<b>5</b>).</div>
+<div class="description-paragraph" id="p-0071" num="0069">In an embodiment, the pulling speed (P/S) is controlled so as to match the target pulling speed (T_P/S) while eliminating the diameter error (ΔDia), and the pulling speed may be calculated by a pulling speed PID equation including a function of a first delay time and a first reaction time.</div>
+<div class="description-paragraph" id="p-0072" num="0070">At this time, the first delay time is a time from a time point when the pulling speed (P/S) is outputted to a time point when a diameter of an actual ingot begins to be controlled, and the first reaction time is a time from the time point when the diameter of the ingot begins to be controlled to a time point when the diameter of the ingot reaches 63% of a final converging diameter of the ingot, and the first delay time and the first reaction time are input as previously set values.</div>
+<div class="description-paragraph" id="p-0073" num="0071">In addition, the first delay time and the first reaction time may be accumulated and stored as real-time measurement values. When an error between the accumulated and stored value and the previously set value occurs at least ten times or more, the value is automatically updated to the accumulated and stored value, and thus the diameter of the ingot may be controlled quickly and accurately according to the pulling speed (P/S).</div>
+<div class="description-paragraph" id="p-0074" num="0072">Meanwhile, the heater power is calculated and output according to the diameter error (ΔDia) and a target temperature (T_temp) (see S<b>6</b> and S<b>7</b>).</div>
+<div class="description-paragraph" id="p-0075" num="0073">In an embodiment, the heater power is controlled so as to match the target temperature (T_temp) while eliminating the diameter error (ΔDia), and the heater power may be calculated by a heater power PID equation including a function of a second delay time and a second reaction time.</div>
+<div class="description-paragraph" id="p-0076" num="0074">At this time, the second delay time is a time from a time point when the heater power is outputted to a time point when a diameter of an actual ingot begins to be controlled, and the second reaction time is a time from the time point when the diameter of the ingot begins to be controlled to a time point when the diameter of the ingot reaches 63% of a final converging diameter of the ingot, and the second delay time and the second reaction time are input as previously set values.</div>
+<div class="description-paragraph" id="p-0077" num="0075">In addition, the second delay time and the second reaction time may be accumulated and stored as real-time measurement values. When an error between the accumulated and stored value and the previously set value occurs at least ten times or more, the value is automatically updated to the accumulated and stored value, and thus the quality of the ingot may be controlled and simultaneously, the diameter of the ingot may be controlled quickly and accurately according to the heater power.</div>
+<div class="description-paragraph" id="p-0078" num="0076">However, when the pulling speed (P/S) is excessively different from the target pulling speed (T_P/S), the heater power is controlled in conjunction with the pulling speed (P/S), and thus it is possible to quickly and accurately match the diameter of the ingot to the target diameter (T_Dia).</div>
+<div class="description-paragraph" id="p-0079" num="0077">Therefore, when the error between the pulling speed (P/S) and the target pulling speed (T_P/S) deviates from a set range, an output multiple is calculated and the heater power is corrected in consideration of the output multiple, and then the output is finally output (see S<b>8</b>, S<b>9</b>, and S<b>10</b>).</div>
+<div class="description-paragraph" id="p-0080" num="0078">In an embodiment, when the pulling speed (P/S) is out of a range of 1 to 10% of the target pulling speed (T_P/S), the output multiple is calculated within a range of −100 times to 100 times, and final heater power may be calculated by multiplying pre-calculated heater power by the output multiple.</div>
+<div class="description-paragraph" id="p-0081" num="0079">Of course, when the error between the pulling speed (P/S) and the target pulling speed (T_P/S) is within the set range, the pre-calculated heater power is maintained.</div>
+<div class="description-paragraph" id="p-0082" num="0080"> <figref idrefs="DRAWINGS">FIGS. 5 and 6</figref> are graphs illustrating a diameter of an ingot and an error of a pulling speed during a process according to the related art and the present invention, and <figref idrefs="DRAWINGS">FIG. 7</figref> is a view illustrating crystal quality results of an ingot grown according to the related art and the present invention.</div>
+<div class="description-paragraph" id="p-0083" num="0081">According to the related art, since the pulling speed is output as a diameter measurement value of the ingot is input to an auto diameter controller, and an average value of the pulling speed is output into heater power sequentially through an auto growth controller and an auto temperature controller, it takes a long time to output the heater power as compared with the pulling speed.</div>
+<div class="description-paragraph" id="p-0084" num="0082">On the other hand, according to the present invention, since the diameter measurement value of the ingot is supplied to the diameter controller and the temperature controller simultaneously after being filtered at the input unit, and the pulling speed and the heater power are output independently from the diameter controller and the temperature controller, the pulling speed and the heater power are output almost simultaneously and quickly.</div>
+<div class="description-paragraph" id="p-0085" num="0083">When the ingot is grown on the basis of the target diameter of 306 mm according to the related art and the present invention, a diameter deviation of the ingot grown according to the related art as shown in <figref idrefs="DRAWINGS">FIG. 5</figref> is shown at an average of 0.84 mm, whereas the diameter deviation of the ingot grown according to the present invention is shown at an average of 0.31 mm, and it can be seen that the diameter deviation of the ingot is improved by about 63.3% as compared to the related art.</div>
+<div class="description-paragraph" id="p-0086" num="0084">Therefore, since the ingot grown according to the present invention shows a small diameter deviation by position, productivity can be improved even though a back-end process such as grinding is not performed separately in order to eliminate the diameter deviation.</div>
+<div class="description-paragraph" id="p-0087" num="0085">In addition, as shown in <figref idrefs="DRAWINGS">FIG. 6</figref>, an error of the pulling speed according to the related art is shown at an average of 0.034 mm/min, whereas an error of the pulling speed according to the present invention is shown at an average of 0.015 mm/min, and it can be seen that the error of the pulling speed is improved by about 56.8% as compared to the related art.</div>
+<div class="description-paragraph" id="p-0088" num="0086">Therefore, a process according to the present invention significantly reduces the error of the pulling speed, so that the quality of the ingot may be uniformly improved for each length, and may be confirmed by a score of a copper haze scoring as shown in <figref idrefs="DRAWINGS">FIG. 7</figref>.</div>
+<div class="description-paragraph" id="p-0089" num="0087">A copper haze evaluation method is an evaluation method in which copper is contaminated on one side of a wafer or a single crystal silicon piece at a high concentration by using a copper contamination solution which is a mixed solution of buffered oxide etchant (BOE) solution and copper, and short diffusion heat treatment is performed, and then the contaminated side or the opposite side of the contaminated side is observed with the naked eye under a condensing lamp, to distinguish a crystal defect region.</div>
+<div class="description-paragraph" id="p-0090" num="0088">A cross section of a wafer or single crystal ingot may be divided into an O-band region, a vacancy dominant point defect zone (VDP) region, an interstitial dominant point defect zone (IDP) region, and a loop dominant point defect zone (LDP) region through a first heat treatment (BP) and a second heat treatment (BSW) by such a copper haze (Cu Hz) evaluation method.</div>
+<div class="description-paragraph" id="p-0091" num="0089">In addition, the score of the copper haze scoring may be assigned to a region as described above by using the Cu Hz evaluation method, and the score of the copper haze scoring may be assigned from 0 to 300.</div>
+<div class="description-paragraph" id="p-0092" num="0090">Recently, since a demand for quality of an ingot is high, the quality is controlled at a level in which only the VDP region and the IDP region, which are defect free regions where the O-band region is controlled, are shown over an entire zone of the ingot.</div>
+<div class="description-paragraph" id="p-0093" num="0091">As shown in <figref idrefs="DRAWINGS">FIG. 7</figref>, an ingot manufactured according to the related art includes a lot of O-band regions with an average of 160 (O-band level)±40 pt level of a copper haze scoring score over the entire zone thereof, whereas an ingot manufactured according to the present invention is shown to include only an IDP region and a VDP region with an average of 80 (IDP/VDP level)±10 pt level of a copper haze scoring score over an entire zone thereof, and it can be seen that the quality of the ingot is significantly improved compared to the related art and the quality of the ingot is uniformly controlled over the entire zone.</div>
+<heading id="h-0010">INDUSTRIAL APPLICABILITY</heading>
+<div class="description-paragraph" id="p-0094" num="0092">The ingot growth control device and the control method thereof according to the present invention may control quickly and accurately the diameter of the ingot during the ingot growing process to the target diameter, and may improve the quality of the ingot.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">18</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM285622594">
+<claim-statement>The invention claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. In an ingot growth control device for heating a raw material accommodated in a crucible in a melt state and growing an ingot from a melt accommodated in the crucible to a target diameter, the ingot growth control device comprising:
+<div class="claim-text">an input unit for inputting diameter data of the ingot grown from the crucible;</div>
+<div class="claim-text">a diameter controller for controlling a pulling speed (P/S) of the ingot in consideration of a previously inputted target pulling speed (T_P/S) in order to reduce an error between diameter data provided by the input unit and a previously inputted target diameter (T_Dia); and</div>
+<div class="claim-text">a temperature controller for controlling heater power in consideration of a previously inputted target temperature (T_temp) in order to reduce the error between the diameter data provided by the input unit and the previously inputted target diameter (T_Dia),</div>
+<div class="claim-text">wherein the temperature controller includes a heater power calculation part for calculating heater power through a heater power PID (Proportional, Integral, Differential) equation including a function of a delay time and a reaction time and an output part for outputting the heater power calculated from the heater power calculation part, and</div>
+<div class="claim-text">wherein the temperature controller applies an output multiple to a previously calculated heater power, when a pulling speed (P/S) of the ingot controlled by the diameter controller deviates from a set range of the target pulling speed (T_P/S).</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The ingot growth control device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the input unit includes a diameter measurement sensor for measuring a diameter of the ingot at an interface of melt accommodated in the crucible, and a sensor filter for processing a diameter measurement value measured by the diameter measurement sensor into diameter data.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The ingot growth control device of <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the sensor filter is a polynomial filter for calculating the diameter measurement value by using a polynomial equation and calculating diameter data in accordance with the polynomial equation.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The ingot growth control device of <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the sensor filter is a prediction filter that calculates a predicted diameter value of the ingot from which a noise reflecting a single crystal growth environment has been removed by using a correlation equation, and calculates diameter data according to the correlation equation.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The ingot growth control device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the diameter controller includes a pulling speed calculation part for calculating a pulling speed (P/S) of the ingot through a pulling speed PID (Proportional, Integral, Differential) equation including a function of a delay time and a reaction time, and
+<div class="claim-text">a pulling speed output part for outputting the pulling speed (P/S) of the ingot calculated from the pulling speed calculation part.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The ingot growth control device of <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein the diameter controller accumulates and stores a time from a time point (t<b>0</b>) when the pulling speed of the ingot is output from the pulling speed output part to a time point (t<b>1</b>) when a diameter of an actual ingot begins to be controlled thereby as delay time data, and
+<div class="claim-text">the accumulated and stored delay time data is applied to the pulling speed PID equation as a delay time.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The ingot growth control device of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the diameter controller accumulates and stores a time from the time point (t<b>1</b>) when the diameter of the actual ingot begins to be controlled to a time point (t<b>2</b>) when the diameter of the actual ingot is controlled by a predetermined percentage of a final converging diameter as reaction time data, and
+<div class="claim-text">the accumulated and stored reaction time data is applied to the pulling speed PID equation as a reaction time.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The ingot growth control device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the temperature controller accumulates and stores a time from a time point (t<b>0</b>) when the heater power is output from the heater power output part to a time point (t<b>1</b>) when a diameter of an actual ingot begins to be controlled thereby as delay time data, and
+<div class="claim-text">the accumulated and stored delay time data is applied to the heater power PID equation as a delay time.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The ingot growth control device of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the temperature controller accumulates and stores a time from the time point (t<b>1</b>) when the diameter of the actual ingot begins to be controlled to a time point (t<b>2</b>) when the diameter of the actual ingot is controlled by a predetermined percentage of a final converging diameter as reaction time data, and
+<div class="claim-text">the accumulated and stored reaction time data is applied to the heater power PID equation as a reaction time.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. In an ingot growth control method for heating a raw material accommodated in a crucible in a melt state and growing an ingot from a melt accommodated in the crucible to a target diameter, the ingot growth control method comprising:
+<div class="claim-text">a first step of inputting diameter data of the ingot grown from the crucible;</div>
+<div class="claim-text">a second step of controlling a pulling speed (P/S) of the ingot in consideration of a previously inputted target pulling speed (T_P/S) in order to reduce an error between the diameter data provided in the first step and a previously inputted target diameter (T_Dia); and</div>
+<div class="claim-text">a third step of controlling heater power in consideration of a previously inputted target temperature (T_temp) in order to reduce an error between the diameter data provided in the first step and the previously inputted target diameter (T_Dia),</div>
+<div class="claim-text">wherein the second and third steps are performed simultaneously,</div>
+<div class="claim-text">wherein the third step includes a first process for calculating heater power through a heater power PID (Proportional, Integral, Differential) equation including a function of a delay time and a reaction time and a second process for outputting the heater power calculated from the first process, and</div>
+<div class="claim-text">wherein the third step further include a process of applying an output multiple to a previously calculated heater power, when a pulling speed (P/S) of the ingot controlled in the second step deviates from a set range of the target pulling speed (T_P/S).</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The ingot growth control method of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the first step includes a first process for measuring a diameter of the ingot at an interface of melt accommodated in the crucible, and a second process for processing a diameter measurement value measured from the first process into diameter data.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The ingot growth control method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the second process calculates the diameter measurement value by using a polynomial equation, and calculates diameter data in accordance with the polynomial equation.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The ingot growth control method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the second process calculates a predicted diameter value of the ingot from which a noise reflecting a single crystal growth environment has been removed by using a correlation equation, and calculates diameter data according to the correlation equation.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The ingot growth control method of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the second step includes a first process for calculating a pulling speed (P/S) of the ingot through a pulling speed PID (Proportional, Integral, Differential) equation including a function of a delay time and a reaction time, and
+<div class="claim-text">a second process for outputting the pulling speed (P/S) of the ingot calculated from the first process.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The ingot growth control method of <claim-ref idref="CLM-00014">claim 14</claim-ref>, wherein the second step further include a process of accumulating and storing a time from a time point (t<b>0</b>) when the pulling speed of the ingot is output from the second process to a time point (t<b>1</b>) when a diameter of an actual ingot begins to be controlled thereby as delay time data, and
+<div class="claim-text">a process of applying the accumulated and stored delay time data to the pulling speed PID equation as a delay time.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The ingot growth control method of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the second step further include a process of accumulating and storing a time from the time point (t<b>1</b>) when the diameter of the actual ingot begins to be controlled to a time point (t<b>2</b>) when the diameter of the actual ingot is controlled by a predetermined percentage of a final converging diameter as reaction time data, and
+<div class="claim-text">a process of applying the accumulated and stored reaction time data to the pulling speed PID equation as a reaction time.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The ingot growth control method of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the third step further include a process of accumulating and storing a time from a time point (t<b>0</b>) when the heater power is output from the second process to a time point (t<b>1</b>) when a diameter of an actual ingot begins to be controlled thereby as delay time data, and
+<div class="claim-text">a process of applying the accumulated and stored delay time data to the heater power PID equation as a delay time.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The ingot growth control method of <claim-ref idref="CLM-00017">claim 17</claim-ref>, wherein the third step further include a process of accumulating and storing a time from the time point (t<b>1</b>) when the diameter of the actual ingot begins to be controlled to a time point (t<b>2</b>) when the diameter of the actual ingot is controlled by a predetermined percentage of a final converging diameter as reaction time data, and
+<div class="claim-text">a process of applying the accumulated and stored reaction time data to the heater power PID equation as a reaction time.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

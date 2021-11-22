@@ -1,0 +1,514 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10043673B2 - Final polishing method of silicon wafer and silicon wafer 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA235598253" source="national office">
+<div class="abstract">A final polishing method using a polishing agent that contains colloidal silica, ammonia, and hydroxyethyl cellulose in which the colloidal silica has a primary particle size of 20 nm or more and less than 30 nm, the hydroxyethyl cellulose has a weight average molecular weight of 400,000 to 700,000, and the polishing agent satisfies 1.5≤D1/D2≤2.5 where D1 is a particle size having a cumulative volume percentage of 95% of particles contained in the polishing agent, and D2 is a particle size having a cumulative volume percentage of 95% of the colloidal silica in case of dispersing the colloidal silica in water with a concentration identical to a colloidal silica concentration in the polishing agent, and using a polishing pad that exhibits a contact angle of 60° or more 100 seconds after dropping pure water to the polishing pad that has been subjected to seasoning and then dried.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES139605459">
+<heading id="h-0001">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0002" num="0001">The present invention relates to a final polishing method of a silicon wafer and to a silicon wafer.</div>
+<heading id="h-0002">BACKGROUND ART</heading>
+<div class="description-paragraph" id="p-0003" num="0002">A semiconductor wafer typified by a silicon wafer is polished with a polishing apparatus <b>601</b>, as shown in <figref idrefs="DRAWINGS">FIG. 6</figref>, including a turn table <b>603</b> with a polishing pad <b>602</b> attached, a polishing-agent-supply mechanism <b>604</b>, and a polishing head <b>606</b> by holding the semiconductor wafer W with the polishing head <b>606</b>, supplying a polishing agent <b>605</b> from the polishing-agent-supply mechanism <b>604</b> to the polishing pad <b>602</b>, separately rotating the turn table <b>603</b> and the polishing head <b>606</b>, and bringing the surface of the semiconductor wafer W into sliding contact with the polishing pad <b>602</b>.</div>
+<div class="description-paragraph" id="p-0004" num="0003">The semiconductor wafer is often polished in multiple stages with changing the kinds of the polishing pad and the polishing agent; first double-side polishing is referred to as primary polishing, polishing after the primary polishing is referred to as secondary polishing, and a polishing process in the final stage is referred to as finish polishing or final polishing.</div>
+<div class="description-paragraph" id="p-0005" num="0004">In the final polishing process, single-side polishing is often employed, and the polishing agent and the polishing pad are selected so as to reduce surface defects and surface roughness of a wafer, called haze. The materials typically used are an alkali-based polishing agent containing colloidal silica and a suede type of polishing pad. Since a polished wafer has a hydrophobic surface, foreign substances are attached to the surface, and the surface is non-uniformly etched by alkali in the polishing agent, which causes haze unevenness. It has thus been known that a water-soluble cellulose such as hydroxyethyl cellulose is added to the polishing agent to make the surface of the polished wafer hydrophilic and inhibit attachment of foreign substances and etching unevenness on the surface.</div>
+<div class="description-paragraph" id="p-0006" num="0005">With respect to the haze of a wafer, addition of hydroxyethyl cellulose (HEC) to the polishing agent has been known to more significantly reduce a haze level than addition of other cellulose (See Patent Document 1, for example). However, hydroxyethyl cellulose, which is suited to improve hydrophilicity of a wafer, is difficult to be filtered and easy to aggregate, thus disadvantageously increasing micro defects on the wafer surface. To solve this problem, it has been proposed that hydroxyethyl cellulose having a low molecular weight is used to improve the filterability, or an undiluted solution is filtered, and then a diluted solution is filtered again (See Patent Document 2, for example). Moreover, it has been proposed to control the ratio of average secondary particle sizes of abrasive grains before and after dilution (See Patent Document 3, for example).</div>
+<heading id="h-0003">CITATION LIST</heading>
+<heading id="h-0004">Patent Literature</heading>
+<div class="description-paragraph" id="p-0007" num="0006">Patent Document 1: Japanese Unexamined Patent publication (Kokai) No. 2008-053414</div>
+<div class="description-paragraph" id="p-0008" num="0007">Patent Document 2: WO2013/108777</div>
+<div class="description-paragraph" id="p-0009" num="0008">Patent Document 3: WO2013/108770</div>
+<heading id="h-0005">SUMMARY OF INVENTION</heading>
+<heading id="h-0006">Technical Problem</heading>
+<div class="description-paragraph" id="p-0010" num="0009">Besides, the wafer surface has been recently required to improve its smoothness. To improve the wafer surface roughness (haze), brush cleaning with low etching power is introduced for cleaning a polished silicon wafer. The brush cleaning enables cleaning with a lower etching amount than batch cleaning using a chemical solution, typified by SC<b>1</b> (a mixed solution of ammonia and hydrogen peroxide water) cleaning. Thus, the brush cleaning can inhibit haze degradation on the wafer surface due to etching.</div>
+<div class="description-paragraph" id="p-0011" num="0010">The haze of a silicon wafer is measured by a laser scattering type of wafer surface inspection apparatus (e.g., Surfscan SP3, made by KLA-Tencor Corp.), and an average value of the wafer entire surface is generally used as a central value of the wafer. The haze level in the plane can also be output as a map. This haze map is used to visually judge a local haze abnormality that cannot be found in the average value.</div>
+<div class="description-paragraph" id="p-0012" num="0011">The haze map is usually output by auto scaling in many cases. Thus, along with improvement of the haze level, haze unevenness can be easily observed, and haze unevenness that occurs in an outer circumferential portion is especially becoming a problem. <figref idrefs="DRAWINGS">FIG. 7</figref> shows an exemplary haze map. <figref idrefs="DRAWINGS">FIG. 8</figref> shows an example of the haze unevenness that occurs in an outer circumferential portion.</div>
+<div class="description-paragraph" id="p-0013" num="0012">The haze unevenness in an outer circumferential portion is remarkably caused when the polishing pad has a low polishing-agent-holding property, especially at an early stage of a lifetime of the polishing pad. This problem is met by prolonging a start-up time (seasoning time) of the polishing pad or polishing a dummy wafer. However, the prolonged suspension of a polishing apparatus reduces the productivity, as well as the seasoning and the dummy wafer running increase the start-up cost and reduce the lifetime of the polishing pad.</div>
+<div class="description-paragraph" id="p-0014" num="0013">Moreover, when hydroxyethyl cellulose having a large molecular weight is added to improve hydrophilicity of the wafer surface and inhibit non-uniform etching of the surface due to the polishing agent, surface defects are increased because of the filterability. To improve the surface defects, there have been proposed the method of filtering an undiluted solution and then filtering a diluted solution again (See Patent Document 2) and the method of controlling the ratio of average secondary particle sizes before and after dilution (See Patent Document 3). However, these methods are insufficient to satisfy both conflicting qualities of wafer wettability and micro defect.</div>
+<div class="description-paragraph" id="p-0015" num="0014">The present invention was accomplished in view of the above-described problems. It is an object of the present invention to provide a final polishing method that can provide a silicon wafer having a good haze level as a whole, little haze unevenness in an outer circumferential portion, and few micro defects.</div>
+<heading id="h-0007">Solution to Problem</heading>
+<div class="description-paragraph" id="p-0016" num="0015">To achieve this object, the present invention provides a final polishing method comprising bringing a silicon wafer into sliding contact with a polishing pad attached to a turn table while supplying a polishing agent to the polishing pad, wherein the polishing agent contains colloidal silica, ammonia, and hydroxyethyl cellulose, the colloidal silica has a primary particle size of 20 nm or more and less than 30 nm as measured by BET method, the hydroxyethyl cellulose has a weight average molecular weight of 400,000 to 700,000, the polishing agent satisfies 1.5≤D<sub>1</sub>/D<sub>2</sub>≤2.5 where D<sub>1 </sub>is a particle size having a cumulative volume percentage of 95% of particles contained in the polishing agent as measured by dynamic light scattering or laser diffraction scattering, and D<sub>2 </sub>is a particle size having a cumulative volume percentage of 95% of the colloidal silica in case of dispersing the colloidal silica in water with a concentration identical to a colloidal silica concentration in the polishing agent as measured by dynamic light scattering or laser diffraction scattering, and the polishing pad exhibits a contact angle of 60° or more with pure water, the contact angle being measured 100 seconds after dropping the pure water to the polishing pad that has been subjected to seasoning and then dried.</div>
+<div class="description-paragraph" id="p-0017" num="0016">This final polishing can provide a silicon wafer having a good haze level as a whole, little haze unevenness in an outer circumferential portion, and few micro defects.</div>
+<div class="description-paragraph" id="p-0018" num="0017">A time of the seasoning may be 30 minutes.</div>
+<div class="description-paragraph" id="p-0019" num="0018">When the seasoning time is 30 minutes, the productivity is not much reduced due to suspension of polishing by a polishing apparatus even if the seasoning is performed with, for example, the polishing apparatus itself. Moreover, when the seasoning is performed with a polishing agent, the seasoning for 30 minutes can reduce the cost of the polishing agent and inhibit reduction of the lifetime of the polishing pad due to clogging of the polishing pad.</div>
+<div class="description-paragraph" id="p-0020" num="0019">Furthermore, to achieve the above object, the present invention provides a silicon wafer polished by the inventive final polishing method.</div>
+<div class="description-paragraph" id="p-0021" num="0020">In this manner, the inventive final polishing method can provide a semiconductor wafer having a good haze level as a whole, little haze unevenness in an outer circumferential portion, meeting the recent requirement for smoothness of the wafer surface, and having few micro defects.</div>
+<heading id="h-0008">Advantageous Effects of Invention</heading>
+<div class="description-paragraph" id="p-0022" num="0021">The final polishing according to the invention can provide a silicon wafer having a good haze level as a whole, little haze unevenness in an outer circumferential portion, and few micro defects.</div>
+<description-of-drawings>
+<heading id="h-0009">BRIEF DESCRIPTION OF DRAWINGS</heading>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a schematic diagram showing an example of a single-side polishing apparatus usable in the final polishing method according to the invention;</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a diagram showing change over time of the contact angle of pure water with the polishing pad;</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a diagram showing change over time of the contact angle, depending on difference in the seasoning time;</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a photograph showing change over time of the contact angle, depending on difference in the seasoning time;</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a diagram showing the contact angle 100 seconds after dropping pure water to the polishing pad;</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a schematic diagram showing an example of a conventional single-side polishing apparatus;</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a photograph showing an exemplary haze map of a wafer after final polishing; and</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a photograph showing an example of the haze unevenness in an outer circumferential portion of a wafer after final polishing.</div>
+</description-of-drawings>
+<heading id="h-0010">DESCRIPTION OF EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0031" num="0030">Hereinafter, embodiments of the present invention will be described, but the present invention is not limited thereto. First, a polishing apparatus usable in the final polishing method according to the invention will be described with reference to <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="p-0032" num="0031">The polishing apparatus <b>1</b> shown in <figref idrefs="DRAWINGS">FIG. 1</figref> is mainly including a turn table <b>3</b> with a polishing pad <b>2</b> attached, a polishing-agent-supply mechanism <b>4</b>, and a polishing head <b>6</b>. The polishing apparatus <b>1</b> is used for polishing by holding a silicon wafer W with the polishing head <b>6</b>, supplying a polishing agent <b>5</b> from the polishing-agent-supply mechanism <b>4</b> to the polishing pad <b>2</b>, separately rotating the turn table <b>3</b> and the polishing head <b>6</b>, and bringing the surface of the silicon wafer W into sliding contact with the polishing pad <b>2</b>.</div>
+<div class="description-paragraph" id="p-0033" num="0032">The inventive final polishing method using the polishing apparatus <b>1</b> to polish a silicon wafer will now be described.</div>
+<div class="description-paragraph" id="p-0034" num="0033">In the inventive final polishing method, a solution containing colloidal silica, ammonia, and hydroxyethyl cellulose is used as the polishing agent <b>5</b>. In this polishing agent, the colloidal silica has a primary particle size of 20 nm or more and less than 30 nm as measured by BET method, and the hydroxyethyl cellulose has a weight average molecular weight of 400,000 to 700,000. Moreover, the polishing agent satisfies 1.5≤D<sub>1</sub>/D<sub>2</sub>≤2.5 where D<sub>1 </sub>is a particle size having a cumulative volume percentage of 95% of particles contained in the polishing agent as measured by dynamic light scattering or laser diffraction scattering, and D<sub>2 </sub>is a particle size having a cumulative volume percentage of 95% of the colloidal silica in case of dispersing the colloidal silica in water with a concentration identical to a colloidal silica concentration in the polishing agent as measured by dynamic light scattering or laser diffraction scattering.</div>
+<div class="description-paragraph" id="p-0035" num="0034">In general, a polishing agent containing a water-soluble polymer such as hydroxyethyl cellulose causes abrasive grains (colloidal silica) to aggregate with the water-soluble polymer, and thus tends to have a large abrasive grain size, compared with a polishing agent containing no water-soluble polymer. The present inventor found that the aggregation effect of the water-soluble polymer can be evaluated by D<sub>95 </sub>(a particle size having a cumulative volume percentage of 95% in particle size distribution on the basis of volume) of particles contained in the polishing agent, as measured by dynamic light scattering or laser diffraction scattering.</div>
+<div class="description-paragraph" id="p-0036" num="0035">More specifically, the aggregation state of abrasive grains attributable to an additive such as the water-soluble polymer contained in the polishing agent can be quantified by calculating the ratio D<sub>1</sub>/D<sub>2 </sub>where D<sub>1 </sub>is D<sub>95 </sub>of particles present in the polishing agent containing the water-soluble polymer, and D<sub>2 </sub>is D<sub>95 </sub>of colloidal silica in case of dispersing the colloidal silica in water with a concentration identical to the colloidal silica concentration in the polishing agent. The particles contained in the polishing agent are mainly colloidal silica, and also include, for example, aggregates of hydroxyethyl cellulose and aggregates of other additives. It can be judged that when the ratio D<sub>1</sub>/D<sub>2 </sub>is around 1.0, the abrasive grains are not aggregated; and when the ratio D<sub>1</sub>/D<sub>2 </sub>is larger than 1.0, the aggregation proceeds due to the additive such as the water-soluble polymer contained in the polishing agent. Accordingly, when the ratio D<sub>1</sub>/D<sub>2 </sub>is small, micro defects due to aggregated abrasive grains in the polishing agent can be inhibited. D<sub>95 </sub>can be measured, for example, by a nano-particle size distribution measurement apparatus SALD-7100, made by SHIMADZU Corp.</div>
+<div class="description-paragraph" id="p-0037" num="0036">Moreover, the haze of the wafer surface is also affected by a primary particle size (also referred to as an average primary particle size) calculated on the basis of a specific surface area of the abrasive grains, measured on the colloidal silica (the abrasive grains) by BET method. Under the same polishing load, abrasive grains having a smaller primary particle size can achieve a pressure dispersion effect on the abrasive grains, but abrasive grains having a primary particle size of less than 20 nm easily aggregate and thus degrade a surface defect level. In addition, such particles reduce a polishing rate, thus decreasing the productivity and increasing the cost. Meanwhile, abrasive grains having a primary particle size of 30 nm or more have an insufficient pressure dispersion effect and thus degrade the haze. Therefore, the abrasive grains should have an average primary particle size of 20 nm or more and less than 30 nm, in view of a balance between the wafer haze level, surface defect level, and polishing rate.</div>
+<div class="description-paragraph" id="p-0038" num="0037">The hydrophilicity (wettability) of the wafer surface is largely affected by the weight average molecular weight of hydroxyethyl cellulose. A larger weight average molecular weight can reduce the haze unevenness but increase the ratio D<sub>1</sub>/D<sub>2 </sub>and increase micro defects due to agglomerated abrasive grains. Moreover, when the concentration of added hydroxyethyl cellulose is decreased, or a dispersing agent is added in order to decrease D<sub>1</sub>/D<sub>2</sub>, a sufficient hydrophilic effect cannot be obtained although D<sub>1</sub>/D<sub>2 </sub>can be decreased. Therefore, to achieve the hydrophilicity of the wafer surface and inhibit micro defects, the hydroxyethyl cellulose should have a weight average molecular weight of 400,000 to 700,000 as well as the ratio D<sub>1</sub>/D<sub>2 </sub>ranges from 1.5 to 2.5. In particular, the ratio D<sub>1</sub>/D<sub>2 </sub>is preferably 2.3 or less.</div>
+<div class="description-paragraph" id="p-0039" num="0038">Use of such a polishing agent enables inhibition of the haze unevenness and reduction of micro defects caused in final polishing of a silicon wafer.</div>
+<div class="description-paragraph" id="p-0040" num="0039">Furthermore, the present invention uses the polishing pad <b>2</b> exhibiting a contact angle of 60° or more with pure water when the contact angle is measured 100 seconds after dropping the pure water to the polishing pad that has been subjected to seasoning and then completely dried. The seasoning means a start-up operation of a polishing pad for smoothing the surface of a new polishing pad just after exchange, generally with ceramics or dummy wafers. This operation is performed with pure water or a polishing agent. The seasoning often takes a long time, and polishing requires suspending during the seasoning, which leads to reduction in productivity of semiconductor wafers. Moreover, the seasoning using a polishing agent increases the cost of the polishing agent and affects the lifetime of the polishing pad. Thus, the seasoning is desirably completed in a short time.</div>
+<div class="description-paragraph" id="p-0041" num="0040">The haze unevenness in an outer circumferential portion of a wafer observed in the haze map is remarkably caused when the polishing pad has a low polishing-agent-holding property, especially at an early stage of the lifetime of the polishing pad. This indicates that the haze unevenness is also affected by the polishing-agent-holding property of the polishing pad. The polishing-agent-holding property of the polishing pad at the early stage of the lifetime can be evaluated by a contact angle at a certain period after dropping pure water to the polishing pad. The pure water dropped to the polishing pad permeates into the polishing pad with the passage of time, and accordingly changes its contact angle. A polishing pad having a good polishing-agent-holding property can be defined as a polishing pad that exhibits a large contact angle and shows little change of the contact angle over time. Therefore, the present invention uses the polishing pad that exhibits a contact angle of 60° or more 100 seconds after dropping pure water and has a good polishing-agent-holding property, whereby a silicon wafer can be polished with little haze unevenness even at an early stage of the lifetime of the polishing pad.</div>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows measurement results of change over time of the contact angle when suede type of polishing pads A-<b>1</b>, B, C, D, and E were subjected to seasoning for 30 minutes. The seasoning made surfaces of the polishing pads almost identical without variation depending on the individual polishing pads. Thus, their contact angles just after dropping pure water were almost the same. On the other hand, change over time of the contact angle varied according to the polishing pads.</div>
+<div class="description-paragraph" id="p-0043" num="0042"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows change over time of the contact angle when the seasoning time was changed to 30 minutes (polishing pad A-<b>1</b>), 120 minutes (polishing pad A-<b>2</b>), and 240 minutes (polishing pad A-<b>3</b>) while the same polishing pad was used. This figure shows that although the contact angles just after dropping pure water were almost the same, change over time of the contact angles varied according to the seasoning time, in spite of the same polishing pad. <figref idrefs="DRAWINGS">FIG. 4</figref> shows an exemplary state of the droplet at this time. Moreover, <figref idrefs="DRAWINGS">FIG. 5</figref> shows contact angles 100 seconds after dropping pure water to the polishing pads A-<b>1</b>, A-<b>2</b>, A-<b>3</b>, B, C, D, and E.</div>
+<div class="description-paragraph" id="p-0044" num="0043">In a polishing pad manufacturing process, an additive such as a surfactant is used as a foam stabilizer. The additive varies in kind and amount to be added according to a maker and the kind of the polishing pad. The additive cannot be completely removed during the polishing pad manufacturing process, and partially remains in the polishing pad, which causes different change over time of the contact angle according to polishing pads. In addition, since the remaining additive is gradually lost through seasoning, the same polishing pad has different concentrations of the remaining additive before and after the seasoning, which leads to change of the contact angle over time.</div>
+<div class="description-paragraph" id="p-0045" num="0044">In particular, the seasoning for 30 minutes with a suede type of final polishing pad, which is usually used for finish polishing, can sufficiently smooth a minute unevenness on the surface of the polishing pad, thus enabling stable evaluation of the contact angle. Moreover, a hydrophilic additive, which largely affects the contact angle, can reduce its residual concentration at a relatively high rate, and thus allows measurement of the contact angle while eliminating the effect of the remaining additive to some extent with seasoning for 30 minutes.</div>
+<div class="description-paragraph" id="p-0046" num="0045">As described above, evaluating the wettability of the polishing pad by the contact angel at a certain period after dropping pure water to the surface of the polishing pad is effective in evaluating the polishing-agent-holding property of the polishing pad.</div>
+<div class="description-paragraph" id="p-0047" num="0046">More specifically, when a polishing pad exhibits a contact angle of 60° or more 100 seconds after dropping pure water to the surface of the polishing pad that has been subjected to seasoning for 30 minutes and then completely dried, this polishing pad can be judged to have a sufficient polishing-agent-holding property even at an early stage of the lifetime of the polishing pad. The contact angle can be measured with a usual contact angle meter. As the contact angle meter, for example, a mobile contact angle meter PG-X, made by MATSUBO Corp., can be used.</div>
+<div class="description-paragraph" id="p-0048" num="0047">The seasoning enables the surface to have a contact angle of 60° or more, but the seasoning time may be prolonged depending on the selected polishing pad, which causes reduction in productivity and increase in start-up cost. Therefore, it is preferable to select a polishing pad that exhibits a contact angle of 60° or more after 100 seconds when the seasoning is performed in a short time of about 5 to 120 minutes, particularly preferably 30 minutes.</div>
+<div class="description-paragraph" id="p-0049" num="0048">When such polishing agent and polishing pad are combined for final polishing, occurrence of the haze unevenness of a wafer, especially the haze unevenness in an outer circumference of a wafer, and occurrence of micro defects can be effectively inhibited from an early stage of the lifetime of the polishing pad.</div>
+<div class="description-paragraph" id="p-0050" num="0049">Moreover, a semiconductor wafer final-polished by the above final polishing method has a good haze level as a whole, little haze unevenness in an outer circumferential portion, meets the recent requirement for smoothness of the wafer surface, and has few micro defects.</div>
+<heading id="h-0011">EXAMPLE</heading>
+<div class="description-paragraph" id="p-0051" num="0050">Next, the present invention will be more specifically described with reference to examples and comparative examples, but the present invention is not limited thereto.</div>
+<heading id="h-0012">Example 1</heading>
+<div class="description-paragraph" id="p-0052" num="0051">A silicon wafer was final-polished according to the inventive final polishing method.</div>
+<div class="description-paragraph" id="p-0053" num="0052">Firstly, abrasive grains (colloidal silica having an average primary particle size of 25 nm, as measured by BET method), ammonia, hydroxyethyl cellulose, and pure water were blended to prepare a polishing agent. In example 1, the hydroxyethyl cellulose has a weight average molecular weight of 500,000. The weight average molecular weight of the hydroxyethyl cellulose was calculated by gel permeation chromatography in terms of polyethylene oxide. The ratio D<sub>1</sub>/D<sub>2 </sub>was 1.86.</div>
+<div class="description-paragraph" id="p-0054" num="0053">As the polishing pad, the polishing pad E shown in <figref idrefs="DRAWINGS">FIG. 5</figref> was used. The polishing pad E exhibited a contact angle of 114.5° 100 seconds after dropping pure water, as described above. In this example, the seasoning of the polishing pad was performed with a ceramic turn table at the same polishing load and the same rotational speed as in polishing the wafer, although the seasoning conditions are not particularly limited thereto in the present invention. Moreover, the same polishing agent as used in final polishing was used at the same flow rate as in final polishing.</div>
+<div class="description-paragraph" id="p-0055" num="0054">The contact angle 100 seconds after dropping pure water was measured as follows. After completion of the seasoning, the surface of the polishing pad was cleaned with pure water by a brush. The polishing pad was then cut to obtain a sample for measuring the contact angle at a position that does not affect a polishing result of the wafer, and the polishing pad was evaluated with the sample. The sample for measuring the contact angle was left to stand for 24 hours or more to be completely dried after the seasoning. Then, the contact angle was measured with a mobile contact angle meter PG-X, made by MATSUBO Corp.</div>
+<div class="description-paragraph" id="p-0056" num="0055">The polishing was performed under the following conditions: the polishing apparatus was PNX332B, made by Okamoto Corporation; the polished subject was a silicon wafer having a diameter of 300 mm; the polishing load was 150 g/cm<sup>2</sup>; the rotational speed of the turn table was 30 rpm; the rotational speed of the head was 30 rpm; the flow rate of the polishing agent was 1 L/min. Moreover, all secondary polishing prior to the final polishing was performed under the same condition. The polishing time of the final polishing was adjusted so as to give the same stock removal. The final-polished wafer was cleaned with a brush cleaning apparatus of a single-wafer processing type to adjust etching conditions such that a haze level after cleaning did not exceed 0.08 ppm.</div>
+<div class="description-paragraph" id="p-0057" num="0056">The haze of the final-polished wafer was evaluated with a wafer surface inspection apparatus Surfscan SP3, made by KLA-Tencor Corp. In general, the haze unevenness is visually judged with a haze map output by auto scaling. In this example, however, only the wafer having a haze level of 0.08 ppm or less was used, a threshold was set to obtain a pattern approximate to haze unevenness that can be found in the map, and a proportion of exceeding the threshold (hereinafter, this proportion is referred to as Defect %) was calculated. While the haze maps of <figref idrefs="DRAWINGS">FIG. 7</figref> and <figref idrefs="DRAWINGS">FIG. 8</figref> were measured except for an area within 2 mm from the outer circumference of the wafer, the haze unevenness in example 1 was quantified by calculation except for an area within 3 mm from the outer circumference of the wafer to establish consistency with a visual judgment.</div>
+<div class="description-paragraph" id="p-0058" num="0057">Defect % quantified by the foregoing method was 1.1% in case of the haze map of <figref idrefs="DRAWINGS">FIG. 7</figref>, and 5.2% in case of the haze unevenness of <figref idrefs="DRAWINGS">FIG. 8</figref>. To determine the haze unevenness of <figref idrefs="DRAWINGS">FIG. 8</figref> as fail, criterion of Defect % was defined as follows: 5% or less is pass; more than 5% is fail.</div>
+<div class="description-paragraph" id="p-0059" num="0058">In quality evaluation, micro defect was judged based on comparative example 1, described later. The micro defect largely varied and hence was shown as follows: less than 1.5 times as many as comparative example 1 is “good”; 1.5 times or more and less than 2 times is “moderate”; 2 times or more is “bad”.</div>
+<div class="description-paragraph" id="p-0060" num="0059">Table 1 shows conditions of the polishing agent and the polishing pad, and wafer quality after polishing in example 1, and examples 2 to 6 and comparative examples 1 to 8, described later. As shown in Table 1, the haze level was good, and the haze unevenness (Defect %) had a good value of 1.1%, which was significantly below a passing criterion of 5.0%. In addition, the result was also satisfactory for micro defect.</div>
+<heading id="h-0013">Example 2</heading>
+<div class="description-paragraph" id="p-0061" num="0060">A silicon wafer was polished as in example 1 except that the weight average molecular weight of hydroxyethyl cellulose in the polishing agent was changed to 400,000, and D<sub>1</sub>/D<sub>2 </sub>was changed to 1.51. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0062" num="0061">Consequently, as shown in Table 1, the haze level was good, and the haze unevenness (Defect %) had a good value of 3.3%, which was below a passing criterion of 5.0%. In addition, the result was also satisfactory for micro defect.</div>
+<heading id="h-0014">Example 3</heading>
+<div class="description-paragraph" id="p-0063" num="0062">A silicon wafer was polished as in example 1 except that the weight average molecular weight of hydroxyethyl cellulose in the polishing agent was changed to 700,000, and D<sub>1</sub>/D<sub>2 </sub>was changed to 2.28. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0064" num="0063">Consequently, as shown in Table 1, the haze level was good, and the haze unevenness (Defect %) had a good value of 2.9%, which was below a passing criterion of 5.0%. In addition, the result was also satisfactory for micro defect.</div>
+<heading id="h-0015">Example 4</heading>
+<div class="description-paragraph" id="p-0065" num="0064">A silicon wafer was polished as in example 1 except that the polishing pad was changed to the polishing pad A-<b>3</b> shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, i.e., the polishing pad exhibiting a contact angle of 62.8° 100 seconds after dropping pure water. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0066" num="0065">Consequently, as shown in Table 1, the haze level was good, and the haze unevenness (Defect %) had a good value of 2.9%, which was below a passing criterion of 5.0%. In addition, the result was also satisfactory for micro defect.</div>
+<heading id="h-0016">Example 5</heading>
+<div class="description-paragraph" id="p-0067" num="0066">A silicon wafer was polished as in example 1 except that the polishing pad was changed to the polishing pad C shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, i.e., the polishing pad exhibiting a contact angle of 63.9° 100 seconds after dropping pure water. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0068" num="0067">Consequently, as shown in Table 1, the haze level was good, and the haze unevenness (Defect %) had a good value of 4.6%, which was below a passing criterion of 5.0%. In addition, the result was also satisfactory for micro defect.</div>
+<heading id="h-0017">Example 6</heading>
+<div class="description-paragraph" id="p-0069" num="0068">A silicon wafer was polished as in example 1 except that the polishing pad was changed to the polishing pad D shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, i.e., the polishing pad exhibiting a contact angle of 81.9° 100 seconds after dropping pure water. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0070" num="0069">Consequently, as shown in Table 1, the haze level was good, and the haze unevenness (Defect %) had a good value of 3.9%, which was below a passing criterion of 5.0%. In addition, the result was also satisfactory for micro defect.</div>
+<heading id="h-0018">Comparative Example 1</heading>
+<div class="description-paragraph" id="p-0071" num="0070">A silicon wafer was polished as in example 4 except that the average primary particle size of colloidal silica in the polishing agent was changed to 35 nm, and D<sub>1</sub>/D<sub>2 </sub>was changed to 2.28. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0072" num="0071">Consequently, as shown in Table 1, since comparative example 1 had an average primary particle size of 35 nm, i.e., the average primary particle size was 30 nm or more, the average haze value was degraded to 0.0750 ppm. This result was higher than the examples by about 15%. This indicates that the average primary particle size should be less than 30 nm. However, if the particle size is too small, the polishing rate decreases. Thus, the average primary particle size should be 20 nm or more.</div>
+<heading id="h-0019">Comparative Example 2</heading>
+<div class="description-paragraph" id="p-0073" num="0072">A silicon wafer was polished as in example 4 except that the weight average molecular weight of hydroxyethyl cellulose in the polishing agent was changed to 300,000, and D<sub>1</sub>/D<sub>2 </sub>was changed to 1.51. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0074" num="0073">Consequently, as shown in Table 1, since the weight average molecular weight of the hydroxyethyl cellulose was less than 400,000, a sufficient hydrophilicity could not be obtained, and the haze unevenness (Defect %) was 8.4%, which significantly exceeded a passing criterion of 5.0%.</div>
+<heading id="h-0020">Comparative Example 3</heading>
+<div class="description-paragraph" id="p-0075" num="0074">A silicon wafer was polished as in example 4 except that the weight average molecular weight of hydroxyethyl cellulose in the polishing agent was changed to 1,000,000, and D<sub>1</sub>/D<sub>2 </sub>was changed to 2.28. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0076" num="0075">Consequently, as shown in Table 1, a sufficient hydrophilicity could be obtained, and the haze unevenness (Defect %) had a good value. However, since the weight average molecular weight of the hydroxyethyl cellulose was more than 700,000, aggregation of the colloidal silica in the polishing agent was promoted compared with the examples, micro defects were increased, and the result was judged as “bad”.</div>
+<heading id="h-0021">Comparative Example 4</heading>
+<div class="description-paragraph" id="p-0077" num="0076">A silicon wafer was polished as in example 4 except that the weight average molecular weight of hydroxyethyl cellulose in the polishing agent was changed to 700,000, and D<sub>1</sub>/D<sub>2 </sub>was changed to 2.80. The quality of the polished wafer was then evaluated. In comparative example 4, D<sub>1</sub>/D<sub>2 </sub>was changed by adjusting the concentration of hydroxyethyl cellulose to be added.</div>
+<div class="description-paragraph" id="p-0078" num="0077">Consequently, as shown in Table 1, since D<sub>1</sub>/D<sub>2 </sub>was more than 2.5, the haze unevenness (Defect %) was 5.5%, which exceeded a passing criterion of 5.0%.</div>
+<heading id="h-0022">Comparative Example 5</heading>
+<div class="description-paragraph" id="p-0079" num="0078">A silicon wafer was polished as in example 4 except that the weight average molecular weight of hydroxyethyl cellulose in the polishing agent was changed to 500,000, and D<sub>1</sub>/D<sub>2 </sub>was changed to 1.23. The quality of the polished wafer was then evaluated. Only in comparative example 5, a dispersing agent was added to decrease D<sub>1</sub>/D<sub>2</sub>. As the dispersing agent, a nonionic surfactant or an anionic surfactant can be used.</div>
+<div class="description-paragraph" id="p-0080" num="0079">Consequently, as shown in Table 1, since D<sub>1</sub>/D<sub>2 </sub>was less than 1.5, a sufficient hydrophilicity could not be obtained, and the haze unevenness (Defect %) was 5.9%, which exceeded a passing criterion of 5.0%.</div>
+<heading id="h-0023">Comparative Example 6</heading>
+<div class="description-paragraph" id="p-0081" num="0080">A silicon wafer was polished as in example 1 except that the polishing pad was changed to the polishing pad A-<b>1</b> shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, i.e., the polishing pad exhibiting a contact angle of 0.0° 100 seconds after dropping pure water. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0082" num="0081">Consequently, as shown in Table 1, since the polishing pad had an insufficient polishing-agent-holding property, the haze unevenness (Defect %) was degraded to 11.3%, which significantly exceeded a passing criterion of 5.0%.</div>
+<heading id="h-0024">Comparative Example 7</heading>
+<div class="description-paragraph" id="p-0083" num="0082">A silicon wafer was polished as in example 1 except that the polishing pad was changed to the polishing pad A-<b>2</b> shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, i.e., the polishing pad exhibiting a contact angle of 53.5° 100 seconds after dropping pure water. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0084" num="0083">Consequently, as shown in Table 1, since the polishing pad had an insufficient polishing-agent-holding property, the haze unevenness (Defect %) was degraded to 5.2%, which exceeded a passing criterion of 5.0%.</div>
+<heading id="h-0025">Comparative Example 8</heading>
+<div class="description-paragraph" id="p-0085" num="0084">A silicon wafer was polished as in example 1 except that the polishing pad was changed to the polishing pad B shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, i.e., the polishing pad exhibiting a contact angle of 40.8° 100 seconds after dropping pure water. The quality of the polished wafer was then evaluated.</div>
+<div class="description-paragraph" id="p-0086" num="0085">Consequently, as shown in Table 1, since the polishing pad had an insufficient polishing-agent-holding property, the haze unevenness (Defect %) was degraded to 6.3%, which exceeded a passing criterion of 5.0%.</div>
+<div class="description-paragraph" id="p-0087" num="0086">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="6" nameend="6" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Polishing agent</td>
+<td class="description-td">Polishing pad</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="10" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">HEC</td>
+<td class="description-td"> </td>
+<td class="description-td">Contact</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="8" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">weight</td>
+<td class="description-td"> </td>
+<td class="description-td">angle [°]</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Quality</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="10" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Primary</td>
+<td class="description-td">average</td>
+<td class="description-td"> </td>
+<td class="description-td">(100 sec</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Haze</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">particle</td>
+<td class="description-td">molecular</td>
+<td class="description-td"> </td>
+<td class="description-td">after</td>
+<td class="description-td">Hardness</td>
+<td class="description-td"> </td>
+<td class="description-td">Haze</td>
+<td class="description-td">unevenness</td>
+<td class="description-td">Micro</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">size</td>
+<td class="description-td">weight</td>
+<td class="description-td">D1/D2 </td>
+<td class="description-td">dropping)</td>
+<td class="description-td">(Shore A)</td>
+<td class="description-td">Seasoning</td>
+<td class="description-td">(ppm)</td>
+<td class="description-td">(Defect %)</td>
+<td class="description-td">defect</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="10" nameend="10" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="10" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Example 1</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">1.86</td>
+<td class="description-td">114.5</td>
+<td class="description-td">54.0</td>
+<td class="description-td"> 30 min</td>
+<td class="description-td">0.0640</td>
+<td class="description-td"> 1.1%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example 2</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">400,000</td>
+<td class="description-td">1.51</td>
+<td class="description-td">114.5</td>
+<td class="description-td">54.0</td>
+<td class="description-td"> 30 min</td>
+<td class="description-td">0.0630</td>
+<td class="description-td"> 3.3%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example 3</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">700,000</td>
+<td class="description-td">2.28</td>
+<td class="description-td">114.5</td>
+<td class="description-td">54.0</td>
+<td class="description-td"> 30 min</td>
+<td class="description-td">0.0660</td>
+<td class="description-td"> 2.9%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example 4</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">1.86</td>
+<td class="description-td">62.8</td>
+<td class="description-td">56.0</td>
+<td class="description-td">240 min</td>
+<td class="description-td">0.0640</td>
+<td class="description-td"> 2.9%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example 5</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">1.86</td>
+<td class="description-td">63.9</td>
+<td class="description-td">45.0</td>
+<td class="description-td"> 30 min</td>
+<td class="description-td">0.0670</td>
+<td class="description-td"> 4.6%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example 6</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">1.86</td>
+<td class="description-td">81.9</td>
+<td class="description-td">62.0</td>
+<td class="description-td"> 30 min</td>
+<td class="description-td">0.0650</td>
+<td class="description-td"> 3.9%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">35 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">2.28</td>
+<td class="description-td">62.8</td>
+<td class="description-td">56.0</td>
+<td class="description-td">240 min</td>
+<td class="description-td">0.0750</td>
+<td class="description-td"> 3.1%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">example 1</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">300,000</td>
+<td class="description-td">1.51</td>
+<td class="description-td">62.8</td>
+<td class="description-td">56.0</td>
+<td class="description-td">240 min</td>
+<td class="description-td">0.0660</td>
+<td class="description-td"> 8.4%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">example 2</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">1,000,000</td>
+<td class="description-td">2.28</td>
+<td class="description-td">62.8</td>
+<td class="description-td">56.0</td>
+<td class="description-td">240 min</td>
+<td class="description-td">0.0640</td>
+<td class="description-td"> 0.7%</td>
+<td class="description-td">bad</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">example 3</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">700,000</td>
+<td class="description-td">2.80</td>
+<td class="description-td">62.8</td>
+<td class="description-td">56.0</td>
+<td class="description-td">240 min</td>
+<td class="description-td">0.0660</td>
+<td class="description-td"> 5.5%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">example 4</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">1.23</td>
+<td class="description-td">62.8</td>
+<td class="description-td">56.0</td>
+<td class="description-td">240 min</td>
+<td class="description-td">0.0660</td>
+<td class="description-td"> 5.9%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">example 5</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">1.86</td>
+<td class="description-td">0.0</td>
+<td class="description-td">56.0</td>
+<td class="description-td"> 30 min</td>
+<td class="description-td">0.0650</td>
+<td class="description-td">11.3%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">example 6</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">1.86</td>
+<td class="description-td">53.5</td>
+<td class="description-td">56.0</td>
+<td class="description-td">120 min</td>
+<td class="description-td">0.0640</td>
+<td class="description-td"> 5.2%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">example 7</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">25 nm</td>
+<td class="description-td">500,000</td>
+<td class="description-td">1.86</td>
+<td class="description-td">40.8</td>
+<td class="description-td">50.0</td>
+<td class="description-td"> 30 min</td>
+<td class="description-td">0.0680</td>
+<td class="description-td"> 6.3%</td>
+<td class="description-td">good</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">example 8</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="10" nameend="10" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0088" num="0087">It is to be noted that the present invention is not limited to the foregoing embodiment. The embodiment is just an exemplification, and any examples that have substantially the same feature and demonstrate the same functions and effects as those in the technical concept described in claims of the present invention are included in the technical scope of the present invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">2</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM133168490">
+<claim-statement>The invention claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A final polishing method comprising bringing a silicon wafer into sliding contact with a polishing pad attached to a turn table while supplying a polishing agent to the polishing pad, wherein
+<div class="claim-text">the polishing agent contains colloidal silica, ammonia, and hydroxyethyl cellulose,</div>
+<div class="claim-text">the colloidal silica has a primary particle size of 20 nm or more and less than 30 nm as measured by BET method,</div>
+<div class="claim-text">the hydroxyethyl cellulose has a weight average molecular weight of 400,000 to 700,000,</div>
+<div class="claim-text">the polishing agent satisfies 1.5≤D<sub>1</sub>/D<sub>2</sub>≤2.5 where D<sub>1 </sub>is a particle size having a cumulative volume percentage of 95% of particles contained in the polishing agent as measured by dynamic light scattering or laser diffraction scattering, and D<sub>2 </sub>is a particle size having a cumulative volume percentage of 95% of the colloidal silica in case of dispersing the colloidal silica in water with a concentration identical to a colloidal silica concentration in the polishing agent as measured by dynamic light scattering or laser diffraction scattering, and</div>
+<div class="claim-text">the polishing pad exhibits a contact angle of 60° or more with pure water, the contact angle being measured 100 seconds after dropping the pure water to the polishing pad that has been subjected to seasoning and then dried.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The final polishing method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a time of the seasoning is 30 minutes.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

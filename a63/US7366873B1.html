@@ -1,0 +1,1518 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US7366873B1 - Indirectly addressed vector load-operate-store method and apparatus 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA51297933">
+<div class="abstract" num="p-0001">A method and apparatus to correctly compute a vector-gather, vector-operate (e.g., vector add), and vector-scatter sequence, particularly when elements of the vector may be redundantly presented, as with indirectly addressed vector operations. For an add operation, one vector register is loaded with the “add-in” values, and another vector register is loaded with address values of “add to” elements to be gathered from memory into a third vector register. If the vector of address values has a plurality of elements that point to the same memory address, the algorithm should add all the “add in” values from elements corresponding to the elements having the duplicated addresses. An indirectly addressed load performs the “gather” operation to load the “add to” values. A vector add operation then adds corresponding elements from the “add in” vector to the “add to” vector. An indirectly addressed store then performs the “scatter” operation to store the results.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES16403616">
+<heading>RELATED APPLICATIONS</heading>
+<div class="description-paragraph" num="p-0002">This application is related to U.S. patent application Ser. No. 10/643,742, entitled “Decoupled Store Address and Data in a Multiprocessor System”, filed on even date herewith; to U.S. patent application Ser. No. 10/643,586, entitled “Decoupled Vector Architecture”, filed on even date herewith; to U.S. patent application Ser. No. 10/643,585, entitled “Latency Tolerant Distributed Shared Memory Multiprocessor Computer”, filed on even date herewith; to U.S. patent application Ser. No. 10/643,754, entitled “Relaxed Memory Consistency Model”, filed on even date herewith; to U.S. patent application Ser. No. 10/643,758, entitled “Remote Translation Mechanism for a Multinode System”, filed on even date herewith; and to U.S. patent application Ser. No. 10/643,741, entitled “Multistream Processing Memory-And Barrier-Synchronization Method And Apparatus”, filed on even date herewith, each of which is incorporated herein by reference.</div>
+<heading>FIELD OF THE INVENTION</heading>
+<div class="description-paragraph" num="p-0003">This invention relates to the field of vector computers, and more specifically to a method and apparatus to correctly computer a vector-load, vector-operate (such as a vector add), and vector-store sequence, particularly when elements of the vector may be redundantly presented as in the case of indirectly addressed vector operations from and to memory.</div>
+<heading>BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" num="p-0004">Indirectly addressed operands are frequently used in computer programs. For example, one typical situation provides a load instruction that specifies a register having an address of an operand in memory (rather than the address being partially or completely specified directly by the instruction), and another register that is the destination of the operand being fetched or loaded. A store instruction using indirect addressing would similarly specify a register that holds the address in memory of the destination, and another register that is the source of the operand being stored.</div>
+<div class="description-paragraph" num="p-0005">Vector computers provide a fast and compact way of programming for codes that are amenable to vectorizing to improve speed and programming efficiency.</div>
+<div class="description-paragraph" num="p-0006">What is needed is a fast, repeatable, and accurate way of performing various indirectly addressed operations in a vector computer.</div>
+<heading>SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" num="p-0007">The present invention provides a method and apparatus to correctly compute a vector-gather, vector-operate (e.g., vector add), and vector-scatter sequence, particularly when elements of the vector may be redundantly presented, as with indirectly addressed vector operations. For an add operation, one vector register is loaded with the “add-in” values, and another vector register is loaded with address values of “add to” elements to be gathered from memory into a third vector register. If the vector of address values has a plurality of elements that point to the same memory address, the algorithm should add all the “add in” values from elements corresponding to the elements having the duplicated addresses. An indirectly addressed load performs the “gather” operation to load the “add to” values. A vector add operation then adds corresponding elements from the “add in” vector to the “add to” vector. An indirectly addressed store then performs the “scatter” operation to store the results.</div>
+<description-of-drawings>
+<heading>BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" num="p-0008"> <figref idrefs="DRAWINGS">FIG. 1A</figref> shows a block diagram of one embodiment of the present invention having a vector processing system <b>100</b>.</div>
+<div class="description-paragraph" num="p-0009"> <figref idrefs="DRAWINGS">FIG. 1B</figref> shows a block diagram of further aspects of vector processing system <b>100</b>.</div>
+<div class="description-paragraph" num="p-0010"> <figref idrefs="DRAWINGS">FIG. 1C</figref> shows a block diagram of an MSP <b>102</b> of some embodiments of the present invention.</div>
+<div class="description-paragraph" num="p-0011"> <figref idrefs="DRAWINGS">FIG. 1D</figref> shows a block diagram of a node <b>106</b> of some embodiments of the present invention.</div>
+<div class="description-paragraph" num="p-0012"> <figref idrefs="DRAWINGS">FIG. 1E</figref> shows a block diagram of a system <b>108</b> of some embodiments of the present invention.</div>
+</description-of-drawings>
+<heading>DESCRIPTION OF PREFERRED EMBODIMENTS</heading>
+<div class="description-paragraph" num="p-0013">In the following detailed description of the preferred embodiments, reference is made to the accompanying drawings that form a part hereof, and in which are shown by way of illustration specific embodiments in which the invention may be practiced. It is understood that other embodiments may be utilized and structural changes may be made without departing from the scope of the present invention.</div>
+<div class="description-paragraph" num="p-0014">The leading digit(s) of reference numbers appearing in the Figures generally corresponds to the Figure number in which that component is first introduced, such that the same reference number is used throughout to refer to an identical component which appears in multiple Figures. The same reference number or label may refer to signals and connections, and the actual meaning will be clear from its use in the context of the description.</div>
+<div class="description-paragraph" num="p-0015">In some embodiments, there is a software application invention that requires that particular sequence of operations to maintain order. The algorithm itself has been vectorized. There is a requirement that within a vector of more than one element, since there may be collisions in the memory system where its referencing the same memory location multiple times in the vector. There needs to be a guarantee that updates to that memory location are done in order. In some embodiments, each memory location is an 8-byte memory location. In some embodiments, there is a vector instruction that can operate on multiple 8 byte quantities in one instruction, by using one vector register to hold addresses of the elements to be loaded into another vector register, that may not be contiguous in memory. In fact in this particular case they are often not contiguous.</div>
+<div class="description-paragraph" num="p-0016">Memory location can be referenced with a single instruction. But there may be multiple occurrences of any given memory address in that single instruction and now we're trying to do like a add of a value to that memory location. And when an addition operation occurs multiple times, there is the possibility of losing one of the adds or getting the adds out-of-order. This has been a known vectorization problem.</div>
+<div class="description-paragraph" num="p-0017">There are generally three instructions of interest. There is a load operation which loads the existing memory contents or a number of elements greater than one, into a vector register using indirect addressing. Then there's an add operation that wants to add a set of values to those elements that are loaded, such as V1 is assigned V2 plus V1. Then we want to store the result back out into the same memory location. And if the memory locations are all disjoint, this can occur at full speed in the vector hardware of <figref idrefs="DRAWINGS">FIG. 1D</figref> described below. The problem occurs, for which this special algorithm is needed, is when there are overlapping or multiple occurrences of the same memory location in the vector register used for addressing. The original values are loaded into v1. Now we add v2 to v1. In conventional methods, the first element that has multiple instances of the address is correct, but the additions after that are or can be incorrect because they lose the previous additions. So when we store the final result of the add back out to memory, we get an incorrect answer in memory. Thus, we need a method to recognize where the conflicting memory locations are, and we have such an algorithm for older systems, and part of the application is probably going to have to describe that old algorithm. And then for the X1 that old algorithm did not work very well, the present invention provides a new way of detecting those collisions.</div>
+<div class="description-paragraph" num="p-0018">In one conventional algorithm, after you did that load from memory, you would use the same memory location to store back a known pattern and then you would load back that pattern and do a comparison against the original pattern and if they matched then there were no collisions. But if they didn't match that means that one or more locations, or that a location had more than one store into it.</div>
+<div class="description-paragraph" num="p-0019">The other vector register specifies an index to those locations. And it's those indexes that may be repeated. That index is used both for the load as well as the store back later.</div>
+<div class="description-paragraph" num="p-0020">In the old way what you'd do is you'd have a pattern of say 1,2,3,4,5,6,7 in the elements and if you didn't get back, if you got 1,2,2 or 1,6,6. You would see where there was a collision and which elements were colliding. Then you unwrap the vector and do it as individual instructions. Effectively that's the conventional algorithm. The intent is to have a fast way of detecting that we do have a collision. The new algorithm, instead of using the original array that we loaded, storing this 1,2,3,4,5 etc., creates a temporary scratch array and uses that instead.</div>
+<div class="description-paragraph" num="p-0021">In fact, one can delay the load of the elements to be added, since the calculations to determine duplicates only needs the scratch area and the addressing vector register. The algorithm selects a certain number of bits out of the index vector elements, like say 12 bits, it doesn't really matter how many bits, and use that reduced index of the index into the temporary. Occasionally you get some false positives. The new algorithm addresses how to deal with the false positives. And does it in such a way that performance is improved on the X1 with this new technique.</div>
+<div class="description-paragraph" num="p-0022">The new algorithm goes on, instead of doing an add like the old algorithm did, it does an add back into the add-in values having duplicated indexes to compress that vector.</div>
+<div class="description-paragraph" num="p-0023"> <figref idrefs="DRAWINGS">FIG. 1A</figref> shows a block diagram of one embodiment of the present invention having a vector-processing system <b>100</b>. <figref idrefs="DRAWINGS">FIG. 1B</figref> shows a block diagram of further aspects of vector processing system <b>100</b>.</div>
+<div class="description-paragraph" num="p-0024">In some embodiments, as shown in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, a first vector register <b>110</b> having E elements is loaded with the “add-in” values A<b>0</b>, A<b>1</b>, . . . A(E−1) into element addresses <b>0</b>, <b>1</b>, . . . (E−1) of register <b>110</b> (i.e., each element of the first vector register <b>110</b> is a different value to be added to a corresponding element fetched from memory), and a second vector register <b>112</b> is loaded with address values @<b>0</b>, @ <b>1</b>, @(E−1)(i.e., each element of the second vector register <b>112</b> is a different signed offset value to be added to a base address pointer to obtain the virtual address of the corresponding element fetched from memory), of “add to” elements to be gathered from memory <b>150</b> (e.g., from a table).</div>
+<div class="description-paragraph" num="p-0025">Occasionally, a plurality of such addresses will be equal, thus specifying to fetch the same “add to” element to a plurality of locations in the add-to vector register <b>110</b>. For example, elements <b>2</b>, <b>15</b>, and <b>47</b> (these are the element addresses of elements in the vector) of the second register <b>112</b> might all have the same offset, say 60033, and the base register could have the pointer to, say address 500000. Thus, the addresses of elements <b>2</b>, <b>15</b>, and <b>47</b> would each point to memory address 560033. The elements <b>2</b>, <b>15</b>, and <b>47</b> of the “add to” vector <b>110</b> would all be loaded with the value from memory address 5033.</div>
+<div class="description-paragraph" num="p-0026">In some embodiments, the desired algorithm would want the same behavior and the same result whether the gather-add-scatter operations were performed one element at a time, 16 elements at a time, 64 elements at a time, or any other number of elements at a time, and regardless of the alignment of the gathered elements relative to the start of any vector operation. Thus, in this example, the value starting in memory address 560033 would be loaded (in a vector “gather” operation), be added to the “add in” values from elements <b>2</b>, <b>15</b>, and <b>47</b> of the first vector register <b>110</b>, and this combined result would be stored back to memory location 560033 (in a “scatter” operation). In some embodiments, this provides the same result as if the value starting in memory address 560033 would be loaded (in a serial “gather” operation), be added to the “add in” value from element <b>2</b> of the first vector register <b>110</b>, and stored back to memory location 560033, then this value from memory address 560033 would be again loaded, be added to the “add in” value from element <b>15</b> of the first vector register <b>110</b>, and stored back to memory location 560033, and then this value from memory address 560033 would be again loaded, be added to the “add in” value from element <b>47</b> of the first vector register <b>110</b>, and stored back to memory location 560033.</div>
+<div class="description-paragraph" num="p-0027">Since the identities of the elements in the second vector register <b>112</b> having the same addresses are unknown, the present invention provides a way to determine those elements. In some embodiments, a first sequence of identification values is stored to a series of addressed locations within a constrained area of memory <b>161</b>. The address of each location used to store the sequence of values in the constrained area <b>161</b> is based at least in part on a corresponding one of the addressing values. For example, the constrained area could have 2<sup>N </sup>locations (e.g., in some embodiments, 2<sup>N</sup>=2<sup>12</sup>=4096 locations), and N bits (e.g., N=12 bits) of the address value are used as an offset into the constrained area. Continuing with the above example, the address offset 60033 could have any 12 bits extracted, Assume, for example, the low 12 bits are used, which would extract “033” from the 60033 value, assuming hexadecimal number notation. If the constrained area <b>161</b> had a base address of 7000, then the location 7033 would be the destination of the identification values for elements <b>2</b>, <b>15</b>, and <b>47</b>, and since they are written in element order, location 7033 would end up with the value stored for element <b>47</b>.</div>
+<div class="description-paragraph" num="p-0028">The method then reads back <b>116</b> from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values, comparing <b>118</b> the first sequence of values to the second sequence of values to generate a bit vector representing compares and miscompares, compressing <b>120</b> the second vector of operand values using the bit vector, using the first vector of addressing values as masked by the bit vector. I.e., for an add operation, where the redundantly addressed locations point to a single memory value B(m) (i.e., at location 560033), each of the corresponding A elements <b>2</b>, <b>15</b>, and <b>47</b> are added to that Bm value and the result is stored to location 56033). The method further includes loading <b>124</b> a third vector register with elements from memory, performing <b>126</b> an arithmetic-logical operation using values from the third vector register and the compressed second vector of operand values to generate a result vector, and using the first vector of addressing values as masked by the bit vector, storing <b>128</b> the result vector to memory.</div>
+<div class="description-paragraph" num="p-0029">One exemplary program that codes one embodiment of the invention is listed below.</div>
+<div class="description-paragraph" num="p-0030"> <figref idrefs="DRAWINGS">FIG. 1C</figref> shows a block diagram of a multistreaming processor (MSP) <b>102</b> that is usable by the above method, for some embodiments of the present invention. MSP <b>102</b> includes a plurality of P chips or P circuits <b>100</b> (each representing one single-streaming processor having a plurality of vector pipelines and a scalar pipeline), each P chip/circuit <b>100</b> connected to a plurality of E chips or E circuits <b>101</b> (each representing an external cache, synchronization, and memory-interface function). In some embodiments, every P chip/circuit <b>100</b> is connected to every E chip/circuit <b>101</b>. In some embodiments, four P Chips <b>100</b> and four E Chips <b>101</b> form one MSP <b>102</b>. Although the P Chip <b>100</b> and the E Chips <b>101</b> are sometimes described herein as “chips” as representing one embodiment, in other embodiments, they are implemented with a plurality of chips each, or with a single chip containing a plurality of P circuits <b>100</b> and/or E circuits <b>101</b>.</div>
+<div class="description-paragraph" num="p-0031">In some embodiments, each scalar processing unit <b>12</b> delivers a peak of 0.4 GFLOPS and 0.8 GIPS at the target frequency of 400 MHz. Each processor <b>100</b> contains two vector pipes, running at 800 MHz, providing 3.2 GFLOPS for 64-bit operations and 6.4 GFLOPS for 32-bit operations. The MSP <b>102</b> thus provides a total of 3.2 GIPS and 12.8/25.6 GFLOPS. Each processor <b>100</b> contains a small Dcache used for scalar references only. A two-MB Ecache <b>24</b> is shared by all the processors <b>100</b> in MSP <b>102</b> and used for both scalar and vector data. In one embodiment, each processor <b>100</b> and e-circuit <b>101</b> of cache <b>24</b> are packaged as separate chips (termed the “P” chip and “E” chips, respectively).</div>
+<div class="description-paragraph" num="p-0032">In some embodiments, signaling between processor <b>100</b> and cache <b>24</b> runs at 400 Mb/s on processor-to-cache connection <b>32</b>. Each processor-to-cache connection <b>32</b> shown in <figref idrefs="DRAWINGS">FIG. 1C</figref> uses an incoming 64-bit path for load data and an outgoing 64-bit path for requests and store data. Loads, in some embodiments, can achieve a maximum transfer rate of fifty-one GB/s from cache <b>24</b>. Stores, in some embodiments, can achieve up to forty-one GB/s for stride-one and twenty-five GB/s for non-unit stride stores.</div>
+<div class="description-paragraph" num="p-0033">In some embodiments, global memory <b>26</b> is distributed to each MSP <b>102</b> as local memory <b>105</b>. Each E Chip <b>101</b> has four ports <b>34</b> to M chip <b>104</b> (and through M chip <b>104</b> to local memory <b>105</b> and to network <b>107</b>). In some embodiments, ports <b>34</b> are sixteen data bits in each direction. MSP <b>102</b> has a total of 25.6 GB/s load bandwidth and 12.8-20.5 GB/s store bandwidth (depending upon stride) to local memory.</div>
+<div class="description-paragraph" num="p-0034"> <figref idrefs="DRAWINGS">FIG. 1D</figref> shows a block diagram of a node <b>106</b> of some embodiments of the present invention. In some embodiments, a node <b>106</b> is packaged on a single printed-circuit board. Node <b>106</b> includes a plurality of MSPs <b>102</b> each connected to a plurality of M chips <b>104</b>, each M-chip <b>104</b> controlling one or more sections of memory <b>105</b>. In some embodiments, each M chip <b>104</b> is connected to memory <b>105</b> using a plurality of channels (e.g., eight), each channel having a plurality of direct RAMBUS DRAM chips (e.g., four). In some embodiments, each node also includes a plurality of I/O channels <b>103</b> used to connect to a local-area network (e.g., one or more gigabit ethernet connections) and/or storage (e.g., disk storage or a storage-area network). Each node <b>106</b> also includes one or more network connections that interconnect the memories of a plurality of nodes, in some embodiments.</div>
+<div class="description-paragraph" num="p-0035">In some embodiments, each node <b>106</b> includes four MSPs <b>102</b> and sixteen M chips <b>104</b>. M chips <b>104</b> contain memory controllers, network interfaces and cache coherence directories with their associated protocol engines. In one such embodiment, memory <b>26</b> is distributed round-robin by 32-byte cache lines across the sixteen M chips <b>104</b> at each node <b>106</b>. Thus, the M chip for a particular address is selected by bits <b>8</b> . . . <b>5</b> of the physical address.</div>
+<div class="description-paragraph" num="p-0036">Each E Chip <b>101</b> is responsible for one fourth of the physical address space, determined by bits <b>5</b> and <b>6</b> of the physical address. A reference to a particular line of memory is sent to the associated E Chip <b>101</b> where the Ecache is consulted, and either the line is found in the Ecache or the request is sent on to an M chip. Bits <b>7</b> and <b>8</b> of the physical address select one of four M chips connected to each E Chip <b>101</b>.</div>
+<div class="description-paragraph" num="p-0037">Each M chip <b>104</b> resides in one of sixteen independent slices of the machine, and the interconnection network <b>107</b> provides connectivity only between corresponding M chips on different nodes (thus there are sixteen parallel, independent networks). All activity (cache, memory, network) relating to a line of memory stays within the corresponding system slice.</div>
+<div class="description-paragraph" num="p-0038">Each M chip <b>104</b> contains two network ports <b>44</b>, each 1.6 GB/s peak per direction. This provides a total peak network bandwidth of 51.2 GB/s in and 51.2 GB/s out. Single transfers to/from any single remote destination will use only half this bandwidth, as only one of two ports <b>44</b> per M chip <b>104</b> will be used. Also, contention from the other processors <b>100</b> on node <b>106</b> must be considered. Lastly, all inter-node data is packetized, resulting in a smaller ratio of sustained to peak than in the local memory subsystem. Protocol overheads vary from 33% (one way, stride−1 reads) to 83% (symmetric, non-unit-stride reads or writes).</div>
+<div class="description-paragraph" num="p-0039">Each node <b>106</b> also contains two I/O controller chips <b>103</b> (“I” chips) that provide connectivity between the outside world and network <b>107</b> and memory <b>26</b>. In some embodiments, each “I” chip <b>103</b> provides two XIO (a.k.a. Crosstalk) I/O channels <b>49</b>, with a peak speed bandwidth of 1.2 GB/s full duplex each. The I chips are connected to each other and to the sixteen M chips <b>104</b> with enough bandwidth to match the four XIO channels.</div>
+<div class="description-paragraph" num="p-0040">This partitioning provides low latency and high bandwidth to local memory <b>105</b>. With a local memory size of up to sixteen GB (sixty-four GB, once 1 Gbit chips become available), most single-processor and autotasked codes should run locally, and most references in distributed-memory codes will be satisfied locally as well. Latency to remote memory will depend upon the distance to the remote node, and the level of contention in network <b>107</b>.</div>
+<div class="description-paragraph" num="p-0041">In some embodiments, a limited operating system executes on each node, with a Unicos/mk-like layer across nodes <b>106</b>. The limited OS will provide basic kernel services and management of two direct-attached I/O devices (a disk array and network interface). All other I/O connectivity is provided by a separate host system. In one such embodiment, the host system also provides the user environment (shell, cross compilers, utility programs, etc.), and can be used to run scalar compute applications.</div>
+<div class="description-paragraph" num="p-0042"> <figref idrefs="DRAWINGS">FIG. 1E</figref> shows a block diagram of a system <b>108</b> of some embodiments of the present invention. System <b>108</b> includes a plurality of nodes <b>106</b> each connected to a common network <b>107</b>. In some embodiments, network <b>107</b> is also connected to one or more other networks <b>109</b>.</div>
+<div class="description-paragraph" num="p-0043">One aspect of the invention provides a computerized method that includes providing a first vector <b>110</b> of addressing values, providing a second vector <b>112</b> of operand values, storing <b>114</b> a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values, reading back <b>116</b> from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values, comparing <b>118</b> the first sequence of values to the second sequence of values to generate a bit vector representing compares and miscompares, compressing <b>120</b> the second vector of operand values using the bit vector, using the first vector of addressing values as masked by the bit vector, loading <b>124</b> a third vector register with elements from memory, performing <b>126</b> an arithmetic-logical operation using values from the third vector register and the compressed second vector of operand values to generate a result vector, and using the first vector of addressing values as masked by the bit vector, storing <b>128</b> the result vector to memory.</div>
+<div class="description-paragraph" num="p-0044">In some embodiments, addresses of the elements in memory are calculated by adding each respective addressing value to a base address of an object in memory.</div>
+<div class="description-paragraph" num="p-0045">In some embodiments, the arithmetic-logical operation is an addition operation that produces at least one element of the result vector as a summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector of addressing values that had identical values.</div>
+<div class="description-paragraph" num="p-0046">In some embodiments, address values for the sequence of addressed locations within the constrained area of memory are each calculated using a truncated portion of each respective addressing value of the first vector of addressing values. In some embodiments, data values of the first sequence of values are each formed by concatenating a portion of each respective addressing value of the first vector of addressing values to a respective one of a sequence of numbers.</div>
+<div class="description-paragraph" num="p-0047">In some embodiments, the constrained area of memory includes 2<sup>N </sup>locations, wherein address values for the sequence of addressed locations within the constrained area of memory are each calculated by adding a base address to an N-bit portion of each respective addressing value of the first vector of addressing values, and wherein data values of the first sequence of values are each formed by concatenating a portion of each respective addressing value of the first vector of addressing values to a respective one of a consecutive sequence of integer numbers.</div>
+<div class="description-paragraph" num="p-0048">In some embodiments, for the loading of the third vector register with elements from memory, elements are loaded from locations specified by addressing values corresponding to bits of the bit vector that indicated a compare and no elements are loaded from locations specified by addressing values corresponding to bits of the bit vector that indicated a miscompare.</div>
+<div class="description-paragraph" num="p-0049">In some embodiments, the operations recited therein are executed in the order recited therein.</div>
+<div class="description-paragraph" num="p-0050">Some embodiments, further include performing <b>124</b> a first synchronization operation that ensures that the comparing the first sequence of values to the second sequence of values to generate the bit vector representing compares and miscompares effectively completes before the loading of the third vector register with elements from memory, and performing <b>130</b> a second synchronization operation that ensures that the storing the result vector to memory completes before subsequent passes through a loop.</div>
+<div class="description-paragraph" num="p-0051">Another aspect of the invention provides a computer-readable medium having instructions stored thereon for causing a suitably programmed information-processing system to execute a method that includes providing <b>110</b> a first vector of addressing values, providing <b>112</b> a second vector of operand values, storing <b>114</b> a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values, reading back <b>116</b> from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values, comparing <b>118</b> the first sequence of values to the second sequence of values to generate a bit vector representing compares and miscompares, compressing <b>120</b> the second vector of operand values using the bit vector, using the first vector of addressing values as masked by the bit vector, loading <b>124</b> a third vector register with elements from memory, performing <b>126</b> an arithmetic-logical operation using values from the third vector register and the compressed second vector of operand values to generate a result vector, and using the first vector of addressing values as masked by the bit vector, storing <b>128</b> the result vector to memory.</div>
+<div class="description-paragraph" num="p-0052">Yet another aspect of the invention provides a computerized method that includes loading <b>210</b> a first vector register with addressing values, loading <b>212</b> a second vector register with operand values, storing <b>214</b> a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each one of these location's addresses in the constrained area of memory is based at least in part on a subset of bits of a corresponding one of the addressing values, reading back <b>216</b> from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values, comparing <b>218</b> the first sequence of values to the second sequence of values, selectively combining <b>220</b>, with an arithmetic-logical operation, certain elements of the second vector of operand values based on results of the comparing, using at least some of the first vector register of addressing values, loading <b>224</b> a third vector register with elements from memory, performing <b>226</b> the arithmetic-logical operation using values from the third vector register and the combined second vector of operand values to generate a result vector, and using the at least some of the first vector register of addressing values, storing <b>228</b> the result vector to memory.</div>
+<div class="description-paragraph" num="p-0053">In some embodiments, addresses of the elements from memory are calculated by adding each respective addressing value to a base address.</div>
+<div class="description-paragraph" num="p-0054">In some embodiments, addresses of the elements from memory are calculated by performing a signed-addition operation of each respective addressing value to a base address of an object in memory.</div>
+<div class="description-paragraph" num="p-0055">In some embodiments, the arithmetic-logical operation is an addition operation that produces at least one element of the result vector as a summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector register of addressing values having identical values.</div>
+<div class="description-paragraph" num="p-0056">In some embodiments, address values for the sequence of addressed locations within the constrained area of memory are each calculated using a truncated portion of each respective addressing value of the first vector register of addressing values.</div>
+<div class="description-paragraph" num="p-0057">In some embodiments, data values of the first sequence of values are each formed by concatenating a portion of each respective addressing value of the first vector register of addressing values to a respective one of a sequence of numbers.</div>
+<div class="description-paragraph" num="p-0058">In some embodiments, the constrained area contains 2<sup>N </sup>consecutive addresses, wherein address values for the sequence of addressed locations within the constrained area of memory are each calculated using an N-bit value derived from each respective addressing value of the first vector register of addressing values, and wherein data values of the first sequence of values are each formed by concatenating a portion of each respective addressing value of the first vector register of addressing values to a respective one of a consecutive sequence of integer numbers.</div>
+<div class="description-paragraph" num="p-0059">In some embodiments, for the loading of the third vector register with elements from memory, elements are loaded from locations specified by addressing values corresponding to indications that indicated compares and no elements are loaded from locations specified by addressing values corresponding to indications that indicated miscompares.</div>
+<div class="description-paragraph" num="p-0060">Another aspect of the invention provides a computer-readable medium having instructions stored thereon for causing a suitably programmed information-processing system to execute one or more of the various embodiments of the above method.</div>
+<div class="description-paragraph" num="p-0061">In some embodiments, the constrained area contains 2<sup>N </sup>consecutive addresses, address values for the sequence of addressed locations within the constrained area of memory are each calculated using an N-bit value derived from each respective addressing value of the first vector register of addressing values, data values of the first sequence of values are each formed by combining at least a portion of each respective addressing value of the first vector register of addressing values to a respective one of a consecutive sequence of integer numbers, for the loading of the third vector register with elements from memory, elements are loaded from locations specified by addressing values corresponding to indications that indicated compares and no elements are loaded from locations specified by addressing values corresponding to indications that indicated miscompares, addresses of the elements from memory are calculated by adding each respective addressing value to a base address, the arithmetic-logical operation is a floating-point addition operation that produces at least one element of the result vector as an ordered-operation floating point summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector register of addressing values having identical values, and for the storing of the result vector of elements to memory, elements are stored to locations specified by addressing values corresponding to indications that indicated compares and no elements are stored to locations specified by addressing values corresponding to indications that indicated miscompares.</div>
+<div class="description-paragraph" num="p-0062">Another aspect of the invention provides a system that includes a first vector processor having a first vector register having addressing values, a second vector register having operand values, a third vector register, a bit vector register, circuitry that selectively stores a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values, circuitry that selectively loads, from the sequence of addressed locations, values resulting from the stores of the first sequence to obtain a second sequence of values, circuitry that selectively compares the first sequence of values to the second sequence of values to generate bit values into the bit vector register representing compares and miscompares, circuitry that selectively compresses the second vector of operand values using the values in the bit vector register, circuitry that selectively loads the third vector register with elements from memory addresses generated from the first vector register of addressing values as masked by the bit vector register, circuitry that selectively performs an arithmetic-logical operation on corresponding values from the third vector register and the compressed second vector of operand values to generate values of a result vector, and, circuitry that selectively stores the result vector to memory.</div>
+<div class="description-paragraph" num="p-0063">Some embodiments of this system further include circuitry to calculate addresses of the elements in memory by adding each respective addressing value to a base address value.</div>
+<div class="description-paragraph" num="p-0064">In some embodiments of this system, the arithmetic-logical operation is an addition operation that produces at least one element of the result vector as a summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector register of addressing values that had identical values.</div>
+<div class="description-paragraph" num="p-0065">Some embodiments of this system further include circuitry to calculate address values for the sequence of addressed locations within the constrained area of memory using a truncated portion of each respective addressing value of the first vector register of addressing values.</div>
+<div class="description-paragraph" num="p-0066">Some embodiments of this system further include circuitry to generate data values of the first sequence of values by joining a portion of each respective addressing value of the first vector register of addressing values to a respective one of a sequence of numbers.</div>
+<div class="description-paragraph" num="p-0067">Some embodiments of this system further include circuitry to generate address values of the sequence of addressed locations within the constrained area of memory by adding a base address to an N-bit portion of each respective addressing value of the first vector register of addressing values, and circuitry to generate data values of the first sequence of values by combining a portion of each respective addressing value of the first vector register of addressing values with a respective one of a consecutive sequence of integer numbers.</div>
+<div class="description-paragraph" num="p-0068">In some embodiments, the circuitry that selectively loads the third vector register with elements from memory only loads element from locations specified by addressing values corresponding to bits of the bit vector that indicated a compare.</div>
+<div class="description-paragraph" num="p-0069">Some embodiments further include synchronization circuitry that ensures that the comparing the first sequence of values to the second sequence of values to generate the bit vector representing compares and miscompares effectively completes before the loading of the third vector register with elements from memory, and that ensures that the storing the result vector to memory completes before subsequent passes through a loop.</div>
+<div class="description-paragraph" num="p-0070">Some embodiments further include a second vector processor having: a first vector register having addressing values, a second vector register having operand values, a third vector register, a bit vector register, circuitry that selectively stores a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values, circuitry that selectively loads, from the sequence of addressed locations, values resulting from the stores of the first sequence to obtain a second sequence of values, circuitry that selectively compares the first sequence of values to the second sequence of values to generate bit values into the bit vector register representing compares and miscompares, circuitry that selectively compresses the second vector of operand values using the values in the bit vector register, circuitry that selectively loads the third vector register with elements from memory addresses generated from the first vector register of addressing values as masked by the bit vector register, circuitry that selectively performs an arithmetic-logical operation on corresponding values from the third vector register and the compressed second vector of operand values to generate values of a result vector, and, circuitry that selectively stores the result vector to memory. This system also includes synchronization circuitry that ensures that the comparing the first sequence of values to the second sequence of values to generate the bit vector representing compares and miscompares effectively completes in both the first and second vector processors before the loading of the third vector register with elements from memory in either processor, and that ensures that the storing the result vector to memory completes before subsequent passes through a loop.</div>
+<div class="description-paragraph" num="p-0071">Another aspect of the invention provides a system that includes a first vector register, a second vector register, a third vector register, a bit vector register, means for loading the first vector register with addressing values, means as described herein for loading the second vector register with operand values, means for storing a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each one of these location's addresses in the constrained area of memory is based at least in part on a subset of bits of a corresponding one of the addressing values, means for loading from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values, means for comparing the first sequence of values to the second sequence of values, means for selectively combining, with an arithmetic-logical operation, certain elements of the second vector of operand values based on results of the comparing, means for loading a third vector register with elements from memory address locations generated using at least some of the first vector register of addressing values, means for performing the arithmetic-logical operation using values from the third vector register and the combined second vector of operand values to generate a result vector, and means for storing the result vector to memory.</div>
+<div class="description-paragraph" num="p-0072">Another aspect of the invention provides a system including a first vector register that can be loaded with addressing values, a second vector register that can be loaded with operand values, a third vector register that can be loaded with operand values from memory locations indirectly addressed using the addressing values from the first vector register, a circuit that determines element addresses of the first vector register that have a value that duplicates a value in another element address, a circuit that selectively adds certain elements of the second vector of operand values based on the element addresses the duplicated values, a circuit that uses indirect addressing to selectively load the third vector register with elements from memory, a circuit that selectively adds values from the third vector register and the second vector of operand values to generate a result vector, and a circuit that selectively stores the result vector to memory using indirect addressing.</div>
+<div class="description-paragraph" num="p-0073">Some embodiments of this system further include an adder that generates addresses of the elements from memory by adding each respective addressing value to a base address.</div>
+<div class="description-paragraph" num="p-0074">Some embodiments of this system further include an adder that generates addresses of the elements from memory by a signed-addition operation of each respective addressing value to a base address of an object in memory.</div>
+<div class="description-paragraph" num="p-0075">In some embodiments, the circuit that selectively adds certain elements performs one or more addition operations using those values from a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector register of addressing values having identical values.</div>
+<div class="description-paragraph" num="h-0007">Multistreaming Aspects of Indirect Addressed Vector Add</div>
+<div class="description-paragraph" num="p-0076">Another aspect of the invention provides a computerized method that includes loading a first vector register with addressing values, loading a second vector register with operand values, determining which, if any, element addresses of the first vector register have a value that duplicates a value in another element address, selectively adding certain elements of the second vector of operand values based on the element addresses the duplicated values, loading, using indirect addressing from the first vector register, elements from memory into a third vector register, adding values from the third vector register and the second vector of operand values to generate a result vector, and storing the result vector to memory using indirect addressing.</div>
+<div class="description-paragraph" num="p-0077">In some embodiments, the set of operations (a), (b), (c), and (d) is performed substantially in parallel in the plurality of processors, and the set of operations (e), (f), and (g) is performed serially, one processor at a time.</div>
+<div class="description-paragraph" num="p-0078">Some embodiments further include executing an ordered Msync operation before the set of operations (e), (f), and (g), and executing an end ordered Msync operation after the set of operations (e), (f), and (g).</div>
+<div class="description-paragraph" num="p-0079">In some embodiments, the set of operations (a), (b), (c), and (d) is performed substantially in parallel in the plurality of processors.</div>
+<div class="description-paragraph" num="p-0080">Some embodiments of the method further include:
+</div> <ul> <li id="ul0001-0001" num="0000"> <ul> <li id="ul0002-0001" num="0080">executing a first barrier synchronization operation before the set of operations (e), (f), and (g) in all of the plurality of processors,</li> <li id="ul0002-0002" num="0081">executing a second barrier synchronization operation before the set of operations (e), (f), and (g) in the second processor,</li> <li id="ul0002-0003" num="0082">executing the set of operations (e), (f), and (g) in the first processor and then executing a second barrier synchronization operation in the first processor to satisfy the second barrier synchronization in the second processor, and executing a third barrier synchronization in the first processor, and</li> <li id="ul0002-0004" num="0083">executing the set of operations (e), (f), and (g) in the second processor and then executing a third barrier synchronization operation in the second processor to satisfy the third barrier synchronization in the first processor.</li> </ul> </li> </ul>
+<div class="description-paragraph" num="p-0081">In some embodiments, the set of operations (a), (b), (c), and (d) is performed substantially in parallel in the plurality of processors.</div>
+<div class="description-paragraph" num="p-0082">In some embodiments, the determining of duplicates includes:
+</div> <ul> <li id="ul0003-0001" num="0000"> <ul> <li id="ul0004-0001" num="0086">generating each respective address value for a sequence of addressed locations within a constrained area of memory containing 2<sup>N </sup>consecutive addresses using an N-bit value derived from each respective addressing value of the first vector register,</li> <li id="ul0004-0002" num="0087">generating each respective data value of a first sequence of values by combining at least a portion of each respective addressing value of the first vector register to a respective one of a sequence of integer numbers,</li> <li id="ul0004-0003" num="0088">storing the first sequence of values to the constrained memory area using the generated sequence of respective address values,</li> <li id="ul0004-0004" num="0089">loading a second first sequence of values from the constrained memory area using the generated sequence of respective address values, and</li> <li id="ul0004-0005" num="0090">comparing the first sequence of values to the second sequence of values, and</li> </ul> </li> </ul>
+<div class="description-paragraph" num="p-0083">wherein the loading of the third vector register includes loading elements from locations specified by addressing values corresponding to indications of positive compares from the comparing,</div>
+<div class="description-paragraph" num="p-0084">wherein addresses of the elements from memory are calculated by adding each respective addressing value to a base address,</div>
+<div class="description-paragraph" num="p-0085">wherein the adding includes a floating-point addition operation that produces at least one element of the result vector as an ordered-operation floating point summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector of addressing values having identical values, and</div>
+<div class="description-paragraph" num="p-0086">wherein for the storing of the result vector of elements to memory, elements are stored to locations specified by addressing values corresponding to indications of positive compares.</div>
+<div class="description-paragraph" num="p-0087">Another aspect of the invention provides a computerized method that includes:
+</div> <ul> <li id="ul0005-0001" num="0000"> <ul> <li id="ul0006-0001" num="0096">(a) within a first vector processor:
+        <ul> <li id="ul0007-0001" num="0097">loading a first vector register in the first vector processor with addressing values,</li> <li id="ul0007-0002" num="0098">loading a second vector register in the first vector processor with operand values,</li> <li id="ul0007-0003" num="0099">determining which, if any, element addresses of the first vector register in the first vector processor have a value that duplicates a value in another element address,</li> <li id="ul0007-0004" num="0100">selectively adding certain elements of the second vector of operand values in the first vector processor based on the element addresses the duplicated values,</li> </ul>
+</li> <li id="ul0006-0002" num="0101">(b) within a second vector processor:
+        <ul> <li id="ul0008-0001" num="0102">loading a first vector register in the second vector processor with addressing values,</li> <li id="ul0008-0002" num="0103">loading a second vector register in the second vector processor with operand values,</li> <li id="ul0008-0003" num="0104">determining which, if any, element addresses of the first vector register in the second vector processor have a value that duplicates a value in another element address,</li> <li id="ul0008-0004" num="0105">selectively operating on certain elements of the second vector of operand values in the second vector processor based on the element addresses the duplicated values,</li> </ul>
+</li> <li id="ul0006-0003" num="0106">(c) performing a synchronization operation that ensures that prior store operations effectively complete in at least the second vector processor before the following (d) operations,</li> <li id="ul0006-0004" num="0107">(d) within the first vector processor:
+        <ul> <li id="ul0009-0001" num="0108">loading, using indirect addressing from the first vector register, elements from memory into a third vector register in the first vector processor,</li> <li id="ul0009-0002" num="0109">operating on values from the third vector register and the second vector of operand values in the first vector processor to generate a first result vector, and</li> <li id="ul0009-0003" num="0110">storing the first result vector to memory using indirect addressing.</li> </ul>
+</li> <li id="ul0006-0005" num="0111">(e) performing a synchronization operation that ensures that the storing of the first result vector effectively completes before the following (f) operations, and</li> <li id="ul0006-0006" num="0112">(f) within the second vector processor:
+        <ul> <li id="ul0010-0001" num="0113">loading, using indirect addressing from the first vector register, elements from memory into a third vector register in the second vector processor,</li> <li id="ul0010-0002" num="0114">operating on values from the third vector register and the second vector of operand values in the second vector processor to generate a second result vector, and</li> <li id="ul0010-0003" num="0115">storing the second result vector to memory using indirect addressing.</li> </ul>
+</li> </ul> </li> </ul>
+<div class="description-paragraph" num="p-0088">In some embodiments, each of the “operating on” functions includes adding.</div>
+<div class="description-paragraph" num="p-0089">In some embodiments, the adding includes a floating-point addition operation that produces at least one element of the result vector as an ordered-operation floating point summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector of addressing values having identical values.</div>
+<div class="description-paragraph" num="p-0090">In some embodiments, the determining of duplicates includes generating each respective address value for a sequence of addressed locations within a constrained area of memory containing 2<sup>N </sup>consecutive addresses using an N-bit value derived from each respective addressing value of the first vector register, generating each respective data value of a first sequence of values by combining at least a portion of each respective addressing value of the first vector register to a respective one of a sequence of integer numbers, storing the first sequence of values to the constrained memory area using the generated sequence of respective address values, loading a second first sequence of values from the constrained memory area using the generated sequence of respective address values, and comparing the first sequence of values to the second sequence of values.</div>
+<div class="description-paragraph" num="p-0091">In some embodiments, the loading of the third vector register of each processor includes loading elements from locations specified by addressing values corresponding to indications of positive compares from the comparing operation.</div>
+<div class="description-paragraph" num="p-0092">In some embodiments, indirect addresses of the elements from memory are calculated by adding each respective addressing value to a base address.</div>
+<div class="description-paragraph" num="p-0093">One aspect of the invention provides a system that includes a first vector register having addressing values, a second vector register having operand values, circuitry programmed to determine which, if any, element addresses of the first vector register have a value that duplicates a value in another element address, circuitry programmed to selectively add certain elements of the second vector of operand values based on the element addresses the duplicated values, circuitry programmed to load, using indirect addressing from the first vector register, elements from memory into a third vector register, circuitry programmed to add values from the third vector register and the second vector of operand values to generate a result vector, and circuitry programmed to store the result vector to memory using indirect addressing.</div>
+<div class="description-paragraph" num="p-0094">In some embodiments, the circuitry programmed to determine duplicates further includes circuitry programmed to generate each respective address value for a sequence of addressed locations within a constrained area of memory containing 2<sup>N </sup>consecutive addresses using an N-bit value derived from each respective addressing value of the first vector register, circuitry programmed to generate each respective data value of a first sequence of values by combining at least a portion of each respective addressing value of the first vector register to a respective one of a sequence of integer numbers, circuitry programmed to store the first sequence of values to the constrained memory area using the generated sequence of respective address values, circuitry programmed to load a second sequence of values from the constrained memory area using the generated sequence of respective address values, and circuitry programmed to compare the first sequence of values to the second sequence of values; and the circuitry programmed to load the third vector register loads elements from locations specified by addressing values corresponding to indications of positive compares; addresses of the elements from memory are calculated by adding each respective addressing value to a base address; and the circuitry programmed to add includes a floating-point adder that produces at least one element of the result vector as an ordered-operation floating point summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector of addressing values having identical values.</div>
+<div class="description-paragraph" num="p-0095">Some embodiments further include circuitry programmed to perform the set of operations (a), (b), (c), and (d) substantially in parallel in the plurality of processors, and circuitry programmed to perform the set of operations (e), (f), and (g) serially, one processor at a time.</div>
+<div class="description-paragraph" num="p-0096">Some embodiments further include circuitry programmed to execute an ordered Msync operation before the set of operations (e), (f), and (g); and circuitry programmed to execute an end ordered Msync operation after the set of operations (e), (f), and (g). Some such embodiments further include circuitry programmed to perform the set of operations (a), (b), (c), and (d) substantially in parallel in the plurality of processors.</div>
+<div class="description-paragraph" num="p-0097">Some embodiments further include circuitry programmed to execute a first barrier synchronization operation before the set of operations (e), (f), and (g) in all of the plurality of processors, circuitry programmed to execute a second barrier synchronization operation before the set of operations (e), (f), and (g) in the second processor, circuitry programmed to execute the set of operations (e), (f), and (g) in the first processor and then executing a second barrier synchronization operation in the first processor to satisfy the second barrier synchronization in the second processor, and executing a third barrier synchronization in the first processor, and circuitry programmed to execute the set of operations (e), (f), and (g) in the second processor and then executing a third barrier synchronization operation in the second processor to satisfy the third barrier synchronization in the first processor. Some such embodiments further include circuitry programmed to perform the set of operations (a), (b), (c), and (d) substantially in parallel in the plurality of processors.</div>
+<div class="description-paragraph" num="p-0098">Another aspect of the invention provides a system that includes</div>
+<div class="description-paragraph" num="p-0099">(a) a first vector processor including means as described herein for loading a first vector register in the first vector processor with addressing values, means for loading a second vector register in the first vector processor with operand values, means for determining which, if any, element addresses of the first vector register in the first vector processor have a value that duplicates a value in another element address, and means for selectively adding certain elements of the second vector of operand values in the first vector processor based on the element addresses the duplicated values; and
+<br/>
+(b) a second vector processor including means for loading a first vector register in the second vector processor with addressing values, means for loading a second vector register in the second vector processor with operand values, means for determining which, if any, element addresses of the first vector register in the second vector processor have a value that duplicates a value in another element address, means for selectively operating on certain elements of the second vector of operand values in the second vector processor based on the element addresses the duplicated values,
+<br/>
+(c) means for performing a synchronization operation that ensures that prior store operations effectively complete in at least the second vector processors before the operations of the following (d) means,
+<br/>
+(d) within the first vector processor: means for loading, using indirect addressing from the first vector register, elements from memory into a third vector register in the first vector processor, means for operating on values from the third vector register and the second vector of operand values in the first vector processor to generate a first result vector, and means for storing the first result vector to memory using indirect addressing;
+<br/>
+(e) performing a synchronization operation that ensures that the storing of the first result vector effectively completes before the operations of the following (f) means, and
+<br/>
+(f) within the second vector processor:
+</div> <ul> <li id="ul0011-0001" num="0000"> <ul> <li id="ul0012-0001" num="0128">means for loading, using indirect addressing from the first vector register, elements from memory into a third vector register in the second vector processor,</li> <li id="ul0012-0002" num="0129">means for operating on values from the third vector register and the second vector of operand values in the second vector processor to generate a second result vector, and</li> <li id="ul0012-0003" num="0130">means for storing the second result vector to memory using indirect addressing.</li> </ul> </li> </ul>
+<div class="description-paragraph" num="p-0100">In some embodiments, each of the means for operating on functions includes an adder.</div>
+<div class="description-paragraph" num="p-0101">In some embodiments, wherein the adder includes a floating-point adder that produces at least one element of the result vector as an ordered-operation floating point summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector of addressing values having identical values.</div>
+<div class="description-paragraph" num="p-0102">In some embodiments, wherein the means for determining of duplicates includes: means as described herein for generating each respective address value for a sequence of addressed locations within a constrained area of memory containing 2<sup>N </sup>consecutive addresses using an N-bit value derived from each respective addressing value of the first vector register, means for generating each respective data value of a first sequence of values by combining at least a portion of each respective addressing value of the first vector register to a respective one of a sequence of integer numbers, means for storing the first sequence of values to the constrained memory area using the generated sequence of respective address values, means for loading a second first sequence of values from the constrained memory area using the generated sequence of respective address values, and means for comparing the first sequence of values to the second sequence of values.</div>
+<div class="description-paragraph" num="p-0103">In some embodiments, the means for loading of the third vector register of each processor includes means for loading elements from locations specified by addressing values corresponding to indications of positive compares from the comparing operation.</div>
+<div class="description-paragraph" num="p-0104">In some embodiments, indirect addresses of the elements from memory are calculated by adding each respective addressing value to a base address.</div>
+<div class="description-paragraph" num="p-0105">Another aspect of the invention provides a computer-readable medium having instructions stored thereon for causing a suitably programmed information-processing system to execute a method that includes loading a first vector register with addressing values, loading a second vector register with operand values, determining which, if any, element addresses of the first vector register have a value that duplicates a value in another element address, selectively adding certain elements of the second vector of operand values based on the element addresses the duplicated values, loading, using indirect addressing from the first vector register, elements from memory into a third vector register, adding values from the third vector register and the second vector of operand values to generate a result vector, and storing the result vector to memory using indirect addressing.</div>
+<div class="description-paragraph" num="p-0106">An iota instruction is described in U.S. Pat. No. 6,308,250, entitled “Method and Apparatus for Processing a Set of Data Values with Plural Processing Units Mask Bits Generated by Other Processing Units,” issued Oct. 23, 2001 to Klausler, the description of which is incorporated herein by reference.</div>
+<div class="description-paragraph" num="p-0107">In some embodiments, a program such as the following example is used:</div>
+<div class="description-paragraph" num="p-0108">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">==============================================================</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">/* kernel of the HMG tabletoy benchmark (with declarations) */</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">#define</td>
+<td class="description-td">LTABSIZE</td>
+<td class="description-td">22</td>
+<td class="description-td">/* logarithm.of table size (27) (22</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">for jobmix) */</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">#define</td>
+<td class="description-td">NRECGEN</td>
+<td class="description-td">100000</td>
+<td class="description-td">/* records to generate on each</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">pass */</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">#define TAB_SIZE</td>
+<td class="description-td">(1 &lt;&lt; LTABSIZE)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">double table[TAB_SIZE];</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">typedef struct</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">{</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">int index;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">double value;</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">}update_t;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">update_t xdata[NRECGEN];</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">. . .</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">/* the timed loop, recs_todo (input data) = 900000000 */</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">while (recs_todo)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">{</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">nrec = MIN(recs_todo, NRECGEN);</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">recs_todo −= nrec;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">for (idx = 0; idx &lt; nrec; idx++)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">table[xdata[idx].index] += xdata[idx].value;</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">}</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">/* Please note that there is NO ivdep on this loop. */</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">/* In some embodiments, change the inner update loop to:</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">#pragma ivdep</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">for (idx = 0; idx &lt; nrec; idx++)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">table[xdata[idx].index]</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">+= xpartred_add64(xdata[idx].value,xdata[idx].index);</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">/* in some embodiments, results were obtained by compiling with: */</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">/*</td>
+<td class="description-td">cc −o toy toy.c</td>
+<td class="description-td">*/</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">/* and running with:</td>
+<td class="description-td">*/</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">/*</td>
+<td class="description-td">aprun −n1 −p:16m toy 900000000</td>
+<td class="description-td">*/</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">==============================================================</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">In some embodiments, the following assembly code is used for the</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">bolded instruction above:</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">HMG Tabletoy update:</td>
+<td class="description-td">table[xdata.index[i]] += xdata.value[i];</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">Registers computed or loaded during RHS processing of update . . .</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v2</td>
+<td class="description-td">[a27,2],m0</td>
+<td class="description-td">;IX = xdata.index[*]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v0</td>
+<td class="description-td">cidx(a11,m0)</td>
+<td class="description-td">;IOTA</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">m1</td>
+<td class="description-td">m0|m0</td>
+<td class="description-td">;input mask</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v1</td>
+<td class="description-td">[a28,2],m0</td>
+<td class="description-td">;Y = xdata.value[*]</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">Generate ordered msync wait,send masks</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">A10 = Remaining tripcount (after this pass)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">A11 = 1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">A22 = SSP#</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">A26 = SSP's array offset</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a24</td>
+<td class="description-td">a22{circumflex over ( )}3</td>
+<td class="description-td">;=0 iff P3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a25</td>
+<td class="description-td">a0&lt;a26</td>
+<td class="description-td">;=0 iff P0 and 1st iter, else 1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a24</td>
+<td class="description-td">a10|a24</td>
+<td class="description-td">;=0 iff P3 and last iteration</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a21</td>
+<td class="description-td">a22−1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a26</td>
+<td class="description-td">a0&lt;a24</td>
+<td class="description-td">;=0 iff P3 and no more iters, else 1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a23</td>
+<td class="description-td">a22+1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a21</td>
+<td class="description-td">a21&amp;3</td>
+<td class="description-td">;restrict shift counts to be 0 . . . 3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a23</td>
+<td class="description-td">a23&amp;3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a22</td>
+<td class="description-td">a11&lt;&lt;a22</td>
+<td class="description-td">;self-mask</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a21</td>
+<td class="description-td">a25&lt;&lt;a21</td>
+<td class="description-td">;mask for SSP to wait on</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a23</td>
+<td class="description-td">a26&lt;&lt;a23</td>
+<td class="description-td">;mask for SSP to send</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a21</td>
+<td class="description-td">a21|a22</td>
+<td class="description-td">;wait mask</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a22</td>
+<td class="description-td">a22|a23</td>
+<td class="description-td">;send mask</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">Inlined “indexed partial reduction” algorithm: Y′,M1 =</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">reduce(Y, IX),M1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">Y′ will contain Y or sum reduced values of Y for duplicate IX</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">values;</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">M1 will contain an update mask where IX values are unique and</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">also where</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">the Y′ elements that need to be added into the update (LHS)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">vector.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">Input:</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">v0 = IOTA vector (0,1,2, . . . ,63)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">v1 = Y vector</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">v2 = IX vector</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">m1 = Input mask</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">v1 = #elements in v0, v1, v2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">Output:</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">v1 = Y′ vector</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">v2 = IX vector</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">m1 = Output mask of unique IX values</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">CNFXSZ</td>
+<td class="description-td">=</td>
+<td class="description-td">16384</td>
+<td class="description-td">;Size of scratch conflict analysis</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">space</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s4</td>
+<td class="description-td">CNFXSZ−1</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a29</td>
+<td class="description-td">v1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a45</td>
+<td class="description-td">CNFXSZ*8−8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v5</td>
+<td class="description-td">v2&amp;s4,m0</td>
+<td class="description-td">;Conflict index set masked from ix</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">m4</td>
+<td class="description-td">fill(a29)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">m3</td>
+<td class="description-td">m1&amp;m4</td>
+<td class="description-td">;Clear trailing mask bits beyond VL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a20</td>
+<td class="description-td">CNFXSZ*8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a45</td>
+<td class="description-td">a63−a45</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s28</td>
+<td class="description-td">8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a63</td>
+<td class="description-td">a63−a20</td>
+<td class="description-td">;Allocate private stack space</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v6</td>
+<td class="description-td">v2&lt;&lt;s28,m0</td>
+<td class="description-td">;(ix&lt;&lt;8) to make room for IOTA</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v4</td>
+<td class="description-td">v6|v0,m0</td>
+<td class="description-td">;(ix&lt;&lt;8)|IOTA</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a27</td>
+<td class="description-td">last(m4)</td>
+<td class="description-td">;last valid element#</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">cnfxloop = *</td>
+<td class="description-td">;“False positive” conflict loop</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">[a45,v5] v4,m3,ord</td>
+<td class="description-td">;Scatter (ix&lt;&lt;8)|IOTA (to</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">scratch array)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s27</td>
+<td class="description-td">x′00ff:d</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">lsync v,v</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v6</td>
+<td class="description-td">[a45,v5],m3</td>
+<td class="description-td">;Gather (ix&lt;&lt;8)′|IOTA′</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v7</td>
+<td class="description-td">+v6&gt;&gt;s28,m3</td>
+<td class="description-td">;Extract ix′</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">m2</td>
+<td class="description-td">v7==v2,m3</td>
+<td class="description-td">;M2 excludes ix's mapping to same CNFX</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v9</td>
+<td class="description-td">v6&amp;s27,m3</td>
+<td class="description-td">;Element #s of y sums</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">m4</td>
+<td class="description-td">v9!=v0,m2</td>
+<td class="description-td">;Conflict map</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">m3</td>
+<td class="description-td">~m2&amp;m3</td>
+<td class="description-td">;Map of remaining ix values</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a6</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a29</td>
+<td class="description-td">pop(m4)</td>
+<td class="description-td">;Conflict trip count (tc)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v7</td>
+<td class="description-td">cmprss(v9,m4)</td>
+<td class="description-td">;IOTA's that conflicts map to</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a26</td>
+<td class="description-td">pop(m3)</td>
+<td class="description-td">;&gt;0 if ix's mapped to same CNFX</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">m1</td>
+<td class="description-td">~m4&amp;m1</td>
+<td class="description-td">;Exclude conflicts in final M1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a1</td>
+<td class="description-td">v7,0</td>
+<td class="description-td">;1st iota into which to sum (iota1)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a8</td>
+<td class="description-td">a6&lt;a29</td>
+<td class="description-td">;=1 if tc &gt; 1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v7,a29</td>
+<td class="description-td">a27</td>
+<td class="description-td">;Store safe y sum index at end</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a6</td>
+<td class="description-td">a0&lt;a29</td>
+<td class="description-td">;=1 if tc &gt; 0</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a7</td>
+<td class="description-td">a6+a8</td>
+<td class="description-td">;=2 if tc &gt; 1, else tc</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a2</td>
+<td class="description-td">v7,a6</td>
+<td class="description-td">;2nd iota into which to sum (iota2)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a3</td>
+<td class="description-td">v7,a7</td>
+<td class="description-td">;3rd iota into which to sum (iota3)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v8</td>
+<td class="description-td">cmprss(v1,m4)</td>
+<td class="description-td">;y values to add into y sums</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">bz</td>
+<td class="description-td">a29,noconflict</td>
+<td class="description-td">;If no conflicts exist</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a11</td>
+<td class="description-td">v8,0</td>
+<td class="description-td">;Get 1st 3 y values (y1,y2,y3)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v8,a29</td>
+<td class="description-td">s0</td>
+<td class="description-td">;Store 0 for conflict summing at</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">end</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a12</td>
+<td class="description-td">v8,a6</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s3</td>
+<td class="description-td">v8,a7</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">$REPEAT</td>
+<td class="description-td">;Repeat 3 update fixes per</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">iteration</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a5</td>
+<td class="description-td">a7&lt;a29</td>
+<td class="description-td">;=1 if &gt;=0 more conflicts (another</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">iter)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s5</td>
+<td class="description-td">v1,a1</td>
+<td class="description-td">;Get 3 y sums (to sum conflicts</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">into)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a23</td>
+<td class="description-td">a2{circumflex over ( )}a1</td>
+<td class="description-td">;Determine conflict:</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">iota2==iota1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a5</td>
+<td class="description-td">a7+a5</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s6</td>
+<td class="description-td">v1,a2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a24</td>
+<td class="description-td">a3{circumflex over ( )}a1</td>
+<td class="description-td">;Determine conflict:</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">iota3==iota1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a15</td>
+<td class="description-td">a5&lt;a29</td>
+<td class="description-td">;=1 if &gt;=1 more conflicts</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s7</td>
+<td class="description-td">v1,a3</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a25</td>
+<td class="description-td">a3{circumflex over ( )}a2</td>
+<td class="description-td">;Determine conflict:</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">iota3==iota2</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a6</td>
+<td class="description-td">a5+a15</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a16</td>
+<td class="description-td">a1</td>
+<td class="description-td">;Save iota1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a1</td>
+<td class="description-td">v7,a5</td>
+<td class="description-td">;Bottom load next iter's iota1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a7</td>
+<td class="description-td">a6&lt;a29</td>
+<td class="description-td">;=1 if &gt;=2 more conflicts</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a17</td>
+<td class="description-td">a2</td>
+<td class="description-td">;Save iota2</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a2</td>
+<td class="description-td">v7,a6</td>
+<td class="description-td">;Bottom load next iter's iota2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a7</td>
+<td class="description-td">a6+a7</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a18</td>
+<td class="description-td">a3</td>
+<td class="description-td">;Save iota3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a13</td>
+<td class="description-td">a11</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s1</td>
+<td class="description-td">a11</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a11</td>
+<td class="description-td">a24?a0:a11</td>
+<td class="description-td">;y1 if iota3==iota1, else 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a3</td>
+<td class="description-td">v7,a7</td>
+<td class="description-td">;Bottom load next iter's iota3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a13</td>
+<td class="description-td">a23?a0:a13</td>
+<td class="description-td">;y1 if iota2==iota1, else 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s2</td>
+<td class="description-td">a12</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a12</td>
+<td class="description-td">a25?a0:a12</td>
+<td class="description-td">;y2 if iota3==iota2, else 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s11</td>
+<td class="description-td">a11</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a11</td>
+<td class="description-td">v8,a5</td>
+<td class="description-td">;Bottom load next iter's y1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s13</td>
+<td class="description-td">a13</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s12</td>
+<td class="description-td">a12</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a12</td>
+<td class="description-td">v8,a6</td>
+<td class="description-td">;Bottom load next iter's y2</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s4,d</td>
+<td class="description-td">s3+s11</td>
+<td class="description-td">;y3 += (iota3==iota1)? y1 : 0</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s3</td>
+<td class="description-td">v8,a7</td>
+<td class="description-td">;Bottom load next iter's y3</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s2,d</td>
+<td class="description-td">s2+s13</td>
+<td class="description-td">;y2 += (iota2==iota1)? y1 : 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s4,d</td>
+<td class="description-td">s4+s12</td>
+<td class="description-td">;y3 += (iota3==iota2)? y2 : 0</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s5,d</td>
+<td class="description-td">s5+s1</td>
+<td class="description-td">;Sum1 += y1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s6,d</td>
+<td class="description-td">s6+s2</td>
+<td class="description-td">;Sum2 += y2 [+ y1]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">s7,d</td>
+<td class="description-td">s7+s4</td>
+<td class="description-td">;Sum3 += y3 [+ y1] [+ y2]</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v1,a16</td>
+<td class="description-td">s5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v1,a17</td>
+<td class="description-td">s6</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v1,a18</td>
+<td class="description-td">s7</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">$UNTIL</td>
+<td class="description-td">a15,Z</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">noconflict =</td>
+<td class="description-td">*</td>
+<td class="description-td">;Branch here if no conflicts</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">bn</td>
+<td class="description-td">a26,cnfxloop</td>
+<td class="description-td">;Repeat if more ix's mapped to</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">same CNFX</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">a63</td>
+<td class="description-td">a63+a20</td>
+<td class="description-td">;Restore stack frame</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">End of inlined “indexed partial reduction” algorithm.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">Update LHS using unique IX mask, M1, and non-allocating</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">gather/scatter.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">*</td>
+<td class="description-td">Use ordered (ripple) msyncs if multistreamed.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">*</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">msync</td>
+<td class="description-td">a21,v</td>
+<td class="description-td">;Ordered msync</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v4</td>
+<td class="description-td">[a32,v2],m1,na</td>
+<td class="description-td">;Gather TABLE[xdata.index[*]]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">v5,d</td>
+<td class="description-td">v4+v1,m1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">[a32,v2]</td>
+<td class="description-td">v5,m1,ord,na</td>
+<td class="description-td">;scatter my updated TABLE values</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">msync</td>
+<td class="description-td">a22,v</td>
+<td class="description-td">;End ordered msync</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" num="p-0109">It is understood that the above description is intended to be illustrative, and not restrictive. Many other embodiments will be apparent to those of skill in the art upon reviewing the above description. The scope of the invention should, therefore, be determined with reference to the appended claims, along with the full scope of equivalents to which such claims are entitled. In the appended claims, the terms “including” and “in which” are used as the plain-English equivalents of the respective terms “comprising” and “wherein,” respectively. Moreover, the terms “first,” “second,” and “third,” etc., are used merely as labels, and are not intended to impose numerical requirements on their objects.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">34</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM9381072">
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A computerized method comprising:
+<div class="claim-text">providing a first vector of addressing values;</div>
+<div class="claim-text">providing a second vector of operand values;</div>
+<div class="claim-text">storing a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values;</div>
+<div class="claim-text">reading back from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values;</div>
+<div class="claim-text">comparing the first sequence of values to the second sequence of values to generate a bit vector representing compares and miscompares;</div>
+<div class="claim-text">compressing the second vector of operand values using the bit vector;</div>
+<div class="claim-text">using the first vector of addressing values as masked by the bit vector, loading a third vector register with elements from memory;</div>
+<div class="claim-text">performing an arithmetic-logical operation using values from the third vector register and the compressed second vector of operand values to generate a result vector; and</div>
+<div class="claim-text">using the first vector of addressing values as masked by the bit vector, storing the result vector to memory.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein addresses of the elements in memory are calculated by adding each respective addressing value to a base address of an object in memory.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the arithmetic-logical operation is an addition operation that produces at least one element of the result vector as a summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector of addressing values that had identical values.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein address values for the sequence of addressed locations within the constrained area of memory are each calculated using a truncated portion of each respective addressing value of the first vector of addressing values.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein data values of the first sequence of values are each formed by concatenating a portion of each respective addressing value of the first vector of addressing values to a respective one of a sequence of numbers.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the constrained area of memory includes 2<sup>N </sup>locations, wherein address values for the sequence of addressed locations within the constrained area of memory are each calculated by adding a base address to an N-bit portion of each respective addressing value of the first vector of addressing values, and wherein data values of the first sequence of values are each formed by concatenating a portion of each respective addressing value of the first vector of addressing values to a respective one of a consecutive sequence of integer numbers.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein for the loading of the third vector register with elements from memory, elements are loaded from locations specified by addressing values corresponding to bits of the bit vector that indicated a compare and no elements are loaded from locations specified by addressing values corresponding to bits of the bit vector that indicated a miscompare.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. A method comprising the following operations executed in the order recited:
+<div class="claim-text">(a) providing a first vector of addressing values;</div>
+<div class="claim-text">(b) providing a second vector of operand values;</div>
+<div class="claim-text">(c) storing a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values;</div>
+<div class="claim-text">(d) reading back from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values;</div>
+<div class="claim-text">(e) comparing the first sequence of values to the second sequence of values to generate a bit vector representing compares and miscompares;</div>
+<div class="claim-text">(f) compressing the second vector of operand values using the bit vector;</div>
+<div class="claim-text">(g) using the first vector of addressing values as masked by the bit vector, loading a third vector register with elements from memory;</div>
+<div class="claim-text">(h) performing an arithmetic-logical operation using values from the third vector register and the compressed second vector of operand values to generate a result vector; and</div>
+<div class="claim-text">(i) using the first vector of addressing values as masked by the bit vector, storing the result vector to memory.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">performing a first synchronization operation that ensures that the comparing the first sequence of values to the second sequence of values to generate the bit vector representing compares and miscompares effectively completes before the loading of the third vector register with elements from memory; and</div>
+<div class="claim-text">performing a first synchronization operation that ensures that the storing the result vector to memory completes before subsequent passes through a loop.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. A computer-readable medium having instructions stored thereon for causing a suitably programmed information-processing system to execute a method comprising:
+<div class="claim-text">providing a first vector of addressing values;</div>
+<div class="claim-text">providing a second vector of operand values;</div>
+<div class="claim-text">storing a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values;</div>
+<div class="claim-text">reading back from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values;</div>
+<div class="claim-text">comparing the first sequence of values to the second sequence of values to generate a bit vector representing compares and miscompares;</div>
+<div class="claim-text">compressing the second vector of operand values using the bit vector;</div>
+<div class="claim-text">using the first vector of addressing values as masked by the bit vector, loading a third vector register with elements from memory;</div>
+<div class="claim-text">performing an arithmetic-logical operation using values from the third vector register and the compressed second vector of operand values to generate a result vector; and</div>
+<div class="claim-text">using the first vector of addressing values as masked by the bit vector, storing the result vector to memory.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. A computerized method comprising:
+<div class="claim-text">loading a first vector register with addressing values;</div>
+<div class="claim-text">loading a second vector register with operand values;</div>
+<div class="claim-text">storing a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each one of these location's addresses in the constrained area of memory is based at least in part on a subset of bits of a corresponding one of the addressing values;</div>
+<div class="claim-text">reading back from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values;</div>
+<div class="claim-text">comparing the first sequence of values to the second sequence of values;</div>
+<div class="claim-text">selectively combining, with an arithmetic-logical operation, certain elements of the second vector of operand values based on results of the comparing;</div>
+<div class="claim-text">using at least some of the first vector register of addressing values, loading a third vector register with elements from memory;</div>
+<div class="claim-text">performing the arithmetic-logical operation using values from the third vector register and the combined second vector of operand values to generate a result vector; and</div>
+<div class="claim-text">using the at least some of the first vector register of addressing values, storing the result vector to memory.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein addresses of the elements from memory are calculated by adding each respective addressing value to a base address.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein addresses of the elements from memory are calculated by performing a signed-addition operation of each respective addressing value to a base address of an object in memory.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the arithmetic-logical operation is an addition operation that produces at least one element of the result vector as a summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector register of addressing values having identical values.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein address values for the sequence of addressed locations within the constrained area of memory are each calculated using a truncated portion of each respective addressing value of the first vector register of addressing values.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The method of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein data values of the first sequence of values are each formed by concatenating a portion of each respective addressing value of the first vector register of addressing values to a respective one of a sequence of numbers.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the constrained area contains 2<sup>N </sup>consecutive addresses, wherein address values for the sequence of addressed locations within the constrained area of memory are each calculated using an N-bit value derived from each respective addressing value of the first vector register of addressing values, and wherein data values of the first sequence of values are each formed by concatenating a portion of each respective addressing value of the first vector register of addressing values to a respective one of a consecutive sequence of integer numbers.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein for the loading of the third vector register with elements from memory, elements are loaded from locations specified by addressing values corresponding to indications that indicated compares and no elements are loaded from locations specified by addressing values corresponding to indications that indicated miscompares.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. A computer-readable medium having instructions stored thereon for causing a suitably programmed information-processing system to execute the method of <claim-ref idref="CLM-00011">claim 11</claim-ref>.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>,
+<div class="claim-text">wherein the constrained area contains 2<sup>N </sup>consecutive addresses,</div>
+<div class="claim-text">wherein address values for the sequence of addressed locations within the constrained area of memory are each calculated using an N-bit value derived from each respective addressing value of the first vector register of addressing values, wherein data values of the first sequence of values are each formed by combining at least a portion of each respective addressing value of the first vector register of addressing values to a respective one of a consecutive sequence of integer numbers,</div>
+<div class="claim-text">wherein for the loading of the third vector register with elements from memory, elements are loaded from locations specified by addressing values corresponding to indications that indicated compares and no elements are loaded from locations specified by addressing values corresponding to indications that indicated miscompares,</div>
+<div class="claim-text">wherein addresses of the elements from memory are calculated by adding each respective addressing value to a base address,</div>
+<div class="claim-text">wherein the arithmetic-logical operation is a floating-point addition operation that produces at least one element of the result vector as an ordered-operation floating point summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector register of addressing values having identical values, and</div>
+<div class="claim-text">wherein for the storing of the result vector of elements to memory, elements are stored to locations specified by addressing values corresponding to indications that indicated compares and no elements are stored to locations specified by addressing values corresponding to indications that indicated miscompares.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. A system comprising:
+<div class="claim-text">a first vector processor having:
+<div class="claim-text">a first vector register having addressing values;</div>
+<div class="claim-text">a second vector register having operand values;</div>
+<div class="claim-text">a third vector register;</div>
+<div class="claim-text">a bit vector register;</div>
+<div class="claim-text">circuitry that selectively stores a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values;</div>
+<div class="claim-text">circuitry that selectively loads, from the sequence of addressed locations, values resulting from the stores of the first sequence to obtain a second sequence of values;</div>
+<div class="claim-text">circuitry that selectively compares the first sequence of values to the second sequence of values to generate bit values into the bit vector register representing compares and miscompares;</div>
+<div class="claim-text">circuitry that selectively compresses the second vector of operand values using the values in the bit vector register;</div>
+<div class="claim-text">circuitry that selectively loads the third vector register with elements from memory addresses generated from the first vector register of addressing values as masked by the bit vector register;</div>
+<div class="claim-text">circuitry that selectively performs an arithmetic-logical operation on corresponding values from the third vector register and the compressed second vector of operand values to generate values of a result vector; and;</div>
+<div class="claim-text">circuitry that selectively stores the result vector to memory.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, further comprising
+<div class="claim-text">circuitry to calculate addresses of the elements in memory by adding each respective addressing value to a base address value.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. The system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the arithmetic-logical operation is an addition operation that produces at least one element of the result vector as a summation of an element of the loaded third vector register and a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector register of addressing values that had identical values.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, further comprising
+<div class="claim-text">circuitry to calculate address values for the sequence of addressed locations within the constrained area of memory using a truncated portion of each respective addressing value of the first vector register of addressing values.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00025" num="00025">
+<div class="claim-text">25. The system of <claim-ref idref="CLM-00024">claim 24</claim-ref>, further comprising
+<div class="claim-text">circuitry to generate data values of the first sequence of values by joining a portion of each respective addressing value of the first vector register of addressing values to a respective one of a sequence of numbers.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00026" num="00026">
+<div class="claim-text">26. The system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, further comprising
+<div class="claim-text">circuitry to generate address values of the sequence of addressed locations within the constrained area of memory by adding a base address to an N-bit portion of each respective addressing value of the first vector register of addressing values; and</div>
+<div class="claim-text">circuitry to generate data values of the first sequence of values by combining a portion of each respective addressing value of the first vector register of addressing values with a respective one of a consecutive sequence of integer numbers.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00027" num="00027">
+<div class="claim-text">27. The system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the circuitry that selectively loads the third vector register with elements from memory only loads element from locations specified by addressing values corresponding to bits of the bit vector that indicated a compare.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00028" num="00028">
+<div class="claim-text">28. The system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, further comprising:
+<div class="claim-text">synchronization circuitry that ensures that the comparing the first sequence of values to the second sequence of values to generate the bit vector representing compares and miscompares effectively completes before the loading of the third vector register with elements from memory, and that ensures that the storing the result vector to memory completes before subsequent passes through a loop.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00029" num="00029">
+<div class="claim-text">29. The system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, further comprising:
+<div class="claim-text">a second vector processor having:
+<div class="claim-text">a first vector register having addressing values;</div>
+<div class="claim-text">a second vector register having operand values;</div>
+<div class="claim-text">a third vector register;</div>
+<div class="claim-text">a bit vector register;</div>
+<div class="claim-text">circuitry that selectively stores a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each location's address is based at least in part on a corresponding one of the addressing values;</div>
+<div class="claim-text">circuitry that selectively loads, from the sequence of addressed locations, values resulting from the stores of the first sequence to obtain a second sequence of values;</div>
+<div class="claim-text">circuitry that selectively compares the first sequence of values to the second sequence of values to generate bit values into the bit vector register representing compares and miscompares;</div>
+<div class="claim-text">circuitry that selectively compresses the second vector of operand values using the values in the bit vector register;</div>
+<div class="claim-text">circuitry that selectively loads the third vector register with elements from memory addresses generated from the first vector register of addressing values as masked by the bit vector register;</div>
+<div class="claim-text">circuitry that selectively performs an arithmetic-logical operation on corresponding values from the third vector register and the compressed second vector of operand values to generate values of a result vector; and;</div>
+<div class="claim-text">circuitry that selectively stores the result vector to memory; and</div>
+</div>
+<div class="claim-text">synchronization circuitry that ensures that the comparing the first sequence of values to the second sequence of values to generate the bit vector representing compares and miscompares effectively completes in both the first and second vector processors before the loading of the third vector register with elements from memory in either processor, and that ensures that the storing the result vector to memory completes before subsequent passes through a loop.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00030" num="00030">
+<div class="claim-text">30. A system comprising:
+<div class="claim-text">a first vector register;</div>
+<div class="claim-text">a second vector register;</div>
+<div class="claim-text">a third vector register;</div>
+<div class="claim-text">a bit vector register;</div>
+<div class="claim-text">means for loading the first vector register with addressing values;</div>
+<div class="claim-text">means for loading the second vector register with operand values;</div>
+<div class="claim-text">means for storing a first sequence of values to a sequence of addressed locations within a constrained area of memory, wherein each one of these location's addresses in the constrained area of memory is based at least in part on a subset of bits of a corresponding one of the addressing values;</div>
+<div class="claim-text">means for loading from the sequence of addressed locations values resulting from the storing of the first sequence to obtain a second sequence of values;</div>
+<div class="claim-text">means for comparing the first sequence of values to the second sequence of values;</div>
+<div class="claim-text">means for selectively combining, with an arithmetic-logical operation, certain elements of the second vector of operand values based on results of the comparing;</div>
+<div class="claim-text">means for loading a third vector register with elements from memory address locations generated using at least some of the first vector register of addressing values;</div>
+<div class="claim-text">means for performing the arithmetic-logical operation using values from the third vector register and the combined second vector of operand values to generate a result vector; and</div>
+<div class="claim-text">means for storing the result vector to memory.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00031" num="00031">
+<div class="claim-text">31. A system comprising:
+<div class="claim-text">a first vector register that can be loaded with addressing values;</div>
+<div class="claim-text">a second vector register that can be loaded with operand values;</div>
+<div class="claim-text">a third vector register that can be loaded with operand values from memory locations indirectly addressed using the addressing values from the first vector register;</div>
+<div class="claim-text">a circuit that determines elements of the first vector register that have an address value that duplicates an address value in another element;</div>
+<div class="claim-text">a circuit that selectively adds certain elements of the second vector of operand values based on the elements having the duplicated address values;</div>
+<div class="claim-text">a circuit that uses indirect addressing to selectively load the third vector register with elements from memory;</div>
+<div class="claim-text">a circuit that selectively adds values from the third vector register and the second vector of operand values to generate a result vector; and</div>
+<div class="claim-text">a circuit that selectively stores the result vector to memory using indirect addressing.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00032" num="00032">
+<div class="claim-text">32. The system of <claim-ref idref="CLM-00031">claim 31</claim-ref>, further comprising:
+<div class="claim-text">an adder that generates addresses of the elements from memory by adding each respective addressing value to a base address.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00033" num="00033">
+<div class="claim-text">33. The system of <claim-ref idref="CLM-00031">claim 31</claim-ref>, further comprising:
+<div class="claim-text">an adder that generates addresses of the elements from memory by a signed-addition operation of each respective addressing value to a base address of an object in memory.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00034" num="00034">
+<div class="claim-text">34. The system of <claim-ref idref="CLM-00031">claim 31</claim-ref>, wherein the circuit that selectively adds certain elements performs one or more addition operations using those values from a plurality of respective elements of the original second vector of operand values corresponding to elements of the first vector register of addressing values having identical values.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

@@ -1,0 +1,545 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10924698B2 - Solid-state imaging element, method of driving the same, and camera system 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA436052550" source="national office">
+<div class="abstract">A solid-state imaging element including pixel signal read lines, and a pixel signal reading unit for reading pixel signals from a pixel unit via the pixel signal read line. The pixel unit includes a plurality of pixels arranged in a matrix form, each pixel including a photoelectric conversion element. In the pixel unit, a shared pixel in which an output node is shared among a plurality of pixels is formed, and a pixel signal of each pixel in the shared pixel is capable of being selectively output from the shared output node to a corresponding one of the pixel signal read lines. The pixel signal reading unit sets a bias voltage for a load element which is connected to the pixel signal read line and in which current dependent on a bias voltage flows in the load element, to a voltage causing a current value to be higher than current upon a reference bias voltage when there is no difference between added charge amounts, when addition of pixel signals of the respective pixels in the shared pixel is driven.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES286006344">
+<heading id="h-0001">RELATED APPLICATION DATA</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of U.S. patent application Ser. No. 15/997,045, filed Jun. 4, 2018, which is a continuation of U.S. patent application Ser. No. 15/947,115, filed Apr. 6, 2018, which is a continuation of U.S. patent application Ser. No. 15/251,229 filed Aug. 30, 2016, now U.S. Pat. No. 9,973,718, which is a continuation of U.S. patent application Ser. No. 14/812,783 filed Jul. 29, 2015, now U.S. Pat. No. 9,497,401 issued Nov. 15, 2016, which is a continuation of U.S. patent application Ser. No. 14/288,032 filed May 27, 2014, now U.S. Pat. No. 9,160,954 issued on Oct. 13, 2015, which is a continuation of U.S. patent application Ser. No. 13/122,317 filed Apr. 1, 2011, now U.S. Pat. No. 8,773,557 issued Jul. 8, 2014, which is a 371 filing of International Patent Application No. PCT/JP2009/066120 filed on Sep. 16, 2009, the entireties of which are incorporated herein by reference to the extent permitted by law. The present application claims the benefit of priority to Japanese Patent Application No. JP 2008-263159 filed on Oct. 9, 2008 in the Japan Patent Office, the entirety of which is incorporated by reference herein to the extent permitted by law.</div>
+<heading id="h-0002">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention relates to a solid-state imaging element represented by a CMOS image sensor, a method of driving the same, and a camera system.</div>
+<heading id="h-0003">BACKGROUND ART</heading>
+<div class="description-paragraph" id="p-0004" num="0003">In recent years, a CMOS image sensor has attracted attention as a solid-state imaging element (image sensor) that is an alternative to a CCD. This is for the following reasons.</div>
+<div class="description-paragraph" id="p-0005" num="0004">A dedicated process is necessary to fabricate a CCD pixel. A plurality of power supply voltages are necessary for operation of the CCD pixel, and a plurality of peripheral ICs need to be combined and operated.</div>
+<div class="description-paragraph" id="p-0006" num="0005">On the other hand, a CMOS image sensor overcomes a problem of a very complicated system in such a CCD.</div>
+<div class="description-paragraph" id="p-0007" num="0006">The same fabrication process as for a typical CMOS integrated circuit can be used to fabricate the CMOS image sensor, which can be driven by a single power supply, and also both an analog circuit and a logic circuit using a CMOS process are incorporated in the same chip.</div>
+<div class="description-paragraph" id="p-0008" num="0007">Thereby, the CMOS image sensor has great merits of the number of peripheral ICs being reduced.</div>
+<div class="description-paragraph" id="p-0009" num="0008">An output circuit for the CCD is mainly a 1-channel (ch) output using a floating diffusion (FD) amplifier with an FD layer.</div>
+<div class="description-paragraph" id="p-0010" num="0009">On the other hand, the CMOS image sensor has an FD amplifier for each pixel, and an output of the CMOS image sensor is mainly a column-parallel output in which any one row in a pixel array is selected and pixels on the row are simultaneously read in a column direction.</div>
+<div class="description-paragraph" id="p-0011" num="0010">This is because it is difficult to obtain sufficient driving capability from an FD amplifier arranged in the pixel and accordingly a data rate needs to be lowered and parallel processing is advantageous.</div>
+<div class="description-paragraph" id="p-0012" num="0011">Here, in such a solid-state imaging element, a unit cell size of a pixel becomes smaller with multiple pixels and miniaturization.</div>
+<div class="description-paragraph" id="p-0013" num="0012">Accordingly, in the solid-state imaging element, a percentage of an area of a transistor in the pixel increases and an area of a photodiode (PD) becomes small, such that a saturation charge amount and sensitivity are degraded and image quality is deteriorated.</div>
+<div class="description-paragraph" id="p-0014" num="0013">Further, high-speed reading in a number of pixels, such as 30 fps realization in an HD mode, is necessary.</div>
+<div class="description-paragraph" id="p-0015" num="0014">Thereby, in a solid-state imaging element including pixels having a small unit cell size, methods of adding some pixel signals in an analog or digital manner for enhancement of sensitivity and S/N or high-speed reading have been proposed.</div>
+<div class="description-paragraph" id="p-0016" num="0015">One method is a method in which an FD is shared among a plurality of pixels and charges obtained through photoelectrical conversion in each pixel are added at the FD.</div>
+<div class="description-paragraph" id="p-0017" num="0016">However, if the FD is formed to add the same color pixels while a unit cell size of the pixel is being reduced, the PD area is further reduced, leading to degradation of a saturation charge amount and sensitivity and deterioration of image quality.</div>
+<div class="description-paragraph" id="p-0018" num="0017">Another addition method is a method of performing conversion into a digital signal and then addition in a solid-state imaging element with an analog digital (AD) converter.</div>
+<div class="description-paragraph" id="p-0019" num="0018">In an all-pixel mode, one AD conversion is performed in a certain period. However, when digital addition is performed to realize high speed, a plurality of AD conversions are necessary in the certain period, and there are issues of a need for fast AD conversion and generation of noise due to the fast AD conversion.</div>
+<div class="description-paragraph" id="p-0020" num="0019">A source follower addition in which a load MOS circuit connected to a read signal line performs addition is known as a method capable of avoiding issues caused by the FD addition and the digital addition and realizing enhancement of sensitivity and S/N and high speed (e.g., see Patent Literature1).</div>
+<heading id="h-0004">CITATION LIST</heading>
+<heading id="h-0005">Patent Literature</heading>
+<div class="description-paragraph" id="p-0021" num="0020">Patent Literature 1: U.S. Pat. No. 6,794,627 B2</div>
+<heading id="h-0006">SUMMARY OF INVENTION</heading>
+<heading id="h-0007">Technical Problem</heading>
+<div class="description-paragraph" id="p-0022" num="0021">In source follower addition in which a plurality of pixel signals are simultaneously read to a read line, the read signal amount becomes an average value of the added pixel charge amounts when added pixel charge amounts are similar with each other.</div>
+<div class="description-paragraph" id="p-0023" num="0022">However, when there is a great difference between the added pixel charge amounts, each of the signal amounts added by the source follower is not equal to the average value, but is a signal amount smaller than the average value.</div>
+<div class="description-paragraph" id="p-0024" num="0023">Thereby, the source follower addition causes false color, for example, in edges where contrast is distinct.</div>
+<div class="description-paragraph" id="p-0025" num="0024">In Patent Literature 1, a plurality of pixels are added to cope with application of colors at the edges.</div>
+<div class="description-paragraph" id="p-0026" num="0025">However, the method of adding pixels on a plurality of columns to cope with the application of colors at the edges suffers from resolution degradation.</div>
+<div class="description-paragraph" id="p-0027" num="0026">The present invention aims to provide a solid-state imaging element, a method of driving the same, and a camera system capable of preventing degradation of resolution while suppressing generation of false colors.</div>
+<heading id="h-0008">Solution to Problem</heading>
+<div class="description-paragraph" id="p-0028" num="0027">According to the first aspect of the present invention, there is provided a solid-state imaging element including: pixel signal read lines; a pixel unit including a plurality of pixels arranged in a matrix form, each pixel including a photoelectric conversion element; and a pixel signal reading unit for reading pixel signals from the pixel unit via the pixel signal read lines, wherein in the pixel unit, a shared pixel in which an output node is shared among a plurality of pixels is formed, and a pixel signal of each pixel in the shared pixel is capable of being selectively output from the shared output node to a corresponding one of the pixel signal read lines, the pixel signal reading unit includes a load element which is connected to the pixel signal read line to function as a current source and in which current dependent on a bias voltage flows, and when addition of pixel signals of the respective pixels in the shared pixel is driven, the bias voltage for the load element is capable of being set to a voltage causing a current value to be higher than current upon a reference bias voltage when there is no difference between added charge amounts.</div>
+<div class="description-paragraph" id="p-0029" num="0028">According to the second aspect of the present invention, there is provided a method of driving a solid-state imaging element, the method including: forming a shared pixel in which an output node is shared among a plurality of pixels each including a photoelectric conversion element; selectively outputting a pixel signal of each pixel in the shared pixel from the shared output node to a corresponding one of the pixel signal read lines; and setting a bias voltage for a load element which is connected to the pixel signal read line to function as a current source and in which current dependent on a bias voltage flows, to a voltage causing a current value to be higher than current upon a reference bias voltage when there is no difference between added charge amounts, when addition of pixel signals of the respective pixels in the shared pixel is driven.</div>
+<div class="description-paragraph" id="p-0030" num="0029">According to the third aspect of the present invention, there is provided a camera system including: a solid-state imaging element; and an optical system for imaging a subject image on the imaging element, wherein the solid-state imaging element includes: pixel signal read lines; a pixel unit including a plurality of pixels arranged in a matrix form, each pixel including a photoelectric conversion element; and a pixel signal reading unit for reading pixel signals from the pixel unit via the pixel signal read lines, and wherein in the pixel unit, a shared pixel in which an output node is shared among a plurality of pixels is formed, and a pixel signal of each pixel in the shared pixel is capable of being selectively output from the shared output node to a corresponding one of the pixel signal read lines, the pixel signal reading unit includes a load element which is connected to the pixel signal read line to function as a current source and in which current dependent on a bias voltage flows, and when addition of pixel signals of the respective pixels in the shared pixel is driven, the bias voltage for the load element is capable of being set to a voltage causing a current value to be higher than current upon a reference bias voltage when there is no difference between added charge amounts.</div>
+<div class="description-paragraph" id="p-0031" num="0030">According to the present invention, when addition of pixel signals of pixels in the shared pixel is driven, the bias voltage for the load element is set to a voltage causing a current value to be higher than current upon a reference bias voltage when there is no difference between the added charge amounts.</div>
+<heading id="h-0009">Advantageous Effects of Invention</heading>
+<div class="description-paragraph" id="p-0032" num="0031">According to the present invention, it is possible to prevent degradation of resolution while suppressing generation of false colors.</div>
+<description-of-drawings>
+<heading id="h-0010">BRIEF DESCRIPTION OF DRAWINGS</heading>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram showing a configuration example of a solid-state imaging element (CMOS image sensor) with a column-parallel ADC according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram specifically showing pixels and an ADC group in a solid-state imaging element (CMOS image sensor) with a column-parallel ADC according to the first embodiment in which an FD is shared among 4 pixels.</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a diagram showing one example of a basic pixel circuit of a CMOS image sensor including four transistors according to the present embodiment.</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a circuit diagram showing an example of a 2×2 shared pixel configuration.</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a diagram showing a timing chart of driving of source follower addition of the first embodiment.</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a diagram showing a linearity characteristic of a source follower of the first embodiment.</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a block diagram showing a configuration example of a solid-state imaging element (CMOS image sensor) with a column-parallel ADC according to a second embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a diagram for explaining an RGB input/output linearity characteristic of the solid-state imaging element according to the second embodiment.</div>
+<div class="description-paragraph" id="p-0041" num="0040"> <figref idrefs="DRAWINGS">FIG. 9A</figref> is a diagram for explaining a first method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 2×2 pixel shared pixel array.</div>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 9B</figref> is a diagram for explaining the first method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 2×2 pixel shared pixel array.</div>
+<div class="description-paragraph" id="p-0043" num="0042"> <figref idrefs="DRAWINGS">FIG. 10A</figref> is a diagram for explaining a second method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 4×1 pixel shared pixel array.</div>
+<div class="description-paragraph" id="p-0044" num="0043"> <figref idrefs="DRAWINGS">FIG. 10B</figref> is a diagram for explaining the second method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 4×1 pixel shared pixel array.</div>
+<div class="description-paragraph" id="p-0045" num="0044"> <figref idrefs="DRAWINGS">FIG. 11A</figref> is a diagram for explaining a third method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 2×2 pixels zigzag pixel shared pixel array.</div>
+<div class="description-paragraph" id="p-0046" num="0045"> <figref idrefs="DRAWINGS">FIG. 11B</figref> is a diagram for explaining the third method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 2×2 pixels zigzag pixel shared pixel array.</div>
+<div class="description-paragraph" id="p-0047" num="0046"> <figref idrefs="DRAWINGS">FIG. 12A</figref> is a diagram for explaining a fourth method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in the same color 2×2 pixel shared pixel array.</div>
+<div class="description-paragraph" id="p-0048" num="0047"> <figref idrefs="DRAWINGS">FIG. 12B</figref> is a diagram for explaining the fourth method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in the same color 2×2 pixel shared pixel array.</div>
+<div class="description-paragraph" id="p-0049" num="0048"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a diagram showing a relationship among a difference between added charge amounts, a gate voltage of a load MOS transistor necessary for linearity maintenance, and a control value.</div>
+<div class="description-paragraph" id="p-0050" num="0049"> <figref idrefs="DRAWINGS">FIG. 14</figref> is a diagram showing one example of a configuration of a camera system to which a solid-state imaging element according to a third embodiment of the present invention is applied.</div>
+</description-of-drawings>
+<heading id="h-0011">DESCRIPTION OF EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0051" num="0050">Hereinafter, embodiments of the present invention will be described with reference to the accompanying drawings.</div>
+<div class="description-paragraph" id="p-0052" num="0051">Further, a description will be given in the following order.</div>
+<div class="description-paragraph" id="p-0053" num="0052">1. First Embodiment (First Configuration Example of Solid-state Imaging Element)</div>
+<div class="description-paragraph" id="p-0054" num="0053">2. Second Embodiment (Second Configuration Example of Solid-state Imaging Element)</div>
+<div class="description-paragraph" id="p-0055" num="0054">3. Third Embodiment (Configuration Example of Camera System)</div>
+<heading id="h-0012">First Embodiment</heading>
+<div class="description-paragraph" id="p-0056" num="0055"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram showing a configuration example of a solid-state imaging element (CMOS image sensor) with a column-parallel ADC according to an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0057" num="0056"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram more specifically showing pixels and an ADC group in a solid-state imaging element (CMOS image sensor) with a column-parallel ADC in which an FD is shared among 4 pixels according to the first embodiment.</div>
+<div class="description-paragraph" id="p-0058" num="0057">This solid-state imaging element <b>100</b> includes a pixel unit <b>110</b>, a load MOS unit <b>120</b>, a vertical scanning circuit <b>130</b>, a horizontal transfer scanning circuit <b>140</b>, a column processing unit (ADC group) <b>150</b> as a pixel signal reading unit, and a timing control unit <b>150</b>, as shown in <figref idrefs="DRAWINGS">FIGS. 1 and 2</figref>.</div>
+<div class="description-paragraph" id="p-0059" num="0058">The solid-state imaging element <b>100</b> includes a digital-analog conversion device (DAC) and bias circuit <b>170</b> including a DAC, an amplifier circuit (S/A) <b>180</b>, a signal processing circuit <b>190</b>, and a line memory <b>200</b>.</div>
+<div class="description-paragraph" id="p-0060" num="0059">Among theses components, the pixel unit <b>110</b>, the load MOS unit <b>120</b>, the vertical scanning circuit <b>130</b>, the horizontal transfer scanning circuit <b>140</b>, the ADC group <b>150</b>, the DAC <b>170</b>, and the amplifier circuit (S/A) <b>180</b> are configured of an analog circuit.</div>
+<div class="description-paragraph" id="p-0061" num="0060">Further, the timing control unit <b>160</b>, the signal processing circuit <b>190</b>, and the line memory <b>200</b> are configured of a digital circuit.</div>
+<div class="description-paragraph" id="p-0062" num="0061">The pixel unit <b>110</b> includes pixels PXL, each including a photodiode (PD) as a photoelectric conversion element, arranged in a matrix form.</div>
+<div class="description-paragraph" id="p-0063" num="0062">The pixel unit <b>110</b> of the present embodiment has a configuration in which the FD is shared among 4 pixels. Here, a basic pixel configuration will be described and then the configuration in which the FD is shared among 4 pixels will be described.</div>
+<heading id="h-0013">Example of Basic Configuration of Pixel</heading>
+<div class="description-paragraph" id="p-0064" num="0063"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a diagram showing one example of a basic pixel circuit of a CMOS image sensor including four transistors according to the present embodiment.</div>
+<div class="description-paragraph" id="p-0065" num="0064">The pixel circuit <b>110</b>A of <figref idrefs="DRAWINGS">FIG. 3</figref> includes, for example, a PD <b>111</b> as a photoelectric conversion element.</div>
+<div class="description-paragraph" id="p-0066" num="0065">The pixel circuit <b>110</b>A includes a PD <b>111</b> as one photoelectric conversion element.</div>
+<div class="description-paragraph" id="p-0067" num="0066">The pixel circuit <b>110</b>A includes, for one PD <b>111</b>, four transistors as active elements: a transfer transistor <b>112</b> as a transfer element, a reset transistor <b>113</b> as a resetting element, an amplifying transistor <b>114</b>, and a selecting transistor <b>115</b>.</div>
+<div class="description-paragraph" id="p-0068" num="0067">The PD <b>111</b> photoelectrically converts incident light into charges (herein, electrons) of an amount dependent on a light amount of the incident light.</div>
+<div class="description-paragraph" id="p-0069" num="0068">The transfer transistor <b>112</b> is connected between the PD <b>111</b> and an FD as an output node.</div>
+<div class="description-paragraph" id="p-0070" num="0069">As a transfer signal TRG is applied to a gate (transfer gate) of the transfer transistor <b>112</b> via a transfer control line LTRG, the transfer transistor <b>112</b> transfers the electrons, which are obtained through photoelectrical conversion in the PD <b>111</b>, to the FD.</div>
+<div class="description-paragraph" id="p-0071" num="0070">The reset transistor <b>113</b> is connected between a power line LVDD and the FD.</div>
+<div class="description-paragraph" id="p-0072" num="0071">As a reset signal RST is applied to a gate of the reset transistor <b>113</b> via a reset control line LRST, the reset transistor <b>113</b> resets a potential of the FD to a potential of the power line LVDD.</div>
+<div class="description-paragraph" id="p-0073" num="0072">A gate of the amplifying transistor <b>114</b> is connected to the FD. The amplifying transistor <b>114</b> is connected to a vertical signal line <b>116</b> via the selecting transistor <b>115</b> and forms a source follower in cooperation with a load MOS, which forms a constant current source outside the pixel unit.</div>
+<div class="description-paragraph" id="p-0074" num="0073">A control signal (address signal or select signal) SEL is applied to a gate of the selecting transistor <b>115</b> via a select control line LSEL, so that the selecting transistor <b>115</b> is turned on.</div>
+<div class="description-paragraph" id="p-0075" num="0074">When the selecting transistor <b>115</b> is turned on, the amplifying transistor <b>114</b> amplifies the potential of the FD and outputs a voltage dependent on the potential to the vertical signal line <b>116</b>. The voltage output from each pixel via the vertical signal line <b>116</b> is output to the ADC group <b>150</b> as a pixel signal reading unit.</div>
+<div class="description-paragraph" id="p-0076" num="0075">These operations are simultaneously performed on respective pixels on one row, for example, because the respective gates of the transfer transistor <b>112</b>, the reset transistor <b>113</b>, and the selecting transistor <b>115</b> are connected in units of rows.</div>
+<heading id="h-0014">Configuration Example of Shared Pixel</heading>
+<div class="description-paragraph" id="p-0077" num="0076">An example of a 2×2 pixel shared pixel configuration as shown in <figref idrefs="DRAWINGS">FIG. 2</figref> will be described based on the above basic configuration.</div>
+<div class="description-paragraph" id="p-0078" num="0077"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a circuit diagram showing an example of the 2×2 shared pixel configuration.</div>
+<div class="description-paragraph" id="p-0079" num="0078">Here, a 2×2 shared pixel is indicated by a reference numeral <b>110</b>B. Further, like configuration portions as in <figref idrefs="DRAWINGS">FIG. 3</figref> are indicated by like reference numerals.</div>
+<div class="description-paragraph" id="p-0080" num="0079">In the shared pixel <b>110</b>B, pixels PXL<b>1</b> to PXL<b>4</b> include PDs <b>111</b>-<b>1</b> to <b>111</b>-<b>4</b>, and transfer transistors <b>112</b>-<b>1</b> to <b>112</b>-<b>4</b> as transfer gates, respectively.</div>
+<div class="description-paragraph" id="p-0081" num="0080">The shared pixel <b>110</b>B includes, for the 4 pixels PXL<b>1</b> to PXL<b>4</b>, an FD, a reset transistor <b>113</b>, an amplifying transistor <b>114</b>, and a selecting transistor <b>115</b>.</div>
+<div class="description-paragraph" id="p-0082" num="0081">Transfer control lines LTRG<b>1</b>(N) and LTRG<b>2</b>(N) and a select control line LSEL(N) are arranged on a row at which the pixels PXL<b>1</b> and PXL<b>2</b> are arranged.</div>
+<div class="description-paragraph" id="p-0083" num="0082">Transfer control lines LTRG<b>3</b>(N) and LRG<b>4</b>(N) and a reset control line LRST (N) are arranged on a row at which the pixels PXL<b>3</b> and PXL<b>4</b> are arranged.</div>
+<div class="description-paragraph" id="p-0084" num="0083">The transfer control line LRG<b>1</b> is connected to a gate of a transfer transistor <b>112</b>-<b>1</b> of the pixel PXL<b>1</b> on the first column, and the transfer control line LRG<b>2</b> is connected to a gate of a transfer transistor <b>112</b>-<b>2</b> of the pixel PXL<b>2</b> on the second column.</div>
+<div class="description-paragraph" id="p-0085" num="0084">The transfer control line LTRG<b>3</b> is connected to a gate of a transfer transistor <b>112</b>-<b>3</b> of the pixel PXL<b>3</b> on the first column, and the transfer control line LTRG<b>4</b> is connected to a gate of a transfer transistor <b>112</b>-<b>4</b> of the pixel PXL<b>4</b> on the second column.</div>
+<div class="description-paragraph" id="p-0086" num="0085">The select control line LSEL(N) is connected to a gate of the selecting transistor <b>115</b> and the reset control line LRST is connected to a gate of the reset transistor <b>113</b>.</div>
+<div class="description-paragraph" id="p-0087" num="0086">The transfer control lines LTRG<b>1</b> to LTRG<b>4</b>, the reset control line LRST, and the select control line LSEL are driven by the vertical scanning circuit <b>130</b>.</div>
+<div class="description-paragraph" id="p-0088" num="0087">A vertical signal line <b>116</b> is arranged as one pixel signal read line between the pixels PXL<b>1</b> and PXL<b>3</b> on the first column and the pixels PXL<b>2</b> and PXL<b>4</b> on the second column. That is, in the pixel unit <b>110</b> of <figref idrefs="DRAWINGS">FIG. 2</figref>, one vertical signal line <b>116</b> is arranged for two columns.</div>
+<div class="description-paragraph" id="p-0089" num="0088">The load MOS transistor <b>121</b> as a load element in the load MOS unit <b>120</b>, which forms the pixel reading unit with the ADC group, is connected to the vertical signal line <b>116</b>, as shown in <figref idrefs="DRAWINGS">FIG. 2</figref>.</div>
+<div class="description-paragraph" id="p-0090" num="0089">In addition, in the ADC group <b>150</b>, ADCs are arranged, one in every two columns, in parallel to correspond to such a configuration.</div>
+<div class="description-paragraph" id="p-0091" num="0090">The load MOS transistor <b>121</b> is formed of an NMOS transistor, which is an N channel insulated gate field effect transistor.</div>
+<div class="description-paragraph" id="p-0092" num="0091">A drain of the load MOS transistor <b>121</b> is connected to the vertical signal line <b>116</b> and a source thereof is connected to a reference potential source VSS.</div>
+<div class="description-paragraph" id="p-0093" num="0092">A gate of each load MOS transistor <b>121</b> is connected to the supply line LVBias for the bias voltage VBias.</div>
+<div class="description-paragraph" id="p-0094" num="0093">In the present embodiment, pixel addition is performed by source follower addition, including the load MOS transistors <b>121</b>.</div>
+<div class="description-paragraph" id="p-0095" num="0094">When charges accumulated in a plurality of pixels are added, the source follower addition is ideal when a signal amount corresponding to an average value of the added charge amounts is output to the vertical signal line <b>116</b> as a read line.</div>
+<div class="description-paragraph" id="p-0096" num="0095">However, when there is a great difference between added charge amounts, a signal amount equal to or smaller than the average value is read, such that input/output linearity is broken.</div>
+<div class="description-paragraph" id="p-0097" num="0096">For example, when resolution of a still image is necessary, charges accumulated in each pixel are output through all-pixel driving without addition.</div>
+<div class="description-paragraph" id="p-0098" num="0097">However, when the source follower addition is driven with the bias voltage VBias that is input to the gate of the load MOS transistor <b>121</b> in all-pixel driving and if there is no difference between the two added pixel charge amounts, the output becomes a value corresponding to an average value of the added charge amounts.</div>
+<div class="description-paragraph" id="p-0099" num="0098">However, if there is a difference between the added charge amounts, the linearity of the load MOS transistor is broken.</div>
+<div class="description-paragraph" id="p-0100" num="0099">Thereby, the linearity of the load MOS can be enhanced by increasing the bias voltage VBias of the load MOS transistor <b>121</b>, and the linearity can be guaranteed even when there is a difference between the added charge amounts. Application of colors in edges where contrast is distinct can be suppressed.</div>
+<div class="description-paragraph" id="p-0101" num="0100">Thereby, in the present embodiment, the gate bias voltage VBias of the load MOS transistor <b>121</b> is optimized so that the linearity is maintained even when there is a great difference between the added pixel charge amounts.</div>
+<div class="description-paragraph" id="p-0102" num="0101">That is, in the present embodiment, when the source follower addition of pixel signals of the pixels PXL in the shared pixel <b>110</b>B is driven, the gate bias voltage is set to a voltage causing a current value to be higher than current upon a reference bias voltage when there is no difference between the added charge amounts.</div>
+<div class="description-paragraph" id="p-0103" num="0102">In the solid-state imaging element <b>100</b>, the timing control unit <b>160</b> for generating an internal clock, the vertical scanning circuit <b>130</b> for controlling a row address or row scan, and the horizontal transfer scanning circuit <b>140</b> for controlling a column address or column scan are arranged as a control unit for sequentially reading signals of the pixel unit <b>110</b>.</div>
+<div class="description-paragraph" id="p-0104" num="0103">The timing control unit <b>160</b> generates timing signals necessary for signal processing in the pixel unit <b>110</b>, the vertical scanning circuit <b>130</b>, the horizontal transfer scanning circuit <b>140</b>, the ADC group (column ADC circuit) <b>150</b>, the DAC <b>170</b>, the signal processing circuit <b>190</b>, and the line memory <b>200</b>.</div>
+<div class="description-paragraph" id="p-0105" num="0104">The pixel unit <b>110</b> photoelectrically converts a video or a screen image for each pixel row through photon accumulation and emission using a line shutter, and outputs an analog signal VSL to the ADC group.</div>
+<div class="description-paragraph" id="p-0106" num="0105">In the ADC group <b>150</b>, each ADC block (each column unit) performs an APGA-compliant integrating ADC using a ramp signal RAMP from the DAC <b>170</b>, and digital CDS on an analog output of the pixel unit <b>110</b>, and outputs a several-bit digital signal.</div>
+<div class="description-paragraph" id="p-0107" num="0106">In the ADC group <b>150</b>, ADCs are arranged, one for a plurality of columns and, specifically, for two columns.</div>
+<div class="description-paragraph" id="p-0108" num="0107">Each ADC includes a comparator <b>151</b> for comparing a reference voltage Vslop, which is a ramp waveform (RAMP) obtained by changing a reference voltage generated by the DAC <b>170</b> into a step form, with an analog signal (potential VSL), which may be via the vertical signal line from pixels in each row line.</div>
+<div class="description-paragraph" id="p-0109" num="0108">Further, each ADC includes a counter <b>152</b> for counting a comparison time, and a memory (latch) <b>153</b> for holding the result of counting.</div>
+<div class="description-paragraph" id="p-0110" num="0109">The ADC group <b>150</b> has an n-bit digital signal conversion function and is arranged on each vertical signal line (read line), constituting a column-parallel ADC block.</div>
+<div class="description-paragraph" id="p-0111" num="0110">An output of each latch <b>153</b> is connected to, for example, a horizontal transfer line LTRF with a 2n-bit width.</div>
+<div class="description-paragraph" id="p-0112" num="0111">2n amplifier circuits <b>180</b> and signal processing circuits <b>190</b> corresponding to the horizontal transfer line LTRF are arranged.</div>
+<div class="description-paragraph" id="p-0113" num="0112">In the ADC group <b>150</b>, the analog signal (potential VSL) read to the vertical signal line <b>116</b> is compared with the reference voltage Vslop (ramp signal RAMP which is a slope waveform linearly changed with a certain slope) by the comparator <b>151</b> arranged in each column.</div>
+<div class="description-paragraph" id="p-0114" num="0113">In this case, the counter <b>152</b> arranged in each column, like the comparator <b>151</b>, is in operation. A certain ramp signal RAMP (potential Vslop) having a ramp waveform and a counter value are changed in one-to-one correspondence, so that the potential VSL of the vertical signal line is converted into a digital signal.</div>
+<div class="description-paragraph" id="p-0115" num="0114">The ADC converts a change of the reference voltage Vslop (ramp signal RAMP) into a change of a time, and performs conversion into a digital value by counting such a time in a certain period (clock).</div>
+<div class="description-paragraph" id="p-0116" num="0115">When the analog signal VSL and the ramp signal RAMP (reference voltage Vslop) intersect, the output of the comparator <b>151</b> is inverted to cease the input clock of the counter <b>152</b> or to input a clock whose input stops to the counter <b>152</b>, completing the AD conversion.</div>
+<div class="description-paragraph" id="p-0117" num="0116">After such an AD conversion period ends, data held in the memory (latch) <b>153</b> is transferred to the horizontal transfer line LTRF by the horizontal transfer scanning circuit <b>140</b> and input to the signal processing circuit <b>190</b> via the amplifier <b>180</b>, such that a two-dimensional image is generated by given signal processing.</div>
+<div class="description-paragraph" id="p-0118" num="0117">The horizontal transfer scanning circuit <b>140</b> performs simultaneous parallel transfer of several channels to secure a transfer rate.</div>
+<div class="description-paragraph" id="p-0119" num="0118">The timing control unit <b>160</b> generates timing necessary for signal processing in the respective blocks, such as the pixel unit <b>110</b> and the ADC group <b>150</b>.</div>
+<div class="description-paragraph" id="p-0120" num="0119">The signal processing circuit <b>190</b> at a subsequent stage performs correction of a vertical line defect or a point defect and clamp of a signal from the signal stored in the line memory <b>200</b>, or performs digital signal processing, such as parallel-serial conversion, compression, coding, addition, averaging, and intermittent operation.</div>
+<div class="description-paragraph" id="p-0121" num="0120">A digital signal transmitted to each pixel row is stored in the line memory <b>200</b>.</div>
+<div class="description-paragraph" id="p-0122" num="0121">In the solid-state imaging element <b>100</b> of the present embodiment, the digital output of the signal processing circuit <b>190</b> is transmitted as an input of an ISP or a baseband LSI.</div>
+<div class="description-paragraph" id="p-0123" num="0122">Next, driving source follower addition in the first embodiment will be described with reference to <figref idrefs="DRAWINGS">FIGS. 5 and 6</figref>.</div>
+<div class="description-paragraph" id="p-0124" num="0123"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a diagram showing a timing chart of driving of source follower addition of the first embodiment.</div>
+<div class="description-paragraph" id="p-0125" num="0124">After the select signals SEL(N) and SEL(N+1) are made at a high level, the reset signals RST(N) and RST(N+1) are made at a high level to reset the FD so that AD conversion at a reset level (P phase) is performed.</div>
+<div class="description-paragraph" id="p-0126" num="0125">Thereafter, the transfer signals TRG<b>1</b>(N) and TRG<b>1</b>(N+1) are made at a high level to simultaneously read signals of the PDs <b>111</b>-<b>1</b>(PD<b>1</b>) on rows N and N+2 and perform AD conversion at a signal level (D phase). A signal of a difference between the P phase and the D phase is held in the memory <b>153</b>.</div>
+<div class="description-paragraph" id="p-0127" num="0126">Next, the reset signals RST(N) and RST(N+1) are made at a high level to reset the FD so that AD conversion of the P phase is performed. The transfer signals TRG<b>2</b>(N) and TRG<b>2</b>(N+1) are made at a high level to read a signal of the PD <b>11102</b>(PD<b>2</b>) so that AD conversion of the D phase is performed.</div>
+<div class="description-paragraph" id="p-0128" num="0127">For output of data of the PD, data of the PD <b>111</b>-<b>1</b>(PD<b>1</b>) is output while the AD conversion process in the PD <b>111</b>-<b>2</b>(PD<b>2</b>) is being performed.</div>
+<div class="description-paragraph" id="p-0129" num="0128">Similarly, AD conversion and data output in the PDs <b>111</b>-<b>3</b>(PD<b>3</b>) and <b>111</b>-<b>4</b>(PD<b>4</b>) are performed.</div>
+<div class="description-paragraph" id="p-0130" num="0129"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a diagram showing a linearity characteristic of the source follower of the first embodiment.</div>
+<div class="description-paragraph" id="p-0131" num="0130">In <figref idrefs="DRAWINGS">FIG. 6</figref>, a horizontal axis indicates a signal charge amount (electron amount) and a vertical axis indicates a read signal voltage (VSL). Further, in <figref idrefs="DRAWINGS">FIG. 6</figref>, a curve (dotted line) indicated by A shows an all-pixel drive characteristic, and a curve (solid line) indicated by B shows a source follower addition drive characteristic.</div>
+<div class="description-paragraph" id="p-0132" num="0131">In still image photographing that emphasizes, for example, resolution, all-pixel driving may be used and a current value flowing in the load MOS transistor <b>121</b> at that time may be determined from the perspective of consumption current and input/output linearity of the source follower.</div>
+<div class="description-paragraph" id="p-0133" num="0132">However, when the source follower addition is performed with current of the load MOS transistor <b>121</b> having the same value as in all-pixel driving, the linearity of the source follower is broken with the increasing difference between the added pixel charge amounts, and false colors are generated in areas, such as edges, where contrast is distinct.</div>
+<div class="description-paragraph" id="p-0134" num="0133">On the other hand, in the present embodiment, the bias voltage VBias of the load MOS transistor <b>121</b> is higher than a normal voltage and current flowing in the load MOS transistor <b>121</b> increases, thereby extending a range in which the linearity of the source follower is maintained.</div>
+<div class="description-paragraph" id="p-0135" num="0134">Thereby, even when the difference between the added pixel charge amounts is great, the read signal amount becomes a signal amount corresponding to an average value of the added charge amounts.</div>
+<div class="description-paragraph" id="p-0136" num="0135">That is, false color at edges caused by the source follower addition can be suppressed.</div>
+<heading id="h-0015">2. Second Embodiment</heading>
+<div class="description-paragraph" id="p-0137" num="0136"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a block diagram showing a configuration example of a solid-state imaging element (CMOS image sensor) with a column-parallel ADC according to a second embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0138" num="0137">The solid-state imaging element <b>100</b>A according to the second embodiment differs from the solid-state imaging element <b>100</b> according to the first embodiment in that the solid-state imaging element <b>100</b>A is configured to independently control the gate voltage of the load MOS transistor <b>121</b> for reading of each pixel.</div>
+<div class="description-paragraph" id="p-0139" num="0138">Thus, in the solid-state imaging element <b>100</b>A, a method of reducing power consumption by adjusting, in each pixel, the current flowing in the load MOS transistor for reading of each pixel in source follower addition drive is adopted.</div>
+<div class="description-paragraph" id="p-0140" num="0139">In the solid-state imaging element <b>100</b>A of the second embodiment, a signal processing circuit <b>190</b>A as a signal processing unit has a calculation function, and a control signal CTL is output to a bias control unit <b>210</b> according to the calculation result.</div>
+<div class="description-paragraph" id="p-0141" num="0140">The bias control unit <b>210</b> dynamically changes the bias voltage VBias of the load MOS transistor <b>121</b> with a voltage VLOAD to adjust the current of the load MOS transistor.</div>
+<div class="description-paragraph" id="p-0142" num="0141">Hereinafter, a bias voltage control function of this solid-state imaging element <b>100</b>A will be described.</div>
+<div class="description-paragraph" id="p-0143" num="0142"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a diagram for explaining an RGB input/output linearity characteristic of the solid-state imaging element according to the second embodiment.</div>
+<div class="description-paragraph" id="p-0144" num="0143">As indicated by A in <figref idrefs="DRAWINGS">FIG. 8</figref>, in a single-chip CMOS image sensor in which a shutter is pressed uniformly for RGB, an RGB accumulation time is cut at a time when any pixel is saturated and no overexposure occurs.</div>
+<div class="description-paragraph" id="p-0145" num="0144">Thereby, as indicated by B in <figref idrefs="DRAWINGS">FIG. 8</figref>, an accumulated charge amount near saturation being added to an accumulated charge amount upon darkness in the source follower addition is a condition in which accumulated charge amounts having a maximum difference therebetween are added.</div>
+<div class="description-paragraph" id="p-0146" num="0145">Since the RGB sensitivity ratio is seen from the pixel characteristic, a maximum difference between source-follower-added charge amounts for the RGB pixels can also be calculated, as indicated by C in <figref idrefs="DRAWINGS">FIG. 5</figref>.</div>
+<div class="description-paragraph" id="p-0147" num="0146">Accordingly, current flowing in the load MOS transistor <b>121</b> upon source follower addition can be optimized for each color, thereby reducing power consumption.</div>
+<div class="description-paragraph" id="p-0148" num="0147"> <figref idrefs="DRAWINGS">FIGS. 9A to 12B</figref> are diagrams showing another method for driving source follower addition in a pixel array including a different shared pixel.</div>
+<div class="description-paragraph" id="p-0149" num="0148"> <figref idrefs="DRAWINGS">FIGS. 9A and 9B</figref> are diagrams for explaining a first method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 2×2 pixel shared pixel array. <figref idrefs="DRAWINGS">FIG. 9A</figref> is an equivalent circuit diagram and <figref idrefs="DRAWINGS">FIG. 9B</figref> shows a timing chart.</div>
+<div class="description-paragraph" id="p-0150" num="0149"> <figref idrefs="DRAWINGS">FIGS. 10A and 10B</figref> are diagrams for explaining a second method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 4×1 pixel shared pixel array. <figref idrefs="DRAWINGS">FIG. 10A</figref> is an equivalent circuit diagram and <figref idrefs="DRAWINGS">FIG. 10B</figref> shows a timing chart.</div>
+<div class="description-paragraph" id="p-0151" num="0150"> <figref idrefs="DRAWINGS">FIGS. 11A and 11B</figref> are diagrams for explaining a third method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in a 2×2 pixels zigzag pixel shared pixel array. <figref idrefs="DRAWINGS">FIG. 11A</figref> is an equivalent circuit diagram and <figref idrefs="DRAWINGS">FIG. 11B</figref> shows a timing chart.</div>
+<div class="description-paragraph" id="p-0152" num="0151"> <figref idrefs="DRAWINGS">FIGS. 12A and 12B</figref> are diagrams for explaining a fourth method of driving source follower addition of the second embodiment, which is a method of driving source follower addition in the same color 2×2 pixel shared pixel array. <figref idrefs="DRAWINGS">FIG. 12A</figref> is an equivalent circuit diagram and <figref idrefs="DRAWINGS">FIG. 12B</figref> shows a timing chart.</div>
+<div class="description-paragraph" id="p-0153" num="0152">In <figref idrefs="DRAWINGS">FIGS. 9A to 12B</figref>, a voltage applied to a gate of a load MOS transistor <b>121</b> is shown as VLOAD.</div>
+<div class="description-paragraph" id="p-0154" num="0153">In the first example of <figref idrefs="DRAWINGS">FIGS. 9A and 9B</figref>, the gate voltage of the load MOS transistor <b>121</b> is controlled with one voltage VLOAD<b>1</b>.</div>
+<div class="description-paragraph" id="p-0155" num="0154">In the second to fourth examples of <figref idrefs="DRAWINGS">FIGS. 10A to 12B</figref>, a gate voltage of a load MOS transistor <b>121</b>-<b>1</b> is controlled with a voltage VLOAD<b>1</b> and a gate voltage of a load MOS transistor <b>121</b>-<b>2</b> is controlled with a voltage VLOAD<b>2</b>.</div>
+<div class="description-paragraph" id="p-0156" num="0155">In any of the four examples, the voltage VLOAD<b>1</b> or VLOAD<b>2</b> to be applied to the gate of the load MOS transistor <b>121</b> is adjusted according to a sensitivity ratio upon column-parallel reading, thereby reducing power consumption.</div>
+<div class="description-paragraph" id="p-0157" num="0156">As one example, when white light is incident to an image sensor in which a Gr/Gb pixel among RGB pixels has the highest sensitivity, the following occurs.</div>
+<div class="description-paragraph" id="p-0158" num="0157">When the Gr/Gb pixel is read, the voltage applied to the gate of the load MOS transistor <b>121</b> is 1 V and when RB pixel is read, the voltage applied to the gate of the load MOS transistor <b>121</b> is changed to 0.8 V, leading to reduced consumption current.</div>
+<div class="description-paragraph" id="p-0159" num="0158">Further, when a light amount is not saturated even though 1 frame has been accumulated, a difference between charge amounts added by source follower addition is further reduced, making it possible to reduce current flowing in the load MOS transistor <b>121</b>.</div>
+<div class="description-paragraph" id="p-0160" num="0159">For example, the arithmetic processing circuit compares an output of a pixel of each color in 1 frame with an output of a pixel of the same color that is subsequently output, and stores a greater output value in the memory of the signal processing circuit <b>190</b>A.</div>
+<div class="description-paragraph" id="p-0161" num="0160">Similarly, through comparison for each color, a maximum output value for each color in the 1 frame is stored in the memory.</div>
+<div class="description-paragraph" id="p-0162" num="0161">After the 1 frame ends, an amount of charges maximally accumulated in the pixel can be supposed from the values stored in the memory of the arithmetic processing circuit and an analog gain value or a digital gain value of a sensor.</div>
+<div class="description-paragraph" id="p-0163" num="0162">When the amount of the charges supposed to be maximally accumulated and a pixel upon darkness are added, the maximum load MOS current needs to flow.</div>
+<div class="description-paragraph" id="p-0164" num="0163">Since it is preferable for the linearity of the load MOS transistor <b>121</b> to be maintained in the above condition, the current flowing in the load MOS transistor <b>121</b> can be further reduced.</div>
+<div class="description-paragraph" id="p-0165" num="0164">Hereinafter, the above-described content will be described in detail in connection with a single-chip image sensor of an RGB Bayer arrangement for column-parallel reading of a 10-bit output as one example.</div>
+<div class="description-paragraph" id="p-0166" num="0165">When pixels are read, an R pixel on a first column is first read.</div>
+<div class="description-paragraph" id="p-0167" num="0166">A maximum output value in the read R pixel is held in the memory of the signal processing circuit <b>190</b>A.</div>
+<div class="description-paragraph" id="p-0168" num="0167">Next, a read maximum output value of a Gr pixel on the same column is held in the memory of the signal processing circuit <b>190</b>A. A maximum value of a Gb pixel/B pixel is held in the memory of the signal processing circuit <b>190</b>A, as in the R pixel/Gr pixel.</div>
+<div class="description-paragraph" id="p-0169" num="0168">The same process is performed on the entire 1 frame.</div>
+<div class="description-paragraph" id="p-0170" num="0169">After the 1 frame ends, the values of the memory in the signal processing circuit <b>190</b>A are as follows: R pixel=512, Gr pixel=768, Gb pixel=768, and B pixel=256.</div>
+<div class="description-paragraph" id="p-0171" num="0170">Further, an analog gain is adB. When a digital gain is applied before an output value is held in the memory of the signal processing circuit <b>190</b>A, the gain value is βdB.</div>
+<div class="description-paragraph" id="p-0172" num="0171">A maximum difference that is likely to be between two signal amounts in each color added by the source follower becomes a charge amount calculated by a charge amount upon darkness and the following equation.</div>
+<div class="description-paragraph" id="p-0173" num="0172">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>charge</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>amount</mi>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>maximum</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>value</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>of</mi>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi>memory</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>in</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>calculation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>process</mi>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+</mrow>
+<mrow>
+<msup>
+<mn>10</mn>
+<mfrac>
+<mi>α</mi>
+<mn>20</mn>
+</mfrac>
+</msup>
+<mo>*</mo>
+<msup>
+<mn>10</mn>
+<mfrac>
+<mi>β</mi>
+<mn>20</mn>
+</mfrac>
+</msup>
+<mo>*</mo>
+<mn>2</mn>
+</mrow>
+</mfrac>
+<mo>*</mo>
+<mi>LSB</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>value</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>/</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mi>conversion</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>efficiency</mi>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0174" num="0173">From the foregoing, a range in which the linearity needs to be maintained upon source follower addition can be recognized.</div>
+<div class="description-paragraph" id="p-0175" num="0174">The value is one example. For example, it can be configured to have a table as shown in <figref idrefs="DRAWINGS">FIG. 13</figref> in the signal processing circuit <b>190</b>A.</div>
+<div class="description-paragraph" id="p-0176" num="0175">For example, a digital value corresponding to a voltage necessary to apply an applied voltage, which is necessary for maintaining the linearity when each color is read from the signal processing circuit <b>190</b>A to the bias control unit <b>210</b>, is fed back.</div>
+<div class="description-paragraph" id="p-0177" num="0176"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a diagram showing a relationship among a difference between added charge amounts, the gate voltage of the load MOS transistor necessary for linearity maintenance, and the control value.</div>
+<div class="description-paragraph" id="p-0178" num="0177">The difference between the added charge amounts is calculated, for example, by the signal processing circuit <b>190</b>A.</div>
+<div class="description-paragraph" id="p-0179" num="0178">When the difference between the added charge amounts is “0,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 0.60 V.</div>
+<div class="description-paragraph" id="p-0180" num="0179">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 0 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0181" num="0180">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 0.60 V in response to the control value 0.</div>
+<div class="description-paragraph" id="p-0182" num="0181">When the difference between the added charge amounts is “200,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 0.65 V.</div>
+<div class="description-paragraph" id="p-0183" num="0182">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 1 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0184" num="0183">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 0.65 V in response to the control value 1.</div>
+<div class="description-paragraph" id="p-0185" num="0184">When the difference between the added charge amounts is “400,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 0.70 V.</div>
+<div class="description-paragraph" id="p-0186" num="0185">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 2 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0187" num="0186">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 0.70 V in response to the control value 2.</div>
+<div class="description-paragraph" id="p-0188" num="0187">When the difference between added charge amounts is “600,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 0.75 V.</div>
+<div class="description-paragraph" id="p-0189" num="0188">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 3 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0190" num="0189">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 0.75V in response to the control value 3.</div>
+<div class="description-paragraph" id="p-0191" num="0190">When the difference between the added charge amounts is “800,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 0.80 V.</div>
+<div class="description-paragraph" id="p-0192" num="0191">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 4 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0193" num="0192">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 0.80 V in response to the control value 4.</div>
+<div class="description-paragraph" id="p-0194" num="0193">When the difference between the added charge amounts is “1000,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 0.85 V.</div>
+<div class="description-paragraph" id="p-0195" num="0194">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 5 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0196" num="0195">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 0.85 V in response to the control value 5.</div>
+<div class="description-paragraph" id="p-0197" num="0196">When the difference between the added charge amounts is “1200,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 0.90 V.</div>
+<div class="description-paragraph" id="p-0198" num="0197">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 6 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0199" num="0198">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 0.90 V in response to the control value 6.</div>
+<div class="description-paragraph" id="p-0200" num="0199">When the difference between the added charge amounts is “1400,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 0.95 V.</div>
+<div class="description-paragraph" id="p-0201" num="0200">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 7 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0202" num="0201">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 0.95 V in response to the control value <b>7</b>.</div>
+<div class="description-paragraph" id="p-0203" num="0202">When the difference between the added charge amounts is “1600,” the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> is 1.00 V.</div>
+<div class="description-paragraph" id="p-0204" num="0203">In this case, the signal processing circuit <b>190</b>A outputs the control signal CTL of a control value 8 to the bias control unit <b>210</b>.</div>
+<div class="description-paragraph" id="p-0205" num="0204">Accordingly, the bias control unit <b>210</b> adjusts the voltage VLOAD applied to the gate of the load MOS transistor <b>121</b> to 1.00 V in response to the control value 8.</div>
+<div class="description-paragraph" id="p-0206" num="0205">As described above, according to the present embodiment, the solid-state imaging element includes the pixel unit <b>110</b> in which the plurality of pixels that perform photoelectric conversion are arranged in a matrix form, and the pixel signal reading unit (ADC group) <b>150</b> for reading data from the pixel unit <b>110</b> in units of rows.</div>
+<div class="description-paragraph" id="p-0207" num="0206">In the pixel unit <b>110</b>, a plurality of pixels share the FD (output node), the reset transistor <b>113</b>, the amplifying transistor <b>114</b>, and the selecting transistor <b>115</b>. Each pixel in the shared pixel includes a PD <b>111</b> and a transfer transistor <b>112</b>.</div>
+<div class="description-paragraph" id="p-0208" num="0207">The vertical signal line <b>116</b> as the read signal line is arranged, one for the columns in which the shared pixel is included. A load MOS transistor <b>121</b> for driving source follower addition, which forms a pixel reading unit in cooperation with the ADC group <b>150</b>, is connected to the vertical signal line <b>116</b>.</div>
+<div class="description-paragraph" id="p-0209" num="0208">The gate voltage of the load MOS transistor <b>121</b> is higher than a reference gate voltage when there is no difference between the added charge amounts, to increase the current of the source follower and extend the linearity characteristic when the source follower addition is driven.</div>
+<div class="description-paragraph" id="p-0210" num="0209">Alternatively, a method of reducing power consumption by adjusting the current flowing in the load MOS transistor using each pixel for reading of each pixel in driving the source follower addition is adopted.</div>
+<div class="description-paragraph" id="p-0211" num="0210">The ADC group <b>150</b> includes a plurality of comparators <b>151</b> arranged to correspond to a column arrangement of pixels, for comparing a read signal potential with a reference voltage for judgment and outputting a judgment signal, a plurality of counters <b>152</b> each for counting a comparison time of a corresponding one of the comparators, and memories <b>153</b>.</div>
+<div class="description-paragraph" id="p-0212" num="0211">Thus, according to the present embodiment, the following advantageous effects can be obtained.</div>
+<div class="description-paragraph" id="p-0213" num="0212">In general, in a CMOS image sensor, when a unit cell size of a pixel becomes small due to multiple pixels and miniaturization, degradation of sensitivity or S/N is not avoided and a driving method of adding pixel outputs in an analog or digital manner is indispensable.</div>
+<div class="description-paragraph" id="p-0214" num="0213">As described above, one adding method is the source follower addition in which the addition is performed by the load MOS connected to the read signal line.</div>
+<div class="description-paragraph" id="p-0215" num="0214">When resolution is necessary, for example, in a still image, charges accumulated in each pixel are output by all-pixel driving without the addition.</div>
+<div class="description-paragraph" id="p-0216" num="0215">However, when the source follower addition is driven with a bias voltage that is input to the gate of the load MOS upon all-pixel driving and if there is no difference between the two added pixel charge amounts, the output becomes a value corresponding to the average value of the added charge amounts. However, if there is a difference between the added charge amounts, the linearity of the load MOS transistor is broken.</div>
+<div class="description-paragraph" id="p-0217" num="0216">According to the present embodiment, the linearity of the load MOS transistor can be enhanced by increasing the bias voltage of the load MOS transistor, and the linearity can be guaranteed even when there is a difference between the added charge amounts, thereby suppressing application of colors, for example, at edges where contrast is distinct.</div>
+<div class="description-paragraph" id="p-0218" num="0217">Further, the current flowing in the load MOS transistor when each color is read is optimized according to the incident light amount and the RGB sensitivity ratio, thereby reducing power consumption.</div>
+<div class="description-paragraph" id="p-0219" num="0218">For example, conditions in which the difference between the added charge amounts is maximized are darkness, and when pixels in which the FD is completely filled are added. However, even when the 1 frame is accumulated, a maximum difference is reduced in a light amount in which a shutter need not be pressed.</div>
+<div class="description-paragraph" id="p-0220" num="0219">Thereby, the range in which the linearity of the load MOS transistor is maintained can be reduced and consumption current can be accordingly reduced.</div>
+<div class="description-paragraph" id="p-0221" num="0220">The solid-state imaging element having such advantageous effects may be applied as an imaging device for a digital camera or a video camera.</div>
+<heading id="h-0016">3. Third Embodiment</heading>
+<heading id="h-0017">Example of Configuration of Camera System</heading>
+<div class="description-paragraph" id="p-0222" num="0221"> <figref idrefs="DRAWINGS">FIG. 14</figref> is a diagram showing one example of a configuration of a camera system to which a solid-state imaging element according to a third embodiment of the present invention is applied.</div>
+<div class="description-paragraph" id="p-0223" num="0222">This camera system <b>300</b> includes an imaging device <b>310</b> to which the CMOS image sensor (solid-state imaging element) <b>100</b> or <b>100</b>A according to the present embodiment is capable of being applied, as shown in <figref idrefs="DRAWINGS">FIG. 14</figref>.</div>
+<div class="description-paragraph" id="p-0224" num="0223">The camera system <b>300</b> includes an optical system for guiding incident light to a pixel area of the imaging device <b>310</b> (for imaging a subject image), such as a lens <b>320</b> for imaging the incident light (image light) on an imaging surface.</div>
+<div class="description-paragraph" id="p-0225" num="0224">The camera system <b>300</b> includes a driving circuit (DRV) <b>330</b> for driving the imaging device <b>310</b>, and a signal processing circuit (PRC) <b>340</b> for processing an output signal of the imaging device <b>310</b>.</div>
+<div class="description-paragraph" id="p-0226" num="0225">The driving circuit <b>330</b> includes a timing generator (not shown) for generating various timing signals including a start pulse or a clock pulse to drive a circuit in the imaging device <b>310</b>, and drives the imaging device <b>310</b> using a given timing signal.</div>
+<div class="description-paragraph" id="p-0227" num="0226">Further, the signal processing circuit <b>340</b> performs given signal processing on the output signal of the imaging device <b>310</b>.</div>
+<div class="description-paragraph" id="p-0228" num="0227">An image signal processed by the signal processing circuit <b>340</b> is recorded, for example, in a recording medium, such as a memory.</div>
+<div class="description-paragraph" id="p-0229" num="0228">Image information recorded in the recording medium is hard copied by, for example, a printer. Further, the image signal processed by the signal processing circuit <b>340</b> is output as a moving image on a monitor configured of a liquid crystal display.</div>
+<div class="description-paragraph" id="p-0230" num="0229">As described above, in an imaging apparatus such as a digital still camera, the above-described solid-state imaging element <b>100</b> or <b>100</b>A is mounted as the imaging device <b>310</b>, thereby realizing a precise camera.</div>
+<heading id="h-0018">REFERENCE SIGNS LIST</heading>
+<div class="description-paragraph" id="p-0231" num="0000">
+</div> <ul>
+<li id="ul0001-0001" num="0000">
+<ul>
+<li id="ul0002-0001" num="0230"> <b>100</b> solid-state imaging element</li>
+<li id="ul0002-0002" num="0231"> <b>110</b> pixel unit</li>
+<li id="ul0002-0003" num="0232"> <b>120</b> load MOS unit</li>
+<li id="ul0002-0004" num="0233"> <b>130</b> vertical scanning circuit</li>
+<li id="ul0002-0005" num="0234"> <b>140</b> horizontal transfer scanning circuit</li>
+<li id="ul0002-0006" num="0235"> <b>150</b> ADC group</li>
+<li id="ul0002-0007" num="0236"> <b>151</b> comparator</li>
+<li id="ul0002-0008" num="0237"> <b>152</b> counter</li>
+<li id="ul0002-0009" num="0238"> <b>153</b> latch</li>
+<li id="ul0002-0010" num="0239"> <b>160</b> timing control unit</li>
+<li id="ul0002-0011" num="0240"> <b>170</b> DAC</li>
+<li id="ul0002-0012" num="0241"> <b>180</b> amplifier circuit</li>
+<li id="ul0002-0013" num="0242"> <b>190</b>, <b>190</b>A signal processing circuit</li>
+<li id="ul0002-0014" num="0243"> <b>200</b> line memory</li>
+<li id="ul0002-0015" num="0244"> <b>210</b> bias control unit</li>
+<li id="ul0002-0016" num="0245">LTRF horizontal transfer line</li>
+<li id="ul0002-0017" num="0246"> <b>300</b> camera system</li>
+<li id="ul0002-0018" num="0247"> <b>310</b> imaging device</li>
+<li id="ul0002-0019" num="0248"> <b>320</b> driving circuit</li>
+<li id="ul0002-0020" num="0249"> <b>330</b> lens</li>
+<li id="ul0002-0021" num="0250"> <b>340</b> signal processing circuit</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">18</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM281526556">
+<claim-statement>What is claimed:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A light detecting device comprising:
+<div class="claim-text">a first pixel unit including:
+<div class="claim-text">a first photoelectric converter; and</div>
+<div class="claim-text">a second photoelectric converter;</div>
+</div>
+<div class="claim-text">a second pixel unit including:
+<div class="claim-text">a third photoelectric converter; and</div>
+<div class="claim-text">a fourth photoelectric converter;</div>
+</div>
+<div class="claim-text">a first signal line coupled to the first photoelectric converter and the third photoelectric converter;</div>
+<div class="claim-text">a second signal line coupled to the second photoelectric converter and the fourth photoelectric converter;</div>
+<div class="claim-text">a first load transistor coupled between a first node that receives a fixed potential and the first signal line; and</div>
+<div class="claim-text">a second load transistor coupled between a second node that receives the fixed potential and the second signal line,</div>
+<div class="claim-text">wherein a gate of the first load transistor is coupled to a first control line, and a gate of the second load transistor is coupled to a second control line.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The light detecting device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the first pixel unit and the second pixel unit are arranged in a first direction.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The light detecting device according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the first photoelectric converter and the second photoelectric converter are arranged in the first direction.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The light detecting device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">a first AD converter coupled to the first signal line; and</div>
+<div class="claim-text">a second AD converter coupled to the second signal line.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The light detecting device according to <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein the first AD converter includes a first comparator and a first counter, and the second AD converter includes a second comparator and a second counter.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The light detecting device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the first control line is configured to receive a first control signal, and the second control line is configured to receive a second control signal different than the first control signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The light detecting device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">a third pixel unit including:
+<div class="claim-text">a fifth photoelectric converter; and</div>
+<div class="claim-text">a sixth photoelectric converter;</div>
+</div>
+<div class="claim-text">a third signal line coupled to the sixth photoelectric converter; and</div>
+<div class="claim-text">a third load transistor coupled between a third node that receives the fixed potential and the third signal line, wherein a gate of the third load transistor is coupled to the first control line.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The light detecting device according to <claim-ref idref="CLM-00007">claim 7</claim-ref>, wherein the first pixel unit and the second pixel unit are arranged in a first direction, and wherein the first pixel unit and the third pixel unit are arranged in a second direction perpendicular to the first direction.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The light detecting device according to <claim-ref idref="CLM-00007">claim 7</claim-ref>, further comprising:
+<div class="claim-text">a fourth pixel unit including:
+<div class="claim-text">a seventh photoelectric converter; and</div>
+<div class="claim-text">an eighth photoelectric converter;</div>
+</div>
+<div class="claim-text">a fourth signal line coupled to the eighth photoelectric converter; and</div>
+<div class="claim-text">a fourth load transistor coupled between a fourth node that receives the fixed potential and the fourth signal line, wherein a gate of the fourth load transistor is coupled to the second control line.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The light detecting device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the fixed potential is a ground potential.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. A light detecting device comprising:
+<div class="claim-text">a first pixel unit including:
+<div class="claim-text">a first photoelectric converter; and</div>
+<div class="claim-text">a second photoelectric converter;</div>
+</div>
+<div class="claim-text">a first signal line coupled to the first photoelectric converter;</div>
+<div class="claim-text">a second signal line coupled to the second photoelectric converter;</div>
+<div class="claim-text">a first load transistor coupled between a first node that receives a fixed potential and the first signal line; and</div>
+<div class="claim-text">a second load transistor coupled between a second node that receives the fixed potential and the second signal line,</div>
+<div class="claim-text">wherein a gate of the first load transistor is coupled to a first control line, and a gate of the second load transistor is coupled to a second control line.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The light detecting device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the first photoelectric converter and the second photoelectric converter are arranged in a first direction.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The light detecting device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising:
+<div class="claim-text">a first AD converter coupled to the first signal line; and</div>
+<div class="claim-text">a second AD converter coupled to the second signal line.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The light detecting device according to <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein the first AD converter includes a first comparator and a first counter, and the second AD converter includes a second comparator and a second counter.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The light detecting device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the first control line is configured to receive a first control signal, and the second control line is configured to receive a second control signal different than the first control signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The light detecting device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising:
+<div class="claim-text">a second pixel unit including:
+<div class="claim-text">a third photoelectric converter; and</div>
+<div class="claim-text">a fourth photoelectric converter;</div>
+</div>
+<div class="claim-text">a third signal line coupled to the fourth photoelectric converter; and</div>
+<div class="claim-text">a third load transistor coupled between the fixed potential and the third signal line; and</div>
+</div>
+<div class="claim-text">wherein a gate of the third load transistor is coupled to the first control line.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The light detecting device according to <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein the first photoelectric converter and the second photoelectric converter are arranged in a first direction and wherein the first pixel unit and the second pixel unit are arranged in a second direction perpendicular to the first direction.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The light detecting device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the fixed potential is a ground potential.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

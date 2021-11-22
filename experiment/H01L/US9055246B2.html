@@ -1,0 +1,950 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US9055246B2 - Noise-cancelling image sensors 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA157670387">
+<div class="abstract" id="p-0001" num="0000">An image sensor that has a plurality of pixels within a pixel array coupled to a control circuit and to one or more subtraction circuits. The control circuit causes an output transistor coupled to a pixel to provide a first reference output signal, a common reset output signal, and a first sense-node reset output signal, between which a subtraction circuit may form a weighted difference to create a noise signal. The control circuit causes the output transistor to provide a second sense-node reset output signal, a light response output signal and a second reference output signal, between which a subtraction circuit may form a weighted difference to create a normalized light response signal. The light response output signal corresponds to the image that is to be captured by the sensor. The noise signal is subtracted from the normalized light response signal to generate a de-noised signal.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES92314332">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of U.S. patent application Ser. No. 14/076,175 filed on Nov. 9, 2013, which is a continuation of U.S. patent application Ser. No. 13/845,158 filed on Mar. 18, 2013, now U.S. Pat. No. 8,582,004, which is a continuation of U.S. patent application Ser. No. 12/639,941 filed on Dec. 16, 2009, now U.S. Pat. No. 8,451,348, which claims priority to U.S. Provisional Patent Application No. 61/138,085 filed on Dec. 16, 2008 and U.S. Provisional Patent Application No. 61/257,825 filed on Nov. 3, 2009.</div>
+<heading id="h-0002">BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">1. Field of the Invention</div>
+<div class="description-paragraph" id="p-0004" num="0003">The subject matter disclosed generally relates to solid state image sensors.</div>
+<div class="description-paragraph" id="p-0005" num="0004">2. Background Information</div>
+<div class="description-paragraph" id="p-0006" num="0005">Photographic equipment such as digital cameras and digital camcorders may contain electronic image sensors that capture light for processing into still or video images. Electronic image sensors typically contain millions of light capturing elements such as photodiodes.</div>
+<div class="description-paragraph" id="p-0007" num="0006">Solid state image sensors can be either of the charge coupled device (CCD) type or the complimentary metal oxide semiconductor (CMOS) type. In either type of image sensor, photo sensors are supported by a substrate and arranged in a two-dimensional array. Image sensors typically contain millions of pixels to provide a high-resolution image.</div>
+<heading id="h-0003">BRIEF SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0008" num="0007">An image sensor that has a plurality of pixels within a pixel array coupled to a control circuit and to one or more subtraction circuits. The control circuit may cause an output transistor coupled to a pixel to provide a first reference output signal, a common reset output signal, and a first sense-node reset output signal, between which a subtraction circuit may form a weighted difference to create a noise signal. The control circuit may cause the output transistor to provide a second sense-node reset output signal, a light response output signal and a second reference output signal, between which a subtraction circuit may form a weighted difference to create a normalized light response signal. The light response output signal corresponds to the image that is to be captured by the sensor. The noise signal may be subtracted from the normalized light response signal to generate a de-noised signal.</div>
+<description-of-drawings>
+<heading id="h-0004">BRIEF DESCRIPTIONS OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0009" num="0008"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a schematic of a first embodiment of an image sensor and an image capture system;</div>
+<div class="description-paragraph" id="p-0010" num="0009"> <figref idrefs="DRAWINGS">FIG. 2</figref> is an illustration of a method for outputting pixel data for an image to an external memory or processor;</div>
+<div class="description-paragraph" id="p-0011" num="0010"> <figref idrefs="DRAWINGS">FIG. 3</figref> an illustration of a method for retrieving and combining pixel data for an image;</div>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIG. 4</figref> is an illustration of a capacitor in the pixel circuit of <figref idrefs="DRAWINGS">FIG. 13</figref>.</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a schematic of a first embodiment of a variable capacitor in the light reader circuit of <figref idrefs="DRAWINGS">FIG. 14C</figref>;</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a schematic of a second embodiment of a variable capacitor in the light reader circuit of <figref idrefs="DRAWINGS">FIG. 14C</figref>;</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a schematic of a third embodiment of a variable capacitor in the light reader circuit of <figref idrefs="DRAWINGS">FIG. 14C</figref>;</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 8</figref> is an illustration of another method for retrieving and combining pixel data for an image;</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 9</figref> is an illustration showing a sequencing of image data for the method of <figref idrefs="DRAWINGS">FIG. 8</figref> for storing and combining pixel data for an image;</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a layout arrangement of pixels of two different layout orientations in an array;</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 11</figref> is another layout arrangement of pixels of two different layout orientations in an array;</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 12</figref> is a schematic of an embodiment of a pair of pixels sharing a reset switch, an output transistor and a select switch, and of an IN line driver;</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a schematic of an embodiment of a pixel of the image sensor and an IN line driver;</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 14A</figref> is a schematic of an embodiment of a light reader circuit;</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 14B</figref> is a schematic of another embodiment of a light reader circuit;</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 14C</figref> is a schematic of an embodiment of a triple-sampling light reader circuit;</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 15A</figref> is a flowchart for an operation of the image sensor according to the second noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 15B</figref> is a flowchart for an alternate operation of the image sensor according to the first noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 15C</figref> is a flowchart for an alternate operation of the image sensor according to the third noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 15D</figref> is a flowchart for an operation of the image sensor according to the fourth noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 16</figref> is a timing diagram for the image sensor operation in <figref idrefs="DRAWINGS">FIG. 15D</figref>;</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 17A</figref> is an illustration showing levels of voltage signals at a storage node and at a corresponding sense node and illustrating a sampling sequence useable for the 2nd noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 17B</figref> is an illustration showing levels of voltage signals at a storage node and at a corresponding sense node and illustrating a sampling sequence useable for the 1st noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 17C</figref> is an illustration showing levels of voltage signals at a storage node and at a corresponding sense node and illustrating a sampling sequence useable for the 3rd noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 17D</figref> is an illustration showing levels of voltage signals at a storage node and at a corresponding sense node and illustrating a sampling sequence useable for mixing the 3rd noise method and 2nd normalizing method;</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 17E</figref> is an illustration showing levels of voltage signals at a storage node and at a corresponding sense node and illustrating a sampling sequence useable for mixing the 3rd noise method and 1st normalizing method;</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 17F</figref> is an illustration modified from <figref idrefs="DRAWINGS">FIG. 17A</figref> for the 2nd noise and normalizing methods and illustrating a reference offset;</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 17G</figref> is an illustration modified from <figref idrefs="DRAWINGS">FIG. 17A</figref> for the 2nd noise and normalizing methods and illustrating a second reference before the second sense-node reset;</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 17H</figref> is an illustration modified from <figref idrefs="DRAWINGS">FIG. 17A</figref> for the 2nd noise and normalizing methods and illustrating a first springboard offset;</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 17I</figref> is an illustration modified from <figref idrefs="DRAWINGS">FIG. 17A</figref> for the 2nd noise and normalizing methods and illustrating a GND1 step;</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIG. 17J</figref> is an illustration modified from <figref idrefs="DRAWINGS">FIG. 17B</figref> for the 1st noise and normalizing methods and illustrating a third and a fourth references;</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIG. 17K</figref> is an illustration modified from <figref idrefs="DRAWINGS">FIG. 17J</figref> to describe an operation of the fourth embodiment under the 1st noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0041" num="0040"> <figref idrefs="DRAWINGS">FIG. 17L</figref> is a diagram modified from <figref idrefs="DRAWINGS">FIG. 17A</figref> to describe an operation of the fourth embodiment under the 2nd noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 17M</figref> is a diagram modified from <figref idrefs="DRAWINGS">FIG. 17J</figref> to describe an operation of the fourth embodiment under the 3rd noise and normalizing methods;</div>
+<div class="description-paragraph" id="p-0043" num="0042"> <figref idrefs="DRAWINGS">FIG. 18A-18C</figref> are schematics for a logic circuit for generating control signals;</div>
+<div class="description-paragraph" id="p-0044" num="0043"> <figref idrefs="DRAWINGS">FIG. 18D</figref> is a schematic for a logic circuit for generating the SAM3, SAM4 and TF signals for <figref idrefs="DRAWINGS">FIG. 17B</figref>;</div>
+<div class="description-paragraph" id="p-0045" num="0044"> <figref idrefs="DRAWINGS">FIG. 19</figref> is a schematic for a unit of the row decoder for directing global RST, TF and SEL signals from the logic circuit of <figref idrefs="DRAWINGS">FIG. 18A-18C</figref> into a row of pixels as row signals RST(n), TF(n) and SEL(n);</div>
+<div class="description-paragraph" id="p-0046" num="0045"> <figref idrefs="DRAWINGS">FIG. 20</figref> is a timing diagram for the unit of row decoder shown in <figref idrefs="DRAWINGS">FIG. 19</figref>;</div>
+<div class="description-paragraph" id="p-0047" num="0046"> <figref idrefs="DRAWINGS">FIG. 21</figref> is a schematic of a second embodiment of an image sensor and an image capture system;</div>
+<div class="description-paragraph" id="p-0048" num="0047"> <figref idrefs="DRAWINGS">FIG. 22</figref> is a schematic of a third embodiment of an image sensor and an image capture system;</div>
+<div class="description-paragraph" id="p-0049" num="0048"> <figref idrefs="DRAWINGS">FIG. 23</figref> is a schematic of a fourth embodiment of an image sensor and an image capture system;</div>
+<div class="description-paragraph" id="p-0050" num="0049"> <figref idrefs="DRAWINGS">FIG. 24</figref> is a schematic of a fifth embodiment of an image sensor and an image capture system;</div>
+<div class="description-paragraph" id="p-0051" num="0050"> <figref idrefs="DRAWINGS">FIG. 25</figref> is a flowchart of a process for calibrating residual noise for a particular set of signed scaling factors for a group of pixels having a similar layout and orientation;</div>
+<div class="description-paragraph" id="p-0052" num="0051"> <figref idrefs="DRAWINGS">FIG. 26</figref> is a flowchart of a process for calibrating residual noises for a plurality of sets of signed scaling factors across multiple groups of pixels;</div>
+<div class="description-paragraph" id="p-0053" num="0052"> <figref idrefs="DRAWINGS">FIG. 27</figref> is a schematic of a driver circuit for driving TF[n] &amp; RST[n] signals for a row of pixels.</div>
+</description-of-drawings>
+<heading id="h-0005">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0054" num="0053">Disclosed is an image sensor that has one or more pixels within a pixel array, each pixel comprising a photodetector and a transfer switch that connects the photodetector to a sense node. The sense node is connected to a vertical signal line via a reset switch. An output transistor is connected to couple an output signal to a vertical OUT line from the sense node. The pixel array may be coupled to a control circuit and to one or more subtraction circuits. The control circuit may cause the output transistor to provide a first reference output signal, a common reset output signal, and a first sense-node reset output signal. The transfer switch is in a triode region when the common reset output signal is provided. The reset switch is in a triode region when the first reference output signal is provided. Both the reset and transfer switches are switched off when the first sense-node reset output signal is provided. A subtraction circuit may sample the common reset output signal, the first sense-node reset output signal and the first reference output signal. A subtraction circuit may form a weighted difference between the sampled common reset output signal, the sampled first sense-node reset output signal and the sampled first reference output signal to create a noise signal. The control circuit may cause the pixel to provide a second sense-node reset output signal, a light response output signal and a second reference output signal. The transfer switch is in a triode region when the light response output signal is provided. The reset switch is in a triode region when the second reference output signal is provided. Both the reset and transfer switches are switched off when the second sense-node reset output signal is provided. A subtraction circuit may sample the second sense-node reset output signal, the light response output signal and the second reference output signal. The light response output signal corresponds to an image that is to be captured by the sensor. A subtraction circuit may form a weighted difference between the sampled second sense-node reset output signal, the sampled second reference output signal and the sampled light response output signal to create a normalized light response signal. The noise signal may be subtracted from the normalized light response signal to generate a de-noised signal of the sensor. A DC offset may be further subtracted to form the de-noised signal. An image capture system may comprise the image sensor and a processor that form the de-noised signal. One or more of the steps may be performed on the processor.</div>
+<div class="description-paragraph" id="p-0055" num="0054">A subtraction circuit may provide a noise signal by sampling and subtracting the common reset output signal and the first sense-node reset output signal from the first reference output signal, each scaled by a respective signed scaling factor. The subtraction circuit may provide a normalized light response signal by sampling and subtracting the light response output signal and the second sense-node reset output signal from the second reference output signal, each having been scaled by a respective signed scaling factor.</div>
+<div class="description-paragraph" id="p-0056" num="0055">The noise signal may be subtracted from the normalized light response signal on the image sensor to form a de-noised signal. Alternately, the noise signal and the normalized light response signal may be transferred to an external processor where the noise signal is subtracted from the normalized light response signal.</div>
+<div class="description-paragraph" id="p-0057" num="0056">Alternately, the noise signal and/or the normalized light response signal may be partly formed in the subtraction circuit on the image sensor and partly on the processor. The noise signal may be stored in a memory, and retrieved from the memory subsequently to be subtracted from the normalized light response signal.</div>
+<div class="description-paragraph" id="p-0058" num="0057">A pre-calibrated offset signal may be further subtracted from the normalized light response signal to form the de-noised image signal. The pre-calibrated offset signal may be retrieved from a memory, for instance a non-volatile memory such as a flash memory.</div>
+<div class="description-paragraph" id="p-0059" num="0058">The noise signal may be formed in one of several mutually equivalent methods, referred to in the following as noise methods. Each of the methods may be performed entirely on the image sensor, or partly on the image sensor and partly on the processor.</div>
+<div class="description-paragraph" id="p-0060" num="0059">In a first noise method, a second noise difference is subtracted from a first noise difference, each having been scaled by a respective signed scaling factor. The first noise difference is a result of subtracting the sampled common reset output signal from the sampled first reference output signal. The second noise difference is a result of subtracting the sampled first sense-node reset output signal from the sampled first reference output signal.</div>
+<div class="description-paragraph" id="p-0061" num="0060">In a second noise method, a third noise difference is subtracted from the first noise difference, each having been scaled by a respective signed scaling factor. The first noise difference is as described above. The third noise difference is a result of subtracting the first sense-node reset output signal from the common reset output signal.</div>
+<div class="description-paragraph" id="p-0062" num="0061">In a third noise method, the third noise difference is subtracted from the second noise difference, each having been scaled by a respective signed scaling factor. The second and third noise differences are as described above.</div>
+<div class="description-paragraph" id="p-0063" num="0062">In a fourth noise method, the noise signal is formed directly from the first reference output signal, the first sense-node output signal, and the common-reset output signals, each having been scaled by a signed scaling factor, without forming the first, second, or third noise differences.</div>
+<div class="description-paragraph" id="p-0064" num="0063">There are other possible methods to form the noise signal from the common reset output signal, the first sense-node reset output signal, and the first reference output signal by manipulating the terms according to the rules of algebra, as one skilled in the art can recognize as being equivalent or equivalent to within a multiplying factor and/or an additive constant.</div>
+<div class="description-paragraph" id="p-0065" num="0064">The noise method may be performed partly in analog domain and partly in digital domain, or entirely in analog domain, or entirely in digital domain. Part of the noise method may be performed on an external processor in an image capture system that comprises the image sensor and the processor. The image capture system may comprise a non-volatile memory that contains computer instructions that when executed causes the processor or the image sensor to perform one or more of the calculations in one or more of the noise methods.</div>
+<div class="description-paragraph" id="p-0066" num="0065">Similarly, the normalized light response signal may be formed in one of several mutually equivalent methods, referred to in the following as normalizing methods. Each of the methods may be performed entirely on the image sensor, or partly on the image sensor and partly on the processor.</div>
+<div class="description-paragraph" id="p-0067" num="0066">Each normalizing method has a corresponding counterpart noise method that has a similar set of signed scaling factors.</div>
+<div class="description-paragraph" id="p-0068" num="0067">In a first normalizing method, a second normalizing difference is subtracted from a first normalizing difference, each having been scaled by a respective signed scaling factor. The first normalizing difference is a result of subtracting the light response output signal from the second reference output signal. The second normalizing difference is a result of subtracting the second sense-node reset output signal from the second reference output signal.</div>
+<div class="description-paragraph" id="p-0069" num="0068">In a second normalizing method, a third normalizing difference is subtracted from the first normalizing difference, each having been scaled by a respective signed scaling factor. The first normalizing difference is as described above. The third normalizing difference is a result of subtracting the second sense-node reset output signal from the light response output signal.</div>
+<div class="description-paragraph" id="p-0070" num="0069">In a third normalizing method, the third normalizing difference is subtracted from the second normalizing difference, each having been scaled by a respective signed scaling factor. The second and third normalizing differences are as described above.</div>
+<div class="description-paragraph" id="p-0071" num="0070">In a fourth normalizing method, the normalized light response signal is formed directly from the light response output signal, the second sense-node reset output signal, and the second reference output signal without forming the first, second, or third differences.</div>
+<div class="description-paragraph" id="p-0072" num="0071">There are other possible methods to form the normalized light response signal from the light response output signal, the second sense-node reset output signal, and the second reference output signal by manipulating the terms according to the rules of algebra, as one skilled in the art can recognize as being equivalent or equivalent to within a multiplying factor and/or an additive constant.</div>
+<div class="description-paragraph" id="p-0073" num="0072">The normalizing method may be performed partly in analog domain and partly in digital domain, or entirely in analog domain, or entirely in digital domain. Part of the normalizing method may be performed on an external processor in an image capture system that comprises the image sensor and the processor.</div>
+<div class="description-paragraph" id="p-0074" num="0073">The image capture system may comprise a non-volatile memory that contains computer instructions that when executed causes the processor or the image sensor to perform one or more of the calculations in one or more of the noise and/or normalizing methods.</div>
+<div class="description-paragraph" id="p-0075" num="0074">The first noise method may share a same set of signed scaling factors with the first normalizing method, or within 10% of each other, and may share circuitries that perform at least a part of the methods, e.g. the scaling factors. Likewise the second noise method may share a same set of signed scaling factors with the second normalizing method; the third noise method with the third normalizing method; and the fourth noise method with the fourth normalizing method.</div>
+<div class="description-paragraph" id="p-0076" num="0075">This process increases a signal-to-noise ratio (SNR) of the de-noised image.</div>
+<div class="description-paragraph" id="p-0077" num="0076">Referring to <figref idrefs="DRAWINGS">FIG. 13</figref>, a pixel <b>14</b> comprises a transfer switch <b>117</b> and a photodetector <b>100</b>, e.g. a photodiode. The transfer switch <b>117</b> has a source connected to the photodetector <b>100</b> and a drain coupled to a gate of an output transistor <b>116</b>, for instance a source-follower transistor. The source is referred to below as the photodiode node (or storage node) <b>115</b>, and the drain the sense node <b>111</b>. A reset switch <b>112</b> has a source connected to the sense node <b>111</b> and a drain connected to an IN line <b>120</b>. The reset switch <b>112</b> may reset the sense node <b>111</b> to a variable bias voltage provided to the pixel array <b>12</b> by a driver <b>17</b> that can drive the IN line <b>120</b> to one of several voltage levels under a control of an control signal DIN. A select switch <b>114</b> may be in series with the output transistor <b>116</b> such that an output signal from the output transistor <b>116</b> is connected to transmit to a OUT line <b>124</b> as shown in <figref idrefs="DRAWINGS">FIG. 13</figref>. OUT line <b>124</b> is part of the vertical signals <b>16</b> that connect the pixel array <b>12</b> to the light readers <b>16</b>, <b>16</b>′. Alternately, multiple pixels each comprising a photodetector and a transfer switch may be aggregated together to share a reset switch <b>112</b>, a select switch <b>114</b> and an output transistor <b>116</b> to achieve higher areal densities, as shown in <figref idrefs="DRAWINGS">FIG. 12</figref>. The image sensor <b>10</b> is preferably constructed with CMOS fabrication processes and circuits. The CMOS image sensor has the characteristics of being high speed, low power consumption, small pixel pitch and a high SNR.</div>
+<div class="description-paragraph" id="h-0006" num="0000">First Embodiment</div>
+<div class="description-paragraph" id="p-0078" num="0077">Referring to the drawings more particularly by reference numbers, <figref idrefs="DRAWINGS">FIG. 1</figref> shows a first embodiment of an image sensor <b>10</b> of the present invention. The image sensor <b>10</b> includes a pixel array <b>12</b> that comprises a plurality of individual photo-detecting pixels <b>14</b>. The pixels <b>14</b> are arranged in a two-dimensional array of rows and columns.</div>
+<div class="description-paragraph" id="p-0079" num="0078">The pixel array <b>12</b> is coupled to light reader circuits <b>16</b>, <b>16</b>′ by a bus <b>18</b> and to a row decoder <b>20</b> by control lines <b>22</b>. The row decoder <b>20</b> can select an individual row of the pixel array <b>12</b>. The light readers <b>16</b>, <b>16</b>′ can then read specific discrete columns within the selected row. Together, the row decoder <b>20</b> and light readers <b>16</b>, <b>16</b>′ allow for the reading of an individual pixel <b>14</b> in the array <b>12</b>.</div>
+<div class="description-paragraph" id="p-0080" num="0079">Outputs <b>19</b> <i>a</i>, <b>19</b> <i>b </i>of the light readers <b>16</b>, <b>16</b>′ may each undergo a respective gain and sign inversion through two gain circuits <b>21</b> under a control of signals COEF<b>1</b> and COEF<b>2</b>, respectively, then mutually subtract at an analog subtractor <b>17</b> coupled to the gain circuits <b>21</b>.</div>
+<div class="description-paragraph" id="p-0081" num="0080">The analog subtractor <b>17</b> may be coupled to an analog-to-digital converter <b>24</b> (ADC) by output line(s) <b>26</b>. The ADC <b>24</b> generates a digital bit string that corresponds to the amplitude of a signal provided by the analog subtractor <b>17</b>.</div>
+<div class="description-paragraph" id="p-0082" num="0081">The ADC <b>24</b> may be coupled to a pair of first image buffers <b>28</b> and <b>30</b>, and a pair of second image buffers <b>32</b> and <b>34</b> by lines <b>36</b> and switches <b>38</b>, <b>40</b> and <b>42</b>. The first image buffers <b>28</b> and <b>30</b> are coupled to a memory controller <b>44</b> by lines <b>46</b> and a switch <b>48</b>. The second image buffers <b>32</b> and <b>34</b> are coupled to a data combiner <b>50</b> by lines <b>52</b> and a switch <b>54</b>. The memory controller <b>44</b> and data combiner <b>50</b> are connected to a read back buffer <b>56</b> by lines <b>58</b> and <b>60</b>, respectively. The output of the read back buffer <b>56</b> is connected to the controller <b>44</b> by lines <b>62</b>. The data combiner <b>50</b> is connected to the memory controller <b>44</b> by lines <b>64</b>. Additionally, the controller <b>44</b> is connected to the ADC <b>24</b> by lines <b>66</b>.</div>
+<div class="description-paragraph" id="p-0083" num="0082">The memory controller <b>44</b> is coupled to an external bus <b>68</b> by a controller bus <b>70</b>. The external bus <b>68</b> may be coupled to an external processor <b>72</b>, an external memory <b>74</b>, and/or an electrically-programmable read-only memory (EPROM) <b>78</b>, which may be a flash memory. The bus <b>70</b>, processor <b>72</b>, memory <b>74</b>, and EPROM <b>78</b> are typically found in existing digital cameras, cameras and cell phones.</div>
+<div class="description-paragraph" id="h-0007" num="0000">Data Traffic</div>
+<div class="description-paragraph" id="p-0084" num="0083">To capture a still picture image, the light readers <b>16</b>, <b>16</b>′ retrieve the sampled first reference output signals, the sampled common-reset output signals and the sampled first sense-node reset output signals for forming the noise data (a first image) of the picture from the pixel array <b>12</b> line by line. The switch <b>38</b> is in a state that connects the ADC <b>24</b> to the first image buffers <b>28</b> and <b>30</b>. Switches <b>40</b> and <b>48</b> are set so that data is entering one buffer <b>28</b> or <b>30</b> and being retrieved from the other buffer <b>30</b> or <b>28</b> by the memory controller <b>44</b>. For example, the second line of the pixel may be stored in buffer <b>30</b> while the first line of pixel data is being retrieved from buffer <b>28</b> by the memory controller <b>44</b> and stored in the external memory <b>74</b>.</div>
+<div class="description-paragraph" id="p-0085" num="0084">When the first line of the second image (the normalized light response data) of the picture is available the switch <b>38</b> is selected to alternately store first image data and second image data in the first <b>28</b> and <b>30</b>, and second <b>32</b> and <b>34</b> image buffers, respectively. Switches <b>48</b> and <b>54</b> may be selected to alternatively output first and second image data to the external memory <b>74</b> or processor <b>72</b> in an interleaving manner. The combiner <b>50</b> is configured in a pass-through mode to pass data from second <b>32</b> and <b>34</b> image buffers to the memory controller <b>44</b>. This process is depicted in <figref idrefs="DRAWINGS">FIG. 2</figref>.</div>
+<div class="description-paragraph" id="p-0086" num="0085">There are multiple methods for retrieving and combining the first and second image data. As shown in <figref idrefs="DRAWINGS">FIG. 3</figref>, in one method each line of the first and second images are retrieved from the external memory <b>74</b> at the memory data rate, stored in the read back buffer <b>56</b>, combined in the data combiner <b>50</b> and transmitted to the processor <b>72</b> at the processor data rate.</div>
+<div class="description-paragraph" id="p-0087" num="0086"> <figref idrefs="DRAWINGS">FIG. 8</figref> and <figref idrefs="DRAWINGS">FIG. 9</figref> illustrate an alternate method. The lines of pixel data of the first image of the picture may be stored in the external memory <b>74</b>. When the first line of the second image of the picture is available, the first line of the first image is retrieved from memory <b>74</b> at the memory data rate and combined in the data combiner <b>50</b> as shown in <figref idrefs="DRAWINGS">FIG. 8</figref> and <figref idrefs="DRAWINGS">FIG. 9</figref>. The combined data is transferred to the external processor <b>72</b> at the processor data rate. As shown in <figref idrefs="DRAWINGS">FIG. 9</figref>, the external memory is both outputting and inputting lines of pixel data from the first image at the memory data rate. <figref idrefs="DRAWINGS">FIG. 8</figref> also shows an optional calibration data may be input to the image sensor to be combined to form the combined data in the data combiner <b>50</b>. The calibration data may be stored in the external memory <b>74</b> or a separate EPROM <b>78</b>.</div>
+<div class="description-paragraph" id="p-0088" num="0087">To reduce noise in the images, the controller <b>44</b> preferably transfers data when the light reader <b>16</b> is not retrieving output signals.</div>
+<div class="description-paragraph" id="p-0089" num="0088">In another method, both the first and second images may be output to the processor <b>72</b>, following the sequence timing shown in <figref idrefs="DRAWINGS">FIG. 2</figref>. The processor <b>72</b> may store in a second memory (not shown) the calibration data image retrieved from EPROM <b>78</b> during startup of the camera. The processor <b>72</b> may store lines of the first image in a third memory (not shown). When a first line of the second image arrives at the processor <b>72</b>, the processor <b>72</b> may retrieve a first line of the calibration data image from the second memory and a first line of the first image from the third memory, and combines them with the first line of the second image to form a first line of the picture. The processor performs likewise for second, third, and subsequent lines of the picture.</div>
+<div class="description-paragraph" id="h-0008" num="0000">Pixel</div>
+<div class="description-paragraph" id="p-0090" num="0089"> <figref idrefs="DRAWINGS">FIG. 13</figref> shows a schematic for an embodiment of a pixel <b>14</b> of the pixel array <b>12</b>. The pixel <b>14</b> may contain a photodetector <b>100</b>. By way of example, the photodetector <b>100</b> may be a photodiode. The photodetector <b>100</b> may be connected to a reset transistor (switch) <b>112</b> via a transfer transistor (switch) <b>117</b>. The photodetector <b>100</b> may also be coupled to a select transistor (switch) <b>114</b> through an output (i.e. source-follower) transistor <b>116</b>. The transistors <b>112</b>, <b>114</b>, <b>116</b>, <b>117</b> may be field effect transistors (FETs).</div>
+<div class="description-paragraph" id="p-0091" num="0090">A gate of the transfer switch <b>112</b> may be connected to a TF(n) line <b>121</b>. A gate of the reset transistor <b>112</b> may be connected to a RST(n) line <b>118</b>. A drain node of the reset transistor <b>112</b> may be connected to an IN line <b>120</b>. A gate of the select transistor <b>114</b> may be connected to a SEL line <b>122</b>. A source node of the select transistor <b>114</b> may be connected to an OUT line <b>124</b>. The RST(n) line <b>118</b>, SEL(n) line <b>122</b>, and TF(n) line <b>126</b> may be common for an entire row of pixels in the pixel array <b>12</b>. Likewise, the IN <b>120</b> and OUT 124 lines may be common for an entire column of pixels in the pixel array <b>12</b>. The RST(n) line <b>118</b>, SEL(n) line <b>122</b> and TF(n) line <b>121</b> are connected to the row decoder <b>20</b> and are part of the control lines <b>22</b>.</div>
+<div class="description-paragraph" id="p-0092" num="0091">Referring to <figref idrefs="DRAWINGS">FIG. 13</figref>, the RST(n) line <b>118</b> and TF(n) line <b>121</b> are driven by tristate buffers <b>374</b>. <figref idrefs="DRAWINGS">FIG. 27</figref> shows a schematic of a tristate buffer <b>374</b>. The tristated buffer <b>374</b> has an input A and an output Y. The output Y may be connected to a supply voltage VDD via a pullup transistor MN<b>3</b> <b>907</b>. When input A is at a logic low level, the output Y is at low level, e.g. 0 volt. When input A rises to a logic high level, e.g. 3.3 volt, the output Y rises up to a voltage level that is approximately a threshold voltage drop below a gate voltage of the pullup transistor MN<b>3</b>, in this embodiment the logic high level of the input A, then pull-up current diminishes rapidly till becoming essentially zero, in which state the output Y becomes tristated. The RST(n) line <b>118</b> and TF(n) line <b>121</b> driven to this tristate may be capacitively coupled to an even higher voltage level through a capacitor by a signal that makes a low-to-high transition during the tristated. In this embodiment, a low-to-high transition on the IN line <b>120</b> capacitively couples into the RST(n) line <b>118</b> and TF(n) line <b>121</b> through the gate-to-channel, gate-to-source, gate-to-drain capacitances of reset switch <b>112</b> and the capacitance of a metal-to-metal capacitor <b>126</b>, respectively.</div>
+<div class="description-paragraph" id="p-0093" num="0092">The metal-to-metal capacitor <b>126</b> is illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref>. The IN line <b>120</b> may be carried in a metal3 wire. The TF(n) line <b>121</b> may be carried in a metal2 wire. An extended metal2 region forms a bottom plate of the capacitor <b>126</b>. A separate metal top plate insulated from the bottom plate by a insulator such as a silicon nitride of 1000 Angstrom thick sits atop the bottom plate and connects to the metal3 wire through a via called via2.</div>
+<div class="description-paragraph" id="p-0094" num="0093">The IN line may be driven by an IN drive circuit <b>17</b> to one of four voltage levels, from highest to lowest, VPH0, VPH1, VPH2, and 0 volt, selectable by control input DIN(1:0). DIN=“11” selects VPH0, “10” VPH1, “01” VPH2, and “00” 0 volt.</div>
+<div class="description-paragraph" id="p-0095" num="0094"> <figref idrefs="DRAWINGS">FIG. 12</figref> shows a schematic of an alternate embodiment for two pixels <b>14</b> each being from one of two adjacent rows of the pixel array <b>12</b>. The two pixels <b>14</b> form a pixel pair <b>14</b>′. The pixel pair <b>14</b>′ includes two photodetectors <b>100</b> <i>a</i>, <b>100</b> <i>b </i>connected to a shared sense node <b>111</b> via transfer switches <b>117</b> <i>a</i>, <b>117</b> <i>b</i>, respectively. Transfer switches <b>117</b> <i>a</i>, <b>117</b> <i>b </i>are controlled by horizontal signals TF(n+1) <b>121</b> <i>a </i>and TF(n) <b>121</b> <i>b</i>, respectively, connected to their respective gates. A shared reset switch <b>112</b> connects the sense node <b>111</b> to the vertical IN line <b>120</b> under a control of a shared horizontal signal RST(n) <b>118</b> that is connected to a gate of the reset switch <b>112</b>. The reset switch <b>112</b> and the transfer switch <b>117</b> <i>a </i>when turned ON together and each into a triode region by driving both the signal RST(n) <b>118</b> and the signal TF(n+1) <b>121</b> <i>a </i>high can reset the photodetector <b>100</b> <i>a </i>to a voltage transmitted by the vertical IN signal <b>120</b>. Likewise, the reset switch <b>112</b> and the transfer switch <b>117</b> <i>b </i>when turned ON together and each into a triode region by driving both the signal RST(n) <b>118</b> and the signal TF(n) <b>121</b> <i>b </i>high can reset the photodetector <b>100</b> <i>b </i>to a voltage transmitted by the vertical IN signal <b>120</b>.</div>
+<div class="description-paragraph" id="p-0096" num="0095">Referring to <figref idrefs="DRAWINGS">FIG. 12</figref>, an output transistor <b>116</b> is connected to a vertical OUT line <b>124</b> via a select transistor <b>114</b> turned ON by horizontal signal SEL(n) <b>122</b>. The output transistor <b>116</b> and the select transistor <b>114</b> are shared among the two pairs of photodetector and transfer switch. A signal can be transmitted from photodetector <b>100</b> <i>a </i>to the vertical OUT line <b>124</b> by driving horizontal signals TF(n+1) <b>121</b> <i>a </i>and SEL(n) <b>122</b>. Likewise, a signal can be transmitted from photodetector <b>100</b> <i>b </i>to the vertical OUT line <b>124</b> by driving horizontal signals TF(n) <b>121</b> <i>b </i>and SEL(n) <b>122</b>.</div>
+<div class="description-paragraph" id="p-0097" num="0096">In a similar manner, three or more pairs of photodetector and transfer switch can share a reset switch, an output transistor and a select switch. Each pair may reside in a different row among a group of adjacent rows. A common select signal and a common reset signal may be shared by the adjacent rows.</div>
+<div class="description-paragraph" id="h-0009" num="0000">Pixel Signal Retrieval: Light Reader</div>
+<div class="description-paragraph" id="p-0098" num="0097"> <figref idrefs="DRAWINGS">FIG. 14A</figref> shows an embodiment of a light reader circuit <b>16</b>. The light reader <b>16</b> may include a plurality of sampling circuits <b>150</b> each connected to an OUT line <b>124</b> of the pixel array <b>12</b>. Each sampling circuit <b>150</b> may include a first capacitor <b>152</b> and a second capacitor <b>154</b>. The first capacitor <b>152</b> is coupled to the OUT line <b>124</b> and a virtual ground signal GND1 <b>156</b> by switches <b>158</b> and <b>160</b>, respectively. The second capacitor <b>154</b> is coupled to the OUT line <b>124</b> and virtual ground GND1 signal by switches <b>162</b> and <b>164</b>, respectively. Switches <b>158</b> and <b>160</b> are controlled by a control line SAM1 <b>166</b>. Switches <b>162</b> and <b>164</b> are controlled by a control line SAM2 <b>168</b>. The capacitors <b>152</b> and <b>154</b> can be connected together to perform a voltage (and/or charge) subtraction by closing switch <b>170</b>. The switch <b>170</b> is controlled by a control line SUB <b>172</b>.</div>
+<div class="description-paragraph" id="p-0099" num="0098">The sampling circuits <b>150</b> are connected to an operational amplifier <b>180</b> by a plurality of first switches <b>182</b> and a plurality of second switches <b>184</b>. The amplifier <b>180</b> has a negative terminal “−” coupled to the first capacitors <b>152</b> by the first switches <b>182</b>, and a positive terminal “+” coupled to the second capacitors <b>154</b> by the second switches <b>184</b>. The operational amplifier <b>180</b> has a positive output “+” connected to an output line OP <b>188</b> and a negative output “−” connected to an output line OM <b>186</b>. Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, for example, for light reader <b>16</b> the output lines <b>186</b> and <b>188</b> are connected to a gain circuit <b>21</b> via signal <b>19</b> <i>a</i>, whereas for light reader <b>16</b>′ the output lines <b>186</b> and <b>188</b> are connected to another gain circuit <b>21</b> via signal <b>19</b> <i>b. </i> </div>
+<div class="description-paragraph" id="p-0100" num="0099">The operational amplifier <b>180</b> provides an amplified signal that is a difference between a voltage stored in the first capacitor <b>152</b> and a voltage stored in the second capacitor <b>154</b> of a sampling circuit <b>150</b> connected to the amplifier <b>180</b>. The gain of the amplifier <b>180</b> can be varied by adjusting the variable capacitors <b>190</b>. The variable capacitors <b>190</b> may be discharged by closing a pair of switches <b>192</b>. The switches <b>192</b> may be connected to a corresponding control line (not shown). Although a single amplifier is shown and described, it is to be understood that more than one amplifier can be used in the light reader circuit <b>16</b>.</div>
+<div class="description-paragraph" id="p-0101" num="0100"> <figref idrefs="DRAWINGS">FIG. 14B</figref> shows another light reader <b>16</b>′. The light reader <b>16</b>′ differs from the light reader <b>16</b> shown in FIG. <b>14</b>A in that the first capacitor <b>152</b> samples with a SAM3 signal <b>167</b> instead of the SAM1 signal <b>166</b>, and the second capacitor <b>154</b> samples with a SAM4 signal <b>169</b> instead of the SAM2 signal <b>168</b>. Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, the output lines <b>186</b>, <b>188</b> of light reader <b>16</b>′ are connected to a gain circuit <b>17</b> via signal <b>19</b> <i>b. </i> </div>
+<div class="description-paragraph" id="h-0010" num="0000">Operation-First Embodiment</div>
+<div class="description-paragraph" id="p-0102" num="0101">The first embodiment shown in <figref idrefs="DRAWINGS">FIG. 1</figref> can be operated under any combination of any one of the first, second and third noise methods with any one of the first, second and third normalizing methods. <figref idrefs="DRAWINGS">FIG. 15A</figref> shows a flowchart of an operation of the first embodiment according to the second noise method and the second normalizing method; <figref idrefs="DRAWINGS">FIG. 15B</figref> an operation according to the first noise method and the first normalizing method; and, <figref idrefs="DRAWINGS">FIG. 15C</figref> an operation according to the third noise method and the third normalizing method. However, a noise method, e.g. the third noise method, may be used together with a non-corresponding normalizing method, e.g. the second normalizing method. For example, a flowchart for a pairing of the 3rd noise method with the 2nd normalizing method can be assembled by replacing Step <b>316</b> <i>c </i>of <figref idrefs="DRAWINGS">FIG. 15C</figref> with Step <b>316</b> <i>a </i>of <figref idrefs="DRAWINGS">FIG. 15A</figref>. Likewise, a flowchart for a pairing of the 3rd noise method with the 1st normalizing method can be assembled by replacing Step <b>306</b> <i>b </i>of <figref idrefs="DRAWINGS">FIG. 15B</figref> with Step <b>316</b> <i>c </i>of <figref idrefs="DRAWINGS">FIG. 15C</figref>.</div>
+<div class="description-paragraph" id="p-0103" num="0102">Corresponding to <figref idrefs="DRAWINGS">FIG. 15A</figref> to <figref idrefs="DRAWINGS">FIG. 15C</figref>, respectively, <figref idrefs="DRAWINGS">FIG. 17A</figref> to <figref idrefs="DRAWINGS">FIG. 17C</figref> illustrate changes in voltage levels of the storage node <b>115</b> of a pixel <b>14</b> and a corresponding sense node <b>111</b> in a process of generating the noise signal and the normalized light response signal, particularly indicating which among the first reference output signal, the common reset output signal, the first sense-node reset output signal is sampled by the SAM1, SAM2, SAM3 and SAM4 signals, respectively, under the different noise methods, and which among the second reference output signal, the second sense-node reset output signal and the light response output signal is sampled by the SAM1, SAM2, SAM3 and SAM4 signals, respectively, under the different normalizing methods.</div>
+<div class="description-paragraph" id="p-0104" num="0103">Different from <figref idrefs="DRAWINGS">FIG. 17A</figref> to <figref idrefs="DRAWINGS">FIG. 17C</figref>, which each illustrates a use of a noise method together with a corresponding normalizing method, <figref idrefs="DRAWINGS">FIG. 17D</figref> and <figref idrefs="DRAWINGS">FIG. 17E</figref> illustrate non-corresponding noise and normalizing methods. <figref idrefs="DRAWINGS">FIG. 17D</figref> illustrates a use of the 3rd noise method with the 2nd normalizing method. <figref idrefs="DRAWINGS">FIG. 17E</figref> illustrates a use of the 3rd noise method with the 1st normalizing method. These figures illustrate that a noise method may be used together with a non-corresponding normalizing method.</div>
+<div class="description-paragraph" id="p-0105" num="0104"> <figref idrefs="DRAWINGS">FIG. 17A</figref> to <figref idrefs="DRAWINGS">FIG. 17E</figref> also can each be used to describe an operation of an alternate embodiment of the image sensor of the present invention under the fourth noise method and the fourth normalizing method, which do not form the intermediate signals of noise and normalizing differences.</div>
+<div class="description-paragraph" id="p-0106" num="0105"> <figref idrefs="DRAWINGS">FIG. 15A</figref> shows a flowchart of an operation of a first embodiment of the image sensor <b>10</b> according to the second noise method and the second normalizing method. In step <b>300</b> a first reference signal is driven onto the sense node <b>111</b> via the IN line <b>120</b> and then a first reference output signal is output by the output transistor <b>116</b> and stored in the light reader <b>16</b> as a sampled first reference output signal. Referring to the schematic in <figref idrefs="DRAWINGS">FIG. 13</figref> and timing diagram in <figref idrefs="DRAWINGS">FIG. 16</figref>, this can be accomplished by switching the RST(n) <b>118</b>, TF(n) <b>121</b>, and IN <b>120</b> lines from a low voltage to a high voltage to turn on the reset switch <b>112</b> and into a triode region. The transfer switch <b>117</b> may be switched on at the same time to transmit the first reference signal to the photodetector <b>100</b> by driving the TF(n) line <b>121</b> high. The RST(n) line <b>118</b> and TF(n) line <b>121</b> are driven high for an entire row. The IN line <b>120</b> is driven high for an entire column. The RST(n) line <b>118</b> and TF(n) line <b>121</b> are first driven high while the IN line <b>120</b> is initially low.</div>
+<div class="description-paragraph" id="p-0107" num="0106">The RST[n] line <b>118</b> and the TF[n] line <b>121</b> may each be connected to be driven by a tri-state buffer <b>374</b> whose output enters a tri-state after driving to a high level from 0 volt. Subsequently, when the IN line <b>120</b> is switched to a high state from a low state, capacitive coupling (due to gate-to-channel capacitance of reset switch <b>112</b>, and to a capacitance of the capacitor <b>126</b>) causes gate voltages of the reset switch <b>112</b> and the transfer switch <b>117</b> to each rise further to hold the reset switch <b>112</b> and transfer switch <b>117</b> respectively in a triode region. With the reset switch <b>112</b> and the transfer switch <b>177</b> in their respective triode region, the voltages at the storage node <b>115</b> and the sense node <b>111</b> are driven to the voltage level on the IN line <b>120</b>. Providing a higher gate voltage high enough for the reset switch <b>112</b> and the transfer switch <b>117</b> to simultaneously remain in triode region allows the photodetector to be reset to a higher level, thus permitting a larger range of voltage swing on the OUT line <b>124</b> to support a larger dynamic range in the output signal output from the pixel <b>14</b>.</div>
+<div class="description-paragraph" id="p-0108" num="0107">The SEL[n] line <b>122</b> is also switched to a high voltage level which turns on select switch <b>114</b>. The voltage of the sense node <b>111</b> is coupled to the OUT line <b>124</b> through output transistor <b>116</b> and select transistor <b>114</b> after a level-shifting at the output transistor <b>116</b>. The SAM1 control line <b>166</b> of the light reader <b>16</b> (see <figref idrefs="DRAWINGS">FIG. 14A</figref>) is selected so that the voltage on the OUT line <b>124</b> is stored in the first capacitor <b>152</b> as a sampled first reference output signal.</div>
+<div class="description-paragraph" id="p-0109" num="0108">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in step <b>302</b> the sense node <b>111</b> and the storage node <b>115</b> are then reset and a common reset output signal is stored in the light reader <b>16</b> as a sampled common-reset output signal. Referring to <figref idrefs="DRAWINGS">FIGS. 13 and 16</figref> this can be accomplished by driving the RST[n] line <b>118</b> low to turn off the reset switch <b>112</b> and reset the pixel <b>14</b> while keeping the TF[n] line <b>121</b> at high level such that the transfer switch <b>117</b> remains in triode region. Turning off the reset switch <b>112</b> creates an error signal across the photodetector <b>100</b> due to reset noise, charge injection and clock feedthrough. As shown in <figref idrefs="DRAWINGS">FIG. 17A</figref>, the error signal reduces the common voltage at the storage node <b>115</b> and the sense node <b>111</b> to V<sub>B </sub>when the reset switch <b>112</b> is switched OFF. The SAM2 line <b>168</b> and SAM3 line <b>167</b> are driven high, the SEL line <b>122</b> is driven low and then high again, so that a level-shifted version of the voltage of the sense node <b>111</b> is stored as a sampled common-reset output signal in the second capacitor <b>154</b> of the light reader <b>16</b> (see <figref idrefs="DRAWINGS">FIG. 14A</figref>) and the first capacitor <b>152</b> of the light reader circuit <b>16</b>′ (see <figref idrefs="DRAWINGS">FIG. 14B</figref>).</div>
+<div class="description-paragraph" id="p-0110" num="0109">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in step <b>304</b> the transfer switch <b>117</b> then turns OFF and a first sense-node reset output signal is then stored in the light reader <b>16</b>′ as a sampled first sense-node reset output signal. Referring to <figref idrefs="DRAWINGS">FIGS. 13 and 16</figref>, this can be accomplished by driving the TF[n] line <b>121</b> low to turn OFF the transfer switch <b>117</b>. Turning off the transfer switch <b>117</b> creates an error signal at the storage node <b>115</b> and the sense node <b>111</b> due to reset noise, charge injection and clock feedthrough. As shown in <figref idrefs="DRAWINGS">FIG. 17A</figref>, the error signal reduces the voltage at the storage node <b>115</b> to V<sub>m </sub>and the sense node <b>111</b> to V<sub>c2</sub>, respectively, when the transfer switch <b>112</b> is turned OFF. The SAM4 line <b>169</b> is driven high, the SEL line <b>122</b> is driven low and then high again, so that a level shifted version of the voltage of the sense node <b>111</b> is stored as the sampled first sense-node reset output signal in the second capacitor <b>154</b> of the light reader circuit <b>16</b>′.</div>
+<div class="description-paragraph" id="p-0111" num="0110">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in step <b>306</b> <i>a </i>the sampled common reset output signal is then subtracted from the sampled first reference output signal to give a first noise difference signal, and the sampled first sense-node reset output signal subtracted from the sampled common-reset output signal to give a third noise difference signal. The third noise difference signal is then subtracted from the first noise difference signal to give the noise signal, the first and third noise difference signals each under a respective gain. The noise signal is converted to digital bit strings by ADC <b>24</b>. The digital output data is stored within the external memory <b>74</b> in accordance with one of the techniques described in <figref idrefs="DRAWINGS">FIG. 2</figref>, <b>3</b>, <b>8</b> or <b>9</b>. The noise data corresponds to the first image. Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, <figref idrefs="DRAWINGS">FIG. 13</figref>, <figref idrefs="DRAWINGS">FIG. 14A</figref> and <figref idrefs="DRAWINGS">FIG. 14B</figref>, the subtractions to produce the first and third differences can be accomplished by closing switches <b>170</b>, <b>171</b>, <b>182</b>, <b>183</b>, <b>184</b> and <b>185</b> of the light readers <b>16</b>, <b>16</b>′ to subtract the voltage across the second capacitor <b>154</b> from the voltage across the first capacitor <b>152</b>. The output signals <b>19</b> <i>a</i>, <b>19</b> <i>b </i>of light readers <b>16</b>, <b>16</b>′ representing the first and third noise differences, respectively, are scaled by analog gain circuits <b>21</b> under signed scaling factors COEF<b>1</b> and COEF<b>2</b>, respectively, then mutually subtracted at the analog subtractor <b>17</b> to give the noise signal. An ADC <b>24</b> coupled to the analog subtractor <b>17</b> digitizes the noise signal into noise data, which is subsequently stored in the memory <b>74</b>.</div>
+<div class="description-paragraph" id="p-0112" num="0111">The signed scaling factors COEF<b>1</b> and COEF<b>2</b> may be selected or provided by the external processor <b>72</b> or an onboard calibration circuit (not shown) or from a nonvolatile memory onboard or external to the image sensor. The signed scaling factors may be determined or predetermined in accordance with one of a number of calibration methods described later in this description. Each of the scaling factors COEF<b>1</b> and COEF<b>2</b> may have a respective sign. The scaling factors COEF<b>1</b> and COEF<b>2</b> may be changed between generating the first image and generating the second image when non-corresponding noise and normalizing methods are in use.</div>
+<div class="description-paragraph" id="p-0113" num="0112">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in step <b>308</b> the TF[n], RST[n], SEL[n] lines are kept at low for the duration of an exposure time while the photodiode accumulates charges.</div>
+<div class="description-paragraph" id="p-0114" num="0113">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in step <b>310</b> the sense node <b>111</b> is reset and the second sense-node reset output signal is then stored in the light reader <b>16</b> as a sampled second sense-node reset output signal. Referring to <figref idrefs="DRAWINGS">FIGS. 13 and 16</figref>, this can be accomplished by driving the RST[n] line <b>118</b> high into tristate, then capacitively coupled to a higher voltage level by driving the IN line <b>120</b> from a low level to a high level (hereinafter “second springboard level”), followed by driving the RST[n] line <b>118</b> low to turn off the reset switch <b>112</b> and reset the sense node <b>111</b>. The sense-node voltage is now V<sub>D2</sub>, whereas the storage node is V<sub>m</sub>, as shown in <figref idrefs="DRAWINGS">FIG. 17A</figref>. The TF[n] line <b>121</b> is kept low. The SAM4 line <b>169</b> is driven high, the SEL[n] line <b>122</b> is driven high, so that a level-shifted version of the sense node voltage is stored as a sampled second sense-node reset output signal in the second capacitor <b>154</b> of the light reader circuit <b>16</b>′ (see <figref idrefs="DRAWINGS">FIG. 14B</figref>). The second springboard level is a sense-node voltage level just before the reset switch <b>112</b> is switched OFF for the second sense node reset. The second springboard level may be same as or different from the first reference level.</div>
+<div class="description-paragraph" id="p-0115" num="0114">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in block <b>312</b> the light response output signal is sampled from the output transistor <b>116</b> and stored in the light reader circuits <b>16</b>, <b>16</b>′ as a sampled light response output signal. The light response output signal corresponds to the optical image that is being detected by the image sensor <b>10</b>. Referring to <figref idrefs="DRAWINGS">FIG. 13</figref>, <figref idrefs="DRAWINGS">FIG. 14A</figref>, <figref idrefs="DRAWINGS">FIG. 14B</figref> and <figref idrefs="DRAWINGS">FIG. 16</figref>, this can be accomplished by having the TF[n] <b>121</b>, SEL[n] <b>122</b>, SAM3 <b>167</b> and SAM2 <b>168</b> lines in a high state, the RST[n] line <b>118</b> in a low state and the transfer switch <b>117</b> driven into a triode region. <figref idrefs="DRAWINGS">FIG. 17A</figref> shows V<sub>E </sub>as a common voltage of the storage node <b>115</b> and the sense node <b>111</b>. The second capacitor <b>154</b> and the first capacitor <b>152</b> of the light readers <b>16</b>, <b>16</b>′, respectively, store a level shifted version of the common voltage of the storage node <b>115</b> and the sense node <b>111</b> as the sampled light response output signal.</div>
+<div class="description-paragraph" id="p-0116" num="0115">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in block <b>314</b> the second reference output signal is generated from the sense node <b>111</b> and the output transistor <b>116</b> and stored in the light reader <b>16</b>. Referring to <figref idrefs="DRAWINGS">FIGS. 13</figref>, <b>14</b>A and <b>16</b>, the RST[n] line <b>118</b> is first driven high and then into a tri-state. The reset switch <b>112</b> enters a triode region. The IN line <b>120</b> is driven high, capacitively coupling the gate node <b>118</b> of the reset switch <b>112</b> to a higher voltage level to cause the reset switch <b>112</b> to remain in the triode region so that the voltage level at the sense node <b>111</b> is driven to the voltage level provided on the IN line <b>120</b>. The sense node voltage is now at V<sub>G </sub>as shown in <figref idrefs="DRAWINGS">FIG. 17A</figref>. The SEL[n] <b>122</b> and SAM1 <b>166</b> lines are then driven high to store the second reference output voltage in the first capacitor <b>152</b>—of the light reader <b>16</b> as a sampled second reference output signal.</div>
+<div class="description-paragraph" id="p-0117" num="0116">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in block <b>316</b> <i>a </i>the sampled light response output signal is subtracted from the sampled second reference output signal to form a first normalizing difference, the sampled second sense-node reset output signal subtracted from the sampled light response output signal to form a third normalizing difference, and the third normalizing difference subtracted from the first normalizing difference to form a normalized light response signal. The normalized light response signal is converted into a digital bit string to create a normalized light output data that is stored in the second image buffers <b>32</b> and <b>34</b>. The normalized light response signal corresponds to the second image. Referring to <figref idrefs="DRAWINGS">FIGS. 13</figref>, <b>14</b> and <b>16</b> the subtraction process can be accomplished by closing switches <b>170</b>, <b>182</b>, <b>183</b>, <b>184</b> and <b>185</b> of the light readers <b>16</b>, <b>16</b>′. The output signals <b>19</b> <i>a</i>, <b>19</b> <i>b </i>of light readers <b>16</b>, <b>16</b>′ representing the first and third normalizing differences, respectively, are scaled by analog gain circuits <b>21</b> under signed scaling factors COEF<b>1</b> and COEF<b>2</b>, respectively, then mutually subtracted at the analog subtractor <b>17</b> to give the normalized light response signal. The COEF<b>1</b> and COEF<b>2</b> values may be same as that in generating the noise signal, or have a ratio within 10% thereof. The normalized light response signal is then converted into a digital bit string by the ADC <b>24</b> as a normalized light response data.</div>
+<div class="description-paragraph" id="p-0118" num="0117">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, in block <b>318</b> the noise data (and may be the calibration data too) are retrieved from external memory. In block <b>320</b> the noise data (and calibration data too) are combined with the normalized light output data in accordance with one of the techniques shown in <figref idrefs="DRAWINGS">FIG. 8</figref> in the image sensor by the combiner <b>50</b>, or in <figref idrefs="DRAWINGS">FIG. 2</figref> by the processor <b>72</b>. The noise data corresponds to the first image and the normalized light output data corresponds to the second image. Thus a reset noise in the normalized light response data is removed to form a de-noised image. The image sensor performs this noise cancellation with a pixel that has only four transistors, having reduced dark current on the storage node <b>115</b> by separating the storage node <b>115</b> from the sense node <b>111</b> using the transfer switch <b>117</b>. Employing sharing of the select switch <b>114</b> and the output transistor <b>116</b> among neighboring photodetectors can achieve fewer than two transistors per pixel. This image sensor thus provides noise cancellation while maintaining a relatively small pixel pitch.</div>
+<div class="description-paragraph" id="p-0119" num="0118"> <figref idrefs="DRAWINGS">FIG. 17A</figref> illustrates a use of the first embodiment of the image sensor of <figref idrefs="DRAWINGS">FIG. 1</figref> under the flowchart of <figref idrefs="DRAWINGS">FIG. 15A</figref>. The first noise and normalizing differences are formed in the light reader <b>16</b>, which samples the first reference output signal with the SAM1 signal <b>166</b> for step <b>300</b> and samples the common reset output signal with the SAM2 signal <b>168</b> for step <b>302</b> of the flowchart in <figref idrefs="DRAWINGS">FIG. 15A</figref> and, after a light exposure, samples the second reference output signal with the SAM1 signal <b>166</b> for step <b>314</b> and samples the light response output signal with the SAM2 signal <b>168</b> for step <b>312</b> of the flowchart. The third noise and normalizing differences are formed in the light reader <b>16</b>′, which samples the common reset output signal with the SAM3 signal <b>167</b> for step <b>302</b> and samples the first sense-node reset output signal with the SAM4 signal <b>169</b> for step <b>304</b> of the flowchart in <figref idrefs="DRAWINGS">FIG. 15A</figref> and, after the light exposure, samples the light response output signal with the SAM3 signal <b>167</b> for step <b>314</b> and samples the second reset output signal with the SAM4 signal <b>169</b> for step <b>312</b> of the flowchart.</div>
+<div class="description-paragraph" id="p-0120" num="0119">Accordingly, <figref idrefs="DRAWINGS">FIG. 17A</figref> shows the SAM1 signal <b>166</b> sampling the first reference output signal, the SAM2 <b>168</b> and SAM3 <b>167</b> signals sampling the common reset output signal, and the SAM4 signal <b>169</b> sampling the first sense-node reset output signal to form the noise signal. <figref idrefs="DRAWINGS">FIG. 17A</figref> also shows the SAM1 signal <b>166</b> sampling the second reference output signal, the SAM2 <b>168</b> and SAM3 <b>167</b> signals sampling the light response output signal, and the SAM4 signal <b>169</b> sampling the second sense-node reset output signal to form the normalized light response signal after the light exposure. The light reader <b>16</b> forms the first noise and normalizing differences. The light reader <b>16</b>′ forms the third noise and normalizing differences. The analog subtractor <b>17</b> subtracts between the first noise difference and the third noise difference, each scaled with a respective signed scaling factor, to form the noise signal according to the second noise method. The analog subtractor <b>17</b> subtracts between the first normalizing difference and the third normalizing difference, each scaled with a respective signed scaling factor, to form the normalized light response signal according to the second normalizing method.</div>
+<div class="description-paragraph" id="p-0121" num="0120">The process described is performed in a sequence across the various rows of the pixels in the pixel array <b>12</b>. As shown in <figref idrefs="DRAWINGS">FIG. 16</figref>, noise signals may be generating from the n-th row in the pixel array while normalized light response signals generate from the n−l-th row, where l is the exposure duration in multiples of a line period.</div>
+<div class="description-paragraph" id="p-0122" num="0121">As mentioned above, step <b>306</b> <i>a </i>of the flowchart in <figref idrefs="DRAWINGS">FIG. 15A</figref> may be replaced with step <b>306</b> <i>b </i>of <figref idrefs="DRAWINGS">FIG. 15B</figref> or step <b>306</b> <i>c </i>of <figref idrefs="DRAWINGS">FIG. 15C</figref>. Also, step <b>316</b> <i>a </i>in <figref idrefs="DRAWINGS">FIG. 15A</figref> may be replaced with step <b>316</b> <i>b </i>of <figref idrefs="DRAWINGS">FIG. 15B</figref> or step <b>316</b> <i>c </i>of <figref idrefs="DRAWINGS">FIG. 15C</figref>.</div>
+<div class="description-paragraph" id="p-0123" num="0122"> <figref idrefs="DRAWINGS">FIG. 17B</figref> illustrates a use of the first embodiment of the image sensor of <figref idrefs="DRAWINGS">FIG. 1</figref> under the flowchart of <figref idrefs="DRAWINGS">FIG. 15B</figref>. In <figref idrefs="DRAWINGS">FIG. 15B</figref>, the steps <b>306</b> <i>a</i>, <b>316</b> <i>a </i>of <figref idrefs="DRAWINGS">FIG. 15A</figref> are replaced with steps <b>306</b> <i>b</i>, <b>316</b> <i>b</i>, where the second noise difference replaces the third noise difference and the second normalizing difference replaces the third normalizing difference, respectively. The second noise and normalizing differences are formed in the light reader <b>16</b>′, which samples the first reference output signal with the SAM3 signal <b>167</b> for step <b>300</b> and samples the first sense-node reset output signal with the SAM4 signal <b>169</b> for step <b>304</b> of the flowchart in <figref idrefs="DRAWINGS">FIG. 15B</figref> and, after a light exposure, samples the second reference output signal with the SAM3 signal <b>167</b> for step <b>314</b> and samples the second sense-node reset output signal with the SAM4 signal <b>169</b> for step <b>310</b> of the flowchart. Accordingly, <figref idrefs="DRAWINGS">FIG. 17B</figref> shows the SAM1 <b>166</b> and SAM3 <b>167</b> signals sampling the first reference output signal, the SAM2 signal <b>168</b> sampling the common reset output signal, and the SAM4 signal <b>169</b> sampling the first sense-node reset output signal to form the noise signal. <figref idrefs="DRAWINGS">FIG. 17B</figref> also shows the SAM1 <b>166</b> and SAM3 <b>167</b> signals sampling the second reference output signal, the SAM2 signal <b>168</b> sampling the light response output signal, and the SAM4 signal <b>169</b> sampling the second sense-node reset output signal to form the normalized light response signal. The light reader <b>16</b> forms the first noise and normalizing differences. The light reader <b>16</b>′ forms the second noise and normalizing differences. The analog subtractor <b>17</b> subtracts between the first noise difference and the second noise difference, each scaled with a respective signed scaling factor, to form the noise signal according to the first noise method. The analog subtractor <b>17</b> subtracts between the first normalizing difference and the second normalizing difference, each scaled with a respective signed scaling factor, to form the normalized light response signal according to the first normalizing method.</div>
+<div class="description-paragraph" id="p-0124" num="0123"> <figref idrefs="DRAWINGS">FIG. 17C</figref> illustrates a use of the first embodiment of the image sensor of <figref idrefs="DRAWINGS">FIG. 1</figref> under the flowchart of <figref idrefs="DRAWINGS">FIG. 15C</figref>. In <figref idrefs="DRAWINGS">FIG. 15C</figref>, the steps <b>306</b> <i>a</i>, <b>316</b> <i>a </i>of <figref idrefs="DRAWINGS">FIG. 15A</figref> are replaced with steps <b>306</b> <i>c</i>, <b>316</b> <i>c</i>, where the second noise difference replaces the first noise difference and the second normalizing difference replaces the first normalizing difference, respectively. The second noise and normalizing differences are formed in the light reader <b>16</b>, which samples the first reference output signal with the SAM1 signal <b>166</b> for step <b>300</b> and samples the first sense-node reset output signal with the SAM2 signal <b>168</b> for step <b>304</b> of the flowchart in <figref idrefs="DRAWINGS">FIG. 15C</figref> and, after a light exposure, samples the second reference output signal with the SAM1 signal <b>166</b> for step <b>314</b> and samples the second sense-node reset output signal with the SAM2 signal <b>168</b> for step <b>310</b> of the flowchart. Accordingly, <figref idrefs="DRAWINGS">FIG. 17C</figref> shows the SAM1 signal <b>166</b> sampling the first reference output signal, the SAM3 signal <b>167</b> sampling the common reset output signal, and the SAM2 <b>168</b> and SAM4 <b>169</b> signals sampling the first sense-node reset output signal to form the noise signal. <figref idrefs="DRAWINGS">FIG. 17C</figref> also shows the SAM1 signal <b>166</b> sampling the second reference output signal, the SAM3 signal <b>167</b> sampling the light response output signal, and the SAM2 <b>168</b> and SAM4 <b>169</b> signals sampling the second sense-node reset output signal to form the normalized light response signal. The light reader <b>16</b> forms the second noise and normalizing differences. The light reader <b>16</b>′ forms the third noise and normalizing differences. The analog subtractor <b>17</b> subtracts between the second noise difference and the third noise difference, each scaled with a respective signed scaling factor, to form the noise signal according to the third noise method. The analog subtractor <b>17</b> subtracts between the second normalizing difference and the third normalizing difference, each scaled with a respective signed scaling factor which may be same as the one used for the third noise method, to form the normalized light response signal according to the third normalizing method.</div>
+<div class="description-paragraph" id="p-0125" num="0124"> <figref idrefs="DRAWINGS">FIG. 17D</figref> illustrates a use of the first embodiment of the image sensor of <figref idrefs="DRAWINGS">FIG. 1</figref> under a mixed pairing of the 3rd noise method with the 2nd normalizing method. Accordingly, <figref idrefs="DRAWINGS">FIG. 17D</figref> shows the SAM1 signal <b>166</b> sampling the first reference output signal, the SAM3 signal <b>167</b> sampling the common reset output signal, and the SAM2 <b>168</b> and SAM4 <b>169</b> signals sampling the first sense-node reset output signal to form the noise signal. <figref idrefs="DRAWINGS">FIG. 17D</figref> also shows the SAM1 signal <b>166</b> sampling the second reference output signal, the SAM2 <b>168</b> and SAM3 <b>167</b> signals sampling the light response output signal, and the SAM4 signal <b>169</b> sampling the second sense-node reset output signal to form the normalized light response signal. The light reader <b>16</b> forms the second noise difference and the first normalizing difference. The light reader <b>16</b>′ forms the third noise difference and the third normalizing difference. The analog subtractor <b>17</b> subtracts between the second noise difference and the third noise difference, each scaled with a respective signed scaling factor, to form a noise signal according to the third noise method. The analog subtractor <b>17</b> subtracts between the first normalizing difference and the third normalizing difference, each scaled with a respective signed scaling factor, to form a normalized light response signal according to the second normalizing method.</div>
+<div class="description-paragraph" id="p-0126" num="0125"> <figref idrefs="DRAWINGS">FIG. 17E</figref> illustrates a use of the first embodiment of the image sensor of <figref idrefs="DRAWINGS">FIG. 1</figref> under a mixed pairing of the 3rd noise method and the 1st normalizing method. The light reader <b>16</b> forms the second noise difference and the first normalizing difference. The light reader <b>16</b>′ forms the third noise difference and the second normalizing difference. The analog subtractor <b>17</b> subtracts between the second noise difference and the third noise difference, each scaled with a respective signed scaling factor, to form a noise signal according to the third noise method. The analog subtractor <b>17</b> subtracts between the first normalizing difference and the second normalizing difference, each scaled with a respective signed scaling factor, to form a normalized light response signal according to the first normalizing method.</div>
+<div class="description-paragraph" id="p-0127" num="0126">An additional third reference level may be applied in the first noise method. <figref idrefs="DRAWINGS">FIG. 17J</figref> shows one such example. to implement the first noise method on the first embodiment, one can modify <figref idrefs="DRAWINGS">FIG. 17B</figref> into <figref idrefs="DRAWINGS">FIG. 17J</figref> by adding a third reference level to apply onto the sense node <b>111</b> immediately after step <b>304</b> and change SAM3 to sample during this third reference level and store a sampled third reference output signal instead of sampling during the first reference level in step <b>300</b>. The second noise difference in this case is the sampled third reference output signal minus the sampled first sense-node reset signal.</div>
+<div class="description-paragraph" id="p-0128" num="0127">Likewise, for the samplings after light exposure, a fourth reference level may be applied onto the sense node <b>111</b> before the second sense-node reset in step <b>310</b>, and SAM3 is moved from step <b>314</b> to sample the fourth reference output signal generated at this time to store a sampled fourth reference output signal. The second normalizing difference in this case is the sampled fourth reference output signal minus the sampled second sense-node reset signal. It is noted that here the fourth reference level also takes the role of the second springboard level. However, as one skilled in the art can readily recognize, a second springboard level different from the fourth reference level may be provided on the IN line <b>120</b> and driven onto the sense node <b>111</b> across the reset switch <b>112</b> between the fourth reference level and the second sense-node reset to adjust the second sense-node reset level and concomitantly the light response level.</div>
+<div class="description-paragraph" id="p-0129" num="0128">The corresponding control signals are changed from timing diagram of <figref idrefs="DRAWINGS">FIG. 16</figref> of the first embodiment and the corresponding logic circuits are changed from the schematics of <figref idrefs="DRAWINGS">FIG. 18A</figref> to <figref idrefs="DRAWINGS">FIG. 18D</figref>, as one skilled in the art would readily know to perform. The third and fourth reference levels may or may not be same as the first and second reference levels. Where they differ, a DC offset may be subtracted in an analog circuit or in a digital circuit or on the external processor <b>72</b>, as one skilled in the art would readily know to perform.</div>
+<div class="description-paragraph" id="p-0130" num="0129">The first embodiment operating under the second noise and normalizing methods, and further using the GND1 voltage level timing as shown in <figref idrefs="DRAWINGS">FIG. 17I</figref> (described later in this description) is the best mode.</div>
+<div class="description-paragraph" id="h-0011" num="0000">Second Embodiment</div>
+<div class="description-paragraph" id="p-0131" num="0130"> <figref idrefs="DRAWINGS">FIG. 21</figref> illustrates a second embodiment of the image sensor. In this alternate embodiment, the analog gain circuits <b>21</b> and analog subtractor <b>17</b> of the first embodiment in <figref idrefs="DRAWINGS">FIG. 1</figref> are replaced with digital gain circuits <b>21</b>′ and digital subtractor <b>17</b>′, respectively, located after the ADCs <b>24</b>. Alternately, the functions of the analog gain circuits <b>21</b> and analog subtractor <b>17</b> may be replaced and performed by a digital circuit or an on-board programmable processor that executes computer instructions that when executed cause the on-board programmable processor to perform such functions on digital data from the ADC <b>24</b>. The second embodiment may be operated like the first embodiment.</div>
+<div class="description-paragraph" id="h-0012" num="0000">Third Embodiment</div>
+<div class="description-paragraph" id="p-0132" num="0131"> <figref idrefs="DRAWINGS">FIG. 22</figref> illustrates a third embodiment. In the third embodiment, the light readers <b>16</b>, <b>16</b>′, the analog gain circuits <b>21</b> and the analog subtractor <b>17</b> of the first embodiment in <figref idrefs="DRAWINGS">FIG. 1</figref> are replaced with a triple-sampling light reader <b>16</b>″ shown in <figref idrefs="DRAWINGS">FIG. 14C</figref>.</div>
+<div class="description-paragraph" id="p-0133" num="0132"> <figref idrefs="DRAWINGS">FIG. 14C</figref> shows a schematic of the triple-sampling light reader <b>16</b>″. The triple-sampling light reader <b>16</b>″ comprises a plurality of triple-sampling circuits <b>150</b>″, each comprising a first pair of capacitors <b>152</b>, <b>154</b> and a second pair of capacitors <b>153</b>, <b>155</b>. The first pair of capacitors <b>152</b>, <b>154</b> comprises a first capacitor <b>152</b> and a second capacitor <b>154</b> that each has a first capacitance. The second pair of capacitors <b>153</b>, <b>155</b> comprises a third capacitor <b>153</b> and a fourth capacitor <b>155</b> that each has a second capacitance. A ratio between the first capacitance and the second capacitance may be varied. By way of example, the ratio may be determined in accordance with a calibration procedure executed on the image sensor <b>10</b>″ or on the external processor <b>72</b> under one of the calibration procedures described later in this description. Within each pair, one capacitor is electrically coupled to a positive terminal “+” of an amplifier <b>180</b> while the other capacitor to a negative terminal “−” of the amplifier <b>180</b>. Together, each pair, the amplifier <b>190</b>, and a pair of feedback capacitors <b>190</b> connected between output terminals and input terminals of the amplifier <b>180</b> can perform a subtraction between two voltage signals sampled onto the capacitors within the pair. The light reader <b>150</b>″ may perform a first subtraction to subtract a second voltage on the second capacitor from a first voltage on the first capacitor, a second subtraction to subtract a fourth voltage on the fourth capacitor from a third voltage on the third capacitor, and a third subtraction to subtract a second difference resulting from the second subtraction from a first difference resulting from the first subtraction, by closing switches <b>170</b>, <b>171</b>, and <b>182</b> to <b>184</b> and opening switches <b>190</b>, each of the first and second differences given a weight equal to the first and second capacitances, respectively. When switches <b>170</b>, <b>171</b> are both closed, the triple-sampling light reader <b>16</b>″ effectively performs the first to third subtractions all at once, without having to form intermediate signals for the first or second differences. Thus the triple-sampling light reader <b>16</b>″ is able to perform any one of the first to third noise methods without forming all of the first to third noise differences under the respective noise method. Likewise, the triple-sampling light reader <b>16</b>″ is able to perform any one of the first to third normalizing methods without forming all of the first to third normalizing differences under the respective normalizing method. Thus it is clear that the light reader <b>16</b>″ is able to perform the fourth noise method which calls for a subtraction among the three constituent component signals of the noise signal, and the fourth normalizing method which calls for a subtraction among the three constituent component signals of the normalized light response signal without having to generate the intermediate noise/normalizing differences. Of the three constituent signals that combine to form the noise signal, a first signal that is sampled by only a capacitor from the first pair of capacitors has a weight of the first capacitance, a second signal that is sampled by a capacitor from the first pair of capacitors and a capacitor from the second pair of capacitors has a weight of either a sum or difference between the first and second capacitances, and a third signal that is sampled by only a capacitor from the second pair of capacitors has a weight of the second capacitance. Likewise is true for the three constituent signals that combine to form the normalized light response signal.</div>
+<div class="description-paragraph" id="p-0134" num="0133">Although a single amplifier <b>180</b> is shown and described, it is to be understood that more than one amplifier can be used in the light reader circuit <b>16</b>″.</div>
+<div class="description-paragraph" id="p-0135" num="0134">To capture a noise signal and a normalized light response signal for a pixel <b>14</b>, the triple-sampling circuit <b>150</b>″ may sample the first reference output signal, the common reset output signal and the first sense-node reset output signal for forming the noise signal, and sample the second reference output signal, the light response output signal and the second sense-node reset output signal for forming the normalized light response signal, according to the flowchart <b>15</b>D and timing diagram <b>16</b>. The triple-sampling circuit <b>150</b>″ may sample the first reference output signal onto the first capacitor <b>152</b>, the first sense-node reset signal onto the fourth capacitor <b>155</b>, and the common reset output signal onto the second <b>154</b> and third <b>153</b> capacitors. When switches <b>170</b>, <b>171</b>, and <b>182</b> to <b>185</b> are closed, and switches <b>158</b> to <b>165</b> and <b>190</b> are opened, charges from the first to fourth capacitors are transferred to capacitors <b>190</b> around the amplifier <b>180</b>. This performs effectively a first subtraction between the sampled output signals stored on the first <b>152</b> and second <b>154</b> capacitors, a second subtraction between the sampled output signals stored on the third <b>153</b> and fourth <b>155</b> capacitors, and a third subtraction between the results of the first and second subtractions, the results of the first and second subtractions given unsigned scaling factors (or weights) of the first and second capacitances, respectively, like the flowchart of <figref idrefs="DRAWINGS">FIG. 15A</figref> except the intermediate first and third noise and normalizing differences need not be formed. Thus <figref idrefs="DRAWINGS">FIG. 15D</figref> shows a flowchart that appropriately describes an operation of the third embodiment.</div>
+<div class="description-paragraph" id="p-0136" num="0135"> <figref idrefs="DRAWINGS">FIG. 17A</figref> shows an example of how the SAM1 to SAM4 sampling signals may be sequenced to operate the third embodiment under the flowchart of <figref idrefs="DRAWINGS">FIG. 15A</figref> except forming the noise and normalizing differences.</div>
+<div class="description-paragraph" id="p-0137" num="0136">Alternately, the triple-sampling circuit <b>150</b>″ may sample the first reference output signal onto the first <b>152</b> and third <b>153</b> capacitors, the common reset output signal onto the second <b>154</b> capacitor, and the first sense-node reset signal onto the fourth capacitor <b>155</b>. When switches <b>170</b>, <b>171</b>, and <b>182</b> to <b>185</b> are closed, and switches <b>158</b> to <b>165</b> and <b>190</b> are opened, charges from the first to fourth capacitors are transferred to capacitors <b>190</b> around the amplifier <b>180</b>. This performs effectively a first subtraction between the sampled output signals stored on the first <b>152</b> and second <b>154</b> capacitors, a second subtraction between the sampled output signals stored on the third <b>153</b> and fourth <b>155</b> capacitors, and a third subtraction between the results of the first and second subtractions, the results of the first and second subtractions given unsigned scaling factors (or weights) of the first and second capacitances, respectively, like the flowchart of <figref idrefs="DRAWINGS">FIG. 15B</figref> except the intermediate first and second noise and normalizing differences need not be formed. <figref idrefs="DRAWINGS">FIG. 17B</figref> shows an example of how the SAM1 to SAM4 signals may be sequenced.</div>
+<div class="description-paragraph" id="p-0138" num="0137">An additional third reference level may be applied in the first noise method, like when the first noise method is applied on the first embodiment, as was already shown in <figref idrefs="DRAWINGS">FIG. 17J</figref>. As in the first embodiment, to implement the first noise method, one can modify <figref idrefs="DRAWINGS">FIG. 17B</figref> into <figref idrefs="DRAWINGS">FIG. 17J</figref> by adding a third reference level to apply onto the sense node <b>111</b> immediately after step <b>304</b> and change SAM3 sampling to sample during this third reference level and store a sampled third reference output signal instead of sampling during the first reference level in step <b>300</b>. The second noise difference in this case is the sampled third reference output signal minus the sampled first sense-node reset signal.</div>
+<div class="description-paragraph" id="p-0139" num="0138">Likewise, for the samplings after light exposure, a fourth reference level may be applied onto the sense node <b>111</b> before the second sense-node reset in step <b>310</b>, and SAM3 sampling moved from step <b>314</b> to sample the fourth reference output signal generated at this time to store a sampled fourth reference output signal. The second normalizing difference in this case is the sampled fourth reference output signal minus the sampled second sense-node reset signal.</div>
+<div class="description-paragraph" id="p-0140" num="0139">The timings of the control signals are changed from the timing diagram of <figref idrefs="DRAWINGS">FIG. 16</figref> of the first embodiment and the logic circuits changed from the schematics of <figref idrefs="DRAWINGS">FIG. 18A</figref> to <figref idrefs="DRAWINGS">FIG. 18D</figref>, as one skilled in the art would readily know to perform. The third and fourth reference levels may or may not be same as the first and second reference levels. Where they differ, a DC offset may be subtracted in an analog circuit or in a digital circuit or on the external processor <b>72</b>, as one skilled in the art would readily know to perform.</div>
+<div class="description-paragraph" id="p-0141" num="0140">For the light reader <b>16</b>″, although the first and second capacitances give unsigned scaling factors, a sign inversion may be applied through one of several ways. In one way, the connections from the first <b>152</b> and second <b>154</b> capacitors to the “+” and “−” inputs of the amplifier may be swapped to get a sign inversion on the first capacitance, and likewise for the connections from the third <b>153</b> and fourth <b>155</b> capacitors to apply a sign inversion on the second capacitance. In another way, the SAM1 <b>166</b> and SAM2 <b>168</b> sampling signals for the first <b>152</b> and second <b>154</b> capacitors may be swapped to apply a sign inversion on the first capacitance, and likewise the sampling SAM3 <b>167</b> and SAM4 <b>169</b> signals for the third <b>153</b> and fourth <b>155</b> capacitors to apply a sign inversion on the second capacitance.</div>
+<div class="description-paragraph" id="p-0142" num="0141">The unsigned scaling factors afforded by the first and second capacitances may combine with one or more ways of applying sign inversion in circuit(s) to provide signed scaling factors. It is clear to one skilled in the art that the inventions in the instant application are not limited to the connections shown in the schematics or described in the description but encompass various modifications, combinations and permutations possible via such ways.</div>
+<div class="description-paragraph" id="p-0143" num="0142">It is also clear to one skilled in the art that similar sign inversions are applicable in light readers <b>16</b>, <b>16</b>′. It is clear to one skilled in the art that the inventions in the instant application that use light readers <b>16</b>, <b>16</b>′ are not limited to the connections shown in the schematics or described in the description but encompass various modifications, combinations and permutations possible via such ways.</div>
+<div class="description-paragraph" id="p-0144" num="0143">Alternately, the triple-sampling circuit <b>150</b>″ may sample the first reference output signal onto the first capacitor <b>152</b>, the first sense-node reset signal onto the second <b>154</b> and fourth capacitors <b>155</b>, and the common reset output signal onto the third capacitor <b>153</b>. When switches <b>170</b>, <b>171</b>, and <b>182</b> to <b>185</b> are closed, and switches <b>158</b> to <b>165</b> and <b>190</b> are opened, charges from the first to fourth capacitors are transferred to capacitors <b>190</b> around the amplifier <b>180</b>. This performs effectively a first subtraction between the sampled output signals stored on the first <b>152</b> and second <b>154</b> capacitors, a second subtraction between the sampled output signals stored on the third <b>153</b> and fourth <b>155</b> capacitors, and a third subtraction between the results of the first and second subtractions, the results of the first and second subtractions given unsigned scaling factors (or weights) of the first and second capacitances, respectively, like the flowchart of <figref idrefs="DRAWINGS">FIG. 15C</figref> except the intermediate second and third noise and normalizing differences need not be formed. <figref idrefs="DRAWINGS">FIG. 17C</figref> shows an example of how the SAM1 to SAM4 sampling signals may be sequenced.</div>
+<div class="description-paragraph" id="p-0145" num="0144">The third <b>153</b> and fourth <b>155</b> capacitors may be variable capacitors, whose second capacitance is selected by a control signal CVAL (not shown). <figref idrefs="DRAWINGS">FIGS. 5-7</figref> illustrate three possible embodiments of this variable capacitor. Although only two capacitance values are supported by the examples shown in <figref idrefs="DRAWINGS">FIG. 5</figref> to <figref idrefs="DRAWINGS">FIG. 7</figref>, more capacitance values are possible by modifications to the circuits shown as is readily understood by one skilled in the art. Furthermore, the first <b>152</b> and second <b>154</b> capacitors may be variable capacitors as well to provide more selections for the ratio between the first and second capacitances.</div>
+<div class="description-paragraph" id="p-0146" num="0145"> <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates one embodiment of a variable capacitor. Three capacitors CS, C<b>0</b>, and C<b>1</b> are connected in parallel between terminals PIX and AMP. Capacitors C<b>0</b> and C<b>1</b> are in series with switches S<b>0</b> and S<b>1</b>, respectively, to control connectivity. When CVAL=0, the switch S<b>0</b> is closed whereas the switch S<b>1</b> is open, causing the capacitor C<b>0</b> to be connected whereas the capacitor C<b>1</b> disconnected, giving a total capacitance of C<b>0</b>+CS between terminals PIX and AMP. When CVAL=1, the switch S<b>1</b> is closed whereas the switch S<b>0</b> is open, causing the capacitor C<b>1</b> to be connected whereas the capacitor C<b>0</b> disconnected, giving a total capacitance of C<b>1</b>+CS between terminals PIX and AMP.</div>
+<div class="description-paragraph" id="p-0147" num="0146"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates another embodiment of a variable capacitor. Two capacitors C<b>0</b> and C<b>1</b> are connected in parallel between terminals PIX and AMP. The capacitor C<b>0</b> and C<b>1</b> further are in series with switches S<b>0</b> and S<b>1</b>, respectively, to control connectivity. When CVAL=0, the switch S<b>0</b> is closed whereas the switch S<b>1</b> is open, causing the capacitor C<b>0</b> to be connected whereas the capacitor C<b>1</b> disconnected, giving a total capacitance of C<b>0</b> between terminals PIX and AMP. When CVAL=1, switch S<b>1</b> is closed whereas switch S<b>0</b> is open, causing capacitor C<b>1</b> to be connected whereas capacitor C<b>0</b> disconnected, giving a total capacitance of C<b>1</b> between terminals PIX and AMP.</div>
+<div class="description-paragraph" id="p-0148" num="0147"> <figref idrefs="DRAWINGS">FIG. 7</figref> illustrates yet another embodiment of a variable capacitor. Two capacitors CS and C<b>1</b> are connected in parallel between terminals PIX and AMP. The capacitor C<b>1</b> is in series with a switch S<b>1</b> to control connectivity. When CVAL=0, the switch S<b>1</b> is open, causing the capacitor C<b>1</b> to be disconnected, giving a total capacitance of CS between terminals PIX and AMP. When CVAL=1, the switch S<b>1</b> is closed, causing the capacitor C<b>1</b> to be connected, giving a total capacitance of C<b>1</b>+CS between terminals PIX and AMP.</div>
+<div class="description-paragraph" id="h-0013" num="0000">Fourth Embodiment</div>
+<div class="description-paragraph" id="p-0149" num="0148"> <figref idrefs="DRAWINGS">FIG. 23</figref> illustrates a fourth embodiment of an image sensor. By way of example, below is described an operation of the fourth embodiment according to the second noise and normalizing methods. The light reader <b>16</b> may sample the first reference output signal onto the first capacitor <b>152</b> and the common-reset output signal onto the second capacitor <b>154</b>, output the first noise difference from amplifier <b>180</b> to the ADC <b>24</b>, sample the common-reset output signal onto the first capacitor <b>152</b> and the first sense-node reset output signal onto the second capacitor <b>154</b>, and output the third noise difference to the ADC <b>24</b>. The ADC <b>24</b> digitizes the first and third noise differences. The digitized noise differences may then be transmitted to the external processor <b>72</b> which forms the noise signal according to the 2nd noise method. Alternately, the noise signal may be formed on the image sensor <b>11</b> by a computing circuit (not shown). In a similar manner, the light reader <b>16</b> may sample the second sense-node reset output signal onto the first capacitor <b>152</b> and the light response output signal onto the second capacitor <b>154</b>, output a negated third normalizing difference from the amplifier <b>180</b> to the ADC <b>24</b>, sample the second reference output signal onto the first capacitor <b>152</b> and the light response output signal onto the second capacitor <b>154</b>, and output the first normalizing difference to the ADC <b>24</b>. The third and first normalizing differences are digitized. The digitized normalizing differences may be transmitted to the external processor <b>72</b> to be combined to form the normalized light response signal according to the first normalizing method. Alternately, the normalized light response signal may be formed on the image sensor <b>11</b> by a computing circuit (not shown).</div>
+<div class="description-paragraph" id="p-0150" num="0149">Note that the negated third normalizing difference may be provided to the ADC <b>24</b> instead of the unnegated third normalizing difference, or vice versa, by interchanging the signals sampled by the first <b>152</b> and second <b>154</b> capacitors, to provide a signal polarity better suited to the input range of the ADC <b>24</b>, as is well known to one skilled in the art.</div>
+<div class="description-paragraph" id="p-0151" num="0150">In the fourth embodiment, the light reader <b>16</b> may form any two noise differences among the first to third noise differences and any two normalizing differences among the first to third normalizing differences, and transmit the differences to the ADC <b>24</b> to be digitized then either transmitted to the external processor <b>72</b> or to be processed on the image sensor <b>11</b> to form the noise signal and the normalized light response signal according to the corresponding noise and normalizing method, respectively, then subtract the noise signal from the normalized light response signal to form the de-noised signal or to form the de-noised signal with those two pairs of noise and normalizing differences directly.</div>
+<div class="description-paragraph" id="p-0152" num="0151">As one skilled in the art would readily recognize, the sequence among the SAM1 to SAM4 signals in <figref idrefs="DRAWINGS">FIG. 17A</figref> to <figref idrefs="DRAWINGS">FIG. 17E</figref> may be modified to suit the fourth embodiment by replacing the SAM3 signal with the SAM1 signal and replacing the SAM4 signal with the SAM2 signal. For example, to implement the second noise and normalizing methods on the fourth embodiment as described above, one can modify <figref idrefs="DRAWINGS">FIG. 17B</figref> into <figref idrefs="DRAWINGS">FIG. 17L</figref> by replacing SAM3 and SAM4 samplings with SAM1 and SAM2 samplings, as shown in <figref idrefs="DRAWINGS">FIG. 17L</figref>. After every consecutive pair of SAM1 and SAM2 samplings, the light reader <b>16</b> outputs the corresponding noise or normalizing difference, then proceeds to the next pair.</div>
+<div class="description-paragraph" id="p-0153" num="0152">As another example, to implement the first noise and normalizing methods on the fourth embodiment, one can modify <figref idrefs="DRAWINGS">FIG. 17B</figref> into <figref idrefs="DRAWINGS">FIG. 17J</figref> by adding a third reference level to apply onto the sense node <b>111</b> immediately after step <b>304</b> and change SAM3 to sample during this third reference level and store a sampled third reference output signal instead of sampling during the first reference level in step <b>300</b>, then modify further to <figref idrefs="DRAWINGS">FIG. 17K</figref> by replacing SAM3 and SAM4 samplings with another pair of SAM1 and SAM2 samplings. Likewise, for the samplings after light exposure, a fourth reference level may be applied onto the sense node <b>111</b> before the second sense-node reset in step <b>310</b> and SAM3 sampling moved from step <b>314</b> to sample the fourth reference output signal at this time to store a sampled fourth reference output signal. Likewise, a further change from <figref idrefs="DRAWINGS">FIG. 17J</figref> into <figref idrefs="DRAWINGS">FIG. 17K</figref> replaces SAM3 and SAM4 samplings with another pair of SAM1 and SAM2 samplings. The timing of the control signals are changed from timing diagram of <figref idrefs="DRAWINGS">FIG. 16</figref> of the first embodiment and the logic circuits are changed from the schematics of <figref idrefs="DRAWINGS">FIG. 18A</figref> to <figref idrefs="DRAWINGS">FIG. 18D</figref>, as one skilled in the art would readily know to perform.</div>
+<div class="description-paragraph" id="p-0154" num="0153">As yet another example, to implement the third noise and normalizing methods on the fourth embodiment, one can modify <figref idrefs="DRAWINGS">FIG. 17C</figref> to <figref idrefs="DRAWINGS">FIG. 17M</figref> by bringing the first reference level to apply onto the sense node <b>111</b> immediately after the first sense-node reset, keeping SAM1 to sample during this first reference level, then replace the SAM3 and SAM4 samplings with another pair of SAM1 and SAM2 samplings. Likewise, for the samplings after light exposure, the second reference level may be brought to apply onto the sense node <b>111</b> before the second sense-node reset, keeping SAM1 to sample this second reference level, then the SAM3 and SAM4 samplings replaced with another pair of SAM1 and SAM2 samplings. Node that the SAM4 sampling may be replaced with SAM1 sampling, while the SAM3 sampling with SAM2 sampling. The timing of the control signals may be changed from the timing diagram of <figref idrefs="DRAWINGS">FIG. 16</figref> of the first embodiment and the logic circuits may be changed from the schematics of <figref idrefs="DRAWINGS">FIG. 18A</figref> to <figref idrefs="DRAWINGS">FIG. 18D</figref>, as one skilled in the art would readily know how to. It is noted that here the second reference level also takes the role of the second springboard level. However, as one skilled in the art can readily recognize, a second springboard level different from the second reference level may be provided on the IN line <b>120</b> and driven onto the sense node <b>111</b> across the reset switch <b>112</b> between the second reference level and the second sense-node reset to adjust the second sense-node reset level and concomitantly the light response level.</div>
+<div class="description-paragraph" id="p-0155" num="0154">The fourth embodiment may be modified to store a noise/normalizing difference signal output by the amplifier <b>180</b> on a capacitor as an analog signal, then to subsequently subtract between this analog signal and the next noise/normalizing difference signal output by the amplifier <b>180</b>, the ADC <b>24</b> digitizing a result from the subtraction.</div>
+<div class="description-paragraph" id="h-0014" num="0000">Fifth Embodiment</div>
+<div class="description-paragraph" id="p-0156" num="0155"> <figref idrefs="DRAWINGS">FIG. 24</figref> illustrates a fifth embodiment. In the fifth embodiment, the analog gain circuits <b>21</b> and the analog subtractor <b>17</b> of the first embodiment in <figref idrefs="DRAWINGS">FIG. 1</figref> are replaced with an analog multiplexer <b>23</b> that has an output coupled to the ADC <b>24</b>. Light reader output signals <b>19</b> <i>a</i>, <b>19</b> <i>b </i>each transmits a noise or normalizing difference that is multiplexed by the analog multiplexer <b>23</b> to be digitized by the ADC <b>24</b>. The digitized noise and normalizing differences may be combined according to any of the first to fourth noise and normalizing methods either on the image sensor <b>11</b>′ by a computing circuit (not shown) or on the external processor <b>72</b>.</div>
+<div class="description-paragraph" id="p-0157" num="0156">Alternately, two (or more) ADCs may be used, each ADC digitizing outputs of light readers <b>16</b>, <b>16</b>′, respectively.</div>
+<div class="description-paragraph" id="h-0015" num="0000">Sixth Embodiment</div>
+<div class="description-paragraph" id="p-0158" num="0157">In a sixth embodiment (not shown in drawing), each of the first reference output signal, the first sense-node reset output signal, the common-reset output signal, the second reference output signal, the second sense-node reset output signal, and the light response output signal may be sampled and digitized directly by one or more ADCs, sequentially or concurrently, then subsequently combined arithmetically in the digital domain, either on the image sensor by a computing circuit (not shown) or externally on the processor <b>72</b>, according to any one of the noise methods and/or normalizing methods, or even to form the result of the normalizing difference subtracting the noise signal, each under a respective gain, without forming one or both of the noise and normalizing differences.</div>
+<div class="description-paragraph" id="h-0016" num="0000">Other Alternate Embodiments and Operations</div>
+<div class="description-paragraph" id="p-0159" num="0158">Other alternate embodiments of the image sensor are possible. For example, the ADC(s) in each of the first to sixth embodiments may be located outside of the image sensor, for example on a different semiconductor substrate than a semiconductor substrate that supports the image sensor. The light readers <b>16</b>, <b>16</b>′, <b>16</b>″, the analog gain circuits <b>17</b>, and the analog subtractor <b>21</b> may likewise be located outside the image sensor.</div>
+<div class="description-paragraph" id="p-0160" num="0159">Other alternate modes of operations are possible. A first variation is that the second reference level may have an offset (hereinafter “reference offset”) down from a voltage level that is transmitted on the IN line immediately before the reset switch <b>112</b> switches from a triode region to an OFF state for the common reset (hereinafter “first springboard level”) (e.g. in <figref idrefs="DRAWINGS">FIG. 17A</figref> the first springboard level is also the first reference level). By way of example, as shown in <figref idrefs="DRAWINGS">FIG. 17F</figref>, the second reference level may be at the VPH2 level, selected by switching DIN(1:0) to “01”, whereas the first reference level takes the VPH0 level, selected by switching DIN(1:0) to “11”. The reference offset may be in a same direction and by a similar amount as the common reset level is offset from the first springboard level (which is also the first reference level), for example within 50 mV of the common reset level. Having a nonzero reference offset has a benefit of minimizing a DC offset in the light response output signal, as such DC offset under high gain can saturate the amplifier <b>180</b> in the light reader. The reference offset may be chosen to be between 50 mV to 300 mV, preferably 150 mV. A separate DC offset in the noise signal due to a difference between the first and second reference levels may be reduced subsequently in the digital domain within the combiner <b>50</b> or in the external processor <b>72</b>. Alternately, the separate DC offset in the noise signal may be removed in the analog domain prior to digitizing by the ADC <b>24</b> by any one of the analog DC signal subtraction methods and circuits known in the art.</div>
+<div class="description-paragraph" id="p-0161" num="0160">Still other variations are possible, as described below.</div>
+<div class="description-paragraph" id="p-0162" num="0161">In a second variation, the IN line <b>120</b> is driven to a higher first springboard level than the first reference level. By way of example, <figref idrefs="DRAWINGS">FIG. 17H</figref> shows a higher first springboard level after the first reference output signal is sampled in step <b>300</b> and before step <b>302</b>. By way of example, the first springboard level may be provided by switching DIN(1:0) to “11” to select the VPH0 level, whereas the first reference level by switching DIN(1:0) to “10” to select the VPH1 level. The offset of the first springboard level above the first reference level (hereinafter “first springboard offset”) can in part cancel the storage-node and sense-node voltage drop during the common reset in step <b>302</b>, so that an offset between the first reference level and the common reset level (hereinafter “reset offset”), and concomitantly a DC offset in the noise signal, is reduced. The first springboard offset may be between 50 mV to 300 mV, preferably 150 mV. In this method, the second reference level may be same as the first reference level, since the storage node reset level is brought essentially close to the first reference level, such as within 100 mV, so that a DC offset in the normalized light response signal is likewise reduced when the second reference level is select to be equal to the first reference level.</div>
+<div class="description-paragraph" id="p-0163" num="0162">In a third variation, the virtual ground GND1 signal <b>156</b> in the light reader that connects to the capacitors <b>152</b> to <b>154</b> has a voltage that varies between a first GND1 level when the first reference output signal is sampled and a second GND1 level when the common-reset output signal is sampled, a difference (hereinafter “GND1 step”) between 50 mV and 300 mV, preferably 150 mV. By way of example, <figref idrefs="DRAWINGS">FIG. 17I</figref> shows voltage level changes on the storage node and the GND1 signal <b>156</b>. The second GND1 level is offset in a same direction as the common reset level is offset from the first reference level, which is also the first springboard level in this example. The GND1 signal <b>156</b> takes the second GND1 level during the sampling of the common reset output signal, the first and second sense-node reset output signals and the light response output signal, whereas during samplings of the first and second reference output signals it takes the first GND1 level. The GND1 step thus partially cancels a DC offset between the common reset level and the first reference level and, concomitantly also a DC offset between the light response level and the second reference level. The second reference level may be same as the first reference level, for example the VPH1 level selected by DIN(1:0)=“10”. An analog signal driver for the GND1 signal <b>156</b> may have two or more output levels, selectable by a digital input, similar to that for the IN line driver <b>17</b>, and may be controlled by a logic circuit constructed according to a similar technique of construction like the logic circuit for generating the DIN(1:0) signals.</div>
+<div class="description-paragraph" id="p-0164" num="0163">The third variation essentially uses a technique of analog offset cancellation or DC subtraction in the light reader. Different alternatives on this technique are possible, as is known in the art. In one alternative, instead of varying the GND1 signal <b>156</b>, a pair of offset-cancelling capacitors (not shown) may be connected to the “+” and “−” inputs of the amplifier <b>180</b> to perform the offset cancellation. These offset-cancelling capacitors can be charged to given voltages, their capacitances may be same as the sampling capacitors <b>152</b>, <b>154</b> or different. When a sampling circuit <b>150</b>, <b>150</b>′ or <b>150</b>″ of the light reader is connected to the amplifier <b>180</b> to transfer charges, the offset-cancelling capacitors are also charged to the given voltages then connected to transfer charges to the feedback capacitors <b>190</b> to effect the offset cancellation.</div>
+<div class="description-paragraph" id="p-0165" num="0164">Another alternative on this technique is to precharge the feedback capacitors <b>190</b> to a suitable differential voltage (hereinafter “precharge voltage”) prior to each transfer of charges from a sampling circuit <b>150</b>, <b>150</b>′ or <b>150</b>″. The precharge voltage has an opposite direction than the reset offset in the sense that the precharge voltage partially cancels an output change of the amplifier <b>180</b> that arises due to the reset offset. The precharge voltage may be increased in magnitude for an increase in a gain of the amplifier <b>270</b> (i.e. the amplifier <b>180</b> together with the feedback capacitors <b>190</b>) when the feedback capacitors <b>190</b> take a smaller capacitance value.</div>
+<div class="description-paragraph" id="p-0166" num="0165">In a fourth variation, the second reference level is provided on the IN line <b>120</b> and the corresponding second reference output signal sampled not after the light response output signal is sampled but before the switching OFF of the reset switch <b>112</b> in step <b>310</b> that precedes the second sense-node reset output signal. By way of example, <figref idrefs="DRAWINGS">FIG. 17G</figref> shows the corresponding sense-node and storage node voltage levels. A step <b>309</b> is inserted immediately before the step <b>310</b> of the flowchart. In step <b>309</b>, the reset switch <b>112</b> is in a triode region, the transfer switch <b>117</b> is in an OFF state, and the IN line <b>120</b> is driven to the second reference level. The corresponding second reference output signal on the OUT line <b>124</b> is sampled by a SAM1 signal and stored as the sampled second reference output signal. Although <figref idrefs="DRAWINGS">FIG. 17G</figref> shows a separate second springboard level is driven onto the sense node <b>111</b> between the second reference level and the sense-node reset, one skilled in the art can recognize that the second springboard level may take a same voltage level as the second reference level or different.</div>
+<div class="description-paragraph" id="p-0167" num="0166">Various combinations and permutations of the above embodiments, variations and techniques are possible, as one skilled in the art would readily be enabled to perform. Each combination and permutation has a corresponding timing diagram and logic circuit for the global control signals that can be constructed by modifications from the timing diagram <figref idrefs="DRAWINGS">FIG. 16</figref> and logic circuit schematic <figref idrefs="DRAWINGS">FIG. 18A</figref> to <figref idrefs="DRAWINGS">FIG. 18D</figref>, described below, as one skilled in the art would be able to readily perform.</div>
+<div class="description-paragraph" id="h-0017" num="0000">Generating Control Signals</div>
+<div class="description-paragraph" id="p-0168" num="0167">The various global control signals RST, SEL, TF, DIN(1), DIN(0), SAM1, SAM2, SAM3, SAM4 and SUB can be generated in a circuit generally referred to as the row decoder <b>20</b>. <figref idrefs="DRAWINGS">FIG. 18A</figref> and <figref idrefs="DRAWINGS">FIG. 18B</figref> show an embodiment of logic to generate the DIN(1), DIN(0), SEL, TF, SAM1, SAM2, SAM3, SAM4 and RST signals in accordance with the timing diagram of <figref idrefs="DRAWINGS">FIG. 16</figref>. The logic may include a plurality of comparators <b>350</b> with one input connected to a counter <b>352</b> and another input connected to hardwired signals that contain a lower count value and an upper count value. The counter <b>352</b> sequentially generates a count. The comparators <b>350</b> compare the present count with the lower and upper count values. If the present count is between the lower and upper count values the comparators <b>350</b> output a logical 1. The lower and upper count values for each of the control signals may be modified to support different timings than displayed in <figref idrefs="DRAWINGS">FIG. 16</figref>, as one skilled in the art would readily recognize. For example, to support the timing sequence of SAM1, SAM2, SAM3 and SAM4 signals shown in <figref idrefs="DRAWINGS">FIG. 17B</figref>, which differs from <figref idrefs="DRAWINGS">FIG. 17A</figref> in that the SAM3 signal samples together with the SAM1 signal instead of with the SAM2 signal, the logic circuit in <figref idrefs="DRAWINGS">FIG. 18C</figref> may be modified such that the buffer that drives the SAM3 signal inputs from the SAM1 signal instead of the SAM2 signal.</div>
+<div class="description-paragraph" id="p-0169" num="0168">The comparators <b>350</b> are connected to a plurality of OR gates <b>358</b>. The OR gates <b>358</b> are connected to latches <b>360</b>. The latches <b>360</b> provide the corresponding DIN(1), DIN(0), SEL, TF, SAM1, SAM2, SAM3, SAM4 and RST signals.</div>
+<div class="description-paragraph" id="p-0170" num="0169">The latches <b>360</b> switch between a logic 0 and a logic 1 in accordance with the logic established by the OR gates <b>358</b>, comparators <b>350</b> and the present count of the counter <b>352</b>. For example, the hardwired signals for the comparator coupled to the DIN(1) latch may contain a count value of 1 and a count value of 22. If the count from the counter is greater or equal to 1 but less than 22 the comparator <b>350</b> will provide a logic 1 that will cause the DIN(1) latch <b>360</b> to output a logic 1. The lower and upper count values establish the sequence and duration of the pulses shown in <figref idrefs="DRAWINGS">FIG. 16</figref>.</div>
+<div class="description-paragraph" id="p-0171" num="0170">The sensor <b>10</b>, <b>10</b>′, <b>10</b>″, <b>11</b>, <b>11</b>′ may have a plurality of reset RST(n) and transfer TF(n) drivers <b>374</b>, each driver <b>374</b> being connected to a row of pixels and is connected to the output of an AND gate <b>375</b>. <figref idrefs="DRAWINGS">FIG. 19</figref> shows a unit of row decoder's output circuit between a row of pixels and a circuit shown in <figref idrefs="DRAWINGS">FIG. 18A-18D</figref>. <figref idrefs="DRAWINGS">FIG. 20</figref> illustrates an operation of the circuit of <figref idrefs="DRAWINGS">FIG. 19</figref>. Signals RSTEN(n), SELEN(n), TFEN(n) are generated by the row decoder <b>20</b> and each may take a logic value of ‘1’ or ‘0’ at any one time. A ‘1’ enables the corresponding RST(n), SEL(n), TF(n) signal to transmit a pulse signal received from global control signals RST, SEL and TF, respectively. In addition, at rising edges of the IN signal, the RST(n) and TF(n) signals are each capacitively coupled to a higher voltage level, as shown in <figref idrefs="DRAWINGS">FIG. 20</figref>, after tri-state buffer <b>374</b> drives RST(n) and TF(n), respectively, to a high level then into a tri-state.</div>
+<div class="description-paragraph" id="h-0018" num="0000">Theory of Operation</div>
+<div class="description-paragraph" id="p-0172" num="0171">Below, a noise cancelling effect afforded by the image sensors <b>10</b>, <b>10</b>′, <b>10</b>″, <b>11</b>, <b>11</b>′ that operate under the first noise method and the first normalizing method is explained in reference to the sampling sequence shown in <figref idrefs="DRAWINGS">FIG. 17A</figref>. The second to fourth noise and normalizing methods are subsequently shown to be equivalent to the first noise and normalizing methods, respectively.</div>
+<div class="description-paragraph" id="p-0173" num="0172">Let Δ<sub>n</sub>Q<sub>B </sub>designate the temporal noise charge on the common node between the storage node <b>115</b>, the sense node <b>111</b> and the channel of the transfer switch <b>117</b> at step <b>302</b>, Δ<sub>n</sub>Q<sub>C2 </sub>designate the temporal noise charge on the sense node at step <b>304</b>, and Δ<sub>n</sub>Q<sub>C1 </sub>designate the temporal noise charge on the storage node at step <b>304</b>. These are temporal noise charges that affect the first image (i.e. noise signal).</div>
+<div class="description-paragraph" id="p-0174" num="0173">Let Δ<sub>n</sub>Q<sub>D1 </sub>designate the temporal noise charge on the storage node <b>115</b> at step <b>310</b>, Δ<sub>n</sub>Q<sub>D2 </sub>designate the temporal noise charge on the sense node <b>111</b> at step <b>310</b>, and Δ<sub>n</sub>Q<sub>E </sub>designate the temporal noise charge on the common node between the storage node <b>115</b>, the sense node <b>111</b> and the channel of the transfer switch <b>117</b> at step <b>312</b>. These are temporal noise charges that affect the second image (i.e. normalized light response signal).</div>
+<div class="description-paragraph" id="p-0175" num="0174">In the first image, temporal noise charges are related as such: Δ<sub>n</sub>Q<sub>B</sub>−Δ<sub>n</sub>Q<sub>C2</sub>=Δ<sub>n</sub>Q<sub>C1</sub>, due to conservation of charges. In the second image, temporal noise charges are related as such: Δ<sub>n</sub>Q<sub>C1</sub>+Δ<sub>n</sub>Q<sub>D2</sub>=Δ<sub>n</sub>Q<sub>E</sub>, due to conservation of charges. Substituting for Δ<sub>n</sub>Q<sub>C1 </sub>from both relations,
+<br/>
+Δ<sub>n</sub> <i>Q</i> <sub>E</sub>−Δ<sub>n</sub> <i>Q</i> <sub>D2</sub>−Δ<sub>n</sub> <i>Q</i> <sub>E</sub>+Δ<sub>n</sub> <i>Q</i> <sub>C2</sub>=0.
+</div>
+<div class="description-paragraph" id="p-0176" num="0175">Temporal noise charges Δ<sub>n</sub>Q<sub>E</sub>, Δ<sub>n</sub>Q<sub>D2</sub>, Δ<sub>n</sub>Q<sub>B </sub>and Δ<sub>n</sub>Q<sub>C2 </sub>result in temporal noise voltages Δ<sub>n</sub>V<sub>GE</sub>, Δ<sub>n</sub>V<sub>GD2</sub>, Δ<sub>n</sub>V<sub>AB </sub>and Δ<sub>n</sub>V<sub>AC2</sub>, respectively, related to the temporal noise charges by −Δ<sub>n</sub>Q<sub>E</sub>=C<sub>Total</sub>.Δ<sub>n</sub>V<sub>GE</sub>, −Δ<sub>n</sub>Q<sub>D2</sub>=C<sub>Sense</sub>.Δ<sub>n</sub>V<sub>GD2</sub>, −Δ<sub>n</sub>Q<sub>B</sub>=C<sub>Total</sub>.Δ<sub>n</sub>V<sub>AB</sub>, and −Δ<sub>n</sub>Q<sub>C2</sub>=C<sub>Sense</sub>.Δ<sub>n</sub>V<sub>AC2</sub>, respectively. C<sub>Sense </sub>is the capacitance on the sense node <b>111</b>. C<sub>Total </sub>is the total capacitance on the storage node <b>115</b>, the sense node <b>111</b>, and the channel-to-gate, drain-to-gate and source-to-gate capacitances of the transfer switch <b>117</b>. Here, V<sub>GE</sub>=V<sub>G</sub>−V<sub>E</sub>, V<sub>GD2</sub>=V<sub>G</sub>−V<sub>D2</sub>, V<sub>AB</sub>=V<sub>A</sub>−V<sub>B</sub>, and V<sub>AC2</sub>=V<sub>A</sub>−V<sub>C2</sub>.</div>
+<div class="description-paragraph" id="p-0177" num="0176">Under the first noise and normalizing methods, form V<sub>AB </sub>&amp; V<sub>AC2</sub>, being the first and second noise differences, respectively, and V<sub>GE </sub>&amp; V<sub>GD2</sub>, being the first and second normalizing differences, respectively. The third image (i.e. de-noised signal), I<sub>3</sub>=I<sub>2</sub>−I<sub>1</sub>=[C<sub>Total</sub>.V<sub>GE</sub>−C<sub>Sense</sub>.V<sub>GD2</sub>]−[C<sub>Total</sub>.V<sub>AB</sub>−C<sub>Sense</sub>.V<sub>AC2</sub>], where I<sub>1</sub>=C<sub>Total</sub>.V<sub>AB</sub>−C<sub>Sense</sub>.V<sub>AC2 </sub>and I<sub>2</sub>=C<sub>Total</sub>.V<sub>GE</sub>−C<sub>Sense</sub>.V<sub>GD2</sub>. The temporal noise Δ<sub>n</sub>I<sub>3</sub>=[C<sub>Total</sub>.Δ<sub>n</sub>V<sub>GE</sub>−C<sub>Sense</sub>.Δ<sub>n</sub>V<sub>GD2</sub>]−[C<sub>Total</sub>.Δ<sub>n</sub>V<sub>AB </sub>C<sub>Sense</sub>.Δ<sub>n</sub>V<sub>AC2</sub>]=−(Δ<sub>n</sub>Q<sub>E</sub>−Δ<sub>n</sub>Q<sub>D2</sub>−Δ<sub>n</sub>Q<sub>B</sub>+Δ<sub>n</sub>Q<sub>C2</sub>)=0. In I<sub>3</sub>, C<sub>Total</sub>.V<sub>GE </sub>is the only term that varies with exposure to light. Hence I<sub>3 </sub>is dependent on V<sub>GE </sub>and contains no temporal switch noises that arise due to switching of reset and transfer transistors.</div>
+<div class="description-paragraph" id="p-0178" num="0177">Equivalently, under the second noise and normalizing methods, form V<sub>AB </sub>&amp; V<sub>BC2</sub>, being the first and third noise differences, respectively, and V<sub>GE </sub>&amp; V<sub>ED2</sub>, being the first and third normalizing differences, respectively. Here, V<sub>BC2</sub>=V<sub>B</sub>−V<sub>C2 </sub>and V<sub>ED2</sub>=V<sub>E</sub>−V<sub>D2</sub>. Third image,</div>
+<div class="description-paragraph" id="p-0179" num="0178">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>3</mn>
+</msub>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Total</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>GE</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>GE</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mrow>
+<mi>GD</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>GE</mi>
+</msub>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+<mo>-</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Total</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>AB</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>AB</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mrow>
+<mi>AC</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>AB</mi>
+</msub>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Total</mi>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>GE</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>V</mi>
+<mrow>
+<mi>GD</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>V</mi>
+<mi>GE</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+<mo>-</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Total</mi>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>AB</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>V</mi>
+<mrow>
+<mi>AC</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>V</mi>
+<mi>AB</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Total</mi>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>GE</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mrow>
+<mi>ED</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+<mo>-</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Total</mi>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>AB</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mrow>
+<mi>BC</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>2</mn>
+</msub>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>1</mn>
+</msub>
+<mo>.</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+<maths id="MATH-US-00001-2" num="00001.2">
+<math overflow="scroll">
+<mrow>
+<mi>Here</mi>
+<mo>,</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>1</mn>
+</msub>
+<mo>=</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Total</mi>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>AB</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mrow>
+<mi>BC</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00001-3" num="00001.3">
+<math overflow="scroll">
+<mi>and</mi>
+</math>
+</maths>
+<maths id="MATH-US-00001-4" num="00001.4">
+<math overflow="scroll">
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>2</mn>
+</msub>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Total</mi>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mi>GE</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mi>Sense</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>V</mi>
+<mrow>
+<mi>ED</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+<mo>.</mo>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0180" num="0179">Equivalently, under the third noise and normalizing methods, form V<sub>BC2 </sub>&amp; V<sub>AC2</sub>, being the third and second noise differences, respectively, and V<sub>ED2 </sub>&amp; V<sub>GD2</sub>, being the third and second normalizing differences, respectively. Substituting for V<sub>GE</sub>=V<sub>GD2</sub>−V<sub>ED2</sub>,
+<br/>
+<i>I</i> <sub>2</sub> <i>=C</i> <sub>Total</sub> <i>.V</i> <sub>GE</sub> <i>−C</i> <sub>Sense</sub> <i>.V</i> <sub>GD2</sub>=(<i>C</i> <sub>Total</sub> <i>−C</i> <sub>Sense</sub>).<i>V</i> <sub>GD2</sub> <i>−C</i> <sub>Total</sub> <i>.V</i> <sub>ED2</sub>.
+<br/>
+Only the second term in I<sub>2 </sub>depends on exposure to light. Substituting for V<sub>AB</sub>=V<sub>AC2</sub>−V<sub>BC2</sub>,
+<br/>
+<i>I</i> <sub>1</sub>=(<i>C</i> <sub>Total</sub> <i>−C</i> <sub>Sense</sub>).<i>V</i> <sub>AC2</sub> <i>−C</i> <sub>Total</sub> <i>.V</i> <sub>BC2</sub>.
+<br/>
+The third image, I<sub>3</sub>=I<sub>2</sub>−I<sub>1</sub>=[(C<sub>Total</sub>−C<sub>Sense</sub>).V<sub>GD2</sub>−C<sub>Total</sub>.V<sub>ED2</sub>]−[C<sub>Total</sub>−C<sub>Sense</sub>).V<sub>AC2</sub>−C<sub>Total</sub>.V<sub>BC2</sub>].
+<br/>
+Calibration
+</div>
+<div class="description-paragraph" id="p-0181" num="0180">Calibration may be performed to find a suitable set of signed scaling factors for the noise and normalizing methods chosen, for example, signed scaling factors COEF<b>1</b>, COEF<b>2</b> in <figref idrefs="DRAWINGS">FIG. 1</figref> or <figref idrefs="DRAWINGS">FIG. 21</figref>, or the first and second capacitances of the triple-sampling circuit <b>150</b>″ for the triple-sampling light reader <b>16</b>″ of the image sensor <b>10</b>″ of <figref idrefs="DRAWINGS">FIG. 22</figref>, or equivalent thereof for the other embodiments. Below describes a calibration procedure to find a suitable set of signed scaling factors.</div>
+<div class="description-paragraph" id="p-0182" num="0181">For each pixel among a plurality of pixels that share a layout and orientation, form a difference between a pair of de-noised signals, each de-noised signal arising from forming a noise signal followed by a normalized light response signal then subtracting the noise signal from the normalized light response signal. The difference has a residual temporal noise but none of the mean of the de-noised signal. Form squares of the differences across the plurality of pixels and a sum of the squares. Since residual temporal noises of different pixels are independent, the sum of the squares is a good approximation of a multiple of a variance of the residual noise of each pixel, namely 2Nσ<sup>2</sup>, where N is the number of pixels and σ<sup>2 </sup>is the variance.</div>
+<div class="description-paragraph" id="p-0183" num="0182">For the plurality of pixels, find the sum of the squares for each of two different sets of signed scaling factors. Normalized each sum by dividing it by a square of a number that is directly proportional to a de-noised signal that would result under the corresponding set of signed scaling factors given a predetermined exposure duration and illumination of the pixels. The set that gives a lesser normalized sum of the squares is preferred. This procedure may be performed for more than two sets of signed scaling factors to identify a suitable set of signed scaling factors to use to form the de-noised signal for the plurality of pixels.</div>
+<div class="description-paragraph" id="p-0184" num="0183">By way of example, <figref idrefs="DRAWINGS">FIG. 10</figref> shows a layout arrangement of pixels of two different layout orientations in an array. In odd columns, the photodiodes and transfer switches assume one orientation whereas in even columns they assume a different orientation. Due to the asymmetry between these two different groups of pixels, a systematic mismatch tends to exist in capacitances and other electrical characteristics between the groups. Within each group, on the other hand, the likeness among pixels helps to minimize mismatches. Therefore calibration should be performed to produce a set of signed scaling factors suitable for each group, and each group may use the set that is suitable for itself in the noise and normalizing methods.</div>
+<div class="description-paragraph" id="p-0185" num="0184"> <figref idrefs="DRAWINGS">FIG. 11</figref> shows another example of layout arrangement of pixels of two different layout orientations in an array. <figref idrefs="DRAWINGS">FIG. 11</figref> corresponds to a three-by-two array of the photodiodes <b>100</b> <i>a</i>, <b>100</b> <i>b </i>and transfer switches <b>117</b> <i>a</i>, <b>117</b> <i>b </i>corresponding to the schematic of <figref idrefs="DRAWINGS">FIG. 12</figref> where two photodiodes <b>100</b> <i>a</i>, <b>100</b> <i>b </i>share a sense node <b>111</b> through transfer switches <b>117</b> <i>a</i>, <b>117</b> <i>b</i>, respectively. Each pixel comprises a photodiode <b>100</b> <i>a </i>or <b>100</b> <i>b </i>and a transfer switch <b>117</b> <i>a </i>or <b>117</b> <i>b</i>, and two pixels share a reset switch <b>112</b>, an output transistor <b>116</b> and a select switch <b>114</b>. In odd rows, the photodiodes and transfer switches assume one orientation whereas in the even rows they assume a different orientation. For the same reason as above, a calibration may be performed to produce a set of signed scaling factors suitable for each group, and each group may use the set that is suitable for itself in the noise and normalizing methods.</div>
+<div class="description-paragraph" id="p-0186" num="0185">Alternately, from the same pixel, more than two de-noise signals may be formed, a plurality of pairs among the de-noised signals are differenced and squared, the squares summed together to form a sum-of-squares. Such sums-of-squares across a plurality of similar pixels may be further summed together to form a final-sum-of-squares. This procedure is illustrated in <figref idrefs="DRAWINGS">FIG. 25</figref> and <figref idrefs="DRAWINGS">FIG. 26</figref>. Referring to <figref idrefs="DRAWINGS">FIG. 26</figref>, each q designates a different set of signed scaling factors, each p designates a different group of similar pixels, there being Z different sets of signed scaling factors and P different pixel layouts. For each combination of p and q, the process illustrated by the flowchart of <figref idrefs="DRAWINGS">FIG. 25</figref> is executed. In the flowchart of <figref idrefs="DRAWINGS">FIG. 25</figref>, N+1 de-noised signals are formed for each pixel in the pixel group p. Each successive pair of de-noised signals from each pixel in the group are differenced and squared. The N squares are summed, and may be further summed across the pixels within the group.</div>
+<div class="description-paragraph" id="p-0187" num="0186">Below describes an alternate procedure.</div>
+<div class="description-paragraph" id="p-0188" num="0187">To compare two different sets of signed scaling factors, repeatedly capture first and second images, with the image sensor kept in the dark or under a sufficiently dim lighting such that exposure to light either causes negligible light response output signal compared with a reset noise from a pixel <b>14</b> in the pixel array <b>12</b> or causes a negligible change in the light response output signal, for example due to a shot noise, compared with the reset noise. For each of one or more pixels, form a de-noised signal from each pair of a number of pairs of first and second images, preferably 9 or more pairs. Normalize each de-noised signal by dividing by a number that is directly proportional to a de-noised signal that is free of DC offset that would result under the same set of signed scaling factors if given a predetermined non-negligible illumination of the pixel(s). Find a variance among the normalized de-noised signals. The set of signed scaling factors that gives a lesser variance is preferred. This procedure may be repeated for more than two sets of signed scaling factors to find a set of signed scaling factors suitable for forming a de-noised signal.</div>
+<div class="description-paragraph" id="p-0189" num="0188">The image sensor may have a circuit to control repeated captures of first and second images and adjustments of the signed scaling factors applied in the noise and normalizing methods. Alternately, the signed scaling factors may be adjusted under a control from an external controller (not shown) or computer (not shown).</div>
+<div class="description-paragraph" id="p-0190" num="0189">Any of these calibration procedures may be completely performed on the image sensor, or partially on the image sensor and partially on the external processor. Alternately, a part of this procedure may be performed on a separate computer and/or under a control of the separate computer.</div>
+<div class="description-paragraph" id="p-0191" num="0190">A data that corresponds to a set of gain factors may be written into a nonvolatile memory or as a configuration of fuses or antifuses in the image sensor or a separate device that is or is to be included in the image capture system, for example the external processor <b>72</b> or a memory card such as commonly known flash memory cards.</div>
+<div class="description-paragraph" id="h-0019" num="0000">Closing</div>
+<div class="description-paragraph" id="p-0192" num="0191">While certain exemplary embodiments have been described and shown in the accompanying drawings, it is to be understood that such embodiments are merely illustrative of and not restrictive on the broad invention, and that this invention not be limited to the specific constructions and arrangements shown and described, since various other modifications may occur to those ordinarily skilled in the art.</div>
+<div class="description-paragraph" id="p-0193" num="0192">For example, although interleaving techniques involving entire lines of an image are shown and described, it is to be understood that the data may be interleaved in a manner that involves less than a full line, or more than one line. By way of example, one-half of the first line of image A may be transferred, followed by one-half of the first line of image B, followed by the second-half of the first line of image A, and so forth and so on. Likewise, the first two lines of image A may be transferred, followed by the first two lines of image B, followed by the third and fourth lines of image A, and so forth and so on.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM84218109">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. An image sensor, comprising:
+<div class="claim-text">a photoelectric conversion unit;</div>
+<div class="claim-text">a sensing node;</div>
+<div class="claim-text">a transfer switch that electrically connects the photoelectric conversion unit to the sensing node;</div>
+<div class="claim-text">an output transistor that outputs signals in response to signals on the sensing node;</div>
+<div class="claim-text">a reset switch that electrically connects a signal line to the sensing node;</div>
+<div class="claim-text">a first capacitor, the image sensor being configured to sample a first signal onto the first capacitor, the first signal being output by the output transistor when the reset switch operates in triode region and a voltage level is driven across source and drain of the reset switch onto the sensing node;</div>
+<div class="claim-text">a second capacitor, the image sensor being configured to sample a second signal onto the second capacitor, the second signal being output by the output transistor when the reset switch is non-conducting and the transfer switch operates in triode region;</div>
+<div class="claim-text">a third capacitor, the image sensor being configured to sample a third signal onto the third capacitor, the third signal being output by the output transistor after the second signal when the reset switch remains non-conducting and the transfer switch has switched to become non-conducting;</div>
+<div class="claim-text">a fourth capacitor, the image sensor being configured to sample one of the first to third signals onto the fourth capacitor; and,</div>
+<div class="claim-text">a first circuit configured to form:
+<div class="claim-text">a fifth signal to represent a difference between signals sampled on the fourth capacitor and one of the first to third capacitors that is configured to sample a signal different from the signal that the fourth capacitor is configured to sample; and,</div>
+<div class="claim-text">a sixth signal to represent a difference between the signals that the remaining two capacitors among the first to third capacitors not involved in forming the fifth signal are configured to sample.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The image sensor of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">a second circuit configured to form a noise signal to represent a weighted difference between the fifth and sixth signals.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The image sensor of <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein a weight of the fifth signal in the weighted difference relative to the sixth signal is adjustable.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The image sensor of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein data that correspond to the relative weight is stored in a nonvolatile memory or as a configuration of fuses or antifuses.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The image sensor of <claim-ref idref="CLM-00002">claim 2</claim-ref>, further comprising:
+<div class="claim-text">an analog-to-digital converter configured to convert the noise signal from analog to digital.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. An image capture system, comprising:
+<div class="claim-text">the image sensor according to <claim-ref idref="CLM-00001">claim 1</claim-ref>;</div>
+<div class="claim-text">a second circuit configured to form a noise signal to represent a weighted difference between the fifth and sixth signals;</div>
+<div class="claim-text">an analog-to-digital converter configured to convert the noise signal from analog to digital; and,</div>
+<div class="claim-text">a processor configured to receive the digitized noise signal and store it in a memory.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. An image capture system, comprising:
+<div class="claim-text">the image sensor according to <claim-ref idref="CLM-00002">claim 2</claim-ref>;</div>
+<div class="claim-text">an analog-to-digital converter configured to convert the noise signal from analog to digital; and,</div>
+<div class="claim-text">a processor configured to receive the digitized noise signal and store it in a memory.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. An image capture system, comprising:
+<div class="claim-text">the image sensor according to <claim-ref idref="CLM-00005">claim 5</claim-ref>; and,</div>
+<div class="claim-text">a processor configured to receive the digitized noise signal and store it in a memory.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. An image sensor, comprising:
+<div class="claim-text">a photoelectric conversion unit;</div>
+<div class="claim-text">a sensing node;</div>
+<div class="claim-text">a transfer switch that electrically connects the photoelectric conversion unit to the sensing node;</div>
+<div class="claim-text">an output transistor that outputs signals onto an output line in response to signals on the sensing node;</div>
+<div class="claim-text">a reset switch that electrically connects a signal line to the sensing node;</div>
+<div class="claim-text">a first circuit connected to the output transistor via the output line, the first circuit being configured to:
+<div class="claim-text">sample the output line to form a first sampled signal when the reset switch operates in triode region and a voltage level is driven across source and drain of the reset switch onto the sensing node;</div>
+<div class="claim-text">sample the output line to form a second sampled signal when the reset switch is non-conducting and the transfer switch operates in triode region;</div>
+<div class="claim-text">sample the output line to form a third sampled signal when the reset switch remains non-conducting and the transfer switch has switched to become non-conducting;</div>
+<div class="claim-text">sample the output line to form a fourth sampled signal when the reset switch operates in triode region again and a voltage level is again driven across the source and the drain of the reset switch onto the sensing node;</div>
+<div class="claim-text">subtract between the first and second sampled signals to form a fifth signal; and,</div>
+<div class="claim-text">subtract between the third and fourth sampled signals to form a sixth signal.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The image sensor of <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein the first circuit comprises four capacitors to store the first to fourth sampled signals respectively.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The image sensor of <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein the first circuit comprises one pair of capacitors to store the first and second sampled signals and store the third and fourth sampled signals subsequently.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The image sensor of <claim-ref idref="CLM-00009">claim 9</claim-ref>, further comprising:
+<div class="claim-text">a second circuit configured to form a noise signal to represent a weighted difference between the fifth and sixth signals.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The image sensor of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein a weight of the fifth signal in the weighted difference relative to the sixth signal is adjustable.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The image sensor of <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein data that correspond to the relative weight is stored in a nonvolatile memory or as a configuration of fuses or antifuses.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The image sensor of <claim-ref idref="CLM-00012">claim 12</claim-ref>, further comprising:
+<div class="claim-text">an analog-to-digital converter configured to convert the noise signal from analog to digital.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. An image capture system, comprising:
+<div class="claim-text">the image sensor according to <claim-ref idref="CLM-00009">claim 9</claim-ref>;</div>
+<div class="claim-text">a second circuit configured to form a noise signal to represent a weighted difference between the fifth and sixth signals;</div>
+<div class="claim-text">an analog-to-digital converter configured to convert the noise signal from analog to digital; and,</div>
+<div class="claim-text">a processor configured to receive the digitized noise signal and store it in a memory.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. An image capture system, comprising:
+<div class="claim-text">the image sensor according to <claim-ref idref="CLM-00012">claim 12</claim-ref>;</div>
+<div class="claim-text">an analog-to-digital converter configured to convert the noise signal from analog to digital; and,</div>
+<div class="claim-text">a processor configured to receive the digitized noise signal and store it in a memory.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. An image capture system, comprising:
+<div class="claim-text">the image sensor according to <claim-ref idref="CLM-00015">claim 15</claim-ref>; and,</div>
+<div class="claim-text">a processor configured to receive the digitized noise signal and store it in a memory.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. A method for capturing an image with an array of photodetecting pixels that comprises a photoelectric conversion unit, a sensing node, a transfer switch that electrically connects the photoelectric conversion unit to the sensing node, an output transistor that outputs signals onto an output line in response to signals on the sensing node, and a reset switch that electrically connects a signal line to the sensing node, the method comprising:
+<div class="claim-text">sampling the output line to form a first sampled signal when the reset switch operates in triode region and a voltage level is driven across source and drain of the reset switch onto the sensing node;</div>
+<div class="claim-text">sampling the output line to form a second sampled signal when the reset switch is non-conducting and the transfer switch operates in triode region;</div>
+<div class="claim-text">sampling the output line to form a third sampled signal when the reset switch remains non-conducting and the transfer switch has switched to become non-conducting;</div>
+<div class="claim-text">sampling the output line to form a fourth sampled signal when the reset switch operates in triode region again and a voltage level is again driven across the source and the drain of the reset switch onto the sensing node;</div>
+<div class="claim-text">subtracting between the first and second sampled signals to form a fifth signal; and,</div>
+<div class="claim-text">subtracting between the third and fourth sampled signals to form a sixth signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The method of <claim-ref idref="CLM-00019">claim 19</claim-ref>, further comprising:
+<div class="claim-text">forming a noise signal as a weighted difference between the fifth and sixth signals.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

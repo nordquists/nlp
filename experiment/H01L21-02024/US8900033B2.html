@@ -1,0 +1,317 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US8900033B2 - Wafer polishing method 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA143978167">
+<div class="abstract" num="p-0001">An object of the present invention is to provide a method of polishing silicon wafers, capable of suppressing generation of undesired sounds from carriers and reducing the thickness variation of the wafers after polished.</div>
+<div class="abstract" num="p-0002">The method is a wafer polishing method in which wafers <b>20</b> are polished by supplying a polishing solution to surfaces <b>30</b> <i>a </i>of a pair of polishing pads <b>30</b> positioned above and below carriers <b>10</b> each having a circular hole <b>11</b> for retaining the wafers <b>20</b>, the carriers <b>10</b> being thinner than the wafers <b>20</b>; and sliding the polishing pads <b>30</b> relatively to the carriers <b>10</b>, thereby simultaneously polishing both surfaces of the wafers <b>20</b> retained in the carriers <b>10</b>. The method is characterized in that information sourced from the carriers <b>10</b> when a difference between the thickness of the carriers <b>10</b> and the thickness of the wafers <b>20</b> reaches a predetermined value is detected to calculate the thickness of the wafers <b>20</b>, thereby terminating polishing.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES83718618">
+<heading>TECHNICAL FIELD</heading>
+<div class="description-paragraph" num="p-0003">The present invention relates to a wafer polishing method and, in particular to a method of simultaneously polishing both surfaces of wafers by rotating carriers retaining the wafers between an upper polishing plate and a lower polishing plate provided with a polishing pad on each surface.</div>
+<heading>RELATED ART</heading>
+<div class="description-paragraph" num="p-0004">For a process of polishing silicon wafers, a polishing method of forcing an upper polishing plate and a lower polishing plate that are provided with a polishing pad on their surface against wafers retained by carriers and moving the wafers between the upper polishing plate and the lower polishing plate that are rotated, thereby simultaneously polishing both surfaces of the wafers has been generally employed. The carriers each have a circular hole for retaining the wafers, and have a smaller thickness than the wafers. In this polishing method, a polishing solution containing abrasive grains has been generally used. This polishing method has been used because surfaces and rear surfaces of a plurality of wafers can be simultaneously polished and accordingly productivity and flatness of the surfaces and the rear surfaces of the wafers can be improved.</div>
+<div class="description-paragraph" num="p-0005">The above polishing method using carriers and a polishing solution containing abrasive grains however has a problem in that the carriers are worn by the abrasive grains contained in the polishing solution, and the thicknesses of the carriers vary, which would lead to thickness variation of the wafers after polished.</div>
+<div class="description-paragraph" num="p-0006">Patent Document 1 discloses carriers for a double-side polishing apparatus capable of preventing the carriers from wearing at the time of simultaneously polishing both surfaces of wafers. However, the carriers for a double-side polishing apparatus in Patent Document 1 are carriers each made by coating the surface of a resin matrix with a DLC (diamond-like carbon) film. Therefore, the production cost is extremely high as compared with metal carriers, carriers each having a metal plate of which surface and rear surface are coated with resin, and resin carriers, which are commonly used. This has been a problem.</div>
+<div class="description-paragraph" num="p-0007">In cases where a polishing solution free of abrasive grains is used as a polishing solution for simultaneously polishing both surfaces of wafers, whichever of the following carriers may be used to prevent the carriers from wearing: metal carriers, carriers each having a metal plate of which surface and rear surface are coated with resin, and resin carriers. However, as polishing proceeds, the difference between the thickness of the carriers and the thickness of the wafers becomes small, and polishing pads contact the carriers to cause the carrier to vibrate, which results in undesired sounds generated from the carriers. This has been another problem.</div>
+<div class="description-paragraph" num="p-0008">When polishing is performed in a state where carriers continue to vibrate, not only the problem of undesired sounds being generated from the carriers arises, but the variation of the wafer thickness that should be reduced by polishing would conversely increase as a result of the variation in the contact of polishing pads with both surfaces of the wafers, which is yet another problem. Therefore, the time point at which the carriers begin to vibrate should be ensured to be detected, and polishing is required to be terminated at the time point.</div>
+<div class="description-paragraph" num="p-0009">Patent Document 2 discloses a method of simultaneously polishing both surfaces of wafers by moving the wafers retained by carriers between upper and lower polishing plates that are rotated. In the polishing method, from vibrations generated from the polishing plates accompanying wafer polishing, one or a plurality of specific frequencies at which the vibration level changes reflecting the progression of polishing are selected in advance, and the change in the vibration level at the specific frequencies is detected in polishing, so that the termination point of polishing is estimated from the change in the vibration level.</div>
+<div class="description-paragraph" num="p-0010">Further, in other polishing methods in which polishing is terminated with the use of polishing sounds generated when wafers are polished, polishing sounds generated in polishing of wafers are detected, and the termination point of polishing is determined based on a change in the polishing sounds, for example as disclosed in Patent Documents 3 and 4. In accordance with this method, the termination point of polishing can be determined during the progress of a polishing process using a relatively simple system configuration.</div>
+<heading>Patent Documents</heading>
+<div class="description-paragraph" num="p-0011">Patent Document 1: Japanese Patent Application Publication No. 2006-303136</div>
+<div class="description-paragraph" num="p-0012">Patent Document 2: Japanese Patent Application Publication No. 2005-252000</div>
+<div class="description-paragraph" num="p-0013">Patent Document 3: Japanese Patent Application Publication No. H6-45299</div>
+<div class="description-paragraph" num="p-0014">Patent Document 4: Japanese Patent Application Publication No. 2001-15467</div>
+<heading>DISCLOSURE OF THE INVENTION</heading>
+<heading>Problems to be Solved by the Invention</heading>
+<div class="description-paragraph" num="p-0015">However, in the invention of Patent Document 2, in fact, a vibration sensor provided on an upper surface of an upper polishing plate detects not only vibrations of polishing plates but also the total vibrations including vibrations of the polishing plates, vibrations of wafers, and vibrations of carriers. Therefore, noise is mixed in the detected specific frequencies at which the vibration level changes; as a result, the change in the vibration level cannot be accurately measured. Thus, the termination point of polishing cannot be accurately detected, which would lead to further variations in the thickness of the wafers polished.</div>
+<div class="description-paragraph" num="p-0016">Further, in the inventions of Patent Documents 3 and 4, while the termination point can be quantitatively determined, cases of polishing using carriers are not considered. Thus, the thickness variation of wafers after polished due to wear of the carriers still remains as a problem to be solved.</div>
+<div class="description-paragraph" num="p-0017">An object of the present invention is to provide a method of polishing silicon wafers, capable of suppressing undesired sounds generated from carriers and reducing the thickness variation of the wafers after polished.</div>
+<heading>Means for Solving the Problem</heading>
+<div class="description-paragraph" num="p-0018">In order to solve the above problems, the inventors of the present invention have made various studies on a wafer polishing method including the steps of supplying a polishing solution to a surface of a pair of polishing pads positioned above and below a carrier which has a circular hole for retaining a wafer and is thinner than the wafer; and sliding the polishing pads relatively to the carrier, thereby simultaneously polishing both surfaces of the wafer retained in the carrier. As a result, the inventors found the following facts. The carrier generates information such as vibrations or sounds when the difference between the thickness of the carrier and the thickness of the wafer reaches a specific value. And by detecting the information, the thickness of the wafer can be determined. Furthermore, the termination of polishing based on the determined thickness allows the polishing amount of the wafer to be stably controlled; therefore, undesired sounds generated from the carrier can be effectively suppressed, and a wafer after polished with reduced thickness variation can be obtained.</div>
+<div class="description-paragraph" num="p-0019">In order to achieve the above object, the present invention primarily includes the following components.</div>
+<div class="description-paragraph" num="p-0020">(1) A wafer polishing method comprising the steps of: supplying a polishing solution to a surface of a pair of polishing pads positioned above and below a carrier which has a circular hole for retaining a wafer and is thinner than the wafer; and sliding the polishing pads relatively to the carrier, thereby simultaneously polishing both surfaces of the wafer retained in the carrier. Information sourced from the carrier when a difference between a thickness of the carrier and a thickness of the wafer reaches a predetermined value, is detected to calculate the thickness of the wafer and thereby terminate polishing.</div>
+<div class="description-paragraph" num="p-0021">(2) The wafer polishing method according to (1) above, wherein the termination of polishing is performed at a termination point of polishing determined by extracting a first signal and a second signal that are signals of two setup frequency ranges from the information obtained from the carrier, and detecting the termination point of polishing where an intensity of the first signal is higher than a predetermined value and an intensity of the second signal is lower than a predetermined value.</div>
+<div class="description-paragraph" num="p-0022">(3) The wafer polishing method according to (1) above, wherein the polishing solution is a polishing solution free of abrasive grains.</div>
+<div class="description-paragraph" num="p-0023">(4) The wafer polishing method according to (1) above, wherein the information sourced from the carrier is sounds and/or vibrations.</div>
+<div class="description-paragraph" num="p-0024">(5) The wafer polishing method according to (1) above, wherein the difference between the thickness of the carrier and the thickness of the wafer at a time when the information is sourced, is in the range of 0.1 μm to 20 μm.</div>
+<div class="description-paragraph" num="p-0025">(6) The wafer polishing method according to (1) above, wherein a pressure applied to the polishing pads in the direction perpendicular to the surfaces of the wafer is in the range of 100 g/cm<sup>2 </sup>to 300 g/cm<sup>2</sup>.</div>
+<div class="description-paragraph" num="p-0026">(7) The wafer polishing method according to (1) above, wherein the information sourced from the carrier is detected with detectors provided for each carrier.</div>
+<div class="description-paragraph" num="p-0027">(8) The wafer polishing method according to (7) above, wherein the detector is provided on a mechanism for holding the carrier.</div>
+<div class="description-paragraph" num="p-0028">(9) The wafer polishing method according to (8) above, wherein the detector is provided on external gears for moving the carrier.</div>
+<div class="description-paragraph" num="p-0029">(10) The wafer polishing method according to (4) above, wherein the detection of the sounds from the carrier is performed by detecting sounds having a frequency of 10 Hz to 1000 Hz.</div>
+<div class="description-paragraph" num="p-0030">(11) The wafer polishing method according to (1) above, wherein the polishing solution contains a specific high molecular weight component.</div>
+<div class="description-paragraph" num="p-0031">(12) The wafer polishing method according to (2) above, wherein the extracting the signals from the information is calculation of a power spectra of digital data obtained by A/D converting the detected information and of a mean value or a maximum value of signal intensities of power spectra corresponding to the setup frequency ranges.</div>
+<heading>Effect of the Invention</heading>
+<div class="description-paragraph" num="p-0032">The present invention can provide a polishing method capable of suppressing undesired sounds generated from carriers and further reducing thickness variation of wafers after polished.</div>
+<description-of-drawings>
+<heading>BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" num="p-0033"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a diagram for illustrating a state of polishing wafers.</div>
+<div class="description-paragraph" num="p-0034"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a cross-sectional view for illustrating a state of members in wafer polishing with respect to one embodiment of a wafer polishing method in accordance with the present invention.</div>
+<div class="description-paragraph" num="p-0035"> <figref idrefs="DRAWINGS">FIGS. 3(</figref> <i>a</i>) and <b>3</b>(<i>b</i>) are graphs showing the intensity of information generated from carriers. Specifically, <figref idrefs="DRAWINGS">FIG. 3(</figref> <i>a</i>) is a graph showing the intensity of sounds generated from the carriers, and <figref idrefs="DRAWINGS">FIG. 3(</figref> <i>b</i>) is a graph showing the intensity of vibrations generated from the carriers.</div>
+<div class="description-paragraph" num="p-0036"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a graph showing the relationship between the elapsed time (second) and the intensity (A.U.) of signals (first signal and second signal) of two frequency ranges, extracted from the information sourced from carriers in polishing.</div>
+<div class="description-paragraph" num="p-0037"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a graph showing the relationship between the elapsed time (second) and the intensity (m/s<sup>2</sup>) of signals of vibrations generated from carriers in polishing.</div>
+<div class="description-paragraph" num="p-0038"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a graph showing the relationship between polishing time (min) and thickness variation (%) of carriers with respect to a case of wafer polishing using a polishing solution free of abrasive grains and a case of wafer polishing using a polishing solution containing abrasive grains.</div>
+</description-of-drawings>
+<heading>BEST MODE FOR CARRYING OUT THE INVENTION</heading>
+<div class="description-paragraph" num="p-0039">A wafer polishing method of the present invention will be described with reference to the drawings.</div>
+<div class="description-paragraph" num="p-0040">A wafer polishing method of the present invention is a method in which wafers <b>20</b> are polished by supplying a polishing solution (not shown) to surfaces <b>30</b> <i>a </i>of a pair of polishing pads <b>30</b> positioned above and below carriers <b>10</b> each having a circular hole <b>11</b> for retaining the wafers <b>20</b>, the carriers <b>10</b> being thinner than the wafers <b>20</b>; and sliding the polishing pads <b>30</b> relatively to the carriers <b>10</b>, thereby simultaneously polishing both surfaces of the wafers <b>20</b> retained in the carriers <b>10</b> as shown in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" num="p-0041">The method is characterized in that information sourced from the carriers <b>10</b> when a difference between the thickness of the carriers <b>10</b> and the thickness of the wafers <b>20</b> reaches a predetermined value, is detected to calculate the thickness of the wafers <b>20</b>, and thereby terminate polishing.</div>
+<div class="description-paragraph" num="p-0042">With the above structure, as shown in <figref idrefs="DRAWINGS">FIG. 2</figref>, information sourced from the carriers <b>10</b> when a difference between the thickness TC of the carriers <b>10</b> and the thickness TW of the wafers <b>20</b> reaches a predetermined value (in <figref idrefs="DRAWINGS">FIG. 2</figref>, information sourced due to vibrations of the carriers <b>10</b> in the directions indicated by the arrows) is detected to calculate the thickness of the wafers <b>20</b>, thereby making it possible to appropriately terminate polishing. Thus, control of the polishing amount of the wafers <b>20</b> can be ensured, so that the wafers <b>20</b> having been polished with reduced thickness variation can be obtained.</div>
+<div class="description-paragraph" num="p-0043"> <figref idrefs="DRAWINGS">FIGS. 3(</figref> <i>a</i>) and <b>3</b>(<i>b</i>) are graphs showing the intensity of information (herein referring to sounds and vibrations) for both cases where carriers are and are not generating information (sounds and vibrations). <figref idrefs="DRAWINGS">FIG. 3(</figref> <i>a</i>) shows data of sounds generated from the carriers. <figref idrefs="DRAWINGS">FIG. 3(</figref> <i>b</i>) shows data of vibrations generated from the carriers. The portions enclosed by broken lines in <figref idrefs="DRAWINGS">FIGS. 3(</figref> <i>a</i>) and <b>3</b>(<i>b</i>) show the situations where sounds and vibrations are generated from the carriers, respectively. The relevant portions show that the intensities of sounds and vibrations are higher than those in cases where the information is not sourced. Therefore, for example, the sounds and vibrations generated when the thickness of the wafers <b>20</b> is desirable are perceived in advance, and polishing is terminated when the relevant sounds and vibrations are achieved. Thus, polishing can be accurately controlled.</div>
+<div class="description-paragraph" num="p-0044">Further, the termination of polishing is preferably performed at a termination point of polishing determined by acquiring the information sourced from the carriers <b>10</b> when the difference between the thickness of the carriers <b>10</b> and the thickness of the wafers <b>20</b> reaches a predetermined value, and extracting a first signal and a second signal that are signals of two setup frequency ranges from the information obtained, to detect the termination point of polishing where the intensity of the first signal is higher than a predetermined value and the intensity of the second signal is lower than a predetermined value.</div>
+<div class="description-paragraph" num="p-0045">The first signal and the second signal extracted from the information refer to two signals of different frequency ranges that are extracted, after acquisition of the information sourced from the carriers <b>10</b>, from the acquired information by a specific process. In the present invention, a signal of high frequency is referred to as a first signal, while a signal of low frequency is referred to as a second signal. Note that the frequencies of the first signal and the second signal are not particularly limited and may be any value as long as the termination of polishing can be controlled by a combination of the first signal and the second signal.</div>
+<div class="description-paragraph" num="p-0046"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a graph showing the relationship between the elapsed time (second) and the intensity (A.U.) of the signals (first signal and second signal) of the two frequency ranges, extracted from information (vibrations) sourced from the carriers <b>10</b> in polishing. As is also clear from <figref idrefs="DRAWINGS">FIG. 4</figref>, until undesired sounds are generated from the carriers, the intensities of both the first signal and the second signal fluctuate; however, while the intensity of the first signal is high at the point where undesired sounds are generated, the intensity of the second signal remains low. Therefore, setting the intensity (predetermined value) which the first signal should exceed and the intensity (predetermined value) which the second signal should fall behind allows the termination point of polishing to be quantitatively determined.</div>
+<div class="description-paragraph" num="p-0047">On the other hand, <figref idrefs="DRAWINGS">FIG. 5</figref> is a graph showing the relationship between the elapsed time (second) and the intensity (m/s<sup>2</sup>) of the signals of vibrations generated from the carriers in polishing. When only vibration signals are detected, many peaks of similar intensity are shown (0 to 480 seconds, 700 seconds to 1000 seconds), which makes it impossible to ascertain the timing when undesired sounds are generated from the above-mentioned carriers. Thus, the termination point of polishing cannot be determined.</div>
+<div class="description-paragraph" num="p-0048">The information sourced from the carriers <b>10</b> is not particularly limited and may be, for example, sounds, vibrations, or heat generated from the carriers as long as the thickness TW of the wafers can be determined based on the information. However, the information is preferably sounds and/or vibrations generated from the carriers <b>10</b> because the termination point of polishing the wafers <b>20</b> can be easily and reliably detected.</div>
+<div class="description-paragraph" num="p-0049">Note that the method of extracting signals from the information is not particularly limited as long as the above-mentioned first signal and second signal can be effectively extracted with the method. For example, since desired signal data can be obtained relatively easily, it is preferable to perform the signal extraction by calculating power spectra of digital data obtained by A/D converting the detected information, and by calculating a mean value or a maximum value of signal intensities of power spectra corresponding to the setup frequency ranges. And if necessary, only specified frequencies may be A/D converted by filtering the information, or the peak hold processing may be conducted after such filtering.</div>
+<div class="description-paragraph" num="p-0050">Further, since the polishing amount can be more accurately controlled, a difference between the thickness TC of the carriers <b>10</b> and the thickness TW of the wafers <b>20</b> (TC-TW) at the time when information is sourced from the carriers <b>10</b>, is preferably in the range of 0.1 μm to 20 μm although depending on the rotation speed of the polishing pads <b>30</b>, pressure, and the type of the polishing solution as well.</div>
+<div class="description-paragraph" num="p-0051">The information (sounds or vibrations and the like) sourced from the carriers <b>10</b> can be detected, for example with detectors <b>40</b> provided adjacent to the carriers <b>10</b> as shown in <figref idrefs="DRAWINGS">FIG. 1</figref>. Here, the detectors <b>40</b> may be, for example, a sound input microphone <b>41</b> and vibration detectors <b>42</b> shown in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" num="p-0052">When the information to be detected is sounds, their frequencies are preferably in the range of 10 Hz to 1000 Hz. The frequency range is expected to be suitable for finding the termination point of polishing; therefore, if polishing is terminated with sounds outside the frequency range, desired wafer thickness would not be achieved.</div>
+<div class="description-paragraph" num="p-0053">Further, the frequency range of the first signal is more preferably in the range of 200 Hz to 1000 Hz, while the frequency range of the second signal is more preferably in the range of 10 Hz to 200 Hz. The first signal and the second signal of these wavelength ranges make it possible to ensure determination of the termination point of polishing when undesired sounds are generated from the carriers <b>10</b> because their signal intensities greatly differ from one another.</div>
+<div class="description-paragraph" num="p-0054">Meanwhile, when vibrations generated from the carriers <b>10</b> are detected, as shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, the vibration detectors <b>42</b> are preferably provided on a mechanism (in <figref idrefs="DRAWINGS">FIG. 1</figref>, external gears <b>50</b>, which are members used for moving the carriers <b>10</b>) for holding the carriers <b>10</b> to detect the information sourced from the carriers <b>10</b>. This is because it is difficult to detect the vibrations of the carriers <b>10</b> itself being interposed between the polishing pads <b>30</b>, and it is easier to detect the vibrations of the external gears <b>50</b>, thereby ensuring easy acquisition of the information from the carriers <b>10</b>.</div>
+<div class="description-paragraph" num="p-0055">Further, the detected sounds and/or vibrations generated from the carriers <b>10</b> are converted into signals, and the signals are sent to a control device <b>60</b> as shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, so that the first signal and the second signal are extracted using the control device <b>60</b>; whether to continue or terminate polishing can also be determined in this manner.</div>
+<div class="description-paragraph" num="p-0056">The carriers <b>10</b> used in a polishing method of the present invention are, as shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, members for retaining the wafers <b>20</b> to be polished, which each include a circular hole for retaining the wafers <b>20</b>. The thickness TC is smaller than the thickness TW of the wafers <b>20</b>. The shape and properties of the carriers <b>10</b> are not particularly limited, and carriers commonly used for polishing both surfaces of wafers may be used. The carriers <b>10</b> preferably have such properties as high wear resistance, a small coefficient of friction with polishing cloth, and high acid resistance or high alkali resistance. The carriers <b>10</b> may be made of, for example, a fiber reinforced plastic, that is, a combination of resin such as epoxy resin, phenol resin, or polyimide resin and reinforcement fiber such as glass fiber, carbon fiber, or aramid fiber.</div>
+<div class="description-paragraph" num="p-0057">The polishing pads <b>30</b> are members for sliding the wafers <b>20</b> being interposed between the upper and lower polishing pads to simultaneously polish the surfaces of the wafers <b>20</b>, as shown in <figref idrefs="DRAWINGS">FIG. 1</figref> and <figref idrefs="DRAWINGS">FIG. 2</figref>. The polishing pads <b>30</b> preferably have properties such as a small coefficient of friction with the wafers <b>20</b> and the carriers <b>10</b>. For example, an urethane material having a hardness (Shore D) of 75 to 85 with a compressibility of 2% to 3% may be used. When the polishing solution does not contain abrasive grains therewithin, the polishing pads <b>30</b> are preferably polishing pads having fixed abrasive grains. Fixed abrasive grains here refer to solid bodies made of a different material from the polishing pad matrix that are fixed to a surface of the polishing pads, and the abrasive grains used may be made of, for example, a ceramic such as silica or alumina; diamond, silicon carbide, or a compound thereof; or a high molecular weight polymer such as polyethylene or polypropylene. Further, their shapes are not limited to particulate form, and may be in the form of solid, gel, or the like. Furthermore, kinds of silica that can be used may be, for example, prepared by either a dry process (combustion process/arc process) or a wet process (sedimentation process/sol-gel process).</div>
+<div class="description-paragraph" num="p-0058">A polishing solution used in a polishing method of the present invention is preferably a polishing solution free of abrasive grains. Use of a polishing solution containing abrasive grains makes it difficult to detect information from the carriers <b>10</b> that is required for the termination of polishing. Here, the “polishing solution free of abrasive grains” is polishing solution in which abrasive grain components may be contained but such abrasive grain components are not positively added.</div>
+<div class="description-paragraph" num="p-0059"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a graph showing the relationship between polishing time (min) and thickness variation (%) of carriers in cases of polishing wafers using a polishing solution containing abrasive grains and a polishing solution free of abrasive grains. <figref idrefs="DRAWINGS">FIG. 6</figref> shows that the carriers are more worn out in the case of using the polishing solution containing abrasive grains.</div>
+<div class="description-paragraph" num="p-0060">The type of the polishing solution is not particularly limited. For example, an alkaline aqueous solution with pH controlled to the range of 8 to 14 is preferably used. With a pH of less than 8, the etching action is weak to reduce the polishing rate; on the other hand, with a pH of more than 14, handling of the polishing solution becomes difficult. The alkaline aqueous solution may be an aqueous ammonia solution, or an alkaline hydroxide solution such as potassium hydroxide or sodium hydroxide, or an alkaline carbonate solution. Alternatively, an aqueous solution of hydrazine or amines can be used. It is preferable to use an aqueous solution of amines in particular in terms of increasing the polishing rate. Further, the polishing solution preferably contains a specific high molecular weight component, since undesired sounds (squeals) generated from the carriers <b>10</b> can be further reduced. The type of the high molecular weight component is not particularly limited, but hydroxyethyl cellulose or polyethylene glycol is preferably used. In particular, hydroxyethyl cellulose, which has a relatively high molecular weight, can efficiently reduce the coefficient of friction between the polishing pads <b>30</b> and the carriers <b>10</b> due to the bearing action between the polishing pads <b>30</b> and the carriers <b>10</b>. As a result, defects in wafers after polished can be reduced. Further, the concentration of the high molecular weight component added to the polishing solution is preferably in the range of 0.01 ppm to 1000 ppm. If the concentration of the high molecular weight component is less than 0.01 ppm, the friction coefficient in polishing is high, which would cause defects in the surface of the wafers after polished. On the other hand, if the concentration is more than 1000 ppm, the polishing rate is significantly reduced, and considerable time is required for mirror polishing.</div>
+<div class="description-paragraph" num="p-0061">In terms of removing metal ions contained in the polishing solution, a chelating agent is preferably added to the polishing solution. The chelating agent may be any substance without particular limitation as long as it has a chelating effect on metal ions. For example, a phosphonic acid type chelating agent, an aminocarboxylic acid type chelating agent, or the like can be used. Considering the solubility in an alkaline aqueous solution, an aminocarboxylic acid type chelating agent is preferable. In addition, considering chelating effect on heavy metal ions, an aminocarboxylic acid salt such as ethylenediaminetetraacetic acid (EDTA) or diethylenetriaminepentaacetic acid (DTPA) is more preferable. The concentration of the chelating agent is preferably in the range of 0.1 ppm to 1000 ppm, which allows metal ions such as Cu, Zn, Fe, Cr, Ni, and Al to be trapped.</div>
+<div class="description-paragraph" num="p-0062">Further, in a polishing method of the present invention, the polishing pads <b>30</b> are slid relatively to the carriers <b>10</b>, thereby polishing surfaces of the silicon wafers <b>20</b>. The sliding method is not necessarily limited in particular. The sliding may be performed by moving only the polishing pads <b>30</b> or by moving only the carriers <b>10</b>; alternatively, the sliding may be performed by relatively moving both the polishing pads <b>30</b> and the carriers <b>10</b>.</div>
+<div class="description-paragraph" num="p-0063">The pressure applied to the polishing pads <b>30</b> in the direction perpendicular to the surfaces of the wafers <b>20</b> is preferably in the range of 100 g/cm<sup>2 </sup>to 300 g/cm<sup>2</sup>. When the pressure is less than 100 g/cm<sup>2</sup>, the pressure is excessively low, so that the information sourced from the carriers <b>10</b>, such as sounds and vibrations would not be sufficiently obtained. On the other hand, when the pressure is more than 300 g/cm<sup>2</sup>, the excessively high pressure makes sounds and vibrations of the carriers <b>10</b> be easily generated; thus, the polishing termination point of the wafers <b>20</b> would not be accurately ascertained.</div>
+<div class="description-paragraph" num="p-0064">Note that the foregoing descriptions merely illustrate some examples of embodiments of the present invention and various modifications can be made thereto within the scope of claims.</div>
+<heading>EXAMPLES</heading>
+<heading>Example 1</heading>
+<div class="description-paragraph" num="p-0065">In Example 1, as shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, silicon wafers <b>20</b> having a diameter of 300 mm were polished by a wafer polishing method including the steps of supplying a polishing solution free of abrasive grains (a potassium hydroxide aqueous solution containing ethylenediaminetetraacetic acid at a concentration of 10 ppm as a chelating agent, and hydroxyethyl cellulose at a concentration of 1 ppm as a high molecular weight component) to a surface of a pair of polishing pads <b>30</b> made of urethane positioned above and below carriers <b>10</b> each having a circular hole <b>11</b> for retaining the wafers <b>20</b>, the carriers <b>10</b> being 750 μm in thickness, which were thinner than the wafers <b>20</b>; and sliding the polishing pads relatively to the carriers, thereby simultaneously polishing both surfaces of the wafers retained in the carriers. The termination point of polishing was determined by acquiring the vibrations generated from the carriers <b>10</b> using vibration detectors <b>42</b> provided on the external gears <b>50</b>; extracting a first signal (a mean value of 200 Hz to 1000 Hz) and a second signal (a mean value of 10 Hz to 100 Hz) from the obtained vibrations; and detecting the timing when the intensity of the first signal is equal to or more than a predetermined value (0.02 A.U.) and the intensity of the second signal is equal to or less than a predetermined value (0.02 A.U).</div>
+<div class="description-paragraph" num="p-0066">The polishing conditions (the type of the polishing solution, whether the polishing solution contains a high molecular weight component or not, and the detection method of a polishing termination point) are shown in Table 1. Further, the silicon wafers were polished five times in total (25 sheets).</div>
+<heading>Example 2</heading>
+<div class="description-paragraph" num="p-0067">In Example 2, silicon wafers (25 sheets) were polished by a similar method to Example 1 except for that the sounds generated from the carriers <b>10</b> were acquired by a sound input microphone <b>41</b> provided adjacent to the carriers <b>10</b>, and a first signal (480 Hz) and a second signal (100 Hz) were extracted from the sounds obtained.</div>
+<div class="description-paragraph" num="p-0068">The polishing conditions (the type of the polishing solution, whether the polishing solution contains a high molecular weight component or not, and the detection method of a polishing termination point) are shown in Table 1.</div>
+<heading>Comparative Example 1</heading>
+<div class="description-paragraph" num="p-0069">In Comparative Example 1, silicon wafers (25 sheets) were polished under similar conditions to Example 1 except for using a polishing solution containing abrasive grains (a potassium hydroxide aqueous solution containing colloidal silica as free abrasive grains).</div>
+<div class="description-paragraph" num="p-0070">The polishing conditions (the type of the polishing solution, whether the polishing solution contains a high molecular weight component or not, and the detection method of a polishing termination point) are shown in Table 1.</div>
+<heading>Comparative Example 2</heading>
+<div class="description-paragraph" num="p-0071">In Comparative Example 2, silicon wafers (25 sheets) were polished under similar conditions to Example 1 except for that polishing was controlled not using the information (sounds or vibrations) sourced from the carriers but using a setup time.</div>
+<div class="description-paragraph" num="p-0072">The polishing conditions (the type of the polishing solution, whether the polishing solution contains a high molecular weight component or not, and the detection method of a polishing termination point) are shown in Table 1.</div>
+<heading>EVALUATION METHOD</heading>
+<div class="description-paragraph" num="h-0016">(1) Wear of Carriers</div>
+<div class="description-paragraph" num="p-0073">The thickness TC of the carriers in Example 1 and Comparative Example 1 was measured before polishing, after a predetermined time lapse from the beginning of the polishing, and after the polishing. The wear level of the carriers was evaluated by plotting the relationship between the polishing time and the thickness TC of the carriers. The results are shown in <figref idrefs="DRAWINGS">FIG. 6</figref> and Table 1.</div>
+<div class="description-paragraph" num="h-0017">(2) Thickness variation of Wafers</div>
+<div class="description-paragraph" num="p-0074">The thickness profiles of the silicon wafers obtained in Examples and Comparative Examples were measured using WaferSight manufactured by KLA-Tencor Corporation, and the thickness variation of the wafers was calculated. Thus, the mean value of the variation was evaluated. The evaluation results are as shown in Table 1, in which smaller values are better.</div>
+<div class="description-paragraph" num="p-0075">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Detecting</td>
+<td class="description-td">Evaluation</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">method</td>
+<td class="description-td"> </td>
+<td class="description-td">Thickness</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">of Polishing</td>
+<td class="description-td"> </td>
+<td class="description-td">variation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Polishing solution</td>
+<td class="description-td">termination</td>
+<td class="description-td">Wear of</td>
+<td class="description-td">of Wafer</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Type</td>
+<td class="description-td">Polymer</td>
+<td class="description-td">point</td>
+<td class="description-td">Carrier</td>
+<td class="description-td">(μm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="6" nameend="5" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Example 1</td>
+<td class="description-td">Without</td>
+<td class="description-td">Hydroxy-</td>
+<td class="description-td">Vibration</td>
+<td class="description-td">Hardly</td>
+<td class="description-td">0.3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Abrasives</td>
+<td class="description-td">ethyl</td>
+<td class="description-td">from Carrier</td>
+<td class="description-td">worn</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">cellulose</td>
+<td class="description-td"> </td>
+<td class="description-td">(FIG. 6)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example 2</td>
+<td class="description-td">Without</td>
+<td class="description-td">Hydroxy-</td>
+<td class="description-td">Sounds</td>
+<td class="description-td">—</td>
+<td class="description-td">0.3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Abrasives</td>
+<td class="description-td">ethyl</td>
+<td class="description-td">from Carrier</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">cellulose</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">With</td>
+<td class="description-td">None</td>
+<td class="description-td">Vibration</td>
+<td class="description-td">Badly</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example 1</td>
+<td class="description-td">Abrasives</td>
+<td class="description-td"> </td>
+<td class="description-td">from Carrier</td>
+<td class="description-td">worn</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">(FIG. 6)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Comparative</td>
+<td class="description-td">Without</td>
+<td class="description-td">Hydroxy-</td>
+<td class="description-td">Time</td>
+<td class="description-td">—</td>
+<td class="description-td">0.6</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example 2</td>
+<td class="description-td">Abrasives</td>
+<td class="description-td">ethyl</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">cellulose</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" num="p-0076">Table 1 and <figref idrefs="DRAWINGS">FIG. 6</figref> show that when polishing was performed by polishing methods of Example 1 and Example 2, the carriers were hardly worn as compared to polishing methods of Comparative Example 1 and Comparative Example 2, and thickness variation of the obtained silicon wafers was small. On the other hand, it is shown that the carriers were badly worn and the thickness variation was large in the polishing method of Comparative Example 1 in which polishing was performed using a polishing solution containing abrasive grains and in the polishing method of Comparative Example 2 in which polishing was controlled using a set time.</div>
+<heading>INDUSTRIAL APPLICABILITY</heading>
+<div class="description-paragraph" num="p-0077">The present invention can provide a polishing method capable of suppressing undesired sounds generated from carriers and further reducing thickness variation of silicon wafers after polished.</div>
+<heading>REFERENCE NUMERALS</heading>
+<div class="description-paragraph" num="p-0078"> <b>10</b>: Carrier</div>
+<div class="description-paragraph" num="p-0079"> <b>11</b>: Circular Hole</div>
+<div class="description-paragraph" num="p-0080"> <b>20</b>: Wafer/Silicon Wafer</div>
+<div class="description-paragraph" num="p-0081"> <b>30</b>: Polishing Pad</div>
+<div class="description-paragraph" num="p-0082"> <b>40</b>: Detector</div>
+<div class="description-paragraph" num="p-0083"> <b>41</b>: Sound Input Microphone</div>
+<div class="description-paragraph" num="p-0084"> <b>42</b>: Vibration Detector</div>
+<div class="description-paragraph" num="p-0085"> <b>50</b>: External Gear</div>
+<div class="description-paragraph" num="p-0086"> <b>60</b>: Control Device</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">11</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM75379171">
+<claim-statement>The invention claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A wafer polishing method comprising the steps of:
+<div class="claim-text">supplying a polishing solution to a surface of a pair of polishing pads positioned above and below a carrier which has a circular hole for retaining a wafer and is thinner than the wafer; and</div>
+<div class="claim-text">sliding the polishing pads relatively to the carrier, thereby simultaneously polishing both surfaces of the wafer retained in the carrier,</div>
+<div class="claim-text">wherein information sourced from the carrier when a difference between a thickness of the carrier and a thickness of the wafer reaches a predetermined value, is detected to calculate the thickness of the wafer and thereby terminate polishing, wherein the information sourced from the carrier is detected with detectors provided for each carrier.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The wafer polishing method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the termination of polishing is performed at a termination point of polishing determined by extracting a first signal and a second signal that are signals of two setup frequency ranges from the information obtained from the carrier, and detecting the termination point of polishing where an intensity of the first signal is higher than a predetermined value and an intensity of the second signal is lower than a predetermined value.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The wafer polishing method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the polishing solution is a polishing solution free of abrasive grains.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The wafer polishing method according <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the information sourced from the carrier is sounds and/or vibrations.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The wafer polishing method according <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the difference between the thickness of the carrier and the thickness of the wafer at a time when the information is sourced, is in the range of 0.1 μm to 20 μm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The wafer polishing method according <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a pressure applied to the polishing pads in the direction perpendicular to the surfaces of the wafer is in the range of 100 g/cm<sup>2 </sup>to 300 g/cm<sup>2</sup>.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The wafer polishing method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the detector is provided on a mechanism for holding the carrier.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The wafer polishing method according to <claim-ref idref="CLM-00007">claim 7</claim-ref>, wherein the detector is provided on external gears for moving the carrier.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The wafer polishing method according to <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein the detection of the sounds from the carrier is performed by detecting sounds having a frequency of 10 Hz to 1000 Hz.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The wafer polishing method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the polishing solution contains a specific high molecular weight component.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The wafer polishing method according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the extracting the signals from the information is calculation of a power spectra of digital data obtained by A/D converting the detected information and of a mean value or a maximum value of signal intensities of power spectra corresponding to the setup frequency ranges.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

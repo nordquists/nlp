@@ -1,0 +1,707 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US9873946B2 - Multi-station sequential curing of dielectric films 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA217839428">
+<div class="abstract" id="p-0001" num="0000">The present invention provides improved methods of preparing a low-k dielectric material on a substrate. The methods involve multiple operation ultraviolet curing processes in which UV intensity, wafer substrate temperature, UV spectral distribution, and other conditions may be independently modulated in each operation. Operations may be pulsed or even be concurrently applied to the same wafer. In certain embodiments, a film containing a structure former and a porogen is exposed to UV radiation in a first operation to facilitate removal of the porogen and create a porous dielectric film. In a second operation, the film is exposed to UV radiation to increase cross-linking within the porous film.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES127070666">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a divisional claiming priority under 35 U.S.C. §120 from U.S. patent application Ser. No. 11/977,792, filed on Oct. 25, 2007, titled “MULTI-STATION SEQUENTIAL CURING OF DIELECTRIC FILMS,” which is a continuation-in-part claiming priority of U.S. patent application Ser. No. 11/688,695, filed on Mar. 20, 2007, titled “MULTI-STATION SEQUENTIAL CURING OF DIELECTRIC FILMS,” which is a continuation-in part of U.S. patent application Ser. No. 11/369,311, filed on Mar. 6, 2006, titled “METHOD FOR REDUCING STRESS IN POROUS DIELECTRIC FILMS,” which is a continuation-in-part of U.S. patent application Ser. No. 11/115,576, filed on Apr. 26, 2005, titled “SINGLE-CHAMBER SEQUENTIAL CURING OF SEMICONDUCTOR WAFERS.” These applications are incorporated herein by reference in their entirety for all purposes.</div>
+<heading id="h-0002">FIELD OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">This invention relates to methods for preparing and treating dielectric films. More specifically, the invention relates to exposing films to ultraviolet radiation and other process conditions to facilitate a desired change in film properties.</div>
+<heading id="h-0003">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0004" num="0003">Many layers of dielectric films are used to make an integrated circuit. IC manufacturing requires dielectric films to have certain properties in order for the circuit to function as designed. For example, there is a general need for materials with low dielectric constants (low-k). Using low-k materials as the intermetal dielectric (i.e., the layer of insulator separating consecutive levels of the conductive metal interconnects) reduces the delay in signal propagation due to capacitive effects, otherwise know as the RC delay. A dielectric material of low dielectric constant will have low capacitance, and hence the RC delay of an IC constructed with such a material will be lower as well.</div>
+<div class="description-paragraph" id="p-0005" num="0004">As another example, there is a general need for materials with specific tensile or compressive stresses. Increasing shallow trench isolation (STI) film tensile stress increases transistor drain current and device performance because the electron and hole mobilities are higher. Other applications require dielectric films to have compressive stress. These and other properties may be met on the film as deposited, or after treatment.</div>
+<div class="description-paragraph" id="p-0006" num="0005">One such treatment may be a thermal process in which the substrate is heated to a temperature for a time. A thermal treatment may remove unwanted particles from the film, or change its stresses and other properties. These thermal processes, however, have certain difficulties. In particular, substrate temperatures generally need to be high (i.e., greater than about 400 degrees Celsius) with exposure times typically on the order of hours. As is well known in the field, these conditions can damage copper containing devices, especially in the application wherein a low-k dielectric is being cured and the long exposure time may be unsuitable for mass manufacturing. Also, the use of temperature sensitive nickel silicide precludes inducing film stress by using temperatures above 400° C. while some SiN films have a cure temperature up to 480° C.</div>
+<div class="description-paragraph" id="p-0007" num="0006">To overcome these disadvantages of thermal processing, another technique has been developed, which involves exposing the film to UV radiation. Irradiation of the low-k or spacer nitride films permits modulation of desired film properties such as dielectric constant or film stress at lower temperatures. However, the use of UV radiation in such processes may result in deleterious side-effects unless special care is taken to deliver the precise wavelengths and to maintain the wafer temperature at an optimal level.</div>
+<div class="description-paragraph" id="p-0008" num="0007">What are needed therefore are improved methods and devices for treating dielectric films with UV radiation to obtain desired film properties.</div>
+<heading id="h-0004">SUMMARY</heading>
+<div class="description-paragraph" id="p-0009" num="0008">The present invention addresses this need by providing improved methods to treat dielectric films with UV radiation. The methods involve multiple operation ultraviolet curing processes in which UV intensity, wafer substrate temperature, UV spectral distribution, and other conditions may be independently modulated in each operation. All operations in the methods may be performed in the same semiconductor processing tool or even the same semiconductor processing chamber. The chamber may have two or more stations. Each station may be configured to perform more than one exposure operation, either serially, concurrently, or partially overlapping. For example, the more than one exposure operation may be operations where the radiation intensity varies, e.g., in a pulsed operation. In another example, radiation having different spectral distributions and different intensities may be irradiated on the same wafer concurrently. These radiation having different characteristics may be emitted from by different radiation sources.</div>
+<div class="description-paragraph" id="p-0010" num="0009">The method also includes flowing gas during the UV radiation exposure. Particularly, helium gas may be flowed to the wafer. In other embodiments, a mixture helium and argon gas may be used. Each operation in the method embodiment may have different gases flowed at different rates. Other suitable gases may include nitrogen.</div>
+<div class="description-paragraph" id="p-0011" num="0010">The method may be used to repair damaged low-k dielectric films after an etching operation. The method may also be used to remove porogen and cross-link bonds in porous low-k dielectric films. In the porogen removal and cross-linking case, the wafer temperature may be maintained during all exposure operation.</div>
+<div class="description-paragraph" id="p-0012" num="0011">The invention also pertains to a chamber for processing semiconductor wafers. The chamber may include a number of processing stations. Each station may include a wafer support and one or more radiation sources. The chamber may also include a mechanism to transfer a wafer to each station. Each station is operable to provide wafer exposure characteristics that vary in at least one of radiation intensity, radiation wavelength, spectral distribution, and wafer temperature for at least two of the plurality of stations. The radiation sources may include one or more light generators and one or more optical components operable to modify one or more characteristics of the radiant output of the light generators. Thus, radiation output of different radiation sources may have different characteristics as to radiation intensity, radiation wavelength, spectral distribution, and wafer temperature.</div>
+<div class="description-paragraph" id="p-0013" num="0012">In certain embodiments, at least one station in a chamber includes two or more independently operable radiation sources. The independently operable radiation sources may be configured to generate radiation that varies in at least one of radiation intensity, radiation wavelength, and spectral distribution.</div>
+<div class="description-paragraph" id="p-0014" num="0013">In another aspect, the invention also pertains to a semiconductor processing tool. The tool may include one or more processing chambers and a mechanism to transfer a wafer to each chamber. Each chamber may include a wafer support and a radiation source operable to provide wafer exposure characteristics that vary at least one of radiation intensity, radiation wavelength, spectral distribution, and wafer support temperature. In some embodiments, one or more processing chamber is configured to dissociate porogen while minimizing cross-linking in a low-k dielectric film and one or more processing chamber is configured to cross-link bonds in the film.</div>
+<div class="description-paragraph" id="p-0015" num="0014">These and other features and advantages of the invention will be described in more detail below with reference to the associated drawings.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a flowchart summarizing stages of a general process in accordance with the present invention.</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a rough schematic representing UV absorption as a function of wavelength for certain processes in accordance with the present invention.</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIGS. 3</figref> A and B are schematic representations of an apparatus suitable for UV porogen removal in accordance with certain embodiments of this invention.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION OF A PREFERRED EMBODIMENT</heading>
+<div class="description-paragraph" id="p-0019" num="0018">Introduction</div>
+<div class="description-paragraph" id="p-0020" num="0019">In the following description, numerous specific details are set forth in order to provide a thorough understanding of the present invention. The present invention may be practiced without some or all of these specific details. In other instances, well known process operations have not been described in detail to not unnecessarily obscure the present invention. While the invention will be described in conjunction with the specific embodiments, it will be understood that it is not intended to limit the invention to the embodiments.</div>
+<div class="description-paragraph" id="p-0021" num="0020">The present invention involves a multi-station semiconductor processing chamber. Each station has a wafer support and a radiation source. The radiation source has one or more light generators and one or more optical components. The radiation intensity and the wavelength output of the radiation source may be independently controlled at each station. The wafer support temperature and gas flow may also be independently controlled at each station. In certain embodiments, the present invention pertains to a multi-chamber semiconductor processing tool having at least one wafer processing station in each chamber and capable of independently control radiation intensity, radiation wavelengths, and wafer temperature at each station.</div>
+<div class="description-paragraph" id="p-0022" num="0021">The present invention also involves processes to prepare and/or cure dielectric films on substrates by exposure to UV radiation. Effects of exposure to UV radiation or UV curing may include increased stress of the materials, increased cross-linking of the bonds of the material and densification the material. UV radiation is also used to remove porogen from a precursor layer containing a porogen and structure former or backbone, thereby forming a porous dielectric film. UV radiation can also be used to evolve solvents present in a film, such as a spin-on ULK film. It is often desirable to modulate one or more of these effects in preference to one another—for example, for dense low-k carbon-doped oxide (CDO) films, it is desirable to increase the mechanical properties of the films by cross-linking without a large increase in the stress of the film whereas for silicon nitride films, a large increase in the stress may be desirable. Similarly, in preparing porous low-k films from precursor layers, it may be desirable to remove porogen from a precursor layer and strengthen the backbone without causing the film thickness to shrink, and thereby causing a concomitant increase in stress. Further, in the case of porous low-k films, it may be desirable to remove the porogen from the film before its cross-linking commences.</div>
+<div class="description-paragraph" id="p-0023" num="0022">Conventional UV curing processes use a single processing condition, e.g. 100% UV intensity and temperature of 400° C., that may be suitable for one or some of the effects listed above but may also cause an undesired effect. For example, porogen evolution and film strengthening occur at slightly different wavelengths. Using a broad spectrum UV radiation, Si—CH<sub>3 </sub>bonds in the film would cross-link rapidly. As a consequence of this cross-linking the film shrinks and rapidly densifies, trapping porogen in the matrix and preventing its successful evolution. This undesired effect causes the film to have a higher dielectric constant than desired.</div>
+<div class="description-paragraph" id="p-0024" num="0023">Methods of the invention modulate these effects in preference to one another. In certain embodiments, the methods involve multiple operation cure processes, each operation having a particular desired result or effect, with conditions such as UV intensity and substrate temperature optimized for the particular desired result. Also in certain embodiments, optimizing conditions for a desired effect involves independently controlling the UV intensity, UV wavelength range, and the substrate temperature in each operation (i.e., so that the substrate temperature is decoupled from the UV intensity and wavelength). The methods of the invention may be performed in multi-station cure chambers, each station having a UV light source, and conditions at each station optimized for the desired result at that station.</div>
+<div class="description-paragraph" id="p-0025" num="0024">UV curing is used to drive out porogen from composite porogen-CDO films, leaving a porous CDO matrix with a low k-value, generally between 2.0 and 2.6. In a particular embodiment, the methods of the present invention are used to prepare dielectric films from precursor films or layers that contain a structure former that serves as a backbone of a porous network, and a porogen, which generates the porous regions within the porous network. The methods involve a multiple operation UV cure process in which porogen is removed in an initial exposure (or exposures) to UV radiation to form a porous dielectric film. This operation tends to make the film softer. Once the porogen is removed, the film is exposed to UV radiation to increase cross-linking within the film, thereby increasing the hardness. Films produced by these methods have lower stress than films produced using a single cure operation, while having comparable hardness and modulus as those films. The UV exposure characteristics of these operations are different so as to accomplish different effects on the film.</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a flow chart depicting generic operations in accordance with the present invention. Initially, a wafer is provided to a semiconductor processing tool (<b>101</b>). This wafer may or may not have a film deposited on it that will be the subject of the UV treatment. If the wafer does not include the film to be treated, an optional step would be to deposit such film onto the wafer (<b>103</b>). This deposition may be performed in a separate chamber or in a first station of a multi-station chamber. Based on the type of film to be treated and processing to be achieved, the wafer is then exposed to radiation under a first set of exposure conditions (<b>105</b>). These conditions may be radiation intensity, spectral distribution, radiation wavelength(s) (either a single wavelength may be used or a spectrum or a range of wavelengths), wafer temperature, and gas flow. These conditions may be controlled independently from each other from operation to operation. In a second operation, the wafer is exposed to radiation at a second set of conditions (<b>107</b>). Typically one or more of these conditions will be different from operation to operation, and additional operations may be used to vary one or more of these conditions (<b>109</b>). An operation may include transferring the wafer between stations, so that the same operation is performed at more than one station, but under the same conditions. In some instances, more than one operation may be performed at one station. The more than one operation may be performed serially, such as pulsed UV exposure in two intensities. The more than one operation may also be performed concurrently, such as UV exposure from two light sources having different intensities and spectral distributions. In some cases, one operation may start before another ends such that only a portion of the operations overlaps each other.</div>
+<div class="description-paragraph" id="p-0027" num="0026">An operation covering more than one station may be preferable in some cases to average out any radiation non-uniformity. Because the wafer is flat and circular, a light generator, usually tubular, cannot uniformity irradiate all parts of the wafer. Using optical components, a plurality of light generators, and carefully designing the layout of these generators, the radiation across the wafer can be made more uniform, but not perfectly. By exposing wafers in subsequent stations under the same exposure conditions but in a different relative orientation (between the light source and the wafer), any spots of non-uniformity are changed from station to station. The generators may be laid out and relative orientation changed such that the total exposure from all of the light sources in the various stations is uniform over the wafer. After the irradiation operations, the wafer is removed from the semiconductor tool in operation <b>111</b>. However, the wafer may experience more processing before it is removed, for example, the wafer may be cooled, or more films may be deposited, before the wafer exits the semiconductor processing tool.</div>
+<div class="description-paragraph" id="p-0028" num="0027">In certain embodiments, the UV cure processes described herein improve wafer throughput by reducing UV exposure time and/or parallel processing of wafers. For example, in one embodiment, having a dedicated porogen removal step reduces required UV exposure time to harden the film by 75% resulting in a three-fold improvement in wafer throughput in the UV cure station. Using of helium solely as the purging gas also reduces cure time. Using a combination of helium and argon, or helium and nitrogen also found to have a beneficial effect to the cure time.</div>
+<div class="description-paragraph" id="p-0029" num="0028">Reference is made throughout the specification to multiple operations in which porogen is removed from a precursor film in an initial operation or operations, and cross-linking (and hardness) is increased in a subsequent operation or operations and for which temperature and UV intensity differentiate the porogen removal and cross-linking operations. As indicated, these processes may be used to produce low stress porous dielectric films having good mechanical strength. However, the multiple operations may also be used for other UV curing processes in which exposure conditions differ from stage to stage to increase any of the effects of UV radiation in preference to any other effect. Some of these UV curing processes include increasing the tensile stress in nitride film at different wafer temperatures and treatment spin-on ULK film to evolve solvent and to harden the film.</div>
+<div class="description-paragraph" id="p-0030" num="0029">Certain embodiments of the present invention involve depositing onto a wafer the film to be irradiated. Different types of film may be deposited, depending on process requirements. One such film is the low-k dielectric film. A precursor film or layer that contains a “structure former”, typically a dielectric material, is deposited with a porogen, which generates the porous regions within the dielectric material. In a method of this invention, the porogen is removed from the precursor film to create a porous low-k dielectric layer. Within the precursor film, the porogen resides in locations that will subsequently become void locations in the final dielectric film. Discussion of method of forming the precursor film may be found in U.S. patent application Ser. No. 11/369,311, filed on Mar. 6, 2006, titled “Method For Reducing Stress In Porous Dielectric Films,” the disclosure of which is herein incorporated by reference in its entirety for all purposes.</div>
+<div class="description-paragraph" id="h-0007" num="0000">Porogen Removal</div>
+<div class="description-paragraph" id="p-0031" num="0030">The porogen removal operation may be accomplished by thermal anneal, UV radiation, or a combination of both. It will be appreciated by those skilled in the art that the UV radiation used with the invention encompasses near-UV, as well UV wavelengths. Thus, the radiation used to facilitate porogen removal in accordance with this invention may have wavelengths ranging between about 156 and 500 nanometers. As indicated, the UV wavelength(s) should match the absorption characteristics of the porogen bonds to be broken and/or the oxidizing agent, if used. Common bonds to be targeted which contribute to the overall absorption characteristics of the porogen-containing film are Si—CH<sub>3</sub>, C—C, C═C and C—H. For example, ATRP has an absorption peak at approximately 250-270 nanometers; therefore, a UV source intended to interact directly with a film containing ATRP preferably has high intensity components in the range of about 220 to 285 nanometers. Note that the radiation may comprise a narrow range of wavelengths (e.g., most intensity exits in a band about 1 to 20 nanometers in width) or a broader range of wavelengths.</div>
+<div class="description-paragraph" id="p-0032" num="0031">As indicated, the UV light can directly interact with porogen bonds and thereby facilitate its decomposition or other breakdown mechanism. In a typical case, the porogen decomposes into lower molecular weight components that exist in the vapor phase or can be easily vaporized and thereby removed from the precursor film. Alternatively the UV radiation can indirectly facilitate breakdown of the porogen. In one example, this is accomplished by the UV radiation interacting with a compound other than the porogen to convert that compound into a species that can attack the porogen and thereby facilitate its removal. For example, the UV radiation may convert molecular oxygen or other oxygen containing compounds present in a reaction chamber to produce a strong oxidant, which can then react with and break down the porogen. Again, the decomposition products of the porogen can be volatilized, diffuse out of the film, and be removed from the precursor film.</div>
+<div class="description-paragraph" id="p-0033" num="0032">In embodiments wherein UV radiation is used to remove porogen, one or more of substrate temperature, UV intensity and UV wavelength are set to result in porogen removal while minimizing the increase in the stress of the film. As discussed above, the single conventional cure operation, e.g., at 400° C. and 100% UV intensity, used for porogen removal and cross-linking results in an increase in stress and entrapment of porogen whent the surface hardens before all the porogen has evolved. In certain embodiments of this invention, the porogen removal operation is performed at a lower UV intensity and/or lower temperature than subsequent cross-linking operations.</div>
+<div class="description-paragraph" id="p-0034" num="0033">Temperatures during the porogen removal operation may be from around 250° C.-450° C. As indicated, in some embodiments the temperature during the porogen removal operation is lower than the temperature during the cross-linking operation. For example, the wafer temperature during the porogen removal operation may range from about 250° C.-400° C.; in specific embodiments the temperature ranges from about 350° C.-400° C., about 350° C.-375° C., and about 375° C.-400° C. In one particular embodiment, the temperature is about 400° C. during the porogen removal operation. As discussed below, temperatures during the cross-linking operation may be around 400° C. or greater.</div>
+<div class="description-paragraph" id="p-0035" num="0034">Also in certain embodiments, UV intensity during porogen removal is lower than the intensity during the cross-linking operation. For example, porogen removal UV intensity may be from about 0-60%, 0-70%, 0-80% or 0-90% of the cross-linking intensity. In a specific embodiment, UV intensity is about 50-90% of the intensity during the cross-linking operation.</div>
+<div class="description-paragraph" id="p-0036" num="0035">In some embodiments, the porogen removal operation may be accomplished in part by a thermal anneal (i.e., with zero UV intensity). Temperatures required for purely thermal anneal depend on the particular porogen used. Typical temperatures range from around 300° C.-450° C., e.g., around 400° C. The use of a thermal cure alone to remove porogen may be beneficial to reduce the total time of UV exposure.</div>
+<div class="description-paragraph" id="p-0037" num="0036">Unlike in a conventional single operation UV cure process, conditions during the porogen removal operation are such that the film is typically made softer or more compliant as a result of this operation. In some embodiments, substrate temperature but not UV intensity may be constant during porogen removal and cross-linking operations. The constant substrate temperature may be maintained by varying the pedestal temperature setpoint while the UV intensity varies. It is believed that constant substrate temperature reduces total cure time by maintaining a consistent shrinkage rate and increases porogen diffusion to film surface. Thus it is desirable to keep the wafer temperature as high as possible without going over thermal budget limits. If the substrate temperature is not kept constant by keeping a high pedestal temperature setpoint, the substrate temperature would be lower during the porogen removal than during the cross-linking operation. The lower temperature would reduce the shrinkage rate, lengthen the total cure time, and may be allow enough cross linking so as to entrap porogen.</div>
+<div class="description-paragraph" id="p-0038" num="0037">In certain embodiments, conditions during the porogen removal operation and the cross-linking operation or operations are also differentiated by the wavelength of the UV radiation. <figref idrefs="DRAWINGS">FIG. 2</figref> shows a rough schematic of UV absorption as a function of wavelength for a porogen and cross-linking in a dielectric material. As can be seen from the figure, absorption of radiation by the backbone is highest shorter wavelengths, including wavelengths about 220-250 nm, and decreases around higher wavelengths. Absorption of radiation by the porogen is dependent on the particular porogen used; the porogen shown in <figref idrefs="DRAWINGS">FIG. 2</figref> has an absorption peak around 260 nm. It should be noted that the absorption spectra depicted are examples; the absorption spectra of the porogen and backbone depends on the particular compositions. In certain embodiments, a first station of a multi-station cure chamber has a radiation source emitting radiation of wavelengths of common porogens, e.g., around 200 nm-500 nm, 200 nm-280 nm, or around 250 nm, while other stations dedicated to increasing the mechanical strength of the porogen have radiation sources that emit lower wavelength radiation.</div>
+<div class="description-paragraph" id="p-0039" num="0038">UV exposure time is largely a function of both the lamp intensity and the density and thickness of the precursor layer including porogen and structure former. UV exposure times range from seconds to tens of hours. Preferably, for commercial applications, the exposure time will be about 5 minutes or less. In a preferred embodiment, the exposure time ranges from about 1 second up to 5 minutes. Purely thermal porogen removal operations may take longer, e.g., hours to tens of hours.</div>
+<div class="description-paragraph" id="p-0040" num="0039">In one embodiment, one or more short pulse of UV light is used to dissociate the porogen in the as-deposited ultra low-k film. The duration of this pulse may be between about 5 and 60 seconds and depends on the as-deposited ULK film thickness. Lamp type, lamp power, pulse duration, window type, and cure temperature may be independently controlled to maximize porogen dissociation. After the pulse is complete, the radiation source turns off or goes to standby and the film will soak at the cure temperature for a period of time as the porogen is evolved and removed from the film. The radiation intensity may reduce to a lower amount or taper off.</div>
+<div class="description-paragraph" id="p-0041" num="0040">The porogen removal operation may be performed in one or more stations. Because UV radiation breaks bonds in the film as well as dissociates porogen, cure at subsequent stations may be tailored to remove the remaining porogen without removing significant amounts of methyl groups. Methyl group removal damages the ULK film, which may increase the dielectric constant, and should be reduced when possible. In a subsequent station, the UV radiation may also be pulsed, followed by a temperature soak. The reverse may be suitable also: a temperature soak followed by a UV radiation pulse. Additionally, more than one radiation source may be pulsed in the same station. For example, at station 2, a UV radiation source configured for porogen removal may be pulsed, followed by one or more pulse of a radiation source configured for cross-linking.</div>
+<div class="description-paragraph" id="p-0042" num="0041">As indicated the UV radiation may directly interact with the porogen or it may generate a reactive species that in turn attacks the porogen. If the exclusive mechanism is direct interaction, then the porogen removal operation is preferably performed an inert environment. This may be a vacuum, a noble gas atmosphere (e.g., argon or helium), or a nitrogen atmosphere, etc. In a preferred embodiment, a mixture of argon and helium is used in a reduced pressure environment, e.g., about 10 Torr. In some embodiments, a quantity of hydrogen gas may be used as well. If reactive species are to be generated, then the atmosphere could include oxygen, N<sub>2</sub>O, CO<sub>2</sub>, NO<sub>2 </sub>or a combination thereof. When exposed to UV radiation, molecular diatomic oxygen forms less stable but more aggressive oxidizing species such as ozone and oxygen radicals. The ozone and oxygen radicals are sufficiently strong oxidizing agents to oxidize the organic porogen. The porogen is then removed in the form of small volatile hydrocarbon molecules and oxygen containing species.</div>
+<div class="description-paragraph" id="p-0043" num="0042">If not removed quickly the volatile porogen removed from the substrate may adhere to the chamber walls or windows. The porogen may become a source of contamination for other substrates or cloud the windows and reduce the effectiveness of the UV radiation. U.S. patent application Ser. No. 11/391,134, filed March 2006 and titled PURGING OF POROGEN FROM UV CURE CHAMBER, describes mechanisms to ensure that the porogen is removed quickly, and is hereby incorporated by reference in its entirely, for all purposes. UV-mediated porogen removal is also discussed in commonly assigned U.S. Pat. No. 7,208,389, issued Apr. 24, 2007 and titled METHOD OF POROGEN REMOVAL FROM POROUS LOW-K FILMS USING UV RADIATION, which is hereby incorporated by reference in its entirety, for all purposes.</div>
+<div class="description-paragraph" id="h-0008" num="0000">Cross-Linking</div>
+<div class="description-paragraph" id="p-0044" num="0043">As noted above, after the porogen removal operation, the film is typically soft and compliant. The cross-linking operation increases the hardness and/or modulus of the film. The cross-linking operation is so called because it is believed that it increases the number of crosslinks (i.e., the number of covalent bonds) within the dielectric film, thereby increasing the film hardness. However, the invention is not limited to a particular mechanism of increasing the hardness and modulus. Hardness and modulus are well defined within the art and will not be discussed in detail herein. Measures of film hardness and modulus presented herein may be made with any suitable apparatus including nano-indenter device.</div>
+<div class="description-paragraph" id="p-0045" num="0044">One way to characterize mechanical performance of a dielectric film is via a “cracking threshold” measurement. This is a measure of thickness of a dielectric film on a blank substrate (e.g., a flat 300 mm wafer) that can be deposited without forming a crack. In a typical experiment, the dielectric is deposited to various thicknesses using a single set of process conditions. The resulting wafer (with dielectric film) is set aside without disturbance for a period of time (e.g., one day) and then examined for cracks. The greatest thickness at which no crack is observed is the cracking threshold. For many processes, the cracking threshold is measured in micrometers. The cracking threshold as well as crack propagation velocity in dielectric films is exponentially dependent on film stress. Thus it is important to minimize thin film stresses to prevent crack propagation through the dielectric layer during the packaging process. As indicated above, in certain embodiments, multi-operation porogen removal and curing operations of the present invention result in minimizing the stress of the film.</div>
+<div class="description-paragraph" id="p-0046" num="0045">The cross-linking operation is performed by exposing the porous dielectric film to UV radiation. In certain embodiments, the film is exposed to ultraviolet radiation. However, as noted above, UV radiation having wavelengths as low as 150 nanometers may be used to increase cross-linking.</div>
+<div class="description-paragraph" id="p-0047" num="0046">Substrate temperatures may range from around room temperature to about 450° C., for example around 400° C. As indicated, in certain embodiments, substrate temperatures during the cross-linking operation are typically higher than during porogen removal. In a particular embodiment, substrate temperature during porogen removal is about 375° C., and during the cross-linking operation around 400° C. In some embodiments, substrate temperature during the cross-linking operation or operations may be as high as the thermal budget allows.</div>
+<div class="description-paragraph" id="p-0048" num="0047">UV intensity may also be higher during cross-linking than during porogen removal, as discussed above. UV exposure time is largely a function of both the lamp intensity and the density of the precursor layer including porogen and structure former. UV exposure times range from seconds to tens of hours. Preferably, for commercial applications, the exposure time will be about 5 minutes or less. In a preferred embodiment, the exposure time ranges from about 1 second up to 5 minutes.</div>
+<div class="description-paragraph" id="p-0049" num="0048">The UV radiation during the cross-linking operation may be modulated, e.g., by intensity, to facilitate mechanical strengthening. This is described in the commonly assigned U.S. patent application Ser. No. 10/825,888, filed Apr. 16, 2004 and titled “Method To Improve Mechanical Strength Of Low-K Dielectric Film Using Modulated UV Exposure,” which is hereby incorporated by reference in its entirety.</div>
+<div class="description-paragraph" id="h-0009" num="0000">Increasing Tensile Stress in Silicon Nitride Film</div>
+<div class="description-paragraph" id="p-0050" num="0049">A silicon nitride film may be treated to increase tensile stress in accordance with the present invention. For certain applications, silicon nitride may be used in place of silicon dioxide for top layer protection because it is harder and has better hermeticity, etch selectivity, and protects regions below it against oxidation. Silicon nitride films may be deposited with an LPCVD (low-pressure chemical vapor deposition) or a PECVD (plasma-enhanced chemical vapor deposition) process.</div>
+<div class="description-paragraph" id="p-0051" num="0050">UV radiation may be used to change the stress properties of the silicon nitride film, generally to increase its tensile stress. Tensile nitride films are used to create and transfer strain to the source and drain regions of NMOS devices. This strain is transferred to the channel regions of the NMOS devices and improves the mobility of carriers, and thus performance of the transistor in an integrated circuit.</div>
+<div class="description-paragraph" id="p-0052" num="0051">UV radiation is known to increase silicon nitride film tensile stress. It is believed that UV radiation breaks Si—H and Si—OH bonds in a PECVD or LPCVD nitride film and allows the hydrogen and resulting water vapor to diffuse out of the film. The presence of bonded hydrogen in the film reduces the nominal spacing between the molecules and generates compressive stress. When the hydrogen is removed, the spacing between the molecules is increased and the film becomes more tensile.</div>
+<div class="description-paragraph" id="p-0053" num="0052">The degree of change in tensile stress can be controlled. Factors include the thickness of the silicon nitride film, the power and intensity of the UV radiation, the duration of exposure, and the temperature of the wafer. By modulating these parameters, the change in tensile stress can be controlled. Of course, some purge gas is flowed to remove the hydrogen and water vapor removed from the film.</div>
+<div class="description-paragraph" id="p-0054" num="0053">In some embodiments, the UV treatment of silicon nitride has two operations: an initial bond breaking operation; and a bond breaking and diffusion operation. It is known in the art that a partially fabricated semiconductor wafer may be subjected to high temperature for a limited time. Every time a wafer is heated to a high temperature, the doped regions in the wafer may spread and regions of mismatched coefficients of thermal expansion may cause extrusions or even delaminations between layers. Every time a wafer is heated and cooled, between 400° C. and room temperature, more crystal dislocation forms, which may cause device failure. On the other hand, diffusion of hydrogen and water vapor through a film is correlated to wafer temperature. In order to minimize the duration of higher temperature exposure, the initial bond breaking operation occurs with a lower wafer temperature. As more hydrogen and hydroxyls are freed, the wafer temperature is increased in the second operation to facilitate removal of the hydrogen and water vapor from the film. The use of two operations to increase the tensile stress of silicon nitride films minimizes the duration of high wafer temperature and maximizes the bond-breaking effects of the UV radiation. In some cases, the wafer temperature may be as high as 480° C. during the higher temperature diffusion operation.</div>
+<div class="description-paragraph" id="h-0010" num="0000">Spin-On Films</div>
+<div class="description-paragraph" id="p-0055" num="0054">A spin-on ULK film may be treated with UV radiation first to evolve the solvent and then to harden and strengthen the film. As its name states, the spin-on ULK film is applied to the wafer via a spinning coating process. First a high viscosity liquid precursor containing the film is applied to the wafer while the wafer is spinning to evenly spread the liquid solution to all parts of the wafer. The spin-on process was first used to apply a thin layer of photoresist. This simple process can planarize the surface of the wafer, because the liquid precursor can form a thin film covering all features.</div>
+<div class="description-paragraph" id="p-0056" num="0055">After the substrate is coated with the liquid precursor, it must undergo annealing to drive-off the solvent; complete chemical reactions; drive off unreacted monomers and oligomers; and to densify the film. Depending on the precursor, different solvents may be used. Generally, two or three operations of bake and cure are used. An initial operation at a lower temperature is generally used to drive off the solvent and to complete chemical reactions and a second operation at a higher temperature is generally used to drive off unreacted materials and to densify the film.</div>
+<div class="description-paragraph" id="p-0057" num="0056">UV radiation can be used instead of the thermal annealing process to complete the spin-on film deposition. In accordance with the present invention, two or three operations can be performed in one semiconductor processing tool. Just like the thermal annealing process, the solvents are first evolved from the spin-on film while the chemical reactions complete. Liquid precursor solvents tend to be volatile and easily evolved; therefore, a lower wafer temperature and less UV intensity is required. However, the purge gas flow rate must be high to remove all evolved solvent and keep the reactor clean. The UV parameters must favor solvent evolution so as not to cause premature hardening and strengthening of the film and trap solvent particles in the dielectric film. The UV wavelengths may be tuned to target the specific solvent. Longer wavelengths may be used to effectively volatilize the solvent without rearranging the chemical bonds within the film. Managing the relative rates at which solvent in a film is evolved and that at which the film hardens is important for the complete removal of solvent.</div>
+<div class="description-paragraph" id="p-0058" num="0057">The next UV operation would be to drive off unreacted organic materials. This step is very similar to the operations for porous ULK films. In this operation, the UV intensity and wafer temperature are increased to that for cross-linking. The UV wavelengths are also changed to the spectral band that favors cross-linking. The purge gas flow rate is still high, to remove any unreacted organic materials. After this operation, the remaining operation is the same as that for cross-linking of a porous ULK film, which is discussed above.</div>
+<div class="description-paragraph" id="h-0011" num="0000">ULK Damage Repair</div>
+<div class="description-paragraph" id="p-0059" num="0058">Carbon-containing low-k materials achieve lower dielectric constants through the incorporation of non-polar covalent bonds (e.g., from the addition of carbon) and the introduction of porosity to decrease film density. Introducing porosity or the incorporation of terminal bonds, such as Si—CH<sub>3</sub>, breaks the continuity of the rigid Si—O—Si lattice of traditional oxides, yielding a lower dielectric constant film that is both mechanically and chemically weaker. Because of these weaknesses, carbon-containing low-k films are susceptible to kinetic plasma damage and chemical damage. Plasma damage can break Si—CH<sub>3 </sub>bonds in the ULK film and removes these methyl groups. Chemical mechanical polishing (CMP) slurries can chemically remove carbon groups such as —CH<sub>3 </sub>from the surface of the low-k dielectric film.</div>
+<div class="description-paragraph" id="p-0060" num="0059">Other damage to ULK film may include the absorption of moisture and reactions causing formation of Si—OH and Si—O. Incorporation of silanol groups increases the k value of the film and is thus undesirable. Moreover, the moisture can remain trapped in the dielectric and oxidize the barrier material, allowing subsequent copper diffusion. Moisture from ambient atmosphere and present in CMP slurries may present these issues to damaged ULK films where the —CH<sub>3 </sub>groups are removed.</div>
+<div class="description-paragraph" id="p-0061" num="0060">These process-induced damages may be treated with UV radiation having certain characteristics. For ULK damage repair, it is useful to note that excess UV radiation can cause more damage by removing even more methyl groups. Controlled UV exposure to repair the damage should not cause significant amount of methyl loss. First the UV exposure should not penetrate more than a few monolayers below the surface of the ULK film. As most of the damage caused by planarization (slurry) and plasma is on the surface, unnecessary UV exposure to deeper layers may cause more methyl bonds to break and unnecessary methyl loss. The low penetration may be accomplished by a shorter exposure and/or with a lower intensity. One alternative is to pulse the UV radiation during processing. A wafer may be exposed to a short radiation pulse, between 5 and 60 seconds, followed with soaking at temperature of about 200-250° C. with purge gas at each station. The pulse need not be a step function, for example, a UV radiation pulse may taper off in intensity.</div>
+<div class="description-paragraph" id="p-0062" num="0061">As an alternative, carbon containing reactive gas may be flowed to the wafer during a second operation to replace the silanol bonds broken with a methyl group. This alternative not only repairs the ULK film, but also replaces the damaged portions. The carbon containing reactive gas may be organo-silanes, -silazanes, -siloxanes, alkanes, alkenes, alkynes, or acetaldehyde. Example organo-silanes, organo-silazanes, or organo-siloxanes may be dichlorodimethylsilane (DCDMS), chlorotrimethylsilane (CTMS), hexamethyldisilazane (HMDS), hexamethyldisiloxane (HMDSO), or tetravinyltetramethylcyclotetrasiloxane (TVTMCTS)). Example alkanes may be methane or ethane. Example alkenes and alkynes may be ethylene or acetylene. These reactant gases may be disassociated by the UV radiation into methyl groups and other components to react with an activated damaged film.</div>
+<div class="description-paragraph" id="p-0063" num="0062">In a first operation, the UV radiation may activate the damaged ULK film and break silanol bonds. Purge gas is flowed to the wafer to facilitate removal of the by products. In a second operation, the UV radiation cross-links the surface Si groups to fill gaps from the departed methyl groups and reforms the highly strained bonds. The cross-linking removes dangling bonds and densifies the film. Alternatively, the UV radiation may disassociate reactant gases and reincorporate the methyl groups into the surface layers of the ULK film if a carbon-containing reactant gas is used. The methyl group incorporation may occur concurrently with the cross-linking operation.</div>
+<div class="description-paragraph" id="p-0064" num="0063">Apparatus</div>
+<div class="description-paragraph" id="p-0065" num="0064">The present invention can be implemented in many different types of apparatus. Generally, the apparatus will include one or more chambers (sometimes referred to as process reactors) that house one or more wafers and are suitable for wafer processing. At least one chamber will include a UV source. A single chamber may be employed for all operations of the invention or separate chambers may be used. Each chamber may house one or more wafers for processing. The one or more chambers maintain the wafer in a defined position or positions (with or without motion within that position, e.g., rotation, vibration, or other agitation) during UV treatment operations. For certain operations in which the wafer is to be heated, the apparatus may include a heating platen.</div>
+<div class="description-paragraph" id="p-0066" num="0065">In one embodiment, the wafer processing tool includes a set of individual chambers. A wafer is loaded from a wafer cache to a first chamber. The wafer cache may be a FOUP, a load lock, or any wafer storage unit. In the first chamber, the wafer is exposed to UV radiation with characteristics selected for a first process. This first process may be to dissociate porogen while minimizing cross-linking. Once the wafer has finished processing in the first chamber, it is moved to a second chamber where it undergoes a second process. The second process may differ from the first process by one or more exposure characteristics, such as UV intensity, wafer temperature, spectral distribution, wavelengths, and purge gas flows. The second process may be to cross link a ULK film.</div>
+<div class="description-paragraph" id="p-0067" num="0066">In certain embodiments the multi-operation cure process is performed using a multi-station cure chamber. As discussed above, in certain embodiments, the multiple operation cure processes of the invention rely on being able to independently modulate the UV intensity, wavelength, spectral distribution and substrate temperature of each step or operation. Additionally, certain inert or reactive gases may be injected during the cure process at the same or different flowrates at each step. For example, in one embodiment, the porogen removal operation uses the same UV intensity but a lower substrate temperature than the cross-linking operation. In another embodiment, the porogen removal operation uses a same substrate temperature and a lower UV intensity than the cross-linking operation. Similarly, various effects of UV exposure (porogen removal, change in stress, change in hardness, process time, etc.) may be modulated by independently modulating UV intensity and substrate temperature. Detail process parameters of various examples are discussed below.</div>
+<div class="description-paragraph" id="p-0068" num="0067">Multi-station cure chambers capable of modulating these effects by providing independent control of the substrate temperature and the UV intensity are described in above-referenced U.S. patent application Ser. No. 11/115,576 and in commonly assigned U.S. patent application Ser. No. 11/184,101, filed Jul. 18, 2005, titled “Cast Pedestal With Heating Element and Coaxial Heat Exchanger,” which is hereby incorporated by reference in its entirety and for all purposes.</div>
+<div class="description-paragraph" id="p-0069" num="0068">These chambers decouple substrate temperature and UV intensity by reducing the amount of IR radiation on the wafer and/or providing independent heat transfer mechanisms to and from the wafer. For example, the chambers may be equipped with cold mirrors or other reflectors to reduce the amount of IR radiation incident on the wafer. In addition, each pedestal or other substrate support may have an independent heat transfer mechanism to help maintain a substrate temperature regardless of the UV intensity. Thus, unlike conventional UV cure chambers where substrate temperature is coupled to UV intensity, the substrate temperature and UV intensity may be independently set for a wide range of temperatures and intensities.</div>
+<div class="description-paragraph" id="p-0070" num="0069"> <figref idrefs="DRAWINGS">FIGS. 3A and 3B</figref> show one embodiment of an apparatus appropriate for use with certain embodiments of the invention that uses UV flood lamps. Chamber <b>301</b> includes multiple cure stations <b>303</b>, <b>305</b>, <b>307</b> and <b>309</b>, each of which accommodates a wafer. Station <b>303</b> includes transfer pins <b>319</b>. <figref idrefs="DRAWINGS">FIG. 3B</figref> is a side view of the chamber showing stations <b>303</b> and <b>305</b> and wafers <b>313</b> and <b>315</b> located above pedestals <b>323</b> and <b>325</b>. There are gaps <b>304</b> between the wafers and the pedestals. The wafer may be supported above the pedestal by an attachment, such as a pin, or floated on gas. Parabolic or planar cold mirrors <b>353</b> and <b>355</b> are located above UV flood lamp sets <b>333</b> and <b>335</b>. UV light from lamp sets <b>333</b> and <b>335</b> passes through windows <b>343</b> and <b>345</b>. Wafers <b>303</b> and <b>305</b> are then exposed to the radiation. In alternative embodiments, the wafer may be supported by the pedestals <b>323</b> and <b>325</b>. In such embodiments, the lamps may or may not be equipped with cold mirrors. By making full contact with the pedestal, the wafer temperature may be maintained by use of a conductive gas such as helium or a mixture of helium and argon at a sufficiently high pressure, typically between 50 and 760 Torr, but preferably between 100 and 600 Torr.</div>
+<div class="description-paragraph" id="p-0071" num="0070">In operation, a wafer (or other substrate) enters the chamber at station <b>303</b> where the porogen removal operation is performed. Pedestal temperature at station <b>303</b> is set to a first temperature, e.g. 375° C., with the UV lamps above station <b>303</b> set to a first intensity, e.g., 70% maximum intensity. After having some or all of the porogen removed in station <b>303</b>, the porous dielectric matrix is soft and is transferred to station <b>305</b> for hardening. Pedestal temperature at station <b>305</b> is set to a second temperature, e.g., 400° C. and UV intensity is set to a second intensity, e.g. 100%, or maximum, intensity. Stations <b>307</b> and <b>309</b> may also be used for increasing hardness. For example, conditions at stations <b>305</b>, <b>307</b> and <b>309</b> may be the same. Each wafer is sequentially exposed to each UV light source</div>
+<div class="description-paragraph" id="p-0072" num="0071">In some cases, different stations irradiate the wafer at different wavelengths or wavelengths ranges. The example above uses a UV flood lamp, which generates radiation in a broad spectrum. Optical components may be used in the radiation source to modulate the part of the broad spectrum that reaches the wafer. For example, reflectors, filters, or combination of both reflectors and filters may be used to subtract a part of the spectrum from the radiation. One such filter is a bandpass filter.</div>
+<div class="description-paragraph" id="p-0073" num="0072">Optical bandpass filters are designed to transmit a specific waveband. They are composed of many thin layers of dielectric materials, which have differing refractive indices to produce constructive and destructive interference in the transmitted light. In this way optical bandpass filters can be designed to transmit a specific waveband only. The range limitations are usually dependant upon the interference filters lens, and the composition of the thin-film filter material. Incident light is passed through two coated reflecting surfaces. The distance between the reflective coatings determines which wavelengths will destructively interfere and which wavelengths will be allowed to pass through the coated surfaces. In situations where the reflected beams are in phase, the light will pass through the two reflective surfaces. However, if the wavelengths are out of phase, destructive interference will block most of the reflections, allowing almost nothing to transmit through. In this way, interference filters are able to attenuate the intensity of transmitted light at wavelengths that are higher or lower than the desired range.</div>
+<div class="description-paragraph" id="p-0074" num="0073">Another filter that can attenuate the wavelengths of the radiation reaching the wafer is the window <b>343</b>, typically made of quartz. By changing the level of metal impurities and water content, the quartz window can be made to block radiations of undesired wavelengths. High-purity Silica Quartz with very little metal impurity is more transparent deeper into the ultraviolet. As an example, quartz with a thickness of 1 cm will have a transmittance of about 50% at a wavelength of 170 nm, which drops to only a few percent at 160 nm. Increasing levels of impurities in the quartz cause transmission of UV at lower wavelengths to be reduced. Electrically fused quartz has a greater presence of metallic impurities, limiting its UV transmittance wavelength to around 200 nm. Synthetic silica, on the other hand, has much greater purity and will transfer down to 170 nm. For infrared radiation, the transmittance through quartz is determined by the water content. More water in the quartz means that infrared radiation is more likely absorbed. The water content in the quartz may be controlled through the manufacturing process. Thus, the spectrum of radiation transmission through the quartz window may be controlled to cutoff or reduce UV transmission at shorter wavelengths and/or to reduce infrared transmission at longer wavelengths.</div>
+<div class="description-paragraph" id="p-0075" num="0074">Another type of filter is UV cut-off filters. These filters do not allow UV transmission below a set value, e.g. 280 nm. These filters work by absorbing wavelengths below the cut-off value. This may be helpful to optimize the desired cure effect.</div>
+<div class="description-paragraph" id="p-0076" num="0075">Radiation wavelength can also be controlled by modifying the properties of the light generator. UV flood lamps can generate a broad spectrum of radiation, from UV to infrared, but other light generators may be used to emit a smaller spectrum or to increase the intensity of a narrower spectrum. Other light generators may be mercury-vapor lamps, doped mercury-vapor lamps, electrode lamps, excimer lamps, excimer lasers, pulsed Xenon lamps, doped Xenon lamps, noble gas lamps (e.g., argon lamps), metal halide lamps (e.g., HgI lamps, RF driven lamps (e.g., inductively and capacitively coupled lamps), DC lamps. Lasers such as excimer lasers can emit radiation of a single wavelength. When dopants are added to mercury-vapor and to Xenon lamps, radiation in a narrow wavelength band may be made more intense. Common dopants are iron, nickel, cobalt, tin, zinc, indium, gallium, thallium, antimony, bismuth, or combinations of these. For example, mercury vapor lamps doped with indium emits strongly in the visible spectrum and around 450 nm; iron, at 360 nm; and gallium, at 320 nm. Radiation wavelengths can also be controlled by changing the fill pressure of the lamps. For example, high-pressure mercury vapor lamps can be made to emit wavelengths of 250 to 440 nm, particularly 310 to 350 nm more intensely. Low-pressure mercury vapor lamps emit at shorter wavelengths.</div>
+<div class="description-paragraph" id="p-0077" num="0076">In addition to changing light generator properties and the use of filters, reflectors that preferentially deliver one or more segments of the lamps spectral output may be used. A common reflector is a cold mirror that allows infrared radiation to pass but reflects other light. Other reflectors that preferentially reflect light of a spectral band may be used. Therefore a wafer may be exposed to radiation of different wavelengths at different stations. Of course, the radiation wavelengths may be the same in some stations.</div>
+<div class="description-paragraph" id="p-0078" num="0077">In <figref idrefs="DRAWINGS">FIG. 3B</figref>, pedestals <b>323</b> and <b>325</b> are stationary. Indexer <b>311</b> lifts and moves each wafer from one pedestal to another between each exposure period. Indexer <b>311</b> is an indexer plate <b>321</b> attached to a motion mechanism <b>331</b> that has rotational and axial motion. Upward axial motion is imparted to indexer plate <b>321</b> to pick up wafers from each pedestal. The rotational motion serves to advance the wafers from one station to another. The motion mechanism then imparts downward axial motion to the plate to put the wafers down on the stations.</div>
+<div class="description-paragraph" id="p-0079" num="0078">Pedestals <b>323</b> and <b>325</b> are electrically heated and maintained at a desired process temperature. Pedestals <b>323</b> and <b>325</b> may also be equipped with cooling lines, if needed. Each pedestal may have its own heating system. In an alternate embodiment, a large heater block may be used to support the wafers instead of individual pedestals. A thermally conductive gas, such as helium, is used to effect good thermal coupling between the pedestal and the wafer. In some embodiments, cast pedestals with coaxial heat exchangers may be used. These are described in above-referenced application Ser. No. 11/184,101.</div>
+<div class="description-paragraph" id="p-0080" num="0079"> <figref idrefs="DRAWINGS">FIGS. 3A and 3B</figref> show only an example of a suitable apparatus and other apparatuses designed for other methods involved in previous and/or subsequent processes may be used. For example, in another embodiment that uses flood lamps, the wafer support is a carousel. Unlike with the stationary pedestal wafer supports, the wafers do not move relative to the carousel. After a wafer is loaded onto the carousel, the carousel rotates, if necessary, to expose the wafer to light from a UV lamp set. The carousel is stationary during the exposure period. After the exposure period, the carousel rotates to advance each wafer for exposure to the next set of lamps. Heating and cooling elements may be embedded within the rotating carousel. Alternatively the carousel may be in contact with a heater plate or hold the wafers so that they are suspended above a heater plate.</div>
+<div class="description-paragraph" id="p-0081" num="0080">In certain embodiments, the substrates are exposed to UV radiation from focused, rather than, flood lamps. Unlike the flood lamp embodiments wherein the wafers are stationary during exposure (as in <figref idrefs="DRAWINGS">FIGS. 3A</figref> and <i>b</i>), there is relative movement between the wafers and the light sources during exposure to the focused lights as the wafers are scanned.</div>
+<div class="description-paragraph" id="p-0082" num="0081">Other apparatuses designed for other methods involved in previous and/or subsequent processes may be used. For example, methods of the invention may be used with a standard PECVD chamber used to deposit the precursor layer if the chamber is equipped with a UV radiation source. Some supercritical fluid chamber systems may also be configured to include a UV radiation source. Many of these systems may also be used to perform post-porogen removal procedures. In these cases, the chamber system will likely be pumped out between each of the process operations.</div>
+<heading id="h-0012">EXAMPLES</heading>
+<div class="description-paragraph" id="p-0083" num="0082">Example processes in accordance with the present invention are discussed below. The example processes list parameters of wafer temperature, UV intensity as percentage of full power, desired spectral band as a wavelength range, and gas flow rate for each of stations one to four for a four-station chamber. These example processes are suitable for use in a Novellus SOLA, which uses a four-station sequential processing chamber. These example processes may also be suitable for use in other semiconductor processing equipment, such as ones that use multiple chambers or multi-stations chambers with fewer or more than four stations.</div>
+<div class="description-paragraph" id="p-0084" num="0083">The first example relates to the porous ULK film embodiment referenced above. Wafers having a porous ULK film deposited thereon are treated with UV radiation first to remove the porogens in the ULK film and then to strengthen and harden the film. Because the porogen becomes harder to remove after the ULK film is hardened and strengthened, the process conditions in the first station must favor porogen removal without cross-linking the film. In station 1, the wafer is exposed to a lower UV intensity radiation than at stations 2 to 4 because the ULK film hardens and strengthens more at higher exposures. The UV intensity is lower at station 1, at about 35% of maximum, which may be about 200 mW/cm<sup>2 </sup>to 400 mW/cm<sup>2 </sup>in the desired spectral band. The UV wavelength range at station 1 is about 250-270 nm, a longer wavelength than at stations 2 to 4, which are at about 220-250 nm. As discussed above, the different wavelengths may be achieved using different light generators and optical components. Note that the pedestal temperature changes between station 1 and station 2, but the wafer temperature does not. The wafer temperature depends on heat transfer from the pedestal, the radiation intensity, and convection through the gas flow. At station 1, the pedestal transfers more heat because the UV intensity is lower. When the UV intensity is increased in stations 2 to 4, the pedestal temperature is correspondingly lowered to maintain the wafer temperature. Maintaining the same wafer temperature from station to station keeps the shrinkage rate consistent and reduces thermal stress on the wafer. The total process time is reduced as compared to having a lower UV intensity at station 1 without a higher pedestal temperature. The wafer temperature of 400-410° C. keeps the process within thermal budget.</div>
+<div class="description-paragraph" id="p-0085" num="0084">Further, the gas flow rates are higher in stations 1 and 2 than at stations 3 and 4. In one particular implementation of this invention, the higher gas flow purges the porogen from the wafer and inside surfaces of the chamber. By the time the wafer reaches stations 3 and 4, most of the porogen has generally been removed and less purging is required. The different gas flow rates may be accomplished by using different mass flow controllers (MFCs) from the same gas inlet header, or, in some instances when different gases are required in each station, different gas inlet headers. In this example, station 1 differs from stations 3 and 4 in every process parameter, but is different from station 2 by three process parameters. On the other hand, only the purge gas flow rate is different as between station 2 and stations 3 and 4. The chamber pressure may be preferably at 10 Torr. The chamber pressure also may be greater than about 8 Torr, about 5-20 Torr, about 8-15 Torr, or about 10 Torr. The preferred purge gas is a mixture of helium and argon, at a ratio of about 1 Helium: 2 Argon. Helium only or argon only as the purge gas may also be used. Process parameters for the preferred embodiment with the mixture of argon and helium as purge gas are summarized in Table 1A. Table 1B summarizes process parameter for the helium only embodiment.</div>
+<div class="description-paragraph" id="p-0086" num="0085">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1A</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Process Example for Porous ULK Film</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Parameter</td>
+<td class="description-td">Station #1</td>
+<td class="description-td">Station #2</td>
+<td class="description-td">Station #3</td>
+<td class="description-td">Station #4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Wafer </td>
+<td class="description-td">400-410° C.</td>
+<td class="description-td">400-410° C.</td>
+<td class="description-td">400-410° C.</td>
+<td class="description-td">400-410° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Temperature</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pedestal </td>
+<td class="description-td">415° C.</td>
+<td class="description-td">350° C.</td>
+<td class="description-td">350° C.</td>
+<td class="description-td">340° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">temperature</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">UV Intensity (% </td>
+<td class="description-td"> 35%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">of full power)</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Desired Spectral </td>
+<td class="description-td">250-270 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">band</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Gas Flow Rate </td>
+<td class="description-td"> 15-25 slm</td>
+<td class="description-td"> 15-25 slm</td>
+<td class="description-td"> 5-15 slm</td>
+<td class="description-td"> 5-15 slm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(helium and </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">argon at</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">about 1:2)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0087" num="0086">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1B</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Process Example for Porous ULK Film</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Parameter</td>
+<td class="description-td">Station #1</td>
+<td class="description-td">Station #2</td>
+<td class="description-td">Station #3</td>
+<td class="description-td">Station #4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Wafer </td>
+<td class="description-td">400-410° C.</td>
+<td class="description-td">400-410° C.</td>
+<td class="description-td">400-410° C.</td>
+<td class="description-td">400-410° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Temperature</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pedestal </td>
+<td class="description-td">415° C.</td>
+<td class="description-td">375° C.</td>
+<td class="description-td">375° C.</td>
+<td class="description-td">375° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">temperature</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">UV Intensity (% </td>
+<td class="description-td"> 35%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">of full power)</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Desired Spectral </td>
+<td class="description-td">250-270 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">band</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Gas Flow Rate </td>
+<td class="description-td"> 10-25 slm</td>
+<td class="description-td"> 10-25 slm</td>
+<td class="description-td"> 5-12 slm</td>
+<td class="description-td"> 5-12 slm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(helium only)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0088" num="0087">As another example, a silicon nitride film may be treated to increase tensile stress in accordance with the present invention. For certain applications, silicon nitride may be used in place of silicon dioxide for top layer protection because it is harder and has better hermeticity, etch selectivity, and protects regions below it against oxidation. Silicon nitride films may be deposited with a LPCVD (low-pressure chemical vapor deposition) or a PECVD (plasma-enhanced chemical vapor deposition) process. UV radiation may be used to change the stress properties of the silicon nitride film, generally to increase its tensile stress. This tensile stress increase can be performed in two operations. In this example, the wafer is heated to 400° C., in some cases up to 480° C., in the first station, while the UV intensity is at the maximum, about 200 to 400 mW/cm<sup>2</sup>. The UV wavelength range is about 220-250 nm, similar to that for building ULK film strength and hardness. The gas flow is at 4 slpm. Because no gaseous by-product is removed in this operation, the gas flowrate is lower than those of other processes. In stations 2 to 4, the wafer is heated to 415° C., and all the other parameters are kept about the same. The process chamber pressure may be at atmosphere or at a vacuum. Process parameters are summarized in Table 2.</div>
+<div class="description-paragraph" id="p-0089" num="0088">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Process Example for High Tensile Nitride Film</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Parameter</td>
+<td class="description-td">Station #1</td>
+<td class="description-td">Station #2</td>
+<td class="description-td">Station #3</td>
+<td class="description-td">Station #4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Wafer </td>
+<td class="description-td">400° C.</td>
+<td class="description-td">415° C.</td>
+<td class="description-td">415° C.</td>
+<td class="description-td">415° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Temperature</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">UV Intensity (% </td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">of full power)</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Desired Spectral </td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">band</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Gas Flow Rate</td>
+<td class="description-td"> 2-6 slm</td>
+<td class="description-td"> 2-6 slm</td>
+<td class="description-td"> 2-6 slm</td>
+<td class="description-td"> 2-6 slm</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0090" num="0089">In yet another example, a spin-on ULK film may be treated with UV radiation first to evolve the solvent and then to harden and strengthen the film. As its name states, the spin-on ULK film is applied to the wafer via a spinning process. First a liquid solution containing the film is applied to the wafer, and the wafer is spun to evenly spread the liquid solution to all parts of the wafer. UV radiation can be applied to the deposited film to drive-off the solvent; complete chemical reactions; drive off unreacted monomers and oligomers; and to densify the film. These processes may be achieved in three operations. In the first station, the wafer temperature is kept at about 350° C., a little lower than stations 2 to 4, which are kept at 400° C. The intensity is also lower at station 1, at about 70% of the maximum, which may be about 200 to 400 mW/cm<sup>2</sup>. The UV wavelength range is at about 300-400 nm, which is longer than the 220-250 nm used in stations 2 to 4. In station 1, most the solvent is evolved from the spin-on ULK film. Premature hardening may trap some solvents and stop chemical reactions; therefore, station 1 parameters favor solvent evolution and not film hardening or strengthening. The purge gas flows at a high rate, 17 slm, to remove all the solvents evolved from the film. In station 2, the purge gas flow is still high, but the wafer temperature, UV intensity and wavelength, are all changed to the parameters that favor film hardening and strengthening. In this station, any remaining unreacted monomers and oligamers are removed under high purge gas flow. In stations 3 and 4, the purge gas flow is reduced to 8 slm while the other parameters remain constant. This example is similar to that of the porous ULK film example in Table 1, which also has three distinct stages. Process parameters are summarized in Table 3.</div>
+<div class="description-paragraph" id="p-0091" num="0090">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Process Example for Spin-on ULK Film</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Parameter</td>
+<td class="description-td">Station #1</td>
+<td class="description-td">Station #2</td>
+<td class="description-td">Station #3</td>
+<td class="description-td">Station #4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Wafer </td>
+<td class="description-td">350° C.</td>
+<td class="description-td">400° C.</td>
+<td class="description-td">400° C.</td>
+<td class="description-td">400° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Temperature</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">UV Intensity (% </td>
+<td class="description-td"> 70%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">of full power)</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Desired Spectral </td>
+<td class="description-td">300-400 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">band</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Gas Flow Rate</td>
+<td class="description-td"> 10-25 slm</td>
+<td class="description-td"> 10-25 slm</td>
+<td class="description-td"> 5-12 slm</td>
+<td class="description-td"> 5-12 slm</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0092" num="0091">In one more example, a damaged ULK film may be repaired with UV radiation. In the trench formation process, etching, ashing, planarizing, and wet or dry cleaning damage ULK film by removing organic groups, generally —CH<sub>3 </sub>groups, in the low-k material of the trench sidewalls and bottom causing bonds to dangle or strain, e.g., Si—O—Si or Si—CH<sub>2</sub>—Si. When exposed to ambient atmosphere or moisture, the dangling Si bonds form silanol groups (Si—OH) that may increase the dielectric constant. The UV radiation may repair this damage by cleaving the silanol bonds and cross-linking the film Si groups to fill gaps from the departed methyl (—CH<sub>3</sub>) groups. As an option, departed methyl groups may also be replenished using carbon containing gas reactants. The UV radiation activates the damaged ULK film layer and cleaves silanol bonds to allow methyl groups from the reactant gas to fill damaged gap.</div>
+<div class="description-paragraph" id="p-0093" num="0092">An example parameters for the film repair is shown in Table 4. At station 1, the wafer temperature is maintained at about 200-250° C. and exposed to a UV band of 300-400 nm at about 70%. At station 1, the silanol bonds are broken and the resultant by-products removed with a relatively higher purge gas flowrate, at about 10-25 slm. The purge gas may be nitrogen, helium, argon, neon, or a combination of these. At station 2, the UV intensity is increased with a UV spectral band having shorter wavelengths. At this station, the purge gas flowrate remains high to completely remove all byproducts, and the cross-linking or the carbon group replacement reactions start. At station 3 and 4, the gas flowrate is reduced after most of the gaseous by products have been removed. The UV spectral band and intensity remains at that of station 2. Note that although the wafer temperature is maintained to be the same from station 1 to 4, the pedestal temperature set point may be different because the UV radiation at different intensities may contribute more or less heat. Thus, at stations 2-4, the pedestal temperature is lower than that at station 1.</div>
+<div class="description-paragraph" id="p-0094" num="0093">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 4</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Process Example for ULK Film Repair</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Parameter</td>
+<td class="description-td">Station #1</td>
+<td class="description-td">Station #2</td>
+<td class="description-td">Station #3</td>
+<td class="description-td">Station #4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Wafer </td>
+<td class="description-td">200-250° C.</td>
+<td class="description-td">200-250° C.</td>
+<td class="description-td">200-250° C.</td>
+<td class="description-td">200-250° C.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Temperature</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">UV Intensity (% </td>
+<td class="description-td"> 70%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+<td class="description-td">100%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">of full power)</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Desired Spectral </td>
+<td class="description-td">300-400 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+<td class="description-td">220-250 nm</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">band</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Gas Flow Rate</td>
+<td class="description-td"> 10-25 slm</td>
+<td class="description-td"> 10-25 slm</td>
+<td class="description-td"> 5-12 slm</td>
+<td class="description-td"> 5-12 slm</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0095" num="0094">While this invention has been described in terms of several embodiments, there are alterations, modifications, permutations, and substitute equivalents, which fall within the scope of this invention. It should also be noted that there are many alternative ways of implementing the methods and apparatuses of the present invention. It is therefore intended that the following appended claims be interpreted as including all such alterations, modifications, permutations, and substitute equivalents as fall within the true spirit and scope of the present invention. The use of the singular in the claims does not mean “only one,” but rather “one or more,” unless otherwise stated in the claims.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">18</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM121007269">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A chamber for processing semiconductor wafers, comprising:
+<div class="claim-text">a plurality of processing stations, each processing station having a wafer support and one or more radiation sources configured to provide ultraviolet radiation at that processing station; and</div>
+<div class="claim-text">a mechanism to transfer a wafer to each processing station, wherein the processing stations are operable to provide wafer exposure characteristics that vary in at least one of radiation intensity, radiation wavelength, spectral distribution, and wafer temperature for at least two of the plurality of processing stations.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The chamber of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein each radiation source comprises:
+<div class="claim-text">a) one or more light generators, and</div>
+<div class="claim-text">b) one or more optical components operable to modify one or more characteristics of radiant output of the light generators.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The chamber of <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the light generators are selected from the group consisting of: mercury-vapor lamps, doped mercury-vapor lamps, electrode lamps, excimer lamps, excimer lasers, noble gas lamps, metal halide lamps, radio-frequency-driven lamps, direct current lamps, and combinations thereof.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The chamber of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein at least one of the processing stations includes two or more independently operable radiation sources.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The chamber of <claim-ref idref="CLM-00004">claim 4</claim-ref> wherein the independently operable radiation sources are configured to generate radiation that varies in at least one of radiation intensity, radiation wavelength, and spectral distribution.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. A semiconductor processing tool, comprising
+<div class="claim-text">a) one or more processing chambers, each chamber comprising a wafer support and a radiation source configured to provide ultraviolet radiation and operable to provide wafer exposure characteristics that vary at least one of radiation intensity, radiation wavelength, spectral distribution, and wafer support temperature; and</div>
+<div class="claim-text">b) a mechanism to transfer a wafer to each chamber.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The semiconductor processing tool of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the one or more processing chambers is configured to dissociate porogens while minimizing cross-linking in a low-k dielectric film and the one or more processing chambers is configured to cross-link bonds in the film.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The chamber of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the mechanism is a rotatable carousel that includes the wafer supports and wherein rotation of the carousel causes the wafer supports and any wafers supported by the wafer supports to be moved between the processing stations.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The chamber of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein:
+<div class="claim-text">the chamber has at least four processing stations, and</div>
+<div class="claim-text">the chamber is configured to:
+<div class="claim-text">provide, at a first processing station of the processing stations, a first wafer support temperature as well as ultraviolet radiation within a first spectral band and having a first ultraviolet radiation intensity within the first spectral band,</div>
+<div class="claim-text">provide, at a second processing station of the processing stations, a second wafer support temperature as well as ultraviolet radiation within a second spectral band and having a second ultraviolet radiation intensity within the second spectral band,</div>
+<div class="claim-text">provide, at a third processing station of the processing stations, a third wafer support temperature as well as ultraviolet radiation within a third spectral band and having a third ultraviolet radiation intensity within the third spectral band, and</div>
+<div class="claim-text">provide, at a fourth processing station of the processing stations, a fourth wafer support temperature as well as ultraviolet radiation within a fourth spectral band and having a fourth ultraviolet radiation intensity within the fourth spectral band, wherein:</div>
+<div class="claim-text">the first wafer support temperature is higher than the second, third, and fourth wafer support temperatures,</div>
+<div class="claim-text">the first ultraviolet radiation intensity is lower than the second, third, and fourth ultraviolet radiation intensities, and</div>
+<div class="claim-text">the first spectral band is different from the second, third, and fourth spectral bands.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The chamber of <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein:
+<div class="claim-text">the first wafer support temperature is approximately 415° C.,</div>
+<div class="claim-text">the second, third, and fourth wafer support temperatures are selected from the group consisting of: approximately 350° C. and approximately 375° C.,</div>
+<div class="claim-text">the first spectral band has wavelengths of between 250 nm and 270 nm,</div>
+<div class="claim-text">the second, third, and fourth spectral bands have wavelengths of between 220 nm and 250 nm,</div>
+<div class="claim-text">the first ultraviolet radiation intensity is approximately 35% of the second, third, and fourth ultraviolet radiation intensities.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The chamber of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the second, third, and fourth ultraviolet radiation intensities are between 200 mW/cm<sup>2 </sup>and 400 mW/cm<sup>2</sup>.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The chamber of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the chamber is further configured to:
+<div class="claim-text">flow purge gas across a wafer in the first processing station at a first flow rate,</div>
+<div class="claim-text">flow the purge gas across a wafer in the second processing station at a second flow rate,</div>
+<div class="claim-text">flow the purge gas across a wafer in the third processing station at a third flow rate,</div>
+<div class="claim-text">flow the purge gas across a wafer in the fourth processing station at a fourth flow rate, and</div>
+<div class="claim-text">the first and second flow rates are higher than the third and fourth flow rates.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The chamber of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein:
+<div class="claim-text">the first and second flow rates are between 15 and 25 standard liters per minute, and</div>
+<div class="claim-text">the third and fourth flow rates are between 5 and 15 standard liters per minute.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The chamber of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the purge gas is selected from the group consisting of: helium, argon, and a mixture of helium and argon at ratio of 1:2.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The chamber of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein:
+<div class="claim-text">the chamber has at least four processing stations, and</div>
+<div class="claim-text">the chamber is configured to:
+<div class="claim-text">provide, at a first processing station of the processing stations, ultraviolet radiation within a first spectral band and having a first ultraviolet radiation intensity within the first spectral band,</div>
+<div class="claim-text">provide, at a second processing station of the processing stations, ultraviolet radiation within a second spectral band and having a second ultraviolet radiation intensity within the second spectral band,</div>
+<div class="claim-text">provide, at a third processing station of the processing stations, ultraviolet radiation within a third spectral band and having a third ultraviolet radiation intensity within the third spectral band, and</div>
+<div class="claim-text">provide, at a fourth processing station of the processing stations, ultraviolet radiation within a fourth spectral band and having a fourth ultraviolet radiation intensity within the fourth spectral band, wherein:</div>
+<div class="claim-text">the first ultraviolet radiation intensity is lower than the second, third, and fourth ultraviolet radiation intensities, and</div>
+<div class="claim-text">the first spectral band is different from the second, third, and fourth spectral bands.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The chamber of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein:
+<div class="claim-text">the first ultraviolet radiation intensity is approximately 70% of the second, third, and fourth ultraviolet radiation intensities,</div>
+<div class="claim-text">the first spectral band is between 300 nm and 400 nm, and</div>
+<div class="claim-text">the second, third, and fourth spectral bands are between 220 nm and 250 nm.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The chamber of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein the chamber is further configured to:
+<div class="claim-text">flow purge gas across a wafer in the first processing station at a first flow rate,</div>
+<div class="claim-text">flow the purge gas across a wafer in the second processing station at a second flow rate,</div>
+<div class="claim-text">flow the purge gas across a wafer in the third processing station at a third flow rate,</div>
+<div class="claim-text">flow the purge gas across a wafer in the fourth processing station at a fourth flow rate, and</div>
+<div class="claim-text">the first and second flow rates are higher than the third and fourth flow rates.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The chamber of <claim-ref idref="CLM-00017">claim 17</claim-ref>, wherein:
+<div class="claim-text">the first and second flow rates are between 10 and 25 standard liters per minute, and</div>
+<div class="claim-text">the third and fourth flow rates are between 5 and 12 standard liters per minute.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

@@ -1,0 +1,331 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US9783920B2 - Laundry treating apparatus and method for controlling the same 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA206870053">
+<div class="abstract" id="p-0001" num="0000">A method is provided for controlling a laundry treating apparatus. The method may include controlling the drum to accelerate the drum to rotate at a first speed, applying a brake to stop the drum, accelerating the drum to a second speed, sensing a current being applied to the motor while the drum is accelerated to the second speed, and determining a laundry amount based on the sensed current.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES121790929">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATION</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application claims priority under 35 U.S.C. §119 to Korean Application No. 10-2013-0096745, filed Aug. 14, 2013, the subject matter of which is hereby incorporated by reference.</div>
+<heading id="h-0002">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0003" num="0002">1. Field</div>
+<div class="description-paragraph" id="p-0004" num="0003">Embodiments may relate to a laundry treating apparatus and a method for controlling the same.</div>
+<div class="description-paragraph" id="p-0005" num="0004">2. Background</div>
+<div class="description-paragraph" id="p-0006" num="0005">In general, a laundry treating apparatus, a machine for applying physical and chemical actions to laundry or clothes to treat the same, calls a washing machine for removing dirt from the laundry, a spin-dryer for spinning a drum holding the laundry therein for extracting water from the laundry, and a dryer for applying cold or heated air to the drum for drying wet laundry, collectively.</div>
+<div class="description-paragraph" id="p-0007" num="0006">The laundry treating apparatus may detect an amount of laundry (hereinafter called a laundry amount) introduced to the drum before performing an operation, such as washing, rinsing, spinning, drying, and etc., and sets an amount of water supply, an operation course, and an operation time period according to the detected laundry amount.</div>
+<div class="description-paragraph" id="p-0008" num="0007">The laundry amount detection may be made by using a principle in which a load on a motor varies with the laundry amount and a current applied to the motor for rotating the drum varies with the load. However, since the load on the motor varies, not only with the load on the motor, but also with a state of clothes in the drum, there has been a problem in that a detected laundry amount shows a variation.</div>
+<heading id="h-0003">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0009" num="0008">Embodiments may provide a laundry treating apparatus and a method for controlling the same that may accurately sense the laundry amount. Embodiments may provide a laundry treating apparatus and a method for controlling the same that can eliminate an influence of a state of clothes introduced to the drum to determination of the laundry amount for determining more accurate laundry amount.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Embodiments may provide a method for controlling a laundry treating apparatus having a drum rotatably provided for holding clothes, and a motor for rotating the drum. The method may include a first speed rotating for controlling the drum to accelerate the drum to rotate at a first speed, a braking for applying a brake to stop the drum, a second speed accelerating for accelerating the drum to a second speed, a current sensing for sensing a current being applied to the motor during the drum is accelerated to the second speed, and a laundry amount determining for determining a laundry amount based on the current sensed in the current sensing.</div>
+<div class="description-paragraph" id="p-0011" num="0010">Embodiments may provide a laundry treating apparatus including a drum rotatably provided for holding clothes, a motor for rotating the drum, a motor control unit for applying a brake to stop the motor after controlling the motor to rotate the drum at a first speed, and controlling the motor to make the drum to again accelerate to a second speed, a current sensing unit for sensing a current being applied to the motor during the motor is controlled by the motor control unit, and a laundry amount sensing unit for determining a laundry amount based on a current value sensed at the current sensing unit during the drum is accelerated to the second speed.</div>
+<div class="description-paragraph" id="p-0012" num="0011">The laundry treating apparatus and the method for controlling the same may have an effect of determining a more accurate laundry amount by minimizing influence of an initial stage of the clothes introduced to the drum to a current value being applied to the motor, because the current value being applied to the motor is sensed after rotating the drum for changing the state of the clothes introduced to the drum.</div>
+<div class="description-paragraph" id="p-0013" num="0012">The laundry treating apparatus and the method for controlling the same may have an effect of making the laundry amount sensed become a reliable index that reflects an actual laundry amount even when the clothes are introduced to the drum in a non-uniform state by the user.</div>
+<description-of-drawings>
+<heading id="h-0004">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0014" num="0013">Arrangements and embodiments may be described in detail with reference to the following drawings in which like reference numerals refer to like elements and wherein:</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a sectional view illustrating a laundry treating apparatus in accordance with an example embodiment;</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram illustrating control relations among major elements of the laundry treating apparatus in <figref idrefs="DRAWINGS">FIG. 1</figref>;</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a flow chart illustrating a method for controlling a laundry treating apparatus in accordance with an example embodiment;</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a graph illustrating time vs. rotation speed of a drum when a laundry treating apparatus is operated according to a control method in accordance with an example embodiment;</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a sectional view illustrating current sensing sections;</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a flow chart illustrating a method for controlling a laundry treating apparatus in accordance with an example embodiment; and</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a graph illustrating time vs. rotation speed of a drum when a laundry treating apparatus is operated according to a control method in accordance with an example embodiment.</div>
+</description-of-drawings>
+<heading id="h-0005">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0022" num="0021">Advantages, features and methods for achieving those of embodiments may become apparent upon referring to embodiments described later in detail together with attached drawings. However, embodiments are not limited to the embodiments disclosed hereinafter, but may be embodied in different modes. The embodiments are provided for perfection of disclosure and informing a scope to persons skilled in this field of art. The same reference numbers may refer to the same elements throughout the specification.</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a sectional view illustrating a laundry treating apparatus in accordance with an example embodiment. <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram illustrating control relations among major elements of the laundry treating apparatus in <figref idrefs="DRAWINGS">FIG. 1</figref>. Other embodiments and configurations may also be provided.</div>
+<div class="description-paragraph" id="p-0024" num="0023">Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, a laundry treating apparatus <b>100</b> may include a casing <b>111</b> having a clothes introduction opening <b>111</b> <i>a </i>formed therein, a door <b>112</b> for opening/closing the clothes introduction opening <b>111</b> <i>a</i>, a tub <b>122</b> arranged in the casing <b>111</b>, a drum <b>124</b> rotatably provided in the tub <b>122</b> for holding clothes introduced thereto through the clothes introduction opening <b>111</b> <i>a</i>, a motor <b>113</b> for rotating the drum <b>124</b>, a detergent box <b>133</b> for holding detergent, and a control panel <b>114</b>.</div>
+<div class="description-paragraph" id="p-0025" num="0024">The cabinet <b>111</b> may have the door <b>112</b> rotatably coupled thereto for opening/closing the clothes introduction opening <b>111</b> <i>a</i>. The cabinet <b>111</b> may have the control panel <b>114</b> provided thereto. The cabinet <b>111</b> may have the detergent box <b>133</b> drawably provided thereto.</div>
+<div class="description-paragraph" id="p-0026" num="0025">The tub <b>122</b> may be arranged in the cabinet <b>111</b> to be able to be buffered with a spring <b>115</b> and a damper <b>117</b>. The tub <b>122</b> may hold washing water. The tub <b>122</b> may be arranged to an outside of the drum <b>124</b> to surround the drum <b>124</b>.</div>
+<div class="description-paragraph" id="p-0027" num="0026">The motor <b>113</b> may generate a torque for rotating the drum <b>124</b>. The motor <b>113</b> may rotate in a regular direction or a reverse direction, for rotating the drum <b>124</b> in different speeds or directions.</div>
+<div class="description-paragraph" id="p-0028" num="0027">The drum <b>124</b> may be rotated, with the clothes held therein. The drum <b>124</b> may be arranged in the tub <b>122</b>. The drum <b>124</b> may be formed in a rotatable cylindrical shape. The drum <b>124</b> may have a plurality of pass through holes for passing the washing water. The drum <b>124</b> may rotate upon having torque of the motor <b>113</b> forwarded thereto.</div>
+<div class="description-paragraph" id="p-0029" num="0028">A gasket <b>128</b> may seal between the tub <b>122</b> and the cabinet <b>111</b>. The gasket <b>128</b> may be arranged between the inlet of the tub <b>122</b> and the clothes introduction opening <b>111</b> <i>a</i>. The gasket <b>128</b> may attenuate an impact forwarded to the door <b>112</b> when the drum <b>124</b> rotates as well as prevent the washing water from leaking to an outside of the tub <b>122</b>. The gasket <b>128</b> may have a circulating nozzle <b>127</b> provided thereto for introduction of the washing water to an inside of the drum <b>124</b>.</div>
+<div class="description-paragraph" id="p-0030" num="0029">The detergent box <b>133</b> may hold detergent, such as washing detergent, fiber softener or bleaching agent. The detergent box <b>133</b> may be drawably provided to a front side of the cabinet <b>111</b>. The detergent in the detergent box <b>133</b> may be introduced to the tub <b>122</b> mixed with the washing water when the washing water is supplied to the tub <b>122</b>.</div>
+<div class="description-paragraph" id="p-0031" num="0030">Provided to an inside of the cabinet <b>111</b>, there may be a water supply valve <b>131</b> for controlling introduction of the washing water from an external water source, a water supply passage <b>132</b> for flow of the washing water being introduced to the water supply valve to the detergent box <b>133</b>, and a water supply pipe <b>134</b> for introduction of the washing water having the detergent mixed therewith at the detergent box <b>133</b> to the tub <b>122</b>.</div>
+<div class="description-paragraph" id="p-0032" num="0031">Provided to the inside of the cabinet <b>111</b>, there may be a drain pipe <b>135</b> for draining the washing water from the tub <b>122</b>, a pump <b>136</b> for draining the washing water from the tub, a circulating flow passage <b>137</b> for circulation of the washing water, a circulating nozzle <b>127</b> for introduction of the washing water to the drum <b>124</b>, and a drain flow passage <b>138</b> for draining the washing water to an outside of the laundry treating apparatus. Depending on embodiments, the pump <b>136</b> may be a circulating pump and a drain pump connected to the circulating flow passage <b>137</b> and the drain flow passage <b>138</b>, respectively.</div>
+<div class="description-paragraph" id="p-0033" num="0032">The motor <b>113</b> may include a stator <b>113</b> <i>a </i>having coils wound thereon, a rotor <b>113</b> <i>b </i>for rotating owing to electro-magnetic reaction with the coil, and a hall element <b>113</b> <i>c </i>for sensing a position of the rotor <b>113</b> <i>b. </i> </div>
+<div class="description-paragraph" id="p-0034" num="0033">Referring to <figref idrefs="DRAWINGS">FIG. 2</figref>, the laundry treating apparatus may include a motor control unit <b>230</b>, a PWM operation unit <b>240</b>, an inverter <b>250</b>, and a current sensing unit <b>260</b>.</div>
+<div class="description-paragraph" id="p-0035" num="0034">The motor control unit <b>230</b> may control power to be applied to the motor <b>113</b>. The motor control unit <b>230</b> may include a position detection unit <b>231</b>, a speed control unit <b>233</b>, a current control unit <b>235</b>, and a coordinate transformation unit <b>237</b>.</div>
+<div class="description-paragraph" id="p-0036" num="0035">The motor <b>113</b> may include the hall element <b>113</b> <i>c </i>for detecting a position of the rotor. The hall element may include an N type semiconductor for measuring strength of a magnetic field by using a hall effect. For an example, if the hall element has a current I<sub>H </sub>flowing thereto and magnetic flux B applied to a surface of the hall element perpendicular to a direction of the current, a voltage V<sub>H </sub>may be generated in a direction perpendicular to the magnetic flux B proportional to the current I<sub>H </sub>and a magnitude of the magnetic flux B. Since the hall element can detect N, S poles and magnitudes thereof from the voltage V<sub>H </sub>generated thus, the hall element can detect a position of the rotor that is a permanent magnet of a PMSM (Permanent Magnet Synchronous Motor) or BLDC (Brushless DC electric Motor). Moreover, since the hall element <b>113</b> <i>c </i>generates the voltage V<sub>H </sub>proportional to the magnitude of the magnetic flux B, enabling to detect current intensity that generates the magnetic flux, the hall element may also be used as a current sensor.</div>
+<div class="description-paragraph" id="p-0037" num="0036">The position detection unit <b>231</b> may detect a position of the drum <b>124</b> based on the position of the rotor <b>113</b> <i>b </i>sensed by the hall element <b>113</b> <i>c</i>. The position detection unit <b>231</b> may also detect a rotation speed of the drum <b>124</b> based on the position of the rotor <b>113</b> <i>b </i>or the drum <b>124</b> detected thus. The position detection unit <b>231</b> may detect the rotation speed of the motor <b>113</b> by using the current that the current sensing unit <b>260</b> senses.</div>
+<div class="description-paragraph" id="p-0038" num="0037">The position of the rotor <b>113</b> <i>b </i>detected with the hall element <b>113</b> <i>c </i>(i.e., a rotation angle θ of the drum <b>124</b>) may have a smallest unit varied with a number of the permanent magnets mounted to the rotor <b>113</b> <i>b</i>. The embodiment may suggest, but is not limited to, 15° as a smallest unit of angle.</div>
+<div class="description-paragraph" id="p-0039" num="0038">The speed control unit <b>233</b> may subject the rotation speed of the rotor <b>113</b> <i>b </i>detected at the position detection unit <b>231</b> to proportional integral control PI for forwarding a command current that is to make the rotation speed ω to follow a command speed ω*. On a d-q axes rotating coordinate system having a d-axis parallel to a direction of the magnetic flux and a q-axis perpendicular to the d-axis, the command current forwarded by the speed control unit <b>233</b> may be expressed with a vector sum of a d-axis command current Id* and a q-axis command current Iq*.</div>
+<div class="description-paragraph" id="p-0040" num="0039">The current control unit <b>235</b> may subject the present currents Id, Iq the current sensing unit <b>260</b> detects to proportional integral control PI to make the present currents Id, Iq to follow the command currents Id*, Iq*, to generate a d-axis command voltage Vd*, and a q-axis command voltage Vq*.</div>
+<div class="description-paragraph" id="p-0041" num="0040">The coordinate transformation unit <b>237</b> may transform the d-q axes rotating coordinate system to a uvw fixed coordinate system and vice versa. The coordinate transformation unit <b>237</b> may transform the command voltage Vd*/Vq* applied thereto in the d-q axes rotating coordinate system to three phase command voltages. The coordinate transformation unit <b>237</b> may transform the present current in the fixed coordinate system (the current sensing unit <b>260</b> senses to be described later) to the d-q axes rotating coordinate system. The rotating coordinate system may be a rotor reference frame rotating in synchronization with the speed of the rotor <b>113</b> <i>b</i>. The coordinate transformation unit <b>237</b> may transform a coordinate based on a position θ of the drum <b>124</b> that the position detection unit <b>231</b> detects.</div>
+<div class="description-paragraph" id="p-0042" num="0041">The PWM (Pulse Width Modulation) operation unit <b>240</b> has a signal of the uvw fixed coordinate system applied thereto from the motor control unit <b>230</b> for generating a PWM signal.</div>
+<div class="description-paragraph" id="p-0043" num="0042">The inverter <b>250</b> is a converter for generating AC power of a variable voltage and a variable frequency from fixed or variable DC power. The inverter <b>250</b> receives a PWM signal from a PWM operation unit <b>240</b> for controlling power to be directly applied to the motor <b>133</b>. The inverter <b>250</b> may control, not only a frequency of AC output power, but also an output voltage of the AC output power. Depending on embodiments, the PWM operation unit <b>240</b> may be included to the inverter <b>250</b>. Such an inverter may be called a PWM inverter.</div>
+<div class="description-paragraph" id="p-0044" num="0043">The PWM operation unit <b>240</b> may generate gating pulses of each phase switch for generating a fundamental voltage having a volt-second average and a frequency the same with command voltages Vd* and Vq* with the inverter <b>250</b>. Additionally, a switching pattern may be determined to minimize unnecessary harmonics and switching losses, and as PWM techniques for this, optimal/programmed PWM, carrier based PWM, space vector PWM, and so on are known well.</div>
+<div class="description-paragraph" id="p-0045" num="0044">The laundry treating apparatus may perform operations or washing, rinsing, spinning, and drying according to setting to the control panel <b>114</b>, for performing an operation optimized to an amount of the clothes by setting detailed variables, such as a water supply amount, a rotation speed of the drum <b>124</b>, a rotation pattern, an operation time period according to the amount of clothes (laundry amount) introduced to the drum <b>124</b>. The laundry treating apparatus may sense the laundry amount before performing respective operations. Embodiments described hereinafter describe the operations for sensing the laundry amount, wherein the laundry amount is not only sensed before performing any stroke of the washing, rinsing, spinning, and drying, but also performed in middle of progress of the stroke. The operations may be applied, not only to a case when a dry laundry amount is sensed before the water supply is made to the drum <b>124</b>, but also to a case when a wet laundry amount is sensed after the water supply is made to the drum <b>124</b>.</div>
+<div class="description-paragraph" id="p-0046" num="0045">A laundry amount sensing unit <b>239</b> may determine the laundry amount based on a current. The laundry amount may be determined based on a present current Id, Iq sensed by a current sensing unit <b>260</b>, and depending on embodiments, not only the present currents, but also a counter electromotive force may be taken into account, altogether.</div>
+<div class="description-paragraph" id="p-0047" num="0046"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a flow chart illustrating a method for controlling a laundry treating apparatus in accordance with an example embodiment. <figref idrefs="DRAWINGS">FIG. 4</figref> is a graph illustrating time vs. rotation speed of a drum when a laundry treating apparatus is operated according to a control method in accordance with an example embodiment. <figref idrefs="DRAWINGS">FIG. 5</figref> is a sectional view illustrating current sensing sections. A method for controlling a laundry treating apparatus in accordance with example embodiments will be described, with reference to <figref idrefs="DRAWINGS">FIGS. 3 to 5</figref>. Other embodiments and configurations may also be provided.</div>
+<div class="description-paragraph" id="p-0048" num="0047">The clothes may be introduced to the drum <b>124</b> and the drum <b>124</b> may be accelerated (A1, [t1, t2]). A command speed ω* applied to a speed control unit <b>233</b> is a first speed ω1, and a rotation speed ω of the drum <b>124</b> may rise (or increase) following the first speed ω1. The first speed ω1 is a speed that can change a clothes state in the drum <b>124</b>, required to make at least some of the clothes held in the drum <b>124</b> to move, and may be set between 46 rpm to 60 rpm, for example.</div>
+<div class="description-paragraph" id="p-0049" num="0048">If the rotation speed ω of the drum <b>124</b> sensed at a position detection unit <b>231</b> reaches the first speed ω1 (A2), the speed control unit <b>233</b> controls the drum <b>124</b> to rotate at a fixed speed of the first speed ω1 (A3, [t2, t3]) by a proportional integral control (PI).</div>
+<div class="description-paragraph" id="p-0050" num="0049">If a certain time period is passed from the t2 to reach the t3, a brake may be applied to the motor <b>113</b> to stop the drum <b>124</b> (A4, [t3, t4]). A braking system of the drum <b>124</b> may be regenerative braking or dynamic braking.</div>
+<div class="description-paragraph" id="p-0051" num="0050">For counting a number of repetitions of current sensing (A8, A9) to be described later, an ‘n’ is set to zero (A5).</div>
+<div class="description-paragraph" id="p-0052" num="0051">At a position aligning section [t4, t5] before the drum <b>124</b> stopped thus is accelerated again, a position of the drum <b>124</b> may be aligned (A6, A61). Magnetization of the stator <b>113</b> <i>a </i>can be made to make the rotor <b>113</b> <i>b </i>to be at a regular position, when a d-axis current may be output from a current control unit <b>235</b>. In this process, resistance of the motor <b>113</b> and an error of voltage information may be sensed. The position alignment of the drum <b>124</b> may also be performed at a position aligning section A62, A63, A64, A65 between acceleration to a second speed ω2 (to be described later) is repeated.</div>
+<div class="description-paragraph" id="p-0053" num="0052">When the same command speed ω* is requested, in order to make the present speed ω to follow the command speed, a torque value generated by the motor <b>113</b> is required to vary with the laundry amount. In view of the current, the current applied to the motor <b>113</b> is required to vary with the laundry amount. Accordingly, the current applied to the motor <b>113</b> may be an index that reflects the laundry amount.</div>
+<div class="description-paragraph" id="p-0054" num="0053">Although the laundry amount may be determined based on the current detected at any section in which the rotation of the drum <b>124</b> is made, preferably, the laundry amount may be determined based on the current applied to the motor <b>113</b>, which is sensed at a section in which the clothes are lifted by rotation of the drum <b>124</b>. Determination of the laundry amount may be made at the laundry amount sensing unit <b>239</b>.</div>
+<div class="description-paragraph" id="p-0055" num="0054">The current applied to the motor <b>113</b>, a present current forwarded from the inverter <b>250</b>, may be sensed by the current sensing unit <b>260</b>. The present current value may be expressed with a d-axis present current Id and a q-axis present current Iq on a d-q rotating coordinate system. Additionally, of the d-axis present current Id and q-axis present current Iq, since a component that generates the torque for rotating the rotor <b>113</b> <i>b </i>is the q-axis component mostly, the laundry amount is preferably determined based on the q-axis present current Iq.</div>
+<div class="description-paragraph" id="p-0056" num="0055">Additionally, although a value sensed starting from a time point the current is applied to the motor <b>113</b> for rotating the drum <b>124</b> from a stationary state may be used as the present current required for determining the laundry amount, the present current value sensed at an initial stage of the rotation of the drum <b>124</b> can not reflect the laundry amount accurately due to different reasons, such as a degree of magnetization of the stator <b>113</b> <i>a</i>, a state of arrangement of the clothes in the drum <b>124</b>, and etc. Consequently, the laundry amount may be determined based on the present current value sensed after the drum <b>124</b> is rotated to a certain extent from the stationary state.</div>
+<div class="description-paragraph" id="p-0057" num="0056">Referring to <figref idrefs="DRAWINGS">FIG. 3</figref> again, operations for determining the laundry amount may be described in more detail.</div>
+<div class="description-paragraph" id="p-0058" num="0057">The drum <b>124</b> may be accelerated from a stationary state (A7, [t5, t9]). The command speed ω* applied to the speed control unit <b>233</b> is a second speed ω2, and the rotation speed ω of the drum <b>124</b> rises (or increases) following the second speed ω2. The second speed ω2 may be set lower than the first speed ω1, for an example, 46 rpm.</div>
+<div class="description-paragraph" id="p-0059" num="0058">In this example, it is not required to accelerate the drum <b>124</b> until the drum <b>124</b> reaches the ω2 which is the command speed, without fail. That is, although <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates that braking of the drum <b>124</b> is made after the drum <b>124</b> reaches the command speed ω2 in each of the acceleration operations, this is no more than illustrative one, and it will be adequate if the drum <b>124</b> is accelerated following a predetermined command speed in the acceleration operation. It is preferable that the command speed in each of the acceleration operations has the same value.</div>
+<div class="description-paragraph" id="p-0060" num="0059">Moreover, even if a highest value of the rotation speed may not reach the command speed ω2 depending on a drive time period of the motor <b>113</b> in the acceleration operation, even in this example, it is preferable that the highest value is lower than the first speed ω1.</div>
+<div class="description-paragraph" id="p-0061" num="0060">Referring to <figref idrefs="DRAWINGS">FIG. 5</figref>, while the drum <b>124</b> is being accelerated, the present current Id/Iq is measured (A8) at a section (A81) in which a position of the drum <b>124</b> changes from a first rotation angle θ1 to a second rotation angle θ2. As described before, the laundry amount may be determined based on the q-axis present current value Iq of the present current values. Then, the brake may be applied to stop the drum <b>124</b> (A9 [t8, t9]).</div>
+<div class="description-paragraph" id="p-0062" num="0061"> <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates position changes of the drum <b>124</b> according to drive of the motor <b>113</b> (i.e., changes from the first rotation angle θ1 to the second rotation angle θ2). P illustrates the lowest point of the drum <b>124</b> having a position aligned in a stationary state and may hereafter be called a reference point. <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates a state in which the reference point is moved up between the rotation angles θ1 and θ2 as the drum <b>124</b> rotates in a clockwise direction from the stationary state. H denotes a horizontal line passing through a center C of the drum <b>124</b>, and V denotes a vertical line the reference point P is positioned thereon in the stationary state of the drum <b>124</b>. The current sensing section may be defined as a section from the first rotation angle θ1 to the second rotation angle θ2.</div>
+<div class="description-paragraph" id="p-0063" num="0062">The laundry amount may have a distribution according to a state of the clothes introduced to the drum <b>124</b>. The clothes introduced to the drum <b>124</b> may be placed in the drum <b>124</b> to one side thereof, and particularly, placed in the drum <b>124</b> gathered to a front side thereof having the laundry introduction opening <b>111</b> <i>a </i>frequently, rather than placed in the drum <b>124</b> deep in a rear side of the drum <b>124</b>. If the drum <b>124</b> is accelerated from such a state directly and the current is sensed at the current sensing section, a load larger than an actual load is applied to the motor <b>113</b> due to factors, such as eccentricity of the clothes, and friction force acting between the clothes and the door <b>112</b>, making the present current value sensed at this time to fail to reflect an accurate laundry amount, consequently. In order to solve such a problem, in a method for controlling a laundry treating apparatus in accordance with an example embodiment, after changing a state of the clothes in the drum <b>124</b> by rotating the drum <b>124</b> at the first speed ω1 for a preset time period, the drum is accelerated to the second speed ω again, the present current value is sensed at this time, and the laundry amount is determined based on the present current value sensed at the time.</div>
+<div class="description-paragraph" id="p-0064" num="0063">The acceleration of the drum <b>124</b> to the second speed ω2 (a second speed acceleration operation) may be repeated as many as a set number of times (A10, A11), and the laundry amount may be determined based on the present current values sensed at the current sensing sections (A81, A82, A83, A84, A85) during the drum <b>124</b> being accelerated. The embodiment suggests repeating acceleration of the drum <b>124</b> to the second speed ω for, but not limited to, 5 times.</div>
+<div class="description-paragraph" id="p-0065" num="0064">The laundry amount calculation unit <b>239</b> may obtain a current integral Iint1 which is integration of the present current value Iq sensed at the current sensing section (A81) as shown with a first equation below.
+<br/>
+<i>Iint=∫</i> <sub>t(θ1)</sub> <sup>t(θ2)</sup> <i>Iqdt </i>
+</div>
+<div class="description-paragraph" id="p-0066" num="0065">The current integrals may also be obtained at current sensing sections (A82, A83, A84, A85) during the second speed ω2 acceleration performed thereafter. Hereafter, the current integrals obtained at current sensing sections (A81, A82, A83, A84, A85) may be called as Iint(1), Iint(2), Iint(3), Iint(4), Iint(5), respectively.</div>
+<div class="description-paragraph" id="p-0067" num="0066">The laundry amount calculating unit <b>239</b> determines the laundry amount based on the present current value sensed at the current sensing section. The laundry amount calculating unit <b>239</b> may determine the laundry amount LD based on the current integral.</div>
+<div class="description-paragraph" id="p-0068" num="0067">Depending on embodiments, the laundry amount LD may be obtained by summing the current integrals. Weighted values Ki may be given to the current integrals respectively, and a second equation shown below may be an example of such methods.</div>
+<div class="description-paragraph" id="p-0069" num="0068">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<mi>LD</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>m</mi>
+</munderover>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>Ki</mi>
+</mrow>
+<mo>|</mo>
+<mrow>
+<mrow>
+<mi>I</mi>
+<mo>⁢</mo>
+<mi>int</mi>
+</mrow>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>i</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0070" num="0069">Where m denotes a number of repetition times of the second speed ω2 acceleration.</div>
+<div class="description-paragraph" id="p-0071" num="0070">The closer to an average of the current integrals, the larger weighted value Ki may be given to the current integral.</div>
+<div class="description-paragraph" id="p-0072" num="0071"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a flow chart of a method for controlling a laundry treating apparatus in accordance with an example embodiment. <figref idrefs="DRAWINGS">FIG. 7</figref> is a graph illustrating time vs. rotation speed of a drum when a laundry treating apparatus is operated according to a control method in accordance with an example embodiment. A method for controlling a laundry treating apparatus in accordance with an example embodiment will be described with reference to <figref idrefs="DRAWINGS">FIGS. 6 to 7</figref>. Other embodiments and configurations may also be provided.</div>
+<div class="description-paragraph" id="p-0073" num="0072">The clothes are introduced to the drum <b>124</b> and the drum <b>124</b> is accelerated (B1, [t1, t2]). A command speed ω* applied to a speed control unit <b>233</b> is a first speed ω1, and a rotation speed ω of the drum <b>124</b> rises (or increases) following the first speed ω1. The first speed ω1 is a speed that can change a clothes state in the drum <b>124</b>, required to make at least some of the clothes held in the drum <b>124</b> to move, and may be set between 46 rpm to 60 rpm, for example.</div>
+<div class="description-paragraph" id="p-0074" num="0073">If the rotation speed ω of the drum <b>124</b> detected at a position detection unit <b>231</b> reaches the first speed ω1 (B2), the speed control unit <b>233</b> controls the drum <b>124</b> to rotate at a fixed speed of the first speed ω1 (B3, [t2, t3]) by a proportional integral control (PI).</div>
+<div class="description-paragraph" id="p-0075" num="0074">The counter electromotive force of the motor <b>113</b> is sensed while the drum <b>124</b> rotates at the first speed ω1 (B4). A circuit that drives the motor <b>113</b> may be expressed with a third equation shown below.</div>
+<div class="description-paragraph" id="p-0076" num="0075">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mrow>
+<mi>Vin</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>Leq</mi>
+<mo>⁢</mo>
+<mrow>
+<mo></mo>
+<mrow>
+<mfrac>
+<mrow>
+<mi>d</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>I</mi>
+</mrow>
+<mrow>
+<mi>d</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>t</mi>
+</mrow>
+</mfrac>
+<mo>+</mo>
+<mi>I</mi>
+</mrow>
+<mo></mo>
+</mrow>
+<mo>⁢</mo>
+<mi>Req</mi>
+</mrow>
+<mo>+</mo>
+<mi>Vemf</mi>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0077" num="0076">Where Vin denotes a voltage applied to the motor <b>113</b> from the inverter <b>250</b>, I denotes a current applied to the motor <b>113</b>, and Vemf denotes a counter electromotive force of the motor <b>113</b>. Leq denotes equivalent inductance of the motor <b>113</b>, and Req denotes equivalent resistance of the motor <b>113</b>, which are values obtainable by tests in advance.</div>
+<div class="description-paragraph" id="p-0078" num="0077">In an operation in which the rotation speed ω of the drum <b>124</b> is controlled by the motor control unit <b>230</b> to follow the command speed ω1, the laundry amount sensing unit <b>239</b> may obtain the counter electromotive force Vemf based on the voltage value Vin from the inverter <b>250</b> and the present current value sensed at the current sensing unit <b>260</b>. Depending on embodiments, a counter electromotive force sensor may be provided for sensing the counter electromotive force.</div>
+<div class="description-paragraph" id="p-0079" num="0078">The counter electromotive force may be measured after the stator <b>113</b> <i>a </i>or the rotor <b>113</b> <i>b </i>is adequately magnetized. The embodiment may suggest measuring the counter electromotive force at a [t23, t3] section, which is a time period after a predetermined time period is passed from a time point t2 when the rotation speed of the drum <b>124</b> reaches the first speed ω1. Moreover, since the counter electromotive force is affected by the current value applied to the motor <b>113</b>, a more accurate counter electromotive force may be obtained only when measured at a time point when speed variation of the motor <b>113</b> becomes small owing to inertia of the motor <b>113</b>, which becomes large adequately, to make variation of the counter electromotive force to become slow adequately in comparison to response of the current control unit <b>235</b>, i.e., after (After t23) the drum <b>124</b> is rotated for a predetermined time period at the first speed ω1.</div>
+<div class="description-paragraph" id="p-0080" num="0079">If a certain time period is passed from the t2 to reach the t3, the brake applied to the motor <b>113</b>, to stop the drum <b>124</b> (B5, [t3, t4]). A braking system of the drum <b>124</b> may be regenerative braking or dynamic braking. For counting a number of repetitions of a current detection (B9, B10) to be described later, an ‘n’ is set to zero (B6).</div>
+<div class="description-paragraph" id="p-0081" num="0080">At a position aligning section [t4, t5] before the drum <b>124</b> stopped thus is accelerated again, a position of the drum <b>124</b> may be aligned (B7, B71). Magnetization of a stator <b>113</b> <i>a </i>may be made to make a rotor <b>113</b> <i>b </i>to be at a regular position, when a d-axis current may output from a current control unit <b>235</b>, mostly. In this operation, resistance of the motor <b>113</b> and an error of voltage information may be detected. The position alignment of the drum <b>124</b> may also be performed at a section between acceleration to a second speed ω2 to be described later is repeated (B72, B73, B74, B75).</div>
+<div class="description-paragraph" id="p-0082" num="0081">The drum <b>124</b> is accelerated from a stationary state (B8, [t5, t9]). The command speed ω* applied to the speed control unit <b>233</b> is a second speed ω2, and the rotation speed ω of the drum <b>124</b> rises (or increases) following the second speed ω2. The second speed ω2 may be set lower than the first speed ω1, for an example, 46 rpm.</div>
+<div class="description-paragraph" id="p-0083" num="0082">While the drum <b>124</b> is being accelerated, the present current Id/Iq is sensed (B9) at a section (B91) in which a position of the drum <b>124</b> changes from a first rotation angle θ1 to a second rotation angle θ2. As described before, the laundry amount may be determined based on the q-axis present current value Iq of the present current values. Thereafter, the brake applied to stop the drum <b>124</b> (B10, [t8, t9]), and the operation returns to B7.</div>
+<div class="description-paragraph" id="p-0084" num="0083">The brake is applied to stop the drum <b>124</b> (B10, [t8, t9]), and the operation returns to B7.</div>
+<div class="description-paragraph" id="p-0085" num="0084">The acceleration of the drum <b>124</b> to the second speed ω2 may be repeated as many as a number of set times (B11, B12), and the laundry amount is determined based on the present current values obtained at current sensing sections (B91, B92, B93, B94, B95) respectively during the drum <b>124</b> being accelerated. The embodiment suggests repeating the acceleration of the drum <b>124</b> to the second speed ω2 for, but not limited to, five times.</div>
+<div class="description-paragraph" id="p-0086" num="0085">Alike the foregoing embodiment, the laundry amount calculation unit <b>239</b> may obtain the current integral Iint, which is integral of the present current value Iq sensed at the current sensing section (B91) (See the first equation above). Such current integrals may be obtained at current sensing sections (B92, B93, B94, B95) during the second speed ω2 acceleration performed thereafter, respectively. The current integrals obtained at the current sensing sections (B91, B92, B93, B94, B95) may be called as Iint(1), Iint(2), Iint(3), Iint(4), Iint(5), respectively.</div>
+<div class="description-paragraph" id="p-0087" num="0086">The laundry amount calculation unit <b>239</b> determines the laundry amount based of the present current value sensed at the current sensing section. The laundry amount calculation unit <b>239</b> may determine the laundry amount LD based on the current integrals.</div>
+<div class="description-paragraph" id="p-0088" num="0087">The embodiment suggests using, not only the present current value sensed at the current sensing section, but also the counter electromotive force Vemf sensed when the drum <b>124</b> is controlled at the first speed ω1, for determining the laundry amount.</div>
+<div class="description-paragraph" id="p-0089" num="0088">The torque generated by the motor <b>113</b> is proportional to the counter electromotive force Vemf and the present current value. Therefore, the laundry amount may be determined taking, as factors, the counter electromotive force Vemf sensed at a section the drum <b>124</b> is controlled to rotate at a fixed speed, and the present current value sensed at a section the drum <b>124</b> is accelerated.</div>
+<div class="description-paragraph" id="p-0090" num="0089">In this example, the present current value may be obtained at any one of the sections (B91, B92, B93, B94, B95) where the drum <b>124</b> is being accelerated, alike the foregoing embodiment, by summing the current integrals. The weighted value Ki may be given to the current integrals. (See the second equation above).</div>
+<div class="description-paragraph" id="p-0091" num="0090">According to description up to now, an equation for obtaining the laundry amount LD may be expressed with a fourth equation shown below.</div>
+<div class="description-paragraph" id="p-0092" num="0091">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mrow>
+<mi>LD</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>Vemf</mi>
+<mo>⁢</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>m</mi>
+</munderover>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>Ki</mi>
+</mrow>
+</mrow>
+<mo>|</mo>
+<mrow>
+<mrow>
+<mi>I</mi>
+<mo>⁢</mo>
+<mi>int</mi>
+</mrow>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>i</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0093" num="0092">Where, m denotes a number of repeating times of the acceleration to the second speed ω2.</div>
+<div class="description-paragraph" id="p-0094" num="0093">Any reference in this specification to “one embodiment,” “an embodiment,” “example embodiment,” etc., means that a particular feature, structure, or characteristic described in connection with the embodiment is included in at least one embodiment of the invention. The appearances of such phrases in various places in the specification are not necessarily all referring to the same embodiment. Further, when a particular feature, structure, or characteristic is described in connection with any embodiment, it is submitted that it is within the purview of one skilled in the art to effect such feature, structure, or characteristic in connection with other ones of the embodiments.</div>
+<div class="description-paragraph" id="p-0095" num="0094">Although embodiments have been described with reference to a number of illustrative embodiments thereof, it should be understood that numerous other modifications and embodiments can be devised by those skilled in the art that will fall within the spirit and scope of the principles of this disclosure. More particularly, various variations and modifications are possible in the component parts and/or arrangements of the subject combination arrangement within the scope of the disclosure, the drawings and the appended claims. In addition to variations and modifications in the component parts and/or arrangements, alternative uses will also be apparent to those skilled in the art.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">14</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM115728452">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method for controlling a laundry treating apparatus having a drum rotatably provided to hold laundry, a motor to rotate the drum, a motor control unit to control the motor, a current sensing unit to sense a current applied to the motor, and a laundry amount sensing unit to determine a laundry amount based on a current value sensed at the current sensing unit, the method comprising:
+<div class="claim-text">controlling the drum to accelerate the drum to rotate at a first speed;</div>
+<div class="claim-text">sensing a counter electromotive force of the motor while the drum is rotated at the first speed;</div>
+<div class="claim-text">applying a brake to stop the drum from rotating at the first speed;</div>
+<div class="claim-text">after stopping the drum, accelerating the drum to a second speed;</div>
+<div class="claim-text">sensing, by the current sensing unit, a current applied to the motor while the drum is accelerating to the second speed, wherein sensing the current includes measuring the current applied to the motor when a position of the drum changes from a first rotation angle to a second rotation angle; and</div>
+<div class="claim-text">determining, by the laundry amount sensing unit, a laundry amount based on the sensed current and the sensed counter electromotive force.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the first rotation angle is greater than zero.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein in the sensing of the current, a q-axis current applied to the motor with reference to a d-q axes rotating coordinate system is measured, wherein the dq-axes and the coordinate system are associated with the sensed counter electromotive force.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein the laundry amount is determined based on an integral of the q-axis current at the section in which the position of the drum changes from the first rotation angle to the second rotation angle.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the second speed is less than the first speed.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein accelerating the drum to the second speed is repeatedly performed, and
+<div class="claim-text">wherein determining the laundry amount includes determining the laundry amount based on current values applied to the motor that are sensed in the repeated accelerating of the drum.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein sensing the counter electromotive force includes sensing the counter electromotive force after the drum is rotated at the first speed for a predetermined time period.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. A laundry treating apparatus comprising:
+<div class="claim-text">a drum rotatably provided to hold laundry;</div>
+<div class="claim-text">a motor to rotate the drum;</div>
+<div class="claim-text">a motor control unit to apply a brake to stop the motor after rotating the drum at a first speed, and the motor control unit to accelerate the motor such that the drum rotates at a second speed;</div>
+<div class="claim-text">a current sensing unit to sense a current applied to the motor while the motor is controlled by the motor control unit; and</div>
+<div class="claim-text">a laundry amount sensing unit to determine a laundry amount based on a current value sensed at the current sensing unit while the drum is accelerating to rotate at the second speed,</div>
+<div class="claim-text">wherein the laundry amount sensing unit senses a counter electromotive force of the motor based on the sensed current at the current sensing unit while the drum is rotated at the first speed, and determines the laundry amount based on the sensed current and the sensed counter electromotive force,</div>
+<div class="claim-text">wherein the laundry amount sensing unit determines the laundry amount based on the sensed current at a section in which a position of the drum changes from the first rotation angle to the second rotation angle.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The laundry treating apparatus of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the first rotation angle is greater than zero.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The laundry treating apparatus of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the current sensing unit measures a q-axis current applied to the motor with reference to a d-q axes rotating coordinate system, and
+<div class="claim-text">wherein the laundry amount sensing unit determines the laundry amount based on the q-axis current, wherein the dq-axes and the rotating coordinate system are associated with the sensed counter electromotive force.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The laundry treating apparatus of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the laundry amount is determined based on an integral of the q-axis current at a section in which a position of the drum changes from the first rotation angle to the second rotation angle.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The laundry treating apparatus of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the second speed is less than the first speed.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The laundry treating apparatus of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the motor control unit to repeatedly make the drum accelerate to the second speed, and
+<div class="claim-text">wherein the laundry amount sensing unit repeatedly determines the laundry amount based on the sensed current at the current sensing unit while the drum is accelerating to the second speed.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The laundry treating apparatus of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the counter electromotive force is sensed after the drum is rotated at the first speed for a predetermined time period.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

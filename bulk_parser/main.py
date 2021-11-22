@@ -26,10 +26,9 @@ file_name = DOWNLOAD_LINKS_FILE[int(sys.argv[1])]
 
 file_links = []
 
-for link in file_name:
-    with open(link, 'r') as f:
-        for line in f:
-            file_links.append(line)
+with open(file_name, 'r') as f:
+    for line in f:
+        file_links.append(line)
 
 n = len(file_links)
 

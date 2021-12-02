@@ -1,4 +1,4 @@
-https://bulkdata.uspto.gov/data/patent/grant/redbook/fulltext/2020/#:~:text=DATE/TIME-,ipg200107.zip,-153943521
+https://bulkdata.uspto.gov/data/patent/grant/redbook/fulltext/2020/ipg200107.zip
 https://bulkdata.uspto.gov/data/patent/grant/redbook/fulltext/2020/ipg200114.zip
 https://bulkdata.uspto.gov/data/patent/grant/redbook/fulltext/2020/ipg200121.zip
 https://bulkdata.uspto.gov/data/patent/grant/redbook/fulltext/2020/ipg200128.zip

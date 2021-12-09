@@ -36,9 +36,13 @@ def construct_cpc_path(cpc_dict):
 def get_relevant_patents(directory, cpc_dict):
     relevant_patents = []
     cpc_path = construct_cpc_path(cpc_dict)
-
-    for filename in glob.iglob(f'{directory}/{cpc_path}**/*.xml', recursive=True):
-        relevant_patents.append(filename)
+    
+    if cpc_path:
+        for filename in glob.iglob(f'{directory}/{cpc_path}**/*.xml', recursive=True):
+            relevant_patents.append(filename)
+    else:
+        for filename in glob.iglob(f'{directory}/**/*.xml', recursive=True):
+            relevant_patents.append(filename)
 
     return relevant_patents
 

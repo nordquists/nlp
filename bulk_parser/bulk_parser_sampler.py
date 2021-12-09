@@ -11,6 +11,9 @@ CPC_ORDERING = ['section',
                 'subgroup']
 
 def decode_cpc(cpc): 
+    if cpc == 'NONE':
+        cpc = ''
+
     parameters = cpc.split('/')
     cpc_dict = dict()
 
@@ -22,23 +25,23 @@ def decode_cpc(cpc):
 
     return cpc_dict
 
-def construct_cpc_path(cpc_dict):
+def construct_cpc_path(cpc_dict, separator):
     path = ''
 
     for parameter in CPC_ORDERING:
         if cpc_dict[parameter]:
             path += cpc_dict[parameter]
-            path += '/'
+            path += separator
         else:
-            return path
-    return path
+            return path[:-1]
+    return path[:-1]
 
 def get_relevant_patents(directory, cpc_dict):
     relevant_patents = []
-    cpc_path = construct_cpc_path(cpc_dict)
+    cpc_path = construct_cpc_path(cpc_dict, '/')
     
     if cpc_path:
-        for filename in glob.iglob(f'{directory}/{cpc_path}**/*.xml', recursive=True):
+        for filename in glob.iglob(f'{directory}/{cpc_path}/**/*.xml', recursive=True):
             relevant_patents.append(filename)
     else:
         for filename in glob.iglob(f'{directory}/**/*.xml', recursive=True):
@@ -46,11 +49,17 @@ def get_relevant_patents(directory, cpc_dict):
 
     return relevant_patents
 
-def copy_relevant_patents(relevant_patents, output):
+def copy_relevant_patents(relevant_patents, output, cpc_dict):
     if not os.path.exists(output):
         os.makedirs(output)
     for f in relevant_patents:
         shutil.copy(f, output + '/' + f.split('/')[-1])
+    
+    file_name = construct_cpc_path(cpc_dict, '_')
+    
+    with open(f'{output}/{file_name}.txt', "w") as file:
+        for f in relevant_patents:
+            file.write(output + '/' + f.split('/')[-1] + '\n')
 
 directory = sys.argv[1]
 cpc = sys.argv[2]
@@ -67,4 +76,4 @@ else:
     print("WARNING: Number of patents too small for desired sample size. Continuing anyway.")
     sample_patents = relevant_patents
 
-copy_relevant_patents(sample_patents, output)
+copy_relevant_patents(sample_patents, output, cpc_dict)

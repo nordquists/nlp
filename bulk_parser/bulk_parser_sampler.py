@@ -56,6 +56,7 @@ def copy_relevant_patents(relevant_patents, output, cpc_dict):
         shutil.copy(f, output + '/' + f.split('/')[-1])
     
     file_name = construct_cpc_path(cpc_dict, '_')
+    file_name = file_name if file_name else 'base'
     
     with open(f'{output}/{file_name}.txt', "w") as file:
         for f in relevant_patents:

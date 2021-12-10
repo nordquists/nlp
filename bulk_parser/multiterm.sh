@@ -10,12 +10,11 @@
 ## $4 = OUTPUT NAME
 ## $5 = BACKGROUND PICKLE FILE
 
-
 # We need to start 4 processes for each foreground corpus since
 # we are testing 4 different breadths for each. 
 
-# nohup python -u main.py "$1" &
-
-id1=$(nohup ./term $1 $6 $5 "l4_l3" "l3")
-
-echo id1
+bash ./term $1 $6 $5 "l4_l3"    "l3"    &
+bash ./term $1 $6 $4 "l4_l2"    "l2"    &
+bash ./term $1 $6 $3 "l4_l1"    "l1"    &
+bash ./term $1 $6 $2 "l4_base"  "base"  &
+wait

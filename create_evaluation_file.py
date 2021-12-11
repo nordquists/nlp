@@ -20,7 +20,7 @@ def read_words_from_output_file(filename):
     with open(filename) as f:
         for line in f:
             items = line.split('\t')
-            terms.append(items[0])
+            terms.append(items[0].strip())
 
     return terms
 

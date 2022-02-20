@@ -1,0 +1,1642 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10003432B2 - Methods and apparatus for WLAN transmission 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA231316922">
+<div class="abstract" id="p-0001" num="0000">A modulation coding scheme (MCS) is selected i) from a first set of MCSs when the PHY data unit is to be transmitted using a first channel bandwidth, and ii) from a second set of MCSs when the PHY data unit is to be transmitted using a second channel bandwidth. The first set of MCSs corresponds to i) a number of spatial streams, and ii) the first channel bandwidth, the second set of MCSs corresponds to i) the number of spatial streams, and ii) the second channel bandwidth. The second set of MCSs excludes one or more MCSs in the first set of MCSs that will result in a padding-related constraint not being met when the second channel bandwidth is to be used. Information bits are encoded according to the selected MCS, and modulated according to the selected MCS.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES138131537">
+<heading id="h-0001">CROSS-REFERENCES TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of U.S. patent application Ser. No. 14/834,117, entitled “Methods and Apparatus for WLAN Transmission,” filed on Aug. 24, 2015, which is a continuation of U.S. patent application Ser. No. 14/221,820, entitled “Methods and Apparatus for WLAN Transmission,” filed on Mar. 21, 2014, which is a divisional of U.S. patent application Ser. No. 12/846,681, entitled “Method and Apparatus for WLAN Transmission,” filed on Jul. 29, 2010, which claims the benefit of the following U.S. Provisional patent applications:</div>
+<div class="description-paragraph" id="p-0003" num="0002">U.S. Provisional Patent Application No. 61/229,679, entitled “Transmitter Flow for 80 MHz OFDM,” filed on Jul. 29, 2009;</div>
+<div class="description-paragraph" id="p-0004" num="0003">U.S. Provisional Patent Application No. 61/233,445, entitled “Transmitter Flow for 80 MHz OFDM,” filed on Aug. 12, 2009;</div>
+<div class="description-paragraph" id="p-0005" num="0004">U.S. Provisional Patent Application No. 61/237,215, entitled “Transmitter Flow for 80 MHz OFDM,” filed on Aug. 26, 2009;</div>
+<div class="description-paragraph" id="p-0006" num="0005">U.S. Provisional Patent Application No. 61/266,453, entitled “Transmitter Flow for 80 MHz OFDM,” filed on Dec. 3, 2009;</div>
+<div class="description-paragraph" id="p-0007" num="0006">U.S. Provisional Patent Application No. 61/286,948, entitled “Transmitter Flow for 80/120/160 MHz OFDM,” filed on Dec. 16, 2009;</div>
+<div class="description-paragraph" id="p-0008" num="0007">U.S. Provisional Patent Application No. 61/312,840, entitled “Transmitter Flow for 80/120/160 MHz OFDM,” filed on Mar. 11, 2010; and</div>
+<div class="description-paragraph" id="p-0009" num="0008">U.S. Provisional Patent Application No. 61/316,982, entitled “Transmitter Flow for 80/120/160 MHz OFDM,” filed on Mar. 24, 2010.</div>
+<div class="description-paragraph" id="p-0010" num="0009">The disclosures of all of the patent applications referenced above are hereby incorporated by reference herein in their entireties.</div>
+<heading id="h-0002">FIELD OF THE DISCLOSURE</heading>
+<div class="description-paragraph" id="p-0011" num="0010">The present disclosure relates generally to communication networks and, more particularly, to wireless local area networks that utilize orthogonal frequency division multiplexing (OFDM).</div>
+<heading id="h-0003">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0012" num="0011">The background description provided herein is for the purpose of generally presenting the context of the disclosure. Work of the presently named inventors, to the extent it is described in this background section, as well as aspects of the description that may not otherwise qualify as prior art at the time of filing, are neither expressly nor impliedly admitted as prior art against the present disclosure.</div>
+<div class="description-paragraph" id="p-0013" num="0012">Wireless local area network (WLAN) technology has evolved rapidly over the past decade. Development of WLAN standards such as the Institute for Electrical and Electronics Engineers (IEEE) 802.11a, 802.11b, 802.11g, and 802.11n Standards has improved single-user peak data throughput. For example, the IEEE 802.11b Standard specifies a single-user peak throughput of 11 megabits per second (Mbps), the IEEE 802.11a and 802.11g Standards specify a single-user peak throughput of 54 Mbps, and the IEEE 802.11n Standard specifies a single-user peak throughput of 600 Mbps. Work has begun on a new standard, IEEE 802.11ac, that promises to provide even greater throughput.</div>
+<heading id="h-0004">SUMMARY</heading>
+<div class="description-paragraph" id="p-0014" num="0013">In an embodiment, a method for generating a physical layer (PHY) data unit for transmission via a communication channel includes selecting, at a communication device, a modulation coding scheme (MCS) i) from a first set of MCSs when the PHY data unit is to be transmitted using a channel having a first channel bandwidth, and ii) from a second set of MCSs when the PHY data unit is to be transmitted using a channel having a second channel bandwidth. The first set of MCSs corresponds to i) a number of spatial streams, and ii) the first channel bandwidth, the second set of MCSs corresponds to i) the number of spatial streams, and ii) the second channel bandwidth, the first set of MCSs is different than the second set of MCSs, and the second set of MCSs excludes one or more MCSs in the first set of MCSs that will result in a padding-related constraint not being met when the second channel bandwidth is to be used. The method also includes: encoding, at the communication device, information bits using one or more encoders and according to the selected MCS; parsing, at the communication device, the encoded information bits into the number of spatial streams; modulating, at the communication device, the encoded information bits according to the selected MCS; and generating, at the communication device, a plurality of Orthogonal Frequency Division Multiplexing (OFDM) symbols based on the modulated encoded information bits.</div>
+<div class="description-paragraph" id="p-0015" num="0014">In another embodiment, an apparatus comprises a network interface device having a memory to store indicators of a first set of modulation coding schemes (MCSs) and a second set of MCSs. The first set of MCSs corresponds to i) a number of spatial streams, and ii) the first channel bandwidth, the second set of MCSs corresponds to i) the number of spatial streams, and ii) the second channel bandwidth, the first set of MCSs is different than the second set of MCSs, and the second set of MCSs excludes one or more MCSs in the first set of MCSs that will result in a padding-related constraint not being met when the second channel bandwidth is to be used. The network interface device is configured to select an MCS i) from the first set of MCSs when a physical layer (PHY) data unit is to be transmitted using a channel having a first channel bandwidth, and ii) from the second set of MCSs when the PHY data unit is to be transmitted using a channel having a second channel bandwidth. The network interface device further comprises: one or more encoders configured to encode information bits according to the selected MCS; a parser configured to parse the encoded information bits into the number of spatial streams; and a modulator configured to modulate the encoded information bits according to the selected MCS. The network interface device is further configured to generate a plurality of Orthogonal Frequency Division Multiplexing (OFDM) symbols based on the modulated encoded information bits.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram of an example wireless local area network (WLAN) <b>10</b>, according to an embodiment;</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram of a prior art physical layer (PHY) unit;</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a block diagram of a PHY unit, according to an embodiment;</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIGS. 4A-4F</figref> are diagrams of various example communication channels via which the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref> is configured to transmit orthogonal frequency division multiplexing (OFDM) symbols, according to various embodiments;</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIGS. 5A and 5B</figref> are diagrams of two example OFDM symbols for 40 MHz communication channels that the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref> is configured to generate, according to an embodiment;</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIGS. 6A and 6B</figref> are diagrams of two example OFDM symbols for 80 MHz communication channels that the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref> is configured to generate, according to some embodiments;</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIGS. 7A and 7B</figref> are diagrams of two example OFDM symbols for 80 MHz communication channels that the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref> is configured to generate, according to some embodiments;</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIGS. 8A-8C</figref> are diagrams of three example OFDM symbols for 80 MHz communication channels, according to some embodiments, where the diagrams show numbers and locations of pilot symbols;</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIGS. 9A and 9B</figref> are tables of example pilot symbol values for different scenarios, according to some embodiments;</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a block diagram of an example pilot tone system that is implemented in the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to some embodiments;</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a block diagram of an example padding system that is implemented in the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to some embodiments;</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 12</figref> is a block diagram of another example padding system that is implemented in the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to other embodiments;</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a block diagram of still another example padding system that is implemented in the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to other embodiments;</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 14</figref> is a diagram of an example aggregated media access control (MAC) layer data unit with MAC layer padding and PHY padding;</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 15</figref> is a table providing some example parameter values for an interleaver of the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to one embodiment;</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 16</figref> is a table providing other example parameter values for the interleaver of the PHY unit of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to another embodiment;</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 17</figref> is a flow diagram of an example method for generating a OFDM symbol, according to an embodiment;</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 18</figref> is a flow diagram of an example method for generating OFDM symbols, according to an embodiment;</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 19</figref> is a flow diagram of another example method for generating OFDM symbols, according to another embodiment;</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 20</figref> is a flow diagram of another example method for generating OFDM symbols, according to another embodiment;</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 21</figref> is a flow diagram of another example method for generating OFDM symbols, according to another embodiment;</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 22</figref> is a flow diagram of another example method for generating OFDM symbols, according to another embodiment; and</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 23</figref> is a flow diagram of another example method for generating OFDM symbols, according to another embodiment.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0039" num="0038">In embodiments described below, a wireless network device such as an access point (AP) of a wireless local area network (WLAN) transmits data streams to one or more client stations. The AP is configured to operate with client stations according to at least a first communication protocol. In one embodiment, the first communication protocol is the IEEE 802.11ac Standard, now in the process of being standardized. In other embodiments, the first communication protocol is a protocol other than the IEEE 802.11ac Standard. In some embodiments or scenarios, one or more client stations in the vicinity of the AP are not configured to operate according to the first communication protocol, but are configured to operate according to at least a second communication protocol. Therefore, in some embodiments, the AP is additionally configured to operate with client stations according to at least a second communication protocol.</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram of an example wireless local area network (WLAN) <b>10</b>, according to an embodiment. An AP <b>14</b> includes a host processor <b>15</b> coupled to a network interface <b>16</b>. The network interface <b>16</b> includes a medium access control (MAC) unit <b>18</b> and a physical layer (PHY) unit <b>20</b>. The PHY unit <b>20</b> includes a plurality of transceivers <b>21</b>, and the transceivers are coupled to a plurality of antennas <b>24</b>. Although three transceivers <b>21</b> and three antennas <b>24</b> are illustrated in <figref idrefs="DRAWINGS">FIG. 1</figref>, the AP <b>14</b> can include different numbers (e.g., 1, 2, 4, 5, etc.) of transceivers <b>21</b> and antennas <b>24</b> in other embodiments. In one embodiment, the MAC unit <b>18</b> and the PHY unit <b>20</b> are configured to operate according to a first communication protocol (e.g., the IEEE 802.11ac Standard, now in the process of being standardized). In another embodiment, the MAC unit <b>18</b> and the PHY unit <b>20</b> are also configured to operate according to at least a second communication protocol (e.g., the IEEE 802.11n Standard, the IEEE 802.11a Standard, etc.).</div>
+<div class="description-paragraph" id="p-0041" num="0040">The WLAN <b>10</b> includes a plurality of client stations <b>25</b>. Although four client stations <b>25</b> are illustrated in <figref idrefs="DRAWINGS">FIG. 1</figref>, the WLAN <b>10</b> can include different numbers (e.g., 1, 2, 3, 5, 6, etc.) of client stations <b>25</b> in various scenarios and embodiments. At least one of the client stations <b>25</b> (e.g., client station <b>25</b>-<b>1</b>) is configured to operate at least according to the first communication protocol. In some embodiments, at least one of the client stations <b>25</b> is not configured to operate according to the first communication protocol but is configured to operate according to at least the second communication protocol (referred to herein as a “legacy client station”).</div>
+<div class="description-paragraph" id="p-0042" num="0041">The client station <b>25</b>-<b>1</b> includes a host processor <b>26</b> coupled to a network interface <b>27</b>. The network interface <b>27</b> includes a MAC unit <b>28</b> and a PHY unit <b>29</b>. The PHY unit <b>29</b> includes a plurality of transceivers <b>30</b>, and the transceivers <b>30</b> are coupled to a plurality of antennas <b>34</b>. Although three transceivers <b>30</b> and three antennas <b>34</b> are illustrated in <figref idrefs="DRAWINGS">FIG. 1</figref>, the client station <b>25</b>-<b>1</b> can include different numbers (e.g., 1, 2, 4, 5, etc.) of transceivers <b>30</b> and antennas <b>34</b> in other embodiments.</div>
+<div class="description-paragraph" id="p-0043" num="0042">In an embodiment, one or both of the client stations <b>25</b>-<b>2</b> and <b>25</b>-<b>3</b>, has a structure the same as or similar to the client station <b>25</b>-<b>1</b>. In an embodiment, the client station <b>25</b>-<b>4</b>, has a structure similar to the client station <b>25</b>-<b>1</b>. In these embodiments, the client stations <b>25</b> structured the same as or similar to the client station <b>25</b>-<b>1</b> have the same or a different number of transceivers and antennas. For example, the client station <b>25</b>-<b>2</b> has only two transceivers and two antennas, according to an embodiment.</div>
+<div class="description-paragraph" id="p-0044" num="0043">According to an embodiment, the client station <b>25</b>-<b>4</b> is a legacy client station, i.e., the client station <b>25</b>-<b>4</b> is not enabled to receive and fully decode a data unit that is transmitted by the AP <b>14</b> or another client station <b>25</b> according to the first communication protocol. Similarly, according to an embodiment, the legacy client station <b>25</b>-<b>4</b> is not enabled to transmit data units according to the first communication protocol. On the other hand, the legacy client station <b>25</b>-<b>4</b> is enabled to receive and fully decode and transmit data units according to the second communication protocol.</div>
+<div class="description-paragraph" id="p-0045" num="0044">In various embodiments, the PHY unit <b>20</b> of the AP <b>14</b> is configured to generate data units conforming to the first communication protocol. The transceiver(s) <b>21</b> is/are configured to transmit the generated data units via the antenna(s) <b>24</b>. Similarly, the transceiver(s) <b>24</b> is/are configured to receive the data units via the antenna(s) <b>24</b>. The PHY unit <b>20</b> of the AP <b>14</b> is configured to process received data units conforming to the first communication protocol, according to an embodiment.</div>
+<div class="description-paragraph" id="p-0046" num="0045">In various embodiments, the PHY unit <b>29</b> of the client device <b>25</b>-<b>1</b> is configured to generate data units conforming to the first communication protocol. The transceiver(s) <b>30</b> is/are configured to transmit the generated data units via the antenna(s) <b>34</b>. Similarly, the transceiver(s) <b>30</b> is/are configured to receive data units via the antenna(s) <b>34</b>. The PHY unit <b>29</b> of the client device <b>25</b>-<b>1</b> is configured to process received data units conforming to the first communication protocol, according to an embodiment.</div>
+<div class="description-paragraph" id="p-0047" num="0046"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram of a prior art PHY unit <b>100</b> configured to operate according to the IEEE 802.11n Standard. The PHY unit <b>100</b> is included in the legacy client <b>25</b>-<b>4</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>), in one embodiment. The PHY unit <b>100</b> includes a scrambler <b>104</b> that generally scrambles an information bit stream to reduce the occurrence of long sequences of ones or zeros and to generate a scrambled stream. An encoder parser <b>108</b> demultiplexes the scrambled stream into one or two encoder input streams corresponding to one or two forward error correction (FEC) encoders <b>112</b>. Each encoder <b>112</b> encodes the corresponding input stream to generate a corresponding encoded stream.</div>
+<div class="description-paragraph" id="p-0048" num="0047">A stream parser <b>116</b> parses the one or two encoded streams into up to four spatial streams. Corresponding to each spatial stream, an interleaver <b>120</b> interleaves bits of the spatial stream (i.e., changes the order of the bits) to prevent long sequences of adjacent noisy bits from entering a decoder at the receiver. Also corresponding to each spatial stream, a constellation mapper <b>124</b> maps an interleaved sequence of bits to constellation points corresponding to different subcarriers of an orthogonal frequency division multiplexing (OFDM) symbol.</div>
+<div class="description-paragraph" id="p-0049" num="0048">A space-time block coding unit <b>128</b> receives the constellation points corresponding to the one or more spatial streams and spreads the spatial streams to a greater number of space-time streams. The space-time block coding unit <b>128</b> can be controlled to merely pass through spatial streams without performing space-time block coding. For example, when the number of spatial streams is four, the space-time block coding unit <b>128</b> does not perform space-time block coding.</div>
+<div class="description-paragraph" id="p-0050" num="0049">A plurality of cyclic shift diversity (CSD) units <b>132</b> insert cyclic shifts into all but one of the space-time streams (if more than one space-time stream). The cyclic shifts are to prevent unintentional beamforming.</div>
+<div class="description-paragraph" id="p-0051" num="0050">A spatial mapping unit <b>136</b> maps the space-time streams to transmit chains. Spatial mapping may include: 1) direct mapping, in which constellation points from each space-time stream are mapped directly onto transmit chains (i.e., one-to-one mapping); 2) spatial expansion, in which vectors of constellation point from all space-time streams are expanded via matrix multiplication to produce inputs to the transmit chains; and 3) beamforming, in which each vector of constellation points from all of the space-time streams is multiplied by a matrix of steering vectors to produce inputs to the transmit chains.</div>
+<div class="description-paragraph" id="p-0052" num="0051">Each output of the spatial mapping unit <b>136</b> corresponds to a transmit chain, and each output of the spatial mapping unit <b>136</b> is operated on by an inverse discrete Fourier transform (IDFT) unit <b>140</b> that converts a block of constellation points to a time-domain signal.</div>
+<div class="description-paragraph" id="p-0053" num="0052">Outputs of the IDFT units <b>140</b> are provided to guard interval (GI) insertion and windowing units <b>144</b> that prepends, to an OFDM symbol, a circular extension of the OFDM symbol and smooths the edges of each symbol to increase spectral decay. Outputs of the GI insertion and windowing units <b>144</b> are provided to analog and radio frequency (RF) units that convert the signals to analog signals and upconvert the signals to RF frequencies for transmission. The IEEE 802.11n Standard specifies that signals are transmitted in either a 20 MHz bandwidth channel or a 40 MHz bandwidth channel.</div>
+<div class="description-paragraph" id="p-0054" num="0053">Referring again to <figref idrefs="DRAWINGS">FIG. 1</figref>, the AP <b>14</b> and the clients <b>25</b>-<b>1</b>, <b>25</b>-<b>2</b>, <b>25</b>-<b>3</b> are configured to transmit and receive signals that conform to the first communication protocol. In some embodiments, the first communication protocol permits transmission in a channel having a bandwidth of at least 80 MHz. For instance, in some embodiments, the first communication protocol permits transmission in a channel having a bandwidth of 80 MHz, 120 MHz, 160 MHz, etc. In some embodiments, the first communication protocol permits transmission with different bandwidths such as two or more of 80 MHz, 120 MHz, 160 MHz, etc.</div>
+<div class="description-paragraph" id="p-0055" num="0054">Additionally, in some embodiments, the first communication protocol is generally backwards compatible with older communication protocols, such as one or both of the IEEE 802.11a Standard and the IEEE 802.11n Standard. For example, in one embodiment, the first communication protocol specifies a PHY data unit format such as one or more of the formats in U.S. patent application Ser. No. 12/758,603, filed on Apr. 12, 2010, and entitled “Physical Layer Frame Format”, which is hereby incorporated by reference herein, in its entirety.</div>
+<div class="description-paragraph" id="p-0056" num="0055"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a block diagram of an example PHY unit <b>200</b> configured to operate according to the first communication protocol, according to an embodiment. Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, the AP <b>14</b> and the client station <b>25</b>-<b>1</b>, in one embodiment, each include a PHY unit such as the PHY unit <b>200</b>.</div>
+<div class="description-paragraph" id="p-0057" num="0056">The PHY unit <b>200</b> includes a scrambler <b>204</b> that generally scrambles an information bit stream to reduce the occurrence of long sequences of ones or zeros. The IEEE 802.11a Standard and the 802.11n Standard specify a 127-length scrambler with a generator polynomial S(x) given by:
+<br/>
+<i>S</i>(<i>x</i>)=<i>x</i> <sup>7</sup> <i>+x</i> <sup>4</sup>+1  Equ. 1
+<br/>
+The polynomial S(x) is also utilized for descrambling an information bit stream at the receiver. In one embodiment, the scrambler <b>204</b> implements a 127-length scrambler with a generator polynomial S(x) given by Equ. 1. Also in this embodiment, a receiver configured to operate according to the first communication protocol also utilizes the generator polynomial S(x) given by Equ. 1. In other embodiments, the scrambler <b>204</b> implements a length different than 127 and/or utilizes a generator polynomial different than the generator polynomial S(x) given by Equ. 1. In another embodiment, the scrambler <b>204</b> is replaced with a plurality of parallel scramblers located after an encoder parser <b>208</b>. In this embodiment, each of the parallel scramblers has a respective output coupled to a respective one of a plurality of FEC encoders <b>212</b>. The plurality of parallel scramblers operate simultaneously on a demultiplexed stream. In another embodiment, the scrambler <b>204</b> comprises a plurality of parallel scramblers and a demultiplexer that demultiplexes the information bit stream to the plurality of parallel scramblers, which operate simultaneously on demultiplexed streams. These embodiments may be useful, in some scenarios, to accommodate wider bandwidths and thus higher operating clock frequencies.
+</div>
+<div class="description-paragraph" id="p-0058" num="0057">The encoder parser <b>208</b> is coupled to the scrambler <b>204</b>. The encoder parser <b>208</b> demultiplexes the information bit stream into one or more encoder input streams corresponding to one or more FEC encoders <b>212</b>. In another embodiment with a plurality of parallel scramblers, the encoder parser <b>208</b> demultiplexes the information bit stream into a plurality of streams corresponding to the plurality of parallel scramblers.</div>
+<div class="description-paragraph" id="p-0059" num="0058">Each encoder <b>212</b> encodes the corresponding input stream to generate a corresponding encoded stream. In one embodiment, each FEC encoder <b>212</b> includes a binary convolutional encoder. In another embodiment, each FEC <b>212</b> encoder includes a binary convolutional encoder followed by a puncturing block. In another embodiment, each FEC encoder <b>212</b> includes a low density parity check (LDPC) encoder. In another embodiment, each FEC encoder <b>212</b> includes a binary convolutional encoder followed by a puncturing block. In yet another embodiment, each FEC encoder <b>212</b> additionally includes an LDPC encoder. In this embodiment, each FEC encoder <b>212</b> is configured to implement any of: 1) binary convolutional encoding without puncturing; 2) binary convolutional encoding with puncturing; or 3) LDPC encoding.</div>
+<div class="description-paragraph" id="p-0060" num="0059">Different numbers of encoders <b>212</b> may operate in parallel depending on the data rate of a particular modulation coding scheme (MCS). In one embodiment, the PHY unit <b>200</b> includes five encoders <b>212</b>, and one, two, three, four, or five encoders operate simultaneously depending on the particular MCS being utilized. In another embodiment, the PHY unit <b>200</b> includes four encoders <b>212</b>, and one, two, three, or four encoders operate simultaneously depending on the particular MCS being utilized. In another embodiment, the PHY unit <b>200</b> includes four encoders <b>212</b>, and one, two, or four encoders operate simultaneously depending on the particular MCS being utilized. In another embodiment, the PHY unit <b>200</b> includes three encoders <b>212</b>, and one, two, or three encoders operate simultaneously depending on the particular MCS being utilized. In another embodiment, the PHY unit <b>200</b> includes up to eight encoders <b>212</b>, and one, two, three, four, five, six, seven, or eight encoders operate simultaneously depending on the particular MCS being utilized. In another embodiment, the PHY unit <b>200</b> includes up to eight encoders <b>212</b>, and one, two, three, four, six, or eight encoders operate simultaneously depending on the particular MCS being utilized. In another embodiment, the PHY unit <b>200</b> includes up to eight encoders <b>212</b>, and one, two, four, six, or eight encoders operate simultaneously depending on the particular MCS being utilized.</div>
+<div class="description-paragraph" id="p-0061" num="0060">In one embodiment, the number of encoders utilized increments according 450 Mbps step sizes in the data rate. In other embodiments, the number of encoders utilized increments according to a step size in the data rate that is between approximately 400 and 500 Mbps. In another embodiment, the number of encoders utilized increments according to a step size in the data rate that is between approximately 400 and 600 Mbps. In one embodiment, the step size is 600 Mbps.</div>
+<div class="description-paragraph" id="p-0062" num="0061">A stream parser <b>216</b> parses the one or more encoded streams into one or more spatial streams for separate interleaving and mapping into constellation points. In one embodiment, the stream parser <b>216</b> uses the output of each operating encoder <b>212</b> in a round robin fashion, using S bits from each operating encoder per cycle, where:</div>
+<div class="description-paragraph" id="p-0063" num="0062"> <maths id="MATH-US-00001" num="00001"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mi>S</mi> <mo>=</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>i</mi> <mo>=</mo> <mn>1</mn> </mrow> <msub> <mi>N</mi> <mi>ss</mi> </msub> </munderover> <mo>⁢</mo> <mrow> <mi>max</mi> <mo>⁢</mo> <mrow> <mo>{</mo> <mrow> <mn>1</mn> <mo>,</mo> <mfrac> <mrow> <msub> <mi>N</mi> <mi>BPSCS</mi> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>i</mi> <mi>ss</mi> </msub> <mo>)</mo> </mrow> </mrow> <mn>2</mn> </mfrac> </mrow> <mo>}</mo> </mrow> </mrow> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>2</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+and where N<sub>SS </sub>is the number of spatial streams and N<sub>BPSCS</sub>(i<sub>SS</sub>) is the number of coded bits per carrier for spatial stream i<sub>SS</sub>.
+</div>
+<div class="description-paragraph" id="p-0064" num="0063">Corresponding to each spatial stream, an interleaver <b>220</b> interleaves bits of the spatial stream (i.e., changes the order of the bits) to prevent long sequences of adjacent noisy bits from entering a decoder at the receiver. Compared to the interleavers <b>120</b> (<figref idrefs="DRAWINGS">FIG. 2</figref>) of the IEEE 802.11n Standard compliant PHY unit <b>100</b>, the interleavers <b>220</b> are extended to cover longer bit streams corresponding to wider bandwidth OFDM symbols, such as 80 MHz, 120 MHz, 160 MHz, etc. As will be described further below, in some embodiments of the PHY unit <b>200</b>, a transmit chain includes multiple radios so that a wideband OFDM symbol is transmitted as multiple sub-OFDM symbols via respective radios. For example, an 80 MHz-wide OFDM symbol is transmitted via two radios, each having a bandwidth of 40 MHz. As another example, a 160 MHz-wide OFDM symbol is transmitted via two radios, each having a bandwidth of 80 MHz. As another example, a 160 MHz-wide OFDM symbol is transmitted via four radios, each having a bandwidth of 40 MHz. In one embodiment in which a wide-band OFDM symbol is transmitted via multiple radios, multiple interleavers <b>220</b> may be utilized such that a separate interleaver <b>220</b> corresponds to each radio used to transmit the wide-band OFDM symbol.</div>
+<div class="description-paragraph" id="p-0065" num="0064">Also corresponding to each spatial stream, a constellation mapper <b>224</b> maps an interleaved sequence of bits to constellation points corresponding to different subcarriers of an OFDM symbol. More specifically, for each spatial stream, the constellation mapper <b>224</b> translates every bit sequence of length log<sub>2</sub>(M) into one of M constellation points. The constellation mapper <b>224</b> handles different numbers of constellation points depending on the MCS being utilized. In an embodiment, the constellation mapper <b>224</b> is a quadrature amplitude modulation (QAM) mapper that handles M=2, 4, 16, 64, 256, and 1024. In other embodiments, the constellation mapper <b>224</b> handles different modulation schemes corresponding to M equaling different subsets of at least two values from the set {2, 4, 16, 64, 256, 1024}.</div>
+<div class="description-paragraph" id="p-0066" num="0065">A space-time block coding unit <b>228</b> receives the constellation points corresponding to the one or more spatial streams and spreads the spatial streams to a greater number of space-time streams. The space-time block coding unit <b>228</b> can be controlled to merely pass through spatial streams without performing space-time block coding. For example, when the number of spatial streams is equal to the maximum number of space-time streams, the space-time block coding unit <b>228</b> does not perform space-time block coding. In some embodiments, the space-time block coding unit <b>228</b> is omitted.</div>
+<div class="description-paragraph" id="p-0067" num="0066">A plurality of CSD units <b>232</b> insert cyclic shifts into all but one of the space-time streams (if more than one space-time stream). The cyclic shifts are to prevent unintentional beamforming. For ease of explanation, the inputs to the CSD units <b>232</b> are referred to as space-time streams even in embodiments in which the space-time block coding unit <b>228</b> is omitted. In one embodiment, the frequency CDD values applied on each of four space-time streams is the same as the frequency CDD values specified in the IEEE 802.11n Standard. In another embodiment, the frequency CDD values applied on each of four space-time streams is different than the frequency CDD values specified in the IEEE 802.11n Standard. In one embodiment, if more than four space-time streams are utilized, the frequency CDD values are defined similarly to the definitions in the IEEE 802.11n Standard.</div>
+<div class="description-paragraph" id="p-0068" num="0067">In one embodiment, the time CDD values applied on each of four space-time streams is the same as the time CDD values specified in the IEEE 802.11n Standard. In another embodiment, the time CDD values applied on each of four space-time streams is different than the time CDD values specified in the IEEE 802.11n Standard. In one embodiment, if more than four space-time streams are utilized, the time CDD values are defined to be values within the range [−200 0] ns. In another embodiment, if more than four space-time streams are utilized, the time CDD values are defined to be values within a suitable range different than the range [−200 0] ns.</div>
+<div class="description-paragraph" id="p-0069" num="0068">A spatial mapping unit <b>236</b> maps the space-time streams to transmit chains. In various embodiments, spatial mapping includes one or more of: 1) direct mapping, in which constellation points from each space-time stream are mapped directly onto transmit chains (i.e., one-to-one mapping); 2) spatial expansion, in which vectors of constellation point from all space-time streams are expanded via matrix multiplication to produce inputs to the transmit chains; and 3) beamforming, in which each vector of constellation points from all of the space-time streams is multiplied by a matrix of steering vectors to produce inputs to the transmit chains.</div>
+<div class="description-paragraph" id="p-0070" num="0069">In one embodiment, the spatial mapping unit <b>236</b> applies a steering matrix Q (e.g., multiplies an N<sub>STS</sub>×1 signal vector s by Q, i.e., Qs), where Q has a size (N<sub>TX</sub>×N<sub>STS</sub>), where N<sub>TX </sub>is the number of transmit chains and N<sub>STS </sub>is the number of space-time streams. When beamforming is utilized, the matrix Q is generated based on the MIMO channel between the transmitter and the receiver. In one embodiment, N<sub>TX </sub>has a maximum value of 8. In another embodiment, N<sub>TX </sub>has a maximum value of 16. In other embodiments, N<sub>TX </sub>has a different maximum value such as 4, 32, 64, etc.</div>
+<div class="description-paragraph" id="p-0071" num="0070">Each output of the spatial mapping unit <b>236</b> corresponds to a transmit chain, and each output of the spatial mapping unit <b>236</b> is operated on by an IDFT unit <b>240</b> that converts a block of constellation points to a time-domain signal.</div>
+<div class="description-paragraph" id="p-0072" num="0071">Outputs of the IDFT units <b>240</b> are provided to GI insertion and windowing units <b>244</b> that prepend, to each OFDM symbol, a circular extension of the OFDM symbol and smooth the edges of each symbol to increase spectral decay. Outputs of the GI insertion and windowing units <b>244</b> are provided to analog and RF units <b>248</b> that convert the signals to analog signals and upconvert the signals to RF frequencies for transmission. As will be discussed below, the signals are transmitted in a 20 MHz, a 40 MHz, an 80 MHz, a 120 MHz, or a 160 MHz bandwidth channel, in various embodiments and/or scenarios.</div>
+<div class="description-paragraph" id="p-0073" num="0072">Example communication channel characteristics and OFDM subcarrier configurations that correspond to transmit signals generated by the example PHY unit <b>200</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to several embodiments, will now be discussed.</div>
+<div class="description-paragraph" id="p-0074" num="0073">Channels</div>
+<div class="description-paragraph" id="p-0075" num="0074"> <figref idrefs="DRAWINGS">FIGS. 4A-4F</figref> are diagrams of communication channels via which signals are transmitted according to the first communication protocol, in some embodiments. The PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured, in some embodiments, to generate transmit signals that occupy a channel such as one of the channels of <figref idrefs="DRAWINGS">FIGS. 4A-4F</figref>, or another suitable channel. In some embodiments, PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to generate transmit signals corresponding to different channels, such as the channels of <figref idrefs="DRAWINGS">FIGS. 4A-4F</figref>, or other suitable channels, depending on channel conditions, the capabilities of the receive device, etc.</div>
+<div class="description-paragraph" id="p-0076" num="0075"> <figref idrefs="DRAWINGS">FIG. 4A</figref> is a diagram showing an example contiguous 80 MHz channel <b>270</b>. In one embodiment, the channel <b>270</b> is transmitted using a single radio transceiver architecture. In another embodiment, the channel <b>270</b> is transmitted using a dual radio transceiver architecture having two separate front end blocks. For example, in this embodiment, a first radio transceiver transmits a lower portion of the channel <b>270</b>, and a second radio transceiver transmits an upper portion of the channel <b>270</b>. Referring again to <figref idrefs="DRAWINGS">FIG. 3</figref>, in one embodiment, separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions, whereas scrambling, encoding, interleaving, constellation mapping, etc., operate over the entire 80 MHz channel. In another embodiment, separate scrambling units <b>204</b>, separate encoders <b>212</b>, separate interleaving units <b>220</b>, separate constellation mapping units <b>224</b>, etc, and separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions.</div>
+<div class="description-paragraph" id="p-0077" num="0076"> <figref idrefs="DRAWINGS">FIG. 4B</figref> is a diagram showing an example contiguous 120 MHz channel <b>274</b>. In one embodiment, the channel <b>274</b> is transmitted using a single radio transceiver architecture. In another embodiment, the channel <b>274</b> is transmitted using a dual radio transceiver architecture having two separate front end blocks. For example, in this embodiment, a first radio transceiver transmits a lower portion of the channel <b>274</b>, and a second radio transceiver transmits an upper portion of the channel <b>274</b>. In one embodiment, one of the upper portion and the lower portion has a bandwidth of 80 MHz, and the other of the upper portion and the lower portion has a bandwidth of 40 MHz. Referring again to <figref idrefs="DRAWINGS">FIG. 3</figref>, in one embodiment, separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions, whereas scrambling, encoding, interleaving, constellation mapping, etc., operate over the entire 120 MHz channel. In another embodiment, separate scrambling units <b>204</b>, separate encoders <b>212</b>, separate interleaving units <b>220</b>, separate constellation mapping units <b>224</b>, etc, and separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions.</div>
+<div class="description-paragraph" id="p-0078" num="0077"> <figref idrefs="DRAWINGS">FIG. 4C</figref> is a diagram showing an example contiguous 160 MHz channel <b>278</b>. In one embodiment, the channel <b>278</b> is transmitted using a single radio transceiver architecture. In another embodiment, the channel <b>278</b> is transmitted using a dual radio transceiver architecture having two separate front end blocks. For example, in this embodiment, a first radio transceiver transmits a lower portion of the channel <b>278</b>, and a second radio transceiver transmits an upper portion of the channel <b>278</b>. Referring again to <figref idrefs="DRAWINGS">FIG. 3</figref>, in one embodiment, separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions, whereas scrambling, encoding, interleaving, constellation mapping, etc., operate over the entire 160 MHz channel. In another embodiment, separate scrambling units <b>204</b>, separate encoders <b>212</b>, separate interleaving units <b>220</b>, separate constellation mapping units <b>224</b>, etc, and separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions.</div>
+<div class="description-paragraph" id="p-0079" num="0078"> <figref idrefs="DRAWINGS">FIG. 4D</figref> is a diagram showing an example non-contiguous 80 MHz channel <b>282</b>, having a lower portion and an upper portion separated in frequency by some minimum bandwidth such as 1 MHz, 5 MHz, 10 MHz, 20 MHz, 40 MHz, etc., or some other suitable minimum bandwidth. In other words, the upper and lower portions are disjoint. In another embodiment, there is not a minimum separation, and the distance (in frequency) between the upper and lower portions is permitted to reach as little as zero, in some scenarios. In one embodiment, the channel <b>282</b> is transmitted using a dual radio transceiver architecture having two separate front end blocks. For example, in this embodiment, a first radio transceiver transmits a lower portion of the channel <b>282</b>, and a second radio transceiver transmits an upper portion of the channel <b>282</b>. In one embodiment having a dual radio transceiver architecture, the PHY unit is configured to additionally generate a contiguous channel with the dual radios. In this embodiment, the lower portion and the upper portion are considered to be separated in frequency by 0 MHz, i.e., the lower portion and the upper portion are not separated in frequency and are thus contiguous. Referring again to <figref idrefs="DRAWINGS">FIG. 3</figref>, in one embodiment, separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions, whereas scrambling, encoding, interleaving, constellation mapping, etc., operate over the entire 80 MHz channel. In another embodiment, separate scrambling units <b>204</b>, separate encoders <b>212</b>, separate interleaving units <b>220</b>, separate constellation mapping units <b>224</b>, etc, and separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions.</div>
+<div class="description-paragraph" id="p-0080" num="0079"> <figref idrefs="DRAWINGS">FIG. 4E</figref> is a diagram showing an example non-contiguous 120 MHz channel <b>286</b>, having a lower portion and an upper portion separated in frequency by some suitable minimum bandwidth. In one embodiment, the channel <b>286</b> is transmitted using a dual radio transceiver architecture having two separate front end blocks. For example, in this embodiment, a first radio transceiver transmits a lower portion of the channel <b>286</b>, and a second radio transceiver transmits an upper portion of the channel <b>286</b>. Referring again to <figref idrefs="DRAWINGS">FIG. 3</figref>, in one embodiment, separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions, whereas scrambling, encoding, interleaving, constellation mapping, etc., operate over the entire 120 MHz channel. In another embodiment, separate scrambling units <b>204</b>, separate encoders <b>212</b>, separate interleaving units <b>220</b>, separate constellation mapping units <b>224</b>, etc, and separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions.</div>
+<div class="description-paragraph" id="p-0081" num="0080"> <figref idrefs="DRAWINGS">FIG. 4F</figref> is a diagram showing an example non-contiguous 160 MHz channel <b>290</b>, having a lower portion and an upper portion separated in frequency by some suitable minimum bandwidth. In one embodiment, the channel <b>290</b> is transmitted using a dual radio transceiver architecture having two separate front end blocks. For example, in this embodiment, a first radio transceiver transmits a lower portion of the channel <b>290</b>, and a second radio transceiver transmits an upper portion of the channel <b>290</b>. Referring again to <figref idrefs="DRAWINGS">FIG. 3</figref>, in one embodiment, separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions, whereas scrambling, encoding, interleaving, constellation mapping, etc., operate over the entire 160 MHz channel. In another embodiment, separate scrambling units <b>204</b>, separate encoders <b>212</b>, separate interleaving units <b>220</b>, separate constellation mapping units <b>224</b>, etc, and separate IDFT blocks <b>240</b>, separate GI insertion and windowing units <b>244</b>, and separate analog and RF units <b>248</b> generate the lower and upper portions.</div>
+<div class="description-paragraph" id="p-0082" num="0081">Similarly, in some embodiments, contiguous 10 MHz and 20 MHz channels are transmitted using a single radio transceiver architecture. In other embodiments, contiguous or non-contiguous 10 MHz and 20 MHz channels are transmitted in upper portions and lower portions in a manner similar to that discussed with respect to <figref idrefs="DRAWINGS">FIGS. 4A-4E</figref>. More generally, the bandwidth of the channel is any suitable bandwidth, and is not limited to 10 MHz, 20 MHz, 40 MHz, 80 MHz, 120 MHz, and 160 MHz. Additionally, a channel may be transmitted in three or more non-contiguous portions using a multiple radio transceiver architecture having three or more separate front end blocks.</div>
+<div class="description-paragraph" id="p-0083" num="0082">In some embodiments, the portions (e.g., upper and lower) of a contiguous or non-contiguous channel are the same bandwidth, such as illustrated in <figref idrefs="DRAWINGS">FIGS. 4A-4D and 4F</figref>. On the other hand, in some embodiments, the portions (e.g., upper and lower) of a channel have different bandwidths, as illustrated in <figref idrefs="DRAWINGS">FIG. 4E</figref>.</div>
+<div class="description-paragraph" id="p-0084" num="0083">IDFT/DFT Structure</div>
+<div class="description-paragraph" id="p-0085" num="0084">According to the IEEE 802.11a Standard, an OFDM signal for a 20 MHz channel is generated using a size 64 IDFT. Similarly, according to the IEEE 802.11n Standard, an OFDM signal for a 20 MHz channel is generated using a size 64 IDFT, and an OFDM signal for a 40 MHz channel is generated using a size 128 IDFT.</div>
+<div class="description-paragraph" id="p-0086" num="0085">The PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured, in some embodiments, to generate OFDM symbols for transmission via channels, such as discussed above.</div>
+<div class="description-paragraph" id="p-0087" num="0086">In one embodiment, an OFDM signal for an 80 MHz channel is generated using a size 256 IDFT, and an OFDM signal for a 160 MHz channel is generated using a size 512 IDFT. In another embodiment, an OFDM signal for a 160 MHz channel is generated using a size 256 IDFT, corresponding to a lower 80 MHz portion, and a size 256 IDFT, corresponding to an upper 80 MHz portion. In one embodiment, an OFDM signal for a 120 MHz channel is generated using a size 128 IDFT, corresponding to a 40 MHz portion, and a size 256 IDFT, corresponding to an 80 MHz portion. The PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured, in some embodiments, to generate IDFTs of different suitable sizes such as one or more of a size 64 IDFT, a size 128 IDFT, a size 256 IDFT, a size 512 IDFT, etc. Referring to <figref idrefs="DRAWINGS">FIG. 3</figref>, for example, each of the IDFT units <b>240</b> is configured to generate IDFTs of different suitable sizes such as one or more of a size 64 IDFT, a size 128 IDFT, a size 256 IDFT, a size 512 IDFT, etc.</div>
+<div class="description-paragraph" id="p-0088" num="0087">Tone Mapping/Subcarrier Design</div>
+<div class="description-paragraph" id="p-0089" num="0088"> <figref idrefs="DRAWINGS">FIGS. 5A, 5B, 6A, 6B, 7A, and 7B</figref> are diagrams of OFDM symbols that are generated according to the first communication protocol, in some embodiments. The PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured, in some embodiments, to generate OFDM symbols such as one of the OFDM symbols of <figref idrefs="DRAWINGS">FIGS. 5A, 5B, 6A, 6B, 7A, and 7B</figref>, or another suitable OFDM symbol. In some embodiments, PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to generate different OFDM symbols, such as the OFDM symbols of <figref idrefs="DRAWINGS">FIGS. 5A, 5B, 6A, 6B, 7A, and 7B</figref>, or other suitable OFDM symbols, depending on channel conditions, the capabilities of the receive device to which the OFDM symbol is being transmitted, etc.</div>
+<div class="description-paragraph" id="p-0090" num="0089">Referring now to <figref idrefs="DRAWINGS">FIG. 5A</figref>, an OFDM symbol <b>310</b> for a 20 MHz channel, according to one embodiment, corresponds to a size 64 IDFT and includes 64 tones. The 64 tones are indexed from −32 to +31, in an embodiment. The 64 tones include 11 guard tones, a direct current (DC) tone, data tones, and pilot tones. The four lowest frequency tones and the three highest frequency tones are guard tones, which are provided for filter ramp up and ramp down. The index-0 tone is a DC tone, which is provided for mitigating radio frequency interference. The OFDM symbol <b>310</b> includes 56 data/pilot tones. The OFDM symbol <b>310</b> has the same format as specified in the IEEE 802.11n Standard.</div>
+<div class="description-paragraph" id="p-0091" num="0090">Referring now to <figref idrefs="DRAWINGS">FIG. 5B</figref>, an OFDM symbol <b>330</b> for a 40 MHz channel, according to one embodiment, corresponds to a size 128 IDFT and includes 128 tones. The 128 tones are indexed from −64 to +63, in an embodiment. The 128 tones include guard tones, DC tones, data tones, and pilot tones. The six lowest frequency tones and the five highest frequency tones are guard tones. The three tones indexed from −1 to +1 are DC tones. The OFDM symbol <b>330</b> includes 114 data/pilot tones. The OFDM symbol <b>330</b> has the same format as specified in the IEEE 802.11n Standard.</div>
+<div class="description-paragraph" id="p-0092" num="0091">Referring now to <figref idrefs="DRAWINGS">FIG. 6A</figref>, an OFDM symbol <b>350</b> for an 80 MHz channel, according to one embodiment, corresponds to a size 256 IDFT (or two 128 IDFTs) and includes 256 tones. The 256 tones are indexed from −128 to +127, in an embodiment. The 256 tones include guard tones, DC tones, data tones, and pilot tones. The six lowest frequency tones and the five highest frequency tones are guard tones. The three tones indexed from −1 to +1 are DC tones. The OFDM symbol <b>350</b> includes 242 data/pilot tones.</div>
+<div class="description-paragraph" id="p-0093" num="0092">Referring now to <figref idrefs="DRAWINGS">FIG. 6B</figref>, an OFDM symbol <b>370</b> for an 80 MHz channel, according to one embodiment, corresponds to a size 256 IDFT (or two 128 IDFTs) and includes 256 tones. The 256 tones are indexed from −128 to +127, in an embodiment. The 256 tones include guard tones, DC tones, data tones, and pilot tones. The four lowest frequency tones and the three highest frequency tones are guard tones. The three tones indexed from −1 to +1 are DC tones. The OFDM symbol <b>370</b> includes 246 data/pilot tones.</div>
+<div class="description-paragraph" id="p-0094" num="0093">In some embodiments, an OFDM symbol for an 80 MHz channel corresponds to two concatenated 40 MHz OFDM symbols. For example, referring now to <figref idrefs="DRAWINGS">FIG. 7A</figref>, an OFDM symbol <b>390</b> for an 80 MHz channel, according to another embodiment, corresponds to a size 256 IDFT (or two 128 IDFTs) and includes 256 tones. The 256 tones are indexed from −128 to +127, in an embodiment. The 256 tones include guard tones, null tones, DC tones, data tones, and pilot tones. The six lowest frequency tones and the five highest frequency tones are guard tones. Eleven tones indexed from −5 to +5 are DC tones. Three tones indexed from −63 to −65 and three tones indexed from +63 to +65 are null tones. The OFDM symbol <b>390</b> includes 57 data/pilot tones indexed from −6 to −62, 57 data/pilot tones indexed from −66 to −122, 57 data/pilot tones indexed from +6 to +62, and 57 data/pilot tones indexed from +66 to +122. Comparing <figref idrefs="DRAWINGS">FIG. 7A</figref>, with <figref idrefs="DRAWINGS">FIG. 5B</figref>, the 80 MHz OFDM symbol <b>390</b> corresponds to two concatenated 40 MHz OFDM symbols <b>330</b>.</div>
+<div class="description-paragraph" id="p-0095" num="0094">Referring now to <figref idrefs="DRAWINGS">FIG. 7B</figref>, an OFDM symbol <b>410</b> for a non-contiguous 80 MHz channel, according to one embodiment, corresponds to a size 256 IDFT (or two 128 IDFTs), includes 256 tones with a separation in frequency between an lower 40 MHz sideband and an upper 40 MHz sideband. Comparing <figref idrefs="DRAWINGS">FIG. 7B</figref>, with <figref idrefs="DRAWINGS">FIG. 5B</figref>, the 80 MHz OFDM symbol <b>390</b> corresponds to two 40 MHz OFDM symbols <b>330</b>, with a frequency separation between the two OFDM symbols <b>330</b>.</div>
+<div class="description-paragraph" id="p-0096" num="0095">With OFDM symbols for 120 MHz and 160 MHz communication channels, a multiple radio PHY unit is utilized, in some embodiments. In some embodiments, 120 MHz and 160 MHz OFDM symbols are formed by concatenating two or more 40 MHz and/or 80 MHz OFDM symbols, in a manner similar to the example OFDM symbols of <figref idrefs="DRAWINGS">FIGS. 7A and 7B</figref>. In some embodiments utilizing multiple radio PHY units, concatenated OFDM symbols are separated in frequency, such as in <figref idrefs="DRAWINGS">FIG. 7B</figref>, in some scenarios.</div>
+<div class="description-paragraph" id="p-0097" num="0096">Pilot Tones</div>
+<div class="description-paragraph" id="p-0098" num="0097">Communication systems that utilize OFDM modulation often utilize pilot tones for frequency offset estimation, for example, and some tones or sub-carriers are reserved for pilots. For instance, the IEEE 802.11n Standard specifies that 20 MHz OFDM symbols have four pilot tones at sub-carrier indices {±7, ±21}. Similarly, the IEEE 802.11n Standard specifies that 40 MHz OFDM symbols have six pilot tones at sub-carrier indices {±11, ±25, ±53}.</div>
+<div class="description-paragraph" id="p-0099" num="0098">In an embodiment of the first communication protocol that is backward compatible with the IEEE 802.11n Standard, at least some of the pilot positions are kept the same as specified in the IEEE 802.11n Standard.</div>
+<div class="description-paragraph" id="p-0100" num="0099"> <figref idrefs="DRAWINGS">FIG. 8A</figref> is a diagram of the OFDM symbol <b>350</b> (<figref idrefs="DRAWINGS">FIG. 6A</figref>) for an 80 MHz channel and showing example locations of pilot tones, according to one embodiment. The OFDM symbol <b>350</b> includes ten pilot tones at sub-carrier indices {±11, ±39, ±75, ±89, ±117}, in one embodiment. <figref idrefs="DRAWINGS">FIG. 8B</figref> is a diagram of the OFDM symbol <b>370</b> (<figref idrefs="DRAWINGS">FIG. 6B</figref>) for an 80 MHz channel and showing example locations of pilot tones, according to one embodiment. The OFDM symbol <b>350</b> includes twelve pilot tones at sub-carrier indices {±11, ±39, ±53, ±75, ±89, ±117}, in one embodiment. <figref idrefs="DRAWINGS">FIG. 8C</figref> is a diagram of the OFDM symbol <b>350</b> (<figref idrefs="DRAWINGS">FIG. 6A</figref>) for an 80 MHz channel and showing example locations of pilot tones, according to another embodiment. The OFDM symbol <b>350</b> includes eight pilot tones at sub-carrier indices {±11, ±39, ±75, ±103}, in one embodiment.</div>
+<div class="description-paragraph" id="p-0101" num="0100">More generally, in some embodiments, an 80 MHz OFDM symbol has one of i) eight, ii) ten, or iii) twelve pilot tones at location pairs belonging to the set of {±11, ±25, ±39, ±53, ±75, ±89, ±103, ±117}. In other embodiments, different numbers of pilot tones and/or different location pairs than discussed above are utilized. For 120 MHz and 160 MHz OFDM symbols, numbers of pilot tones and pilot tone locations are chosen based on positions of pilots in constituent 40 MHz and/or 80 MHz OFDM symbols, in some embodiments. In other embodiments, numbers of pilot tones and pilot tone locations for 120 MHz and 160 MHz OFDM symbols are chosen irregardless of the positions of pilots in 40 MHz and/or 80 MHz OFDM symbols utilized in the first communication protocol.</div>
+<div class="description-paragraph" id="p-0102" num="0101">In the IEEE 802.11n Standard, pilot values for L pilots (L=4 for a 20 MHz OFDM symbol, and L=6 for a 40 MHz OFDM symbol) on the n-th pilot symbol on the i-th spatial stream are given by:
+<br/>
+<i>P</i> <sub>i,n</sub>=└Ψ<sub>i,n % L</sub>Ψ<sub>i,(n+1)% L </sub>. . . Ψ<sub>i,(n+L−1)%</sub>┘,  Equ. 3
+<br/>
+where P<sub>i,n </sub>is a vector of L pilot values for the n-th OFDM symbol of the i-th spatial stream, and Ψ<sub>i,j </sub>are pilot values. For the IEEE 802.11n Standard, each Ψ<sub>i,j </sub>belongs to the set of {−1, 1}.
+</div>
+<div class="description-paragraph" id="p-0103" num="0102">In one embodiment, pilot tone values for 80 MHz OFDM symbols are chosen similarly to pilot values in 20 MHz and 40 MHz OFDM symbols. <figref idrefs="DRAWINGS">FIG. 9A</figref> is a table showing example pilot values for 80 MHz OFDM symbols having eight pilots, for up to four spatial streams. In <figref idrefs="DRAWINGS">FIG. 9A</figref>, N<sub>STS </sub>is the number of space-time streams (sometimes referred to herein as spatial streams), and i<sub>STS </sub>is a space-time stream index. <figref idrefs="DRAWINGS">FIG. 9B</figref> is a table showing example pilot values for 80 MHz OFDM symbols having ten pilots, for up to four spatial streams.</div>
+<div class="description-paragraph" id="p-0104" num="0103">In other embodiment, the columns of the examples tables of <figref idrefs="DRAWINGS">FIGS. 9A and 9B</figref> are permuted to yield new pilot tone value patterns.</div>
+<div class="description-paragraph" id="p-0105" num="0104">In one embodiment, pilot tone values with eight pilots for exactly eight spatial (or space-time) streams is:</div>
+<div class="description-paragraph" id="p-0106" num="0105"> <maths id="MATH-US-00002" num="00002"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> </mtr> <mtr> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> </mtr> <mtr> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> </mtr> <mtr> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> </mtr> <mtr> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> </mtr> <mtr> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> </mtr> <mtr> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> </mtr> <mtr> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mn>1</mn> </mtd> <mtd> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>4</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where the rows correspond to spatial streams and the columns correspond to pilots. The matrix of Equ. 4 is a Hadamard matrix. For fewer than eight spatial streams, the first N<sub>SS </sub>rows of the matrix of Equ. 4 are chosen, in an embodiment.
+</div>
+<div class="description-paragraph" id="p-0107" num="0106">In one embodiment, pilot values for 120 MHz and 160 MHz OFDM symbols are chosen to be a combination of pilot value patterns specified in the IEEE 802.11n Standard for 40 MHz OFDM symbols, and/or pilot value patterns for 80 MHz OFDM symbols.</div>
+<div class="description-paragraph" id="p-0108" num="0107">Data Tones</div>
+<div class="description-paragraph" id="p-0109" num="0108">With the example tone mappings for 80 MHz OFDM symbols discussed above with reference to <figref idrefs="DRAWINGS">FIGS. 6A, 6B, 7A, and 7B</figref>, and with different numbers of pilot tones, the number of sub-carriers that remain for data transmission can be determined. For example, with OFDM symbol <b>370</b> of <figref idrefs="DRAWINGS">FIG. 6B</figref>, there are 238 data tones when eight pilot tones are utilized, 236 data tones when ten pilot tones are utilized, and 234 data tones when twelve pilot tones are utilized. As another example, with OFDM symbol <b>350</b> of <figref idrefs="DRAWINGS">FIG. 6A</figref>, there are 234 data tones when eight pilot tones are utilized, 232 data tones when ten pilot tones are utilized, and 230 data tones when twelve pilot tones are utilized. As yet another example, with OFDM symbol <b>390</b> of <figref idrefs="DRAWINGS">FIG. 7A</figref> or the OFDM symbol <b>410</b> of <figref idrefs="DRAWINGS">FIG. 7B</figref>, there are 220 data tones when eight pilot tones are utilized, 218 data tones when ten pilot tones are utilized, and 216 data tones when twelve pilot tones are utilized. In one embodiment, with OFDM symbol <b>390</b> of <figref idrefs="DRAWINGS">FIG. 7A</figref> or the OFDM symbol <b>410</b> of <figref idrefs="DRAWINGS">FIG. 7B</figref>, only twelve pilot tones are utilized thus providing 216 data tones. More generally, depending on the particular OFDM symbol configuration and the number pilot tones, an 80 MHz OFDM symbol will have a number of data tones chosen from the set {216, 228, 230, 232, 234, 236, 238}, according to one embodiment. In other embodiments, an 80 MHz OFDM symbol has a number of data tones that is different than values in the set {216, 228, 230, 232, 234, 236, 238}.</div>
+<div class="description-paragraph" id="p-0110" num="0109">With 120 MHz and 160 MHz OFDM symbols, the number of data tones is the cumulative number of data tones in 40 MHz and/or 80 MHz OFDM symbols that make up the 120 MHz or 160 MHz OFDM symbol, according to some embodiments.</div>
+<div class="description-paragraph" id="p-0111" num="0110"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a block diagram of an example pilot system <b>450</b>. The pilot system <b>450</b> is utilized in the PHY unit <b>200</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to an embodiment. The PHY unit <b>200</b> utilizes another suitable pilot system different than the pilot system <b>450</b> in other embodiments. Referring now to <figref idrefs="DRAWINGS">FIG. 10</figref>, the pilot system <b>450</b> includes a pilot generator <b>450</b> that generates suitable pilot tone values, such as pilot tone values discussed above or similar pilot tone values. A pilot inserter <b>458</b> receives the pilot tone values as well as data tones from the spatial mapping unit <b>236</b>. The pilot inserter <b>458</b> inserts the pilot tone values within the data tones at suitable tone indexes to generate an IDFT input. The IDFT input is then provided to an IDFT unit <b>240</b>. A pilot control unit <b>462</b> generates control signals provided to the pilot generator <b>454</b> and the pilot inserter <b>458</b> to control the number of pilots generated, the tone index positions of the pilot signals, etc. In various embodiments, the number and positions of pilots vary according to factors such as one or more of the bandwidth of the channel being utilized (e.g., 20 MHz, 40 MHz, 80 MHz, etc.), channel conditions (e.g., poor channel conditions may call for more pilots, good channel conditions allow less pilots and therefore higher throughput), etc.</div>
+<div class="description-paragraph" id="p-0112" num="0111">Padding</div>
+<div class="description-paragraph" id="p-0113" num="0112">Padding is utilized is various circumstances, in some embodiments. For example, padding is utilized to lengthen a set of information bits to be an input size of a block encoder, in one embodiment. As another example, padding is utilized to lengthen a set of information data to fill entirely an integer number of OFDM symbols in one embodiment. In one embodiment, padding is utilized both to lengthen a set of information bits to be an input size of a block encoder, and to lengthen a set of information data to fill entirely an integer number of OFDM symbols. Padding involves adding bits or symbols of a known value or values (e.g., zero or some other suitable value or set of values) to a set of information bits or symbols, in some embodiments. Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, in some embodiments, padding is implemented in the MAC unit <b>18</b>, <b>28</b> and/or the PHY unit <b>20</b>, <b>29</b>.</div>
+<div class="description-paragraph" id="p-0114" num="0113">In some embodiments, padding is implemented with equal rate encoding for padding bits and data. In one embodiment, padding is implements with several additional constraints: 1) an equal number of data bits are input to each FEC encoder <b>212</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>); 2) a puncturing block at each FEC encoder <b>212</b> operates on an integer number of message blocks, where the message block length depends on the code rate; and 3) a total number of encoded bits fits into an integer number of OFDM symbols.</div>
+<div class="description-paragraph" id="p-0115" num="0114"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a block diagram of an example padding system, according to an embodiment. The padding system <b>500</b> is utilized in conjunction with the PHY unit <b>200</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to an embodiment. In another embodiment, another suitable padding system different than the padding system <b>500</b> is utilized in conjunction with the PHY unit <b>200</b>. Referring now to <figref idrefs="DRAWINGS">FIG. 11</figref>, the padding system <b>500</b> includes a first padding unit <b>504</b> that receives x bits and adds p<sub>1 </sub>padding bits. In one embodiment, padding unit <b>504</b> adds the p<sub>1 </sub>padding bits so that an equal number of data bits will be input to each FEC encoder <b>212</b> after parsing by the encoder parser <b>208</b>. In one embodiment, p<sub>1 </sub>is selected according to:</div>
+<div class="description-paragraph" id="p-0116" num="0115"> <maths id="MATH-US-00003" num="00003"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <msub> <mi>p</mi> <mn>1</mn> </msub> <mo>=</mo> <mrow> <mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> <mo>⁢</mo> <mrow> <mo>⌈</mo> <mfrac> <mi>x</mi> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>⌉</mo> </mrow> </mrow> <mo>-</mo> <mi>x</mi> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>5</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+The padding unit <b>504</b> is included in the PHY unit <b>200</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to one embodiment. The padding unit <b>504</b> is included in the MAC unit <b>18</b>, <b>28</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>, according to another embodiment.
+</div>
+<div class="description-paragraph" id="p-0117" num="0116">Referring again to <figref idrefs="DRAWINGS">FIG. 11</figref>, after parsing by the encoder parser <b>208</b>, y=(x+p<sub>1</sub>)/N<sub>ES </sub>bits are generated on each output of the encoder parser <b>208</b>, where N<sub>ES </sub>is the number of FEC encoders <b>212</b> being utilized for encoding the information bits. The padding system <b>500</b> also includes a respective second padding unit <b>508</b> corresponding to each FEC encoder <b>212</b>. The second padding unit <b>508</b> receives y bits and adds p<sub>2 </sub>padding bits.</div>
+<div class="description-paragraph" id="p-0118" num="0117">A respective tail bit unit <b>512</b> adds N<sub>tail </sub>tail bits. In one embodiment, N<sub>tail </sub>is six. In other embodiments, N<sub>tail </sub>is a suitable number other than six. The output of the tail bit unit <b>512</b> is (y+N<sub>tail</sub>+p<sub>2</sub>) bits. The FEC encoder <b>212</b> performs FEC encoding and puncturing, according to an embodiment, according to a code rate R. Thus, each FEC encoder <b>212</b> generates an output having
+<br/>
+(<i>y+N</i> <sub>tail</sub> <i>p</i> <sub>2</sub>)*<i>R </i>bits.
+</div>
+<div class="description-paragraph" id="p-0119" num="0118">In one embodiment, the second padding unit <b>508</b> adds the p<sub>2 </sub>padding bits so that the puncturing block at each FEC encoder <b>212</b> operates on an integer number of message blocks, where the message block length depends on the code rate R. In one embodiment, p<sub>2 </sub>is selected such that:</div>
+<div class="description-paragraph" id="p-0120" num="0119"> <maths id="MATH-US-00004" num="00004"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mfrac> <mrow> <mo>(</mo> <mrow> <mi>y</mi> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> <mo>+</mo> <msub> <mi>p</mi> <mn>2</mn> </msub> </mrow> <mo>)</mo> </mrow> <mi>R</mi> </mfrac> <mo>=</mo> <mi>k</mi> </mrow> <mo>,</mo> <mrow> <mi>k</mi> <mo>∈</mo> <mi>I</mi> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>6</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where I is the set of positive integers.
+</div>
+<div class="description-paragraph" id="p-0121" num="0120">In one embodiment, the second padding unit <b>508</b> adds the p<sub>2 </sub>padding bits also so that a total number of encoded bits fits into an integer number of OFDM symbols. In one embodiment, p<sub>2 </sub>is selected such that:</div>
+<div class="description-paragraph" id="p-0122" num="0121"> <maths id="MATH-US-00005" num="00005"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <mo>(</mo> <mrow> <mi>y</mi> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> <mo>+</mo> <msub> <mi>p</mi> <mn>2</mn> </msub> </mrow> <mo>)</mo> </mrow> <mo>=</mo> <mrow> <mi>l</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mfrac> <msub> <mi>RN</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>)</mo> </mrow> </mrow> </mrow> <mo>,</mo> <mrow> <mi>l</mi> <mo>∈</mo> <mi>I</mi> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>7</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where N<sub>CBPS </sub>is the number of encoded bits per OFDM symbol.
+</div>
+<div class="description-paragraph" id="p-0123" num="0122">In one embodiment, N<sub>DBPS </sub>need not be an integer, where N<sub>DBPS </sub>is the number of decoded bits per OFDM symbol.</div>
+<div class="description-paragraph" id="p-0124" num="0123">Variables N<sub>R </sub>and N<sub>Q </sub>are defined by the simplest rational forms of:</div>
+<div class="description-paragraph" id="p-0125" num="0124"> <maths id="MATH-US-00006" num="00006"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mi>R</mi> <mo>=</mo> <mfrac> <msub> <mi>N</mi> <mi>R</mi> </msub> <msub> <mi>D</mi> <mi>R</mi> </msub> </mfrac> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>8</mn> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mrow> <mrow> <mo>(</mo> <mfrac> <msub> <mi>RN</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>)</mo> </mrow> <mo>=</mo> <mfrac> <msub> <mi>N</mi> <mi>Q</mi> </msub> <msub> <mi>D</mi> <mi>Q</mi> </msub> </mfrac> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>9</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+Then, Equation 6 and Equation 7 can be rewritten as:
+<br/>
+(<i>y+N</i> <sub>tail</sub> <i>+p</i> <sub>2</sub>)<i>D</i> <sub>R</sub> <i>=kN</i> <sub>R</sub> <i>,k∈I,</i>  Equ. 10
+<br/>
+(<i>y+N</i> <sub>tail</sub> <i>+p</i> <sub>2</sub>)<i>D</i> <sub>Q</sub> <i>=lN</i> <sub>Q</sub> <i>,kΣl,</i>  Equ. 11
+<br/>
+which imply that:
+<br/>
+(<i>y+N</i> <sub>tail</sub> <i>+p</i> <sub>2</sub>)=<i>mLCM</i>(<i>N</i> <sub>R</sub> <i>,N</i> <sub>Q</sub>),  Equ. 12
+<br/>
+where LCM (a,b) is the least common multiple of a and b. In one embodiment,
+</div>
+<div class="description-paragraph" id="p-0126" num="0125">
+<maths id="MATH-US-00007" num="00007">
+<math overflow="scroll">
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>R</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mn>2</mn>
+<mo>,</mo>
+<mrow>
+<mi>R</mi>
+<mo>=</mo>
+<mfrac>
+<mn>1</mn>
+<mn>2</mn>
+</mfrac>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mn>3</mn>
+<mo>,</mo>
+<mrow>
+<mi>R</mi>
+<mo>=</mo>
+<mfrac>
+<mn>2</mn>
+<mn>3</mn>
+</mfrac>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mn>4</mn>
+<mo>,</mo>
+<mrow>
+<mi>R</mi>
+<mo>=</mo>
+<mfrac>
+<mn>3</mn>
+<mn>4</mn>
+</mfrac>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mn>6</mn>
+<mo>,</mo>
+<mrow>
+<mi>R</mi>
+<mo>=</mo>
+<mfrac>
+<mn>5</mn>
+<mn>6</mn>
+</mfrac>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+<mo>.</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0127" num="0126">Therefore, we have:</div>
+<div class="description-paragraph" id="p-0128" num="0127"> <maths id="MATH-US-00008" num="00008"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <mo>(</mo> <mrow> <mi>y</mi> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> <mo>+</mo> <msub> <mi>p</mi> <mn>2</mn> </msub> </mrow> <mo>)</mo> </mrow> <mo>=</mo> <mrow> <mi>L</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>C</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mi>M</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <msub> <mi>N</mi> <mi>R</mi> </msub> <mo>,</mo> <msub> <mi>N</mi> <mi>Q</mi> </msub> </mrow> <mo>)</mo> </mrow> </mrow> <mo>⁢</mo> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mi>y</mi> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> </mrow> <mrow> <mi>L</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>C</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>M</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mo>(</mo> <mrow> <msub> <mi>N</mi> <mi>R</mi> </msub> <mo>,</mo> <msub> <mi>N</mi> <mi>Q</mi> </msub> </mrow> <mo>)</mo> </mrow> </mrow> </mfrac> <mo>⌉</mo> </mrow> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>13</mn> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mrow> <msub> <mi>p</mi> <mn>2</mn> </msub> <mo>=</mo> <mrow> <mrow> <mi>L</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>C</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>M</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mo>(</mo> <mrow> <msub> <mi>N</mi> <mi>R</mi> </msub> <mo>,</mo> <msub> <mi>N</mi> <mi>Q</mi> </msub> </mrow> <mo>)</mo> </mrow> <mo>⁢</mo> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mi>y</mi> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> </mrow> <mrow> <mi>L</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>C</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>M</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mo>(</mo> <mrow> <msub> <mi>N</mi> <mi>R</mi> </msub> <mo>,</mo> <msub> <mi>N</mi> <mi>Q</mi> </msub> </mrow> <mo>)</mo> </mrow> </mrow> </mfrac> <mo>⌉</mo> </mrow> </mrow> <mo>-</mo> <mrow> <mo>(</mo> <mrow> <mi>y</mi> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>14</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where ┌a┐ denotes the smallest integer greater than or equal to a.
+</div>
+<div class="description-paragraph" id="p-0129" num="0128"> <figref idrefs="DRAWINGS">FIG. 12</figref> is a block diagram of another example padding system <b>550</b>, according to an embodiment. The padding system <b>550</b> is utilized in conjunction with the PHY unit <b>200</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to an embodiment. The PHY unit <b>200</b> utilizes another suitable padding system different than the padding system <b>550</b> in other embodiments. Referring now to <figref idrefs="DRAWINGS">FIG. 12</figref>, the padding system <b>550</b> includes a padding unit <b>554</b> that receives x bits and adds p padding bits, where:
+<br/>
+<i>p</i>=(<i>p</i> <sub>1</sub> <i>+N</i> <sub>ES p2</sub>)  Equ. 15
+<br/>
+The padding unit <b>554</b> is included in the PHY unit <b>200</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to one embodiment. The padding unit <b>554</b> is included in the MAC unit <b>18</b>, <b>28</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>, according to another embodiment.
+</div>
+<div class="description-paragraph" id="p-0130" num="0129">Referring again to <figref idrefs="DRAWINGS">FIG. 12</figref>, after parsing by the encoder parser <b>208</b>, y=(x+p)/N<sub>ES </sub>bits are generated on each output of the encoder parser <b>208</b>. The respective tail bit unit <b>512</b> adds N<sub>tail </sub>tail bits. In one embodiment, N<sub>tail </sub>is six. In other embodiments, N<sub>tail </sub>is a suitable number other than six. The output of the tail bit unit <b>512</b> is (y+N<sub>tail</sub>) bits. The FEC encoder <b>212</b> performs FEC encoding and puncturing, according to an embodiment, according to a code rate R. Thus, each FEC encoder <b>212</b> generates an output having (y+N<sub>tail</sub>)*R bits.</div>
+<div class="description-paragraph" id="p-0131" num="0130">Padding is often not limited to a single OFDM symbol. The number of OFDM symbols, in one embodiment, is determined according to:</div>
+<div class="description-paragraph" id="p-0132" num="0131"> <maths id="MATH-US-00009" num="00009"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msub> <mi>N</mi> <mi>SYM</mi> </msub> <mo>=</mo> <mrow> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mo>(</mo> <mrow> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mn>8</mn> <mo>⁢</mo> <mi>L</mi> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>service</mi> </msub> </mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>⌉</mo> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> </mrow> <mo>)</mo> </mrow> <mi>W</mi> </mfrac> <mo>⌉</mo> </mrow> <mo>⁢</mo> <mfrac> <msub> <mi>WN</mi> <mi>ES</mi> </msub> <mrow> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <mo>⁢</mo> <mi>R</mi> </mrow> </mfrac> </mrow> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>16</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where W=LCM (N<sub>R</sub>,N<sub>Q</sub>), L is a very high throughput (VHT) field length, defined in octets, and N<sub>service </sub>is a number of service bits.
+</div>
+<div class="description-paragraph" id="p-0133" num="0132">According to one embodiment, the number of padding bits is determined according to:
+<br/>
+<i>p=N</i> <sub>SYM</sub> <i>N</i> <sub>CBPS</sub> <i>R</i>−(8<i>L+N</i> <sub>service</sub> <i>+N</i> <sub>tail</sub> <i>N</i> <sub>ES</sub>)  Equ. 17
+</div>
+<div class="description-paragraph" id="p-0134" num="0133">When STBC is utilized, constellation points from two consecutive OFDM symbols are used and mapped into multiple space-time streams spanning two OFDM symbols, according to some embodiments. Therefore, with STBC, the number of OFDM symbols should be even. This additional constraint is accommodated, in one embodiment, by substituting l=2l in Equation 7:</div>
+<div class="description-paragraph" id="p-0135" num="0134"> <maths id="MATH-US-00010" num="00010"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <mo>(</mo> <mrow> <mi>y</mi> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> <mo>+</mo> <msub> <mi>p</mi> <mn>2</mn> </msub> </mrow> <mo>)</mo> </mrow> <mo>=</mo> <mrow> <mn>2</mn> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mi>l</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mfrac> <msub> <mi>RN</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <mo>,</mo> <mrow> <mi>l</mi> <mo>∈</mo> <mi>I</mi> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>18</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+Then, the number of OFDM symbols is given by:
+</div>
+<div class="description-paragraph" id="p-0136" num="0135"> <maths id="MATH-US-00011" num="00011"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <msub> <mi>N</mi> <mi>SYM</mi> </msub> <mo>=</mo> <mrow> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mo>(</mo> <mrow> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mn>8</mn> <mo>⁢</mo> <mi>L</mi> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>service</mi> </msub> </mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>⌉</mo> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> </mrow> <mo>)</mo> </mrow> <mi>W</mi> </mfrac> <mo>⌉</mo> </mrow> <mo>⁢</mo> <mfrac> <msub> <mi>WN</mi> <mi>ES</mi> </msub> <mrow> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <mo>⁢</mo> <mi>R</mi> </mrow> </mfrac> </mrow> </mrow> <mo>,</mo> <mi>and</mi> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>19</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where W=LCM (N<sub>R</sub>,N<sub>Q</sub>) and
+</div>
+<div class="description-paragraph" id="p-0137" num="0136"> <maths id="MATH-US-00012" num="00012"> <math overflow="scroll"> <mrow> <mrow> <mrow> <mo>(</mo> <mfrac> <mrow> <msub> <mi>m</mi> <mi>STBC</mi> </msub> <mo>⁢</mo> <msub> <mi>RN</mi> <mi>CBPS</mi> </msub> </mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>)</mo> </mrow> <mo>=</mo> <mfrac> <msub> <mi>N</mi> <mi>Q</mi> </msub> <msub> <mi>D</mi> <mi>Q</mi> </msub> </mfrac> </mrow> <mo>,</mo> </mrow> </math> </maths> <br/>
+and where m<sub>STBC</sub>=1 if STBC is not used and m<sub>STBC</sub>=2 if STBC is used. The number of padding bits is determined according to Equation 17.
+</div>
+<div class="description-paragraph" id="p-0138" num="0137">In another embodiment in which STBC is utilized, a constraint is satisfied:
+<br/>
+(<i>y+N</i> <sub>tail</sub> <i>+p</i> <sub>2</sub>)<i>D</i> <sub>Q</sub>=2<i>jN</i> <sub>Q</sub> <i>,j∈I,</i>  Equ. 20
+<br/>
+Then, the number of OFDM symbols is given by:
+</div>
+<div class="description-paragraph" id="p-0139" num="0138"> <maths id="MATH-US-00013" num="00013"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <msub> <mi>N</mi> <mi>SYM</mi> </msub> <mo>=</mo> <mrow> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mo>(</mo> <mrow> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mn>8</mn> <mo>⁢</mo> <mi>L</mi> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>service</mi> </msub> </mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>⌉</mo> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> </mrow> <mo>)</mo> </mrow> <mi>W</mi> </mfrac> <mo>⌉</mo> </mrow> <mo>⁢</mo> <mfrac> <msub> <mi>WN</mi> <mi>ES</mi> </msub> <mrow> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <mo>⁢</mo> <mi>R</mi> </mrow> </mfrac> </mrow> </mrow> <mo>,</mo> <mi>and</mi> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>21</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where W=LCM (N<sub>R</sub>,2N<sub>Q</sub>). The number of padding bits is determined according to Equation 17.
+</div>
+<div class="description-paragraph" id="p-0140" num="0139">In some scenarios, for example some MCS/number of encoders/packet length scenarios, the embodiments described above will result in a large number of padding bits and hence a large number of dummy OFDM symbols. For instance, when a puncturing block does not see an integer number of blocks or when N<sub>CBPS </sub>is not a multiple of N<sub>ES</sub>, a large number of padding bits may result.</div>
+<div class="description-paragraph" id="p-0141" num="0140">In some embodiments, bits at the end portion of a packet are encoded with a code rate different than a code rate utilized at the remaining portion of the packet. In one embodiment, bits at the end portion of the packet are encoded at a smallest rate, e.g., a 1/2 convolutional code (message block length of one). This helps to ensure that a puncturing block at each FEC encoder <b>212</b> operates on an integer number of message blocks. In one embodiment, an entire packet is encoded with a 1/2 convolutional code, and then puncturing is performed on a first portion of the packet to achieve a desired coding rate, whereas no puncturing is performed of the end portion of the packet. In one embodiment, padding in a MAC unit is applied prior to encoding the PHY packet such that the end portion of the packet is encoded with a code rate different than a code rate utilized at the remaining portion of the packet.</div>
+<div class="description-paragraph" id="p-0142" num="0141">In one embodiment, a number of tones and allowable MCS's are selected such that the following constraints are satisfied: 1) for rates 1/2, 3/4, and 5/6,</div>
+<div class="description-paragraph" id="p-0143" num="0142"> <maths id="MATH-US-00014" num="00014"> <math overflow="scroll"> <mrow> <mi>mod</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>,</mo> <msub> <mi>D</mi> <mi>R</mi> </msub> </mrow> <mo>)</mo> </mrow> </mrow> </math> </maths> <br/>
+is even, which requires
+</div>
+<div class="description-paragraph" id="p-0144" num="0143"> <maths id="MATH-US-00015" num="00015"> <math overflow="scroll"> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> </math> </maths> <br/>
+to be an integer; and 2) for rate 2/3, we ensure that
+</div>
+<div class="description-paragraph" id="p-0145" num="0144"> <maths id="MATH-US-00016" num="00016"> <math overflow="scroll"> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> <mo>⁢</mo> <msub> <mi>D</mi> <mi>R</mi> </msub> </mrow> </mfrac> </math> </maths> <br/>
+is an integer. In this embodiment, the number of OFDM symbols is given by:
+</div>
+<div class="description-paragraph" id="p-0146" num="0145"> <maths id="MATH-US-00017" num="00017"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msub> <mi>N</mi> <mi>SYM</mi> </msub> <mo>⁢</mo> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mo>(</mo> <mrow> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mn>8</mn> <mo>⁢</mo> <mi>L</mi> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>service</mi> </msub> </mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>⌉</mo> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>tail</mi> </msub> </mrow> <mo>)</mo> </mrow> <mo>⁢</mo> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mrow> <mrow> <msub> <mi>m</mi> <mi>STBC</mi> </msub> <mo>⁢</mo> <msub> <mi>RN</mi> <mi>CBPS</mi> </msub> </mrow> </mfrac> <mo>⌉</mo> </mrow> <mo>⁢</mo> <msub> <mi>m</mi> <mi>STBC</mi> </msub> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>22</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+In this embodiment, the number of padding bits is given by:
+</div>
+<div class="description-paragraph" id="p-0147" num="0146">
+<maths id="MATH-US-00018" num="00018">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>p</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>⌊</mo>
+<mfrac>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>SYM</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>CBPS</mi>
+</msub>
+</mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>D</mi>
+<mi>R</mi>
+</msub>
+</mrow>
+</mfrac>
+<mo>⌋</mo>
+</mrow>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>R</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mi>mod</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mfrac>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>SYM</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>CBPS</mi>
+</msub>
+</mrow>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+</mfrac>
+<mo>,</mo>
+<msub>
+<mi>D</mi>
+<mi>R</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mn>8</mn>
+<mo>⁢</mo>
+<mi>L</mi>
+</mrow>
+<mo>+</mo>
+<msub>
+<mi>N</mi>
+<mi>service</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>tail</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equ</mi>
+<mo>.</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>23</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0148" num="0147">In some embodiments, padding bits are added after encoding, such as when a preamble of a packet includes an indicator of the number of bits in the packet. In one embodiment, the number of OFDM symbols when padding occurs after encoding is given by:</div>
+<div class="description-paragraph" id="p-0149" num="0148"> <maths id="MATH-US-00019" num="00019"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msub> <mi>N</mi> <mi>SYM</mi> </msub> <mo>=</mo> <mrow> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mo>(</mo> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mn>8</mn> <mo>⁢</mo> <mi>L</mi> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>service</mi> </msub> <mo>+</mo> <mrow> <msub> <mi>N</mi> <mi>tail</mi> </msub> <mo>⁢</mo> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mrow> </mrow> <mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> <mo>⁢</mo> <msub> <mi>N</mi> <mi>R</mi> </msub> </mrow> </mfrac> <mo>⌉</mo> </mrow> <mo>)</mo> </mrow> <mo>⁢</mo> <msub> <mi>N</mi> <mi>ES</mi> </msub> <mo>⁢</mo> <msub> <mi>N</mi> <mi>R</mi> </msub> </mrow> <mrow> <msub> <mi>m</mi> <mi>STBC</mi> </msub> <mo>⁢</mo> <msub> <mi>RN</mi> <mi>CBPS</mi> </msub> </mrow> </mfrac> <mo>⌉</mo> </mrow> <mo>⁢</mo> <msub> <mi>m</mi> <mi>STBC</mi> </msub> </mrow> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>24</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+In this embodiment, the number of padding bits after encoding is given by:
+</div>
+<div class="description-paragraph" id="p-0150" num="0149"> <maths id="MATH-US-00020" num="00020"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msub> <mi>p</mi> <mi>after</mi> </msub> <mo>=</mo> <mrow> <mrow> <msub> <mi>N</mi> <mi>SYM</mi> </msub> <mo>⁢</mo> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> </mrow> <mo>-</mo> <mrow> <mrow> <mo>(</mo> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mn>8</mn> <mo>⁢</mo> <mi>L</mi> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>service</mi> </msub> <mo>+</mo> <mrow> <msub> <mi>N</mi> <mi>tail</mi> </msub> <mo>⁢</mo> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mrow> </mrow> <mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> <mo>⁢</mo> <msub> <mi>N</mi> <mi>R</mi> </msub> </mrow> </mfrac> <mo>⌉</mo> </mrow> <mo>)</mo> </mrow> <mo>⁢</mo> <msub> <mi>N</mi> <mi>ES</mi> </msub> <mo>⁢</mo> <msub> <mi>D</mi> <mi>R</mi> </msub> </mrow> </mrow> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>25</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+In this embodiment, the number of padding bits before encoding is given by:
+</div>
+<div class="description-paragraph" id="p-0151" num="0150">
+<maths id="MATH-US-00021" num="00021">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msub>
+<mi>p</mi>
+<mi>before</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mo>⌈</mo>
+<mfrac>
+<mrow>
+<mrow>
+<mn>8</mn>
+<mo>⁢</mo>
+<mi>L</mi>
+</mrow>
+<mo>+</mo>
+<msub>
+<mi>N</mi>
+<mi>service</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>tail</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+</mrow>
+</mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>R</mi>
+</msub>
+</mrow>
+</mfrac>
+<mo>⌉</mo>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>D</mi>
+<mi>R</mi>
+</msub>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mn>8</mn>
+<mo>⁢</mo>
+<mi>L</mi>
+</mrow>
+<mo>+</mo>
+<msub>
+<mi>N</mi>
+<mi>service</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>tail</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equ</mi>
+<mo>.</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>26</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0152" num="0151">In an embodiment, padding bits are added before encoding to ensure that each encoder has the same number of bits, and to ensure that the encoder sees an integer number of puncture patterns. Additionally in this embodiment, padding bits are added after encoding.</div>
+<div class="description-paragraph" id="p-0153" num="0152">In embodiments in which padding bits are added after encoding, packet length information is provided to the receiver to enable decoding of the information. In one embodiment, the packet length information is provided in a PHY data unit preamble. For example, the packet length information provided in the PHY data unit preamble is indicated in terms of OFDM symbols. In another embodiment, the packet length information is provided using MAC layer signaling.</div>
+<div class="description-paragraph" id="p-0154" num="0153"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a block diagram of another example padding system <b>600</b>, according to an embodiment. The padding system <b>600</b> is utilized in conjunction with the PHY unit <b>200</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to an embodiment. The PHY unit <b>200</b> utilizes another suitable padding system different than the padding system <b>600</b> in other embodiments. Referring now to <figref idrefs="DRAWINGS">FIG. 13</figref>, the padding system <b>550</b> includes a first padding unit <b>604</b> that adds P<sub>before </sub>padding bits. The padding unit <b>604</b> is included in the PHY unit <b>200</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, according to one embodiment. The padding unit <b>604</b> is included in the MAC unit <b>18</b>, <b>28</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>, according to another embodiment. In one embodiment, MAC unit padding is provided up to a 32-bit or 8-bit boundary.</div>
+<div class="description-paragraph" id="p-0155" num="0154">Referring again to <figref idrefs="DRAWINGS">FIG. 13</figref>, after parsing by the encoder parser <b>208</b>, a respective tail bit unit <b>608</b> adds N<sub>tail </sub>tail bits. After the FEC encoder <b>212</b>, a second padding unit <b>612</b> adds P<sub>after </sub>padding bits.</div>
+<div class="description-paragraph" id="p-0156" num="0155">In some embodiments, MCS's are chosen based on whether one or more conditions corresponding to padding are satisfied. In particular, if the conditions are not satisfied for a particular MCS, the MCS is not utilized for transmission. For example, in one embodiment, only MCS's are utilized that satisfy:</div>
+<div class="description-paragraph" id="p-0157" num="0156"> <maths id="MATH-US-00022" num="00022"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <mi>mod</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>,</mo> <msub> <mi>D</mi> <mi>R</mi> </msub> </mrow> <mo>)</mo> </mrow> </mrow> <mo>=</mo> <mn>0</mn> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>27</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+which implies that
+</div>
+<div class="description-paragraph" id="p-0158" num="0157"> <maths id="MATH-US-00023" num="00023"> <math overflow="scroll"> <mrow> <mfrac> <msub> <mi>N</mi> <mi>DBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>and</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> </mrow> </math> </maths> <br/>
+are integers. Then, the number of OFDM symbols, according to an embodiment, is determined by:
+</div>
+<div class="description-paragraph" id="p-0159" num="0158">
+<maths id="MATH-US-00024" num="00024">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>SYM</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>m</mi>
+<mi>STBC</mi>
+</msub>
+<mo>⁢</mo>
+<mrow>
+<mo>⌈</mo>
+<mfrac>
+<mrow>
+<mrow>
+<mn>8</mn>
+<mo>⁢</mo>
+<mi>L</mi>
+</mrow>
+<mo>+</mo>
+<msub>
+<mi>N</mi>
+<mi>service</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>tail</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>ES</mi>
+</msub>
+</mrow>
+</mrow>
+<mrow>
+<msub>
+<mi>m</mi>
+<mi>STBC</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>DBPS</mi>
+</msub>
+</mrow>
+</mfrac>
+<mo>⌉</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equ</mi>
+<mo>.</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>28</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0160" num="0159">The number of padding bits, according to an embodiment, is determined by:
+<br/>
+<i>p=N</i> <sub>SYM</sub> <i>N</i> <sub>DBPS</sub>−8<i>L−N</i> <sub>service</sub> <i>−N</i> <sub>tail</sub> <i>N</i> <sub>ES</sub>  Equ. 29
+<br/>
+To satisfy Equation 27, all MCS/encoder combinations cannot be accommodated, according to an embodiment. In one embodiment, MCS entries in an MCS table are excluded from consideration if Equation 27 is not satisfied. In another embodiment, one MCS table is utilized, and an index to the table is interpreted differently depending on the channel bandwidth so that certain MCS entries are excluded from consideration for certain channel bandwidths.
+</div>
+<div class="description-paragraph" id="p-0161" num="0160">In embodiments of padding techniques discussed above, it is assumed that the encoder parser <b>208</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) assigns one bit to each encoder in a round robin fashion. Additionally, in the embodiments of padding techniques discussed above, it is assumed that after padding, each encoder has an equal number of input bits. In some embodiments, the encoder parser <b>208</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to parse bits to different encoders such that the number of bits parsed to each encoder is not the same for all encoders, in some situations. In these embodiments, the encoder parser <b>208</b> is configured so that the puncturing block at each FEC encoder <b>212</b> operates on an integer number of message blocks, where the message block length depends on the code rate. In one embodiment, the encoder parser <b>208</b> assigns N<sub>R </sub>bits to each encoder <b>212</b> in a round robin fashion, where N<sub>R </sub>can be more than one.</div>
+<div class="description-paragraph" id="p-0162" num="0161">In some embodiments, only MCS's are utilized that correspond to both N<sub>DBPS </sub>and N<sub>CBPS </sub>being integers. For instance, in one embodiment, MCS entries in an MCS table are excluded from consideration when they do not correspond to both N<sub>DBPS </sub>and N<sub>CBPS </sub>being integers. In another embodiment, one MCS table is utilized, and an index to the table is interpreted differently depending on the channel bandwidth so that certain MCS entries are excluded from consideration for certain channel bandwidths. In one embodiment, the number of symbols is determined according to Equation 28 and the number of padding bits is determined according to Equation 29. Referring to <figref idrefs="DRAWINGS">FIG. 3</figref>, in one embodiment, the encoder parser <b>208</b> is configured to handle situations in which</div>
+<div class="description-paragraph" id="p-0163" num="0162"> <maths id="MATH-US-00025" num="00025"> <math overflow="scroll"> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> </math> </maths> <br/>
+is not an integer, i.e., some encoders might receive fewer bits than others and thus the number of bits parsed to each encoder is not the same for all encoders. In these embodiments, fewer MCS's are excluded as compared to the constraint of Equation 27.
+</div>
+<div class="description-paragraph" id="p-0164" num="0163">In other embodiments, only MCS's are utilized that correspond to both 1) N<sub>ES </sub>is a multiple of N<sub>R</sub>; and 2) N<sub>CBPS </sub>is not a multiple of N<sub>R</sub>. For instance, in one embodiment, MCS entries in an MCS table are excluded from consideration when they do not correspond to both 1) N<sub>ES </sub>is a multiple of N<sub>R</sub>; and 2) N<sub>CBPS </sub>is not a multiple of N<sub>R</sub>. An example of an MCS that is excluded in one embodiment is 256 QAM, 3/4 coding rate, and with 3 binary convolutional coding encoders. This is just one example of the exclusion of a particular MCS. More generally, MCSs are excluded based particular suitable criteria related to padding, such as described above. In another embodiment, one MCS table is utilized, and an index to the table is interpreted differently depending on the channel bandwidth so that certain MCS entries are excluded from consideration for certain channel bandwidths. Thus, in these embodiments, a particular MCS is allowable for one or more first channel bandwidths, but is excluded for one or more second channel bandwidths. For example, a particular MCS is allowable for a 120 MHz channel bandwidth, but is excluded for 80 MHz and 160 MHz bandwidths. This is merely an example, and other MCSs are allowable with another set of one or more first channel bandwidths but excluded for another set of one or more second channel bandwidths.</div>
+<div class="description-paragraph" id="p-0165" num="0164">In one embodiment, packets transmitted according to the first communication protocol have an aggregated MAC protocol data unit (A-MPDU) frame format. <figref idrefs="DRAWINGS">FIG. 14</figref> is a diagram of an example A-MPDU <b>650</b>, according to an embodiment. The A-MPDU is generated so that it is a multiple of K bytes, where K is one or four, according to some embodiments. The MAC unit <b>18</b>, <b>28</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to generate the A-MPDU of <figref idrefs="DRAWINGS">FIG. 14</figref>, in one embodiment. Also, the MAC unit <b>18</b>, <b>28</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to add zero, one, or more K byte MAC delimiters, according to an embodiment. The PHY unit <b>20</b>, <b>29</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to add tail bits and then append padding bits (for example, of value zero) from the end of the last 32-bit boundary, according to an embodiment.</div>
+<div class="description-paragraph" id="p-0166" num="0165">In some embodiments, independent data corresponding to different stations are transmitted simultaneously, which is hereby referred to as multi-user transmissions. See, for example, U.S. patent application Ser. No. 12/758,603, filed on Apr. 12, 2010, and entitled “Physical Layer Frame Format for WLAN,” which is hereby incorporated by reference herein in its entirety; U.S. patent application Ser. No. 12/175,526, filed on Jul. 18, 2008, and entitled “Access Point with Simultaneous Downlink Transmission of Independent Data for Multiple Client Stations,” which is hereby incorporated by reference herein in its entirety; and U.S. patent application Ser. No. 12/175,501, filed on Jul. 18, 2008, and entitled “Wireless Network with Simultaneous Uplink Transmission of Independent Data from Multiple Client Stations,” which is hereby incorporated by reference herein in its entirety.</div>
+<div class="description-paragraph" id="p-0167" num="0166">In some embodiments having multi-user transmissions, each packet corresponding to a particular user is padded to a length corresponding to the longest packet in the simultaneous transmission. Thus, in these embodiments, the number of padding bits for a particular user is calculated based on a number of symbols in the longest packet in the simultaneous transmission. In an example scenario with K users, this is expressed as:
+<br/>
+<i>N</i> <sub>SYM</sub> <sup>max</sup>=max(<i>N</i> <sub>SYM</sub> <sup>user1</sup> <i>,N</i> <sub>SYM</sub> <sup>user2</sup> <i>, . . . ,N</i> <sub>SYM</sub> <sup>userK</sup>)  Equ. 30
+<br/>
+where N<sub>SYM</sub> <sup>userk </sup>is the number of symbols (including padding bits) required if only the packet corresponding to the k-th user were being transmitted. In an embodiment, the number of padding bits for the k-th user is then calculated based on:
+<br/>
+<i>p</i> <sup>userk</sup> <i>=N</i> <sub>SYM</sub> <sup>max </sup> <i>N</i> <sub>CBPS</sub> <sup>userk</sup> <i>R</i> <sup>userk</sup>−(8<i>L</i> <sup>userk</sup> <i>+N</i> <sub>service</sub> <i>+N</i> <sub>tail</sub> <i>N</i> <sub>ES</sub> <sup>userk</sup>)  Equ. 31
+<br/>
+In various embodiments, padding is performed in the PHY unit <b>20</b>, <b>29</b> and/or the MAC unit <b>18</b>, <b>28</b>. In an embodiment in which the packet length is specified in the PHY preamble, padding is performed in the PHY unit <b>20</b>, <b>29</b>.
+</div>
+<div class="description-paragraph" id="p-0168" num="0167">In one embodiment having multi-user transmissions, the number of symbols in the multi-user packet is chosen such that the following conditions are satisfied for all users participating in the transmission:
+<br/>
+(<i>N</i> <sub>SYM</sub> <sup>max</sup> <i>−N</i> <sub>SYM</sub> <sup>userk </sup>is a multiple of <i>m</i> <sub>STBC</sub> <sup>userk</sup>, and
+<br/>
+(<i>N</i> <sub>SYM</sub> <sup>max</sup> <i>−N</i> <sub>SYM</sub> <sup>userk</sup>)<i>N</i> <sub>CBPS</sub> <sup>userk </sup>is a multiple of <i>N</i> <sub>ES</sub> <sup>userk</sup> <i>D</i> <sub>R</sub> <sup>userk</sup>, and
+<br/>
+In a special case where N<sub>CBPS</sub> <sup>userk </sup>is a multiple of N<sub>ES</sub> <sup>userk </sup>D<sub>R</sub> <sup>userk</sup>∀k, the number of symbols in the multi-user packet is given by:
+</div>
+<div class="description-paragraph" id="p-0169" num="0168">
+<maths id="MATH-US-00026" num="00026">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>N</mi>
+<mi>SYM</mi>
+<mi>max</mi>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>⌈</mo>
+<mfrac>
+<mrow>
+<mi>max</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msubsup>
+<mi>N</mi>
+<mi>SYM</mi>
+<mrow>
+<mi>user</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+<mo>,</mo>
+<msubsup>
+<mi>N</mi>
+<mi>SYM</mi>
+<mrow>
+<mi>user</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>,</mo>
+<mi>…</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>,</mo>
+<msubsup>
+<mi>N</mi>
+<mi>SYM</mi>
+<mi>userK</mi>
+</msubsup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<msub>
+<mi>m</mi>
+<mi>STBC</mi>
+</msub>
+</mfrac>
+<mo>⌉</mo>
+</mrow>
+<mo>⁢</mo>
+<msub>
+<mi>m</mi>
+<mi>STBC</mi>
+</msub>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equ</mi>
+<mo>.</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>32</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0170" num="0169">where m<sub>STBC</sub>=1 if none of the k users utilize STBC, and m<sub>STBC</sub>=2 if at least one of the k users utilizes STBC. The number of padding bits for the k-th user is given by Equation 31.</div>
+<div class="description-paragraph" id="p-0171" num="0170">As discussed above, in some embodiments, bits at the end portion of a packet are encoded with a code rate different than a code rate utilized at the remaining portion of the packet. In one embodiment, bits at the end portion of the packet are encoded at a smallest rate, e.g., a 1/2 convolutional code (message block length of one). In some embodiments with multi-user transmissions, the number of symbols in the multi-user packet is given by Equation 32, and the number of padding bits for the k-th user is given by:</div>
+<div class="description-paragraph" id="p-0172" num="0171">
+<maths id="MATH-US-00027" num="00027">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>p</mi>
+<mi>userk</mi>
+</msup>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>⌊</mo>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>N</mi>
+<mi>SYM</mi>
+<mi>max</mi>
+</msubsup>
+<mo>⁢</mo>
+<msubsup>
+<mi>N</mi>
+<mi>CBPS</mi>
+<mi>userk</mi>
+</msubsup>
+</mrow>
+<mrow>
+<msubsup>
+<mi>N</mi>
+<mi>ES</mi>
+<mi>userk</mi>
+</msubsup>
+<mo>⁢</mo>
+<msubsup>
+<mi>D</mi>
+<mi>R</mi>
+<mi>userk</mi>
+</msubsup>
+</mrow>
+</mfrac>
+<mo>⌋</mo>
+</mrow>
+<mo>⁢</mo>
+<msubsup>
+<mi>N</mi>
+<mi>R</mi>
+<mi>userk</mi>
+</msubsup>
+<mo>⁢</mo>
+<msubsup>
+<mi>N</mi>
+<mi>ES</mi>
+<mi>userk</mi>
+</msubsup>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mi>mod</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>N</mi>
+<mi>SYM</mi>
+<mi>max</mi>
+</msubsup>
+<mo>⁢</mo>
+<msubsup>
+<mi>N</mi>
+<mi>CBPS</mi>
+<mi>userk</mi>
+</msubsup>
+</mrow>
+<msubsup>
+<mi>N</mi>
+<mi>ES</mi>
+<mi>userk</mi>
+</msubsup>
+</mfrac>
+<mo>,</mo>
+<msubsup>
+<mi>D</mi>
+<mi>R</mi>
+<mi>userk</mi>
+</msubsup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<msubsup>
+<mi>N</mi>
+<mi>ES</mi>
+<mi>userk</mi>
+</msubsup>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mn>8</mn>
+<mo>⁢</mo>
+<msup>
+<mi>L</mi>
+<mi>userk</mi>
+</msup>
+</mrow>
+<mo>+</mo>
+<msub>
+<mi>N</mi>
+<mi>service</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>tail</mi>
+</msub>
+<mo>⁢</mo>
+<msubsup>
+<mi>N</mi>
+<mi>ES</mi>
+<mi>userk</mi>
+</msubsup>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equ</mi>
+<mo>.</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>33</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0173" num="0172">As discussed above, in some embodiments, padding bits are added after encoding, such as when a preamble of a packet includes an indicator of the number of bits in the packet. In some embodiments with multi-user transmissions, the number of symbols in the multi-user packet is given by Equation 32, and the number of padding bits (after encoding) for the k-th user is given by:</div>
+<div class="description-paragraph" id="p-0174" num="0173"> <maths id="MATH-US-00028" num="00028"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msubsup> <mi>P</mi> <mi>after</mi> <mi>userk</mi> </msubsup> <mo>=</mo> <mrow> <mrow> <msubsup> <mi>N</mi> <mi>SYM</mi> <mi>max</mi> </msubsup> <mo>⁢</mo> <msubsup> <mi>N</mi> <mi>CBPS</mi> <mi>userk</mi> </msubsup> </mrow> <mo>-</mo> <mrow> <mrow> <mo>(</mo> <mrow> <mo>⌈</mo> <mfrac> <mrow> <mrow> <mn>8</mn> <mo>⁢</mo> <mi>L</mi> </mrow> <mo>+</mo> <msub> <mi>N</mi> <mi>service</mi> </msub> <mo>+</mo> <mrow> <msub> <mi>N</mi> <mi>tail</mi> </msub> <mo>⁢</mo> <msubsup> <mi>N</mi> <mi>ES</mi> <mi>userk</mi> </msubsup> </mrow> </mrow> <mrow> <msubsup> <mi>N</mi> <mi>ES</mi> <mi>userk</mi> </msubsup> <mo>⁢</mo> <msubsup> <mi>N</mi> <mi>R</mi> <mi>userk</mi> </msubsup> </mrow> </mfrac> <mo>⌉</mo> </mrow> <mo>)</mo> </mrow> <mo>⁢</mo> <msubsup> <mi>N</mi> <mi>ES</mi> <mi>userk</mi> </msubsup> <mo>⁢</mo> <msubsup> <mi>D</mi> <mi>R</mi> <mi>userk</mi> </msubsup> </mrow> </mrow> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>34</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+In these embodiments, the packet length of each user packet is specified separately in portions of the PHY preambles corresponding to the users (e.g., in the VHT-SIG fields corresponding to the users). The number of padding bits before encoding is provided by Equation 26, in an embodiment.
+</div>
+<div class="description-paragraph" id="p-0175" num="0174">In one embodiment, MAC padding is utilized for multi-user transmissions, and PHY padding is used for single-user transmissions.</div>
+<div class="description-paragraph" id="p-0176" num="0175">In some embodiments of padding techniques such as discussed above, some techniques may result in an excessive number of padding bits and/or dummy OFDM symbols for certain MCS and number of FEC encoders combinations. In some embodiments, such combinations are avoided by excluding certain MCS and number of FEC encoders combinations from use by the PHY unit <b>19</b>, <b>29</b>. For example, if a table of MCS and number of FEC encoders entries, certain entries are excluded, in an embodiment. In another embodiment, one MCS table is utilized, and an index to the table is interpreted differently depending on the channel bandwidth so that certain MCS entries are excluded from consideration for certain channel bandwidths. For instance, in one embodiment, only MCS's are considered for use in which</div>
+<div class="description-paragraph" id="p-0177" num="0176"> <maths id="MATH-US-00029" num="00029"> <math overflow="scroll"> <mrow> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>,</mo> </mrow> </math> </maths> <br/>
+N<sub>DBPS</sub>,
+</div>
+<div class="description-paragraph" id="p-0178" num="0177"> <maths id="MATH-US-00030" num="00030"> <math overflow="scroll"> <mrow> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <mrow> <msub> <mi>N</mi> <mi>P_OUT</mi> </msub> <mo>⁢</mo> <mi>R</mi> </mrow> </mfrac> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>and</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <mrow> <msub> <mi>N</mi> <mi>ES</mi> </msub> <mo>⁢</mo> <msub> <mi>N</mi> <mi>P_OUT</mi> </msub> </mrow> </mfrac> </mrow> </math> </maths> <br/>
+are integers, where N<sub>P</sub> <sub>_</sub> <sub>OUT </sub>is the number of bits output by the puncturing block of the FEC encoder. In other embodiments, other suitable conditions are utilized to exclude MCS and number of FEC encoders combinations to avoid excessive numbers of padding bits and/or dummy OFDM symbols.
+</div>
+<div class="description-paragraph" id="p-0179" num="0178">In some embodiments, the type of padding is different based on the bandwidth of the packet. For example, in embodiments that utilize an MCS table, the set of allowed MCS entries is dependent on the packet bandwidth. In other embodiments, some MCS's are excluded for multi-user packets, whereas the same MCS's are allowed, at least for some packet bandwidths, for single user packets. In some embodiments utilizing multi-user transmissions, different MCS's are allowed based on the number of users. In some embodiments that utilize an MCS table, the set of allowed MCS entries is dependent on the packet bandwidth, whether the transmission is part of a multi-user transmission, and/or the number of users in a multi-user transmission. In another embodiment, one MCS table is utilized, and an index to the table is interpreted differently depending on the channel bandwidth, whether the transmission is part of a multi-user transmission, and/or the number of users in a multi-user transmission, so that certain MCS entries are excluded from consideration for certain combinations of channel bandwidth, whether the transmission is part of a multi-user transmission, and/or the number of users in a multi-user transmission.</div>
+<div class="description-paragraph" id="p-0180" num="0179">In some embodiments and scenarios, the bits output by the puncturing block of an FEC encoder lie at an OFDM symbol boundary and overlap with the next OFDM symbol. This is different than in the IEEE 802.11n Standard, where N<sub>CBPS </sub>is always a multiple of N<sub>P</sub> <sub>_</sub> <sub>OUT</sub>. In these embodiments, the receiver PHY unit is configured to handle bits output by the puncturing block of an FEC encoder lie at an OFDM symbol boundary and overlap with the next OFDM symbol, which requires suitable buffering capability in some embodiments.</div>
+<div class="description-paragraph" id="p-0181" num="0180">As discussed above, in some embodiments, N<sub>tail </sub>is six. In some embodiments, N<sub>tail </sub>is a suitable value other than six. For example, in some embodiments, N<sub>tail </sub>is zero.</div>
+<div class="description-paragraph" id="p-0182" num="0181">In some embodiments, N<sub>service </sub>is the same as specified in the IEEE 802.11n Standard. In other embodiments, N<sub>service </sub>is a suitable value other than as specified in the IEEE 802.11n Standard.</div>
+<div class="description-paragraph" id="p-0183" num="0182">In some embodiments, the padding bits are placed before the tail bits, and padding bits and tail bits are scrambled together. In other embodiments, all or a portion of padding bits are placed after the tail bits. With multiple FEC encoders and when all or a portion of padding bits are placed after the tail bits, the encoder parser <b>208</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to distribute padding bits equally amongst the FEC encoders <b>212</b>, according to an embodiment.</div>
+<div class="description-paragraph" id="p-0184" num="0183">In one embodiment, for OFDM symbols with 234 tones per 80 MHz, and 450 Mbps data rate per encoder, the MCS (64-QAM, 3/4, N<sub>SS</sub>=3, N<sub>ES</sub>=2) is excluded for 80 MHz channels and 160 MHz channels, but is allowed for 120 MHz channels. This is just one example of the exclusion of a particular MCS. More generally, MCSs are excluded based particular suitable criteria related to padding, such as described above. In another embodiment, some 256-QAM rates are excluded for 120 MHz and 160 MHz channels.</div>
+<div class="description-paragraph" id="p-0185" num="0184">In one embodiment, an MCS combination is excluded for all 20/40/80/120/160 channel bandwidths as long as the MCS combination violates an exclusion rule for at least one of the 20/40/80/120/160 channel bandwidths. In another embodiment, a single MCS table is shared for all of or at least multiple ones of 20/40/80/120/160 channel bandwidths, but the MCS index is interpreted differently for different combinations of one or more of channel bandwidths, whether the transmission is part of a multi-user transmission, and/or the number of users in a multi-user transmission.</div>
+<div class="description-paragraph" id="p-0186" num="0185">In one embodiment, the MAC unit <b>18</b>, <b>28</b> computes N<sub>SYM </sub>and p (the number of padding bits). Then, the MAC unit <b>18</b>, <b>28</b> pads to k-bit boundary (e.g., k=8 or 32) of the overall p padding bits (e.g., pad bits set to zero or some other suitable value or set of values). The MAC unit <b>18</b>, <b>28</b> sends a signal to the PHY unit <b>19</b>, <b>29</b> (e.g., by a TxVector) that indicates the PHY unit <b>19</b>, <b>29</b> is to add remaining padding bits. In this embodiment, BCC tail bits are inserted after padding bits.</div>
+<div class="description-paragraph" id="p-0187" num="0186">Stream Parser</div>
+<div class="description-paragraph" id="p-0188" num="0187">Referring again to <figref idrefs="DRAWINGS">FIG. 3</figref>, the stream parser <b>216</b> divides encoded bit streams into individual spatial streams, which are then separately interleaved and mapped into constellation points, according to an embodiment. In one embodiment, the stream parser <b>216</b> operates in a manner similar to the stream parser specified in the IEEE 802.11n Standard. In one embodiment, the stream parser uses the output of each FEC encoder <b>212</b> in a round robin fashion using S bits from each FEC encoder <b>212</b> each cycle, where:</div>
+<div class="description-paragraph" id="p-0189" num="0188"> <maths id="MATH-US-00031" num="00031"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mi>S</mi> <mo>=</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>i</mi> <mo>=</mo> <mn>1</mn> </mrow> <msub> <mi>N</mi> <mi>SS</mi> </msub> </munderover> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mi>max</mi> <mo>⁢</mo> <mrow> <mo>{</mo> <mrow> <mn>1</mn> <mo>,</mo> <mfrac> <mrow> <msub> <mi>N</mi> <mi>BPSCS</mi> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>i</mi> <mi>SS</mi> </msub> <mo>)</mo> </mrow> </mrow> <mn>2</mn> </mfrac> </mrow> <mo>}</mo> </mrow> </mrow> </mrow> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>35</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where N<sub>BPSCS</sub>(i<sub>SS</sub>) is the number of coded bits per carrier for spatial stream i<sub>SS</sub>.
+</div>
+<div class="description-paragraph" id="p-0190" num="0189">Interleaver</div>
+<div class="description-paragraph" id="p-0191" num="0190">In an embodiment, each interleaver <b>220</b> divides the bits per symbol in each spatial stream into blocks of size N<sub>ROW</sub>×N<sub>COL</sub>. In one embodiment, bits in each block are entered into a matrix of size N<sub>ROW</sub>×N<sub>COL </sub>on a row by row basis and read out along the columns of the matrix. This operation is represented by:
+<br/>
+<i>i=N</i> <sub>ROW</sub>(<i>k </i>mod <i>N</i> <sub>COL</sub>)+floor(<i>k/N</i> <sub>COL</sub>)<i>k=</i>0,1, . . . ,<i>N</i> <sub>CBPSS</sub>(<i>i</i> <sub>SS</sub>)−1   Equ. 36
+<br/>
+where i and k represent the output and input bit indices, and N<sub>CBPSS</sub>(i<sub>SS</sub>) is the number of coded bits per symbol for the i-th spatial stream, as defined in the IEEE 802.11n Standard.
+</div>
+<div class="description-paragraph" id="p-0192" num="0191">In another embodiment, in order to map adjacent coded bits to less and more significant constellation bits, the interleaver operation is represented by:</div>
+<div class="description-paragraph" id="p-0193" num="0192"> <maths id="MATH-US-00032" num="00032"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mi>j</mi> <mo>=</mo> <mrow> <mrow> <mrow> <mi>s</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>i</mi> <mi>SS</mi> </msub> <mo>)</mo> </mrow> </mrow> <mo>⁢</mo> <mrow> <mi>floor</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>i</mi> <mo>/</mo> <mrow> <mi>s</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>i</mi> <mi>SS</mi> </msub> <mo>)</mo> </mrow> </mrow> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> <mo>+</mo> <mrow> <mrow> <mo>(</mo> <mrow> <mi>i</mi> <mo>+</mo> <mrow> <msub> <mi>N</mi> <mi>CBPSS</mi> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>i</mi> <mi>SS</mi> </msub> <mo>)</mo> </mrow> </mrow> <mo>-</mo> <mrow> <mi>floor</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mfrac> <msub> <mi>iN</mi> <mi>COL</mi> </msub> <mrow> <msub> <mi>N</mi> <mi>CBPSS</mi> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>i</mi> <mi>SS</mi> </msub> <mo>)</mo> </mrow> </mrow> </mfrac> <mo>)</mo> </mrow> </mrow> </mrow> <mo>)</mo> </mrow> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>mod</mi> <mo>⁢</mo> <mstyle> <mspace height="0.6ex" width="0.6em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mi>s</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>i</mi> <mi>SS</mi> </msub> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> </mrow> <mo>⁢</mo> <mstyle> <mtext>
+</mtext> </mstyle> <mo>⁢</mo> <mstyle> <mspace height="1.1ex" width="1.1em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mrow> <mi>i</mi> <mo>=</mo> <mn>0</mn> </mrow> <mo>,</mo> <mn>1</mn> <mo>,</mo> <mi>…</mi> <mo>⁢</mo> <mstyle> <mspace height="0.6ex" width="0.6em"> </mspace> </mstyle> <mo>,</mo> <mrow> <mrow> <msub> <mi>N</mi> <mi>CBPSS</mi> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>i</mi> <mi>SS</mi> </msub> <mo>)</mo> </mrow> </mrow> <mo>-</mo> <mn>1</mn> </mrow> </mrow> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>37</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where j and i represent the output and input bit indices.
+</div>
+<div class="description-paragraph" id="p-0194" num="0193">In yet another embodiment, in order to separate adjacent coded bits in the spatial domain, each stream is cyclically rotated via a frequency rotation parameter N<sub>ROT</sub>:</div>
+<div class="description-paragraph" id="p-0195" num="0194">
+<maths id="MATH-US-00033" num="00033">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>r</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>j</mi>
+<mo>-</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>i</mi>
+<mi>SS</mi>
+</msub>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>3</mn>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mn>3</mn>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>floor</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<msub>
+<mi>i</mi>
+<mi>SS</mi>
+</msub>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mn>3</mn>
+</mfrac>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>ROT</mi>
+</msub>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>BPSCS</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>i</mi>
+<mi>SS</mi>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>CBPSS</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>i</mi>
+<mi>SS</mi>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="1.1ex" width="1.1em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>j</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mo>,</mo>
+<mn>1</mn>
+<mo>,</mo>
+<mi>…</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>,</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>CBPSS</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>i</mi>
+<mi>SS</mi>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equ</mi>
+<mo>.</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>38</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0196" num="0195">In still another embodiment, in order to separate adjacent coded bits in the spatial domain, each stream is cyclically rotated via a frequency rotation parameter N<sub>ROT</sub>:
+<br/>
+<i>r</i>=(<i>j−f</i>(<i>i</i> <sub>SS</sub> <i>,N</i> <sub>SS</sub>)<i>N</i> <sub>ROT</sub> <i>N</i> <sub>BPSCS</sub>(<i>i</i> <sub>SS</sub>))mod <i>N</i> <sub>CBPSS</sub>(<i>i</i> <sub>SS</sub>)<i>j=</i>0,1, . . . ,<i>N</i> <sub>CBPSS</sub>(<i>i</i> <sub>SS</sub>)−1  Equ. 39
+<br/>
+where f(i<sub>SS</sub>,N<sub>SS</sub>) is a suitable function of both the spatial stream index and the total number of spatial streams.
+</div>
+<div class="description-paragraph" id="p-0197" num="0196">In one embodiment, f(i<sub>SS</sub>,N<sub>SS</sub>=8) is given by Table 1.</div>
+<div class="description-paragraph" id="p-0198" num="0197">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="2" nameend="1" namest="offset" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="2" nameend="1" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">i<sub>SS</sub> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="9" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">4</td>
+<td class="description-td">5</td>
+<td class="description-td">6</td>
+<td class="description-td">7</td>
+<td class="description-td">8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="9" nameend="8" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="9" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">f (i<sub>SS</sub>, N<sub>SS </sub>= 8)</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">6</td>
+<td class="description-td">1</td>
+<td class="description-td">4</td>
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">5</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="9" nameend="9" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0199" num="0198">In another embodiment, f(i<sub>SS</sub>,N<sub>SS</sub>=6) is given by Table 2.</div>
+<div class="description-paragraph" id="p-0200" num="0199">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">i<sub>SS</sub> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">4</td>
+<td class="description-td">5</td>
+<td class="description-td">6</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="7" nameend="6" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="8" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">f (i<sub>SS</sub>, N<sub>SS </sub>= 6)</td>
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">4</td>
+<td class="description-td">1</td>
+<td class="description-td">5</td>
+<td class="description-td">3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="8" nameend="7" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0201" num="0200">For a given tone mapping, interleaver parameters are the number of rows, N<sub>ROW</sub>, the number of columns, N<sub>COL</sub>, and the frequency rotation parameter, N<sub>ROT</sub>, according to an embodiment. In one embodiment, the values of N<sub>ROW </sub>and N<sub>COL </sub>satisfy the relationship:
+<br/>
+<i>N</i> <sub>ROW</sub> <i>N</i> <sub>COL</sub> <i>=N</i> <sub>VHT−Data</sub> <sup>Tone</sup> <i>N</i> <sub>BPSCS</sub>(<i>i</i>)  Equ. 40
+<br/>
+for any i, where N<sub>VHT−Data</sub> <sup>Tone </sup>is the number of data tones, and N<sub>BPSCS</sub>(i) is the number of coded bits per carrier for the i-th spatial stream. <figref idrefs="DRAWINGS">FIG. 15</figref> is a table providing some example values for the interleaver parameters, according to one embodiment.
+</div>
+<div class="description-paragraph" id="p-0202" num="0201">In some embodiments, N<sub>ROT </sub>varies depending on the number of streams. For example, in one embodiment:
+<br/>
+<i>N</i> <sub>ROT</sub> <i>=g</i>(<i>N</i> <sub>SS</sub>)  Equ. 41
+<br/>
+where g (N<sub>SS</sub>) is a function of the number of spatial streams. In one embodiment:
+</div>
+<div class="description-paragraph" id="p-0203" num="0202"> <maths id="MATH-US-00034" num="00034"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msub> <mi>N</mi> <mi>ROT</mi> </msub> <mo>=</mo> <mfrac> <msubsup> <mi>N</mi> <mrow> <mi>VHT</mi> <mo>-</mo> <mi>Data</mi> </mrow> <mi>Tone</mi> </msubsup> <msub> <mi>N</mi> <mi>SS</mi> </msub> </mfrac> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>42</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+In another embodiment:
+</div>
+<div class="description-paragraph" id="p-0204" num="0203"> <maths id="MATH-US-00035" num="00035"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msub> <mi>N</mi> <mi>ROT</mi> </msub> <mo>=</mo> <mrow> <mfrac> <msubsup> <mi>N</mi> <mrow> <mi>VHT</mi> <mo>-</mo> <mi>Data</mi> </mrow> <mi>Tone</mi> </msubsup> <msub> <mi>N</mi> <mi>SS</mi> </msub> </mfrac> <mo>+</mo> <mi>c</mi> </mrow> </mrow> </mtd> <mtd> <mrow> <mi>Equ</mi> <mo>.</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mn>43</mn> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where c is a suitable integer constant.
+</div>
+<div class="description-paragraph" id="p-0205" num="0204">Examples of N<sub>ROT </sub>values for five to eight spatial streams, according to an embodiment, is provided in the table of <figref idrefs="DRAWINGS">FIG. 16</figref>.</div>
+<div class="description-paragraph" id="p-0206" num="0205">In the IEEE 802.11n Standard, N<sub>COL </sub>is the same for all modulation schemes (i.e., independent of constellation size) while N<sub>ROW </sub>is a linear function of constellation size. In one embodiment, both N<sub>COL </sub>and N<sub>ROW </sub>vary as the modulation scheme varies. In other words, N<sub>COL </sub>will have at least two different values depending on the particular modulation scheme, and N<sub>ROW </sub>will have at least two different values depending on the particular modulation scheme. For example, in one embodiment, both N<sub>COL </sub>and N<sub>ROW </sub>vary as the constellation size varies. In other words, N<sub>COL </sub>will have at least two different values depending on the particular constellation size, and N<sub>ROW </sub>will have at least two different values depending on the particular constellation size. In one embodiment, N<sub>COL </sub>and N<sub>ROW </sub>are defined as:
+<br/>
+<i>N</i> <sub>ROW</sub> <i>=f</i> <sub>1</sub>(<i>N</i> <sub>BPSCS</sub>(<i>i</i>))  Equ. 44
+<br/>
+<i>N</i> <sub>COL</sub> <i>=f</i> <sub>2</sub>(<i>N</i> <sub>BPSCS</sub>(<i>i</i>))  Equ. 45
+<br/>
+where f<sub>1 </sub>and f<sub>2 </sub>are mappings defined from N<sub>BPSCS</sub>(i) to arbitrary numbers such that:
+<br/>
+<i>N</i> <sub>COL</sub> <i>=N</i> <sub>VHT−Data</sub> <sup>Tone</sup> <i>N</i> <sub>BPSCS</sub>(<i>i</i>)  Equ. 46
+</div>
+<div class="description-paragraph" id="p-0207" num="0206">In one embodiment, f<sub>1 </sub>and f<sub>2 </sub>are non-linear functions. An example for eight pilot tones in an 80 MHz channel (assuming 234 data tones), according to an embodiment, is provided in Table 3.</div>
+<div class="description-paragraph" id="p-0208" num="0207">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">N<sub>BPSCS</sub>(i)</td>
+<td class="description-td">N<sub>ROW</sub>, N<sub>COL</sub> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1 (BPSK)</td>
+<td class="description-td">(18, 13)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2 (QPSK)</td>
+<td class="description-td">(36, 13)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">4 (16-QAM)</td>
+<td class="description-td">(36, 26)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">6 (64-QAM)</td>
+<td class="description-td">(54, 26)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">8 (256-QAM)</td>
+<td class="description-td">(72, 26)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0209" num="0208">The example of Table 3 illustrates that N<sub>ROW </sub>sometimes is the same for different size constellations (e.g., QPSK and 16-QAM). In particular, N<sub>ROW </sub>has four different values for five different constellation sizes. The example of Table 3 also illustrates that N<sub>COL </sub>sometimes varies for different size constellations (e.g., BPSK/QPSK versus 16-QAM/64-QAM/256-QAM). In particular, N<sub>COL </sub>has two different values for five different constellation sizes. In one specific example, in an 80 MHz channel (assuming 234 data tones), N<sub>ROW</sub>, N<sub>COL </sub>is (9*N<sub>BPSCS</sub>(i<sub>SS</sub>), 26). In another example, an 80 MHz channel (assuming 234 data tones), N<sub>ROW</sub>, N<sub>COL </sub>is (6*N<sub>BPSCS</sub>(i<sub>SS</sub>), 39).</div>
+<div class="description-paragraph" id="p-0210" num="0209"> <figref idrefs="DRAWINGS">FIG. 17</figref> is a flow diagram of an example method <b>750</b> for generating a first OFDM symbol for transmission via a communication channel having a first bandwidth, according to an embodiment. The PHY unit <b>20</b>, <b>29</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to implement the method <b>750</b>, in one embodiment. Similarly, the PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to implement the method <b>750</b>, in another embodiment. In other embodiments, another suitable PHY unit is configured to implement the method <b>750</b>.</div>
+<div class="description-paragraph" id="p-0211" num="0210">The method <b>750</b> of <figref idrefs="DRAWINGS">FIG. 17</figref> will be described with respect to <figref idrefs="DRAWINGS">FIGS. 5B, 7A, and 7B</figref> for ease of explanation. OFDM symbols generated according to the method <b>750</b>, however, need not have the example OFDM symbol structure of <figref idrefs="DRAWINGS">FIG. 5B, 7A</figref>, or <b>7</b>B.</div>
+<div class="description-paragraph" id="p-0212" num="0211">At block <b>754</b>, a first frequency portion of the first OFDM symbol is generated, where the first frequency portion of the first OFDM symbol has a structure corresponding to a structure of a second OFDM symbol having a bandwidth equal to a bandwidth of the first frequency portion of the first OFDM symbol. For example, the first frequency portion of the first OFDM symbol has guard tones, null tones, and direct current (DC) tones that correspond to guard tones and DC tones of the second OFDM symbol, in an embodiment. Referring to <figref idrefs="DRAWINGS">FIGS. 5B and 7A</figref>, the OFDM symbol <b>330</b> has a bandwidth of 40 MHz and is for transmission in a 40 MHz wide communication channel, whereas the OFDM symbol <b>390</b> has a bandwidth of 80 MHz and is for transmission in an 80 MHz wide communication channel. The lower half (in frequency) of the OFDM symbol <b>390</b> has a structure that corresponds to the structure of the OFDM symbol <b>330</b>. For example, the lower (in frequency) guard tones of the OFDM symbol <b>390</b> correspond to the lower (in frequency) guard tones of the OFDM symbol <b>330</b>. The guard tones at indexes −5 through −1 of the OFDM symbol <b>390</b> correspond to the upper (in frequency) guard tones of the OFDM symbol <b>330</b>. The three null tones of the lower (in frequency) half of the OFDM symbol <b>390</b> correspond to the DC tones of the OFDM symbol <b>330</b>.</div>
+<div class="description-paragraph" id="p-0213" num="0212">Referring now to <figref idrefs="DRAWINGS">FIGS. 5B and 7B</figref>, the lower 40 MHz sideband of the OFDM symbol <b>410</b> has a structure that corresponds to the structure of the OFDM symbol <b>330</b> in a manner similar to that described above with respect to <figref idrefs="DRAWINGS">FIGS. 5B and 7A</figref>.</div>
+<div class="description-paragraph" id="p-0214" num="0213">At block <b>758</b>, a second frequency portion of the first OFDM symbol is generated, where the second frequency portion of the first OFDM symbol has a structure corresponding to the structure of the second OFDM symbol. For example, the second frequency portion of the first OFDM symbol has guard tones, null tones, and direct current (DC) tones that correspond to guard tones and DC tones of the second OFDM symbol. Referring to <figref idrefs="DRAWINGS">FIGS. 5B and 7A</figref>, the OFDM symbol <b>330</b> has a bandwidth of 40 MHz and is for transmission in a 40 MHz wide communication channel, whereas the OFDM symbol <b>390</b> has a bandwidth of 80 MHz and is for transmission in an 80 MHz wide communication channel. The upper half (in frequency) of the OFDM symbol <b>390</b> has a structure that corresponds to the structure of the OFDM symbol <b>330</b>. For example, the upper (in frequency) guard tones of the OFDM symbol <b>390</b> correspond to the upper (in frequency) guard tones of the OFDM symbol <b>330</b>. The guard tones at indexes 0 through 5 of the OFDM symbol <b>390</b> correspond to the lower (in frequency) guard tones of the OFDM symbol <b>330</b>. The three null tones of the upper (in frequency) half of the OFDM symbol <b>390</b> correspond to the DC tones of the OFDM symbol <b>330</b>.</div>
+<div class="description-paragraph" id="p-0215" num="0214">Referring now to <figref idrefs="DRAWINGS">FIGS. 5B and 7B</figref>, the upper 40 MHz sideband of the OFDM symbol <b>410</b> has a structure that corresponds to the structure of the OFDM symbol <b>330</b> in a manner similar to that described above with respect to <figref idrefs="DRAWINGS">FIGS. 5B and 7A</figref>.</div>
+<div class="description-paragraph" id="p-0216" num="0215">As another example, a 160 MHz bandwidth OFDM symbol can be generated according to an embodiment of the method <b>750</b> based on the structure of an 80 MHz OFDM symbol such as any one of the example OFDM symbols of <figref idrefs="DRAWINGS">FIGS. 6A, 6B, and 7A</figref>.</div>
+<div class="description-paragraph" id="p-0217" num="0216">In another embodiment, the method <b>750</b> further includes generating a third frequency portion of the first OFDM symbol, where the third frequency portion of the first OFDM symbol has a structure corresponding to the structure of the second OFDM symbol. For example, a 120 MHz bandwidth OFDM symbol can be generated, according to an embodiment of the method <b>750</b>, having three portions based on the structure of a 40 MHz OFDM symbol such as any either of the example OFDM symbols of <figref idrefs="DRAWINGS">FIGS. 5A and 5B</figref>.</div>
+<div class="description-paragraph" id="p-0218" num="0217">In other embodiments, the method <b>750</b> further includes generating at least a fourth frequency portion of the first OFDM symbol in a manner similar to those discussed above.</div>
+<div class="description-paragraph" id="p-0219" num="0218">In some embodiments, the method <b>750</b> is utilized for generating non-contiguous (in frequency) OFDM symbols, whereas a different method is utilized for generating contiguous (in frequency) OFDM symbols. In these embodiments, an upper portion and a lower portion of a contiguous OFDM symbol need not have a structure that corresponds to another OFDM symbol having the same bandwidth as the portion.</div>
+<div class="description-paragraph" id="p-0220" num="0219"> <figref idrefs="DRAWINGS">FIG. 18</figref> is a flow diagram of an example method <b>800</b> for generating a PHY data unit for transmission via a communication channel, according to an embodiment. The PHY unit <b>20</b>, <b>29</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to implement the method <b>800</b> at least partially, in one embodiment. Similarly, the PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to implement the method <b>800</b> at least partially, in another embodiment. In other embodiments, another suitable PHY unit is configured to implement the method <b>800</b> at last partially.</div>
+<div class="description-paragraph" id="p-0221" num="0220">At block <b>804</b>, 1) a number of FEC encoders, 2) an MCS, and 3) a number of spatial streams to be utilized in transmitting the PHY data unit are determined. At block <b>808</b>, a number of padding bits is determined so that, after adding the padding bits, after FEC encoding, and after modulation, encoded information bits and padding bits fit within an integer number of OFDM symbols. Determining the number of padding bits includes determining the integer number of OFDM symbols based on LCM (N<sub>R</sub>,N<sub>Q</sub>). For example, the number of OFDM symbols is determined according to one or more of Equations 16, 19, 21, and 22, according to some embodiments, or another suitable equation. After determining the number of OFDM symbols, the number of padding bits is determined according Equation 17, in an embodiment, or another suitable equation.</div>
+<div class="description-paragraph" id="p-0222" num="0221">At block <b>812</b>, the padding bits are added to the information bits. Some or all of the padding bits are added to the information bits before encoder parsing, according to some embodiments. For instance, in one embodiment, some or all of the padding bits are added to the information bits by a padding system of the MAC unit <b>18</b>, <b>28</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>). In one embodiment, some or all of the padding bits are added to the information bits after encoder parsing. The block <b>812</b> is implemented at least partly by the padding system <b>500</b> (<figref idrefs="DRAWINGS">FIG. 11</figref>) or the padding system <b>550</b> (<figref idrefs="DRAWINGS">FIG. 12</figref>), in some embodiments, or by another suitable padding system.</div>
+<div class="description-paragraph" id="p-0223" num="0222">At block <b>816</b>, the information bits are encoded by the number of FEC encoders determined at block <b>804</b> and according to the MCS determined at block <b>804</b>. Block <b>816</b> includes parsing the information bits to the FEC encoders. In some embodiments, a transmitter includes four or more FEC encoders, and a number of the FEC encoders to be utilized is determined based on channel conditions, capabilities of a receiver, etc., for example. In one embodiment, block <b>816</b> is implemented by the encoder parser <b>208</b> and one or more of the FEC encoders <b>212</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0224" num="0223">At block <b>820</b>, the encoded information bits are modulated according to the MCS determined at block <b>804</b>. Block <b>820</b> is implemented by one or more of the constellation mappers <b>224</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>), according to an embodiment.</div>
+<div class="description-paragraph" id="p-0225" num="0224">At block <b>824</b>, one or more OFDM symbols are formed. In one embodiment, block <b>824</b> is implemented at least partially by one or more of the IDFT units <b>240</b> and one or more of the GI and window units <b>244</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0226" num="0225"> <figref idrefs="DRAWINGS">FIG. 19</figref> is a flow diagram of another example method <b>850</b> for generating a PHY data unit for transmission via a communication channel, according to another embodiment. The PHY unit <b>20</b>, <b>29</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to implement the method <b>850</b> at least partially, in one embodiment. Similarly, the PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to implement the method <b>850</b> at least partially, in another embodiment. In other embodiments, another suitable PHY unit is configured to implement the method <b>850</b> at last partially.</div>
+<div class="description-paragraph" id="p-0227" num="0226">At block <b>854</b>, padding bits are added to information bits to generate payload information. Some or all of the padding bits are added to the information bits before encoder parsing, according to some embodiments. For instance, in one embodiment, some or all of the padding bits are added to the information bits by a padding system of the MAC unit <b>18</b>, <b>28</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>). In one embodiment, some or all of the padding bits are added to the information bits after encoder parsing. The block <b>854</b> is implemented at least partly by the padding system <b>500</b> (<figref idrefs="DRAWINGS">FIG. 11</figref>) or the padding system <b>550</b> (<figref idrefs="DRAWINGS">FIG. 12</figref>), in some embodiments, or by another suitable padding system.</div>
+<div class="description-paragraph" id="p-0228" num="0227">At block <b>858</b>, a first portion of the payload information is encoded by one or more FEC encoders according to first code rate. Block <b>858</b> includes parsing payload information to the one or more FEC encoders. In one embodiment, block <b>858</b> is implemented by the encoder parser <b>208</b> and one or more of the FEC encoders <b>212</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0229" num="0228">At block <b>862</b>, a second portion of the payload information is encoded by one or more FEC encoders according to second code rate. In one embodiment, the second code rate is a lowest code rate of the one or more FEC encoders. In one embodiment, the second code rate is a lower code as compared to the first code rate. Block <b>862</b> includes parsing payload information to the one or more FEC encoders. In one embodiment, block <b>862</b> is implemented by the encoder parser <b>208</b> and one or more of the FEC encoders <b>212</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0230" num="0229">At block <b>866</b>, the encoded payload information is modulated. Block <b>866</b> is implemented by one or more of the constellation mappers <b>224</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>), according to an embodiment.</div>
+<div class="description-paragraph" id="p-0231" num="0230">At block <b>870</b>, one or more OFDM symbols are formed. In one embodiment, block <b>870</b> is implemented at least partially by one or more of the IDFT units <b>240</b> and one or more of the GI and window units <b>244</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0232" num="0231"> <figref idrefs="DRAWINGS">FIG. 20</figref> is a flow diagram of another example method <b>900</b> for generating a PHY data unit for transmission via a communication channel, according to another embodiment. The PHY unit <b>20</b>, <b>29</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to implement the method <b>900</b> at least partially, in one embodiment. Similarly, the PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to implement the method <b>900</b> at least partially, in another embodiment. In other embodiments, another suitable PHY unit is configured to implement the method <b>900</b> at last partially.</div>
+<div class="description-paragraph" id="p-0233" num="0232">At block <b>904</b>, zero or more first padding bits are added to information bits. Some or all of the first padding bits are added to the information bits before encoder parsing, according to some embodiments. For instance, in one embodiment, some or all of the first padding bits are added to the information bits by a padding system of the MAC unit <b>18</b>, <b>28</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>). In one embodiment, some or all of the first padding bits are added to the information bits after encoder parsing. The block <b>904</b> is implemented at least partly by the padding system <b>600</b> (<figref idrefs="DRAWINGS">FIG. 13</figref>), in one embodiment, or by another suitable padding system. For example, block <b>904</b> is implemented by the padding unit <b>604</b>, in one embodiment.</div>
+<div class="description-paragraph" id="p-0234" num="0233">At block <b>908</b>, the information bits and the zero or more first padding bits are encoded by one or more convolutional encoders. Block <b>908</b> includes parsing the information bit and the zero or more first padding bits to the one or more FEC encoders. In one embodiment, block <b>908</b> is implemented by the encoder parser <b>208</b> and one or more of the FEC encoders <b>212</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0235" num="0234">At block <b>912</b>, second padding bits are added to the encoded information and first padding bits. Block <b>912</b> is implemented at least partly by the padding system <b>600</b> (<figref idrefs="DRAWINGS">FIG. 13</figref>), in one embodiment, or by another suitable padding system. For example, block <b>912</b> is implemented by the padding unit <b>612</b>, in one embodiment.</div>
+<div class="description-paragraph" id="p-0236" num="0235">At block <b>916</b>, the encoded information bits and first padding bits and the second padding bits are modulated. Block <b>916</b> is implemented by one or more of the constellation mappers <b>224</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>), according to an embodiment.</div>
+<div class="description-paragraph" id="p-0237" num="0236">At block <b>920</b>, one or more OFDM symbols are formed. In one embodiment, block <b>920</b> is implemented at least partially by one or more of the IDFT units <b>240</b> and one or more of the GI and window units <b>244</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0238" num="0237"> <figref idrefs="DRAWINGS">FIG. 21</figref> is a flow diagram of another example method <b>950</b> for generating a PHY data unit for transmission via a communication channel, according to another embodiment. The PHY unit <b>20</b>, <b>29</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to implement the method <b>950</b> at least partially, in one embodiment. Similarly, the PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to implement the method <b>950</b> at least partially, in another embodiment. In other embodiments, another suitable PHY unit is configured to implement the method <b>950</b> at last partially.</div>
+<div class="description-paragraph" id="p-0239" num="0238">At block <b>954</b>, a first set of MCS's and a second set of MCS's are provided, where the first set and the second set both correspond to a given number of spatial streams and a given number of encoders, and where the first set corresponds to a first channel bandwidth and the second set corresponds to a second channel bandwidth. The first set is different than the second set.</div>
+<div class="description-paragraph" id="p-0240" num="0239">In one embodiment, the first set of MCS's and the second set of MCS's are provided in separate MCS tables corresponding to different channel bandwidths. In another embodiment, the first set of MCS's and the second set of MCS's are provided in a single MCS table, and an index to the single MCS table is interpreted differently depending on the channel bandwidth to be used to transmit the PHY data unit. For example, the index to the single MCS table is interpreted to select only from the first set of MCS's when the first channel bandwidth is to be used, whereas the index to the single MCS table is interpreted to select only from the second set of MCS's when the second channel bandwidth is to be used.</div>
+<div class="description-paragraph" id="p-0241" num="0240">In one embodiment, the first set of MCS's excludes MCS's that will result in excessive numbers of padding bits and/or dummy OFDM symbols when the first channel bandwidth is to be used, and the second set of MCS's excludes MCS's that will result in excessive numbers of padding bits and/or dummy OFDM symbols when the second channel bandwidth is to be used. In another embodiment, the first set of MCS's excludes MCS's that result in one or more padding bit-related constraints failing to be met when the first channel bandwidth is to be used, and the second set of MCS's excludes MCS's that do not satisfy the one or more padding bit-related constraints when the second channel bandwidth is to be used.</div>
+<div class="description-paragraph" id="p-0242" num="0241">At block <b>958</b>, an MCS is selected from the first set when the PHY data unit is to be transmitted in a channel having the first channel bandwidth. At block <b>962</b>, an MCS is selected from the second set when the PHY data unit is to be transmitted in a channel having the second channel bandwidth.</div>
+<div class="description-paragraph" id="p-0243" num="0242">At block <b>966</b>, a payload is encoded according to the selected MCS. Block <b>966</b> includes parsing the payload to one or more FEC encoders. In one embodiment, block <b>966</b> is implemented by the encoder parser <b>208</b> and one or more of the FEC encoders <b>212</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0244" num="0243">At block <b>970</b>, the encoded payload is modulated. Block <b>970</b> is implemented by one or more of the constellation mappers <b>224</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>), according to an embodiment.</div>
+<div class="description-paragraph" id="p-0245" num="0244">At block <b>974</b>, one or more OFDM symbols are formed. In one embodiment, block <b>974</b> is implemented at least partially by one or more of the IDFT units <b>240</b> and one or more of the GI and window units <b>244</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0246" num="0245"> <figref idrefs="DRAWINGS">FIG. 22</figref> is a flow diagram of another example method <b>1000</b> for generating a PHY data unit for transmission via a communication channel, according to another embodiment. The PHY unit <b>20</b>, <b>29</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to implement the method <b>1000</b> at least partially, in one embodiment. Similarly, the PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to implement the method <b>950</b> at least partially, in another embodiment. In other embodiments, another suitable PHY unit is configured to implement the method <b>950</b> at last partially.</div>
+<div class="description-paragraph" id="p-0247" num="0246">At block <b>1004</b>, a first set of MCS's that correspond to a first channel bandwidth is provided. At block <b>1008</b>, a second set of MCS's that correspond to a second channel bandwidth is provided, wherein providing the second set of MCS's includes excluding MCS's from the first set of MCS's that do not satisfy a constraint related to padding. In one embodiment, the first set of MCS's and the second set of MCS's each exclude MCS's that do not satisfy the constraint, but one or more MCS's in the first set satisfy the constraint with respect to the first channel bandwidth, but these one or more MCS's do not satisfy the constraint with respect to the second channel bandwidth. In one embodiment, the constraint corresponds to Equ. 27 and/or the constraint is that</div>
+<div class="description-paragraph" id="p-0248" num="0247"> <maths id="MATH-US-00036" num="00036"> <math overflow="scroll"> <mrow> <mfrac> <msub> <mi>N</mi> <mi>DBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>and</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mfrac> <msub> <mi>N</mi> <mi>CBPS</mi> </msub> <msub> <mi>N</mi> <mi>ES</mi> </msub> </mfrac> </mrow> </math> </maths> <br/>
+are integers. In another embodiment, the constraint is that both N<sub>DBPS </sub>and N<sub>CBPS </sub>are integers.
+</div>
+<div class="description-paragraph" id="p-0249" num="0248">In one embodiment, the first set of MCS's and the second set of MCS's are provided in separate MCS tables corresponding to the different channel bandwidths. In another embodiment, the first set of MCS's and the second set of MCS's are provided in a single MCS table, and an index to the single MCS table is interpreted differently depending on the channel bandwidth to be used to transmit the PHY data unit. For example, the index to the single MCS table is interpreted to select only from the first set of MCS's when the first channel bandwidth is to be used, whereas the index to the single MCS table is interpreted to select only from the second set of MCS's when the second channel bandwidth is to be used.</div>
+<div class="description-paragraph" id="p-0250" num="0249">In one embodiment, the first set of MCS's excludes MCS's that will result in excessive numbers of padding bits and/or dummy OFDM symbols when the first channel bandwidth is to be used, and the second set of MCS's excludes MCS's that will result in excessive numbers of padding bits and/or dummy OFDM symbols when the second channel bandwidth is to be used. In another embodiment, the first set of MCS's excludes MCS's that result in one or more padding bit-related constraints failing to be met when the first channel bandwidth is to be used, and the second set of MCS's excludes MCS's that do not satisfy the one or more padding bit-related constraints when the second channel bandwidth is to be used.</div>
+<div class="description-paragraph" id="p-0251" num="0250">At block <b>1012</b>, an MCS is selected from the first set when the PHY data unit is to be transmitted in a channel having the first channel bandwidth. At block <b>1016</b>, an MCS is selected from the second set when the PHY data unit is to be transmitted in a channel having the second channel bandwidth.</div>
+<div class="description-paragraph" id="p-0252" num="0251">At block <b>1018</b>, padding bits are added to information bits to generate payload information.</div>
+<div class="description-paragraph" id="p-0253" num="0252">At block <b>1020</b>, the payload information is encoded according to the selected MCS. Block <b>1020</b> includes parsing the payload to one or more FEC encoders. In one embodiment, block <b>1020</b> is implemented by the encoder parser <b>208</b> and one or more of the FEC encoders <b>212</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>). In some embodiments, padding bits are added after encoding.</div>
+<div class="description-paragraph" id="p-0254" num="0253">At block <b>1024</b>, the encoded payload is modulated. Block <b>1024</b> is implemented by one or more of the constellation mappers <b>224</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>), according to an embodiment.</div>
+<div class="description-paragraph" id="p-0255" num="0254">At block <b>1028</b>, one or more OFDM symbols are formed. In one embodiment, block <b>1028</b> is implemented at least partially by one or more of the IDFT units <b>240</b> and one or more of the GI and window units <b>244</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0256" num="0255"> <figref idrefs="DRAWINGS">FIG. 23</figref> is a flow diagram of another example method <b>1050</b> for generating a PHY data unit for transmission via a communication channel, according to another embodiment. The PHY unit <b>20</b>, <b>29</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) is configured to implement the method <b>1050</b> at least partially, in one embodiment. Similarly, the PHY unit <b>200</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) is configured to implement the method <b>1050</b> at least partially, in another embodiment. In other embodiments, another suitable PHY unit is configured to implement the method <b>1050</b> at last partially.</div>
+<div class="description-paragraph" id="p-0257" num="0256">At block <b>1054</b>, a modulation scheme is selected from a set of possible modulation schemed that can be utilized.</div>
+<div class="description-paragraph" id="p-0258" num="0257">At block <b>1058</b>, payload information is encoded. Block <b>1058</b> includes parsing the payload information to one or more FEC encoders. In one embodiment, block <b>1058</b> is implemented by the encoder parser <b>208</b> and one or more of the FEC encoders <b>212</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0259" num="0258">At block <b>1062</b>, the interleaving parameter N<sub>COL </sub>is selected from a plurality of different values. N<sub>COL </sub>is selected using or based on the selected modulation scheme. For example, for a given channel bandwidth, N<sub>COL </sub>may be different for different constellation sizes, according to an embodiment.</div>
+<div class="description-paragraph" id="p-0260" num="0259">At block <b>1066</b>, the encoded payload information is interleaved, which includes entering encoded data into N<sub>ROW </sub>and reading the encoded data out in N<sub>COL </sub>columns. Block <b>1066</b> is implemented by one or more of the interleavers <b>220</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>), according to an embodiment.</div>
+<div class="description-paragraph" id="p-0261" num="0260">At block <b>1070</b>, the encoded and interleaved payload information is modulated according to the selected modulation scheme. Block <b>1070</b> is implemented by one or more of the constellation mappers <b>224</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>), according to an embodiment.</div>
+<div class="description-paragraph" id="p-0262" num="0261">At block <b>1074</b>, one or more OFDM symbols are formed. In one embodiment, block <b>1024</b> is implemented at least partially by one or more of the IDFT units <b>240</b> and one or more of the GI and window units <b>244</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+<div class="description-paragraph" id="p-0263" num="0262">At least some of the various blocks, operations, and techniques described above may be implemented utilizing hardware, a processor executing firmware instructions, a processor executing software instructions, or any combination thereof. When implemented utilizing a processor executing software or firmware instructions, the software or firmware instructions may be stored in any computer readable memory such as on a magnetic disk, an optical disk, or other storage medium, in a RAM or ROM or flash memory, processor, hard disk drive, optical disk drive, tape drive, etc. Likewise, the software or firmware instructions may be delivered to a user or a system via any known or desired delivery method including, for example, on a computer readable disk or other transportable computer storage mechanism or via communication media. Communication media typically embodies computer readable instructions, data structures, program modules or other data in a modulated data signal such as a carrier wave or other transport mechanism. The term “modulated data signal” means a signal that has one or more of its characteristics set or changed in such a manner as to encode information in the signal. By way of example, and not limitation, communication media includes wired media such as a wired network or direct-wired connection, and wireless media such as acoustic, radio frequency, infrared and other wireless media. Thus, the software or firmware instructions may be delivered to a user or a system via a communication channel such as a telephone line, a DSL line, a cable television line, a fiber optics line, a wireless communication channel, the Internet, etc. (which are viewed as being the same as or interchangeable with providing such software via a transportable storage medium). The software or firmware instructions may include machine readable instructions that, when executed by the processor, cause the processor to perform various acts.</div>
+<div class="description-paragraph" id="p-0264" num="0263">When implemented in hardware, the hardware may comprise one or more of discrete components, an integrated circuit, an application-specific integrated circuit (ASIC), etc.</div>
+<div class="description-paragraph" id="p-0265" num="0264">While the present invention has been described with reference to specific examples, which are intended to be illustrative only and not to be limiting of the invention, changes, additions and/or deletions may be made to the disclosed embodiments without departing from the scope of the invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM131658220">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method for generating a physical layer (PHY) data unit for transmission via a communication channel, the method comprising:
+<div class="claim-text">selecting, at a communication device, a modulation coding scheme (MCS) i) from a first set of MCSs when the PHY data unit is to be transmitted using a channel having a first channel bandwidth, and ii) from a second set of MCSs when the PHY data unit is to be transmitted using a channel having a second channel bandwidth, wherein
+<div class="claim-text">the first set of MCSs corresponds to i) a number of spatial streams, and ii) the first channel bandwidth,</div>
+<div class="claim-text">the second set of MCSs corresponds to i) the number of spatial streams, and ii) the second channel bandwidth,</div>
+<div class="claim-text">the first set of MCSs is different than the second set of MCSs, and</div>
+<div class="claim-text">the second set of MCSs excludes one or more MCSs in the first set of MCSs that will result in a padding-related constraint not being met when the second channel bandwidth is to be used;</div>
+</div>
+<div class="claim-text">encoding, at the communication device, information bits using one or more encoders and according to the selected MCS;</div>
+<div class="claim-text">parsing, at the communication device, the encoded information bits into the number of spatial streams;</div>
+<div class="claim-text">modulating, at the communication device, the encoded information bits according to the selected MCS; and</div>
+<div class="claim-text">generating, at the communication device, a plurality of Orthogonal Frequency Division Multiplexing (OFDM) symbols based on the modulated encoded information bits.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein:
+<div class="claim-text">the number of spatial streams is three;</div>
+<div class="claim-text">the second channel bandwidth is 80 MHz;</div>
+<div class="claim-text">the first set of MCSs includes an MCS corresponding to 64-QAM modulation and rate 3/4 encoding; and</div>
+<div class="claim-text">the second set of MCSs excludes the MCS corresponding to 64-QAM modulation and rate 3/4 encoding.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the first set of MCSs excludes one or more MCSs in the second set of MCSs that will result in the padding-related constraint not being met when the first channel bandwidth is to be used.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein:
+<div class="claim-text">the number of spatial streams is three;</div>
+<div class="claim-text">the first channel bandwidth is 160 MHz;</div>
+<div class="claim-text">the second channel bandwidth is 80 MHz;</div>
+<div class="claim-text">the first set of MCSs includes an MCS corresponding to 64-QAM modulation and rate 3/4 encoding;</div>
+<div class="claim-text">the second set of MCSs excludes the MCS corresponding to 64-QAM modulation and rate 3/4 encoding;</div>
+<div class="claim-text">the second set of MCSs includes an MCS corresponding to 256-QAM modulation and rate 5/6 encoding; and</div>
+<div class="claim-text">the first set of MCSs excludes the MCS corresponding to 256-QAM modulation and rate 5/6 encoding.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein selecting the MCS comprises:
+<div class="claim-text">selecting the MCS i) from a first MCS table corresponding to i) the number of spatial streams, and ii) the first channel bandwidth when the PHY data unit is to be transmitted using a channel having the first channel bandwidth and using the number of spatial streams; and</div>
+<div class="claim-text">selecting the MCS i) from a second MCS table corresponding to i) the number of spatial streams, and ii) the second channel bandwidth when the PHY data unit is to be transmitted using a channel having the second channel bandwidth and using the number of spatial streams;</div>
+<div class="claim-text">wherein the second table excludes the one or more MCSs in the first set of MCSs that will result in the padding-related constraint not being met when the second channel bandwidth is to be used.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein selecting the MCS comprises:
+<div class="claim-text">selecting the MCS from an MCS table; and</div>
+<div class="claim-text">interpreting the MCS table differently when the PHY data unit is to be transmitted using the first channel bandwidth as compared to when the PHY data unit is to be transmitted using the second channel bandwidth.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">adding, at a media access control (MAC) unit of the communication device, padding delimiters to an end of a MAC data unit to be included in the PHY data unit; and</div>
+<div class="claim-text">adding, at a PHY unit of the communication device, PHY padding to the PHY data unit.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein:
+<div class="claim-text">the second channel bandwidth is 80 MHz; and</div>
+<div class="claim-text">when the second channel bandwidth is to be used, generating the plurality of OFDM symbols comprises generating OFDM symbols having 256 subcarriers, with data tones and pilot tones i) at subcarrier indices −122 to −2 and ii) at subcarrier indices 2 to 122.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein:
+<div class="claim-text">when the second channel bandwidth is to be used, generating the plurality of OFDM symbols comprises generating OFDM symbols with</div>
+<div class="claim-text">guard tones only at subcarrier indices i) −128 to −123 and ii)+123 to +127, and DC tones only at subcarrier indices −1 to +1.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein:
+<div class="claim-text">when the second channel bandwidth is to be used, generating the plurality of OFDM symbols comprises generating OFDM symbols with pilot tones at subcarrier indices −103, −75, −39, −11, 11, 39, 75, and 103.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. An apparatus, comprising:
+<div class="claim-text">a network interface device including:
+<div class="claim-text">a memory to store indicators of a first set of modulation coding schemes (MCSs) and a second set of MCSs, wherein
+<div class="claim-text">the first set of MCSs corresponds to i) a number of spatial streams, and ii) the first channel bandwidth,</div>
+<div class="claim-text">the second set of MCSs corresponds to i) the number of spatial streams, and ii) the second channel bandwidth,</div>
+<div class="claim-text">the first set of MCSs is different than the second set of MCSs, and</div>
+<div class="claim-text">the second set of MCSs excludes one or more MCSs in the first set of MCSs that will result in a padding-related constraint not being met when the second channel bandwidth is to be used;</div>
+</div>
+</div>
+<div class="claim-text">wherein the network interface device is configured to select an MCS i) from the first set of MCSs when a physical layer (PHY) data unit is to be transmitted using a channel having a first channel bandwidth, and ii) from the second set of MCSs when the PHY data unit is to be transmitted using a channel having a second channel bandwidth;</div>
+<div class="claim-text">wherein the network interface device further includes:
+<div class="claim-text">one or more encoders configured to encode information bits according to the selected MCS,</div>
+<div class="claim-text">a parser configured to parse the encoded information bits into the number of spatial streams, and</div>
+<div class="claim-text">a modulator configured to modulate the encoded information bits according to the selected MCS; and</div>
+</div>
+<div class="claim-text">wherein the network interface device is further configured to generate a plurality of Orthogonal Frequency Division Multiplexing (OFDM) symbols based on the modulated encoded information bits.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The apparatus of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein:
+<div class="claim-text">the number of spatial streams is three;</div>
+<div class="claim-text">the second channel bandwidth is 80 MHz;</div>
+<div class="claim-text">the first set of MCSs includes an MCS corresponding to 64-QAM modulation and rate 3/4 encoding; and</div>
+<div class="claim-text">the second set of MCSs excludes the MCS corresponding to 64-QAM modulation and rate 3/4 encoding.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The apparatus of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the first set of MCSs excludes one or more MCSs in the second set of MCSs that will result in the padding-related constraint not being met when the first channel bandwidth is to be used.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The apparatus of <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein:
+<div class="claim-text">the number of spatial streams is three;</div>
+<div class="claim-text">the first channel bandwidth is 160 MHz;</div>
+<div class="claim-text">the second channel bandwidth is 80 MHz;</div>
+<div class="claim-text">the first set of MCSs includes an MCS corresponding to 64-QAM modulation and rate 3/4 encoding;</div>
+<div class="claim-text">the second set of MCSs excludes the MCS corresponding to 64-QAM modulation and rate 3/4 encoding.</div>
+<div class="claim-text">the second set of MCSs includes an MCS corresponding to 256-QAM modulation and rate 5/6 encoding.</div>
+<div class="claim-text">the first set of MCSs excludes the MCS corresponding to 256-QAM modulation and rate 5/6 encoding.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The apparatus of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein:
+<div class="claim-text">the memory is configured to store:
+<div class="claim-text">a first MCS table corresponding to i) the number of spatial streams, and ii) the first channel bandwidth, the first MCS table storing indicators of the first set of MCSs, and</div>
+<div class="claim-text">a second MCS table corresponding to i) the number of spatial streams, and ii) the second channel bandwidth, the second MCS table storing indicators of the second set of MCSs;</div>
+</div>
+<div class="claim-text">the network interface device is configured to:
+<div class="claim-text">select the MCS from the first MCS table when the PHY data unit is to be transmitted using a channel having the first channel bandwidth and using the number of spatial streams, and</div>
+<div class="claim-text">select the MCS from the second MCS table when the PHY data unit is to be transmitted using a channel having the second channel bandwidth and using the number of spatial streams;</div>
+</div>
+<div class="claim-text">the second MCS table excludes one or more indicators of the one or more MCSs in the first set of MCSs that will result in the padding-related constraint not being met when the second channel bandwidth is to be used.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The apparatus of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein:
+<div class="claim-text">the memory is configured to store an MCS table storing indicators of MCSs; and</div>
+<div class="claim-text">the network interface device is configured to:
+<div class="claim-text">selecting the MCS from the MCS table, and</div>
+<div class="claim-text">interpret the MCS table differently when the PHY data unit is to be transmitted using the first channel bandwidth as compared to when the PHY data unit is to be transmitted using the second channel bandwidth.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The apparatus of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the network interface device includes:
+<div class="claim-text">a media access control (MAC) unit configured to add padding delimiters to an end of a MAC data unit to be included in the PHY data unit; and</div>
+<div class="claim-text">a PHY unit configured to add PHY padding to the PHY data unit.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The apparatus of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein:
+<div class="claim-text">the second channel bandwidth is 80 MHz; and</div>
+<div class="claim-text">the network interface device is configured to, when the second channel bandwidth is to be used, generate the plurality of OFDM symbols to have 256 subcarriers, with data tones and pilot tones i) at subcarrier indices −122 to −2 and ii) at subcarrier indices 2 to 122.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The apparatus of <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the network interface device is configured to:
+<div class="claim-text">when the second channel bandwidth is to be used, generate the OFDM symbols with</div>
+<div class="claim-text">guard tones only at subcarrier indices i) −128 to −123 and ii)+123 to +127, and DC tones only at subcarrier indices −1 to +1.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The apparatus of <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the network interface device is configured to:
+<div class="claim-text">when the second channel bandwidth is to be used, generate the OFDM symbols with pilot tones at subcarrier indices −103, −75, −39, −11, 11, 39, 75, and 103.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

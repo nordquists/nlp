@@ -1,0 +1,1389 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10622970B2 - Attenuators for electronic applications 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA384986560">
+<div class="abstract" id="p-0001" num="0000">In some embodiments, an attenuator for electronic application can include a first group of attenuation steps, with each configured to switchably provide a first fixed attenuation value. The attenuator can further include a second group of attenuation steps, with each configured to switchably provide a second fixed attenuation value. Magnitude of the second fixed attenuation value can be less than magnitude of the first fixed attenuation value. The attenuator can be configured to be capable of providing a total attenuation value from approximately zero to a sum of the attenuation steps of the first group and the second group in increments of the second fixed attenuation value.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES254249213">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATION(S)</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of U.S. application Ser. No. 15/295,993 filed Oct. 17, 2016, entitled STEP ATTENUATORS, which is a continuation of U.S. application Ser. No. 14/632,996 filed Feb. 26, 2015, entitled SYSTEMS, DEVICES AND METHODS RELATED TO RADIO-FREQUENCY STEP ATTENUATORS, which claims priority to and the benefit of the filing date of U.S. Provisional Application No. 61/945,773 filed Feb. 27, 2014, entitled SYSTEMS, DEVICES AND METHODS RELATED TO RADIO-FREQUENCY STEP ATTENUATORS, the benefits of the filing dates of which are hereby claimed and the disclosures of which are hereby expressly incorporated by reference herein in their entirety.</div>
+<heading id="h-0002">BACKGROUND</heading>
+<heading id="h-0003">Field</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present disclosure relates to step attenuators.</div>
+<heading id="h-0004">Description of the Related Art</heading>
+<div class="description-paragraph" id="p-0004" num="0003">In electronic applications such as radio-frequency (RF) applications, it is sometimes desirable to amplify or attenuate a signal such as an RF signal. In the context of amplification, a to-be-transmitted RF signal can be amplified by a power amplifier (PA); and a received RF signal can be amplified by a low-noise amplifier (LNA). In the context of attenuation, one or more attenuators can be implemented along each of the foregoing transmit (Tx) and receive (Rx) paths as needed or desired.</div>
+<heading id="h-0005">SUMMARY</heading>
+<div class="description-paragraph" id="p-0005" num="0004">In accordance with a number of implementations, the present disclosure relates to a step attenuator having an attenuator circuit including stages connected in series between a first node and a second node. The stages include a plurality of first attenuation steps each configured to provide switchable attenuation with a first gain. The stages further include a plurality of second attenuation steps each configured to provide switchable attenuation with a second gain. The step attenuator further includes a controller in communication with the attenuator circuit. The controller is configured to control the switchable attenuation of each of the first attenuation steps and the second attenuation steps.</div>
+<div class="description-paragraph" id="p-0006" num="0005">In some embodiments, the first attenuation steps can include N steps such that the N steps provide attenuation between approximately zero and N times the first gain. The second attenuation steps can include M steps, and the second gain can be selected such that the first gain has a value of (M+1) times the second gain. The attenuator circuit can have an overall attenuation value in a range of approximately zero to a maximum value in steps of the second gain, with the maximum value being a sum of N times the first gain and M times the second gain.</div>
+<div class="description-paragraph" id="p-0007" num="0006">In some embodiments, the attenuator circuit can be susceptible to a glitch during a transition operation from a start attenuation state to a stop attenuation state, with the glitch being a magnitude of a temporary excursion of the overall attenuation value outside the transition range, and the glitch magnitude having a maximum value of a difference between the first gain and the second gain. The quantity N, the quantity M, the first gain, and the second gain can be selected such that the maximum glitch value is less than a maximum glitch value associated with a binary-weighted step attenuator having a similar range of overall attenuation and a similar step size. The maximum glitch value of the step attenuator can be less than half of the maximum glitch value of the binary-weighted step attenuator. The quantity N can be, for example, 7, and the quantity M can be, for example, 3; and the first gain can be 4 dB, and the second gain can be 1 dB, such that the overall attenuation value is in a range of approximately zero to 31 dB. The maximum glitch value of the step attenuator can be less than or equal to a fifth of the maximum glitch value of the binary-weighted step attenuator.</div>
+<div class="description-paragraph" id="p-0008" num="0007">In some embodiments, the sum of the quantities N and M can be less than the total number of attenuation steps in a thermometer-coded step attenuator having a similar range of overall attenuation and a similar step size. The sum of the quantities N and M can be less than half of the total number of attenuation steps in the thermometer-coded step attenuator. The quantity N can be 7, and the quantity M can be 3. The first gain can be 4 dB, and the second gain can be 1 dB, such that the overall attenuation value is in a range of approximately zero to 31 dB. The sum of the quantities N and M can be less than a third of the total number of attenuation steps in the thermometer-coded step attenuator.</div>
+<div class="description-paragraph" id="p-0009" num="0008">In some embodiments, each of the first and second attenuation steps can include a parallel arrangement of a resistance circuit and a switch. The resistance circuit can include a π-type or T-type network of resistors. The resistors can be implemented as thin-film resistors.</div>
+<div class="description-paragraph" id="p-0010" num="0009">In some embodiments, the attenuator circuit can be implemented on a GaAs substrate. The controller can be implemented on a CMOS substrate.</div>
+<div class="description-paragraph" id="p-0011" num="0010">In some implementations, the present disclosure relates to a method for attenuating a radio-frequency (RF) signal. The method includes passing an RF signal through an attenuator circuit including stages connected in series between a first node and a second node. The stages include a plurality of first attenuation steps, with each configured to provide switchable attenuation with a first gain. The stages further include a plurality of second attenuation steps, with each configured to provide switchable attenuation with a second gain. The method further includes controlling the switchable attenuation of each of the first attenuation steps and the second attenuation steps to yield an overall attenuation for the RF signal between the first node and the second node.</div>
+<div class="description-paragraph" id="p-0012" num="0011">In some embodiments, the first attenuation steps can include N steps and the second attenuation steps include M steps. The second gain can be selected such that the first gain has a value of (M+1) times the second gain. The overall attenuation of the attenuator circuit can be in a range of approximately zero to a maximum value in steps of the second gain, with the maximum value being a sum of N times the first gain and M times the second gain. The controlling can include providing one or more sets of switching signals to the stages, with each set of switching signals resulting in a change in the overall attenuation. The one or more sets of switching signals can result in the attenuator circuit being susceptible to a glitch during the change in the overall attenuation, with the glitch being a magnitude of a temporary excursion of the overall attenuation value outside a transition range between a start state and a stop state, and the glitch magnitude having a maximum value of a difference between the first gain and the second gain.</div>
+<div class="description-paragraph" id="p-0013" num="0012">In some embodiments, the controlling can include providing a single set of switching signals to the stages, with the single set of switching signals resulting a likelihood of glitch occurrence in about a third of possible changes in attenuation.</div>
+<div class="description-paragraph" id="p-0014" num="0013">In some embodiments, the controlling can include providing multiple sets of switching signals to the stages in sequence, the multiple sets of switching signals configured to reduce a likelihood of glitch occurrence. The multiple sets of switching signals can be configured to eliminate the likelihood of glitch occurrence except in attenuation changes involving a single first attenuation step and at least one second attenuation step.</div>
+<div class="description-paragraph" id="p-0015" num="0014">In some embodiments, the multiple sets of switching signals can include a first set of switching signals that result in one or more of the first attenuation steps being switched to change the overall attenuation from the start state towards the stop state, a second set of switching signals that result in one or more of the second attenuation steps being switched to change the overall attenuation back towards the start state, and a third set of switching signals that result in one or more of the first attenuation steps being switched to change the overall attenuation towards the stop state, to thereby effectuate the attenuation change without a glitch.</div>
+<div class="description-paragraph" id="p-0016" num="0015">In some embodiments, the multiple sets of switching signals can include a first set of switching signals that result in a first attenuation change from the start state towards the stop state, and a second switching signals that result in a second attenuation change back towards the start state, with the magnitude of the first attenuation change being greater than the magnitude of the second attenuation change.</div>
+<div class="description-paragraph" id="p-0017" num="0016">According to some teachings, the present disclosure relates to a radio-frequency (RF) attenuation module that includes a packaging substrate configured to receive a plurality of components, and an attenuator implemented on the packaging substrate. The attenuator includes an attenuator circuit having stages connected in series between a first node and a second node. The stages include a plurality of first attenuation steps, with each being configured to provide switchable attenuation with a first gain. The stages further include a plurality of second attenuation steps, with each being configured to provide switchable attenuation with a second gain. The attenuator further includes a controller in communication with the attenuator circuit, with the controller being configured to control the switchable attenuation of each of the first attenuation steps and the second attenuation steps.</div>
+<div class="description-paragraph" id="p-0018" num="0017">In some embodiments, the attenuator can be implemented on a first semiconductor die, and the controller can be implemented on a second semiconductor die. The first semiconductor die can be a GaAs die, and the second semiconductor die can be a CMOS die.</div>
+<div class="description-paragraph" id="p-0019" num="0018">In a number of implementations, the present disclosure relates to a radio-frequency (RF) system that includes a transceiver configured to generate an RF signal to be transmitted and process a received RF signal. The RF system further includes an antenna in communication with the transceiver, with the antenna being configured to facilitate transmission and reception of the respective RF signals. The RF system further includes an attenuator implemented to provide attenuation for at least some of the RF signals. The attenuator includes an attenuator circuit having stages connected in series between a first node and a second node. The stages include a plurality of first attenuation steps, with each being configured to provide switchable attenuation with a first gain. The stages further include a plurality of second attenuation steps, with each being configured to provide switchable attenuation with a second gain. The attenuator further includes a controller in communication with the attenuator circuit, with the controller being configured to control the switchable attenuation of each of the first attenuation steps and the second attenuation steps.</div>
+<div class="description-paragraph" id="p-0020" num="0019">For purposes of summarizing the disclosure, certain aspects, advantages and novel features of the inventions have been described herein. It is to be understood that not necessarily all such advantages may be achieved in accordance with any particular embodiment of the invention. Thus, the invention may be embodied or carried out in a manner that achieves or optimizes one advantage or group of advantages as taught herein without necessarily achieving other advantages as may be taught or suggested herein.</div>
+<description-of-drawings>
+<heading id="h-0006">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 1</figref> depicts a step attenuator configured to receive an RF signal and yield an attenuated RF signal.</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows a conventional step attenuator, commonly referred to as a thermometer-coded attenuator, controlled by a controller.</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows an example attenuation transition that can be implemented in the thermometer-coded attenuator of <figref idrefs="DRAWINGS">FIG. 2</figref>.</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows another conventional attenuator having a plurality of cascading N binary-weighted stages.</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows an example attenuation transition that can be implemented in the binary-weighted attenuator of <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 6</figref> shows an attenuator having one or more features as described herein.</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 7</figref> shows an attenuator that can be a more specific example of the attenuator of <figref idrefs="DRAWINGS">FIG. 6</figref>.</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows an example sequence of successive 1 dB transitions that can be implemented in the attenuator of <figref idrefs="DRAWINGS">FIG. 7</figref>.</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIGS. 9A-9C</figref> show examples of attenuation changes (Δatt.) having different patterns of operations, and how such different patterns of operations can result in different glitches.</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 10A</figref> shows an example of a non-sequenced 13 dB transition having a pattern of operations that can result from a single control command.</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 10B</figref> shows an example of how sequencing can be implemented to ensure that glitch will not occur during an attenuation transition similar to the example of <figref idrefs="DRAWINGS">FIG. 10A</figref>.</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 11A</figref> shows another example of a non-sequenced 13 dB transition having a pattern of operations that can result from a single control command.</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 11B</figref> shows another example of how sequencing can be implemented to ensure that glitch will not occur during an attenuation transition similar to the example of <figref idrefs="DRAWINGS">FIG. 11A</figref>.</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 12</figref> shows a process that can be implemented to operate an attenuator having one or more features as described herein.</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 13</figref> shows a process that can be implemented to operate an attenuator using a sequencing technique.</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 14</figref> shows an example of how various attenuation stages can be added to or subtracted from an RF path.</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIGS. 15A and 15B</figref> show examples of how each switchable attenuation stage of <figref idrefs="DRAWINGS">FIG. 14</figref> can be implemented.</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 16</figref> shows that in some embodiments, an attenuator having one or more features as described herein can be implemented in an RF module.</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIG. 17</figref> shows that in some embodiments, the module of <figref idrefs="DRAWINGS">FIG. 16</figref> can be implemented as a packaged module.</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIG. 18</figref> shows non-limiting examples of how an attenuator having one or more features as described herein can be implemented in an RF system.</div>
+</description-of-drawings>
+<heading id="h-0007">DETAILED DESCRIPTION OF SOME EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0041" num="0040">The headings provided herein, if any, are for convenience only and do not necessarily affect the scope or meaning of the claimed invention.</div>
+<div class="description-paragraph" id="p-0042" num="0041">Disclosed herein are various examples of systems, devices and methods related to step attenuators that can be utilized in, for example, radio-frequency (RF) applications. <figref idrefs="DRAWINGS">FIG. 1</figref> schematically depicts a step attenuator configuration <b>100</b> having a step attenuator circuit <b>102</b> configured to receive an RF signal (e.g., RF_in) and yield an attenuated RF signal (e.g., RF_out). In some embodiments, the step attenuator circuit <b>102</b> can be configured to operate as a digital step attenuator (DSA). As described herein, operation of such a step attenuator circuit <b>102</b> can be controlled and/or facilitated by a controller <b>104</b>. Non-limiting examples related to the step attenuator configuration <b>100</b> are described herein in greater detail.</div>
+<div class="description-paragraph" id="p-0043" num="0042">Step attenuators are typically implemented as a plurality of independently-enabled stages. For example, <figref idrefs="DRAWINGS">FIG. 2</figref> shows a conventional step attenuator <b>10</b> having an attenuator circuit <b>12</b> controlled by a controller <b>14</b> (e.g., a level shift/decode circuit). The attenuator circuit <b>12</b> is depicted as providing an attenuating path between a first node RF<b>1</b> and a second node RF<b>2</b>. The first node RF<b>1</b> can be an input node for an RF signal, in which case the second node RF<b>2</b> can function as an output node. In some embodiments, the attenuator circuit <b>12</b> can be operated in reverse, such that the second node RF<b>2</b> functions as an input node and the first node RF<b>1</b> functions as an output node.</div>
+<div class="description-paragraph" id="p-0044" num="0043">In the example of <figref idrefs="DRAWINGS">FIG. 2</figref>, there are N independently-controlled attenuation elements <b>16</b>, with each attenuation element configured to provide an attenuation of A-dB. Accordingly, the N attenuation elements <b>16</b> can provide an overall attenuation having a value between 0 dB and NA-dB in A-dB steps, between the RF<b>1</b> and RF<b>2</b> nodes. For example, when all of the N attenuation elements <b>16</b> are bypassed in an RF path, the overall attenuation value is approximately 0 dB. In another example, when all of the N attenuation elements <b>16</b> are inserted into the RF path, the overall attenuation value is approximately NA-dB.</div>
+<div class="description-paragraph" id="p-0045" num="0044">In the example of <figref idrefs="DRAWINGS">FIG. 2</figref>, the N attenuation elements <b>16</b> are shown to be controlled independently by the level shift/decode circuit <b>14</b>. For N such elements with each element having binary states, a control signal having Log<sub>2</sub>(N) bits can provide sufficient information for the independent control of the N attenuation elements <b>16</b>.</div>
+<div class="description-paragraph" id="p-0046" num="0045">The example step attenuator <b>10</b> of <figref idrefs="DRAWINGS">FIG. 2</figref> is commonly referred to as a thermometer-coded attenuator. Because all of the attenuation elements have the same attenuation value, thermometer-coding can benefit from monotonicity. Gain may jitter during a transition between a start state to a stop state; however, the overall attenuation value generally does not go outside a range defined by the start and stop attenuation values.</div>
+<div class="description-paragraph" id="p-0047" num="0046">For example, <figref idrefs="DRAWINGS">FIG. 3</figref> shows an example transition that can be implemented for the thermometer-coded attenuator <b>10</b> of <figref idrefs="DRAWINGS">FIG. 2</figref>. Suppose that there are 32 independently-controlled elements in the attenuator circuit <b>12</b>, with each element providing 1 dB attenuation. The example transition in <figref idrefs="DRAWINGS">FIG. 3</figref> is a 1 dB reduction in overall attenuation, starting from a 16 dB state to a 15 dB state. There is essentially only one operation that can effectuate such a transition; and that is subtracting a 1 dB element from the RF path.</div>
+<div class="description-paragraph" id="p-0048" num="0047">For an example transition where a decrease of more than 1 dB is desired (e.g., 6 dB reduction), an appropriate number of 1 dB elements (e.g., 6 elements) can be subtracted from the RF path. Similarly, a transition where an increase of one or more dB is desired can be effectuated by adding one or more 1 dB elements into the RF path.</div>
+<div class="description-paragraph" id="p-0049" num="0048">One can see that for the thermometer-coded attenuator <b>10</b> of <figref idrefs="DRAWINGS">FIG. 2</figref>, all feasible transitions within the operating range involve essentially only one type of operation to transition from the start state to the stop state in a monotonic manner. More particularly, a transition where a decrease in overall attenuation is desired involves subtraction of a number of attenuation elements, such that even if the subtraction operations are effectuated over some time period, the intermediate values of overall attenuation decrease monotonically between the start attenuation value and the stop attenuation value. Further, none of the intermediate values ventures outside of the range defined by the start attenuation value and the stop attenuation value. Similarly, a transition where an increase in overall attenuation is desired involves addition of a number of attenuation elements, such that even if the addition operations are effectuated over some time period, the intermediate values of overall attenuation increase monotonically between the start attenuation value and the stop attenuation value. Further, none of the intermediate values ventures outside of the range defined by the start attenuation value and the stop attenuation value.</div>
+<div class="description-paragraph" id="p-0050" num="0049">The foregoing monotonicity feature of the thermometer-coded attenuator <b>10</b> of <figref idrefs="DRAWINGS">FIG. 2</figref>, resulting in the intermediate values remaining within the transition range during an attenuation transition, can be characterized as being glitch-free. For the purpose of description, a glitch can be defined as how much an overall attenuation goes outside a range defined by a start attenuation value and a stop attenuation value during an attenuation transition.</div>
+<div class="description-paragraph" id="p-0051" num="0050">Generally, a glitch is an undesirable property of an attenuator. In such a context, the example thermometer-coded attenuator <b>10</b> of <figref idrefs="DRAWINGS">FIG. 2</figref> being glitch-free is a desirable property. However, attenuators such as the example of <figref idrefs="DRAWINGS">FIG. 2</figref> can have undesirable properties. For example, the overall size of a thermometer-coded attenuator can be problematic. Suppose that the example thermometer-coded attenuator <b>10</b> of <figref idrefs="DRAWINGS">FIG. 2</figref> is to be implemented to provide attenuation between 0 dB and 32 dB, in 1 dB steps. Such an attenuator can include 32 attenuation elements, with each element having an independent driver channel. In another example, an attenuator with a range of 0 dB to 32 dB with 0.5 dB steps can include 64 attenuation elements, with each element having an independent driver channel.</div>
+<div class="description-paragraph" id="p-0052" num="0051"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows another example of a conventional attenuator <b>20</b> having an attenuator circuit <b>22</b> and a level shift/decode circuit <b>24</b>. The attenuator circuit <b>22</b> is shown to include a plurality of cascading N binary-weighted independently-enabled stages. Such attenuation stages can be added or subtracted from an RF path between a first node RF<b>1</b> and a second node RF<b>2</b>. When the first node RF<b>1</b> functions as an input, the second node RF<b>2</b> can function as an output. When operated in reverse, the second node RF<b>2</b> can function as an input, and the first node RF<b>1</b> can function as an output.</div>
+<div class="description-paragraph" id="p-0053" num="0052">By applying a binary control word with N bits, 2<sup>N </sup>attenuation states can be achieved. For example, with N=5 stages of attenuations 16 dB, 8 dB, 4 dB, 2 dB and 1 dB, 2<sup>5</sup>=32 attenuation states can be achieved, spanning a range of 0 dB to 31 dB, inclusive, in 1 dB steps. As shown, a control word having 5 bits can allow implementation of such 32 attenuation states.</div>
+<div class="description-paragraph" id="p-0054" num="0053">Compared to the thermometer-coded attenuator <b>10</b> of <figref idrefs="DRAWINGS">FIG. 2</figref> (e.g., with 32 stages 1 dB steps to yield a range of 0 dB to 32 dB), the example binary-weighted arrangement of <figref idrefs="DRAWINGS">FIG. 4</figref> (e.g., with 5 stages (16 dB, 8 dB, 4 dB, 2 dB and 1 dB) to yield a range of 0 dB to 31 dB) provides a similar attenuation range using a much smaller number of stages. An example advantage of using such smaller number of stages includes a much smaller physical size of the attenuator device.</div>
+<div class="description-paragraph" id="p-0055" num="0054">Despite the desirable smaller size, the foregoing binary-weighted arrangement can include glitches during various transitions. Further, sequencing of a given transition by two or more separate controlled operations does not solve such glitch effects.</div>
+<div class="description-paragraph" id="p-0056" num="0055">As generally understood, glitch effects associated with a binary-weighted arrangement results from use of different attenuation values during transitions that include both addition and subtraction operations. <figref idrefs="DRAWINGS">FIG. 5</figref> shows an example attenuation transition that can be implemented in the example conventional attenuator <b>20</b> of <figref idrefs="DRAWINGS">FIG. 4</figref>. The example transition involves a decrease in attenuation from a start value of 16 dB to a stop value of 15 dB, for a change of 1 dB. At the start state, the 16 dB stage is in the RF path, and the rest of the stages (8 dB, 4 dB, 2 dB and 1 dB) are out of the RF path. To achieve the stop state of 15 dB, the 16 dB stage needs to be subtracted, and all of the 8 dB, 4 dB, 2 dB and 1 dB stages need to be added to the RF path.</div>
+<div class="description-paragraph" id="p-0057" num="0056">The foregoing subtraction and addition operations involving the 5 stages (16 dB, 8 dB, 4 dB, 2 dB and 1 dB) are preferably performed substantially simultaneously, in which case there may not be a glitch. However, the independent control of the 5 stages can result in some or all of the subtraction and addition operations being performed at different times during the transition. In the example of <figref idrefs="DRAWINGS">FIG. 5</figref>, the 16 dB-to-15 dB transition is depicted as <b>28</b>, and includes an initial subtraction of the 16 dB stage, followed by successive additions of the 8 dB, 4 dB, 2 dB and 1 dB stages. Between the subtraction of the 16 dB stage and the addition of the 8 dB stage, a time period of Δt can exist; and during such a time period, the overall attenuation falls to approximately zero. Such an effect can create an undesirable condition for a downstream circuit that should be receiving a signal reduced by 15 dB, but instead receives an un-attenuated signal.</div>
+<div class="description-paragraph" id="p-0058" num="0057">In general, the maximum glitch for a given binary-weighted attenuation arrangement is the difference between the most significant bit (MSB) and the least significant bit (LSB). In the example shown in <figref idrefs="DRAWINGS">FIG. 4</figref>, the MSB is 16 dB, and the LSB is 1 dB; and thus, the 15 dB glitch shown for the 16 dB-to-15 dB transition in <figref idrefs="DRAWINGS">FIG. 5</figref> is also the maximum glitch of 15 dB for the attenuator of <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0059" num="0058">It is also noted that for the example transition <b>28</b> of <figref idrefs="DRAWINGS">FIG. 5</figref>, there are other possible glitch values. For example, suppose that addition operations for the 8 dB and 4 dB stages occur before a subtraction of the 16 dB stage (and then followed by additions of the 2 dB and 1 dB stages). In such a combination, the additions of the 8 dB and 4 dB results in a first glitch of +12 dB above the start state of 16 dB, for a temporary overall attenuation of 28 dB. Then, the subtraction of the 16 dB stage results in the temporary overall attenuation falling to 12 dB which is a second glitch of −3 below the stop state of 15 dB. Accordingly, the largest glitch for such a combination of operations for the example transition <b>28</b> is +12 dB above the start state of 16 dB.</div>
+<div class="description-paragraph" id="p-0060" num="0059"> <figref idrefs="DRAWINGS">FIG. 6</figref> shows an attenuator <b>100</b> having an attenuator circuit <b>102</b> and a level shift/decode circuit <b>104</b>. The attenuator circuit <b>102</b> is shown to include two groups of attenuation elements. The first group includes a plurality of attenuation elements <b>110</b>, with each element configured to provide an attenuation of B-dB. The second group includes a plurality of attenuation elements <b>112</b>, with each element configured to provide an attenuation of A-dB. Although described in the context of two groups of attenuation elements, it will be understood that more than two of such groups can be implemented.</div>
+<div class="description-paragraph" id="p-0061" num="0060">In the example of <figref idrefs="DRAWINGS">FIG. 6</figref>, each attenuation element (<b>110</b> or <b>112</b>) (also referred to herein as a stage) can be controlled independently. Accordingly, such attenuation stages can be added or subtracted from an RF path between a first node RF<b>1</b> and a second node RF<b>2</b>. When the first node RF<b>1</b> functions as an input, the second node RF<b>2</b> can function as an output. When operated in reverse, the second node RF<b>2</b> can function as an input, and the first node RF<b>1</b> can function as an output.</div>
+<div class="description-paragraph" id="p-0062" num="0061">As described herein, the numbers of stages in each of the two groups in the attenuator <b>100</b> can be selected to, for example, yield a manageable number of stages overall, and to reduce the maximum glitch. As also described herein, the use of such groups of attenuation stages can further allow implementation of sequencing techniques that can eliminate glitches in most situations and reduce glitch effects in other situations. Various examples of the foregoing advantageous features are described herein in greater detail.</div>
+<div class="description-paragraph" id="p-0063" num="0062"> <figref idrefs="DRAWINGS">FIG. 7</figref> shows an attenuator <b>100</b> that can be a more specific example of the attenuator <b>100</b> of <figref idrefs="DRAWINGS">FIG. 6</figref>. In the example of <figref idrefs="DRAWINGS">FIG. 7</figref>, an attenuator circuit <b>122</b> is shown to include two groups of attenuation stages. The first group includes 7 attenuation stages, with each stage configured to provide an attenuation of 4 dB. The second group includes 3 attenuation stages, with each stage configured to provide an attenuation of 1 dB.</div>
+<div class="description-paragraph" id="p-0064" num="0063">With the foregoing 10 attenuation stages, an overall attenuation of 0 dB to 31 dB can be obtained. To obtain such a range of attenuation values in 1 dB increments, a control word having 5 bits can be utilized. Table 1 lists states of the seven 4 dB stages and the three 1 dB stages for the 32 overall attenuation values. For a given stage, a “0” indicates that the stage is not in the RF path (e.g., bypassed), and a “1” indicates that the stage is in the RF path.</div>
+<div class="description-paragraph" id="p-0065" num="0064">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="11" nameend="11" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Overall</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attenuation</td>
+<td class="description-td">4 dB</td>
+<td class="description-td">4 dB</td>
+<td class="description-td">4 dB</td>
+<td class="description-td">4 dB</td>
+<td class="description-td">4 dB</td>
+<td class="description-td">4 dB</td>
+<td class="description-td">4 dB</td>
+<td class="description-td">1 dB</td>
+<td class="description-td">1 dB</td>
+<td class="description-td">1 dB</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(dB)</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+<td class="description-td">Stage</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">12</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">13</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">14</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">15</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">17</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">18</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">19</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">20</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">21</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">22</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">23</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">24</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">25</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">26</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">27</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">28</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">29</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">30</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">31</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0066" num="0065"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows a sequence of successive 1 dB transitions, starting from 0 dB to the maximum attenuation value of 31 dB. As shown in <figref idrefs="DRAWINGS">FIG. 8</figref> and Table 1, when the 1 dB stages are added for the 1 dB transitions, glitches do not occur. However, when all three of the 1 dB stages are already in the RF path, they need to be subtracted and an available 4 dB stage needs to be added. For such transitions, the maximum glitch is 3 dB (depicted as <b>128</b> in <figref idrefs="DRAWINGS">FIG. 8</figref>).</div>
+<div class="description-paragraph" id="p-0067" num="0066">In reference to <figref idrefs="DRAWINGS">FIG. 8</figref>, it will be understood that although the 3 dB glitch transitions <b>128</b> are depicted as a particular pattern of operations (e.g., successive subtraction of three 1 dB stages followed by an addition of one 4 dB stage), other patterns of operations are also possible; and some of such other patterns of operations can yield smaller glitches. It will also be understood that although <figref idrefs="DRAWINGS">FIG. 8</figref> only shows successive 1 dB transitions, other transitions involving larger attenuation changes can also be implemented.</div>
+<div class="description-paragraph" id="p-0068" num="0067"> <figref idrefs="DRAWINGS">FIGS. 9A-9C</figref> show examples of attenuation changes (Δatt.) having different patterns of operations, and how such different patterns of operations can result in different glitches. <figref idrefs="DRAWINGS">FIG. 9A</figref> shows some patterns of operation(s) that can occur when a transition of a 1 dB increase (Δatt.=+1 dB) is desired. In the left-most example, an addition of a 1 dB stage can provide the desired +1 dB transition without a glitch. In the next example, the desired +1 dB transition is shown to result in an addition of a 4 dB stage followed by successive subtractions of three 1 dB stages, thereby yielding a glitch of 3 dB above the stop attenuation value. The next example is similar to the example transition <b>128</b> of <figref idrefs="DRAWINGS">FIG. 8</figref>, where successive subtractions of three 1 dB stages are followed by an addition of a 4 dB stage, thereby yielding a glitch of 3 dB below the start attenuation value. In the last example, the desired +1 dB transition is shown to result in subtraction of a 1 dB stage, followed by an addition of a 4 dB stage, followed by successive subtractions of two 1 dB stages, thereby yielding a glitch of 1 dB below the start attenuation value, and a larger glitch of 2 dB above the stop attenuation value.</div>
+<div class="description-paragraph" id="p-0069" num="0068"> <figref idrefs="DRAWINGS">FIG. 9B</figref> shows some patterns of operations that can occur when a transition of a 13 dB increase (Δatt.=+13 dB) is desired. In the left-most example, successive additions of three 4 dB stages and a 1 dB stage can provide the desired +13 dB transition without a glitch. In the next example, the same desired +13 dB transition is shown to result in a pattern where four 4 dB stages are added successively, followed by successive subtractions of three 1 dB stages, thereby yielding a glitch of 3 dB above the stop attenuation value. In the next example, the same desired +13 dB transition is shown to result in a pattern where three 1 dB stages are subtracted successively, followed by successive additions of four 4 dB stages, thereby yielding a glitch of 3 dB below the start attenuation value. In the next example, the same desired +13 dB transition is shown to result in a pattern where one 4 dB stage is added, followed by successive subtraction of three 1 dB stages, followed by successive addition of three 4 dB stages, thereby yielding a glitch-free transition. The last example is a variation of such a glitch-free transition involving both addition and subtraction operations. In the last example, successive additions of three 4 dB stages are followed by successive subtractions of three 1 dB stages, followed by an addition of one 4 dB stage, thereby yielding a glitch-free transition.</div>
+<div class="description-paragraph" id="p-0070" num="0069"> <figref idrefs="DRAWINGS">FIG. 9C</figref> shows some patterns of operations that can occur when a transition of a 31 dB increase (Δatt.=+31 dB) is desired. In the left example, successive additions of seven 4 dB stages and three 1 dB stages can provide the desired +31 dB transition without a glitch. In the right example, successive additions of three 1 dB stages and seven 4 dB stages can provide the desired +31 dB transition, again without a glitch.</div>
+<div class="description-paragraph" id="p-0071" num="0070">Table 2 lists worst-case and best-case patterns for transitions involving the listed changes in attenuation (Δatt.). In Table 2, an addition of a negative number indicates a subtraction of the corresponding stage. Similar table can be formed for transitions involving reductions in attenuation.</div>
+<div class="description-paragraph" id="p-0072" num="0071">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Worst case</td>
+<td class="description-td">Best case</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Number </td>
+<td class="description-td">Number </td>
+<td class="description-td">Worst </td>
+<td class="description-td">Number </td>
+<td class="description-td">Number </td>
+<td class="description-td">Worst </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">of 4 dB </td>
+<td class="description-td">of 1 dB </td>
+<td class="description-td">glitch</td>
+<td class="description-td">of 4 dB </td>
+<td class="description-td">of 1 dB </td>
+<td class="description-td">glitch</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Aatt.</td>
+<td class="description-td">stage(s) </td>
+<td class="description-td">stage(s) </td>
+<td class="description-td">size </td>
+<td class="description-td">stage(s) </td>
+<td class="description-td">stage(s) </td>
+<td class="description-td">size </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(dB)</td>
+<td class="description-td">added</td>
+<td class="description-td">added</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">added</td>
+<td class="description-td">added</td>
+<td class="description-td">(dB)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="7" nameend="7" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">−3</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">1</td>
+<td class="description-td">−2</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">1</td>
+<td class="description-td">−1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">2</td>
+<td class="description-td">−3</td>
+<td class="description-td">3</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">2</td>
+<td class="description-td">−2</td>
+<td class="description-td">2</td>
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">−1</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">3</td>
+<td class="description-td">−3</td>
+<td class="description-td">3</td>
+<td class="description-td">2</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">3</td>
+<td class="description-td">−2</td>
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">3</td>
+<td class="description-td">−1</td>
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">12</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">13</td>
+<td class="description-td">4</td>
+<td class="description-td">−3</td>
+<td class="description-td">3</td>
+<td class="description-td">3</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">14</td>
+<td class="description-td">4</td>
+<td class="description-td">−2</td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">15</td>
+<td class="description-td">4</td>
+<td class="description-td">−1</td>
+<td class="description-td">1</td>
+<td class="description-td">3</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16</td>
+<td class="description-td">4</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">4</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">17</td>
+<td class="description-td">5</td>
+<td class="description-td">−3</td>
+<td class="description-td">3</td>
+<td class="description-td">4</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">18</td>
+<td class="description-td">5</td>
+<td class="description-td">−2</td>
+<td class="description-td">2</td>
+<td class="description-td">4</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">19</td>
+<td class="description-td">5</td>
+<td class="description-td">−1</td>
+<td class="description-td">1</td>
+<td class="description-td">4</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">20</td>
+<td class="description-td">5</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">5</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">21</td>
+<td class="description-td">6</td>
+<td class="description-td">−3</td>
+<td class="description-td">3</td>
+<td class="description-td">5</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">22</td>
+<td class="description-td">6</td>
+<td class="description-td">−2</td>
+<td class="description-td">2</td>
+<td class="description-td">5</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">23</td>
+<td class="description-td">6</td>
+<td class="description-td">−1</td>
+<td class="description-td">1</td>
+<td class="description-td">5</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">24</td>
+<td class="description-td">6</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">6</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">25</td>
+<td class="description-td">7</td>
+<td class="description-td">−3</td>
+<td class="description-td">3</td>
+<td class="description-td">6</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">26</td>
+<td class="description-td">7</td>
+<td class="description-td">−2</td>
+<td class="description-td">2</td>
+<td class="description-td">6</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">27</td>
+<td class="description-td">7</td>
+<td class="description-td">−1</td>
+<td class="description-td">1</td>
+<td class="description-td">6</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">28</td>
+<td class="description-td">7</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">7</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">29</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">7</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">30</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">31</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">7</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="7" nameend="7" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0073" num="0072">One can note that the best-case for a given transition is where all of the operations are either additions or subtractions—that is, the operations are monotonic. It is also noted that for certain transitions, monotonic operations are the only possible operations, such that there is no distinction between worst-case and best-case. For example, transitions involving multiples of 4 dB essentially require monotonic operations with the 4 dB stages. For other transitions involving operations with both 4 dB and 1 dB stages, and as described in reference to <figref idrefs="DRAWINGS">FIGS. 9A-9C</figref> and</div>
+<div class="description-paragraph" id="p-0074" num="0073">Table 2, there can be a glitch-free result, a worst-case glitch result, or some glitch result in between. Overall, and assuming randomness or approximate randomness of operations in a given transition, about a third of transitions include glitches of various sizes.</div>
+<div class="description-paragraph" id="p-0075" num="0074">One can also note that the example attenuator described herein in reference to <figref idrefs="DRAWINGS">FIGS. 7-9</figref> and Tables 1 and 2 can provide advantageous features such as a reduced-glitch feature, as well as a reduced number of stages. For example, when compared to the binary-weighted attenuator having similar operating range and step size (e.g., attenuator <b>20</b> of <figref idrefs="DRAWINGS">FIG. 4</figref>), the attenuator <b>100</b> of <figref idrefs="DRAWINGS">FIG. 7</figref> has a lower likelihood of glitches. Further, the attenuator <b>100</b> of <figref idrefs="DRAWINGS">FIG. 7</figref> has a maximum glitch size of 3 dB, compared to the 15 dB maximum glitch for the binary-weighted attenuator <b>20</b> of <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0076" num="0075">In another example, 32 attenuation states (0 to 31 dB in 1 dB steps) can be obtained with the 10 stages (seven 4 dB and three 1 dB), compared to the thermometer-coded attenuator <b>10</b> of <figref idrefs="DRAWINGS">FIG. 2</figref> which would require 31 1 dB steps to achieve the same operating range (0 to 31 dB) and step size (1 dB).</div>
+<div class="description-paragraph" id="p-0077" num="0076">As described herein, the foregoing advantageous features associated with the examples of <figref idrefs="DRAWINGS">FIGS. 6-9</figref> can be obtained without any sequencing operations. As also described herein, there are some transitions that can suffer from glitches, where certain patterns of operation can reduce the magnitudes of or eliminate such glitches. For example, <figref idrefs="DRAWINGS">FIG. 9B</figref> involves a 13 dB transition which can suffer from a glitch as large as 3 dB (second and third patterns from the left). However, the fourth and fifth example patterns involve both additions and subtractions; and yet both examples yield zero glitches.</div>
+<div class="description-paragraph" id="p-0078" num="0077">In some implementations, an attenuator such as the example attenuator <b>100</b> of <figref idrefs="DRAWINGS">FIGS. 6 and 7</figref> can be operated with sequenced commands to remove or reduce glitches in selected attenuation transitions. For the purpose of description herein, it will be understood that sequencing, sequenced, sequenced commands, sequenced operations, and the like can include more than one commands issued to effectuate a given attenuation transition. In the various transition examples described herein in reference to <figref idrefs="DRAWINGS">FIGS. 3, 5, 8 and 9</figref> (e.g., <b>128</b> in <figref idrefs="DRAWINGS">FIG. 8</figref> or any of the examples in <figref idrefs="DRAWINGS">FIGS. 9A-9C</figref>), it is assumed that a single command is provided to a level shift/decode circuit which in turn sends out independent add and/or subtract signals to the corresponding stages.</div>
+<div class="description-paragraph" id="p-0079" num="0078">In an example sequenced configuration, a level shift/decode circuit can receive two or more commands so that independent add and/or subtract signals corresponding to each command are sent to the corresponding stages as a group separately from independent add and/or subtract signals of other group(s). Other sequenced configurations utilizing one or more features of the present disclosure can also be implemented.</div>
+<div class="description-paragraph" id="p-0080" num="0079"> <figref idrefs="DRAWINGS">FIGS. 10 and 11</figref> show examples of sequenced operations that can be implemented for certain transitions. In <figref idrefs="DRAWINGS">FIG. 10A</figref>, an example of a 13 dB transition is a non-sequenced transition having a pattern <b>130</b> of operations that can result from a single control command. Such a transition is also described herein in reference to <figref idrefs="DRAWINGS">FIG. 9B</figref> (fourth example from the left). <figref idrefs="DRAWINGS">FIG. 10B</figref> shows an example of how sequencing can be implemented to ensure that glitch will not occur during a similar transition. In the example of <figref idrefs="DRAWINGS">FIG. 10B</figref>, a sequence of operations can include three separate commands, with the commands resulting in successive patterns indicated as <b>140</b>, <b>142</b> and <b>144</b>. The first command can result in the first pattern of operation <b>140</b> where one 4 dB stage is added; and since such an addition is towards the stop attenuation state, no glitch occurs. The second command can result in the second pattern of operation <b>142</b> where three 1 dB stages are subtracted. Even though the second pattern of operation <b>142</b> includes subtractions, no glitch occurs because of the presence of the previously added 4 dB stage (in the first pattern of operation <b>140</b>). In some situations, the 4 dB stage added in the first pattern of operation <b>140</b> can be considered to be a buffer against a total of subtractions needed (e.g., 3 dB) for the transition. The third command can result in the third pattern of operation <b>144</b> where three 4 dB stages are added; and since such additions are toward the stop attenuation state, no glitch occurs.</div>
+<div class="description-paragraph" id="p-0081" num="0080">In <figref idrefs="DRAWINGS">FIG. 11A</figref>, another example of a 13 dB transition is a non-sequenced transition having a pattern <b>130</b> of operations that can result from a single control command. Such a transition is also described herein in reference to FIG. <b>9</b>B (last example from the left). <figref idrefs="DRAWINGS">FIG. 11B</figref> shows another example of how sequencing can be implemented to ensure that glitch will not occur during a similar transition. In the example of <figref idrefs="DRAWINGS">FIG. 11B</figref>, a sequence of operations can include three separate commands, with the commands resulting in successive patterns indicated as <b>140</b>, <b>142</b> and <b>144</b>. The first command can result in the first pattern of operation <b>140</b> where three 4 dB stages are added; and since such additions are toward the stop attenuation state, no glitch occurs. The second command can result in the second pattern of operation <b>142</b> where three 1 dB stages are subtracted. Even though the second pattern of operation <b>142</b> includes subtractions, no glitch occurs because of the presence of the three previously added 4 dB stages (in the first pattern of operation <b>140</b>). In some situations, the three 4 dB stages added in the first pattern of operation <b>140</b> can be considered to be a buffer against a total of subtractions needed (e.g., 3 dB) for the transition. The third command can result in the third pattern of operation <b>144</b> where one 4 dB stage is added; and since such an addition is towards the stop attenuation state, no glitch occurs.</div>
+<div class="description-paragraph" id="p-0082" num="0081">As described in the foregoing examples of <figref idrefs="DRAWINGS">FIGS. 10B and 11B</figref>, a first command can be configured to yield a pattern of operation towards the stop attenuation state (e.g., addition in <figref idrefs="DRAWINGS">FIGS. 10B and 11B</figref>), with sufficient magnitude to prevent glitches from any subsequent operation(s) away from the stop attenuation state (e.g., subtraction in <figref idrefs="DRAWINGS">FIGS. 10B and 11B</figref>). In more general terms, a first pattern of operation for a given transition can be configured to move attenuation towards the stop attenuation state with sufficient magnitude to accommodate some or all of subsequent operations toward the start attenuation state. A last pattern of operation for the same transition can also be configured to move attenuation towards the stop attenuation state. With such boundaries in place, one or more commands that result in corresponding intermediate pattern(s) of operation can be implemented without causing a glitch. In the examples of <figref idrefs="DRAWINGS">FIGS. 10B and 11B</figref>, there is only one intermediate pattern of operation (pattern <b>142</b>), and such a pattern is shown to include all of the away-from-stop attenuation state operations (e.g., subtractions).</div>
+<div class="description-paragraph" id="p-0083" num="0082">Table 2 lists the worst-case and best-case patterns for transitions involving the listed changes in attenuation (Δatt.), without the sequencing techniques as described herein. Table 3 lists the same worst-case and best-case patterns for transitions involving the listed changes in attenuation (Δatt.), with the sequencing techniques as described herein. In Table 3, an addition of a negative number indicates a subtraction of the corresponding stage. Similar table can be formed for transitions involving reductions in attenuation.</div>
+<div class="description-paragraph" id="p-0084" num="0083">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Worst case</td>
+<td class="description-td">Best case</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Number </td>
+<td class="description-td">Number </td>
+<td class="description-td">Worst </td>
+<td class="description-td">Number </td>
+<td class="description-td">Number </td>
+<td class="description-td">Worst </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">of 4 dB </td>
+<td class="description-td">of 1 dB </td>
+<td class="description-td">glitch</td>
+<td class="description-td">of 4 dB </td>
+<td class="description-td">of 1 dB </td>
+<td class="description-td">glitch</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Aatt.</td>
+<td class="description-td">stage(s) </td>
+<td class="description-td">stage(s) </td>
+<td class="description-td">size </td>
+<td class="description-td">stage(s) </td>
+<td class="description-td">stage(s) </td>
+<td class="description-td">size </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(dB)</td>
+<td class="description-td">added</td>
+<td class="description-td">added</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">added</td>
+<td class="description-td">added</td>
+<td class="description-td">(dB)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="7" nameend="7" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">−3</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">1</td>
+<td class="description-td">−2</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">1</td>
+<td class="description-td">−1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">2</td>
+<td class="description-td">−3</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">2</td>
+<td class="description-td">−2</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">−1</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">3</td>
+<td class="description-td">−3</td>
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">3</td>
+<td class="description-td">−2</td>
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">3</td>
+<td class="description-td">−1</td>
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">12</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">13</td>
+<td class="description-td">4</td>
+<td class="description-td">−3</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">14</td>
+<td class="description-td">4</td>
+<td class="description-td">−2</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">15</td>
+<td class="description-td">4</td>
+<td class="description-td">−1</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16</td>
+<td class="description-td">4</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">4</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">17</td>
+<td class="description-td">5</td>
+<td class="description-td">−3</td>
+<td class="description-td">0</td>
+<td class="description-td">4</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">18</td>
+<td class="description-td">5</td>
+<td class="description-td">−2</td>
+<td class="description-td">0</td>
+<td class="description-td">4</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">19</td>
+<td class="description-td">5</td>
+<td class="description-td">−1</td>
+<td class="description-td">0</td>
+<td class="description-td">4</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">20</td>
+<td class="description-td">5</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">5</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">21</td>
+<td class="description-td">6</td>
+<td class="description-td">−3</td>
+<td class="description-td">0</td>
+<td class="description-td">5</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">22</td>
+<td class="description-td">6</td>
+<td class="description-td">−2</td>
+<td class="description-td">0</td>
+<td class="description-td">5</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">23</td>
+<td class="description-td">6</td>
+<td class="description-td">−1</td>
+<td class="description-td">0</td>
+<td class="description-td">5</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">24</td>
+<td class="description-td">6</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">6</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">25</td>
+<td class="description-td">7</td>
+<td class="description-td">−3</td>
+<td class="description-td">0</td>
+<td class="description-td">6</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">26</td>
+<td class="description-td">7</td>
+<td class="description-td">−2</td>
+<td class="description-td">0</td>
+<td class="description-td">6</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">27</td>
+<td class="description-td">7</td>
+<td class="description-td">−1</td>
+<td class="description-td">0</td>
+<td class="description-td">6</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">28</td>
+<td class="description-td">7</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">7</td>
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">29</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">7</td>
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">30</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">31</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+<td class="description-td">7</td>
+<td class="description-td">3</td>
+<td class="description-td">0</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="7" nameend="7" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0085" num="0084">One can see in Table 3 that the sequencing techniques described herein in reference to <figref idrefs="DRAWINGS">FIGS. 10 and 11</figref> can eliminate glitches in almost all of the possible transitions. However, there are certain types of transitions involving Δatt. of 3 dB or less where introduction of a 4 dB stage can result in a glitch. It is also noted that sequencing can increase the overall switching time associated with a given sequenced transition. In the context of the 3-part sequence examples of <figref idrefs="DRAWINGS">FIGS. 10B and 11B</figref>, the overall switching time can be about triple the switching time associated with a non-sequenced transition.</div>
+<div class="description-paragraph" id="p-0086" num="0085">In the various examples described in reference to <figref idrefs="DRAWINGS">FIGS. 7-11</figref>, the seven 4 dB stage and the three 1 dB stages can provide an attenuation range of 0 dB to 31 dB in 1 dB steps. It will be understood that other combinations of attenuation stage values can also be implemented. For example, if one desires a similar attenuation range but with smaller steps, seven 4 dB stages and seven 0.5 dB stages can be implemented; and such a combination can yield an attenuation range of 0 dB to 31.5 dB in 0.5 dB steps.</div>
+<div class="description-paragraph" id="p-0087" num="0086"> <figref idrefs="DRAWINGS">FIG. 12</figref> shows a process <b>200</b> that can be implemented to operate an attenuator having one or more features as described herein. In block <b>202</b>, a desired amount of change in attenuation (Δatt.) to be implemented can be determined. In a decision block <b>204</b>, the process <b>200</b> can determine whether such a change can be implemented. For example, the process <b>200</b> can determine whether the end value resulting from the change is within an operating range of the attenuator. If the answer is “Yes,” the process <b>200</b> in block <b>206</b> can configure an array of a plurality of first attenuation elements (also referred to herein as stages or steps) and a plurality of second attenuation elements, such that the array yields the desired Δatt. In some implementations, configuring of the array in block <b>206</b> may or may not include a sequencing technique.</div>
+<div class="description-paragraph" id="p-0088" num="0087"> <figref idrefs="DRAWINGS">FIG. 13</figref> shows a process <b>220</b> that can be implemented to operate an attenuator using a sequencing technique. In block <b>222</b>, Δatt. between start and stop attenuation states can be determined, where such Δatt. is to be implemented utilizing an array of attenuation elements including a plurality of X-dB stages and M Y-dB stages, with X=(M+1)Y. In a decision block <b>224</b>, the process <b>220</b> can determine whether more than one X-dB stage is needed to implement the desired Δatt. If the answer is “Yes,” the process <b>200</b> in block <b>226</b> can determine the number of X-dB stages (N) needed for the Δatt. transition. In block <b>228</b>, a first operation can be performed with up to N−1 X-dB stage(s) towards the stop attenuation state. In block <b>230</b>, a second operation can be performed with Y-dB stage(s) towards the start attenuation state. In block <b>232</b>, a third operation can be performed with the remaining X-dB stage(s) towards the stop attenuation state.</div>
+<div class="description-paragraph" id="p-0089" num="0088"> <figref idrefs="DRAWINGS">FIG. 14</figref> shows an example of how various attenuation stages can be added to or subtracted from an RF path. An example attenuator <b>300</b> is similar to the example of <figref idrefs="DRAWINGS">FIG. 7</figref>, in that seven 4 dB stages (<b>302</b>) and three 1 dB stages (<b>312</b>) are implemented between a first node RF<b>1</b> and a second node RF<b>2</b>. As shown, each stage can be a switchable stage <b>320</b> that includes a parallel arrangement of an attenuation element (4 dB or 1 dB) and a corresponding switch (<b>304</b> or <b>314</b>). Such parallel arrangements can be connected in series so as to yield a switchable array capable of providing 0 dB to 31 dB attenuation between RF<b>1</b> and RF<b>2</b>.</div>
+<div class="description-paragraph" id="p-0090" num="0089">Each switch (<b>304</b> or <b>314</b>) is shown to be controllable independently through its respective control line from a level shift/decode circuit <b>124</b>. For example, a line <b>306</b> is shown to control the switch <b>304</b> associated with one of the 4 dB elements. Similarly, a line <b>316</b> is shown to control the switch <b>314</b> associated with one of the 1 dB elements. Accordingly, turning a given switch ON results in the corresponding attenuation element being bypassed, thereby subtracting that attenuation element from the RF path. Similarly, turning the switch OFF results in the attenuation element being inserted (added) into the RF path.</div>
+<div class="description-paragraph" id="p-0091" num="0090"> <figref idrefs="DRAWINGS">FIGS. 15A and 15B</figref> show examples of how each switchable attenuation stage <b>320</b> of <figref idrefs="DRAWINGS">FIG. 14</figref> can be implemented. <figref idrefs="DRAWINGS">FIG. 15A</figref> shows that in some embodiments, a switchable attenuation stage <b>320</b> can include a switch portion <b>324</b> coupled to a resistor array <b>322</b>. When both switches S<b>1</b> and S<b>2</b> are connected to the upper throws, an RF signal bypasses the resistor array <b>322</b>. When both switches S<b>1</b> and S<b>2</b> are connected to the lower throws, the RF signal passes through the resistor array <b>322</b>. In the example of <figref idrefs="DRAWINGS">FIG. 15A</figref>, the resistor array <b>322</b> is a π-type resistor network; and such a network can be configured to provide, for example accurate attenuation and desired impedance matching.</div>
+<div class="description-paragraph" id="p-0092" num="0091"> <figref idrefs="DRAWINGS">FIG. 15B</figref> shows that in some embodiments, a switchable attenuation stage <b>320</b> can include a switch portion <b>324</b> coupled to a resistor array <b>322</b>. When both switches S<b>1</b> and S<b>2</b> are connected to the upper throws, an RF signal bypasses the resistor array <b>322</b>. When both switches S<b>1</b> and S<b>2</b> are connected to the lower throws, the RF signal passes through the resistor array <b>322</b>. In the example of <figref idrefs="DRAWINGS">FIG. 15B</figref>, the resistor array <b>322</b> is a T-type resistor network; and such a network can be configured to provide, for example accurate attenuation and desired impedance matching.</div>
+<div class="description-paragraph" id="p-0093" num="0092">It will be understood that other types of resistor network or resistance configurations can be utilized to provide switched attenuation functionality for a given stage.</div>
+<div class="description-paragraph" id="p-0094" num="0093">In some embodiments, the resistors in the resistor-arrays of <figref idrefs="DRAWINGS">FIGS. 15A and 15B</figref> can be implemented as thin-film resistive layers. Such thin-film resistive layers can be implemented on the same semiconductor substrate on which the switches (e.g., S<b>1</b>, S<b>2</b>) are fabricated. Such a semiconductor substrate can include, for example, gallium arsenide (GaAs).</div>
+<div class="description-paragraph" id="p-0095" num="0094"> <figref idrefs="DRAWINGS">FIG. 16</figref> shows that in some embodiments, an attenuator having one or more features as described herein can be implemented in an RF module <b>400</b>. As shown, such a module can include a step attenuator circuit <b>102</b> as described herein. The module <b>400</b> can further include a controller <b>104</b> having one or more features as described herein.</div>
+<div class="description-paragraph" id="p-0096" num="0095"> <figref idrefs="DRAWINGS">FIG. 17</figref> shows that in some embodiments, the module of <figref idrefs="DRAWINGS">FIG. 16</figref> can be implemented as a packaged module <b>400</b>. In the example of <figref idrefs="DRAWINGS">FIG. 17</figref>, the step attenuator circuit <b>102</b> is depicted as being implemented on a GaAs die <b>410</b>, and the controller <b>104</b> is depicted as being implemented on a CMOS die <b>420</b>. Other configurations can also be implemented. For example, both of the step attenuator circuit <b>102</b> and the controller <b>104</b> can be implemented on a single CMOS die. In another example, both of the step attenuator circuit <b>102</b> and the controller <b>104</b> can be implemented on a single CMOS-silicon-on-insulator (CMOS-SOI) die which can yield improved switching performance (e.g., CMOS switches with improved isolation).</div>
+<div class="description-paragraph" id="p-0097" num="0096"> <figref idrefs="DRAWINGS">FIG. 18</figref> shows non-limiting examples of how an attenuator having one or more features as described herein can be implemented in an RF system <b>500</b>. Such an RF system can include an antenna <b>502</b> configured to facilitate reception and/or transmission of RF signals. In the context of reception, an RF signal received by the antenna <b>502</b> can be filtered (e.g., by a band-pass filter <b>510</b>) before being amplified by a low-noise amplifier (LNA) <b>512</b>. Such an LNA-amplified RF signal can be filtered (e.g., by a band-pass filter <b>514</b>), passed through a step attenuator (RF ATTEN) <b>100</b>, and routed to a mixer <b>540</b>. The mixer <b>540</b> can operate with an oscillator (not shown) to yield an intermediate-frequency (IF) signal. Such an IF signal can be filtered (e.g., by a band-pass filter <b>542</b>) and passed through a step attenuator (IF ATTEN) <b>100</b> before being routed to an intermediate-frequency (IF) amplifier <b>516</b>. Either or both of the step attenuators (RF ATTEN and IF ATTEN) <b>100</b> along the receive path can include one or more features as described herein.</div>
+<div class="description-paragraph" id="p-0098" num="0097">In the context of transmission, an IF signal can be provided to an IF amplifier <b>520</b>. An output of the IF amplifier <b>520</b> can be filtered (e.g., by a band-pass filter <b>544</b>) and passed through a step attenuator (IF ATTEN) <b>100</b> before being routed to a mixer <b>546</b>. The mixer <b>546</b> can operate with an oscillator (not shown) to yield an RF signal. Such an RF signal can be filtered (e.g., by a band-pass filter <b>522</b>) and passed through a step attenuator (RF ATTEN) <b>100</b> before being routed to a power amplifier (PA) <b>524</b>. The PA-amplified RF signal can be routed to the antenna <b>502</b> through a filter (e.g., a band-pass filter <b>526</b>) for transmission. Either or both of the step attenuators (IF ATTEN and RF ATTEN) <b>100</b> along the transmit path can include one or more features as described herein.</div>
+<div class="description-paragraph" id="p-0099" num="0098">In some embodiments, various operations associated with the RF system <b>500</b> can be controlled and/or facilitated by a system controller <b>530</b>. Such a system controller can include, for example, a processor <b>532</b> and a storage medium such as a non-transient computer-readable medium (CRM) <b>534</b>. In some embodiments, at least some control functionalities associated with the operation of one or more step attenuators <b>100</b> in the RF system <b>500</b> can be performed by the system controller <b>530</b>.</div>
+<div class="description-paragraph" id="p-0100" num="0099">In some embodiments, the RF system <b>500</b> of <figref idrefs="DRAWINGS">FIG. 18</figref> can be implemented as a base transceiver station configured for operation in various wireless bands, including cellular bands. It will also be understood that one or more features of the step attenuator <b>100</b> as described herein can also be implemented in portable wireless devices.</div>
+<div class="description-paragraph" id="p-0101" num="0100">Various examples related to one or more features of the present disclosure are described herein in the context of step attenuation applications. It will be understood, however, that one or more features of the present disclosure can also be implemented in other RF applications, especially in applications where switching in and out of electrical elements in an array over a time period can result in intermediate states deviating outside of a desired range.</div>
+<div class="description-paragraph" id="p-0102" num="0101">The present disclosure describes various features, no single one of which is solely responsible for the benefits described herein. It will be understood that various features described herein may be combined, modified, or omitted, as would be apparent to one of ordinary skill. Other combinations and sub-combinations than those specifically described herein will be apparent to one of ordinary skill, and are intended to form a part of this disclosure. Various methods are described herein in connection with various flowchart steps and/or phases. It will be understood that in many cases, certain steps and/or phases may be combined together such that multiple steps and/or phases shown in the flowcharts can be performed as a single step and/or phase. Also, certain steps and/or phases can be broken into additional sub-components to be performed separately. In some instances, the order of the steps and/or phases can be rearranged and certain steps and/or phases may be omitted entirely. Also, the methods described herein are to be understood to be open-ended, such that additional steps and/or phases to those shown and described herein can also be performed.</div>
+<div class="description-paragraph" id="p-0103" num="0102">Some aspects of the systems and methods described herein can advantageously be implemented using, for example, computer software, hardware, firmware, or any combination of computer software, hardware, and firmware. Computer software can comprise computer executable code stored in a computer readable medium (e.g., non-transitory computer readable medium) that, when executed, performs the functions described herein. In some embodiments, computer-executable code is executed by one or more general purpose computer processors. A skilled artisan will appreciate, in light of this disclosure, that any feature or function that can be implemented using software to be executed on a general purpose computer can also be implemented using a different combination of hardware, software, or firmware. For example, such a module can be implemented completely in hardware using a combination of integrated circuits. Alternatively or additionally, such a feature or function can be implemented completely or partially using specialized computers designed to perform the particular functions described herein rather than by general purpose computers.</div>
+<div class="description-paragraph" id="p-0104" num="0103">Multiple distributed computing devices can be substituted for any one computing device described herein. In such distributed embodiments, the functions of the one computing device are distributed (e.g., over a network) such that some functions are performed on each of the distributed computing devices.</div>
+<div class="description-paragraph" id="p-0105" num="0104">Some embodiments may be described with reference to equations, algorithms, and/or flowchart illustrations. These methods may be implemented using computer program instructions executable on one or more computers. These methods may also be implemented as computer program products either separately, or as a component of an apparatus or system. In this regard, each equation, algorithm, block, or step of a flowchart, and combinations thereof, may be implemented by hardware, firmware, and/or software including one or more computer program instructions embodied in computer-readable program code logic. As will be appreciated, any such computer program instructions may be loaded onto one or more computers, including without limitation a general purpose computer or special purpose computer, or other programmable processing apparatus to produce a machine, such that the computer program instructions which execute on the computer(s) or other programmable processing device(s) implement the functions specified in the equations, algorithms, and/or flowcharts. It will also be understood that each equation, algorithm, and/or block in flowchart illustrations, and combinations thereof, may be implemented by special purpose hardware-based computer systems which perform the specified functions or steps, or combinations of special purpose hardware and computer-readable program code logic means.</div>
+<div class="description-paragraph" id="p-0106" num="0105">Furthermore, computer program instructions, such as embodied in computer-readable program code logic, may also be stored in a computer readable memory (e.g., a non-transitory computer readable medium) that can direct one or more computers or other programmable processing devices to function in a particular manner, such that the instructions stored in the computer-readable memory implement the function(s) specified in the block(s) of the flowchart(s). The computer program instructions may also be loaded onto one or more computers or other programmable computing devices to cause a series of operational steps to be performed on the one or more computers or other programmable computing devices to produce a computer-implemented process such that the instructions which execute on the computer or other programmable processing apparatus provide steps for implementing the functions specified in the equation(s), algorithm(s), and/or block(s) of the flowchart(s).</div>
+<div class="description-paragraph" id="p-0107" num="0106">Some or all of the methods and tasks described herein may be performed and fully automated by a computer system. The computer system may, in some cases, include multiple distinct computers or computing devices (e.g., physical servers, workstations, storage arrays, etc.) that communicate and interoperate over a network to perform the described functions. Each such computing device typically includes a processor (or multiple processors) that executes program instructions or modules stored in a memory or other non-transitory computer-readable storage medium or device. The various functions disclosed herein may be embodied in such program instructions, although some or all of the disclosed functions may alternatively be implemented in application-specific circuitry (e.g., ASICs or FPGAs) of the computer system. Where the computer system includes multiple computing devices, these devices may, but need not, be co-located. The results of the disclosed methods and tasks may be persistently stored by transforming physical storage devices, such as solid state memory chips and/or magnetic disks, into a different state.</div>
+<div class="description-paragraph" id="p-0108" num="0107">Unless the context clearly requires otherwise, throughout the description and the claims, the words “comprise,” “comprising,” and the like are to be construed in an inclusive sense, as opposed to an exclusive or exhaustive sense; that is to say, in the sense of “including, but not limited to.” The word “coupled”, as generally used herein, refers to two or more elements that may be either directly connected, or connected by way of one or more intermediate elements. Additionally, the words “herein,” “above,” “below,” and words of similar import, when used in this application, shall refer to this application as a whole and not to any particular portions of this application. Where the context permits, words in the above Detailed Description using the singular or plural number may also include the plural or singular number respectively. The word “or” in reference to a list of two or more items, that word covers all of the following interpretations of the word: any of the items in the list, all of the items in the list, and any combination of the items in the list. The word “exemplary” is used exclusively herein to mean “serving as an example, instance, or illustration.” Any implementation described herein as “exemplary” is not necessarily to be construed as preferred or advantageous over other implementations.</div>
+<div class="description-paragraph" id="p-0109" num="0108">The disclosure is not intended to be limited to the implementations shown herein. Various modifications to the implementations described in this disclosure may be readily apparent to those skilled in the art, and the generic principles defined herein may be applied to other implementations without departing from the spirit or scope of this disclosure. The teachings of the invention provided herein can be applied to other methods and systems, and are not limited to the methods and systems described above, and elements and acts of the various embodiments described above can be combined to provide further embodiments. Accordingly, the novel methods and systems described herein may be embodied in a variety of other forms; furthermore, various omissions, substitutions and changes in the form of the methods and systems described herein may be made without departing from the spirit of the disclosure. The accompanying claims and their equivalents are intended to cover such forms or modifications as would fall within the scope and spirit of the disclosure.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">21</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM249304702">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. An attenuator comprising:
+<div class="claim-text">at least N first attenuation steps each configured to be capable of providing a first fixed attenuation value; and</div>
+<div class="claim-text">at least M second attenuation steps each configured to be capable of providing a second fixed attenuation value, the first fixed attenuation value approximately equal to (M+1) times the second fixed attenuation value, the attenuator capable of providing a total attenuation value from approximately zero to a sum of the attenuation values of the N first attenuation steps and the M second attenuation steps in increments of the second fixed attenuation value.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The attenuator of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the attenuator is configured such that during a change in the total attenuation value, a glitch has a magnitude that is less than or equal to a difference between the first fixed attenuation value and the second fixed attenuation value.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The attenuator of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the at least N first attenuation steps and the at least M second attenuation steps are arranged in series between an input node and an output node of the attenuator.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The attenuator of <claim-ref idref="CLM-00003">claim 3</claim-ref> wherein the at least N first attenuation steps are arranged in series with each other in a first group, and the at least M second attenuation steps are arranged in series with each other in a second group.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The attenuator of <claim-ref idref="CLM-00003">claim 3</claim-ref> wherein each of the at least N first attenuation steps is configured as a switchable attenuation step capable of providing an attenuation of approximately zero or the first fixed attenuation value.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The attenuator of <claim-ref idref="CLM-00005">claim 5</claim-ref> wherein each of the at least M second attenuation steps is configured as a switchable attenuation step capable of providing an attenuation of approximately zero or the second fixed attenuation value.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The attenuator of <claim-ref idref="CLM-00003">claim 3</claim-ref> wherein each of the first attenuation steps and the second attenuation steps includes a parallel arrangement of a resistive path and a bypass path, and a switching circuit configured to provide the corresponding fixed attenuation value by the resistive path or approximately zero attenuation by the bypass path in the respective attenuation step.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. An packaged electronic device comprising:
+<div class="claim-text">a packaging substrate configured to receive a plurality of components; and</div>
+<div class="claim-text">an attenuation circuit implemented on the packaging substrate and including at least N first attenuation steps each configured to be capable of providing a first fixed attenuation value, and at least M second attenuation steps each configured to be capable of providing a second fixed attenuation value, the first fixed attenuation value approximately equal to (M+1) times the second fixed attenuation value, the attenuator circuit capable of providing a total attenuation value from approximately zero to a sum of the attenuation values of the N first attenuation steps and the M second attenuation steps in increments of the second fixed attenuation value.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The packaged electronic device of <claim-ref idref="CLM-00008">claim 8</claim-ref> further comprising a controller implemented on the packaging substrate and in communication with the attenuation circuit, the controller configured to control each of the at least N first attenuation steps and the at least M second attenuation steps.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The packaged electronic device of <claim-ref idref="CLM-00009">claim 9</claim-ref> wherein each of the at least N first attenuation steps and the at least M second attenuation steps includes a combination of a resistance circuit, a bypass path, and a switching circuit to provide the corresponding fixed attenuation value by the resistance circuit or approximately zero attenuation by the bypass path in the respective attenuation step.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The packaged electronic device of <claim-ref idref="CLM-00010">claim 10</claim-ref> wherein the resistance circuit includes a π-type or T-type network of resistors.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The packaged electronic device of <claim-ref idref="CLM-00011">claim 11</claim-ref> wherein at least some of the resistors are implemented as thin-film resistors.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The packaged electronic device of <claim-ref idref="CLM-00011">claim 11</claim-ref> wherein the attenuation circuit is implemented on a first semiconductor die and the controller is implemented on a second semiconductor die.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The packaged electronic device of <claim-ref idref="CLM-00013">claim 13</claim-ref> wherein the first semiconductor die includes a gallium arsenide die and the second semiconductor die includes a complementary metal-oxide-semiconductor die.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The packaged electronic device of <claim-ref idref="CLM-00009">claim 9</claim-ref> wherein the packaged electronic device is a packaged module configured for radio-frequency application.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The packaged electronic device of <claim-ref idref="CLM-00015">claim 15</claim-ref> further comprising a radio-frequency integrated circuit.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The packaged electronic device of <claim-ref idref="CLM-00016">claim 16</claim-ref> wherein the radio-frequency integrated circuit is configured to amplify a received signal.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. A electronic device comprising:
+<div class="claim-text">an electronic circuit having a signal path; and</div>
+<div class="claim-text">an attenuator implemented along the signal path and including at least N first attenuation steps each configured to be capable of providing a first fixed attenuation value, and at least M second attenuation steps each configured to be capable of providing a second fixed attenuation value, the first fixed attenuation value approximately equal to (M+1) times the second fixed attenuation value, the attenuator capable of providing a total attenuation value from approximately zero to a sum of the attenuation values of the N first attenuation steps and the M second attenuation steps in increments of the second fixed attenuation value.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The electronic device of <claim-ref idref="CLM-00018">claim 18</claim-ref> wherein the electronic device is a radio-frequency device, and the signal path is configured to support a radio-frequency signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The attenuator of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the at least N first attenuation steps include N first attenuation steps.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The attenuator of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the at least M second attenuation steps include M second attenuation steps.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

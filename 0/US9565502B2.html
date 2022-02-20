@@ -1,0 +1,1509 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US9565502B2 - Binaural hearing assistance system comprising a database of head related transfer functions 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA188488969">
+<div class="abstract" id="p-0001" num="0000">The application relates to a binaural hearing assistance system comprising left and right hearing assistance devices adapted for being located at or in a left and right ear, respectively, of a user, each of the left and right hearing assistance devices comprising a) an input unit for providing one or more electric input signals based on one or more input sounds of a sound field surrounding the binaural hearing assistance system; b) a source separation unit for separating and localizing one or more sound sources S<sub>s </sub>in said sound field relative to the input transducer unit based on said one or more electric input signals, and providing respective separated sound source signals X<sub>s</sub>, and localization parameters LP<sub>s </sub>of said one or more sound sources (s=1, 2, . . . , N<sub>s</sub>); c) an antenna and transceiver unit adapted for allowing an exchange of said electric input signals, and/or said separated sound source signals X<sub>s </sub>and/or said localization parameters LP<sub>s </sub>of said one or more sound sources between said left and right hearing assistance devices. The application further relates to a method of operating a binaural hearing assistance system. The object of the present application is to provide an improved binaural hearing assistance system. The problem is solved in that the system further comprises d) a comparison and calculation unit for comparing said electric input signals, and/or said separated sound source signals X<sub>s</sub> <sup>l</sup>, X<sub>s</sub> <sup>r </sup>and/or said localization parameters LP<sub>s</sub> <sup>l</sup>, LP<sub>s</sub> <sup>r </sup>of said left and right hearing assistance devices, respectively, to estimate a head related transfer function HRTF value for one or more of said sound sources S with said localization parameters LP<sub>s </sub>at a given point in time; and e) a memory unit for storing and updating a database of said HRTF values and optionally said localization parameters LP<sub>s </sub>over time. This has the advantage of providing a flexible binaural hearing assistance system that is capable of learning the relevant HRTFs of its user, optionally without being initialized. The invention may e.g. be used in hearing aids, headsets, ear phones, active ear protection systems and combinations thereof.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES111111560">
+<div class="description-paragraph" id="p-0002" num="0001">This application is a Divisional of copending application Ser. No. 14/531,415, filed on Nov. 3, 2014, which claims priority under 35 U.S.C. §120. This application claims priority of Application EP 13191567.0 filed in Europe on Nov. 5, 2013, under 35 U.S.C. §119, all of which are hereby expressly incorporated by reference into the present application.</div>
+<heading id="h-0001">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present application relates to hearing assistance devices, in particular to a binaural hearing assistance system comprising left and right hearing assistance devices adapted for being located at and/or in a left and right ear of a user, respectively, or fully or partially implanted in the head of a user. The disclosure relates specifically to a binaural hearing assistance system configured to build a database of the user's head related transfer functions.</div>
+<div class="description-paragraph" id="p-0004" num="0003">The application furthermore relates to a method of operating a hearing assistance system comprising left and right hearing assistance devices. The application further relates to a data processing system comprising a processor and program code means for causing the processor to perform at least some of the steps of the method.</div>
+<div class="description-paragraph" id="p-0005" num="0004">Embodiments of the disclosure may e.g. be useful in hearing aids, headsets, ear phones, active ear protection systems and combinations thereof.</div>
+<heading id="h-0002">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0006" num="0005">The following account of the prior art relates to one of the areas of application of the present application, hearing aids.</div>
+<div class="description-paragraph" id="p-0007" num="0006">The human ability to spatially localize a sound source is to a large extent dependent on perception of the sound at both ears. Due to different physical distances between the sound source and the left and right ears, a difference in time of arrival of a given wavefront of the sound at the left and right ears is experienced (the Interaural Time Difference, ITD). Consequently, a difference in phase of the sound signal (at a given point in time) will likewise be experienced and in particular perceivable at relatively low frequencies (e.g. below 1500 Hz). Due to the shadowing effect of the head (diffraction), a difference in level of the received sound signal at the left and right ears is likewise experienced (the Interaural Level Difference, ILD). The attenuation by the head (and body) is larger at relatively higher frequencies (e.g. above 1500 Hz). The detection of the cues provided by the ITD and ILD largely determine our ability to localize a sound source in a horizontal plane (i.e. perpendicular to a longitudinal direction of a standing person). The diffraction of sound by the head (and body) is described by the Head Related Transfer Functions (HRTF). The HRTF for the left and right ears ideally describe respective transfer functions from a sound source (from a given direction) to the ear drums of the left and right ears. If correctly determined, the HRTFs provide the relevant ITD and ILD between the left and right ears for a given direction of sound relative to the user's ears. Such HRTF<sub>left </sub>and HRTF<sub>right </sub>are preferably applied to a sound signal received by a left and right hearing assistance device in order to improve a user's sound localization ability (cf. e.g. Chapter 14 of [Dillon; 2001]).</div>
+<div class="description-paragraph" id="p-0008" num="0007">Several methods of generating HRTFs are known. Standard HRTFs from a dummy head can e.g. be provided, as e.g. derived from Gardner and Martin's KEMAR HRTF database [Gardner and Martin, 1994] and applied to sound signals received by left and right hearing assistance devices of a specific user. Alternatively, a direct measurement of the user's HRTF, e.g. during a fitting session can—in principle—be performed, and the results thereof be stored in a memory of the respective (left and right) hearing assistance devices. During use, e.g. in case the hearing assistance device is of the Behind The Ear (BTE) type, where the microphone(s) that pick up the sound typically are located near the top of (and often, a little behind) pinna, a direction of impingement of the sound source is determined by each device, and the respective relative HRTFs are applied to the (raw) microphone signal to (re)establish the relevant localization cues in the signal presented to the user.</div>
+<div class="description-paragraph" id="p-0009" num="0008">WO2010115227A1 describes a method and system for allowing a recipient of a bilateral hearing aid system, to locate the source of a sound signal about the recipient using localization cues (e.g. interaural level difference (ILD)) in the sound signal, which are modified (e.g. transposed to a lower frequency) to provide useable localization cues to generate a stimulating signal for application to the recipient.</div>
+<div class="description-paragraph" id="p-0010" num="0009">US2004218771A1 describes a method for producing an approximated partial transfer function for use in an electroacoustic appliance for producing an environment correction transfer function that matches an appliance transfer function for the electroacoustic appliance to an acoustic environment. An environment correction transfer function to standard HRTFs is determined, the correction determining the partial transfer function due to the specific environmental conditions and the particular hearing aid used.</div>
+<div class="description-paragraph" id="p-0011" num="0010">WO2009001277A1 describes a binaural object-oriented audio decoder for providing an enhanced binaural object-oriented audio decoder by modifying the received head-related transfer function parameters according to a received desired distance, which allows an arbitrary virtual positioning of objects in a space.</div>
+<heading id="h-0003">SUMMARY</heading>
+<div class="description-paragraph" id="p-0012" num="0011">In the present disclosure, a binaural fitting is intended to mean a hearing assistance device-pair adapted to be able to exchange data between them, ‘data’ being audio signals, control signals, and/or other parameters. According to the present disclosure—with a binaural fitting—it is possible to learn the individual Head Related Transfer Functions (HRTF's) from the sources over a given time, which will allow the device to modify the position of nearby sound sources or position virtual sources. With this approach it is possible to skip the measurement (or estimate) of the individual HRTF during hearing instrument fitting. A bilateral fitting, on the other hand, is intended to mean a hearing assistance device-pair adapted for being worn at both ears of a user, but lacking the capability of exchanging data between them.</div>
+<div class="description-paragraph" id="p-0013" num="0012">EP 2 563 045 A1 states that with a binaural fit, it is possible to learn the HRTF's from the sources over a given time. When the HRTF's have been learned it is possible to switch to the bilateral BEE estimation to minimize the inter-instrument communication. With this approach it is possible to skip the measurement of the HRTF during hearing instrument fitting, and minimize the power consumption from inter-instrument communication. Whenever the set of hearing instruments have found that the difference in chosen frequency bands is sufficiently small between the binaural and bilateral estimation for a given spatial location, the instrument can rely on the bilateral estimation method for that spatial location.</div>
+<div class="description-paragraph" id="p-0014" num="0013">An object of the present application is to provide an adaptive and improved binaural hearing assistance system.</div>
+<div class="description-paragraph" id="p-0015" num="0014">Objects of the application are achieved by the invention described in the accompanying claims and as described in the following.</div>
+<div class="description-paragraph" id="h-0004" num="0000">A Binaural Hearing Assistance System:</div>
+<div class="description-paragraph" id="p-0016" num="0015">In an aspect, an object of the application is achieved by a binaural hearing assistance system comprising left and right hearing assistance devices adapted for being located at or in a left and right ear, respectively, of a user (or fully or partially implemented in the head, e.g. at the left and right ear of the user), each of the left and right hearing assistance devices comprising
+</div> <ul> <li id="ul0001-0001" num="0000"> <ul> <li id="ul0002-0001" num="0016">an input unit for providing one or more electric input signals based on one or more input sounds of a sound field surrounding the binaural hearing assistance system;</li> <li id="ul0002-0002" num="0017">a source separation unit for separating and localizing one or more sound sources S<sub>s </sub>in said sound field relative to the input transducer unit based on said one or more electric input signals, and providing respective separated sound source signals X<sub>s</sub>, and localization parameters LPs of said one or more sound sources (s=1, 2, . . . , N<sub>s</sub>);</li> <li id="ul0002-0003" num="0018">an antenna and transceiver unit adapted for allowing an exchange of said electric input signals and/or said separated sound source signals Xs and/or said localization parameters LPs of said one or more sound sources between said left and right hearing assistance devices.</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0017" num="0019">Each hearing assistance device further comprises,
+</div> <ul> <li id="ul0003-0001" num="0000"> <ul> <li id="ul0004-0001" num="0020">a comparison and calculation unit for comparing said electric input signals and/or said separated sound source signals X<sub>s</sub> <sup>l</sup>, X<sub>s</sub> <sup>r </sup>of said left and right hearing assistance devices, respectively, to estimate a head related transfer function HRTF value for one or more of said sound sources S with said localization parameters LP<sub>s </sub>at a given point in time; and</li> <li id="ul0004-0002" num="0021">a memory unit for storing and updating a database of said HRTF values over time.</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0018" num="0022">This has the advantage of providing a flexible binaural hearing assistance system that is capable of learning the relevant HRTFs of its user.</div>
+<div class="description-paragraph" id="p-0019" num="0023">In an embodiment, the database of HRTF values initially comprises standard HRTF-data, e.g. from a dummy head, e.g. derived from Gardner and Martin's KEMAR HRTF database or otherwise measured or estimated HRTF-values. In an embodiment, the database of HRTF values is initially empty (so that the binaural hearing assistance system (without prior knowledge of any HRTF-values) gradually improves and learns the HRTF-values for the particular user of the system).</div>
+<div class="description-paragraph" id="p-0020" num="0024">In an embodiment, the binaural hearing assistance system is configured to provide that said HRTF values are updated according to a criterion or learning rule.</div>
+<div class="description-paragraph" id="p-0021" num="0025">In an embodiment, the HRTF values are relative values (indicative of a relative difference between the head related transfer functions for the right and left ears). In an embodiment, each HRTF values is (or can be) expressed as a complex number (for a given source and location of the source relative the user). In an embodiment, the HRTF value for a given source and location of the source relative the user is a complex number indicative of a relative difference between the head related transfer functions for the right and left ears. In an embodiment, the HRTF-value is expressed as a ratio of the head related transfer functions for the right and left ears, HRTF=HRTF<sub>r</sub>/HRTF<sub>l</sub>.</div>
+<div class="description-paragraph" id="p-0022" num="0026">In an embodiment, the binaural hearing assistance system is configured to provide that a HRTF value is updated when a difference measure ΔHRTF between a currently estimated HRTF value and a corresponding HRTF value stored in the database is larger than a threshold value ΔHRTF<sub>TH </sub>(e.g. a complex threshold value, e.g. so that the real and imaginary (or magnitude and phase) parts of the difference measure ΔHRTF are evaluated separately). The difference measure may be based on ratios, or differences of the relevant current and stored HRTF values (or functional values thereof, e.g. logarithmic or absolute value).</div>
+<div class="description-paragraph" id="h-0005" num="0000">Online Learning of HRTF</div>
+<div class="description-paragraph" id="p-0023" num="0027">Given a source signal S<sub>s </sub>at a given position θ<sub>s</sub>, φ<sub>s</sub>, d<sub>s </sub>relative to the microphone, the ratio between the corresponding signals that reaches the right and left microphones is</div>
+<div class="description-paragraph" id="p-0024" num="0028">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mi>s</mi>
+<mi>r</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mi>s</mi>
+<mi>l</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>r</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>S</mi>
+<mi>s</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>l</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>S</mi>
+<mi>s</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>r</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>l</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mfrac>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0025" num="0029">The ratio can be split into the magnitude part that contains the Interaural Level Difference (ILD) indexed by the position parameters (with its notational short form A<sub>s</sub>) and the timing part, the Interaural Time Difference (ITD) indexed by the position parameters (with its notational short form Θ<sub>s</sub>).</div>
+<div class="description-paragraph" id="p-0026" num="0030"> <maths id="MATH-US-00002" num="00002"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mi>I</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>L</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mi>D</mi> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>k</mi> <mo>,</mo> <msub> <mi>θ</mi> <mi>s</mi> </msub> <mo>,</mo> <msub> <mi>ϕ</mi> <mi>s</mi> </msub> <mo>,</mo> <msub> <mi>d</mi> <mi>s</mi> </msub> </mrow> <mo>]</mo> </mrow> </mrow> </mrow> <mo>=</mo> <mrow> <mfrac> <mrow> <mo></mo> <mrow> <msubsup> <mi>X</mi> <mi>s</mi> <mi>r</mi> </msubsup> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>n</mi> <mo>,</mo> <mi>k</mi> </mrow> <mo>]</mo> </mrow> </mrow> <mo></mo> </mrow> <mrow> <mo></mo> <mrow> <msubsup> <mi>X</mi> <mi>s</mi> <mi>l</mi> </msubsup> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>n</mi> <mo>,</mo> <mi>k</mi> </mrow> <mo>]</mo> </mrow> </mrow> <mo></mo> </mrow> </mfrac> <mo>=</mo> <mrow> <msub> <mi>A</mi> <mi>s</mi> </msub> <mo>⁡</mo> <mrow> <mo>[</mo> <mi>k</mi> <mo>]</mo> </mrow> </mrow> </mrow> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mrow> <mi>I</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>T</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mi>D</mi> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>k</mi> <mo>,</mo> <msub> <mi>θ</mi> <mi>s</mi> </msub> <mo>,</mo> <msub> <mi>ϕ</mi> <mi>s</mi> </msub> <mo>,</mo> <msub> <mi>d</mi> <mi>s</mi> </msub> </mrow> <mo>]</mo> </mrow> </mrow> </mrow> <mo>=</mo> <mrow> <mfrac> <mrow> <mrow> <mi>∠</mi> <mo>⁢</mo> <mrow> <mo>{</mo> <mrow> <msubsup> <mi>X</mi> <mi>s</mi> <mi>r</mi> </msubsup> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>n</mi> <mo>,</mo> <mi>k</mi> </mrow> <mo>]</mo> </mrow> </mrow> <mo>}</mo> </mrow> </mrow> <mo>-</mo> <mrow> <mi>∠</mi> <mo>⁢</mo> <mrow> <mo>{</mo> <mrow> <msubsup> <mi>X</mi> <mi>s</mi> <mi>l</mi> </msubsup> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>n</mi> <mo>,</mo> <mi>k</mi> </mrow> <mo>]</mo> </mrow> </mrow> <mo>}</mo> </mrow> </mrow> </mrow> <mrow> <mn>2</mn> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>π</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mi>f</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>k</mi> <mo>)</mo> </mrow> </mrow> </mrow> </mfrac> <mo>=</mo> <mrow> <msub> <mi>Θ</mi> <mi>s</mi> </msub> <mo>⁡</mo> <mrow> <mo>[</mo> <mi>k</mi> <mo>]</mo> </mrow> </mrow> </mrow> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mi>and</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>thus</mi> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mrow> <msubsup> <mi>X</mi> <mi>s</mi> <mi>r</mi> </msubsup> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>n</mi> <mo>,</mo> <mi>k</mi> </mrow> <mo>]</mo> </mrow> </mrow> <mo>=</mo> <mrow> <mrow> <msub> <mi>A</mi> <mi>s</mi> </msub> <mo>⁡</mo> <mrow> <mo>[</mo> <mi>k</mi> <mo>]</mo> </mrow> </mrow> <mo>⁢</mo> <mrow> <msubsup> <mi>X</mi> <mi>s</mi> <mi>l</mi> </msubsup> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>n</mi> <mo>,</mo> <mi>k</mi> </mrow> <mo>]</mo> </mrow> </mrow> <mo>⁢</mo> <msup> <mi>ⅇ</mi> <mrow> <mrow> <mo>-</mo> <mn>2</mn> </mrow> <mo>⁢</mo> <mrow> <msub> <mi>πjΘ</mi> <mi>s</mi> </msub> <mo>⁡</mo> <mrow> <mo>[</mo> <mi>k</mi> <mo>]</mo> </mrow> </mrow> </mrow> </msup> </mrow> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where
+<br/>
+S<sub>s </sub>source signal and S<sub>s</sub>[n,k] source signal in filter bank representation
+<br/>
+M<sup>r </sup>microphone signal at right microphone
+<br/>
+X<sub>s</sub> <sup>r </sup>source s signal at right microphone
+<br/>
+n time index
+<br/>
+k frequency index
+<br/>
+s source index
+<br/>
+θ<sub>s </sub>horizontal angle of incidence for source s
+<br/>
+Φ<sub>s </sub>vertical angle of incidence for source s
+<br/>
+HRTF<sub>r </sub>head related transfer function for sound originating from ∠θ<sub>s</sub>, ∠φ<sub>s</sub>,
+<br/>
+d<sub>s </sub>distance of source s (right microphone)
+</div>
+<div class="description-paragraph" id="p-0027" num="0031">In other words, the relative head related transfer functions HRTF, which reflect the difference between the transfer functions from the sound the source in question (S<sub>s</sub>) to the right and left ears (microphones) of the user, can be written as the complex number:</div>
+<div class="description-paragraph" id="p-0028" num="0032">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mrow>
+<mstyle>
+<mspace height="1.1ex" width="1.1em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>F</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>r</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>l</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mi>s</mi>
+<mi>r</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mi>s</mi>
+<mi>l</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mfrac>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00003-2" num="00003.2">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>F</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mrow>
+<msub>
+<mi>A</mi>
+<mi>s</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<msup>
+<mi>ⅇ</mi>
+<mrow>
+<mrow>
+<mo>-</mo>
+<mn>2</mn>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>πjΘ</mi>
+<mi>s</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</msup>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>I</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>L</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>D</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<msup>
+<mi>ⅇ</mi>
+<mrow>
+<mrow>
+<mo>-</mo>
+<mn>2</mn>
+</mrow>
+<mo>⁢</mo>
+<mi>πj</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>I</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>D</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0029" num="0033">According to the present disclosure, the obtained estimates of the transfer function between the two ears (A<sub>s</sub>[k] and Θ<sub>s</sub>[k]) are continuously compared (e.g. for all values of the time index n; or at predefined points in time, e.g. periodically, e.g. with a predefined frequency) to the (or a) representation of the wearer's individual HRTF in the database for the corresponding or nearest position.</div>
+<div class="description-paragraph" id="p-0030" num="0034">In an embodiment, the system is configured so that whenever the set of hearing instruments (hearing assistance devices) have found that the difference (A<sub>s</sub>[k], Θ<sub>s</sub>[k]) in chosen frequency bands (k) is greater than the learning threshold τ<sub>A </sub>or τ<sub>Θ </sub>between stored and the estimated values for the given location (θ<sub>s</sub>,φ<sub>s</sub>,d<sub>s</sub>), the instrument (hearing assistance device) can update the HRTF database according to a learning rule.</div>
+<div class="description-paragraph" id="p-0031" num="0035">In an embodiment, the learning rule comprises that said HRTF values are updated at a given point in time (and possibly at a given frequency or frequency band) if the deviation exceeds the learning thresholds τ<sub>A </sub>and τ<sub>Θ</sub>, where τ<sub>A </sub>relates to the Interaural Level Difference (ILD) indexed by the position parameters (with its notational short form A<sub>s</sub>) and where and τ<sub>Θ</sub>, relates to the Interaural Time Difference (ITD) indexed by the position parameters (with its notational short form Θ<sub>s</sub>).</div>
+<div class="description-paragraph" id="p-0032" num="0036">In an embodiment, the learning rule is linear with a memory factor α, where 0&lt;α&lt;1.
+<br/>
+HRTF<sub>database</sub> <i>[k,θ</i> <sub>s</sub>,φ<sub>s</sub> <i>,d</i> <sub>s</sub>]=HRTF<sub>database</sub> <i>[k,θ</i> <sub>s</sub>,φ<sub>s</sub> <i>,d</i> <sub>s</sub>](1−α)+α<i>A</i> <sub>s</sub> <i>[k]e</i> <sup>−πjΘ</sup> <sup> <sub2>s</sub2> </sup> <sup>[k]</sup>.
+</div>
+<div class="description-paragraph" id="p-0033" num="0037">The learning thresholds τ<sub>A </sub>and τ<sub>Θ </sub>may furthermore be made frequency dependent (e.g. dependent on frequency index k). In an embodiment, the learning thresholds are different above and below a threshold frequency (e.g. 1500 Hz) and relatively smaller where the difference in question (ITD or ILD) is the more sensitive, and relatively higher where the difference in question (ITD or ILD) is the less sensitive.</div>
+<div class="description-paragraph" id="p-0034" num="0038">In an embodiment, the hearing assistance devices comprise an analogue-to-digital (AD) converter to digitize an analogue input with a predefined sampling rate, e.g. 20 kHz. In an embodiment, the hearing assistance devices comprise a digital-to-analogue (DA) converter to convert a digital signal to an analogue output signal, e.g. for being presented to a user via an output transducer.</div>
+<div class="description-paragraph" id="p-0035" num="0039">In an embodiment, the binaural hearing assistance system comprises a time to time frequency (TF) conversion unit for presenting said one or more time variant electric input signals x(n) in a time-frequency representation X(n,k), where n is a time index and k is a frequency index. In an embodiment, the source separation unit is configured to provide a time-frequency representation X<sub>s</sub>(n,k) of said separated sound source signals X<sub>s </sub>(and/or said electric input signals)</div>
+<div class="description-paragraph" id="p-0036" num="0040">In an embodiment, each hearing assistance device, e.g. the input unit, comprise(s) a TF-conversion unit for providing a time-frequency representation of an input signal. In an embodiment, the time-frequency representation comprises an array or map of corresponding complex or real values of the signal in question in a particular time and frequency range. In an embodiment, the TF conversion unit comprises a filter bank for filtering a (time varying) input signal and providing a number of (time varying) output signals each comprising a distinct frequency range of the input signal. In an embodiment, the TF conversion unit comprises a Fourier transformation unit (e.g. based on an FFT-, e.g. a DFT-algorithm) for converting a time variant input signal to a (time variant) signal in the frequency domain. In an embodiment, the frequency range considered by the hearing assistance device from a minimum frequency f<sub>min </sub>to a maximum frequency f<sub>max </sub>comprises a part of the typical human audible frequency range from 20 Hz to 20 kHz, e.g. a part of the range from 20 Hz to 12 kHz. In an embodiment, a signal of the forward and/or analysis path of the hearing assistance device is split into a number NI of frequency bands, where NI is e.g. larger than 5, such as larger than 10, such as larger than 50, such as larger than 100, such as larger than 500, at least some of which are processed individually. In an embodiment, the hearing assistance device is/are adapted to process a signal of the forward and/or analysis path in a number NP of different frequency channels (NP≦NI). The frequency channels may be uniform or non-uniform in width (e.g. increasing in width with frequency), overlapping or non-overlapping.</div>
+<div class="description-paragraph" id="p-0037" num="0041">In an embodiment, the localization parameters LP<sub>s</sub> <sup>l </sup>and LP<sub>s</sub> <sup>r </sup>of the left and right hearing assistance device, respectively, of a sound source S<sub>s </sub>comprises estimates of coordinates of said sound source relative to an input unit or transducer of the respective left and right hearing assistance device, or relative to the hearing assistance device itself.</div>
+<div class="description-paragraph" id="p-0038" num="0042">In an embodiment, the input unit of a hearing assistance device comprises a number of input transducers, e.g. two or more input transducers. In an embodiment, an input transducer comprises a microphone. In an embodiment, an input transducer comprises a wireless receiver. In an embodiment, an input transducer is adapted for converting an input sound to an electric input signal. In an embodiment, an input transducer comprises a microphone, e.g. a directional or an omni-directional microphone. In an embodiment, the hearing assistance system (e.g. each hearing assistance device, e.g. embodied in the input unit and/or the source separation unit) comprises a directional microphone system adapted to enhance a target acoustic source among a multitude of acoustic sources in the local environment of the user wearing the hearing assistance system. In an embodiment, the directional system is adapted to detect (such as adaptively detect) from which direction (and/or e.g. from which distance) a particular part of the microphone signal (e.g. a particular sound source) originates. This can be achieved in various different ways as e.g. described in the prior art.</div>
+<div class="description-paragraph" id="p-0039" num="0043">In an embodiment, the input unit comprises an antenna and transceiver circuitry for wirelessly receiving a direct electric input signal from another device, e.g. a communication device or another hearing assistance device. In an embodiment, the direct electric input signal represents or comprises an audio signal and/or a control signal and/or an information signal. In an embodiment, the transceiver circuitry comprises demodulation circuitry for demodulating the received direct electric input to provide the direct electric input signal representing an audio signal and/or a control signal. In general, the wireless link established by the antenna and transceiver circuitry of the hearing assistance device can be of any type. In an embodiment, the wireless link is used under power constraints, e.g. in that the hearing assistance device is or comprises a portable (typically battery driven) device. In an embodiment, the wireless link is a link based on near-field communication, e.g. an inductive link based on an inductive coupling between antenna coils of transmitter and receiver parts. In another embodiment, the wireless link is based on far-field, electromagnetic radiation (radiated fields (RF)). In an embodiment, the wireless link is based on a standardized or proprietary technology. In an embodiment, the wireless link is based on Bluetooth technology (e.g. Bluetooth Low-Energy technology).</div>
+<div class="description-paragraph" id="p-0040" num="0044">In an embodiment, the localization parameters (e.g. absolute or relative spatial coordinates) of the sound source S<sub>s </sub>(s=1, 2, . . . , Ns) in the left and right hearing assistance devices are referred to a coordinate system having its center midway between the left and right hearing assistance devices, when operationally mounted on (or implanted in) the user (i.e. typically midway between the ears of the user, cf. e.g. <figref idrefs="DRAWINGS">FIG. 1C</figref>). In an embodiment, the separated sound source signals X<sub>s</sub> <sup>l</sup>, X<sub>s</sub> <sup>r </sup>and the corresponding localization parameters LP<sub>s</sub> <sup>l</sup>, LP<sub>s</sub> <sup>r </sup>of the left and right hearing assistance devices are exchanged between the left and right hearing assistance devices. During learning of HRTF's, similarities (or differences) in the localization parameters determined in each of the hearing assistance devices for a given sound source (as seen from the midpoint between the ears) reveals how much the devices agree (or disagree). For sources in front of the listener, the degree to which the location of such sources coincide (e.g. an absolute or relative deviation between the localization parameters of the left and right hearing assistance devices) represent an estimation of an accuracy measure, which can be used to decide how much an observation should be allowed to update the HRTF database (e.g. determine a weight of the new value in an update algorithm, cf. e.g. parameter a in the learning rule exemplified above).</div>
+<div class="description-paragraph" id="p-0041" num="0045">In an embodiment, some or all of the electric input signals, some or all of the separated sound source signals X<sub>s</sub> <sup>l</sup>, X<sub>s</sub> <sup>r </sup>and some or all of the localization parameters are exchanged between the left and right hearing assistance devices (i.e. the localization parameters are not exchanged).</div>
+<div class="description-paragraph" id="p-0042" num="0046">In an embodiment (e.g. in a specific first mode of operation), only the separated sound source signals X<sub>s</sub> <sup>l</sup>, X<sub>s</sub> <sup>r </sup>are exchanged between the left and right hearing assistance devices (i.e. the localization parameters are not exchanged).</div>
+<div class="description-paragraph" id="p-0043" num="0047">In an embodiment (e.g. in a specific second mode of operation), only the localization parameters LP<sub>s</sub> <sup>l</sup>, LP<sub>s</sub> <sup>r </sup>are exchanged between the left and right hearing assistance devices (i.e. the separated sound source signals are not exchanged). During use of the learned HRTF, exchange of the localization parameters requires less bandwidth than exchange of separated audio signals.</div>
+<div class="description-paragraph" id="p-0044" num="0048">In an embodiment (e.g. in a specific third mode of operation), the separated sound source signals as well as the corresponding localization parameters are exchanged between the left and right hearing assistance devices.</div>
+<div class="description-paragraph" id="p-0045" num="0049">In an embodiment (e.g. in a specific fourth mode of operation), sound source signals for selected sources and/or localization parameters of the same and/or other sound sources are exchanged between the left and right hearing assistance devices.</div>
+<div class="description-paragraph" id="p-0046" num="0050">In an embodiment, the left and right hearing assistance devices are configured to enable access to the HRTF-database of the respective other hearing assistance device and to import said electric input signals, and/or separated sound source signals and/or localization parameters for said sources from the other (opposite) hearing assistance device. This allows e.g. the hearing assistance devices to probe each other about currently dominant sound sources and/or their spatial directions.</div>
+<div class="description-paragraph" id="p-0047" num="0051">Exchanging the localization parameters, and including both entries (of the left and right devise) in the HRTF tables of each hearing assistance device has the potential advantage of improving the HRTF-accuracy.</div>
+<div class="description-paragraph" id="h-0006" num="0000">Applying a HRTF to a Signal</div>
+<div class="description-paragraph" id="p-0048" num="0052">In an embodiment, each of the left and right hearing assistance devices comprises an HRTF-control unit for applying a HRTF-value to at least one of said separated sound source signals (and/or to at least one of the electric input signals). The HRTF value is preferably selected from the database of HRTF values corresponding the location of the separated sound source in question.</div>
+<div class="description-paragraph" id="p-0049" num="0053">The transfer functions in the HRTF database may, alternatively or additionally, be applied to sound signals X<sub>e </sub>received through other channels than the microphones (e.g. via a wireless receiver), e.g. by streaming, Direct Audio Input (DAI), telecoil, etc., i.e. signals that have not been exposed to the physical HRTF of the wearer.</div>
+<div class="description-paragraph" id="p-0050" num="0054">In an embodiment, at least one of the left and right hearing assistance devices comprises an audio input for receiving a direct electric input signal representing a sound source signal of a real or virtual sound source, and where said at least one of the left and right hearing assistance devices is configured to estimate a location of a real or virtual sound source and to apply a corresponding HRTF from the database to said direct electric input signal.</div>
+<div class="description-paragraph" id="p-0051" num="0055">Given that the signal X<sub>e </sub>is to be placed at position (θ<sub>e</sub>,φ<sub>e</sub>,d<sub>e</sub>) the corresponding device signals can be written as</div>
+<div class="description-paragraph" id="p-0052" num="0056">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msubsup>
+<mi>Y</mi>
+<mi>e</mi>
+<mi>r</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>database</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>e</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>e</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>e</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>X</mi>
+<mi>e</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msubsup>
+<mi>Y</mi>
+<mi>e</mi>
+<mi>l</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mfrac>
+<mn>2</mn>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>database</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>e</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>e</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>e</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mfrac>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>X</mi>
+<mi>e</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0053" num="0057">In other words, the relative HRTF accounts for the difference between the sound from a given source S<sub>e </sub>at the right and left ears. This ‘difference’ can then be applied to a signal without directional cues (X<sub>e </sub>e.g. a directly received electric signal, e.g. a streamed signal). Thereby the time and level differences normally accounted for by the different locations of the ears relative to the sound source and to the shadowing effect of the human head (etc.) can be applied to a signal (X<sub>e</sub>) without directional cues (to thereby e.g. virtually ‘placing’ a directly received electric signal in the environment around the user).</div>
+<div class="description-paragraph" id="p-0054" num="0058">For a multi channel input signal X<sub>E</sub>, each channel can be considered as a sum of individual signals X<sub>e1-eM </sub>with individual position in the two equations above, i.e.
+<br/>
+<i>Y</i> <sub>E</sub> <sup>r</sup> <i>[n,k]=Σ</i> <sub>e′=1:M</sub> <i>Y</i> <sub>e′</sub> <sup>r</sup> <i>[n,k]. </i>
+</div>
+<div class="description-paragraph" id="p-0055" num="0059">In an embodiment, the localization parameters comprise (or is constituted by) a direction (e.g. from the input unit or transducer or hearing assistance device in question) to the real or virtual sound source. In an embodiment, the sound represented by the direct electric input is a single channel sound (mono), or alternatively a multichannel sound where each channel has its own position. In an embodiment, the binaural hearing assistance system is configured to estimate the position of the sound source from the direction to the origin of the sound source (or direct electric signal). In an embodiment, the binaural hearing assistance system is configured to exchange localization data of (e.g. the position of and/or direction to) the sound source between the two hearing assistance devices.</div>
+<div class="description-paragraph" id="p-0056" num="0060">In an embodiment, each of the left and right hearing assistance devices comprises a signal processing unit for processing an input signal selected among said electric input signals, and/or said separated sound source signals or a mixture thereof. In an embodiment, the hearing assistance device is adapted to provide a frequency dependent gain to compensate for a hearing loss of a user. In an embodiment, the hearing assistance device comprises a signal processing unit for enhancing the input signals and providing a processed output signal. Various aspects of digital hearing aids are described in [Schaub; 2008].</div>
+<div class="description-paragraph" id="p-0057" num="0061">In an embodiment, at least one of (such as each of) the left and right hearing assistance devices comprises an output unit for providing output stimuli to the user based on a processed signal, wherein said output stimuli are perceived by the user as sound. In an embodiment, the output unit comprises an output transducer for converting an electric signal to a stimulus perceived by the user as an acoustic signal. In an embodiment, the output unit comprises a number of electrodes of a cochlear implant or a vibrator of a bone conducting hearing assistance device. In an embodiment, the output transducer comprises a receiver (speaker) for providing the stimulus as an acoustic signal to the user.</div>
+<div class="description-paragraph" id="p-0058" num="0062">In an embodiment, each of the left and right hearing assistance devices comprises a forward signal path between said input and output units, the forward path comprising a signal processing unit operatively connected to an output of the input unit and an input of the output unit, the signal processing unit being configured to apply a processing algorithm to an input signal and provide a processed output signal. In an embodiment, each of the left and right hearing assistance devices comprises an analysis path comprising functional components for analyzing the input signal (e.g. determining a level, a modulation, a type of signal, an acoustic feedback estimate, etc.). In an embodiment, some or all signal processing of the analysis path and/or the signal path is conducted in the frequency domain. In an embodiment, some or all signal processing of the analysis path and/or the signal path is conducted in the time domain.</div>
+<div class="description-paragraph" id="h-0007" num="0000">Manipulating the Position of a Signal</div>
+<div class="description-paragraph" id="p-0059" num="0063">In an embodiment, the binaural hearing assistance system comprises a user interface (e.g. a remote control, e.g. implemented as an APP of a SmartPhone) from which a user can select a suitable position, e.g. by ‘placing’ a sound source in the current acoustic environment (e.g. via a graphical interface illustrating currently active (real or virtual, e.g. directly received sound signals) sound source(s) relative to the user). In an embodiment, the binaural hearing assistance system is configured to update localization parameters of a sound source in the memory unit of the left and right hearing assistance devices, based on inputs from a user interface. In an embodiment, the binaural hearing assistance system is configured to allow a user to select a particular sound source signal to be included in the output signal to the user via the user interface.</div>
+<div class="description-paragraph" id="p-0060" num="0064">The HRTF database also allows for manipulation of the perceived position of sounds that have been affected by the wearer's HRTF. Modifying the perceived location of a signal is a two step procedure where the resulting signals Y<sub>e</sub> <sup>lr </sup>undergo a compensation for the HRTF corresponding to the signal's physical position and application of the HRTF corresponding to the chosen perceived position. For instance, this allows device-pairs to increase the perceived distance between concurrent sounds.</div>
+<div class="description-paragraph" id="p-0061" num="0065">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msubsup>
+<mi>Y</mi>
+<mi>e</mi>
+<mi>r</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>database</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>e</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>e</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>e</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>database</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mfrac>
+<mo>⁢</mo>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mi>s</mi>
+<mi>r</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msubsup>
+<mi>Y</mi>
+<mi>e</mi>
+<mi>l</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>database</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>s</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mrow>
+<mi>H</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>R</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>F</mi>
+<mi>database</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>θ</mi>
+<mi>e</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>e</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>d</mi>
+<mi>e</mi>
+</msub>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mfrac>
+<mo>⁢</mo>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mi>s</mi>
+<mi>l</mi>
+</msubsup>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>n</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0062" num="0066">In an embodiment, the binaural hearing assistance system comprises an auxiliary device (e.g. a remote control, e.g. a cellphone, e.g. a SmartPhone) wherein the user interface is implemented.</div>
+<div class="description-paragraph" id="p-0063" num="0067">In an embodiment, the system is adapted to establish a communication link between the hearing assistance device(s) and the auxiliary device to provide that information (e.g. control and status signals, possibly audio signals) can be exchanged or forwarded from one to the other.</div>
+<div class="description-paragraph" id="p-0064" num="0068">In an embodiment, the auxiliary device is or comprises an audio gateway device adapted for receiving a multitude of audio signals (e.g. from an entertainment device, e.g. a TV or a music player, a telephone apparatus, e.g. a mobile telephone or a computer, e.g. a PC) and adapted for selecting and/or combining an appropriate one of the received audio signals (or combination of signals) for transmission to the hearing assistance device. In an embodiment, the auxiliary device is or comprises a remote control for controlling functionality and operation of the hearing assistance device(s). In an embodiment, the auxiliary device is or comprises a cellphone, e.g. a SmartPhone. In an embodiment, processing of the system (e.g. sound source separation) and/or the function of a remote control is fully or partially implemented in a SmartPhone, the SmartPhone possibly running an APP allowing to control the functionality of the audio processing device via the SmartPhone and/or to provide a user interface (the hearing assistance device(s) comprising an appropriate wireless interface to the SmartPhone, e.g. based on Bluetooth or some other standardized or proprietary scheme).</div>
+<div class="description-paragraph" id="p-0065" num="0069">In the present context, a SmartPhone is a portable electronic device that may comprise
+</div> <ul> <li id="ul0005-0001" num="0000"> <ul> <li id="ul0006-0001" num="0070">a (A) cellular telephone comprising a microphone, a speaker, and a (wireless) interface to the public switched telephone network (PSTN) COMBINED with</li> <li id="ul0006-0002" num="0071">a (B) personal computer comprising a processor, a memory, an operative system (OS), a user interface (e.g. a keyboard and display, e.g. integrated in a touch sensitive display) and a wireless data interface (including a Web-browser), allowing a user to download and execute application programs (APPs) implementing specific functional features (e.g. displaying information retrieved from the Internet, remotely controlling another device, combining information from various sensors of the SmartPhone (e.g. camera, scanner, GPS, microphone, etc.) and/or external sensors to provide special features, etc.).</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0066" num="0072">In an embodiment, the binaural hearing assistance system is configured to allow a user to modify a location of a sound source whose location has been determined by the source separation unit (or received separately for a wirelessly received direct electric signal) via the user interface and to apply the HRTF values to the sound source signal, the HRTF values being extracted from the HRTF database corresponding to the modified location of the sound source. Thereby, the user is allowed to manipulate the sound field by placing one or more sound sources at another position than its/their physical (or otherwise proposed) location. In an embodiment, the sound signal from the sound source whose location has been modified via the user interface represents a single channel sound (mono) or a multichannel sound where each channel has its own position.</div>
+<div class="description-paragraph" id="p-0067" num="0073">In an embodiment, the binaural hearing assistance system comprises a localization unit (e.g. embodied in at least one of, such as each of, the hearing assistance devices, or in an auxiliary device) where the position of the sound source is estimated by other means than the sound signal, i.e. by an independent localization unit in the device-pair, including outputs from the wireless/radio communication etc. In an embodiment, the binaural hearing assistance system comprises a localization extracting unit (e.g. embodied in at least one of, such as each of, the hearing assistance devices, or in an auxiliary device) configured to extract localization parameters intended for representing the perceived location of a specific sound. In an embodiment, the binaural hearing assistance system comprises an antenna and transceiver unit for receiving a signal comprising the localization parameters. In an embodiment, the localization extracting unit is configured to extract localization parameters embedded in an audio signal representing a sound source signal. In an embodiment, at least one of the hearing assistance devices comprise a localization extracting unit.</div>
+<div class="description-paragraph" id="h-0008" num="0000">Detectors:</div>
+<div class="description-paragraph" id="p-0068" num="0074">In an embodiment, the binaural hearing assistance system (e.g. one of the hearing assistance devices or an auxiliary device) comprises one or more detectors, e.g. configured to provide signals relating to a current property of ‘the physical environment’ of the hearing assistance system, e.g. to provide parameters of the acoustic environment.</div>
+<div class="description-paragraph" id="p-0069" num="0075">In an embodiment, the hearing assistance device comprises a level detector (LD) for determining the level of an input signal (e.g. on a band level and/or of the full (wide band) signal). The input level of the electric microphone signal picked up from the user's acoustic environment is e.g. a classifier of the environment.</div>
+<div class="description-paragraph" id="p-0070" num="0076">In a particular embodiment, the hearing assistance device comprises a voice activity detector (VAD) for determining whether or not an input signal comprises a voice signal (at a given point in time). This has the advantage that time segments of the electric microphone signal comprising human utterances (e.g. speech) in the user's environment can be identified, and thus separated from time segments only comprising other sound sources (e.g. artificially generated noise). In an embodiment, the voice detector is adapted to detect as a VOICE also the user's own voice. Alternatively, the voice detector is adapted to exclude a user's own voice from the detection of a VOICE. In an embodiment, the hearing assistance system is configured to identify the sound sources that comprise speech (and e.g.—in a particular speech mode—exclude sources that are not identified as (currently) comprising speech).</div>
+<div class="description-paragraph" id="p-0071" num="0077">In a particular embodiment, the hearing assistance device comprises a feedback detector (e.g. a tone detector in combination with a discriminator of whether a detected tone is due to feedback or not). In a particular embodiment, the hearing assistance device comprises a detector of music, e.g. based on the feedback detector).</div>
+<div class="description-paragraph" id="h-0009" num="0000">Other Functionality:</div>
+<div class="description-paragraph" id="p-0072" num="0078">In an embodiment, the hearing assistance device comprises an acoustic (and/or mechanical) feedback suppression system. In an embodiment, the hearing assistance device further comprises other relevant functionality for the application in question, e.g. compression, noise reduction, etc.</div>
+<div class="description-paragraph" id="p-0073" num="0079">In an embodiment, the hearing assistance device comprises a listening device, e.g. a hearing aid, e.g. a hearing instrument, e.g. a hearing instrument adapted for being located at the ear or fully or partially in the ear canal of a user or for being fully or partially implanted in a user's head, or a headset, an earphone, an ear protection device or a combination thereof.</div>
+<div class="description-paragraph" id="h-0010" num="0000">Use:</div>
+<div class="description-paragraph" id="p-0074" num="0080">In an aspect, use of a binaural hearing assistance system as described above, in the ‘detailed description of embodiments’ and in the claims, is moreover provided. In an embodiment, use is provided in a system comprising one or more hearing instruments, headsets, ear phones, active ear protection systems, etc., e.g. in handsfree telephone systems, teleconferencing systems, public address systems, karaoke systems, classroom amplification systems, etc.</div>
+<div class="description-paragraph" id="h-0011" num="0000">A Method:</div>
+<div class="description-paragraph" id="p-0075" num="0081">In an aspect, a method of operating a binaural hearing assistance system comprising left and right hearing assistance devices is furthermore provided, the method comprising in each of the left and right hearing assistance devices:
+</div> <ul> <li id="ul0007-0001" num="0000"> <ul> <li id="ul0008-0001" num="0082">providing one or more electric input signals based on one or more input sounds of a sound field surrounding the binaural hearing assistance system;</li> <li id="ul0008-0002" num="0083">separating and localizing one or more sound sources S<sub>s </sub>in said sound field relative to the input transducer unit based on said one or more electric input signals, and providing respective separated sound source signals X<sub>s</sub>, and localization parameters LP<sub>s </sub>of said one or more sound sources (s=1, 2, . . . , N<sub>s</sub>);</li> <li id="ul0008-0003" num="0084">exchanging of said electric input signals, and/or said separated sound source signals X<sub>s </sub>and/or said localization parameters LP<sub>s </sub>of said one or more sound sources between said left and right hearing assistance devices;</li> <li id="ul0008-0004" num="0085">comparing said electric input signals, and/or said separated sound source signals X<sub>s</sub> <sup>l</sup>, X<sub>s</sub> <sup>r </sup>and/or said localization parameters LP<sub>s</sub> <sup>l</sup>, LP<sub>s</sub> <sup>r </sup>of said left and right hearing assistance devices, respectively, to estimate a head related transfer function HRTF value for one or more of said sound sources S with said localization parameters LP<sub>s </sub>at a given point in time; and</li> <li id="ul0008-0005" num="0086">storing and updating a database of said HRTF values and optionally said localization parameters LP<sub>s </sub>over time.</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0076" num="0087">It is intended that some or all of the structural features of the system described above, in the ‘detailed description of embodiments’ or in the claims can be combined with embodiments of the method, when appropriately substituted by a corresponding process and vice versa. Embodiments of the method have the same advantages as the corresponding system.</div>
+<div class="description-paragraph" id="p-0077" num="0088">In an embodiment, the method provides that said HRTF values are updated according to a criterion or learning rule. In an embodiment, the method comprises initially storing standard HRTF-data in the database, e.g. from a dummy head, e.g. derived from Gardner and Martin's KEMAR HRTF database. During use of the binaural hearing assistance system, the initially stored HRTF-data (e.g. standard data) are substituted by improved (customized, learned) HRTF-data.</div>
+<div class="description-paragraph" id="p-0078" num="0089">In an embodiment, the method provides that said criterion or learning rule comprises that a HRTF value is updated when a difference measure ΔHRTF between a currently estimated HRTF value and a corresponding HRTF value stored in the database is larger than a threshold value ΔHRTF<sub>TH</sub>. In an embodiment, the method provides that said criterion or learning rule comprises that said HRTF values are updated at a given point in time, and optionally at a given frequency or frequency band, if the deviation between stored and current values of Interaural Level Difference (ILD) and Interaural Time Difference (ITD), both being indexed by the position parameters of the sound source in question, exceeds learning thresholds τ<sub>A </sub>and τ<sub>Θ</sub>, where τ<sub>A </sub>relates to ILD and where and τ<sub>Θ</sub>, relates ITD.</div>
+<div class="description-paragraph" id="h-0012" num="0000">A Computer Readable Medium:</div>
+<div class="description-paragraph" id="p-0079" num="0090">In an aspect, a tangible computer-readable medium storing a computer program comprising program code means for causing a data processing system to perform at least some (such as a majority or all) of the steps of the method described above, in the ‘detailed description of embodiments’ and in the claims, when said computer program is executed on the data processing system is furthermore provided by the present application. In addition to being stored on a tangible medium such as diskettes, CD-ROM-, DVD-, or hard disk media, or any other machine readable medium, and used when read directly from such tangible media, the computer program can also be transmitted via a transmission medium such as a wired or wireless link or a network, e.g. the Internet, and loaded into a data processing system for being executed at a location different from that of the tangible medium.</div>
+<div class="description-paragraph" id="h-0013" num="0000">A Data Processing System:</div>
+<div class="description-paragraph" id="p-0080" num="0091">In an aspect, a data processing system comprising a processor and program code means for causing the processor to perform at least some (such as a majority or all) of the steps of the method described above, in the ‘detailed description of embodiments’ and in the claims is furthermore provided by the present application.</div>
+<heading id="h-0014">DEFINITIONS</heading>
+<div class="description-paragraph" id="p-0081" num="0092">In the present context, a ‘hearing assistance device’ refers to a device, such as e.g. a hearing instrument or an active ear-protection device or other audio processing device, which is adapted to improve, augment and/or protect the hearing capability of a user by receiving acoustic signals from the user's surroundings, generating corresponding audio signals, possibly modifying the audio signals and providing the possibly modified audio signals as audible signals to at least one of the user's ears. A ‘hearing assistance device’ further refers to a device such as an earphone or a headset adapted to receive audio signals electronically, possibly modifying the audio signals and providing the possibly modified audio signals as audible signals to at least one of the user's ears. Such audible signals may e.g. be provided in the form of acoustic signals radiated into the user's outer ears, acoustic signals transferred as mechanical vibrations to the user's inner ears through the bone structure of the user's head and/or through parts of the middle ear as well as electric signals transferred directly or indirectly to the cochlear nerve of the user.</div>
+<div class="description-paragraph" id="p-0082" num="0093">The hearing assistance device may be configured to be worn in any known way, e.g. as a unit arranged behind the ear with a tube leading radiated acoustic signals into the ear canal or with a loudspeaker arranged close to or in the ear canal, as a unit entirely or partly arranged in the pinna and/or in the ear canal, as a unit attached to a fixture implanted into the skull bone, as an entirely or partly implanted unit, etc. The hearing assistance device may comprise a single unit or several units communicating electronically with each other.</div>
+<div class="description-paragraph" id="p-0083" num="0094">More generally, a hearing assistance device comprises an input transducer for receiving an acoustic signal from a user's surroundings and providing a corresponding input audio signal and/or a receiver for electronically (i.e. wired or wirelessly) receiving an input audio signal, a signal processing circuit for processing the input audio signal and an output means for providing an audible signal to the user in dependence on the processed audio signal. In some hearing assistance devices, an amplifier may constitute the signal processing circuit. In some hearing assistance devices, the output means may comprise an output transducer, such as e.g. a loudspeaker for providing an air-borne acoustic signal or a vibrator for providing a structure-borne or liquid-borne acoustic signal. In some hearing assistance devices, the output means may comprise one or more output electrodes for providing electric signals.</div>
+<div class="description-paragraph" id="p-0084" num="0095">In some hearing assistance devices, the vibrator may be adapted to provide a structure-borne acoustic signal transcutaneously or percutaneously to the skull bone. In some hearing assistance devices, the vibrator may be implanted in the middle ear and/or in the inner ear. In some hearing assistance devices, the vibrator may be adapted to provide a structure-borne acoustic signal to a middle-ear bone and/or to the cochlea. In some hearing assistance devices, the vibrator may be adapted to provide a liquid-borne acoustic signal to the cochlear liquid, e.g. through the oval window. In some hearing assistance devices, the output electrodes may be implanted in the cochlea or on the inside of the skull bone and may be adapted to provide the electric signals to the hair cells of the cochlea, to one or more hearing nerves, to the auditory cortex and/or to other parts of the cerebral cortex.</div>
+<div class="description-paragraph" id="p-0085" num="0096">A ‘listening system’ refers to a system comprising one or two hearing assistance devices, and a ‘binaural listening system’ refers to a system comprising one or two hearing assistance devices and being adapted to cooperatively provide audible signals to both of the user's ears. Listening systems or binaural listening systems may further comprise ‘auxiliary devices’, which communicate with the hearing assistance devices and affect and/or benefit from the function of the hearing assistance devices. Auxiliary devices may be e.g. remote controls, audio gateway devices, mobile phones, public-address systems, car audio systems or music players. Hearing assistance devices, listening systems or binaural listening systems may e.g. be used for compensating for a hearing-impaired person's loss of hearing capability, augmenting or protecting a normal-hearing person's hearing capability and/or conveying electronic audio signals to a person.</div>
+<div class="description-paragraph" id="p-0086" num="0097">Further objects of the application are achieved by the embodiments defined in the dependent claims and in the detailed description of the invention.</div>
+<div class="description-paragraph" id="p-0087" num="0098">As used herein, the singular forms “a,” “an,” and “the” are intended to include the plural forms as well (i.e. to have the meaning “at least one”), unless expressly stated otherwise. It will be further understood that the terms “includes,” “comprises,” “including,” and/or “comprising,” when used in this specification, specify the presence of stated features, integers, steps, operations, elements, and/or components, but do not preclude the presence or addition of one or more other features, integers, steps, operations, elements, components, and/or groups thereof. It will also be understood that when an element is referred to as being “connected” or “coupled” to another element, it can be directly connected or coupled to the other element or intervening elements may be present, unless expressly stated otherwise. Furthermore, “connected” or “coupled” as used herein may include wirelessly connected or coupled. As used herein, the term “and/or” includes any and all combinations of one or more of the associated listed items. The steps of any method disclosed herein do not have to be performed in the exact order disclosed, unless expressly stated otherwise.</div>
+<description-of-drawings>
+<heading id="h-0015">BRIEF DESCRIPTION OF DRAWINGS</heading>
+<div class="description-paragraph" id="p-0088" num="0099">The disclosure will be explained more fully below in connection with a preferred embodiment and with reference to the drawings in which:</div>
+<div class="description-paragraph" id="p-0089" num="0100"> <figref idrefs="DRAWINGS">FIGS. 1A</figref>-<figref idrefs="DRAWINGS">FIG. 1D</figref> schematically illustrate various examples of a mutual location in space of elements of a binaural hearing assistance system and/or a sound source, represented in a spherical and an orthogonal coordinate system,</div>
+<div class="description-paragraph" id="p-0090" num="0101"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows an embodiment of a binaural hearing assistance system comprising left and right hearing assistance devices and an auxiliary device, e.g. an audio gateway, the system being adapted for establishing a first (interaural) communication link between the two hearing assistance devices as well as for establishing a communication link between each or the two hearing assistance devices and the auxiliary device,</div>
+<div class="description-paragraph" id="p-0091" num="0102"> <figref idrefs="DRAWINGS">FIG. 3A</figref>.-<figref idrefs="DRAWINGS">FIG. 3B</figref> show an embodiment of a binaural hearing assistance system comprising left and right hearing assistance devices,</div>
+<div class="description-paragraph" id="p-0092" num="0103"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows an embodiment of a binaural hearing assistance system comprising left and right hearing assistance devices and an auxiliary device, e.g. a cellphone, the auxiliary device comprising a user interface for the system, e.g. for viewing and (possibly) influencing the (perceived) location of current sound sources in the environment of the binaural hearing assistance system, and</div>
+<div class="description-paragraph" id="p-0093" num="0104"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows a flow diagram of a method of operating a hearing assistance system (as e.g. shown in <figref idrefs="DRAWINGS">FIG. 3</figref>) comprising left and right hearing assistance devices.</div>
+</description-of-drawings>
+<div class="description-paragraph" id="p-0094" num="0105">The figures are schematic and simplified for clarity, and they just show details which are essential to the understanding of the disclosure, while other details are left out. Throughout, the same reference signs are used for identical or corresponding parts.</div>
+<div class="description-paragraph" id="p-0095" num="0106">Further scope of applicability of the present disclosure will become apparent from the detailed description given hereinafter. However, it should be understood that the detailed description and specific examples, while indicating preferred embodiments of the disclosure, are given by way of illustration only. Other embodiments may become apparent to those skilled in the art from the following detailed description.</div>
+<heading id="h-0016">DETAILED DESCRIPTION OF EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0096" num="0107"> <figref idrefs="DRAWINGS">FIG. 1</figref> schematically illustrates various examples of a mutual location in space of elements of a binaural hearing assistance system and/or a sound source, represented in a spherical and an orthogonal coordinate system.</div>
+<div class="description-paragraph" id="p-0097" num="0108"> <figref idrefs="DRAWINGS">FIG. 1A</figref> defines coordinates of a spherical coordinate system (d, θ, φ) in an orthogonal coordinate system (x, y, z). A given point in three dimensional space (here illustrated by a location of sound source S<sub>s</sub>) whose location is represented by a vector d<sub>s </sub>from the center of the coordinate system (0, 0, 0) to the location (x<sub>s</sub>, y<sub>s</sub>, z<sub>s</sub>) of the sound source S<sub>s </sub>in the orthogonal coordinate system is represented by spherical coordinates (d<sub>s</sub>, θ<sub>s</sub>, φ<sub>s</sub>), where d<sub>s</sub>, is the radial distance to the sound source S<sub>s</sub>, θ<sub>s </sub>is the (polar) angle from the z-axis of the orthogonal coordinate system (x, y, z) to the vector d<sub>s</sub>, and φ<sub>s</sub>), is the (azimuth) angle from the x-axis to a projection of the vector d<sub>s </sub>in the xy-plane of the orthogonal coordinate system.</div>
+<div class="description-paragraph" id="p-0098" num="0109"> <figref idrefs="DRAWINGS">FIG. 1B</figref> defines the location of left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r </sub>(see <figref idrefs="DRAWINGS">FIG. 1C, 1D</figref>, here represented by left and right microphones mic<sub>l</sub>, mic<sub>r</sub>) in orthogonal and spherical coordinates, respectively. The center (0, 0, 0) of the coordinate systems can in principle be located anywhere, but is here (to utilize the symmetry of the setup) assumed to be located midway between the location of the centers of the left and right microphones mic<sub>l</sub>, mic<sub>r</sub>, as illustrated in <figref idrefs="DRAWINGS">FIG. 1C, 1D</figref>. The location of the left and right microphones mic<sub>l</sub>, mic<sub>r </sub>are defined by respective vectors d<sub>l </sub>and d<sub>r</sub>, which can be represented by respective sets of rectangular and spherical coordinates (x<sub>l</sub>, y<sub>l</sub>, z<sub>l</sub>), (d<sub>l</sub>, θ<sub>l</sub>, φ<sub>l</sub>) and (x<sub>r</sub>, y<sub>r</sub>, z<sub>r</sub>), (d<sub>r</sub>, θ<sub>r</sub>, φ<sub>r</sub>).</div>
+<div class="description-paragraph" id="p-0099" num="0110"> <figref idrefs="DRAWINGS">FIG. 1C</figref> defines the location of left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r </sub>(here represented by left and right microphones mic<sub>r</sub>, mic<sub>r</sub>) relative to a sound source S<sub>s </sub>in orthogonal and spherical coordinates, respectively. The center (0, 0, 0) of the coordinate systems is assumed to be located midway between the location of the centers of the left and right microphones mic<sub>l</sub>, mic<sub>r</sub>. The location of the left and right microphones mic<sub>l</sub>, mic<sub>r</sub>. are defined by vectors d<sub>l </sub>and d<sub>r</sub>, respectively. The location of the sound source S<sub>s </sub>is defined by vector d<sub>s </sub>and orthogonal and spherical coordinates (x<sub>s</sub>, y<sub>s</sub>, z<sub>s</sub>) and (d<sub>s</sub>, θ<sub>s</sub>, φ<sub>s</sub>), respectively. The sound source S<sub>s </sub>may e.g. illustrate a person speaking (or otherwise expressing him or herself), a loudspeaker playing sound, or a wireless transmitter transmitting an audio signal to a wireless receiver of one or both of the hearing assistance devices.</div>
+<div class="description-paragraph" id="p-0100" num="0111"> <figref idrefs="DRAWINGS">FIG. 1D</figref> defines a similar setup as shown in <figref idrefs="DRAWINGS">FIG. 1C</figref>. <figref idrefs="DRAWINGS">FIG. 1D</figref> illustrates a user U equipped with left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r </sub>and a sound source S<sub>s </sub>(e.g. a loudspeaker, as shown, or a person speaking) located in front, to the left of the user. Left and right microphones mic<sub>l</sub>, mic<sub>r </sub>of the left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r </sub>received time variant sound signals sound source S<sub>s</sub>. The sound signals are received by the respective microphones and converted electric input signals and provided in a time frequency representation in the form of (complex) digital signals X<sub>sl</sub>[n,k] and X<sub>sr</sub>[n,k] in the left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r </sub>(see also <figref idrefs="DRAWINGS">FIG. 3B</figref>), n being a time index and k being a frequency index. The directions of propagation of the sound wave-fronts from the sound source S<sub>s </sub>to the respective left and right microphones mic<sub>l</sub>, mic<sub>r </sub>are indicated by lines (vectors) d<sub>sl </sub>and d<sub>sr</sub>, respectively. The center (0, 0, 0) of the orthogonal coordinate system (x, y, z) is located midway between the left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r</sub>, which are assumed to lie in the xy-plane (z=0, θ=90°) together with the sound source S<sub>s</sub>. The different distances, d<sub>sl </sub>and d<sub>sr</sub>, from the sound source S<sub>s </sub>to the left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r</sub>, respectively, account for different times of arrival of a given sound wave-front at the two microphones mic<sub>l</sub>, mic<sub>r</sub>, hence resulting in an ITD(d<sub>s</sub>, θ<sub>s</sub>, φ<sub>s</sub>). Likewise the different constitution of the propagation paths (the path to the right hearing assistance device HAD<sub>r </sub>is influenced by the users' head (as indicated by the dotted line segment of the vector d<sub>sr</sub>), the path to the left hearing assistance device HAD<sub>l </sub>is NOT) gives rise to different levels of the received signals at the two microphones mic<sub>l</sub>, mic<sub>r</sub>. In other words an ILD(d<sub>s</sub>, θ<sub>s</sub>, φ<sub>s</sub>) is observed. These differences (that are perceived by a normally hearing person as localization cues) are to a certain extent (depending on the actual location of the microphones on the hearing assistance device) reflected in the signals X<sub>sl</sub>[n,k] and X<sub>sr</sub>[n,k] and can be used to extract the head related transfer functions for the given geometrical scenario point source located at (d<sub>s</sub>, θ<sub>s</sub>, φ<sub>s</sub>).</div>
+<div class="description-paragraph" id="p-0101" num="0112"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows an embodiment of a binaural hearing assistance system comprising left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r</sub>, and an auxiliary device AD, e.g. an audio gateway, the system being adapted for establishing a first (interaural) communication link IA-WL between the two hearing assistance devices as well as for establishing a communication link WL-I between each or the two hearing assistance devices and the auxiliary device. <figref idrefs="DRAWINGS">FIG. 2</figref> shows an application scenario of an embodiment of a binaural hearing assistance system according to the present disclosure, wherein the auxiliary device (AD) comprises an audio gateway device, e.g. adapted for receiving a multitude of audio signals from different sound sources (here only one source S<sub>1</sub>, entertainment device (TV), is shown). Alternatively inputs from other acoustic and/or wirelessly transmitted audio sources, e.g. from a telephone apparatus, e.g. a mobile telephone, from a computer, e.g. a PC, or from an external microphone (e.g. based on FM or Bluetooth transmission) for picking up sounds from the environment, e.g. the voice of another person, can be received by the auxiliary device (and/or one or both of the hearing assistance devices). The audio signals from sound source S<sub>1 </sub>are wirelessly transmitted to the left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r </sub>(via the auxiliary device and links WL-RF and WL-I) AS WELL AS acoustically propagated by a loudspeaker of the entertainment device TV. A further audio source S<sub>2 </sub>in the form of a person speaking thereby creating sound source signals which are received at the left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r</sub>. The geometric arrangement of the sound sources S<sub>1 </sub>and S<sub>2 </sub>relative to the left and right hearing assistance devices HAD<sub>l</sub>, HAD<sub>r </sub>are illustrated with their different distance and propagation paths relative to the user's head as explained in <figref idrefs="DRAWINGS">FIG. 1D</figref>. The two sound sources S<sub>1 </sub>and S<sub>2 </sub>are represented in the xyz-coordinate system by vectors d<sub>s1 </sub>and d<sub>s2</sub>, respectively. The propagation paths of the wave fronts of the acoustic signals of the two sound sources S<sub>1 </sub>and S<sub>2 </sub>are represented in the xyz-coordinate system by vector sets (d<sub>1l</sub>, d<sub>1r</sub>) and (d<sub>2l</sub>, d<sub>2r</sub>), respectively, where, as in <figref idrefs="DRAWINGS">FIG. 1D</figref>, the parts of the paths that are influenced by head diffraction are indicated in dotted line.</div>
+<div class="description-paragraph" id="p-0102" num="0113">The auxiliary device AD is adapted to be connected to the (different) sound source(s) via wireless links WL-RF, here in the form of digital transmission link(s) according to the Bluetooth standard as indicated by the Bluetooth transceiver (BT-Rx-Tx) in the audio gateway device (AD). The audio sources and the audio gateway device may be paired using the button BT-pair on the auxiliary device. Once paired, the BT-address of the audio source may be stored in a memory of the audio gateway device for easy future pairing. The links to the audio sources may alternatively or additionally be implemented in any other convenient wireless and/or wired manner, and according to any appropriate modulation type or transmission standard, possibly different for different audio sources. The auxiliary device may function as a remote control of the binaural hearing assistance system. The intended mode of operation of the system can e.g. be selected by the user U via mode selection buttons Mode1 and Mode2. The auxiliary device AD may further have the function of allowing a user to the change the currently active program (e.g. telephone program, TV-listening program, normal conversation program, etc.) or changing operating parameters (e.g. volume, cf. Vol-button) in the hearing assistance devices, and/or for fully or partially powering the system down (or up).</div>
+<div class="description-paragraph" id="p-0103" num="0114">In the embodiment of <figref idrefs="DRAWINGS">FIG. 2</figref>, the left and right hearing assistance devices (HAD<sub>l</sub>, HAD<sub>r</sub>) each additionally comprises a manually operable user interface (UI), whereby the user is allowed to change operating conditions of each individual (or both) hearing instruments by manual operation of the user interface (e.g. a push button), e.g. for changing program or operating parameters (e.g. volume) or for powering the devices (fully or partially) down or up (i.e. turning devices on or off).</div>
+<div class="description-paragraph" id="p-0104" num="0115">The left and right hearing assistance devices (HAD<sub>l</sub>, HAD<sub>r</sub>) are shown as devices mounted at the left and right ears of a user (U). The hearing assistance devices of the system of <figref idrefs="DRAWINGS">FIG. 2</figref> each comprises a wireless transceiver, here indicated to be based on inductive communication (I-Rx). The transceiver (at least) comprises an inductive receiver (i.e. an inductive coil, which is inductively coupled to a corresponding coil in a transceiver (I-Tx) of the audio gateway device (AD)), which is adapted to receive the audio signal from the audio gateway device (either as a baseband signal or as a modulated (analogue or digital) signal, and in the latter case to extract the audio signal from the modulated signal). The inductive links WL-I between the auxiliary device AD and each of the hearing instruments are indicated to be one-way, but may alternatively be two-way (e.g. to be able to exchange control signals between transmitting (AD) and receiving (HAD<sub>l</sub>, HAD<sub>r</sub>) device, e.g. to agree on an appropriate transmission channel, or to exchange other signals or parameters, e.g. audio signals or localization parameters). Alternatively or additionally, the hearing assistance device(s) may be adapted to receive one or more audio signals directly transmitted to the hearing assistance device(s) from other sound sources in the environment. The left and right hearing assistance devices may e.g. be embodied in respective left and right hearing instruments, each comprising a BTE-part (adapted for being located Behind The Ear (BTE) of the user) as shown in <figref idrefs="DRAWINGS">FIG. 2</figref>. Each of the left and right hearing instrument may comprise one or more microphones (mic<sub>l </sub>and mic<sub>r</sub>, respectively). One or both of the hearing instruments may e.g. be adapted to compensate for a hearing impairment of the user. Alternatively, the left and right hearing assistance devices may comprise ear pieces for augmenting an acoustic and/or wirelessly received (possibly virtual) sound field ‘surrounding’ the user U. The user U may be normally hearing or hearing impaired.</div>
+<div class="description-paragraph" id="p-0105" num="0116">The auxiliary device (AD) is shown to be carried around the neck of the user (U) in a neck-strap. The neck-strap may have the combined function of a carrying strap and a loop antenna into which the audio signal from the auxiliary device is fed (directly by galvanic connection, or indirectly via an inductive coupling to a transmitting coil in the auxiliary device) for better inductive coupling to the inductive transceiver of the listening device. Alternatively, the auxiliary device AD may be carried by the user U in any other way, e.g. held in a hand.</div>
+<div class="description-paragraph" id="p-0106" num="0117"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows an embodiment of a binaural hearing assistance system comprising first and second hearing assistance devices.</div>
+<div class="description-paragraph" id="p-0107" num="0118"> <figref idrefs="DRAWINGS">FIG. 3A</figref> shows an example of a binaural or a bilateral listening system comprising first and second hearing assistance devices HAD<sub>l</sub>, HAD<sub>r</sub>, each being e.g. a hearing assistance device as illustrated in <figref idrefs="DRAWINGS">FIG. 3B</figref>. The hearing assistance devices are adapted to exchange information via wireless link IA-WL and transceivers RxTx. The information that can be exchanged between the two hearing assistance devices comprises e.g. information (e.g. sound source localization information or HRTFs), control signals and/or audio signals (e.g. one or more (e.g. all) frequency bands of one or more audio signals). The first and second hearing assistance devices HAD<sub>l</sub>, HAD<sub>r </sub>of <figref idrefs="DRAWINGS">FIG. 1A</figref> are shown as BTE-type device, each comprising a housing adapted for being located behind an ear (pinna) of a user, the hearing assistance devices each comprising one or more microphones, a signal processing unit and an output unit (e.g. a loudspeaker). In an embodiment, all of these components are located in the housing of the BTE-part. In such case the sound from the output transducer may be propagated to the ear canal of the user via a tube connected to a loudspeaker outlet of the BTE-part. The tube may be connected to an ear mould specifically adapted to the form of the users' ear canal and allowing sound signals from the loudspeaker to reach the ear drum of the ear in question. In an embodiment, the ear mould or other part located in or near the ear canal of the user comprises a microphone (e.g. located at the entrance to ear canal) which form part of the input unit of the corresponding hearing assistance device and thus may constitute one of the electric input signals that are used to separate the sound sources S<sub>s </sub>in the environment from each other. Alternatively, the output transducer may be located separately from the BTE-part, e.g. in the ear canal of the user, and electrically connected to the signal processing unit of the BTE-part (e.g. via electric conductors or a wireless link).</div>
+<div class="description-paragraph" id="p-0108" num="0119"> <figref idrefs="DRAWINGS">FIG. 3B</figref> shows an embodiment of a binaural or a bilateral hearing assistance system, e.g. a hearing aid system, comprising left and right hearing assistance devices (HAD<sub>l</sub>, HAD<sub>r</sub>), in the following termed hearing instruments. The left and right hearing instruments are adapted for being located at or in left and right ears of a user. The hearing instruments are adapted for exchanging information between them via a wireless communication link, here via a specific inter-aural (IA) wireless link (IA-WL) implemented by corresponding antenna and transceiver circuitry (IA-Rx/Tx-l and IA-Rx/Tx-r). of the left and right hearing instruments, respectively). The two hearing instruments (HAD<sub>l</sub>, HAD<sub>r</sub>) are adapted to allow the exchange of audio source signals X<sub>s </sub>and localization parameters LP<sub>s </sub>of the corresponding source signals S<sub>s </sub>between the two hearing instruments, cf. dotted arrows indicating a transfer of signals X<sub>s</sub> <sup>r</sup>, LP<sub>s</sub> <sup>r </sup>from the right to the left instrument and signals X<sub>s</sub> <sup>l</sup>, LP<sub>s</sub> <sup>l </sup>from the left to the right instruments. Each hearing instrument (HAD<sub>l</sub>, HAD<sub>r</sub>) comprise a forward signal path comprising an input unit (IU<sub>l</sub>, IU<sub>r</sub>) operatively connected to a signal processing unit (SPU) and an output unit (here loudspeaker (SPK)). Between the input unit IU and the signal processing unit SPU, and in operative connection with both, a source separation and localization unit (SEP-LOC) is located. The source separation and localization unit (SEP-LOC) is adapted to provide separated sound source signals (X<sub>s</sub> <sup>l</sup>, X<sub>s</sub> <sup>r</sup>, s=1, 2, . . . N<sub>s</sub>) and corresponding localization parameters (LP<sub>s</sub> <sup>l</sup>, LP<sub>s</sub> <sup>r</sup>, s=1, 2, . . . N<sub>s</sub>) based on a number of electric input signals (INm1, INm2, INw) from the input unit (IU), each electric input signal representing a sound or audio signal. In the present embodiment, the electric input signals (INm1, INm2) are signals from two microphones (mic<sub>l1</sub>, mic<sub>l2 </sub>and mic<sub>r1</sub>, mic<sub>r2 </sub>of the left and right hearing instruments, respectively) and (INw) from a wireless receiver comprising antenna (ANT) and transceiver circuitry (RF-Rx/Tx-l and RF-Rx/Tx-r of the left and right instruments, respectively). The forward path further comprises a selector and mixer unit (SEL-MIX-HRTF) for selecting a given source signal (X<sub>s</sub> <sup>l</sup>, X<sub>s</sub> <sup>r</sup>, s=1, 2, . . . N<sub>s</sub>) or mixing a number of source signals and providing a resulting input signal IN to the signal processing unit (SPU). The hearing instruments further comprises a memory (HRTF<sub>l</sub>, HRTF<sub>r</sub>) for storing a database of head related transfer functions HRTF and a calculation and comparator unit (COMP) for determining a HRTF of a current sound source S<sub>s </sub>(from the currently received separated sound source signals X<sub>s</sub> <sup>l </sup>and X<sub>s</sub> <sup>r</sup>, of the left and right hearing instruments, respectively) and comparing such current values with values stored in the database. The calculation and comparator unit (COMP) is configured to update the corresponding HRTF-value of the database according to a predefined learning rule (e.g. controlled via a control signal crit from the signal processing unit SPU). The selector and mixer unit (SEL-MIX-HRTF) is configured to access the memory (HRTF<sub>l</sub>, HRTF<sub>r</sub>) and to apply an appropriate HRTF to a currently received sound source signal (e.g. only to a signal selected for further processing), cf. signal hrtf<sub>l </sub>and hrtf<sub>r </sub>in the left and right hearing instruments, respectively. In the binaural hearing assistance system of <figref idrefs="DRAWINGS">FIG. 3B</figref>, signals X<sub>s</sub> <sup>r</sup>, LP<sub>s</sub> <sup>r </sup>and signals X<sub>s</sub> <sup>l</sup>, LP<sub>s</sub> <sup>l </sup>are transmitted via bi-directional wireless link IA-WL from the right to the left and from the left to the right hearing instruments, respectively. These signals are received and extracted by the respective antenna (ANT) and transceiver circuitry (IA-Rx/Tx-l and IA-Rx/Tx-r) and forwarded to the respective signal processing units (SPU) of the opposite hearing instrument as signals DBS. The source signal and localization data (X<sub>s</sub> <sup>l</sup>, LP<sub>s</sub> <sup>l</sup>) received in the right hearing instrument (HAD<sub>r</sub>) from the left hearing instrument (HAD<sub>l</sub>) can be forwarded from the signal processing unit (SPU) to the HRTF-database (HRTF<sub>r</sub>) of the right hearing instrument (HAD<sub>r</sub>) via signal dbs. Likewise, source signal and localization data (X<sub>s</sub> <sup>r</sup>, LP<sub>s</sub> <sup>r</sup>) can be extracted from the HRTF-database (HRTF<sub>r</sub>) of the right hearing instrument (HAD<sub>r</sub>) and forwarded to the left hearing instrument (HAD<sub>l</sub>) via signal dbs, signal processing unit SPU, signal DBS, antenna and transceiver circuitry (IA-Rx/Tx-r) of the right hearing instrument and wireless link IA-WL. The source signal and/or localization parameters from the local and the opposite hearing instrument can be used together to update the respective HRTF-databases and to apply localization cues provided by the relevant HRFT-values for the selected resulting input signal(s) in the left and right hearing instruments. Each (or one of the) hearing instruments comprises a manually operable and/or a remotely operable user interface (UI) for generating a control signal UC, e.g. for providing a user input to one or more or the signal processing unit (SPU), the HRTF-database (HRTF<sub>l</sub>, HRTF<sub>r</sub>), the selector and mixer unit (SEL-MIX-HRTF) and the separation and localization unit (SEP-LOC) (e.g. for selecting a target signal among a number of signals in the sound field picked up by the input unit (IU)). In an embodiment, a given sound source can be ‘relocated’ via the user interface, so that it is perceived as originating at a location determined by the user, such location possibly being virtual (e.g. allocated to a directly received audio input signal) and/or deviating from the physical location of the sound source as determined by the separation and localization unit (SEP-LOC) (e.g. originating from a speaker in the environment of the user). Such user interface is discussed in connection with <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0109" num="0120"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows an embodiment of a binaural hearing assistance system comprising left and right hearing assistance devices (HAD<sub>l</sub>, HAD<sub>r</sub>) and an auxiliary device (AD), e.g. a cellphone, the auxiliary device comprising a user interface (UI) for the system, e.g. for viewing and (possibly) influencing the (perceived) location of current sound sources (S<sub>s</sub>) in the environment of the binaural hearing assistance system.</div>
+<div class="description-paragraph" id="p-0110" num="0121">The left and right hearing assistance devices (HAD<sub>l</sub>, HAD<sub>r</sub>) are e.g. implemented as described in connection with <figref idrefs="DRAWINGS">FIG. 3</figref>. In the embodiment of <figref idrefs="DRAWINGS">FIG. 4</figref>, the binaural hearing assistance system comprises an auxiliary device (AD) in the form of or comprising a cellphone, e.g. a SmartPhone. The left and right hearing assistance devices (HAD<sub>l</sub>, HAD<sub>r</sub>) and the auxiliary device (AD) each comprise relevant antenna and transceiver circuitry for establishing wireless communication links between the hearing assistance devices (link IA-WL) as well as between at least one of or each of the hearing assistance devices and the auxiliary device (link WL-RF). The antenna and transceiver circuitry in each of the left and right hearing assistance devices necessary for establishing the two links is denoted RF-IA-RX/Tx-l, and RF-IA-RX/Tx-r, respectively, in <figref idrefs="DRAWINGS">FIG. 4</figref>. Each of the left and right hearing assistance devices (HAD<sub>l</sub>, HAD<sub>r</sub>) comprises a respective database of head related transfer functions (HRTF<sub>l</sub>, HRTF<sub>r</sub>). In an embodiment, the interaural link IA-WL is based on near-field communication (e.g. on inductive coupling), but may alternatively be based on radiated fields (e.g. according to the Bluetooth standard, and/or be based on audio transmission utilizing the Bluetooth Low Energy standard). In an embodiment, the link WL-RF between the auxiliary device and the hearing assistance devices is based on radiated fields (e.g. according to the Bluetooth standard, and/or based on audio transmission utilizing the Bluetooth Low Energy standard), but may alternatively be based on near-field communication (e.g. on inductive coupling). The bandwidth of the links (IA-WL, WL-RF) is preferably adapted to allow sound source signals (or at least parts thereof, e.g. selected frequency bands and/or time segments) and/or localization parameters identifying a current location of a sound source to be transferred between the devices. In an embodiment, processing of the system (e.g. sound source separation) and/or the function of a remote control is fully or partially implemented in the auxiliary device AD (SmartPhone). In an embodiment, the user interface UI is implemented by the SmartPhone possibly running an APP allowing to control the functionality of the audio processing device via the SmartPhone, e.g. utilizing a display of the SmartPhone to implement a graphical interface (e.g. combined with text entry options).</div>
+<div class="description-paragraph" id="p-0111" num="0122">In an embodiment, the binaural hearing assistance system is configured to allow a user to modify a location of a sound source whose location has been determined by the source separation unit (or received separately for a wirelessly received direct electric signal) via the user interface and to apply the HRTF values to the sound source signal, the HRTF values being extracted from the HRTF database corresponding to the modified location of the sound source. As illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref>, a location of the sound sources as defined by the separation and localization unit may be displayed by the user interface (UI) of the SmartPhone (which is convenient for viewing and interaction via a touch sensitive display, when the Smartphone is held in a hand (Hand) of the user (U)). The sound sources S<sub>s </sub>displayed by the user interface may e.g. be limited by a, e.g. user defined, criterion, e.g. including all detected, or the currently loudest, or those currently containing speech, and/or those currently containing music, or those currently containing noise (e.g. uncorrelated sound, and/or sound identified not to be speech and not to be music), etc. In the illustrated example in <figref idrefs="DRAWINGS">FIG. 4</figref>, the locality of 3 sound sources S<sub>1</sub>, S<sub>2 </sub>and S<sub>3 </sub>(as represented by respective vectors d<sub>1</sub>, d<sub>2</sub>, and d<sub>3 </sub>in the indicated orthogonal coordinate system (x, y, z) having its center between the respective microphone units (mic<sub>l</sub>, mic<sub>r</sub>) of the left and right hearing assistance devices) are displayed relative to the user (U). In the example of <figref idrefs="DRAWINGS">FIG. 4</figref>, a new sound source S<sub>4 </sub>has been detected (e.g. a wirelessly received direct electric audio signal source), and the user interface UI is configured to allow the user to spatially place the new source in the current sound source arrangement according to wish (e.g. by dragging the source symbol to the left of text indication ‘S<sub>4</sub>’ and dropping it at an appropriate location relative to the user). The binaural hearing assistance system (including the auxiliary device) is configured to determine and transmit localization parameters LP<sub>4 </sub>corresponding to the location of S<sub>4 </sub>as proposed by the user via the user interface to the left and right hearing assistance devices (HAD<sub>l</sub>, HAD<sub>r</sub>) of the binaural hearing assistance system. The binaural hearing assistance system (including the left and right hearing assistance devices) is adapted to receive the localization parameters LP<sub>4 </sub>and to apply corresponding head related transfer functions HRTF (HRTF<sub>l</sub>(LP<sub>4</sub>), HRTF<sub>r</sub>(LP<sub>4</sub>)) to the sound source signal S<sub>4 </sub>in the left and right hearing assistance devices, respectively. Additionally, the user is allowed to manipulate the sound field by placing one or more sound sources at another position than its/their physical (or otherwise proposed) location.</div>
+<div class="description-paragraph" id="p-0112" num="0123">Various aspects of inductive communication links (IA-WL) are e.g. discussed in EP 1 107 472 A2, EP 1 777 644 A1, US 2005/0110700 A1, and US2011222621A1. WO 2005/055654 and WO 2005/053179 describe various aspects of a hearing aid comprising an induction coil for inductive communication with other units. A protocol for use in an inductive communication link is e.g. described in US 2005/0255843 A1.</div>
+<div class="description-paragraph" id="p-0113" num="0124">In an embodiment, the RF-communication link (WL-RF) is based on classic Bluetooth as specified by the Bluetooth Special Interest Group (SIG) (cf. e.g. https://www.bluetooth.org). In an embodiment, the (second) RF-communication link is based other standard or proprietary protocols (e.g. a modified version of Bluetooth, e.g. Bluetooth Low Energy modified to comprise an audio layer).</div>
+<div class="description-paragraph" id="p-0114" num="0125"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows a flow diagram of a method of operating a hearing assistance system (as e.g. shown in <figref idrefs="DRAWINGS">FIG. 3</figref>) comprising left and right hearing assistance devices. The method comprises in each of the left and right hearing assistance devices the steps shown in <figref idrefs="DRAWINGS">FIG. 5</figref>.</div>
+<div class="description-paragraph" id="p-0115" num="0126">The invention is defined by the features of the independent claim(s). Preferred embodiments are defined in the dependent claims. Any reference numerals in the claims are intended to be non-limiting for their scope.</div>
+<div class="description-paragraph" id="p-0116" num="0127">Some preferred embodiments have been shown in the foregoing, but it should be stressed that the invention is not limited to these, but may be embodied in other ways within the subject-matter defined in the following claims and equivalents thereof.</div>
+<heading id="h-0017">REFERENCES</heading>
+<div class="description-paragraph" id="p-0117" num="0000">
+</div> <ul>
+<li id="ul0009-0001" num="0128">[Gardner and Martin, 1994] Gardner, Bill and Martin, Kieth, <i>HRTF Measurements of a KEMAR Dummy</i>-<i>Head Microphone</i>, MIT Media Lab Machine Listening Group, MA, US, 1994.</li>
+<li id="ul0009-0002" num="0129">[Dillon; 2001] Dillon H. (2001), Hearing Aids, Thieme, New York-Stuttgart, 2001.</li>
+<li id="ul0009-0003" num="0130">WO2010115227A1 (COCHLEAR) 14 Oct. 2010</li>
+<li id="ul0009-0004" num="0131">US2004218771A1 (SAT) 4 Nov. 2004</li>
+<li id="ul0009-0005" num="0132">WO2009001277A1 (PHILIPS) 31 Dec. 2008</li>
+<li id="ul0009-0006" num="0133">EP2563045A1 (OTICON) 27 Feb. 2013</li>
+<li id="ul0009-0007" num="0134">[Schaub; 2008] Arthur Schaub, Digital hearing Aids, Thieme Medical. Pub., 2008.</li>
+<li id="ul0009-0008" num="0135">EP1107472A2 (SONY) 13 Jun. 2001</li>
+<li id="ul0009-0009" num="0136">EP1777644A1 (OTICON) 24 May 2007</li>
+<li id="ul0009-0010" num="0137">US20050110700A1 (STARKEY/OTICON) 26 May 2005</li>
+<li id="ul0009-0011" num="0138">US2011222621A1 (OTICON) 15 Sep. 2011</li>
+<li id="ul0009-0012" num="0139">WO2005055654 (STARKEY/OTICON) 16 Jun. 2005</li>
+<li id="ul0009-0013" num="0140">WO2005053179 (STARKEY/OTICON) 9 Jun. 2005</li>
+<li id="ul0009-0014" num="0141">US20050255843A1 (STARKEY/OTICON) 17 Nov. 2005</li>
+</ul>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">23</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM104116398">
+<claim-statement>The invention claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A non-transitory storage medium storing a processor-executable program that, when executed by a processor of an auxiliary device, implements a user interface process for a binaural hearing assistance system including left and right hearing assistance devices, the process comprising:
+<div class="claim-text">exchanging information with the left and right hearing assistance devices;</div>
+<div class="claim-text">providing a graphical interface configured to illustrate one or more currently active sound sources relative to the user; and</div>
+<div class="claim-text">executing, based on input from a user via the user interface, at least one of:
+<div class="claim-text">modifying a location of a sound source, the location of the sound source having been determined by source separation; and</div>
+<div class="claim-text">placing a sound source for a wirelessly received direct electric signal at an appropriate location relative to the user.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The non-transitory storage medium according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the user interface is configured to allow a user to select a suitable position of a sound source relative to the user.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The non-transitory storage medium according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the process further comprises:
+<div class="claim-text">updating localization parameters of a sound source in a memory unit of the left and right hearing assistance devices, based on user input to the user interface.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The non-transitory storage medium according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, the process further comprising:
+<div class="claim-text">allowing a user, based on user input to the user interface, to select a particular sound source signal to be included in an output signal from at least one of the hearing assistance devices to the user.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The non-transitory storage medium according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, the process further comprising:
+<div class="claim-text">extracting localization parameters that represent perceived location of a specific sound.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The non-transitory storage medium according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, the process further comprising:
+<div class="claim-text">extracting localization parameters embedded in an audio signal representing a sound source signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The non-transitory storage medium according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein sound sources displayed by the user interface are limited by a user defined criterion.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The non-transitory storage medium according to <claim-ref idref="CLM-00007">claim 7</claim-ref> wherein the user define criterion comprises one of the following options:
+<div class="claim-text">include all detected sound sources,</div>
+<div class="claim-text">include the currently loudest sound sources,</div>
+<div class="claim-text">include the sound sources currently containing speech,</div>
+<div class="claim-text">include the sound sources currently containing music,</div>
+<div class="claim-text">include the sound sources currently containing noise</div>
+<div class="claim-text">include the sound sources currently containing uncorrelated sound,</div>
+<div class="claim-text">include the sound source identified not to be speech and not to be music,</div>
+</div>
+<div class="claim-text">or a mixture thereof.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The non-transitory storage medium according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the user interface is configured to allow the user, based on input to the user interface, to spatially place a new source in the current sound source arrangement by dragging a sound source symbol from a current location and dropping it at an appropriate location relative to the user.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The non-transitory storage medium according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, the process further comprising:
+<div class="claim-text">determining and transmitting localization parameters corresponding to the location of a sound source as proposed by the user via the user interface to the left and right hearing assistance devices of the binaural hearing assistance system.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. An auxiliary device comprising:
+<div class="claim-text">a user interface for a binaural hearing assistance system that includes left and right hearing assistance devices adapted for being located at or in a left and right ear, respectively, of a user, wherein</div>
+<div class="claim-text">the user interface generates a graphical interface configured to illustrate a currently active sound source relative to the user, and, based on input from the user via the user interface, allowing a user to perform at least one of:
+<div class="claim-text">modifying a location of a sound source, the location of the sound source having been determined by source separation; and</div>
+<div class="claim-text">placing a sound source for a wirelessly received direct electric signal at an appropriate location relative to the user.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The auxiliary device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein said auxiliary device is a remote control or a smartphone.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The auxiliary device according to <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the user interface is a remote control or smartphone executing a software program.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The auxiliary device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the device is configured to establish a communication link with the left and right hearing assistance devices to exchange information with the left and right hearing assistance devices.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The auxiliary device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising:
+<div class="claim-text">a localization unit, which estimates the position of a sound source by means other than the sound signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The auxiliary device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising:
+<div class="claim-text">an antenna and transceiver for receiving a signal comprising localization parameters.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. An auxiliary device configured to execute a program to implement a user interface process for a binaural hearing assistance system including left and right hearing assistance devices, the process comprising:
+<div class="claim-text">exchanging information with the left and right hearing assistance devices;</div>
+<div class="claim-text">providing a graphical interface configured to illustrate one or more currently active sound sources relative to the user; and</div>
+<div class="claim-text">executing, based on input from a user via the user interface, at least one of:
+<div class="claim-text">modifying a location of a sound source, the location of the sound source having been determined by source separation; and</div>
+<div class="claim-text">placing a sound source for a wirelessly received direct electric signal at an appropriate location relative to the user.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. A binaural hearing assistance system, comprising:
+<div class="claim-text">left and right hearing assistance devices adapted for being located at or in a left and right ear, respectively, of a user, each of the left and right hearing assistance devices, comprising:</div>
+<div class="claim-text">an input unit for providing one or more electric input signals based on one or more input sounds of a sound field surrounding the binaural hearing assistance system,</div>
+<div class="claim-text">a signal processing unit for processing an input signal selected among said electric input signals, or a mixture thereof, and providing a processed output signal, and</div>
+<div class="claim-text">an output unit for providing output stimuli to the user based on the processed signal, wherein said output stimuli are perceived by the user as sound; and</div>
+<div class="claim-text">an auxiliary device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The binaural hearing assistance system according to <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the auxiliary device receives localization parameters and applies corresponding head related transfer functions (HRTF) to a selected sound source signal in the left and right hearing assistance devices, respectively.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The binaural hearing assistance system according to <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the auxiliary device applies hear related transfer functions (HRTF) values to a sound source signal whose location has been modified via the user interface, the HRTF values being extracted from a HRTF database corresponding to a modified location of the sound source.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The binaural hearing assistance system according to <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the auxiliary device allows the user to manipulate the sound field by placing one or more sound sources at a position other than its/their physical or otherwise proposed location.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The binaural hearing assistance system according to <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the auxiliary device allows a user to relocate a sound source via the user interface of the auxiliary device, so that the sound source is perceived as originating at a location determined by the user.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. A method for implementing a user interface on an auxiliary device for a binaural hearing assistance system including left and right hearing assistance devices, the method comprising:
+<div class="claim-text">exchanging information with the left and right hearing assistance devices;</div>
+<div class="claim-text">providing a graphical interface configured to illustrate one or more currently active sound sources relative to the user; and</div>
+<div class="claim-text">executing, based on input from a user via the user interface, at least one of:
+<div class="claim-text">modifying a location of a sound source, the location of the sound source having been determined by source separation; and</div>
+<div class="claim-text">placing a sound source for a wirelessly received direct electric signal at an appropriate location relative to the user.</div>
+</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

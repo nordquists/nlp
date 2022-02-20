@@ -1,0 +1,1233 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10521949B2 - Framework for graphics animation and compositing operations 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA359180113" source="national office">
+<div class="abstract">A graphics animation and compositing operations framework has a layer tree for interfacing with the application and a render tree for interfacing with a render engine. Layers in the layer tree can be content, windows, views, video, images, text, media or other type of objects for an application's user interface. The application commits state changes of the layers of the layer tree. The application does not need to include explicit code for animating the changes to the layers. Instead, after a synchronization threshold has been met, an animation is determined for animating the change in state by the framework which can define a set of predetermined animations based on motion, visibility and transition. The determined animation is explicitly applied to the affected layers in the render tree. A render engine renders from the render tree into a frame buffer, synchronized with the display. Portions of the render tree changing relative to prior versions can be tracked to improve resource management.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES233007077">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a Continuation of U.S. patent application Ser. No. 15/428,718, filed Feb. 9, 2017, entitled “FRAMEWORK FOR GRAPHICS ANIMATION AND COMPOSITING OPERATIONS,” which is a Continuation of U.S. patent application Ser. No. 15/242,074, filed Aug. 19, 2016, entitled “FRAMEWORK FOR GRAPHICS ANIMATION AND COMPOSITING OPERATIONS,” which is a Continuation of U.S. patent application Ser. No. 14/665,975, filed Mar. 23, 2015, entitled “FRAMEWORK FOR GRAPHICS ANIMATION AND COMPOSITING OPERATIONS,” which is a Continuation of U.S. patent application Ser. No. 11/500,154, filed Aug. 4, 2006, entitled “FRAMEWORK FOR GRAPHICS ANIMATION AND COMPOSITING OPERATIONS,” the entire contents of all of which are hereby incorporated by reference as if fully set forth herein, under 35 U.S.C. § 120.</div>
+<heading id="h-0002">FIELD OF THE DISCLOSURE</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The subject matter of the present disclosure relates to a framework for handling graphics animation and compositing operations for a graphical user interface of a computer system application.</div>
+<heading id="h-0003">COMPUTER PROGRAM LISTING</heading>
+<div class="description-paragraph" id="p-0004" num="0003">The following table shows 14 source code files of an application programming interface that are provided as computer program listing on a compact disc in read only format and are hereby incorporated by reference.</div>
+<div class="description-paragraph" id="p-0005" num="0004">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Computer Program Listing Appendix</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Last</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">#</td>
+<td class="description-td">File</td>
+<td class="description-td">Size</td>
+<td class="description-td">Type</td>
+<td class="description-td">Modified</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">LayerKit</td>
+<td class="description-td">1 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:17 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">LKAnimation</td>
+<td class="description-td">8 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">LKBase</td>
+<td class="description-td">3 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">LKConstraintLayoutManager</td>
+<td class="description-td">3 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">LKFilterInfo</td>
+<td class="description-td">1 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">LKLayer</td>
+<td class="description-td">16</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">KB</td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">LKObject</td>
+<td class="description-td">3 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">LKOpenGLLayer</td>
+<td class="description-td">3 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">LKScrollLayer</td>
+<td class="description-td">2 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">LKTextLayer</td>
+<td class="description-td">3 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">LKTiming</td>
+<td class="description-td">3 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">12</td>
+<td class="description-td">LKTimingFunction</td>
+<td class="description-td">2 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">13</td>
+<td class="description-td">LKTransaction</td>
+<td class="description-td">3 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">14</td>
+<td class="description-td">LKTransform</td>
+<td class="description-td">4 KB</td>
+<td class="description-td">Header File</td>
+<td class="description-td">May 22, 2006</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">7:15 PM</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<heading id="h-0004">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0006" num="0005">Mac OS X provides prior art graphics and imaging frameworks for developers to create “views” for graphical user interfaces (GUIs) of a computer application. (MAC OS is a registered trademark of Apple Computer Inc. of Cupertino, Calif.) For example, Cocoa is an object-oriented application environment that developers can use to develop Mac OS X native applications. Apple's Cocoa Application Framework (also referred to as Application Kit or AppKit) is one of the core Cocoa frameworks. Application Kit provides functionality and associated Application Programming Interfaces (APIs) for applications, including objects for graphical user interfaces, event-handling mechanisms, application services, and drawing and image composition facilities.</div>
+<div class="description-paragraph" id="p-0007" num="0006">NSView is part of Cocoa's Objective-C API and is an abstract class that defines basic drawing, event-handling, and printing architecture of applications. With NSView, each “view” of an application's GUI is dealt with using local coordinates, and each view is positioned relative to its parent view in a hierarchical fashion. Using a view hierarchy is useful for building complex user interfaces out of modular parts. The Application Kit framework is used to develop NSView-based applications. This framework contains objects needed to implement a graphical, event-driven user interface that includes windows, dialogs, buttons, menus, scrollers, text fields, etc. Application Kit framework handles the drawing of objects, communicates with hardware devices and screen buffers, clears areas of the screen before drawing, and clips views.</div>
+<div class="description-paragraph" id="p-0008" num="0007">GUIs for computer applications have increased in complexity and are usually designed to handle views, animations, videos, windows, frames, events, etc. Even with the increased complexity, the goal of developers is to make the GUIs more tactile and natural in appearance. Accordingly, developers must consider how to create and manage the GUIs for computer applications with this goal in mind.</div>
+<div class="description-paragraph" id="p-0009" num="0008">Referring to <figref idrefs="DRAWINGS">FIG. 1A</figref>, a rendering process <b>100</b> according to the prior art is schematically illustrated. In the rendering process <b>100</b>, an application <b>110</b>, which can be based on NSView as discussed above, inputs GUI information into a backing store <b>120</b> and issues rendering commands to the render engine <b>130</b>. The render engine <b>130</b> renders the GUI information from the backing store <b>120</b> into a frame buffer <b>140</b>. The render engine <b>130</b> can use Apple's Core Image and Core Video. Core Image is an image processing framework, and Core Video is a video processing framework. Scan-out hardware <b>150</b> then outputs the rendered information in the frame buffer <b>140</b> to a display <b>160</b> using a frame rate <b>180</b> of the display <b>160</b>.</div>
+<div class="description-paragraph" id="p-0010" num="0009">This prior art rendering process <b>100</b> has no built-in framework for animating objects or views. Instead, the NSView-based application <b>110</b> handles animation explicitly by moving views around, resizing views, etc. To provide animation, most NSView-based applications <b>110</b> developed in the art resort to using “snapshots” of the views and compositing the snapshots using other facilities. In <figref idrefs="DRAWINGS">FIG. 1A</figref>, the application <b>110</b> is show having a pseudo-code loop <b>112</b> for animating movement of an object or view for the application's GUI. In this simplified example, the object or view is being moved from a start point A to an end point B (e.g., the application <b>110</b> may receive user input moving a view from a starting position on the display to an ending position). The typical developer of the application <b>110</b> does not want the object to disappear from point A on the display <b>160</b> and suddenly appear at point B on the display <b>160</b> because users prefer a more gradual or “natural” movement.</div>
+<div class="description-paragraph" id="p-0011" num="0010">To make the movement more gradual or “natural,” the developer of the application <b>110</b> typically animates the movement of the object from start point A to end point B using explicit code such as code segment or loop <b>112</b>. In this simplified code, the loop <b>112</b> is used to animate the object by incrementally moving the object some distance X for each iteration of the loop <b>112</b>. <figref idrefs="DRAWINGS">FIG. 1B</figref> shows some resulting positions of an object or view <b>164</b> as it would appear incrementally on displayed results <b>162</b> as the application <b>110</b> of <figref idrefs="DRAWINGS">FIG. 1A</figref> performs the animation of the object <b>164</b> with the iterative loop <b>112</b> of <figref idrefs="DRAWINGS">FIG. 1A</figref>. The number of steps or “snapshots” used to animate the movement of the object <b>164</b> is decided by the developer. In addition to such an iterative loop <b>112</b> for moving objects, the developer must include explicit code in the application <b>110</b> to implement any form of animation (e.g., fade-in, fade-out, resize, etc.) for an object.</div>
+<div class="description-paragraph" id="p-0012" num="0011">In addition to requiring explicit animation in the application <b>110</b>, the data structures and painting model for NSView present problems when the application <b>110</b> has dynamic content. For example, NSView makes no particular distinction between changes in content and layout and is not well tuned for continuous re-layout. As an NSView object is moved, for example, it creates “damage” to content in its wake that requires other views to be redrawn. Redrawing a view typically invokes the model-to-view mapping code of NSView-based application <b>110</b> and requires expensive computations to be performed (particularly if the model data needs to be retrieved over a network).</div>
+<div class="description-paragraph" id="p-0013" num="0012">The timing of services for this form of application <b>110</b> offers some additional difficulties for developers. Most animations are done using one or more timers (e.g., the embedded loops or iterative steps <b>112</b>) in the main event loop of the application <b>110</b>. Therefore, the duty cycle of the timer for the animation is completely dependent on how fast the application <b>110</b> services its main event loop. Although some events can be handled quickly, other events may take much longer and may actually be subject to I/O delays.</div>
+<div class="description-paragraph" id="p-0014" num="0013">In addition, the frame buffer <b>140</b> and scan-out hardware <b>150</b> operate under a frame rate <b>180</b> to output information to the display <b>160</b>. The frame rate <b>180</b> is typically about 60-Hz. To improve the handling of events, developers attempt to operate the application <b>110</b> in synchronization with the frame rate <b>180</b> of the hardware. In this way, the majority of events of the application <b>110</b> can be timely handled within the main loop of the application <b>110</b> and rendered to the display <b>160</b> at the frame rate <b>180</b>. However, maintaining such a consistent frame rate of 60-Hz. in the main loop of the application <b>110</b> can be difficult. Furthermore, determining what actual frame rate to use and determining when to initiate the timer to keep it in sync with video blanking of the scan-out hardware <b>150</b> is not readily apparent in a given context because the application <b>110</b> is not given intimate knowledge of the video display <b>160</b> and its associated hardware <b>150</b>.</div>
+<div class="description-paragraph" id="p-0015" num="0014">In addition to presenting problems for developers with respect to animation and event handling, the NSView-based application <b>110</b> may have problems related to layout of the GUI for the application <b>110</b>. For example, a number of constraints must typically be applied to views when they are resized for display. One of the views may have a fixed absolute size, while other views may be designed to change size with the composition. Additionally, many views (e.g., text or web views) must explicitly change how they are represented as a function of the actual size at which they are to be displayed. Consequently, the text or web view may need to invoke its own layout techniques when it is resized. Developers of the NSView-based application <b>110</b> must explicitly handle these types of complex issues.</div>
+<div class="description-paragraph" id="p-0016" num="0015">The subject matter of the present disclosure is directed to overcoming, or at least reducing the effects of, one or more of the problems set forth above.</div>
+<heading id="h-0005">SUMMARY</heading>
+<div class="description-paragraph" id="p-0017" num="0016">A framework for performing graphics animation and compositing operations is disclosed. The framework is used as part of rendering process to render a user interface of an application for display on a computer system. The framework is divided into two processes. A layer tree process interfaces with the application, and a render tree process interfaces with a render engine. The layer tree process has a first data structure or layer tree that contains object or layers associated with the user interface of the application. The layers can be content, windows, views, video, images, text, media, or any other type of object for a user interface of an application. The render tree process is separate from the layer tree process and does not interface with the application. The render tree process has a second data structure or render tree that contains object or layers associated with the layer tree. The render engine renders from the render tree.</div>
+<div class="description-paragraph" id="p-0018" num="0017">When the application changes or is manipulated to change a layer of the user interface (e.g., a user moves a layer from a first position to a second position in a window of the user interface), the layer tree process receives the changes from the application and implements the changes directly to the layer tree. The changes from the application change the state of one or more layers in the layer tree. For example, if a layer has been moved in the application, then attributes describing the position of the affected layer in the layer tree will change. From the change in state of the affected layer in the layer tree, an animation and compositing process independent from the application determines what animation to use to animate the change of the affected layer. The animation and compositing process then implements the determined animation on the affected layer of the render tree. Then, the render engine renders the layers in the render tree into a frame buffer of the computer system.</div>
+<div class="description-paragraph" id="p-0019" num="0018">In one technique to improve resource usage, the framework can focus on dirty regions of the render tree when rendering. A “dirty region” is one or more layers or objects of the render tree that have changed relative to their immediate prior versions. For example, the dirty regions can be indicated by change objects added to the associated layers of the render tree that have been changed relative to their immediately prior version. The change objects are updated at each transaction of rendering the render tree. During rendering, the render engine renders only those layers that have changed relative to their immediately prior version.</div>
+<div class="description-paragraph" id="p-0020" num="0019">In another technique to improve resource usage, user interface information from an application is stored to a first buffer. A buffer handler receives a first update region of the user interface information from the application. In response, the buffer handler stores the user interface information from the first buffer into a second buffer except for the first update region. The render engine renders from the second buffer for display on the computer system, and the buffer handler marks the first buffer as purgeable. During subsequent processing, the buffer handler determines whether the first buffer has been reclaimed in response to receiving a second update region from the application. If the first buffer has not been reclaimed, buffer handler can use the first buffer again.</div>
+<div class="description-paragraph" id="p-0021" num="0020">The foregoing summary is not intended to summarize each potential embodiment or every aspect of the present disclosure.</div>
+<description-of-drawings>
+<heading id="h-0006">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0022" num="0021">The foregoing summary, preferred embodiments, and other aspects of the present disclosure will be best understood with reference to a detailed description of specific embodiments, which follows, when read in conjunction with the accompanying drawings, in which:</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 1A</figref> illustrates a rendering process according to the prior art.</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 1B</figref> illustrates example results of the prior art rendering process of <figref idrefs="DRAWINGS">FIG. 1A</figref>.</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 2A</figref> illustrates an embodiment of a rendering process according to certain teachings of the present disclosure.</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 2B</figref> illustrates example results of the rendering process of <figref idrefs="DRAWINGS">FIG. 2A</figref>.</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 3</figref> illustrates a rendering process showing an embodiment of a framework for graphics animation and compositing according to certain teachings of the present disclosure.</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates details of the rendering process and framework of <figref idrefs="DRAWINGS">FIG. 3</figref> in flow chart form.</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIGS. 5A through 5C</figref> illustrate details of layers for the framework of <figref idrefs="DRAWINGS">FIG. 3</figref>.</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates a rendering process having a framework and a buffer handler according to certain teachings of the present disclosure.</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 7</figref> illustrates details of the rendering process of <figref idrefs="DRAWINGS">FIG. 6</figref> in flow chart form.</div>
+</description-of-drawings>
+<div class="description-paragraph" id="p-0032" num="0031">While the subject matter of the present disclosure is susceptible to various modifications and alternative forms, specific embodiments thereof have been shown by way of example in the drawings and are herein described in detail. The figures and written description are not intended to limit the scope of the inventive concepts in any manner. Rather, the figures and written description are provided to illustrate the inventive concepts to a person skilled in the art by reference to particular embodiments, as required by 35 U.S.C. § 112.</div>
+<heading id="h-0007">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0033" num="0032">I. Overview of Layer Kit Framework</div>
+<div class="description-paragraph" id="p-0034" num="0033">Referring to <figref idrefs="DRAWINGS">FIG. 2A</figref>, one embodiment of a rendering process <b>200</b> according to certain teachings of the present disclosure is schematically illustrated. In the rendering process <b>200</b>, an application <b>210</b> inputs graphical user interface (GUI) information into a backing store (not shown), and a layer kit framework <b>220</b> is used to process the GUI information in the backing store. Once the framework <b>220</b> has processed the GUI information, a render engine <b>230</b> renders the processed information into a frame buffer <b>240</b>. Although not shown in <figref idrefs="DRAWINGS">FIG. 2A</figref>, the render engine <b>230</b> typically renders processed information into an assembly buffer that is then composited into the appropriate location of the frame buffer <b>240</b>. When compositing is completed, scan-out hardware <b>250</b> outputs the rendered information in the frame buffer <b>240</b> to a display <b>260</b> using a frame rate <b>280</b> of the display <b>260</b>.</div>
+<div class="description-paragraph" id="p-0035" num="0034">The processing performed by the layer kit framework <b>220</b> includes graphics animation and compositing operations for the application <b>210</b>. To perform the operations, the layer kit framework <b>220</b> divides the processing into a layer tree <b>222</b> and a render tree <b>226</b>. In this two-tree approach, the layer tree <b>222</b> is exposed to the application <b>210</b> and is used for implicit animation and implicit layout of graphics objects (also referred to herein as layers). On the other hand, the render tree <b>226</b> is manipulated and is traversed by the render engine <b>230</b>.</div>
+<div class="description-paragraph" id="p-0036" num="0035">As will be discussed in more detail later, the layer tree <b>222</b> includes a data structure that interfaces with the application <b>210</b>. The data structure of the layer tree <b>222</b> is configured to hold a hierarchy of layers. The layers are objects having various properties and attributes and are used to build the GUI of the application <b>210</b>. (The terms “property” and “attribute” may be used interchangeably in the present disclosure). In general, for example, the layers can include content, windows, views, video, images, text, media, etc. The data structure of the layer tree <b>222</b> is preferably as small and compact as possible. Therefore, many of the attributes of the layers preferably have default values kept in an extended property dictionary, such as NSDictionary of Apple's Cocoa application environment.</div>
+<div class="description-paragraph" id="p-0037" num="0036">During operation, the application <b>210</b> interacts with the layer tree <b>222</b> of the framework <b>220</b> to manipulate the hierarchy of layers in the layer tree <b>222</b>. The application <b>210</b> can be any computer application or client process that manipulates or changes the layers being displayed. When the application <b>210</b> commits an event or change to the layer tree <b>222</b>, the framework <b>220</b> determines what events or changes are made at each layer by the application <b>110</b>. These events or changes in the layer tree <b>222</b> are then committed to an animation and compositing process <b>224</b> of the framework <b>220</b>. This process <b>224</b> determines one or more implicit animation functions of the framework <b>220</b> to use on the layer tree <b>222</b> based on the committed events or changes for each layer of the layer tree <b>222</b>.</div>
+<div class="description-paragraph" id="p-0038" num="0037">The animation and compositing process <b>224</b> then performs explicit animation of the events or changes and configures the layout of the layers in the render tree <b>226</b>. The animation and layout of the render tree <b>226</b> are then rendered by the render engine <b>230</b> and output to the frame buffer <b>240</b>. Any manipulations of layers made by the application <b>210</b> to the layer tree are not evaluated at the frame rate <b>280</b> of the display <b>260</b>. Instead, changes in the render tree <b>226</b> are traversed and updated at the frame rate <b>280</b>.</div>
+<div class="description-paragraph" id="p-0039" num="0038">As alluded to above, the framework <b>220</b> separates the animation and compositing of layers from the application <b>210</b>. For example, when the application <b>210</b> makes changes, the affected layers in the layer tree <b>222</b> are instantly changed from one state to another. State changes reflected in the layers of the layer tree <b>222</b> are then “percolated” to the physical display <b>260</b> by animating the changes and compositing the layers of the render tree <b>226</b> from the initial state of the layers to their final or end-state. This form of animation and composition is referred to herein as “implicit animation” and is part of the animation and compositing process <b>224</b> of <figref idrefs="DRAWINGS">FIG. 2A</figref>.</div>
+<div class="description-paragraph" id="p-0040" num="0039">By using implicit animation in the framework <b>220</b>, the application <b>210</b> does not have to include code for animating changes (e.g., movement, resizing, etc.) of layers to be displayed. Accordingly, any code required for animating layers can be minimized in the application <b>210</b>. As shown in simplified form in <figref idrefs="DRAWINGS">FIG. 2A</figref>, for example, the application <b>210</b> may not require an embedded loop for animating changes to the layers. Instead, the application <b>210</b> includes code that indicates a change in the state of a layer (e.g., indicates a change in position of a layer). The framework <b>220</b> determines from the changes made to the layers in the layer tree <b>222</b> what implicit animation to perform on the layers, and then the framework <b>220</b> explicitly performs that animation on the layers using the render tree <b>226</b>. Accordingly, animations can be abstracted in such a way that the code of the application <b>210</b> does not need to run at the frame rate <b>280</b>. This allows the animation for objects/layers to be decoupled from the logic of the application <b>210</b> and allows the application <b>210</b> and the animations to run on separate threads in the rendering process <b>200</b>.</div>
+<div class="description-paragraph" id="p-0041" num="0040">The animation and compositing process <b>224</b> can perform a number of different types of animation on layers or objects. For example, if the application <b>210</b> operates on the layer tree <b>222</b> to change a layer from start point A to end point B in the GUI for the application <b>210</b>, the animation and compositing process <b>224</b> automatically manipulates (i.e., without application <b>210</b> input) the representation of that layer in the render tree <b>226</b> to animate its movement from point A to point B on the display <b>260</b>. In another, example, if the application <b>210</b> operates on the layer tree <b>222</b> to add a new layer to the layer tree <b>222</b>, the animation and compositing process <b>224</b> may automatically manipulate the render tree <b>226</b> to fade in the new layer. In yet another example, if the application <b>210</b> operates on the layer tree <b>222</b> to replace an existing layer with a new layer, the animation and compositing process <b>224</b> automatically manipulates the render tree <b>226</b> to animate a transition from the existing layer to the new layer.</div>
+<div class="description-paragraph" id="p-0042" num="0041">To help illustrate how the application <b>210</b> changes the state of layers in the layer tree <b>222</b>, <figref idrefs="DRAWINGS">FIG. 2B</figref> shows an example result <b>212</b> of a layer <b>214</b> of the layer tree <b>222</b> of <figref idrefs="DRAWINGS">FIG. 2A</figref> being changed from a start state to an end state by the application <b>210</b> of <figref idrefs="DRAWINGS">FIG. 2A</figref>. In this example, the layer <b>214</b> is schematically represented as an object in a layout boundary <b>216</b> and is shown moved from a start state A to an end-state B (e.g., a user of the application's GUI has moved a window from one point A on the screen to another point B).</div>
+<div class="description-paragraph" id="p-0043" num="0042">Returning to <figref idrefs="DRAWINGS">FIG. 2A</figref>, the state change of the layer made by the application <b>210</b> are committed almost immediately to the layer tree <b>222</b>. Once made, the animation and compositing process <b>224</b> obtains the change in state of the affected layer from the layer tree <b>222</b> using a state-based form of operation. The animation and compositing process <b>224</b> then uses characteristics of the start-state and end-state of the layers to determine what animation to use to arrive at the end-state of the layers for display. Finally, the process <b>224</b> explicitly applies the determined animation and associated layout of the layers to the data structure of the render tree <b>226</b> in a procedural fashion.</div>
+<div class="description-paragraph" id="p-0044" num="0043">To help illustrate the operation of the animation and compositing process <b>224</b>, <figref idrefs="DRAWINGS">FIG. 2B</figref> shows example results <b>262</b> of animation on an affected layer <b>264</b> in a layout boundary <b>266</b>. The layer <b>264</b> is part of the render tree <b>226</b> of <figref idrefs="DRAWINGS">FIG. 2A</figref> and is associated with the changed layer <b>214</b> of <figref idrefs="DRAWINGS">FIG. 2B</figref>. In this example, the layer <b>264</b> is being moved in increments of a distance X over a period of time from point A on the display <b>260</b> to another point B on the display <b>260</b>, as the animation and compositing process <b>224</b> of <figref idrefs="DRAWINGS">FIG. 2A</figref> applies the determined animation in a procedural fashion to the render tree <b>226</b> of <figref idrefs="DRAWINGS">FIG. 2A</figref>. It will be appreciated that several layers can be simultaneously changed and animated. By separating the animation and compositing from the application <b>210</b> in <figref idrefs="DRAWINGS">FIG. 2A</figref>, the framework <b>220</b> can better synchronize animation with the frame rate <b>280</b>. In this way, multiple and simultaneous changes made to the layers by the application <b>210</b> can be committed in synchronization to the display <b>260</b>.</div>
+<div class="description-paragraph" id="p-0045" num="0044">II. Embodiment of Layer Kit Framework</div>
+<div class="description-paragraph" id="p-0046" num="0045">A. Framework and Rendering Process</div>
+<div class="description-paragraph" id="p-0047" num="0046">Given the above overview of the rendering process and layer kit framework of the present disclosure, we now turn to a more detailed discussion of an embodiment of a layer kit framework according to certain teachings of the present disclosure. In <figref idrefs="DRAWINGS">FIG. 3</figref>, a rendering process <b>300</b> is illustrated showing an embodiment of a layer kit framework <b>310</b> for graphics animation and compositing operations. The framework <b>310</b> includes a layer tree process <b>320</b>, a queue <b>330</b>, an implicit animation process <b>340</b>, an explicit animation process <b>350</b> and a render tree process <b>360</b>. The framework <b>310</b> is part of an object-oriented application environment, such as Cocoa, designed for developing Mac OS X native applications. Files of an Objective-C API for the layer kit framework <b>310</b> have been incorporated herein by reference in the computer program listing appendix. The framework <b>310</b> can be used to build interactive user interfaces for applications. Preferably, the framework <b>310</b> is compatible with Apple's existing Application Kit framework by using an NSView subclass to host layers and other properties of the framework <b>310</b> as discussed below.</div>
+<div class="description-paragraph" id="p-0048" num="0047">The layer tree process <b>320</b> has a data structure or layer tree <b>322</b> that interfaces with an application <b>302</b>. Like views of NSView, a layer <b>324</b> of the framework <b>310</b> “draws itself.” When it draws itself, the layer <b>324</b> is given a CoreGraphics context (CGContext). Unlike NSView, however, rendering commands from the application <b>302</b> are not issued immediately, but are instead captured into the retained data structure of the layer tree <b>322</b> and are then eventually passed over to the render tree process <b>360</b> for processing. The render tree process <b>360</b> can then redraw layers <b>364</b> in the render tree <b>362</b> that are associated with the layers <b>324</b> of the layer tree <b>322</b> with no intervention by the application <b>302</b>. This is one purpose for separating the layer tree process <b>320</b> from the render tree process <b>360</b>. The render tree process <b>360</b> can always synthesize an up-to-date representation of the layers without needing to call back to the application <b>302</b>.</div>
+<div class="description-paragraph" id="p-0049" num="0048">The isolation mentioned above also allows the render tree process <b>360</b> to be implemented in a number of ways, including allowing the render tree process <b>360</b> to reside in another thread or in another process via Interprocess Communication (IPC). For example, the render tree process <b>360</b> can be implemented on an NSTimer on a separate thread from the layer tree process <b>320</b>. The isolation between the layer tree process <b>320</b> and the render tree process <b>360</b> also allows the layer tree process <b>320</b> to be implemented in an object language like Objective-C, while the render tree process <b>360</b> can be coded entirely in a procedural language such as C if necessary for performance.</div>
+<div class="description-paragraph" id="p-0050" num="0049">B. Layer Tree and Layers</div>
+<div class="description-paragraph" id="p-0051" num="0050">As shown in <figref idrefs="DRAWINGS">FIG. 3</figref>, the layer tree <b>322</b> is diagrammatically illustrated as a number of layers <b>324</b> that are interconnected by dependencies with one another in a hierarchical fashion. It is understood that a computer system can store the layer tree <b>322</b> in any format suitable for the computer. Several types of layers <b>324</b> can be defined in the framework <b>310</b>. Some possible types of layers include Image layers, CoreGraphics layers, Text layers, Vector layers (e.g., layers based on CGLayerRef, Client drawable, and display-lists), CoreVideoBuffer or Media layers (e.g., autonomously animating content such as movie or Quark Composer), and other more generic layers.</div>
+<div class="description-paragraph" id="p-0052" num="0051">Before proceeding with the discussion of the rendering process <b>300</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>, we first turn to a discussion of the layers <b>324</b> in the layer tree <b>322</b> of the framework <b>310</b>. The layers <b>324</b> are substantially similar to “views” of Apple's NSView. Like the “views” in NSView, for example, each layer <b>324</b> is associated with a window in which it is displayed, and the layers <b>324</b> are related to one another in a hierarchical fashion of superlayers and sublayers because some layers <b>324</b> are subregions of other layers <b>324</b> in a window.</div>
+<div class="description-paragraph" id="p-0053" num="0052">The framework <b>310</b> can use the following classes NSArray, NSDictionary, NSEnumerator, LKAnimation, and CIFilter, and the protocol LKAction. NSArray, NSDictionary, NSEnumerator, and CIFilter are known and used in the art. LKAnimation and LKAction are defined for the disclosed framework <b>310</b> of <figref idrefs="DRAWINGS">FIG. 3</figref> and are described in the incorporated files. The base layer class for layers <b>324</b> in the framework <b>310</b> is the NSObject class. However, the base layer class has specific timing (LKTiming) and object (LKObject) protocols for the framework <b>310</b> of the present disclosure.</div>
+<div class="description-paragraph" id="p-0054" num="0053">The LKObject protocol for the layers <b>324</b> extends the standard NSKeyValueCoding protocol known in the art by adding support for property introspection and customization. All objects implementing the LKObject protocol also implement the NSCoding protocol for object archiving. Each object implementing the LKObject protocol exposes a set of properties declared using the standard Objective-C property syntax. These properties are also accessible via the NSKeyValueCoding protocol. When accessing properties whose values are not objects, the standard Key-Value Coding (KVC) wrapping conventions are used with extensions to support the following types: CGPoint (NSValue), CGSize (NSValue), CGRect (NSValue), and CGAffineTransform (NSAffineTransform).</div>
+<div class="description-paragraph" id="p-0055" num="0054">Many more details of the layers <b>324</b> are discussed herein and are included in the incorporated file “LKLayer.” Here, we only briefly mention some of the geometrical and hierarchical properties for layers <b>324</b> in the framework <b>310</b>. Many of the properties are similar to those used in Core Graphics. Layers <b>324</b> have “bounds” or a coordinate system that are defined by the property CGRect bounds. The position of a layer <b>324</b> is defined by the property CGPoint position. The Z component of the position of a layer <b>324</b> is defined by the property CGFloat zPosition.</div>
+<div class="description-paragraph" id="p-0056" num="0055">The frame of a layer <b>324</b> is defined by the property CGRect frame. Unlike NSView, each layer <b>324</b> in the layer hierarchy of the framework <b>310</b> has an implicit frame rectangle that is defined as a function of the “bounds,” “transform” and “position” properties. When setting the frame of the layer <b>324</b>, the “position” and “bounds.size” for the layer <b>324</b> are changed to match the given frame. The frame and bounds model of the framework <b>310</b> is similar to that used for Apple's Application Kit, but only the bounds, offset, and matrix are stored. The frame can be computed using an instance of “method: (CGRect) frame.”</div>
+<div class="description-paragraph" id="p-0057" num="0056">To help visualize the layers <b>324</b>, their hierarchy in the layer tree <b>322</b>, the frame and bounds of the layers <b>324</b>, and other details, we turn briefly to <figref idrefs="DRAWINGS">FIGS. 5A-5C</figref>. <figref idrefs="DRAWINGS">FIG. 5A</figref> shows an example of a window <b>500</b> of a graphical user interface. The window <b>500</b> has three layers A, B and C. Much like the view hierarchy used in Apple's NSView, the layers A, B, and C in the window <b>500</b> are linked together in a layer hierarchy <b>505</b>, which is also shown in <figref idrefs="DRAWINGS">FIG. 5A</figref>. In general, each layer can have another layer as its superlayer and can be the superlayer for any number of sublayers. As used herein, a superlayer is the layer that is immediately above a given layer in the hierarchy <b>505</b>, and a sublayer is the layer that is contained either wholly or partially by the superlayer. In the example of <figref idrefs="DRAWINGS">FIG. 5A</figref>, the window's content layer is at the top of the hierarchy <b>505</b>, and layer A in the hierarchy <b>505</b> is the superlayer for the sublayers B and C.</div>
+<div class="description-paragraph" id="p-0058" num="0057"> <figref idrefs="DRAWINGS">FIG. 5B</figref> shows the hierarchical relationships <b>510</b> between the layers A, B, C, and Content in the layer hierarchy <b>505</b> of <figref idrefs="DRAWINGS">FIG. 5A</figref>. Using the relationships <b>510</b> for the layers is beneficial for both drawing and handling events for an application's GUI. In particular, the layer hierarchy <b>505</b> of <figref idrefs="DRAWINGS">FIG. 5A</figref> having the relationships <b>510</b> of <figref idrefs="DRAWINGS">FIG. 5B</figref> permits more complex layers to be constructed out of other sublayers and allows each layer to have its own coordinate system.</div>
+<div class="description-paragraph" id="p-0059" num="0058">In <figref idrefs="DRAWINGS">FIG. 5C</figref>, for example, the relationships for three example layers <b>520</b>D, <b>520</b>E, and <b>520</b>F are shown where layer <b>520</b>D is the superlayer of <b>520</b>E and where layer <b>520</b>E is the superlayer of <b>520</b>F. Each layer <b>520</b>D, <b>520</b>E, and <b>520</b>F is defined by a corresponding frame rectangle <b>530</b>D, <b>530</b>E, and <b>530</b>F having its own coordinate system <b>532</b>D, <b>532</b>E, and <b>532</b>F. The “bounds” attribute of the layers <b>520</b> defines its coordinate system <b>532</b>. In general, the frame rectangle <b>530</b> of each layer <b>520</b> is positioned within the coordinate system <b>532</b> of its superlayer. Thus, the frame rectangle <b>530</b>E for layer <b>520</b>E is positioned within the coordinate system <b>532</b>D of layer <b>520</b>D, and the frame rectangle <b>530</b>F for layer <b>520</b>F is positioned within the coordinate system <b>532</b>E of layer <b>520</b>E. When a given layer <b>520</b> is moved or its coordinate system <b>532</b> is transformed (e.g., rotated, flipped, etc.), all of its sublayers <b>520</b> are moved or transformed along with it. Yet, because each layer <b>520</b> has its own coordinate system <b>532</b>, the drawing instructions for that layer <b>520</b> can be consistent no matter where the layer <b>520</b> is or where its superlayer moves to on a screen.</div>
+<div class="description-paragraph" id="p-0060" num="0059">The frame rectangles <b>530</b> essentially define the area of the layers <b>520</b>—i.e., the tablet on which the layers <b>520</b> can draw. The frame rectangle <b>530</b> of a given layer <b>520</b> can lie within the frame rectangle <b>530</b> of its superlayer. In addition, the frame rectangle <b>530</b> of a given layer <b>520</b> can extend outside its superlayer's frame rectangle <b>530</b>. For example, the frame rectangle <b>530</b>F lies entirely within the frame rectangle <b>530</b>E of its superlayer <b>520</b>D, but the frame rectangle <b>530</b>E for layer <b>520</b>E extends outside the frame rectangle <b>530</b>D of its superlayer <b>520</b>D. In contrast to “views” in NSView, the layers <b>520</b> can place content outside the frame of their parent layers.</div>
+<div class="description-paragraph" id="p-0061" num="0060">Given the above overview of layers, we now return to a discussion in <figref idrefs="DRAWINGS">FIG. 3</figref> of how the layers <b>324</b> are interrelated to one another to construct the layout of the layer tree <b>322</b> of the disclosed framework <b>310</b>. The layers <b>324</b> in the layer tree <b>322</b> are constrained by layer constraints (not shown in <figref idrefs="DRAWINGS">FIG. 3</figref>). A constraint-based layout manager adds a “constraints” layer property to the data structure for layers <b>324</b> in the layer tree <b>322</b>. The constraint-based layout manager is defined in the incorporated file “LKConstraintLayoutManager.” The “constraints” layer property is an array of LKConstraint objects. Each LKConstraint object describes one geometrical relationship between two layers <b>324</b> of the layer tree <b>322</b>. Layout of the layers <b>324</b> in the layer tree <b>322</b> is performed by fetching the constraints of each sublayer <b>324</b> and solving the resulting system of constraints for the frame of each sublayer <b>324</b> starting from the bounds of the containing layer <b>324</b>. The relationships between layers <b>324</b> are linear equations of the form: u=m v+c, where “u” and “v” are scalar values representing geometrical attributes (e.g. leftmost x position) of the two layers <b>324</b>, and where “m” and “c” are constants. Sibling layers <b>324</b> are referenced by name, using a “name” property of each layer <b>324</b>. A special name “superlayer” is used to refer to the superlayer of a given layer <b>324</b>.</div>
+<div class="description-paragraph" id="p-0062" num="0061">C. Render Tree and Animation</div>
+<div class="description-paragraph" id="p-0063" num="0062">Now that we have an understanding of the layer tree <b>322</b> and its layers <b>324</b>, we turn to a discussion of details related to the render tree process <b>360</b> and render tree <b>362</b>. As discussed previously, the render tree process <b>360</b> has a data structure or render tree <b>362</b> that does not interface with the application <b>302</b>. Instead, explicit animation is made to the render tree <b>362</b> by the explicit animation process <b>350</b>, and the render engine <b>304</b> renders from the render tree <b>362</b>. The render tree <b>362</b> is similar to the layer tree <b>322</b> in that it contains a description of the layer hierarchy of the layers <b>324</b> found in the layer tree <b>322</b>. Accordingly, the render tree <b>362</b> also includes a plurality of layers <b>364</b> that are related in a hierarchical fashion and that are associated with the layers <b>324</b> of the layer tree <b>322</b>.</div>
+<div class="description-paragraph" id="p-0064" num="0063">In contrast to the layer tree <b>322</b>, the render tree <b>362</b> further includes animation objects <b>366</b> added to the data structure of the layers <b>364</b> in the render tree <b>362</b>. For illustrative purposes, the animation object <b>366</b> for one of the layers <b>364</b> is diagrammatically shown in <figref idrefs="DRAWINGS">FIG. 3</figref> as an appended element to a node D<b>1</b> that has been changed in the layer tree <b>322</b> by the application <b>302</b>. During processing by the animation processes (implicit and/or explicit), the animation object <b>366</b> is added to a representation of the layer <b>364</b> in the render tree <b>362</b> associated with the changed layer <b>324</b> in the layer tree <b>322</b>. In typical operation of the framework <b>310</b>, adding the animation object <b>366</b> is implicitly invoked through an action that is an LKAnimation object. Details related to LKAnimation object are discussed below and are incorporated file “LKAnimation.”</div>
+<div class="description-paragraph" id="p-0065" num="0064">The animation object <b>366</b> has a “key,” a “duration” property, and other properties and details discussed herein. The “key” is used to identify the animation, and the “key” may be any string such that only one animation per unique key is added per layer <b>364</b> in the render tree <b>362</b>. The special key “transition” is automatically used for transition animations of the layers <b>364</b>. The “duration” property of the animation object <b>366</b> defines the duration of the animation. If the “duration” property of the animation object <b>366</b> is zero or negative, it is given a default duration, which can be either a particular value of a transaction property for the render process <b>300</b> or can be a default value of 0.25 seconds, for example.</div>
+<div class="description-paragraph" id="p-0066" num="0065">D. Operation of the Framework in the Rendering Process</div>
+<div class="description-paragraph" id="p-0067" num="0066">Given the details of the framework <b>310</b> discussed above, we now turn to a discussion of how the framework <b>310</b> is used in the rendering process <b>300</b>. In <figref idrefs="DRAWINGS">FIG. 4</figref>, the rendering process <b>300</b> of <figref idrefs="DRAWINGS">FIG. 3</figref> is shown in flow chart form as process <b>400</b>. For the sake of understanding the discussion that follows, reference is concurrently made to reference numbers of components in the rendering process <b>300</b> of <figref idrefs="DRAWINGS">FIG. 3</figref> and to blocks of the process <b>400</b> of <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0068" num="0067">During operation, the application <b>302</b> obtains changes made to one or more layers of the application's GUI system (Block <b>405</b>). The application <b>302</b> interfaces with the layer tree process <b>320</b> and commits the changes <b>303</b> to the layer tree <b>322</b> (Block <b>410</b>). As discussed previously, the changes to the layer tree <b>322</b> are not immediately rendered by the render engine <b>304</b>. Instead, the layer tree process <b>320</b> changes the state of one or more affected layers and sublayers <b>324</b> in the hierarchy of the layer tree <b>322</b> (Block <b>415</b>). In the example of <figref idrefs="DRAWINGS">FIG. 3</figref>, a node D<b>1</b> has had its state changed from X to Y (e.g., the layer associated with node D<b>1</b> has been moved from one position to another position, has been resized from one size to another size, etc.). The state change to the layer <b>324</b> in the layer tree <b>322</b> may not include any animation or compositing information, and the state change may merely indicate to the layer tree process <b>320</b> the start and end states of the affected layers and sublayers <b>324</b> of the hierarchy in the layer tree <b>322</b>.</div>
+<div class="description-paragraph" id="p-0069" num="0068">The state change of the layers and sublayers <b>324</b> is then queued in a queue <b>330</b> of the framework <b>310</b> (Block <b>420</b>). The queue <b>330</b> is used to commit the state changes to the implicit animation process <b>340</b> and periodically determines whether to commit the state changes (Block <b>425</b>). Preferably, multiple state changes to layers <b>324</b> in the layer tree <b>322</b> are batched into atomic transactions that are committed together by the queue <b>330</b>. If it is not time to commit, then the process <b>400</b> can return to obtaining additional state changes to the layer tree <b>322</b> by the application <b>302</b> at Blocks <b>405</b> through <b>415</b>.</div>
+<div class="description-paragraph" id="p-0070" num="0069">If it is time to commit, then the queue <b>330</b> commits the state changes to the implicit animation process <b>340</b> (Block <b>430</b>). The implicit animation process <b>340</b> includes default animation operations, but explicit overrides can be made. Explicit overrides can be implemented by an appropriately programmed application using the “actions” property of the layers. In addition, explicit overrides can be implemented using a “+defaultActionForKey:” method for implementing a default action for a specified “key” on the layer and using a “−actionForKey:” method for implementing an action for a specified key on the layer</div>
+<div class="description-paragraph" id="p-0071" num="0070">The implicit animation process <b>340</b> determines what animation operations to perform based on the state changes of the affected layers <b>324</b> in the layer tree <b>322</b> (Block <b>435</b>). This determination depends on the “context” of the state change. The context is based on various variables such as the type of layer <b>324</b> being changed, the position of the changed layer <b>324</b> in the hierarchy of the layer tree <b>322</b>, any sublayers of the changed layer <b>324</b>, the type of change, etc. Details related to this determination are provided in more detail later.</div>
+<div class="description-paragraph" id="p-0072" num="0071">Once the animations have been determined, the explicit animation process <b>350</b> then implements the determined animations on the associated layers <b>364</b> in the render tree (Block <b>440</b>). In particular, the explicit animation process <b>350</b> implements the processes or steps of the animations on the associated layers <b>364</b> in the hierarchy of the render tree <b>362</b> in a transactional fashion. Eventually, the explicit animations of the render tree <b>362</b> are committed to the render engine <b>304</b> for rendering and are eventually displayed (Block <b>445</b>).</div>
+<div class="description-paragraph" id="p-0073" num="0072">E. Additional Details of the Layer Kit Framework</div>
+<div class="description-paragraph" id="p-0074" num="0073">We now return to <figref idrefs="DRAWINGS">FIG. 3</figref> to discuss additional details of the framework <b>310</b>.</div>
+<div class="description-paragraph" id="p-0075" num="0074">1. Transactions in the Framework</div>
+<div class="description-paragraph" id="p-0076" num="0075">As noted previously, changes in the layers <b>324</b> associated with the layer tree <b>322</b> are “percolated” to the render tree <b>362</b>. In other words, the layer tree process <b>320</b> and the render tree process <b>360</b> interact in a transactional model. Changes to the data structure of the layer tree <b>322</b> are explicitly “flushed” or “committed” to the render tree <b>362</b> in order to have a visual effect. This is similar to window backing store flushing, where a group of changes appears atomically. The difference in the framework <b>310</b> is that some of the changes are not necessarily implemented immediately and might implicitly require animation.</div>
+<div class="description-paragraph" id="p-0077" num="0076">If new changes are committed before the explicit animation and render tree processes <b>320</b> and <b>360</b> have completed animations of affected layers <b>364</b>, the processes <b>320</b> and <b>360</b> can still animate to the newly requested state smoothly from its current state, again without the application <b>302</b> being involved. If the root (or a subtree) of the hierarchy associated with the layer tree <b>322</b> is changed to a completely new scene and committed to the render tree <b>362</b>, for example, a default scene transition can be explicitly invoked (e.g. 0.5-second dissolve or cube transition can be implicitly applied).</div>
+<div class="description-paragraph" id="p-0078" num="0077">Transactions are the mechanism used by the framework <b>310</b> for batching multiple operations to the layer tree <b>322</b> into atomic updates to the render tree <b>362</b>. Details related to the transactions are included in the incorporated file “LKTransaction.” Every modification to the layer tree <b>322</b> requires a transaction to be part of it. The framework <b>310</b> supports two kinds of transactions, “explicit” transactions and “implicit” transactions. The application <b>302</b> can call explicit transactions before modifying the layer tree <b>322</b> and can commit the explicit transactions after modifying the layer tree <b>322</b>. Implicit transactions are created automatically by the framework <b>310</b> when the layer tree <b>322</b> is modified by the application's thread without an active transaction. The implicit transactions are committed automatically when the thread's run-loop next iterates. In some circumstances (i.e., where there is no run-loop, or the run-loop is blocked), it may be necessary to use explicit transactions to get timely updates to the render tree <b>362</b>.</div>
+<div class="description-paragraph" id="p-0079" num="0078">To handle transactions, the framework <b>310</b> defines an LKTransaction, which is an NSObject. Using the framework <b>310</b>, new transactions can be initiated, all changes made during a current transaction can be committed to the render tree <b>362</b> and any extant implicit transactions can be flushed. Preferably, implicit transactions are not committed until any nested explicit transactions have been completed. Transaction properties can include “animationDuration” that defines a default duration in seconds for animations added to layers <b>364</b> and can include “disableActions” that suppresses implicit actions for property changes.</div>
+<div class="description-paragraph" id="p-0080" num="0079">Use of transactions and implicit animation in the framework <b>310</b> offers a number of advantages in the rendering process <b>300</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>. In one advantage, the separate layer and render trees <b>322</b> and <b>362</b> keep rendering and display operations “clean.” For example, the application <b>302</b> can provide an instruction for a layer <b>324</b> at a start-state “X” in the layer tree <b>322</b> to be changed to an end-state “Y.” The layer tree process <b>320</b> implements that state change to the affected layer, and the application <b>302</b> can then immediately continue to operate as if the affected layer <b>324</b> is at end-state “Y.” Separately, the explicit animation process <b>350</b> and render tree process <b>360</b> of the framework <b>310</b> process the associated layer <b>364</b> of the render tree <b>362</b> to animate its change from start-state “X” to end-state “Y.”</div>
+<div class="description-paragraph" id="p-0081" num="0080">In the rendering process <b>300</b>, the application <b>302</b> no longer performs the animation. Instead, the framework <b>310</b> performs the animation by first determining the animation to perform with the implicit animation process <b>340</b> and then implementing the determined animation with the explicit animation process <b>350</b>. Having the application “assume” the end-state for the affected layer <b>324</b> of the layer tree <b>322</b> while having the framework <b>310</b> animate the associated layer <b>364</b> of the render tree <b>362</b> to its end-state allows multiple events and changes to be queued up with the layer tree process <b>320</b> and queue <b>330</b> without the application <b>302</b> having to do graphical programming and animation.</div>
+<div class="description-paragraph" id="p-0082" num="0081">2. Animation in the Framework</div>
+<div class="description-paragraph" id="p-0083" num="0082">As noted previously, the framework <b>310</b> determines what animations to use for layers <b>324</b> changed by the application <b>302</b>. The type of animation used can depend upon characteristics of a given context of the application's GUI currently being rendered for display. In the framework <b>310</b>, the animations between states are implicitly determined, and it is assumed that animations will be “gradual” to some extent. If a new position for a layer tree layer <b>324</b> is set, for example, the associated render tree layer <b>364</b> is implicitly animated from its current position to its new position via a default animation or transition to gradually animate the change. Similarly, when a new layer tree layer <b>324</b> is added, an associated render tree layer <b>364</b> will have a default “appearance” animation or transition (e.g., a 0.25-second materialize or dissolve).</div>
+<div class="description-paragraph" id="p-0084" num="0083">Preferably, animation behaviors are programmable in the framework <b>310</b> by invoking a predefined name of the animation (e.g., Push/Left, Swirl/In, etc.). The framework <b>310</b> can define various forms of animation and can have a set of predetermined animations to be used. For example, some animations in the framework <b>310</b> can be defined in a manner similar to what is used in Synchronized Multimedia Integration Language. (Synchronized Multimedia Integration Language is technology developed and distributed by the World Wide Web Consortium, W3C). In addition, animations in the framework <b>310</b> can include animatable properties, attributes and filters of layers <b>324</b> and can include transitions between changes in the layers <b>324</b> of the layer tree <b>322</b>. Preferably, the framework <b>310</b> allows developers to make overrides of default values, such as timing controls for animations.</div>
+<div class="description-paragraph" id="p-0085" num="0084">For example, the framework <b>310</b> can define a transition animation subclass that contains various transition types such as “fade”, “moveIn”, “push”, and “reveal.” Because some transitions of the animation model may be motion-based, the framework <b>310</b> can further define a property subtype for these transitions. The property subtype can be used to specify the direction for the motion-based transitions. For examples, values for this property subtype can be “fromLeft,” “fromRight,” “fromTop,” “fromBottom,” and “fromCorner.”</div>
+<div class="description-paragraph" id="p-0086" num="0085">Because animations may occur over a period of time, the framework <b>310</b> can further define another property subtype for animations that specifies the amount of progress for the animation at which to begin and end execution. In one example, a timing function can define the pacing of the animation. The timing function can define a general keyframe animation class to create an array of objects providing the value of the animation function for each keyframe. Typically, a “keyframe” is a frame used to designate where changes occur in the animation. The framework <b>310</b> can also define LKTimingFunction objects. If N number of keyframes are set for the animation, there would typically be N−1 objects in the “timingFunctions” array. Each function in the array describes the pacing of one keyframe to keyframe segment of the animation.</div>
+<div class="description-paragraph" id="p-0087" num="0086">In addition, a path object can define the behavior of an animation. Each point in the path object except for “moveto” points defines a single keyframe for determining the timing and the interpolation of the animation. For constant velocity animations along a path, the animation can be set to a calculated mode of “paced.” Other calculated modes can include “linear” and “discrete.”</div>
+<div class="description-paragraph" id="p-0088" num="0087">For basic (i.e., single-keyframe) animations, the framework <b>310</b> can define a subclass for interpolation objects that define the property values between which an animation is to be interpolated. Preferably, the object type of the interpolation objects matches the type of the property being animated using the standard rules described in incorporated file “LKObject,” for example. Some supported modes for interpolating animation include (1) interpolating between a “fromValue” and a “toValue,” (2) interpolating between a “fromValue” and (a “fromValue” plus a “byValue”), interpolating between (a “toValue” minus a “byValue”) and a “toValue,” (3) interpolating between a “fromValue” and the current presentation value of a property, (4) interpolating between the layer's current value of a property in the render tree <b>362</b> and a “toValue” for that property, (5) interpolating between the layer's current value of a property in the render tree <b>362</b> and that value plus a “byValue”, and (6) interpolating between the previous value of a property in the render tree <b>362</b> and the current presentation value of that property.</div>
+<div class="description-paragraph" id="p-0089" num="0088">To handle animations of multiple layers, the framework <b>310</b> can also define an animation subclass for grouped animations to create an array of LKAnimation objects. Each member of the array can be run concurrently in the time space defined for a parent animation.</div>
+<div class="description-paragraph" id="p-0090" num="0089">In addition to motion, transitions, and other animations disclosed herein, the framework <b>310</b> can allow layer properties to be animated as well. For this, the framework <b>310</b> can include a set of ValueAnimation classes. In one example, a FloatAnimation value may be defined in one of the ValueAnimation classes so that the X-position of a layer in the GUI could be set to the FloatAnimation value that has been specified to oscillate between two values.</div>
+<div class="description-paragraph" id="p-0091" num="0090">Furthermore, the animations defined in the framework <b>310</b> can include animatable filters for the layers. For example, the framework <b>310</b> can define additional attributes for CIFilter objects that can be accessible both via the NSKeyValueCoding protocol and through declared properties. These additional attributes can be used to construct keypaths to existing filters so that the framework <b>310</b> can set an attribute of a filter attached to a layer <b>364</b> and so that animations of the layers <b>364</b> may access filter attributes via the key-paths. In this way, the filters for layers <b>364</b> can be animatable within the framework <b>310</b>.</div>
+<div class="description-paragraph" id="p-0092" num="0091">As used herein, a “key” is a string that identifies a specific property of an object. Typically, a key corresponds to the name of an accessor method or instance variable in the receiving object. As used herein, a “key path” is a string of keys separated by “dots.” The key-path is used to specify a sequence of object properties to traverse. The property of the first key in the sequence is relative to the receiver, and each subsequent key is evaluated relative to the value of the previous property. For example, the key path “address.street” would get the value of the address property from the receiving object, and then determine the street property relative to the address object.</div>
+<div class="description-paragraph" id="p-0093" num="0092">In one example of animatable filters, a generalized filtering model may include: maskop(mask, compositeop(layerop(layer), backgroundop(background)), background). Here, layerop can be a unary image operator that processes the foreground image. For example, layerop could be used to add a glow to a layer. Backgroundop can be a unary image operator that processes the background image. For example, backgroundop could be used to ripple the background. In addition, compositeop can be a binary image operator that combines the foreground and background, and it can default to source-over or to source-over with shadow if present. Finally, maskop can be a ternary operator that takes a mask and two images and blends them together.</div>
+<div class="description-paragraph" id="p-0094" num="0093">Although the framework <b>310</b> preferably provides a number of default animations, overrides can be made available to specify particular animation behaviors. In this way, the GUI of the application <b>302</b> can be essentially programmed for “goal states,” and the framework <b>310</b> can handle the details of animating the layers of the application's GUI towards those goal states. The application <b>302</b>, therefore, can be developed as if the application <b>302</b> is animating the layers of the GUI. However, the application <b>302</b> never truly animates the layers of the GUI when the implicit animations of the framework <b>310</b> are used.</div>
+<div class="description-paragraph" id="p-0095" num="0094">3. Timing Functions of the Framework</div>
+<div class="description-paragraph" id="p-0096" num="0095">The framework <b>310</b> defines a timing protocol called LKTiming that is implemented by layers and animations. Details related to this protocol are included in the incorporated file “LKTiming.” The timing protocol of the framework <b>310</b> models a hierarchical timing system, with each object describing the mapping from time values in the object's parent to local time. Absolute time is defined as “mach time” (i.e., machine time) converted to seconds. A LKCurrentTime function is provided as a convenience for querying the current absolute time. Conversions can also be made between different versions of time. The timing model of the framework <b>310</b> can allow animations to repeat their basic duration multiple times and can optionally allow animations to play backwards before repeating.</div>
+<div class="description-paragraph" id="p-0097" num="0096">Animations may use various timing functions defined in the framework <b>310</b>. For example, the timing functions in the framework <b>310</b> can generally be represented by segments of functions describing timing curves. These functions can map input time normalized to a range such as between [0,1] to output time also in the range [0,1]. The timing functions for the framework <b>310</b> can be used to define the pacing of an animation over its duration (or over the duration of one keyframe). Common timing functions can also be created and used in the framework <b>310</b>, such as “linear,” “easeIn,” “easeOut,” and “easeInEaseOut.” In addition, timing functions can be created that are modeled on a cubic Bezier curve, where the end points of the curve are at (0,0) and (1,1) and where the two points “c1” and “c2” defined by the class instance are the control points. Thus, the points defining the Bezier curve can be: “[(0,0), c1, c2, (1,1)].”</div>
+<div class="description-paragraph" id="p-0098" num="0097">4. Other Forms of Time-Varying Images</div>
+<div class="description-paragraph" id="p-0099" num="0098">Not all time-varying images, however, can be modeled as state transitions of the layers from one state to another state. Some layers (e.g., Video, Flash or Quartz Composer) are “media layers” in that these media layers have timing and other behaviors that are intrinsic to them. Because media layers may need to be representable as nodes in the layer tree <b>322</b>, the framework <b>310</b> includes a MediaLayer abstraction for interacting with CoreVideo compliant media. The MediaLayer abstraction is used for the media layers <b>324</b> of the layer tree <b>322</b> that have intrinsic animation and that have their appearance change as a function of time. The media layers can reference a media file. The media can be abstract and needs to provide a compliant “frame for time” accessor for the render tree process <b>360</b> to use and needs to provide a time mapping between the notion of time for the render tree process <b>360</b> and the notion of time for the media in the media layer. All of the standard layer attributes (Opacity, transform, shadow, etc.) can be applied in the render tree process <b>360</b> for the media layer.</div>
+<div class="description-paragraph" id="p-0100" num="0099">Other common objects for display in an application's GUI that have intrinsic timing include the “pulsing button,” “rotating gear,” “progress bar,” animated GIF, or other similar objects. These can be specified by a particular type of media layer that has its animation represented by a set of images. For this type of media layer, the layer itself can provide a time-varying method for drawing itself for each frame when rendered from the render tree <b>362</b>. For example, the framework <b>310</b> samples this type of media layer at an appropriate number of times and provides the frames as an atomic set to the render tree process <b>360</b>. The render tree process <b>360</b> then plays out the animation (either in a one-shot fashion or, more typically, in a looped fashion) so that the layer <b>364</b> can be animated for display.</div>
+<div class="description-paragraph" id="p-0101" num="0100">5. Layer Resizing</div>
+<div class="description-paragraph" id="p-0102" num="0101">A layer <b>324</b> can exhibit a number of behaviors when its frame rectangle is changed by the application <b>302</b>. In a default mode, the bounds (i.e., the coordinate system) are not changed, and the layer's contents are merely scaled. Since a display list representing the content is resolution independent, the display list just needs to be replayed through the new current transformation matrix (CTM), which is used to transform the bounds and frame of the layers. The other mode of resizing a layer <b>324</b> is just to give the resized layer more or less “real-estate” and not to change the size of any of its items. In this case, any sublayers of the resized layer <b>324</b> are resized according to their auto sizing information. This information relates how a sublayer's frame changes when its parent layer's bounds change. Because each layer <b>324</b> retains its own drawing information, resizing can occur without necessarily invoking drawing code of the application <b>302</b>. The only cases where intervention by the application <b>302</b> may be necessary is when a layer's representation is a function of its bounds (such as text layout). In this case, the application <b>302</b> may defer computing the new representation for the text layer and can work with the old representation for the text layer until the resize is complete.</div>
+<div class="description-paragraph" id="p-0103" num="0102">6. Attributes for Layers</div>
+<div class="description-paragraph" id="p-0104" num="0103">Below is a detailed discussion of various attributes for layers that can be defined in the framework <b>310</b>. This discussion is not meant to be exhaustive of all of the attributes that can be used for layers and is merely intended to provide a number of example attributes that can be used. Each layer can have one or more of these various attributes. In general, the framework <b>310</b> can use many of the attributes associated with Quartz. As is known in the art, Quartz is part of the Mac OS X graphics and windowing environment. In addition to the attributes associated with Quartz, the framework <b>310</b> can define other attributes discussed below. Some of the attributes discussed below are referenced in terms of Quartz.</div>
+<div class="description-paragraph" id="p-0105" num="0104">A “bounds” attribute for a layer is a CGRect type of attribute, which in Quartz is the data structure that represents the location and dimensions of a rectangle. The “bounds” attribute gives a layer's intrinsic bounds in the coordinate system of the layer. In the framework <b>310</b> of the present disclosure, it may be desirable to also define attributes for a filter and a shadow coordinate system that can be used if a layer is scaled.</div>
+<div class="description-paragraph" id="p-0106" num="0105">A “position” attribute is a CGPoint type of attribute, which in Quartz is the data structure that represents a point in a two-dimensional coordinate system. The “position” attribute defines the position of a layer in parent layer's coordinate system. This is the center of the layer's bounds rectangle transformed to the parent layer's coordinate system.</div>
+<div class="description-paragraph" id="p-0107" num="0106">A “parent” attribute defines a layer as a parent layer (e.g., superlayer) in relation to other layers in the hierarchy of the data structures. Similarly, a “children” attribute is an NSArray type of attribute that defines sublayers. A “contents” attribute for a layer is a CGLayerRef type of attribute, which defines an opaque attribute type that represents a Quartz layer. The “contents” attribute gives the results of the last draw captured as a display list. The “contents” attribute can also be set directly, allowing the contents of a layer to be set from a CGLayerRef.</div>
+<div class="description-paragraph" id="p-0108" num="0107">An “hidden” attribute for a layer is a Boolean type of attribute. The “hidden” attribute is TRUE if the layer (and all of its sublayers) is not to be displayed. This allows an object to stay in the layer tree but not necessarily be rendered for display. When the state of this attribute changes, the appropriate implicit animation (e.g., dissolve, appear, etc.) is performed on the layer.</div>
+<div class="description-paragraph" id="p-0109" num="0108">“Flag” attributes for a layer are attributes that can be used for various purposes. For example, flag attributes can be provided for autoresize mask, content resize mask, and redraw. An autoresize mask flag can indicate whether the mask should be autoresized. A content resize mask flag can be used to determine how to map content when a layer's bounds do not match its content's bounds. A needs redraw flag can indicate that a redraw is needed when bounds of a layer change. To a developer, however, these flag attributes will simply appear as normal attributes.</div>
+<div class="description-paragraph" id="p-0110" num="0109">An “extendedAttributes” attribute for a layer is defined in Apple's NSDictionary class, which declares an API for objects that manage immutable associations of keys and values. This attribute gives a dictionary of extra attributes that can be set by calling the method setValue:forKey: on a layer. When these extended attributes are set on a layer, the render tree can preferably smoothly animate the value from one state to another. A developer using the framework <b>310</b> to create an application, however, will not perceive any difference between attributes and extended attributes.</div>
+<div class="description-paragraph" id="p-0111" num="0110">An “actions” attribute is also defined in NSDictionary. This attribute gives a dictionary of animation behaviors, such as visibility animation, durations, etc. The dictionary maps property names to animation objects, which is how implicit animations are overridden as discussed previously.</div>
+<div class="description-paragraph" id="p-0112" num="0111">As noted above, the framework <b>310</b> can have a number of attributes defined in a dictionary for a layer. The dictionary contains additional appearance attributes. These attributes and all layer attributes can be set via Key-Value Coding (KVC), which is a protocol of Apple's Cocoa for getting and setting values generically. The attributes are added to the dictionary when set using KVC and are searched for in the dictionary when the attributes are looked up. If the attribute is not present and the extended attribute dictionary has a “style” key (discussed below), the lookup continues recursively. If no value is found during the lookup process, a default value is adopted. This allows extended attributes to exist in a styling hierarchy and allows attribute bundles to be efficiently shared among multiple layers. Because the layer tree <b>322</b> is not traversed at the frame rate (e.g., <b>280</b> of <figref idrefs="DRAWINGS">FIG. 2A</figref>), the lookup operation for extended attributes may not be computationally expensive. An efficient render tree implementation would likely deal with flattened attributes exclusively.</div>
+<div class="description-paragraph" id="p-0113" num="0112">The following Table 2 provides a number of attributes that can be used for layers in the framework <b>310</b>. Additional attributes or properties are defined in the incorporated file “LKLayer.”</div>
+<div class="description-paragraph" id="p-0114" num="0113">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Summary of Attributes</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Default </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute</td>
+<td class="description-td">Type</td>
+<td class="description-td">Value</td>
+<td class="description-td">Description</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">actions</td>
+<td class="description-td">NSDictionary</td>
+<td class="description-td">nil</td>
+<td class="description-td">Dictionary that maps </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">property names to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">animation objects.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">autoresizingMask</td>
+<td class="description-td">unsigned int</td>
+<td class="description-td">0</td>
+<td class="description-td">A bitmask that defines </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">how a layer is resized </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">when the bounds of </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">its superlayer changes.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">backgroundColor</td>
+<td class="description-td">CGColorRef</td>
+<td class="description-td">Clear</td>
+<td class="description-td">Defines a color with </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">which a layer's bounds </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">will be cleared before </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">it is drawn. This can </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">also be a color created </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">from a pattern. Having </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">this explicit allows the </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">render tree to perform </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">occlusion culling.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">backgroundFilters</td>
+<td class="description-td">NSArray of</td>
+<td class="description-td">Null</td>
+<td class="description-td">Gives an optional set </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">CIFilters</td>
+<td class="description-td"> </td>
+<td class="description-td">of filters that filter the </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">background of a layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">borderColor</td>
+<td class="description-td">CGColorRef</td>
+<td class="description-td">black</td>
+<td class="description-td">Defines the color of </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the border for a layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">borderWidth</td>
+<td class="description-td">CGFloat</td>
+<td class="description-td">0</td>
+<td class="description-td">Defines the width of </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the border for a layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">bounds</td>
+<td class="description-td">CGRect</td>
+<td class="description-td">null</td>
+<td class="description-td">Defines the coordinate </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">system of a layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">composite</td>
+<td class="description-td">CIFilter</td>
+<td class="description-td">CISource-</td>
+<td class="description-td">Gives a CIFilter that </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">OverComposite</td>
+<td class="description-td">takes two inputs </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">(inputImage and </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">backgroundImage). </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Called to render a layer </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">onto the background </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">image.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">compositeFilter</td>
+<td class="description-td">CIFilter</td>
+<td class="description-td">nil</td>
+<td class="description-td">Gives a CoreImage </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">filter used to composite </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the layer with its </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">(possibly filtered) </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">background. Implies </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">source-over</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">compositing.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">contents</td>
+<td class="description-td">CGImageRef</td>
+<td class="description-td">nil</td>
+<td class="description-td">Defines an object </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">providing the contents </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">of a layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">contentsGravity</td>
+<td class="description-td">NSString</td>
+<td class="description-td">resize</td>
+<td class="description-td">Defines how the </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">contents of the layer </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">is mapped into its </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">bounds rect.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">cornerRadius</td>
+<td class="description-td">CGFloat</td>
+<td class="description-td">0</td>
+<td class="description-td">Defines the radius of </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the corners of a layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">delegate</td>
+<td class="description-td">id</td>
+<td class="description-td">nil</td>
+<td class="description-td">Defines an object that </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">will receive a LKLayer </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">delegate method.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">doubleSided</td>
+<td class="description-td">BOOL</td>
+<td class="description-td">YES</td>
+<td class="description-td">When false layers </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">facing away from the </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">viewer are hidden from </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">view.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">filters</td>
+<td class="description-td">NSArray</td>
+<td class="description-td">nil</td>
+<td class="description-td">Gives filters to process </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">a layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">hidden</td>
+<td class="description-td">BOOL</td>
+<td class="description-td">NO</td>
+<td class="description-td">Defines whether a </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">layer is to be displayed </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">or not.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">layerFilters</td>
+<td class="description-td">NSArray of </td>
+<td class="description-td">Null</td>
+<td class="description-td">Gives an optional set </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">CIFilters</td>
+<td class="description-td"> </td>
+<td class="description-td">of filters to process a </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">layer after rendering, </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">but before compositing.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">layoutManager</td>
+<td class="description-td">id</td>
+<td class="description-td">nil</td>
+<td class="description-td">Gives the object </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">responsible for </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">assigning frame rects </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">to sublayers.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">mask</td>
+<td class="description-td">Layer</td>
+<td class="description-td">Null</td>
+<td class="description-td">Gives the layer to clip </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">to. Clipping is </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">performed by </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">computing the </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">effective alpha mask </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">of the layer (including </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">mask layer's opacity).</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">masksToBounds</td>
+<td class="description-td">BOOL</td>
+<td class="description-td">NO</td>
+<td class="description-td">Gives an implicit mask </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">matching a layer </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">bounds is applied to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the layer when true.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">name</td>
+<td class="description-td">NSString</td>
+<td class="description-td">nil</td>
+<td class="description-td">Gives the name of the </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">opacity</td>
+<td class="description-td">float</td>
+<td class="description-td">1</td>
+<td class="description-td">Gives opacity of a </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">layer and cumulatively </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">applies to all sublayers.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">position</td>
+<td class="description-td">CGPoint</td>
+<td class="description-td">0, 0  </td>
+<td class="description-td">Defines the position of </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">a layer in parent layer's </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">coordinate system.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">shadowColor</td>
+<td class="description-td">CGColorRef</td>
+<td class="description-td">black</td>
+<td class="description-td">Gives shadow color </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">for layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">shadowOffset</td>
+<td class="description-td">CGSize</td>
+<td class="description-td">0, −3</td>
+<td class="description-td">Gives shadow offset </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">for layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">shadowOpacity</td>
+<td class="description-td">float</td>
+<td class="description-td">0</td>
+<td class="description-td">Gives shadow opacity </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">for layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">shadowRadius</td>
+<td class="description-td">CGFloat</td>
+<td class="description-td">3</td>
+<td class="description-td">Gives shadow radius </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">for layer.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">style</td>
+<td class="description-td">NSDictionary</td>
+<td class="description-td">Null</td>
+<td class="description-td">Gives the next </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">dictionary in stack to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">search for attribute </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">lookups.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">sublayers</td>
+<td class="description-td">NSArray</td>
+<td class="description-td">nil</td>
+<td class="description-td">Gives the array of </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">sublayers of a layer. </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">The layers are listed </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">in back to front order.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">transform</td>
+<td class="description-td">LKTransform</td>
+<td class="description-td">Identity</td>
+<td class="description-td">Gives layer's </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">orientation relative </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">to parent's coordinate </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">system. This matrix </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">is applied in a space </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">with the center of the </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">layer at the origin </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">(e.g., to rotate a layer </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">about its center, this </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">matrix should be a </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">pure rotation).</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">zPosition</td>
+<td class="description-td">CGFloat</td>
+<td class="description-td">0</td>
+<td class="description-td">Gives the Z component </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">of the layer's position </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">in its superlayer.</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0115" num="0114">7. Methods or Functions of the Framework</div>
+<div class="description-paragraph" id="p-0116" num="0115">In addition to the attributes discussed above, the framework <b>310</b> has a number of methods or functions—some of which have already been discussed and some of which will now be discussed. A “drawSelf:” function is used to draw a layer into a CGContext. In Quartz, the CGContext defines an opaque type of graphics context that represents a Quartz 2D drawing environment and that functions to create, manage, and operate on the drawing environment. As is known in the art, Quartz 2D is a two-dimensional drawing API that allows developers to produce many of the visual effects (e.g., translucency, drop shadows, etc.) used in the user interface of Mac OS X. The render tree <b>362</b> needs the complete description of layers <b>364</b> in order to provide animation so the function is configured for the layer <b>364</b> to draw itself. A layer <b>364</b> that provides scrolling should just draw its entire contents. If an incremental update is to be performed on the scrollable view, then some of the view can be left blank for update later. This function is similar to an NSView drawSelf: function.</div>
+<div class="description-paragraph" id="p-0117" num="0116">A “setValue:forKey:” function sets layer attributes to new values. This will usually result in an animation in the render tree <b>362</b>. If a transaction is open, the update will be appended to that transaction. If no transaction is open, an implicit transaction is created, and the update is added to that transaction so the update can be sent to the render tree <b>362</b> for processing. A “display” function can send display instructions externally. It is only necessary to call the display function when the “drawSelf:” function needs to compute a new state for the layer. A “layoutSublayers” function can be overridden by subclassers to be called when bounds of a layer change. If not overridden, the layout of children layers will use auto-resizing when bounds change because auto-resizing is always used when bounds change.</div>
+<div class="description-paragraph" id="p-0118" num="0117">To provide custom animations for certain events, the method “actionForKey:” can be overridden to return an LKAnimation object. For example, the method “actionForKey:” can be overriden when the “hidden” attribute changes, to specify “Swirl-In” as opposed to the default appearance animation. A “setAutoResizeMask:” function is similar to NSView's autoresize mask and can be used to controls the constraints between a layer's frame and its superlayer's bounds.</div>
+<div class="description-paragraph" id="p-0119" num="0118">An [LKTransaction begin] method can be used to open a transaction session for a layer (and all of its sublayers). Transactions can nest. Only when the outermost transaction is closed is the data committed to the render tree <b>362</b>. An [LKTransaction commit] method ends the current transaction. Only when the outermost transaction is closed is the data committed to the render tree <b>362</b>. An additional method can be provided to abort a current transaction so that the layer tree <b>322</b> can be reset to initial values.</div>
+<div class="description-paragraph" id="p-0120" num="0119">8. Event Handling for Layers</div>
+<div class="description-paragraph" id="p-0121" num="0120">The GUI for the application <b>302</b> will typically have layers that incorporate interactive behavior for producing events. For example, a layer of the application <b>302</b> can represent a “button” of the GUI. Because a “button” in the framework <b>310</b> is made up of many sublayers (e.g., title, left-cap, center, right-cap, shadow), the hierarchy for interacting with the “button” is likely to be much coarser grained than the layer tree <b>322</b>. Accordingly, the framework <b>310</b> can provide a protocol implemented by the layers <b>324</b> that provide interactive behaviors (e.g., a mouse suite of methods, a keyboard suite, etc.). Alternatively, the layers <b>324</b> for the “button” or other interactive event can be aggregated into an interactive object defined in the framework <b>310</b> so that the individual layers <b>324</b> can be handled together as a group.</div>
+<div class="description-paragraph" id="p-0122" num="0121">For example, the framework <b>310</b> can define action objects that respond to events via the LKAction protocol. The LKAction protocol, which is included in the incorporated file “LKAction,” may be used to trigger an event named as a “path” on a receiver function. The layer <b>324</b> on which the event happened is identified in the protocol, and arguments of the protocol can carry various parameters associated with the event. When an action object is invoked, it receives three parameters: the name of the event, the layer <b>324</b> on which the event happened, and a dictionary of named arguments specific to each event kind. There are three types of events: property changes, externally-defined events and layer-defined events. Whenever a property of a layer <b>324</b> is modified, the event with the same name as the property is triggered. External events are determined by calling a key path and looking up the action associated with the event name.</div>
+<div class="description-paragraph" id="p-0123" num="0122">III. Resource Management with the Layer Kit Framework</div>
+<div class="description-paragraph" id="p-0124" num="0123">As noted previously, separating the layer tree process <b>320</b> from the render tree process <b>360</b> offers a number of benefits in the framework <b>310</b> of the present disclosure. In addition to these benefits, the framework <b>310</b> of the present disclosure preferably improves resource management using a “dirty regions” technique and a “buffer handling” technique discussed below.</div>
+<div class="description-paragraph" id="p-0125" num="0124">A. Dirty Region Technique</div>
+<div class="description-paragraph" id="p-0126" num="0125">Preferably, operation of the render tree process <b>360</b> and render engine <b>304</b> focuses on “dirty regions” of the render tree <b>362</b>. The “dirty regions” includes those layers <b>364</b> of the render tree <b>362</b> that need to be rendered because changes have been made to those layers <b>364</b>. During operation, the render tree process <b>360</b> determines which regions (layer, sublayer, group of layers, etc.) have changed and appends the associated layers <b>364</b> with a change object, which is diagrammatically shown in <figref idrefs="DRAWINGS">FIG. 3</figref> as element <b>368</b>. Change objects <b>368</b> are added to the data structure of the render tree <b>362</b> for the associated layers <b>364</b>. The change objects <b>368</b> are updated with each transaction of the render tree process <b>360</b> to keep track of which layers <b>364</b> of the render tree <b>362</b> that have changed relative to their immediate prior version.</div>
+<div class="description-paragraph" id="p-0127" num="0126">During rendering and compositing, the marked layers <b>364</b> are then stored in a cache. The storage of the marked layers <b>364</b> accounts for the relationships of the layers <b>364</b> in the render tree <b>362</b> to one another and, in addition, accounts for changes to the layers <b>364</b> due to animation. When a sublayer <b>364</b> is changed, for example, it is marked as changed and any parent layer <b>364</b> of it in the render tree <b>362</b> is also marked as having something that has changed. The cache does not store the actual contents (pixel information, etc.) of the layers <b>364</b>. Rather, each affected layer <b>364</b> is stored. The cached layers <b>364</b> are then made available to the render engine <b>304</b> for rendering. By focusing on the “dirty regions,” the render engine <b>304</b> can operate more efficiently and reduce the amount of image that is updated via compositing to only those layers <b>364</b> of the render tree <b>362</b> that have been modified since the last composite operation.</div>
+<div class="description-paragraph" id="p-0128" num="0127">B. Buffer Handling Technique</div>
+<div class="description-paragraph" id="p-0129" num="0128">Rendering processes may not necessarily use resources efficiently (e.g., memory, time, etc.). Referring to <figref idrefs="DRAWINGS">FIG. 6</figref>, one embodiment of a rendering process <b>600</b> to improve resource management is schematically illustrated. The rendering process <b>600</b> includes an application <b>610</b>, one or more buffers or backing stores <b>620</b>, <b>625</b>, a buffer handler <b>630</b>, a framework <b>640</b>, a render engine <b>650</b>, a frame buffer <b>660</b>, scan-out hardware <b>670</b> and a display <b>680</b>.</div>
+<div class="description-paragraph" id="p-0130" num="0129">In much the same manner as discussed in previous embodiments, the framework <b>640</b> includes a layer tree (not shown) and a render tree (not shown), which require buffers in memory. The render engine <b>650</b> renders information from the framework <b>640</b> and inputs the rendered information into the frame buffer <b>660</b>, and the scan-out hardware <b>670</b> outputs the information from the frame buffer to the display <b>680</b>. To improve resource management, the buffer handler <b>630</b> operates in conjunction with the framework <b>640</b> and controls the buffers used for the layer tree and/or the render tree of the framework <b>640</b>.</div>
+<div class="description-paragraph" id="p-0131" num="0130">A process of how the buffer handler <b>630</b> manages buffers for the layer tree of the framework <b>640</b> is shown in flow chart form in <figref idrefs="DRAWINGS">FIG. 7</figref>. For the sake of understanding in the discussion that follows, reference is concurrently made to elements in the rendering process <b>600</b> of <figref idrefs="DRAWINGS">FIG. 6</figref> and to blocks of the process <b>700</b> of <figref idrefs="DRAWINGS">FIG. 7</figref>. In general, the buffer handler <b>630</b> can handle a set of the buffers <b>620</b> and <b>625</b> for each layer of the application's <b>610</b> GUI. In addition, more than two buffers <b>620</b> and <b>625</b> can be used for each set.</div>
+<div class="description-paragraph" id="p-0132" num="0131">Initially, an application <b>610</b> operating in the user space <b>602</b> of a computer system writes GUI information to an initial buffer or backing store B<sub>0 </sub> <b>620</b> allocated in memory (Block <b>705</b>). At some point, the application <b>610</b> may receive an update to a region (e.g., one or more layers) of the GUI information in the initial buffer B<sub>0 </sub> <b>620</b>. For example, a user may make a change in the application <b>610</b> (e.g., a layer may be moved, resized, etc.) after the initial buffer B<sub>0 </sub> <b>620</b> has been created. The buffer handler <b>630</b> is notified by the application <b>610</b> that a subregion of the initial buffer B<sub>0 </sub> <b>620</b> is to be updated (Block <b>710</b>). For example, as discussed above, changes made to the GUI information of the application <b>610</b> are committed to the layer tree (not shown) of the framework <b>640</b>, which can then provide notice to the buffer handler <b>630</b>. In response, the buffer handler <b>630</b> creates a new buffer B<sub>1 </sub> <b>625</b> and copies the entire contents from the initial buffer B<sub>0 </sub> <b>620</b> to the new buffer B<sub>1 </sub> <b>625</b> except for the subregion <b>626</b> to be updated (Block <b>720</b>). The framework <b>640</b> then uses the new buffer B<sub>1 </sub> <b>625</b> for its graphics animation and compositing operations, and the render engine <b>650</b> renders from the new buffer B<sub>1 </sub> <b>625</b> (Block <b>725</b>).</div>
+<div class="description-paragraph" id="p-0133" num="0132">Subsequently, the buffer handler <b>630</b> notifies the kernel space <b>604</b> to mark the initial buffer B<sub>0 </sub> <b>620</b> as “purgeable” (Block <b>730</b>). Marking the initial buffer B<sub>0 </sub> <b>620</b> as “purgeable” means that the memory associated the initial buffer B<sub>0 </sub> <b>620</b> can be reclaimed by the kernel space <b>604</b> if needed by the kernel during subsequent processing, otherwise the initial buffer B<sub>0 </sub> <b>620</b> will be left as it is.</div>
+<div class="description-paragraph" id="p-0134" num="0133">During subsequent processing, the application <b>610</b> obtains a new update region and notifies the buffer handler <b>630</b> (Block <b>735</b>). The buffer handler <b>630</b> determines from the kernel space <b>604</b> whether the initial buffer B<sub>0 </sub>has been reclaimed (Blocks <b>740</b> and <b>745</b>). If it has been reclaimed (i.e., the kernel space <b>604</b> let the initial buffer B<sub>0 </sub> <b>620</b> be purged during subsequent processing), then buffer handler <b>630</b> must get new memory and create a new initial buffer B<sub>0 </sub>(Block <b>750</b>). Then, the application <b>610</b> writes to this new initial buffer B<sub>0 </sub>(Block <b>755</b>), and the process <b>600</b> repeats. For example, the buffer handler <b>630</b> creates a new buffer B<sub>1 </sub>(Block <b>715</b>), copies all of the initial buffer B<sub>0 </sub>into the new buffer B<sub>1 </sub>except of for the new update region (Block <b>720</b>). The framework <b>640</b> can process on the new buffer B<sub>1 </sub>to implement animations, for example, and the render engine <b>650</b> renders from the new buffer B<sub>1 </sub>(Block <b>725</b>), and the initial buffer B<sub>0 </sub>is marked as purgeable (Block <b>730</b>), until the next new update region is obtained.</div>
+<div class="description-paragraph" id="p-0135" num="0134">Advantageously, however, the initial buffer B<sub>0 </sub> <b>620</b> that was marked as purgeable at Block <b>730</b> may not have been reclaimed. If it has not been reclaimed at Block <b>645</b> after the application <b>610</b> has received the new update region, then the buffer handler <b>630</b> may only need to update part of that old initial buffer B<sub>0 </sub> <b>620</b> in order to use it again for processing. In this situation, the buffer handler <b>630</b> updates the old initial buffer B<sub>0 </sub> <b>620</b> by copying into it the differences between it and the previous updated region (Block <b>760</b>). From this point, the old initial buffer B<sub>0 </sub> <b>620</b> can be reused for processing. Accordingly, the buffer handler <b>630</b> creates a new buffer B<sub>1 </sub>(Block <b>715</b>), copies all of the old initial buffer B<sub>0 </sub> <b>620</b> into the new buffer B<sub>1 </sub>except of for the new update region (Block <b>720</b>). The framework <b>640</b> process on and the render engine <b>650</b> renders from the new buffer B<sub>1 </sub>(Block <b>725</b>), and the old initial buffer B<sub>0 </sub> <b>620</b> is again marked as purgeable (Block <b>730</b>), until the next new update region is obtained.</div>
+<div class="description-paragraph" id="p-0136" num="0135">The foregoing description of preferred and other embodiments is not intended to limit or restrict the scope or applicability of the inventive concepts conceived of by the Applicants. In exchange for disclosing the inventive concepts contained herein, the Applicants desire all patent rights afforded by the appended claims. Therefore, it is intended that the appended claims include all modifications and alterations to the full extent that they come within the scope of the following claims or the equivalents thereof.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM227557175">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method of rendering a user interface of an application on a computer system, comprising:
+<div class="claim-text">maintaining, by an animation framework that executes independently of an application program, a layer tree data structure comprising a plurality of layers, each layer representing one or more graphical attributes of a graphical user interface object, each layer associated with one or more constraints, each constraint defining geometrical relationships among the layers;</div>
+<div class="claim-text">receiving, from the application program, a notification of a change to a first object of a first layer of the layer tree data structure;</div>
+<div class="claim-text">changing a second object of a render tree data structure responsive to the received notification of change, the second object being associated with the first object;</div>
+<div class="claim-text">determining a first implicit animation from a plurality of implicit animations for animating the second object based on a first set of constraints associated with the first layer, wherein the first implicit animation is automatically determined independent of the application program; and</div>
+<div class="claim-text">rendering, from the render tree data structure, the second object by applying the first implicit animation thereto.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising determining a layout of the first layer by solving the first set of constraints.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the one or more constraints comprise an array of constraint objects, each constraint object describing one geometrical relationship between two layers of the plurality of layers.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising receiving, from the application program, a notification to flush pending implicit transactions, the pending implicit transactions comprising the first implicit animation, wherein changing the second object is based on the notification to flush.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein each of the first object and the second object comprise layer objects selected from a group consisting of an image layer object, a graphic layer object, a text layer object, a vector layer object, and a media layer object.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising updating the render tree data structure by adding an animation object that includes the first implicit animation to the render tree data structure, wherein the render tree data structure and the layer tree data structure are structurally similar.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the change to the first object comprises an addition of an object to the layer tree data structure or a deletion of an object from the layer tree data structure, and wherein determining the first implicit animation comprises selecting a visibility-based animation for animating an addition or a deletion of the second object associated with the first object.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, further comprising committing the change of the first object to the layer tree data structure, wherein the layer tree data structure comprises a hierarchy of objects having an arrangement of relationships to one another.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein rendering from the render tree data structure comprises traversing the render tree data structure.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. A computer system, comprising:
+<div class="claim-text">a display device;</div>
+<div class="claim-text">a memory storing instructions of an application programming interface for rendering a user interface of an application; and</div>
+<div class="claim-text">a processor operatively coupled to the memory and the display device and adapted to execute the instructions stored in the memory to cause the processor to:
+<div class="claim-text">maintain, by an animation framework that executes independently of an application program, a layer tree data structure comprising a plurality of layers, each layer representing one or more graphical attributes of a graphical user interface object, each layer associated with one or more constraints, each constraint defining geometrical relationships among the layers;</div>
+<div class="claim-text">receive, from the application program, a notification of a change to a first object of a first layer of the layer tree data structure;</div>
+<div class="claim-text">change a second object of a render tree data structure responsive to the received notification of change, the second object being associated with the first object;</div>
+<div class="claim-text">determine a first implicit animation from a plurality of implicit animations for animating the second object based on a first set of constraints associated with the first layer, wherein the first implicit animation is automatically determined independent of the application program; and</div>
+<div class="claim-text">render, from the render tree data structure, the second object by applying the first implicit animation thereto.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, further comprising instructions to cause the processor to determine a layout of the first layer by solving the first set of constraints.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the one or more constraints comprise an array of constraint objects, each constraint object describing one geometrical relationship between two layers of the plurality of layers.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, further comprising instructions to cause the processor to receive, from the application program, a notification to flush pending implicit transactions, the pending implicit transactions comprising the first implicit animation, wherein the instructions to cause the processor to change the second object comprise instructions to cause the processor to change the second object based on the notification to flush.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein each of the first object and the second object comprise layer objects selected from a group consisting of an image layer object, a graphic layer object, a text layer object, a vector layer object, and a media layer object.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, further comprising instructions to cause the processor to update the render tree data structure by adding an animation object that includes the first implicit animation to the render tree data structure, wherein the render tree data structure and the layer tree data structure are structurally similar.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the change to the first object comprises an addition of an object to the layer tree data structure or a deletion of an object from the layer tree data structure, and wherein the instructions to cause the processor to determine the first implicit animation comprise instructions to cause the processor to select a visibility-based animation for animating an addition or a deletion of the second object associated with the first object.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The system of <claim-ref idref="CLM-00016">claim 16</claim-ref>, further comprising instructions to cause the processor to commit the change of the first object to the layer tree data structure, wherein the layer tree data structure comprises a hierarchy of objects having an arrangement of relationships to one another.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The system of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein the instructions to cause the processor to render from the render tree data structure comprise instructions to cause the processor to traverse the render tree data structure.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. A non-transitory computer-readable storage medium storing instructions for rendering a user interface of an application by one or more processors, wherein the instructions, when executed, cause the one or more processors to:
+<div class="claim-text">maintain, by an animation framework that executes independently of an application program, a layer tree data structure comprising a plurality of layers, each layer representing one or more graphical attributes of a graphical user interface object, each layer associated with one or more constraints, each constraint defining geometrical relationships among the layers;</div>
+<div class="claim-text">receive, from the application program, a notification of a change to a first object of a first layer of the layer tree data structure;</div>
+<div class="claim-text">change a second object of a render tree data structure responsive to the received notification of change, the second object being associated with the first object;</div>
+<div class="claim-text">determine a first implicit animation from a plurality of implicit animations for animating the second object based on a first set of constraints associated with the first layer, wherein the first implicit animation is automatically determined independent of the application program; and</div>
+<div class="claim-text">render, from the render tree data structure, the second object by applying the first implicit animation thereto.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The computer-readable storage medium of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the instructions further cause the one or more processors to determine a layout of the first layer by solving the first set of constraints.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

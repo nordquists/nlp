@@ -1,0 +1,748 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10299280B2 - Systems and methods for interference alignment in Wi-Fi 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA297589899" source="national office">
+<div class="abstract">System and method embodiments are provided for interference alignment in a wireless local area network (LAN) with an overlapping basic service set (OBSS). In an embodiment, a method includes instructing a first access point (AP) in the wireless LAN to broadcast a null data packet (NDP) sounding packet to a plurality of stations when no other AP is broadcasting, wherein the NDP sounding packet comprises a plurality of long training field (LTFs), and wherein a total number of LTFs is equal to a total number of transmission streams, receiving channel beamforming (BF) information and a signal plus interference to noise ratio (SINR) from each of the stations, wherein each of the stations computes the channel BF information and the SINR from sounding packets received from each of the APs in the wireless LAN, and determining a transmission schedule according to the SINRs and the channel BF information.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES191784079">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">The present application is a continuation of U.S. application Ser. No. 13/938,058, filed Jul. 9, 2013, titled “System and Method for Interference Alignment in Wi-Fi,” which claims the benefit of U.S. Provisional Patent Application No. 61/693,103 filed Aug. 24, 2012 and entitled “System and Method for Interference Alignment in Wi-Fi,” and U.S. Provisional Patent Application No. 61/718,031, filed Oct. 24, 2012 and entitled “System and Method for CSI-Based Interference Alignment with User Cooperation,” which are incorporated herein as if produced in their entirety.</div>
+<heading id="h-0002">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention relates to a system and method for wireless communications, and, in particular embodiments, to a system and method for interference alignment in Wi-Fi.</div>
+<heading id="h-0003">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0004" num="0003">In a wireless local area network (WLAN), each station (STA) can take a channel estimation formed between two access points (APs), and feed the information back to a controller AP, which may be a master AP, or one of the APs in collaboration. The controller AP then computes a beam-forming matrix based on the feedback. The beam-forming matrix is split into two, which is the same number as the number of APs for interference alignment (IA) to work, in the case of a two AP collaboration, but may be different with more than two APs.</div>
+<div class="description-paragraph" id="p-0005" num="0004">There may be an Overlapped Basic Service Set (OBSS) issue where multiple APs are densely populated and there is only one large bandwidth available. That is, each AP may try to transmit the data to its own associated STA simultaneously under the same spectrum. While IA can be a solution for this issue, further development, such as IA channel estimation, is needed for IA to work in Wi-Fi.</div>
+<heading id="h-0004">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0006" num="0005">In accordance with an embodiment, a method in a network component for interference alignment in a wireless local area network (LAN) with an overlapping basic service set (OBSS) includes instructing with the network component a first one of a plurality of access point (APs) in the wireless LAN to broadcast a null data packet (NDP) sounding packet to a plurality of stations when no other AP in the plurality of APs is broadcasting, wherein the NDP sounding packet comprises a plurality of long training field (LTFs), and wherein a total number of LTFs is equal to a total number of transmission streams, receiving a channel beamforming (BF) information and a signal plus interference to noise ratio (SINR) from each of the plurality of stations, wherein each of the plurality of stations computes the channel beamforming (BF) information and the SINR from sounding packets received from each of the plurality of APs in the wireless LAN, and determining a transmission schedule according to the SINRs and the pre-coder candidates.</div>
+<div class="description-paragraph" id="p-0007" num="0006">In accordance with another embodiment, a network component configured for interference alignment in a wireless local area network (LAN) with an overlapping basic service set (OBSS) includes a processor; and a computer readable storage medium storing programming for execution by the processor, the programming including instructions to: instruct a first one of a plurality of access point (APs) in the wireless LAN to broadcast a null data packet (NDP) sounding packet to a plurality of stations when no other AP in the plurality of APs is broadcasting, wherein the NDP sounding packet comprises a plurality of long training field (LTFs), and wherein a total number of LTFs is equal to a total number of transmission streams; receive channel beamforming (BF) information and a signal plus interference to noise ratio (SINR) from each of the plurality of stations, wherein each of the plurality of stations computes the channel BF information and the SINR from sounding packets received from each of the plurality of APs in the wireless LAN; and determine a transmission schedule according to the SINRs and the channel BF information.</div>
+<div class="description-paragraph" id="p-0008" num="0007">In accordance with another embodiment, a method in an access point (AP) for interference alignment in a wireless local area network (LAN) with an overlapping basic service set (OBSS) with multiple APs includes broadcasting with the AP a null data packet (NDP) sounding packet to a plurality of stations when no other AP in the wireless LAN is broadcasting, wherein the NDP sounding packet comprises a plurality of long training field (LTFs), and wherein a total number of LTFs is equal to a total number of transmission streams; receiving channel beamforming (BF) information and a signal plus interference to noise ratio (SINR) from each of the plurality of stations, wherein each of the plurality of stations computes the channel BF information and the SINR from sounding packets received from at least some of the plurality of APs in the wireless LAN; grouping stations with a same channel BF information in a group; selecting a station within each group that provides a best SINR; determining a sum-rate for each group according to a corresponding selected stations channel BF information and its corresponding SINR; determining a group that provides a best sum-rate; and creating a beamforming matrix according to the determined channel BF information from the determined group, wherein a first column corresponds to a beamforming vector for a first one of the multiple APs.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0009" num="0008">For a more complete understanding of the present invention, and the advantages thereof, reference is now made to the following descriptions taken in conjunction with the accompanying drawing, in which:</div>
+<div class="description-paragraph" id="p-0010" num="0009"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates a network for communicating data;</div>
+<div class="description-paragraph" id="p-0011" num="0010"> <figref idrefs="DRAWINGS">FIG. 2</figref> illustrates an embodiment of overall IA operation applied in a Wi-Fi system, with an LTF design for channel estimation in IA operation mode;</div>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIG. 3A</figref> illustrates an embodiment of a preamble for NDP sounding and data packet frame;</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 3B</figref> illustrates an embodiment of a preamble for an NDP sounding and data packet frame;</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIGS. 4 and 5</figref> illustrate throughput and bit error rate (BER) performance results, respectively, based on the simulation environments;</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates an embodiment system of each STA's operation during NDP sounding;</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 7</figref> illustrates an embodiment system of each STA's operation during data packet transmission using a CSI based BF feedback;</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates an embodiment system of each STA's operation during data packet transmission using CQI based BF feedback information;</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 9</figref> illustrates a flowchart of an embodiment method for NDP sounding in a Wi-Fi network; and</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a processing system that can be used to implement various embodiments.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION OF ILLUSTRATIVE EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0020" num="0019">The making and using of the presently preferred embodiments are discussed in detail below. It should be appreciated, however, that the present invention provides many applicable inventive concepts that can be embodied in a wide variety of specific contexts. The specific embodiments discussed are merely illustrative of specific ways to make and use the invention, and do not limit the scope of the invention.</div>
+<div class="description-paragraph" id="p-0021" num="0020">An embodiment implements an interference alignment (IA) algorithm in a Wi-Fi system, and in particular may be implemented where an OBSS situation is formed. An embodiment includes a preamble design to enable an IA algorithm to work in a Wi-Fi system. Although primarily described with reference to two AP collaboration, the disclosed embodiments are not limited to two AP collaboration, but may be extended to cases of more than two APs in collaboration.</div>
+<div class="description-paragraph" id="p-0022" num="0021">When an IA mode is triggered, an AP broadcasts a null data packet (NDP) sounding packet for channel feedback alternately among the APs in the OBSS network. The preamble design may be conformed to the existing specification, but the number of long training fields (LTFs) should be equal to the number of transmit (TX) streams (TX N_STS), which is different from the existing NDP sounding packet format. The effective channel estimation is done in each STA, and is used for the computation of post-detection signal plus interference to noise ratio (SINR) per TX space-time stream.</div>
+<div class="description-paragraph" id="p-0023" num="0022">The sum-rate using the SINRs and pre-coder candidates are computed over all sub-carriers, and the pre-coder that is giving the best sum-rate is selected, in the case of channel quality indicator (CQI)-based beamforming feedback (precoding matrix indicator (PMI) and SINR feedback). The selected pre-coder and its corresponding SINRs are fed back from each STA. The AP (both APs may receive the feedback information and pass it over to the controller AP (master AP) or a backhaul controller receives the feedback information from all STAs, and makes a grouping of stations based on the fed back preferred pre-coder index, that is, those with the same preferred pre-coder are grouped together.</div>
+<div class="description-paragraph" id="p-0024" num="0023">Among each group, the fed back SINR per TX stream is compared, and the STA that gives the best SINR is selected. The sum-rate is computed again in each group based on the selected STA and its corresponding SINR. The sum-rate among all the groups is computed, and the group that gives the best sum-rate is chosen. The corresponding pre-coder to the selected group is the pre-coder selected and the already selected STAs in that group are scheduled from both APs. The left half columns are used for the beamforming matrix for on AP (AP<b>0</b>) and the right half columns are the beamforming matrix for the other AP (API).</div>
+<div class="description-paragraph" id="p-0025" num="0024">While an embodiment IA system is described with CQI-based beamforming feedback, embodiments are not limited to a CQI based feedback system, but may be generalized to channel state information (CSI)-based beamforming feedback systems where the V matrix out of singular value decomposition (SVD) of estimated effective channels are angle-quantized and fed back together with the SINR values.</div>
+<div class="description-paragraph" id="p-0026" num="0025">The selected STAs receive the data packet transmission (also referred to as a data transmission packet), take a minimum mean square error (MMSE) MIMO detection, and calculate the rank 2*(N_STS) MIMO transmissions; that is, the N_STS MIMO transmission from each AP will make the 2*(N_STS) overall MIMO transmission in the 2 APs IA situation. The soft-output from MMSE MIMO detection is passed over to the Viterbi decoder, and the corresponding elements to each STA among the decoded signals are taken. The computation in each STA during the NDP sounding, the operation in each AP for the user scheduling, and the channel estimation and detection computation in each AP are described below.</div>
+<div class="description-paragraph" id="p-0027" num="0026">In an embodiment, multiple APs are made possible to transmit data concurrently with the help of BF technology.</div>
+<div class="description-paragraph" id="p-0028" num="0027">In an embodiment, an LTF set is disclosed for a preamble frame. The number of LTFs depends on the number of TX streams (N_STS) per AP for the channel sounding packet, and for the data packet, the number of LTFs are N_STS times the number of APs in collaboration.</div>
+<div class="description-paragraph" id="p-0029" num="0028">In an embodiment, the TX stream and TX antenna configuration is set in accordance with the number of APs in collaboration. For example, in case 4 APs and 2 TX streams per AP will be in the AP collaboration mode, there will be at least 8×8 overall MIMO antenna configuration from the STA side, which results in the 8×2 BF precoder per AP. Hence, in this case, there should be 8 TX antennas per AP.</div>
+<div class="description-paragraph" id="p-0030" num="0029">In an embodiment, if the number of LTFs is the number of TX streams (N_STS) per AP for the sounding packet, only one AP may be operational while the others in the network with the same spectrum are shut off during the NDP sounding packet transmission for a beam-forming feedback.</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates a network <b>100</b> for communicating data. The network <b>100</b> comprises a multiple access points (APs) <b>110</b> that have overlapping coverage areas <b>112</b>, <b>113</b>, a plurality of user equipment (UEs) <b>120</b>, and a backhaul network <b>130</b>. As used herein, the term AP may also be referred to as a transmission point (TP) and the two terms may be used interchangeably throughout this disclosure. Also, as used herein, the term UE may also be referred to as STA and the two terms may be used interchangeably throughout this disclosure. The AP <b>110</b> may comprise any component capable of providing wireless access by, inter alia, establishing uplink (dashed line) and/or downlink (dotted line) connections with the UEs <b>120</b>, such as a base transceiver station (BTS), an enhanced base station (eNB), a femtocell, and other wirelessly enabled devices. The UEs <b>120</b> may comprise any component capable of establishing a wireless connection with the AP <b>110</b>. The backhaul network <b>130</b> may be any component or collection of components that allow data to be exchanged between the APs <b>110</b> and a remote end (not shown). In some embodiments, the network <b>100</b> may comprise various other wireless devices, such as relays, femtocells, etc.</div>
+<div class="description-paragraph" id="p-0032" num="0031">Because multiple APs <b>110</b> are operating in an area with overlapping coverage areas <b>112</b>, <b>113</b>, interference between transmissions from the APs <b>110</b> and the UEs <b>120</b> may pose problems for effective communication. The APs <b>110</b> may be configured to utilize embodiment IA algorithms as described below in order to improve the communications between the various devices in the network <b>100</b>.</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 2</figref> illustrates an embodiment system <b>200</b> of overall IA operation applied in a Wi-Fi system, with an LTF design for channel estimation in IA operation mode. In an embodiment, system <b>200</b> utilizes channel state information (CSI) feedback in performing IA. In another embodiment, system <b>200</b> utilizes channel quality information (CQI) feedback in performing IA. System <b>200</b> includes multiple APs <b>202</b> (labeled AP<b>0</b> and AP<b>1</b>) and multiple stations (STAs) <b>210</b> (labeled STA <b>1</b>, STA <b>2</b>, STA <b>3</b>, and STA N). The system <b>200</b> also includes a user selection and pre-coder design unit <b>206</b>. Each AP <b>202</b> includes multiple transmitter antennas <b>204</b> and each STA <b>210</b> includes multiple receiver antennas <b>212</b>. The APs <b>202</b> transmits an NDP sounding packet in transmission streams <b>208</b>; the LTF design for beam-forming sounding is described hereinafter.</div>
+<div class="description-paragraph" id="p-0034" num="0033">As we see from <figref idrefs="DRAWINGS">FIG. 2</figref>, in a CSI feedback embodiment, two APs <b>202</b> transmit the Down Link (DL) signals concurrently, and the beamforming at each AP <b>202</b> needs to be designed in consideration of interferences from the other AP <b>202</b>. Disclosed is an LTF design that enables this AP collaboration in a Wi-Fi system using CSI feedback from the STAs <b>210</b>. The following description explains an embodiment based on two AP <b>202</b> collaboration. However, other embodiments are not limited to the two APs case, but may be extended to more than two APs case. In an embodiment, the beamforming design is implemented in Channel-Nulling or Eigen Beam-forming (EGB) method using the angle quantization based beamforming (BF) feedback according to Institute of Electrical and Electronics Engineers (IEEE) 802.11ac or the precoder matrix indicator (PMI) based BF feedback like the Long Term Evolution (LTE) system. However, the BF feedback scheme is not limited to the IEEE 802.11ac type of feedback or the LTE-like feedback.</div>
+<div class="description-paragraph" id="p-0035" num="0034">Each AP <b>202</b> in the collaboration mode will broadcast the NDP sounding packet one by one, and all the STAs <b>210</b> within the network <b>200</b> will take a channel estimation using the sounding packet. Each AP <b>202</b> takes the SVD operation, and computes the V matrix for the Eigen vectors and the S vector for the singular values. The angle quantized V matrix as well as the singular values are feedback to its associated AP <b>202</b>, where two APs <b>202</b> will share the feedback information. The singular values from the S vector will be used for the SINR and sum-rate computation. In case there is a single TX stream per AP <b>202</b>, one dominant singular value will be used for the SINR and sum-rate computation, and when there are multiple TX streams per each AP <b>202</b>, the same number of singular values as the number of TX streams will be used for the SINR and sum-rate computation. The sum-rate may be computed at each STA <b>210</b> and feedback to AP <b>202</b>, or just like the current IEEE 802.11ac, the S vector will be feedback and the sum-rate can be computed at each AP <b>202</b>. Either way is possible.</div>
+<div class="description-paragraph" id="p-0036" num="0035">Each element in the singular vector S represents the Eigen values of channel matrix formed between 2 APs <b>202</b> and each STA <b>210</b>. Each STA <b>210</b> takes the dominant Eigen value(s) out of the S vector. The average sum-rate per STA <b>210</b> is computed as follows,</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <maths id="MATH-US-00001" num="00001"> <math overflow="scroll"> <mrow> <mrow> <msub> <mi>C</mi> <mi>avg_sum</mi> </msub> <mo>=</mo> <mrow> <mfrac> <mn>1</mn> <mi>N</mi> </mfrac> <mo>⁢</mo> <mrow> <munderover> <mo>∑</mo> <mn>1</mn> <mi>N</mi> </munderover> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>i</mi> <mo>=</mo> <mn>1</mn> </mrow> <mi>Nsts</mi> </munderover> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mi>log</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mn>1</mn> <mo>+</mo> <msub> <mi>s</mi> <mi>i</mi> </msub> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> </mrow> </mrow> <mo>,</mo> </mrow> </math> </maths> <br/>
+where C<sub>avg</sub> <sub>_</sub> <sub>sum </sub>is the average sum-rate per STA <b>210</b>, N is the number of subcarriers per symbol, N_STS is the number of TX streams per AP <b>202</b>, and S<sub>i </sub>represents the i<sup>th </sup>dominant singular value of the singular vector S.
+</div>
+<div class="description-paragraph" id="p-0038" num="0037">The master AP <b>202</b> will choose two STAs <b>210</b> with the best two sum-rates in case one STA <b>210</b> per AP is supposed to be selected. With the V matrix of those selected two STAs <b>210</b>, each AP <b>202</b> (or master AP <b>202</b>) takes the first N_STS columns of those two selected V matrix, and assigns those two sets of N_STS columns to each AP <b>202</b> for the beamforming matrix. This type of BF design is called an EGB. The size of the beamforming matrix per AP <b>202</b> is N<sub>TX </sub>X N_STS, where N<sub>TX </sub>is the number of TX antennas.</div>
+<div class="description-paragraph" id="p-0039" num="0038">If it is desired to design the BF matrix in a Channel-Nulling method for the aforementioned case above, then, first of all, try to find the null-space for the first N_STS columns of each selected V matrix. Each found null-space will be applied for the BF of other AP <b>202</b>, that is, when V<sub>0 </sub>is called an EGB matrix of AP<b>0</b> <b>202</b>, and V<sub>1 </sub>is called an EGB matrix of AP<b>1</b> <b>202</b>, the null-space of V<sub>0 </sub>will become a BF matrix for AP<b>1</b> <b>202</b>, and the null-space of V<sub>1 </sub>will become a BF matrix for AP<b>0</b> <b>202</b>.</div>
+<div class="description-paragraph" id="p-0040" num="0039">Once the user selection and BF matrix design are done, the data packet will be transmitted to those selected STAs <b>210</b>. The selected STAs may take an MMSE MIMO detection after receiving the data packet, thinking the rank 2*(N_STS) MIMO transmissions, that is, the N_STS MIMO transmission from each AP <b>202</b> will make the 2*(N_STS) overall MIMO transmission in 2 APs <b>202</b> collaboration situation.</div>
+<div class="description-paragraph" id="p-0041" num="0040">Next, an Interference Alignment system in Wi-Fi using a PMI type of BF feedback (i.e., a CQI feedback embodiment) is described. A pre-set of PMI can be assumed. The channels are estimated for the sounding packets broadcasted by each AP <b>202</b> respectively one by one, and each individual precoder in the pre-set PMI of each STA <b>210</b> will be applied to get the effective channels, which is used for the computation of SINRs per each TX stream. We may get the sum-rate with the TX SINRs for the effective channels, and find out the PMI index which generates the best sum-rate. The chosen PMI index and its corresponding TX SINRs will be fed back to each AP <b>202</b> as a BF report by each STA <b>210</b>. The master AP <b>202</b> groups all the STAs <b>210</b> with the same fed back PMI index. The TX SINRs per TX stream will be compared among the grouped STAs <b>210</b>, and the best SINR will be chosen for the TX stream. The new sum-rate based on the chosen best SINRs among the grouped STAs <b>210</b> will be computed, and these new sum-rates computed over all the groups will be compared among each other and choose one precoder producing the best sum-rate.</div>
+<div class="description-paragraph" id="p-0042" num="0041">Once the precoder is obtained from the aforementioned procedure above, the first half columns of the precoder will be used for the BF matrix of AP<b>0</b> <b>202</b>, and the right half columns for the BF matrix of AP<b>1</b> <b>202</b>. The detection scheme may be the same for both PMI based BF or EGB (or Channel-Nulling) based BF.</div>
+<div class="description-paragraph" id="p-0043" num="0042">Disclosed herein is a new Preamble design to accommodate the proposed AP collaborated communications. The preamble for the channel sounding period will be different from the data packet. The number of Long Training Field (LTF) is dependent on the number of TX streams (Rank of TX Transmissions) per AP, which is different from the existing standards where the channel sounding packet has as many LTFs as the number of TX antennas, but, here, we will take an antenna virtualization among multiple APs. That is, each STA will take channel estimation for the TX streams not for the actual TX antennas. We may describe it using the Short packet frame or Long packet frame of IEEE 802.11ah. <figref idrefs="DRAWINGS">FIGS. 3A and 3B</figref> show the Short preamble and the Long preamble frame format of IEEE 802.11ah.</div>
+<div class="description-paragraph" id="p-0044" num="0043"> <figref idrefs="DRAWINGS">FIGS. 3A and 3B</figref> illustrate an embodiment of a preamble for IA beamforming feedback. Any preamble packet format in IEEE 802.11 such as IEEE 802.11n Mixed-mode or Green field packet, IEEE 802.11ac packet, or short or long packet in IEEE 802.11ah may be used. Unlike legacy WiFi, the number of LTFs for channel estimation is identical to the number of streams, i.e., the TX rank. Cyclic delay diversity (CDD) is used; no beam-forming is applied. When one AP broadcasts the beam-forming packet, the other AP is supposed to be shut-off. The N_STS should be one half of N_TX, for example, when N_STS is 2, the N_TX is 4 in the case of a two AP collaboration situation.</div>
+<div class="description-paragraph" id="p-0045" num="0044"> <figref idrefs="DRAWINGS">FIGS. 3A and 3B</figref> illustrate an embodiment of a preamble for a data packet frame. Any preamble packet format in IEEE 802.11 such as IEEE 802.11n Mixed-mode or Green field packet, IEEE 802.11ac packet, or short or long packet in IEEE 802.11ah may be used. Unlike legacy WiFi, the number of LTFs for channel estimation is identical to the number of TX antennas. The available two APs transmit the beam-formed data packet to destination STAs simultaneously. The number of streams (N_STS) should be one half of N_TX, for example, when N_STS is 2, the N_TX is 4, or when N_STS is 1, the N_TX is 2 (in the case of a two AP collaboration situation), etc.</div>
+<div class="description-paragraph" id="p-0046" num="0045">The Cyclic Delay Diversity (CDD) will be only applied per antenna in the sounding packet without the beamforming applied. The number of TX streams (N_STS) should be one half of N<sub>TX</sub>, that is, when N_STS is 2, the N<sub>TX </sub>should be 4, as in the case of 2 AP collaboration.</div>
+<div class="description-paragraph" id="p-0047" num="0046">As for the data packet, it is vice versa. The number of LTFs depends on the number of TX antennas (N<sub>TX</sub>) per AP, or we may say the number of LTFs is twice as many as N_STS per antenna when there is a 2 AP collaboration. The APs in collaboration mode will transmit the data packets concurrently. The number of TX streams (N_STS) should be one half of N<sub>TX </sub>for the beamforming in case of 2 AP collaboration. The same frame format in <figref idrefs="DRAWINGS">FIGS. 3A and 3B</figref> may be applied to the data packets.</div>
+<div class="description-paragraph" id="p-0048" num="0047">Returning to <figref idrefs="DRAWINGS">FIG. 2</figref>, in an embodiment, two APs <b>202</b> may operate in the same frequency band in a Wi-Fi network. Multiple STAs <b>210</b> may be served simultaneously from the two APs <b>202</b>, which increases the overall data throughput. In an embodiment, the existing preamble design is modified to enable IA operation. In an embodiment, the same number of LTFs to the number of TX streams <b>208</b> per AP <b>202</b> is transmitted for NDP sounding, that is, for beam-forming channel feedback. In an embodiment, the same number of LTFs to the number of TX antennas <b>204</b> per each AP <b>202</b> is transmitted for a data packet transmission. In an embodiment, the IA operation may be available only for the AP <b>202</b> whose number of TX streams <b>208</b> is one half the number of TX antennas <b>204</b> in the case of a two AP collaboration situation. In an embodiment, during the NDP sounding packet transmission for a beam-forming feedback, only one AP <b>202</b> may be operational while the others in the network with the same spectrum are shut off.</div>
+<div class="description-paragraph" id="p-0049" num="0048">In an embodiment, the STAs <b>210</b> perform effective channel estimation, which is used for computing SINR per each stream <b>208</b> in each AP <b>202</b>. The STAs <b>210</b> compute the sum-rate using these SINRs per Space-Time-Stream (STS) <b>208</b> in each AP <b>202</b> over all subcarriers, and choose the pre-coder that best matches. The STAs <b>210</b> feedback the preferred pre-coder and its corresponding SINRs to the AP <b>202</b> (master AP). In an embodiment, the master AP <b>202</b> is AP<b>0</b> <b>202</b>. The master AP includes the user and pre-coder selection unit <b>206</b>. In other embodiments, the user and pre-coder selection unit <b>206</b> may be included in a server reached through a backhaul network.</div>
+<div class="description-paragraph" id="p-0050" num="0049">The AP <b>202</b> selects the STAs <b>210</b> to schedule and the corresponding pre-coder. The AP <b>202</b> transmits a data packet; the preamble design for the data packet is described hereinafter. In an embodiment, the left half columns of the selected pre-coder are used for the beam-forming of AP<b>0</b> <b>202</b> and the right half columns of the selected pre-coder are used for the beam-forming of AP<b>1</b> <b>202</b>.</div>
+<div class="description-paragraph" id="p-0051" num="0050">The selected STAs <b>210</b> take an MMSE MIMO detection, and calculate the rank 2*(N_STS) MIMO transmissions; that is, the N_STS MIMO transmission from each AP <b>202</b> will make the 2*(N_STS) overall MIMO transmission in the 2 APs IA situation. The soft-output from MMSE MIMO detection is passed over to the Viterbi decoder.</div>
+<div class="description-paragraph" id="p-0052" num="0051">In existing Wi-Fi systems, carrier sense multiple access with collision avoidance (CSMA/CA) is the multiple access scheme, where only one AP provides a service to a STA in the OBSS case. An embodiment enables an IA scheme in which two APs in the same spectrum can transmit the data to multiple STAs simultaneously. An embodiment changes the preamble packet, and has a restriction between the number of TX steams and the number of TX antennas.</div>
+<div class="description-paragraph" id="p-0053" num="0052">An embodiment resolves an OBSS situation in large bandwidth Wi-Fi operation without sacrificing throughput. Embodiments may be implemented in next generation Wi-Fi access points and cellular systems, such as next-generation Wi-Fi enterprise access points, 3GPP LTE and/or advanced base stations, and the like.</div>
+<div class="description-paragraph" id="p-0054" num="0053">A simulation environment, which is one example embodiment, includes 2 APs, 1 TX stream-2 TX antennas per AP; 10 STAs, 2 RX per STA; flat fading channel between each TX-RX pair; a codebook size of two pre-coders (two 2×2 pre-coders); QPSK and rate ½ BCC with a Viterbi Decoder; and one iteration for beam-forming vector selection. <figref idrefs="DRAWINGS">FIGS. 4 and 5</figref> illustrate throughput performance results <b>400</b> and bit error rate (BER) performance results <b>500</b>, respectively, based on the simulation environments.</div>
+<div class="description-paragraph" id="p-0055" num="0054"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates an embodiment system <b>600</b> of each STA's operation during NDP sounding. The illustration in <figref idrefs="DRAWINGS">FIG. 6</figref> is based on the simulation environment above. System <b>600</b> includes multiple APs <b>602</b> (labeled AP<b>0</b> and AP<b>1</b>) and the n<sup>th </sup>STA <b>606</b>. Each AP <b>602</b> includes two transmitter antennas <b>604</b> and transmits sounding packet streams <b>610</b>. Each STA <b>606</b> includes two receiver antennas <b>608</b>.
+<br/>
+<i>r</i> <sub>0</sub> <i>=s</i> <sub>1</sub> <i>h</i> <sub>00</sub> <sup>n1</sup> <i>+s</i> <sub>1</sub> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n1</sup> <i>+N </i>
+<br/>
+<i>r</i> <sub>1</sub> <i>=s</i> <sub>1</sub> <i>h</i> <sub>10</sub> <sup>n1</sup> <i>+s</i> <sub>1</sub> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>11</sub> <sup>n1</sup> <i>+N </i>
+</div>
+<div class="description-paragraph" id="p-0056" num="0055">where r<sub>i </sub>is the received signal at the i<sup>th </sup>receiver, h is the channel parameter, and θ is the CDD value which is a function of the subcarrier index.
+<br/>
+<i>r</i> <sub>0</sub> <i>=s</i> <sub>1</sub> <i>h</i> <sub>00</sub> <sup>n1</sup> <i>+s</i> <sub>1</sub> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n1</sup> <i>+N=s</i> <sub>1</sub>(<i>h</i> <sub>00</sub> <sup>n1</sup> <i>+e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n1</sup>)+<i>N=s</i> <sub>1</sub> <i>h</i> <sub>eff0</sub> <sup>n1</sup> <i>+N </i>
+<br/>
+<i>r</i> <sub>1</sub> <i>=s</i> <sub>1</sub> <i>h</i> <sub>10</sub> <sup>n1</sup> <i>+s</i> <sub>1</sub> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>11</sub> <sup>n1</sup> <i>+N=s</i> <sub>1</sub>(<i>h</i> <sub>10</sub> <sup>n1</sup> <i>+e</i> <sup>jθ</sup> <i>h</i> <sub>11</sub> <sup>n1</sup>)+<i>N=s</i> <sub>1</sub> <i>h</i> <sub>eff1</sub> <sup>n1</sup> <i>+N </i>
+</div>
+<div class="description-paragraph" id="p-0057" num="0056">where h<sub>eff0</sub> <sup>n1 </sup>and h<sub>eff1</sub> <sup>n1 </sup>are estimated with one LTF from AP<b>1</b>.</div>
+<div class="description-paragraph" id="p-0058" num="0057">The N above represents the Additive White Gaussian Noise (AWGN). Here, s<sub>1 </sub>is the LTF sequence in that subcarrier. In the same way, h<sub>eff0</sub> <sup>n0 </sup>and h<sub>eff1</sub> <sup>n0 </sup>are estimated between STA n and AP<b>0</b>. After the NDP sounding period, the STA n will estimate the channel, H<sub>l</sub> <sup>r</sup>=</div>
+<div class="description-paragraph" id="p-0059" num="0058"> <maths id="MATH-US-00002" num="00002"> <math overflow="scroll"> <mrow> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> </mtd> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mtd> </mtr> <mtr> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> </mtd> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> <mo>.</mo> </mrow> </math> </maths> <br/>
+The SINR for the EGB or Channel Nulling type of BF is computed using the singular values after the SVD operation of the H<sub>n</sub>. The SINR for the PMI type of BF is computed with the following equation. First, multiple H<sub>n </sub>with each precoder candidate, such that
+</div>
+<div class="description-paragraph" id="p-0060" num="0059"> <maths id="MATH-US-00003" num="00003"> <math overflow="scroll"> <mrow> <mrow> <msubsup> <mi>H</mi> <mi>l</mi> <mi>r</mi> </msubsup> <mo>=</mo> <mrow> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> </mtd> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mtd> </mtr> <mtr> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> </mtd> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> <mo>⁢</mo> <msub> <mi>V</mi> <mi>l</mi> </msub> </mrow> </mrow> <mo>,</mo> </mrow> </math> </maths> <br/>
+where V<sub>l </sub>is the l<sup>th </sup>pre-coder and H<sub>l</sub> <sup>r </sup>is the effective channel matrix. The SINR for the TX stream is computed as SINR<sub>l,j</sub> <sup>r</sup>=h<sub>l,i</sub> <sup>r</sup> <sup> <sup2>H</sup2> </sup>(h<sub>l,j</sub> <sup>r</sup>h<sub>l,j</sub> <sup>r</sup> <sup> <sup2>H</sup2> </sup>+σ<sup>2</sup>I)h<sub>l,i</sub> <sup>r</sup>, where i,j=0, 1; i≠j; l=0, . . . , L−1. Then, the sum-rate is computed with the following equation: R<sub>l</sub>=Σ<sub>i </sub>log(1+Γ<sub>i</sub>), where R<sub>i </sub>is the corresponding sum-rate for the l<sup>th </sup>pre-coder, and Γ<sub>i </sub>is the SINR per i<sup>th </sup>TX-stream, that is, i<sup>th </sup>AP <b>602</b> for the case of 2 AP and a single TX stream per AP. Each AP <b>602</b> feeds back the preferred l<sup>th </sup>pre-coder and the TX SINR for the AP <b>602</b> to compute the sum-rate.
+</div>
+<div class="description-paragraph" id="p-0061" num="0060">In an embodiment, each AP <b>602</b> operates to select pre-coders and users. First, the STAs <b>606</b> are grouped according to the fed back preferred pre-coder, that is, those STAs <b>606</b> with the same preferred pre-coder are grouped together. Among each group, the fed back SINR per TX stream <b>610</b> is compared, that is, per AP <b>602</b>, and the STA <b>606</b> that gives the best SINR is chosen. The sum-rate is computed again in each group based on the selected STA <b>606</b> and its corresponding SINR. The sum-rate between all the groups is compared, and the group that gives the best sum-rate is chosen. The corresponding pre-coder to the selected group is the pre-coder selected and the already selected two STAs <b>606</b> in that group are scheduled per each AP <b>602</b>. The selected pre-coder is the 2×2 matrix in this case, and the first column is used for the beamforming vector for the AP<b>0</b> <b>602</b> and the second column is the beamforming vector for the AP<b>1</b> <b>602</b>.</div>
+<div class="description-paragraph" id="p-0062" num="0061"> <figref idrefs="DRAWINGS">FIG. 7</figref> illustrates an embodiment system <b>700</b> of each STA's operation during data packet transmission using a CSI based BF feedback. The system <b>700</b> includes two APs <b>702</b> (labeled AP<b>0</b> and AP<b>1</b>) and multiple STAs <b>706</b>. Each AP <b>702</b> includes two transmitter antennas <b>704</b> and each STA <b>706</b> includes two receiver antennas <b>708</b>. System <b>700</b> illustrates the detail operation at each STA <b>706</b> during the Data transmission period with two APs <b>702</b>. Each STA <b>706</b> estimates the channel for each TX stream, and it is</div>
+<div class="description-paragraph" id="p-0063" num="0062"> <maths id="MATH-US-00004" num="00004"> <math overflow="scroll"> <mrow> <msubsup> <mi>H</mi> <mi>eff</mi> <mi>n</mi> </msubsup> <mo>=</mo> <mrow> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> </mtd> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mtd> </mtr> <mtr> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> </mtd> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> <mo>.</mo> </mrow> </mrow> </math> </maths> <br/>
+Each element of it is
+</div>
+<div class="description-paragraph" id="p-0064" num="0063"> <maths id="MATH-US-00005" num="00005"> <math overflow="scroll"> <mrow> <mrow> <msubsup> <mover> <mi>h</mi> <mo>^</mo> </mover> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> <mo>=</mo> <mfrac> <mrow> <msubsup> <mi>r</mi> <mn>0</mn> <mrow> <mi>t</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> <mo>-</mo> <msubsup> <mi>r</mi> <mn>0</mn> <mrow> <mi>t</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mrow> <mrow> <mn>2</mn> <mo>·</mo> <msub> <mi>l</mi> <mi>k</mi> </msub> </mrow> </mfrac> </mrow> <mo>,</mo> <mrow> <msubsup> <mover> <mi>h</mi> <mo>^</mo> </mover> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> <mo>=</mo> <mfrac> <mrow> <msubsup> <mi>r</mi> <mn>0</mn> <mrow> <mi>t</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> <mo>-</mo> <msubsup> <mi>r</mi> <mn>0</mn> <mrow> <mi>t</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mrow> <mrow> <mn>2</mn> <mo>·</mo> <msub> <mi>l</mi> <mi>k</mi> </msub> </mrow> </mfrac> </mrow> <mo>,</mo> <mstyle> <mtext>
+</mtext> </mstyle> <mo>⁢</mo> <mrow> <msubsup> <mover> <mi>h</mi> <mo>^</mo> </mover> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> <mo>=</mo> <mfrac> <mrow> <msubsup> <mi>r</mi> <mn>1</mn> <mrow> <mi>t</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> <mo>-</mo> <msubsup> <mi>r</mi> <mn>1</mn> <mrow> <mi>t</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mrow> <mrow> <mn>2</mn> <mo>·</mo> <msub> <mi>l</mi> <mi>k</mi> </msub> </mrow> </mfrac> </mrow> <mo>,</mo> <mrow> <msubsup> <mover> <mi>h</mi> <mo>^</mo> </mover> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> <mo>=</mo> <mfrac> <mrow> <msubsup> <mi>r</mi> <mn>0</mn> <mrow> <mi>t</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> <mo>-</mo> <msubsup> <mi>r</mi> <mn>0</mn> <mrow> <mi>t</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mrow> <mrow> <mn>2</mn> <mo>·</mo> <msub> <mi>l</mi> <mi>k</mi> </msub> </mrow> </mfrac> </mrow> <mo>,</mo> </mrow> </math> </maths> <br/>
+where r<sub>i </sub>is the received signal at the i<sup>th </sup>receiver, tn is the nth symbol transmission time, and k is the subcarrier index. If the received signal is denoted as
+</div>
+<div class="description-paragraph" id="p-0065" num="0064"> <maths id="MATH-US-00006" num="00006"> <math overflow="scroll"> <mrow> <mrow> <mover> <mi>r</mi> <mi>_</mi> </mover> <mo>=</mo> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <msub> <mi>r</mi> <mn>0</mn> </msub> </mtd> </mtr> <mtr> <mtd> <msub> <mi>r</mi> <mn>1</mn> </msub> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> </mrow> <mo>,</mo> </mrow> </math> </maths> <br/>
+and the transmitted signal
+</div>
+<div class="description-paragraph" id="p-0066" num="0065"> <maths id="MATH-US-00007" num="00007"> <math overflow="scroll"> <mrow> <mrow> <mover> <mi>d</mi> <mi>_</mi> </mover> <mo>=</mo> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <msub> <mi>d</mi> <mn>0</mn> </msub> </mtd> </mtr> <mtr> <mtd> <msub> <mi>d</mi> <mn>1</mn> </msub> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> </mrow> <mo>,</mo> </mrow> </math> </maths> <br/>
+where d<sub>0 </sub>and d<sub>1 </sub>are the desired signals for the STA <b>706</b> scheduled from AP<b>0</b> <b>702</b> and AP<b>1</b> <b>702</b>, respectively, then, the MMSE-MIMO detection produces the detected <o>d</o> as follows:
+<br/>
+[<i>H</i> <sub>eff</sub> <sup>H</sup> <i>H</i> <sub>eff</sub> <i>+N</i> <sub>0</sub> <i>I</i>]<sup>−1</sup> <i>H</i> <sub>eff</sub> <sup>H</sup> <i> <o>r</o> </i>=[<i>H</i> <sub>eff</sub> <sup>H</sup> <i>H</i> <sub>eff</sub> <i>+N</i> <sub>0</sub> <i>I</i>]<sup>−1</sup> <i>H</i> <sub>eff</sub> <sup>H</sup> <i>H</i> <sub>eff</sub> <i> <o>d</o>+N</i>.
+</div>
+<div class="description-paragraph" id="p-0067" num="0066"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates an embodiment system <b>800</b> of each STA's operation during data packet transmission using CQI based BF feedback information. The system <b>800</b> includes two APs <b>802</b> (labeled AP<b>0</b> and AP<b>1</b>) and multiple STAs <b>806</b>. Each AP <b>802</b> includes two transmitter antennas <b>804</b> and each STA <b>806</b> includes two receiver antennas <b>808</b>. Two LTFs are transmitted from each AP <b>802</b>, that is, LTF<b>0</b> and LTF<b>1</b>. The LTF sequence at the same subcarrier position in each LTF<b>0</b> and LTF<b>1</b> are called s<sub>i</sub> <sup>t0 </sup>and s<sub>i</sub> <sup>t1</sup>.
+<br/>
+<i>r</i> <sub>0</sub> <sup>t0</sup> <i>=s</i> <sub>0</sub> <sup>t0</sup> <i>h</i> <sub>00</sub> <sup>n0</sup> <i>+s</i> <sub>1</sub> <sup>t0</sup> <i>h</i> <sub>00</sub> <sup>n1</sup> <i>+s</i> <sub>0</sub> <sup>t0</sup> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n0</sup> <i>+s</i> <sub>1</sub> <sup>t0</sup> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n1</sup> <i>+N </i>
+<br/>
+<i>r</i> <sub>1</sub> <sup>t0</sup> <i>=s</i> <sub>0</sub> <sup>t0</sup> <i>h</i> <sub>10</sub> <sup>n0</sup> <i>+s</i> <sub>1</sub> <sup>t0</sup> <i>h</i> <sub>10</sub> <sup>n1</sup> <i>+s</i> <sub>0</sub> <sup>t0</sup> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>11</sub> <sup>n0</sup> <i>+s</i> <sub>1</sub> <sup>t0</sup> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>11</sub> <sup>n1</sup> <i>+N </i>
+<br/>
+<i>r</i> <sub>0</sub> <sup>t1</sup> <i>=−s</i> <sub>0</sub> <sup>t1</sup> <i>h</i> <sub>00</sub> <sup>n0</sup> <i>−s</i> <sub>1</sub> <sup>t1</sup> <i>h</i> <sub>00</sub> <sup>n1</sup> <i>+s</i> <sub>0</sub> <sup>t1</sup> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n0</sup> <i>+s</i> <sub>1</sub> <sup>t1</sup> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n1</sup> <i>+N </i>
+<br/>
+<i>r</i> <sub>1</sub> <sup>t1</sup> <i>=−s</i> <sub>0</sub> <sup>t1</sup> <i>h</i> <sub>10</sub> <sup>n0</sup> <i>−s</i> <sub>1</sub> <sup>t1</sup> <i>h</i> <sub>10</sub> <sup>n1</sup> <i>+s</i> <sub>0</sub> <sup>t1</sup> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>11</sub> <sup>n0</sup> <i>+s</i> <sub>1</sub> <sup>t1</sup> <i>e</i> <sup>jθ</sup> <i>h</i> <sub>11</sub> <sup>n1</sup> <i>+N </i>
+</div>
+<div class="description-paragraph" id="p-0068" num="0067">where r<sub>i</sub> <sup>tj </sup>is the received signal at the i<sup>th </sup>receiver and at time tj.
+<br/>
+<i>r</i> <sub>0</sub> <sup>t0</sup> <i>=s</i> <sub>0</sub> <sup>t0</sup>(<i>h</i> <sub>00</sub> <sup>n0</sup> <i>+e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n0</sup>)+<i>s</i> <sub>1</sub> <sup>t0</sup>(<i>h</i> <sub>00</sub> <sup>n1</sup> <i>+e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n1</sup>)+<i>N </i>
+<br/>
+<i>r</i> <sub>1</sub> <sup>t0</sup> <i>=s</i> <sub>0</sub> <sup>t0</sup>(<i>h</i> <sub>10</sub> <sup>n0</sup> <i>+e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n0</sup>)+<i>s</i> <sub>1</sub> <sup>t0</sup>(<i>h</i> <sub>00</sub> <sup>n1</sup> <i>+e</i> <sup>jθ</sup> <i>h</i> <sub>01</sub> <sup>n1</sup>)+<i>N</i>
+</div>
+<div class="description-paragraph" id="p-0069" num="0068">
+<maths id="MATH-US-00008" num="00008">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msubsup>
+<mi>r</mi>
+<mn>0</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msubsup>
+<mi>r</mi>
+<mn>1</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msubsup>
+<mi>h</mi>
+<mrow>
+<mi>eff</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>n</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+</mtd>
+<mtd>
+<msubsup>
+<mi>h</mi>
+<mrow>
+<mi>eff</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>n</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msubsup>
+<mi>h</mi>
+<mrow>
+<mi>eff</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+<mrow>
+<mi>n</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+</mtd>
+<mtd>
+<msubsup>
+<mi>h</mi>
+<mrow>
+<mi>eff</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+<mrow>
+<mi>n</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msubsup>
+<mi>s</mi>
+<mn>0</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msubsup>
+<mi>s</mi>
+<mn>1</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0070" num="0069">r<sub>0</sub> <sup>t1 </sup>and r<sub>1</sub> <sup>t1 </sup>can be obtained in a similar manner.</div>
+<div class="description-paragraph" id="p-0071" num="0070">For the LTF sequence, s<sub>0</sub> <sup>t0</sup>=s<sub>1</sub> <sup>t0</sup>=s<sub>0</sub> <sup>t1</sup>=s<sub>1</sub> <sup>t1 </sup>and the estimated effective channel parameters are:</div>
+<div class="description-paragraph" id="p-0072" num="0071">
+<maths id="MATH-US-00009" num="00009">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msubsup>
+<mover>
+<mi>h</mi>
+<mo>^</mo>
+</mover>
+<mrow>
+<mi>eff</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>n</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>r</mi>
+<mn>0</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+<mo>-</mo>
+<msubsup>
+<mi>r</mi>
+<mn>0</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+</mrow>
+<mrow>
+<mn>2</mn>
+<mo>·</mo>
+<msubsup>
+<mi>s</mi>
+<mi>i</mi>
+<mi>tj</mi>
+</msubsup>
+</mrow>
+</mfrac>
+</mrow>
+<mo>,</mo>
+<mrow>
+<msubsup>
+<mover>
+<mi>h</mi>
+<mo>^</mo>
+</mover>
+<mrow>
+<mi>eff</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>n</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>r</mi>
+<mn>0</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+<mo>-</mo>
+<msubsup>
+<mi>r</mi>
+<mn>0</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+</mrow>
+<mrow>
+<mn>2</mn>
+<mo>·</mo>
+<msubsup>
+<mi>s</mi>
+<mi>i</mi>
+<mi>tj</mi>
+</msubsup>
+</mrow>
+</mfrac>
+</mrow>
+<mo>,</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msubsup>
+<mover>
+<mi>h</mi>
+<mo>^</mo>
+</mover>
+<mrow>
+<mi>eff</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+<mrow>
+<mi>n</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>r</mi>
+<mn>1</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+<mo>-</mo>
+<msubsup>
+<mi>r</mi>
+<mn>1</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+</mrow>
+<mrow>
+<mn>2</mn>
+<mo>·</mo>
+<msubsup>
+<mi>s</mi>
+<mi>i</mi>
+<mi>tj</mi>
+</msubsup>
+</mrow>
+</mfrac>
+</mrow>
+<mo>,</mo>
+<mrow>
+<msubsup>
+<mover>
+<mi>h</mi>
+<mo>^</mo>
+</mover>
+<mrow>
+<mi>eff</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+<mrow>
+<mi>n</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>r</mi>
+<mn>1</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</msubsup>
+<mo>-</mo>
+<msubsup>
+<mi>r</mi>
+<mn>1</mn>
+<mrow>
+<mi>t</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+</mrow>
+<mrow>
+<mn>2</mn>
+<mo>·</mo>
+<msubsup>
+<mi>s</mi>
+<mi>i</mi>
+<mi>tj</mi>
+</msubsup>
+</mrow>
+</mfrac>
+</mrow>
+<mo>,</mo>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0073" num="0072">When</div>
+<div class="description-paragraph" id="p-0074" num="0073"> <maths id="MATH-US-00010" num="00010"> <math overflow="scroll"> <mrow> <mrow> <mover> <mi>r</mi> <mi>_</mi> </mover> <mo>=</mo> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <msub> <mi>r</mi> <mn>0</mn> </msub> </mtd> </mtr> <mtr> <mtd> <msub> <mi>r</mi> <mn>1</mn> </msub> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> </mrow> <mo>,</mo> <mrow> <msub> <mi>H</mi> <mi>eff</mi> </msub> <mo>=</mo> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> </mtd> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mtd> </mtr> <mtr> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>0</mn> </mrow> </msubsup> </mtd> <mtd> <msubsup> <mi>h</mi> <mrow> <mi>eff</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> <mrow> <mi>n</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>1</mn> </mrow> </msubsup> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> </mrow> </mrow> </math> </maths> <br/>
+and transmitted data are
+</div>
+<div class="description-paragraph" id="p-0075" num="0074"> <maths id="MATH-US-00011" num="00011"> <math overflow="scroll"> <mrow> <mrow> <mover> <mi>d</mi> <mi>_</mi> </mover> <mo>=</mo> <mrow> <mo>[</mo> <mtable> <mtr> <mtd> <msub> <mi>d</mi> <mn>0</mn> </msub> </mtd> </mtr> <mtr> <mtd> <msub> <mi>d</mi> <mn>1</mn> </msub> </mtd> </mtr> </mtable> <mo>]</mo> </mrow> </mrow> <mo>,</mo> </mrow> </math> </maths> <br/>
+MMSE MIMO detection may provide detected <o>d</o> as follows,
+<br/>
+[<i>H</i> <sub>eff</sub> <sup>H</sup> <i>H</i> <sub>eff</sub> <i>+N</i> <sub>0</sub> <i>I</i>]<sup>−1</sup> <i>H</i> <sub>eff</sub> <sup>H</sup> <i> <o>r</o> </i>=[<i>H</i> <sub>eff</sub> <sup>H</sup> <i>H</i> <sub>eff</sub> <i>+N</i> <sub>0</sub> <i>I</i>]<sup>−1</sup> <i>H</i> <sub>eff</sub> <sup>H</sup> <i>H</i> <sub>eff</sub> <i> <o>d</o>+N </i>
+</div>
+<div class="description-paragraph" id="p-0076" num="0075">where d<sub>0 </sub>is the desired signal for the STA <b>806</b> scheduled from AP<b>0</b>, and d<sub>1 </sub>is the desired signal for the STA <b>806</b> scheduled from AP<b>1</b> <b>802</b>.</div>
+<div class="description-paragraph" id="p-0077" num="0076"> <figref idrefs="DRAWINGS">FIG. 9</figref> illustrates a flowchart of an embodiment method <b>900</b> for NDP sounding in a Wi-Fi network. The method <b>900</b> begins at block <b>902</b> where a first one of a plurality of APs transmits a sounding packet with each of a plurality of transmission antennas to a plurality of stations that each have two or more receiver antennas. In an embodiment, the sounding packet is a null data sounding packet that includes a plurality of LTFs where the total number of LTFs is equal to the total number of transmission streams. The first AP transmits the sounding packet when no other AP is transmitting its sounding packets. Next, the method <b>900</b> proceeds to block <b>904</b> where it is determined whether there are any more APs that need to transmit sounding packets. If there are additional APs, then the method <b>900</b> proceeds to block <b>902</b>. If all of the APs have transmitted sounding packets, then the method <b>900</b> proceeds to block <b>906</b>. At block <b>906</b>, each STA computes a pre-coder and an SINR from the sounding packets received from each of the plurality of APs and transmits the STA's channel beamforming information and its SINR to at least one of the APs. At block <b>908</b>, at least one of the APs receives the channel beamforming information and SINR from each of the STAs. At block <b>910</b>, a master AP or a backhaul controller (e.g., a backhaul server) computes a sum-rate based on the SINRs and the pre-coder candidates and selects the pre-coder that produces the best sum-rate. At block <b>912</b>, the master AP (or backhaul controller) groups STAs that have the same channel beamforming information (e.g., a preferred pre-coder) into a group and selects a STA from the group that provides the best SINR. At block <b>914</b>, the master AP recomputes a sum-rate in each group based on the selected STA in each group and the selected STAs SINR. At block <b>916</b>, the master AP selects a group that provides the best sum-rate and selects the channel beamforming information (e.g., a pre-coder) corresponding to the selected group. At block <b>918</b>, the master AP schedules transmissions from the APs to the selected STAs through the chosen channel beamforming information (e.g., pre-coder), after which, the method <b>900</b> ends.</div>
+<div class="description-paragraph" id="p-0078" num="0077"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a block diagram of a processing system <b>1000</b> that may be used for implementing the devices and methods disclosed herein. Specific devices may utilize all of the components shown, or only a subset of the components, and levels of integration may vary from device to device. Furthermore, a device may contain multiple instances of a component, such as multiple processing units, processors, memories, transmitters, receivers, etc. The processing system <b>1000</b> may comprise a processing unit <b>1001</b> equipped with one or more input/output devices, such as a speaker, microphone, mouse, touchscreen, keypad, keyboard, printer, display, and the like. The processing unit <b>1001</b> may include a central processing unit (CPU) <b>1010</b>, memory <b>1020</b>, a mass storage device <b>1030</b>, a network interface <b>1050</b>, and an I/O interface <b>1060</b> connected to a bus <b>1040</b>.</div>
+<div class="description-paragraph" id="p-0079" num="0078">The bus <b>1040</b> may be one or more of any type of several bus architectures including a memory bus or memory controller, a peripheral bus, video bus, or the like. The CPU <b>1010</b> may comprise any type of electronic data processor. The memory <b>1020</b> may comprise any type of system memory such as static random access memory (SRAM), dynamic random access memory (DRAM), synchronous DRAM (SDRAM), read-only memory (ROM), a combination thereof, or the like. In an embodiment, the memory <b>1020</b> may include ROM for use at boot-up, and DRAM for program and data storage for use while executing programs.</div>
+<div class="description-paragraph" id="p-0080" num="0079">The mass storage device <b>1030</b> may comprise any type of storage device configured to store data, programs, and other information and to make the data, programs, and other information accessible via the bus <b>1040</b>. The mass storage device <b>1030</b> may comprise, for example, one or more of a solid state drive, hard disk drive, a magnetic disk drive, an optical disk drive, or the like.</div>
+<div class="description-paragraph" id="p-0081" num="0080">The I/O interface <b>1060</b> may provide interfaces to couple external input and output devices to the processing unit <b>1001</b>. The I/O interface <b>1060</b> may include a video adapter. Examples of input and output devices may include a display coupled to the video adapter and a mouse/keyboard/printer coupled to the I/O interface. Other devices may be coupled to the processing unit <b>1001</b>, and additional or fewer interface cards may be utilized. For example, a serial interface such as Universal Serial Bus (USB) (not shown) may be used to provide an interface for a printer.</div>
+<div class="description-paragraph" id="p-0082" num="0081">The processing unit <b>1001</b> may also include one or more network interfaces <b>1050</b>, which may comprise wired links, such as an Ethernet cable or the like, and/or wireless links to access nodes or different networks. The network interface <b>1001</b> allows the processing unit to communicate with remote units via the networks <b>1080</b>. For example, the network interface <b>1050</b> may provide wireless communication via one or more transmitters/transmit antennas and one or more receivers/receive antennas. In an embodiment, the processing unit <b>1001</b> is coupled to a local-area network or a wide-area network for data processing and communications with remote devices, such as other processing units, the Internet, remote storage facilities, or the like.</div>
+<div class="description-paragraph" id="p-0083" num="0082">Although the description has been described in detail, it should be understood that various changes, substitutions and alterations can be made without departing from the spirit and scope of this disclosure as defined by the appended claims. Moreover, the scope of the disclosure is not intended to be limited to the particular embodiments described herein, as one of ordinary skill in the art will readily appreciate from this disclosure that processes, machines, manufacture, compositions of matter, means, methods, or steps, presently existing or later to be developed, may perform substantially the same function or achieve substantially the same result as the corresponding embodiments described herein. Accordingly, the appended claims are intended to include within their scope such processes, machines, manufacture, compositions of matter, means, methods, or steps.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">27</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM185620653">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method in a wireless local area network (LAN) for interference alignment, the wireless LAN having a plurality of access points (APs), the method comprising:
+<div class="claim-text">instructing a first AP of the plurality of APs, the first AP having a plurality of antennae and a transmission stream per 2 antennae, to broadcast a null data packet (NDP) sounding packet to a plurality of stations when no other AP in the plurality of APs is broadcasting, wherein the NDP sounding packet comprises a plurality of long training fields (LTFs), and wherein a total number of LTFs for the NDP sounding packet is equal to a total number of transmission streams per AP;</div>
+<div class="claim-text">receiving channel beamforming (BF) information and a signal plus interference to noise ratio (SINR) from each of the plurality of stations, wherein each of the plurality of stations computes the channel BF information and the SINR from at least the NDP sounding packet; and</div>
+<div class="claim-text">determining a transmission schedule according to the SINRs and the channel BF information.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the channel BF information comprises pre-coder candidates and further comprising computing a sum-rate according to the SINRs and the pre-coder candidates and selecting a one of the pre-coder candidates that provides a best sum-rate.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising grouping the stations according to a preferred pre-coder index, wherein each station provides a corresponding preferred pre-coder index in response to the NDP sounding packet.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein stations with a same preferred pre-coder are grouped together.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, further comprising comparing the SINRs per stream in a group and selecting a station from the group that provides a best SINR.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00005">claim 5</claim-ref>, further comprising:
+<div class="claim-text">recomputing a sum-rate in each group based on a selected station in each group and the selected station's corresponding SINR;</div>
+<div class="claim-text">selecting a group that provides a best sum-rate;</div>
+<div class="claim-text">selecting a pre-coder corresponding to the selected group; and</div>
+<div class="claim-text">scheduling the stations in the selected group from two APs.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, further comprising forming a beamforming matrix for the two APs, wherein a one column corresponds to a first beamforming vector for a first one of the two APs and a second column corresponds to a second beamforming vector for a second one of the two APs.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the determining a transmission schedule comprises determining a V matrix is determined from singular value decomposition (SVD) of estimated effective channels that are angle-quantized by the stations.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein multiple APs operate in a same frequency band in the wireless LAN.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the channel BF information comprises one of channel state information and channel quality information.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the channel BF information comprises angle quantization based BF feedback and further comprising performing a Channel-Nulling or Eigen Beam-forming (EGB) method using the angle quantization based BF feedback.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising determining a V matrix for Eigen vectors and an S vector determined from singular values according to the angle quantization based BF feedback.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein a number of singular values is equal to the total number of transmission streams.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">instructing two or more APs from the plurality of APs to transmit a data packet to one of the stations, wherein a number of LTFs for the data packet is equal to a total number of transmission streams across the two or more APs.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. A processing system configured for interference alignment in a wireless local area network (LAN) comprising:
+<div class="claim-text">a processor; and</div>
+<div class="claim-text">a non-transitory computer readable storage medium storing programming for execution by the processor, the programming including instructions to:</div>
+<div class="claim-text">instruct a first access point (AP) of a plurality of APs, the first AP having a plurality of antennae and a transmission stream per 2 antennae, to broadcast a null data packet (NDP) sounding packet to a plurality of stations when no other AP in the plurality of APs is broadcasting, wherein the NDP sounding packet comprises a plurality of long training fields (LTFs), and wherein a total number of LTFs for the NDP sounding packet is equal to a total number of transmission streams per AP;</div>
+<div class="claim-text">receive channel beamforming (BF) information and a signal plus interference to noise ratio (SINR) from each of the plurality of stations, wherein each of the plurality of stations computes the channel BF information and the SINR from at least the NDP sounding packet; and</div>
+<div class="claim-text">determine a transmission schedule according to the SINRs and the channel BF information.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The processing system of <claim-ref idref="CLM-00015">claim 15</claim-ref> wherein the channel BF information comprises pre-coder candidates and wherein the instructions further comprise instructions to compute a sum-rate according to the SINRs and the pre-coder candidates and to select a one of the pre-coder candidates that provides a best sum-rate.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The processing system of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the processing system comprises a master AP, wherein the master AP is one of the plurality of APs.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The processing system of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the processing system comprises a backhaul controller.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The processing system of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the instructions further comprise instructions to group the stations according to a preferred pre-coder index, wherein each station provides a corresponding preferred pre-coder index in response to the NDP sounding packet.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The processing system of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein stations with a same preferred pre-coder are grouped together.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The processing system of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the instructions further comprise instructions to compare the SINRs per stream in a group and to select a station from the group that provides a best SINR.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The processing system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the instructions further comprise instructions to:
+<div class="claim-text">recompute a sum-rate in each group based on a selected station in each group and a selected station's corresponding SINR;</div>
+<div class="claim-text">select a group that provides a best sum-rate;</div>
+<div class="claim-text">select a pre-coder corresponding to the selected group; and</div>
+<div class="claim-text">schedule the stations in the selected group from two APs.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. The processing system of <claim-ref idref="CLM-00022">claim 22</claim-ref>, wherein the instructions further comprise instructions to form a beamforming matrix for the two APs, wherein a one column corresponds to a first beamforming vector for a first one of the two APs and a second column corresponds to a second beamforming vector for a second one of the two APs.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The processing system of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the instructions to determine a transmission schedule comprises instructions to determine a V matrix is determined from singular value decomposition (SVD) of estimated effective channels that are angle-quantized by the stations.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00025" num="00025">
+<div class="claim-text">25. The processing system of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein multiple APs operate in a same frequency band in the wireless LAN.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00026" num="00026">
+<div class="claim-text">26. The processing system of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the channel BF information comprises one of channel state information and channel quality information.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00027" num="00027">
+<div class="claim-text">27. The processing system of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the instructions further comprise instructions to:
+<div class="claim-text">instruct two or more APs from the plurality of APs to transmit a data packet to one of the stations, wherein a number of LTFs for the data packet is equal to a total number of transmission streams across the two or more APs.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

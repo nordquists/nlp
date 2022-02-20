@@ -1,0 +1,1486 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US9681416B2 - Method for transmitting and receiving paging information in a broadband wireless access system 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA197170070">
+<div class="abstract" id="p-0001" num="0000">A method for efficiently transmitting and receiving a paging message and system information from and in a mobile station of a broadband wireless access system is disclosed. A method for receiving a paging message in a mobile station comprises receiving paging information from a serving base station, the paging information including paging sub group identifier (paging sub group ID) indicating a paging sub group to which the mobile station belongs; and receiving the paging message for a predetermined paging interval of the paging sub group, wherein the paging sub group is determined separately from a paging group and a geographical location determining the paging group, and is maintained while the mobile station is being operated in an idle mode.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES116464236">
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation application of U.S. application Ser. No. 14/167,913 filed Jan. 29, 2014, which is a continuation application of U.S. patent application Ser. No. 12/865,833 filed Nov. 19, 2010, now U.S. Pat. No. 8,660,064, which is a National Stage entry of International Application No. PCT/KR2009/002945 filed Jun. 3, 2009, which claims priority to U.S. Provisional Application Nos. 61/058,553 filed Jun. 3, 2008 and 61/061,106 filed on Jun. 12, 2008, all of which are incorporated by reference for all purposes as if fully set forth herein.</div>
+<heading id="h-0001">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention relates to a broadband wireless access system, and more particularly to, a method for transmitting and receiving paging information efficiently.</div>
+<heading id="h-0002">BACKGROUND ART</heading>
+<div class="description-paragraph" id="p-0004" num="0003">In the following description, a generally used paging group and an idle mode of a terminal are schematically explained.</div>
+<div class="description-paragraph" id="p-0005" num="0004"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a diagram illustrating a paging group in a general IEEE 802.16 system.</div>
+<div class="description-paragraph" id="p-0006" num="0005">Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, a plurality of base stations (BS) supporting an idle mode belong to a paging group to construct a paging area.</div>
+<div class="description-paragraph" id="p-0007" num="0006">In this case, the paging group indicates a logical group. If there is a traffic that targets a mobile station (MS), the object of the paging group is to provide a neighbor range area that can be paged in downlink (DL). And, the paging group should meet the condition to be large enough for a specific terminal to exist for most of time within a same paging group and the condition to be small enough for a paging load to maintain a proper level.</div>
+<div class="description-paragraph" id="p-0008" num="0007"> <figref idrefs="DRAWINGS">FIG. 1</figref> shows four paging groups defined on multiple base stations located at hexagonal lattices. One base station is able to be included in one or more paging groups. The paging group is defined by a management system. And, a paging group is able to use a paging group-action backbone network message. Moreover, a list of terminal in idle mode is managed using a paging-announce message corresponding to one of backbone network messages and initial paging of all base stations belonging to a paging group can be managed.</div>
+<div class="description-paragraph" id="p-0009" num="0008">Idle mode indicates an operation of supporting a terminal to periodically receive a downlink (DL) broadcast traffic transmission without registering at a specific base station when the terminal is moving in a wireless link environment constructed with multiple base stations.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Idle mode is able to give the benefit to a terminal by eliminating a handover-related activation requirement and general operation requirements. Idle mode is able to save power and operational resources used by a terminal in a manner of put limitation on a terminal action to be scanned in a discrete cycle.</div>
+<div class="description-paragraph" id="p-0011" num="0010">Idle mode provides a simple and proper method of informing a terminal for a downlink traffic in pending and is able to give the benefit to a network and a base station by removing a wireless interface and a network handover (HO) traffic from an inactive terminal.</div>
+<div class="description-paragraph" id="p-0012" num="0011">Hereinafter, an example of an operation procedure of a mobile station entering an idle mode in a general IEEE 802.16 system will be described with reference to <figref idrefs="DRAWINGS">FIG. 2</figref>. Referring to <figref idrefs="DRAWINGS">FIG. 2</figref>, a mobile station can transmit a deregistration request (DREG-REQ) message to a serving base station to enter an idle mode from a normal mode (S<b>201</b>).</div>
+<div class="description-paragraph" id="p-0013" num="0012">The serving base station which has received the DREG-REQ message can transmit and receive information of the mobile station and the serving base station to and from a paging controller. Namely, the serving base station can notify the paging controller of mobile station identifier (MSID) and serving base station identifier (BSID). Also, the paging controller can notify the serving base station of paging group identifier (PG ID) or paging controller identifier (PC ID). The paging group identifier or the paging controller identifier can be used to transmit and receive a paging message.</div>
+<div class="description-paragraph" id="p-0014" num="0013">Subsequently, the serving base station can transmit a deregistration command (DREG-CMD) message to the mobile station. The serving base station can transmit the deregistration command (MOB_DREG-CMD) message to the mobile station in response to the deregistration request message. The deregistration command message can include paging information. At this time, the paging information can include parameters such as paging cycle, paging offset, and paging listening interval. The deregistration command message can further include paging controller identifier and paging group identifier (S<b>203</b>).</div>
+<div class="description-paragraph" id="p-0015" num="0014">At this time, the paging information can be included in the deregistration command message in a type of Table 7 below. This information can be provided to the mobile station through a ranging response (RNG-RSP) message in a location update procedure which will be described later.</div>
+<div class="description-paragraph" id="p-0016" num="0015">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="4" nameend="4" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type</td>
+<td class="description-td">Length</td>
+<td class="description-td">Value</td>
+<td class="description-td">Scope</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">134</td>
+<td class="description-td">7</td>
+<td class="description-td">Bits #0-15: PAGING_CYCLE - cycle in which the paging</td>
+<td class="description-td">RNG-RSPDREG-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">message is transmitted within the paging group. Bits</td>
+<td class="description-td">CMD <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00001" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">#16-31: PAGING_OFFSET - determines the frame within the</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">cycle from which the paging interval starts. Shall be smaller</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">than PAGING_CYCLE value. Bits #32-47: Paging-group-ID-</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">ID of the paging group the MS is assigned to. Bits</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">#48-55: Paging Interval Length - Max duration in frames of</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Paging Listening interval. Used in calculation of Paging</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">listening interval. value shall be between 1 and 5 frames</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">(default = 2). <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00002" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0017" num="0016">The parameters in Table 1 are user equipment-specific values, and different paging cycles, paging offsets and paging listening intervals can be allocated to the respective mobile stations. The base station can identify a paging interval of each mobile station through the parameters.</div>
+<div class="description-paragraph" id="p-0018" num="0017">The mobile station which has received the DREG-CMD message from the serving base station identifies that a request of entrance to an idle mode is successfully accepted, and enters the idle mode. The mobile station can receive a paging message based on paging information received through the MOB_DREG-CMD message.</div>
+<div class="description-paragraph" id="p-0019" num="0018">Namely, the mobile station can monitor a radio channel to identify the presence of a paging message transferred thereto for a paging listening interval. The mobile station is operated in a sleep mode (or the radio channel is turned off) for the other interval to reduce power consumption (S<b>204</b>).</div>
+<div class="description-paragraph" id="p-0020" num="0019">A call or external packet can be transmitted to the paging controller (S<b>205</b>).</div>
+<div class="description-paragraph" id="p-0021" num="0020">In this case, the paging controller can perform a paging procedure of the mobile station. At this time, the paging controller can transmit a paging announcement message to all base stations within the paging group (S<b>206</b>).</div>
+<div class="description-paragraph" id="p-0022" num="0021">All the base stations within the paging group, which have received the paging announcement message, can broadcast a MOB_PAG-ADV message to all mobile stations managed by the base stations. At this time, the paging message can include parameters of Table 2 (S<b>207</b>).</div>
+<div class="description-paragraph" id="p-0023" num="0022">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Syntax <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00003" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Size (bit) <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00004" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Notes</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">for (i = 0; i &lt; Num_Paging_Group_IDs;</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">i++) { <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00005" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging Group ID <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00006" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">—</td>
+<td class="description-td">16</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Num_MACs <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00007" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">—</td>
+<td class="description-td">Number of MS MAC addresses <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00008" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">For (j = 0; j &lt; Num_MACs; j++) { <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00009" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">MS MAC Address hash <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00010" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">24 </td>
+<td class="description-td">The hash is obtained by</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">computing a CRC24 on the MS</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">48-bit MAC address. The</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">polynomial for the calculation is</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">0x1864CFB <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00011" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Action Code <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00012" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">2</td>
+<td class="description-td">Paging action instruction to MS</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">0b00 = No action required 0b01 =</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Perform ranging to establish</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">location and acknowledge</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">message 0b10 = Enter network</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">0b11 = Reserved <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00013" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reserved <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00014" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">6</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Padding <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00015" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">variable <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00016" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Padding bits to ensure octet</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">aligned <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00017" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">TLV Encoded Information <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00018" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">variable <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00019" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">TLV-specific <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00020" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">—</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00021" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0024" num="0023">The mobile station checks the MOB_PAG-ADV message. If the mobile station is paged by the paging controller, the mobile station enters a normal mode and is then able to perform communications with the serving base station (S<b>208</b>, S<b>209</b>).</div>
+<div class="description-paragraph" id="p-0025" num="0024">In a general communication system, mobile stations belonging to the same paging group can have different paging intervals. These paging intervals can be managed by the paging controller or the base station. The paging intervals will be described with reference to <figref idrefs="DRAWINGS">FIG. 3</figref>.</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a diagram illustrating different paging intervals of two different mobile stations, which belong to the same paging group in a general communication system.</div>
+<div class="description-paragraph" id="p-0027" num="0026">Referring to <figref idrefs="DRAWINGS">FIG. 3</figref>, it is assumed that two mobile stations MS<b>1</b> and MS<b>2</b> exist in the same paging group. At this time, in the mobile station MS<b>1</b>, the first frame of the paging cycle can be established as a paging interval, and in the mobile station MS<b>2</b>, the fourth frame of the same paging cycle can be established as a paging interval.</div>
+<div class="description-paragraph" id="p-0028" num="0027">Next, a procedure of updating system information in a mobile station which is in an idle mode will be described.</div>
+<div class="description-paragraph" id="p-0029" num="0028">The mobile station which is in the idle mode wakes up for only a listening interval and then receives a paging message. Subsequently, the mobile station takes a corresponding action in accordance with an action code value. For example, if an action code corresponding to the mobile station is ‘0’, the mobile station does not take any action. If an action code corresponding to the mobile station is ‘1’, the mobile station can perform ranging for location update.</div>
+<div class="description-paragraph" id="p-0030" num="0029">It is assumed that a downlink channel descriptor (DCD) message, an uplink channel descriptor (UCD) message or neighboring cell information transmitted from a preferred base station of the mobile station which is in the idle mode is updated. At this time, in a general wireless communication system, the preferred base station can notify the mobile station of a frame where a message containing the updated DCD/UCD or neighboring cell information is transmitted by transmitting a broadcast control pointer information element (Broadcast_Control_Pointer_IE) to the mobile station. Table 3 illustrates contents that can be included in the broadcast control pointer information element.</div>
+<div class="description-paragraph" id="p-0031" num="0030">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Syntax</td>
+<td class="description-td">Size (bit) <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00022" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Notes</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Broadcast_Control_Pointer_IE(</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">) { <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00023" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Extended DIUC <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00024" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">4</td>
+<td class="description-td">Broadcast_Control_Pointer_IE( ) = 0xA <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00025" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Length <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00026" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">4</td>
+<td class="description-td">Length in bytes <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00027" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">DCD_UCD Transmission</td>
+<td class="description-td">7</td>
+<td class="description-td">The most significant bits of the frame</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Frame <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00028" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td"> </td>
+<td class="description-td">number's least 9 significant bits of the next</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">DCD and/or UCD transmission. <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00029" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Skip Broadcast_System_Update</td>
+<td class="description-td">1</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00030" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">If (Skip</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Broadcast_System_Update ==</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">0) { <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00031" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Broadcast_System_Update_Type</td>
+<td class="description-td">1</td>
+<td class="description-td">Shows the type of</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00032" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td"> </td>
+<td class="description-td">Broadcast_System_Update0: For</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">MOB_NBR-ADV Update 1: For</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Emergency Services Message <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00033" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Broadcast_System_Update_Transmission _Frame <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00034" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">7</td>
+<td class="description-td">The least significant bits of the frame</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">number of the next</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Broadcast_System_Update transmission. <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00035" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0032" num="0031">Referring to Table 3, the broadcast control pointer information element can include information of a frame (DCD_UCD transmission frame) where the DCD/UCD messages are transmitted, and a frame (broadcast_system_update_transmission_frame) for update of broadcast system information.</div>
+<div class="description-paragraph" id="p-0033" num="0032">Unlike the mobile station which is in an active mode, the mobile station which is in the idle mode can receive a message by waking up for only a listening interval. Since the updated DCD or UCD message has a relatively great transmission cycle (maximum ten seconds), if the updated message is not transmitted within the listening interval of each mobile station, each mobile station may not receive the updated message. Such a case will be described with reference to <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a diagram illustrating an operation procedure of updating system information through a mobile station, which is in an idle mode, in a general communication system.</div>
+<div class="description-paragraph" id="p-0035" num="0034">Referring to (a) of <figref idrefs="DRAWINGS">FIG. 4</figref>, the mobile station can receive the broadcast control pointer information element from the preferred base station for only its listening interval. The mobile station can wake up to receive the updated system information even if a frame indicated by the broadcast control pointer information element does not correspond to the listening interval of the mobile station. The mobile station can again sleep until next listening interval if the updated system information is successfully received.</div>
+<div class="description-paragraph" id="p-0036" num="0035">However, it may be assumed that the mobile station fails to receive the updated system information from the frame indicated by the broadcast control pointer information element as illustrated in (b) of <figref idrefs="DRAWINGS">FIG. 4</figref>. At this time, the mobile station may have to receive system information by waking up until next interval where system information is transferred.</div>
+<heading id="h-0003">DISCLOSURE OF INVENTION</heading>
+<heading id="h-0004">Technical Problem</heading>
+<div class="description-paragraph" id="p-0037" num="0036">In a general broadband wireless access system, a paging controller that manages a paging procedure of a mobile station should report paging information (paying cycle, paging offset, paging interval, etc.) of a corresponding mobile station to a base station if the mobile station is paged. This is because that the base station can exactly transmit a paging message to the corresponding mobile station only when knowing an interval where the mobile station wakes up.</div>
+<div class="description-paragraph" id="p-0038" num="0037">In the worst case, a base station may have to transmit the paging message every frame in accordance with a distribution of paging intervals of mobile stations which are in idle mode.</div>
+<div class="description-paragraph" id="p-0039" num="0038">Furthermore, even though a mobile station which is in an idle mode knows a frame where system information is transmitted by successfully receiving a broadcast control pointer information element (IE) from a preferred base station so as to update system information, the mobile station may fail to receive the system information.</div>
+<div class="description-paragraph" id="p-0040" num="0039">Moreover, it is assumed that sub maps are multiplexed with one cyclic redundancy check (CRC) in a general system (for example, IEEE 802.16e system), like a downlink map or an uplink map (DL/UL-MAP). In this case, the mobile station waking up from a paging subframe should decode the whole sub maps. Also, if the sub maps are transmitted through a separate CRC attachment in accordance with connection identifier (CID) (for example, CRC or CID masking), the mobile station performs blind decoding for all sub maps through corresponding CID in a general system (for example, long term evolution (LTE) system), thereby detecting control signals transmitted thereto. In case of a general wireless communication system, broadcast CID is used to transmit a paging message. If the message is transmitted using broadcast CID, the mobile stations which are in a normal mode as well as the mobile stations which are in an idle mode may all receive the paging message. If the mobile station which is in a normal mode receives a paging message, it causes unnecessary power consumption of the mobile station and increases decoding overhead of the mobile station.</div>
+<div class="description-paragraph" id="p-0041" num="0040">The present invention is devised to substantially obviate one or more problems due to limitations and disadvantages of the related art. An object of the present invention is to provide method for efficiently updating system information in a mobile station which is in an idle mode.</div>
+<div class="description-paragraph" id="p-0042" num="0041">Another object of the present invention is to provide a method for efficiently paging a mobile station.</div>
+<div class="description-paragraph" id="p-0043" num="0042">Other object of the present invention is to provide an operation method for efficiently saving the power of a mobile station.</div>
+<div class="description-paragraph" id="p-0044" num="0043">It is to be understood that the technical problems to be achieved by the present invention are not limited to the aforementioned problems and other technical problems which are not mentioned will be apparent from the following description to the person with an ordinary skill in the art to which the present invention pertains.</div>
+<heading id="h-0005">Technical Solution</heading>
+<div class="description-paragraph" id="p-0045" num="0044">In order to solve the above technical problems, the present invention provides various methods for efficiently transmitting and receiving a paging message.</div>
+<div class="description-paragraph" id="p-0046" num="0045">In one aspect of the present invention, a method for receiving a paging message in a mobile station comprises receiving paging information from a serving base station, the paging information including paging sub group identifier (paging_sub_group_ID) indicating a paging sub group to which the mobile station belongs; and receiving the paging message for a predetermined paging interval of the paging sub group, wherein the paging sub group is determined separately from a paging group and a geographical location determining the paging group, and is maintained while the mobile station is being operated in an idle mode.</div>
+<div class="description-paragraph" id="p-0047" num="0046">At this time, the paging interval is established in a subframe unit.</div>
+<div class="description-paragraph" id="p-0048" num="0047">Also, the method further comprises receiving paging indication information indicating whether a paging message of at least one paging sub group is transmitted. In this case, the step of receiving the paging message is performed when the paging indication information indicates the paging sub group to which the mobile station belongs.</div>
+<div class="description-paragraph" id="p-0049" num="0048">Also, the paging indication information includes at least one of bits indicating whether the paging message of at least one paging sub group is transmitted, and if the paging indication information is transmitted twice or more within the paging cycle, the paging indication information is transmitted at different superframes.</div>
+<div class="description-paragraph" id="p-0050" num="0049">Also, the paging indication information is transmitted at a first subframe of a superframe where a paging cycle starts, through any one of a superframe header (SFH), a broadcast channel (BCH) included in the superframe header, a data region of the first subframe, and a sub-packet of a secondary superframe header.</div>
+<div class="description-paragraph" id="p-0051" num="0050">Also, the paging interval is a subframe after predetermined offset established in accordance with the paging sub group from the subframe from which the paging indication information is transmitted.</div>
+<div class="description-paragraph" id="p-0052" num="0051">Also, the bits respectively represent whether the paging message of one paging sub group is transmitted, and if the paging indication information includes bits of all paging sub groups belonging to a predetermined paging group, the paging information is broadcasted to the mobile station through the superframe header.</div>
+<div class="description-paragraph" id="p-0053" num="0052">Also, the paging message further includes a system information update indication (SIUI) field, the method further comprises performing update of system information if the SIUI field indicates update of the system information.</div>
+<div class="description-paragraph" id="p-0054" num="0053">Also, the step of performing update of system information includes acquiring system information by decoding a superframe header (SFH) received after a superframe where the paging message including the system information update indication field is transmitted.</div>
+<div class="description-paragraph" id="p-0055" num="0054">Also, the paging message is transmitted to the mobile station through a downlink resource indicated by predetermined paging message control information included in a sub-map of a subframe corresponding to the paging interval, the predetermined paging message control information is CRC masked by predetermined paging CID for a specific mobile station of an idle mode, and the mobile station performs blind decoding for the predetermined paging message control information using its paging CID.</div>
+<div class="description-paragraph" id="p-0056" num="0055">Also, the predetermined paging message control information has a size previously established in a previously established location of the sub-map.</div>
+<div class="description-paragraph" id="p-0057" num="0056">In another aspect of the present invention, a method for transmitting a paging message from a base station to a mobile station comprises receiving a deregistration request message from the mobile station; transmitting a deregistration command message including paging information to the mobile station, the paging information including paging sub group identifier (paging_sub_group_ID) indicating a paging sub group to which the mobile station belongs; and transmitting a paging message to the mobile station for a predetermined paging interval of the paging sub group, wherein the paging sub group is established separately from a paging group and a geographical location determining the paging group, and is maintained while the mobile station is being operated in an idle mode.</div>
+<div class="description-paragraph" id="p-0058" num="0057">At this time, the paging interval is established in a subframe unit.</div>
+<div class="description-paragraph" id="p-0059" num="0058">Also, the method further comprises receiving a paging indication message of the mobile station from a paging controller; and transmitting paging indication information to the mobile station, the paging indication information indicating whether a paging message of a paging sub group to which the mobile station belongs is transmitted.</div>
+<div class="description-paragraph" id="p-0060" num="0059">Also, the paging indication information is transmitted from a first subframe of a superframe where a paging cycle starts, through any one of a superframe header (SFH), a broadcast channel (BCH) included in the superframe header, a data region of the first subframe, and a sub-packet of a secondary superframe header.</div>
+<div class="description-paragraph" id="p-0061" num="0060">Also, the step of transmitting a paging message is performed at a subframe after predetermined offset previously determined for a paging sub group to which the mobile station belongs, from a subframe where the paging indication information is transmitted.</div>
+<div class="description-paragraph" id="p-0062" num="0061">In other aspect of the present invention, a method for receiving a paging message in a mobile station of an idle mode comprises monitoring the paging message for a first paging cycle; and increasing the first paging cycle by a predetermined value if the paging message is not received for the first paging cycle.</div>
+<div class="description-paragraph" id="p-0063" num="0062">At this time, the step of monitoring the paging message and the step of increasing the first paging cycle are repeated as much as the number of times, which is previously determined.</div>
+<div class="description-paragraph" id="p-0064" num="0063">Also, the step of increasing the first paging cycle is performed until the first paging cycle becomes equal to a maximum paging cycle which is previously determined.</div>
+<heading id="h-0006">Advantageous Effects</heading>
+<div class="description-paragraph" id="p-0065" num="0064">According to the present invention, the following advantages can be obtained.</div>
+<div class="description-paragraph" id="p-0066" num="0065">First of all, the mobile station which is in the idle mode can update system information more efficiently.</div>
+<div class="description-paragraph" id="p-0067" num="0066">Second, it is possible to page the mobile station which is in the idle mode, more efficiently.</div>
+<div class="description-paragraph" id="p-0068" num="0067">Finally, the mobile station can be operated in the idle mode more efficiently.</div>
+<div class="description-paragraph" id="p-0069" num="0068">It is to be understood that the advantages that can be obtained by the present invention are not limited to the aforementioned advantages and other advantages which are not mentioned will be apparent from the following description to the person with an ordinary skill in the art to which the present invention pertains.</div>
+<description-of-drawings>
+<heading id="h-0007">BRIEF DESCRIPTION OF DRAWINGS</heading>
+<div class="description-paragraph" id="p-0070" num="0069"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a diagram illustrating a paging group in a general IEEE 802.16 system;</div>
+<div class="description-paragraph" id="p-0071" num="0070"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a diagram illustrating an example of an operation procedure of a mobile station which enters an idle mode in a general IEEE 802.16 system;</div>
+<div class="description-paragraph" id="p-0072" num="0071"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a diagram illustrating paging intervals of two different mobile stations belonging to the same paging group in a general communication system;</div>
+<div class="description-paragraph" id="p-0073" num="0072"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a diagram illustrating an operation procedure of updating system information through a mobile station, which is in an idle mode, in a general communication system;</div>
+<div class="description-paragraph" id="p-0074" num="0073"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a conceptional view of a paging group that can be used in a general wireless communication system and a paging sub group that can be used in the embodiments of the present invention;</div>
+<div class="description-paragraph" id="p-0075" num="0074"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a diagram illustrating a paging interval to which a paging subframe that can be used in the embodiments of the present invention is applied and an operation of a mobile station;</div>
+<div class="description-paragraph" id="p-0076" num="0075"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a diagram illustrating a paging subframe per paging sub group according to one embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0077" num="0076"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a diagram illustrating an example of a method for updating system information of a mobile station which is in an idle mode in accordance with one embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0078" num="0077"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a diagram illustrating a location where a paging channel can be transmitted in accordance with another embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0079" num="0078"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a diagram illustrating a paging interval when a paging message is transmitted through a paging channel according to another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0080" num="0079"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a diagram illustrating a location where a paging indication bit in accordance with another embodiment of the present invention is transmitted.</div>
+<div class="description-paragraph" id="p-0081" num="0080"> <figref idrefs="DRAWINGS">FIG. 12</figref> is a diagram illustrating a location where a paging message is transmitted according to another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0082" num="0081"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a diagram illustrating an example of a location where a paging message is transmitted if paging indication bits are transmitted at different times per paging sub group in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0083" num="0082"> <figref idrefs="DRAWINGS">FIG. 14</figref> is a diagram illustrating an example of a location where a paging message is transmitted if paging indication bits of a plurality of paging sub groups are transmitted at the same time in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0084" num="0083"> <figref idrefs="DRAWINGS">FIG. 15</figref> is a diagram illustrating an example of a 1 bit paging indication method in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0085" num="0084"> <figref idrefs="DRAWINGS">FIG. 16</figref> is a diagram illustrating a method for transmitting a paging message using bitmap type paging indication in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0086" num="0085"> <figref idrefs="DRAWINGS">FIG. 17</figref> is a diagram illustrating an example that a paging indication grouping method in accordance with another embodiment of the present invention is used.</div>
+<div class="description-paragraph" id="p-0087" num="0086"> <figref idrefs="DRAWINGS">FIG. 18</figref> is a diagram illustrating another example that paging indication grouping method in accordance with another embodiment of the present invention is used.</div>
+<div class="description-paragraph" id="p-0088" num="0087"> <figref idrefs="DRAWINGS">FIG. 19</figref> is a diagram illustrating an example of a location where control signaling for a paging message in accordance with another embodiment of the present invention is transmitted.</div>
+<div class="description-paragraph" id="p-0089" num="0088"> <figref idrefs="DRAWINGS">FIG. 20</figref> is a diagram illustrating an example that a paging cycle of a mobile station is determined in a multi-level in accordance with the further embodiment of the present invention.</div>
+</description-of-drawings>
+<heading id="h-0008">MODE FOR THE INVENTION</heading>
+<div class="description-paragraph" id="p-0090" num="0089">The present invention relates a wireless access system. Hereinafter, methods for paging a mobile station more efficiently in accordance with the embodiments of the present invention will be described.</div>
+<div class="description-paragraph" id="p-0091" num="0090">The following embodiments are achieved by combination of structural elements and features of the present invention in a predetermined type. Each of the structural elements or features should be considered selectively unless specified separately. Each of the structural elements or features may be carried out without being combined with other structural elements or features. Also, some structural elements and/or features may be combined with one another to constitute the embodiments of the present invention. The order of operations described in the embodiments of the present invention may be changed. Some structural elements or features of one embodiment may be included in another embodiment, or may be replaced with corresponding structural elements or features of another embodiment.</div>
+<div class="description-paragraph" id="p-0092" num="0091">In the description of drawings, procedures or steps that may make the subject matter of the present invention obscure will be omitted, and procedures or steps equivalent to the range that can be understood by those skilled in the art will be omitted.</div>
+<div class="description-paragraph" id="p-0093" num="0092">The embodiments of the present invention have been described based on the data transmission and reception between a base station and a mobile station. In this case, the base station means a terminal node of a network, which performs direct communication with the mobile station. A specific operation which is described as being performed by the base station may be performed by an upper node of the base station as the case may be.</div>
+<div class="description-paragraph" id="p-0094" num="0093">In other words, it will be apparent that various operations performed for communication with the mobile station in the network which includes a plurality of network nodes along with the base station may be performed by the base station or network nodes other than the base station. The base station may be replaced with terms such as a fixed station, Node B, eNode B (eNB), and access point. Also, the mobile station may be replaced with terms such as a user equipment (UE), a subscriber station (SS), a mobile subscriber station (MSS), and a terminal.</div>
+<div class="description-paragraph" id="p-0095" num="0094">Furthermore, a transmitter means a fixed and/or mobile node that transmits data service or voice service, and a receiver means a fixed and/or mobile node that receives data service or voice service. Accordingly, in an uplink, the mobile station could be a transmitter, and the base station could be a receiver. Likewise, in a downlink, the mobile station could be a receiver, and the base station could be a transmitter.</div>
+<div class="description-paragraph" id="p-0096" num="0095">Meanwhile, in the present invention, examples of the mobile station include a personal digital assistant (PDA), a cellular phone, a personal communication service (PCS) phone, a global system for mobile (GSM) phone, a wideband CDMA (WCDMA) phone, and a mobile broadband system (MBS) phone. Also, examples of the mobile station include a personal digital assistant (PDA), a hand-held PC, a notebook PC, a smart phone, and a multi mode-multi band (MM-MB) terminal.</div>
+<div class="description-paragraph" id="p-0097" num="0096">In this case, the smart phone means a terminal having advantages of a mobile communication terminal and a personal mobile terminal in combination. Namely, the smart phone can mean a terminal that data communication functions such as schedule management, facsimile transmission and reception, and Internet access, which correspond to functions of the personal mobile terminal, are added to the mobile communication terminal. Also, the multi mode-multi band terminal means a mobile terminal having a multi-modem chip to be operated in a portable Internet system and other mobile communication systems (for example, code division multiple access (CDMA) 2000 system, WCDMA system, etc.).</div>
+<div class="description-paragraph" id="p-0098" num="0097">The embodiments according to the present invention may be implemented by various means, for example, hardware, firmware, software, or their combination.</div>
+<div class="description-paragraph" id="p-0099" num="0098">If the embodiment according to the present invention is implemented by hardware, the method according to the embodiments of the present invention may be implemented by one or more application specific integrated circuits (ASICs), digital signal processors (DSPs), digital signal processing devices (DSPDs), programmable logic devices (PLDs), field programmable gate arrays (FPGAs), processors, controllers, microcontrollers, microprocessors, etc.</div>
+<div class="description-paragraph" id="p-0100" num="0099">If the embodiment according to the present invention is implemented by firmware or software, the method according to the embodiments of the present invention may be implemented by a type of a module, a procedure, or a function, which performs functions or operations described as above. A software code may be stored in a memory unit and then may be driven by a processor. The memory unit may be located inside or outside the processor to transmit and receive data to and from the processor through various means which are well known.</div>
+<div class="description-paragraph" id="p-0101" num="0100">The embodiments of the present invention can be supported by standard documents disclosed in at least one of wireless access systems, i.e., IEEE 802 system, 3GPP system, 3GPP LTE system, and 3GPP2 system. Namely, among the embodiments of the present invention, steps or parts which are not described to clarify technical spirits of the present invention can be supported by the above standard documents. Also, all terminologies disclosed herein can be described by the above standard documents. Particularly, the embodiments of the present invention can be supported by one or more of standard documents of the IEEE 802.16 system, i.e., P802.16-2004, P802.16e-2005 and P802.16Rev2.</div>
+<div class="description-paragraph" id="p-0102" num="0101">Hereinafter, the preferred embodiments according to the present invention will be described in detail with reference to the accompanying drawings. It is to be understood that the detailed description which will be disclosed together with the accompanying drawings is intended to describe exemplary embodiments of the present invention and is not intended to describe unique embodiments by which the present invention can be carried.</div>
+<div class="description-paragraph" id="p-0103" num="0102">Furthermore, specific terminologies hereinafter described are provided to assist understanding of the present invention, and various modifications can be made in the specific terminologies within the range that they do not depart from technical spirits of the present invention.</div>
+<div class="description-paragraph" id="p-0104" num="0103">The present invention suggests a paging sub group that can be determined separately from a paging group classified by a geographic location to perform efficient paging. The paging sub group can also be MS-specifically determined (e.g., using MS identifier).</div>
+<div class="description-paragraph" id="p-0105" num="0104"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a conceptional view of a paging group that can be used in a general wireless communication system and a paging sub group that can be used in the embodiments of the present invention.</div>
+<div class="description-paragraph" id="p-0106" num="0105">Referring to <figref idrefs="DRAWINGS">FIG. 5</figref>, when a mobile station moves from its paging group region (for example, P_G<b>1</b>) to another paging group region (P_G<b>2</b>), the mobile station can perform location update. As a result, a new paging group identifier (PGID) is given to the mobile station, and the mobile station belongs to a new paging group. However, since a paging sub group is determined separately from the paging group defined in accordance with the geographic location, the paging sub group can be maintained regardless of a location of the mobile station. Accordingly, if paging intervals of all mobile stations belonging to the same paging sub group are determined equally, the mobile station can receive a paging message at the same time of a paging cycle regardless of a change of the paging group, which is caused by movement of the mobile station.</div>
+<div class="description-paragraph" id="p-0107" num="0106">For example, it is assumed that three mobile stations MS<b>1</b>, MS<b>3</b>, and MS<b>5</b> are established to a paging sub group <b>1</b> as illustrated in <figref idrefs="DRAWINGS">FIG. 5</figref>. If the mobile station MS<b>1</b> moves from the region P_G<b>1</b> to the region P_G<b>2</b>, the paging group of the mobile station MS<b>1</b> can be updated through a location update procedure. However, since the paging sub group is not related with the geographic location, the mobile station may continuously be maintained at the paging sub group <b>1</b>. Hereinafter, a number of the paging sub group can be used as the same meaning of paging sub group ID. Namely, paging sub group ID of the paging sub group <b>1</b> could be 1.</div>
+<div class="description-paragraph" id="p-0108" num="0107">This paging sub group can be determined by mobile station ID (MSID) without separate signaling between a base station the mobile station. In this case, in order to determine the paging sub group, the mobile station or the base station can identify a paging sub group of a corresponding mobile station by using a method of the following Math Figure 1.
+<br/>
+Paging Sub Group ID=MS_ID modulo <i>N</i>  [Math Figure 1]
+</div>
+<div class="description-paragraph" id="p-0109" num="0108">In the Math Figure 1, ‘N’ represents the number of paging sub groups, and can be transferred to the mobile station through system information.</div>
+<div class="description-paragraph" id="p-0110" num="0109">Also, the paging sub group can be given to the mobile station by a paging controller or the base station through a deregistration command (DREG-CMD) message during idle mode entry or a ranging response (RNG-RSP) message during location update. This will be described with reference to Table 4.</div>
+<div class="description-paragraph" id="p-0111" num="0110">Table 4 illustrates an example that paging sub group information is included in the deregistration command message or the ranging response message that can be used in the embodiments of the present invention.</div>
+<div class="description-paragraph" id="p-0112" num="0111">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="4" nameend="4" namest="1" rowsep="1">TABLE 4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00036" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Length <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00037" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Value <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00038" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Scope <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00039" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">xxx <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00040" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">x <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00041" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">PAGING_CYCLE</td>
+<td class="description-td">RNG-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PAGING_OFFSETPaging</td>
+<td class="description-td">RSPDREG-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Interval LengthPaging-group-ID</td>
+<td class="description-td">CMD <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00042" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Paging-sub-group-ID: mobile</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">station is grouped once more in</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">sub group not geographical</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">grouping.</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0113" num="0112">Referring to Table 4, the base station can notify the mobile station of the paging sub group in such a manner that a paging sub group ID value is added to a type length value (TLV) indicating paging information in the deregistration command message or the ranging response message.</div>
+<div class="description-paragraph" id="p-0114" num="0113">The present invention additionally suggests a paging subframe together with the aforementioned paging subgroup. The paging subframe means a subframe where the paging message is transmitted. The paging subframe will be described with reference to <figref idrefs="DRAWINGS">FIG. 6</figref>.</div>
+<div class="description-paragraph" id="p-0115" num="0114"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a diagram illustrating a paging interval to which a paging subframe that can be used in the embodiments of the present invention is applied and an operation of a mobile station.</div>
+<div class="description-paragraph" id="p-0116" num="0115">In a general wireless communication system, a paging message monitoring interval unit of the mobile station is a frame. However, if the paging subframe is applied as illustrated in <figref idrefs="DRAWINGS">FIG. 6</figref>, the mobile station can monitor the paging message in a subframe unit. Accordingly, the mobile station can save the power more efficiently. To this end, the TLV indicating paging information in the ranging response message or the deregistration command message transmitted from the base station to the mobile station can be modified as illustrated in Table 5.</div>
+<div class="description-paragraph" id="p-0117" num="0116">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="4" nameend="4" namest="1" rowsep="1">TABLE 5</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00043" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Length <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00044" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Value <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00045" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Scope <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00046" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">xxx <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00047" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">x <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00048" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">PAGING_CYCLE</td>
+<td class="description-td">RNG-RSPDREG-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PAGING_OFFSET:</td>
+<td class="description-td">CMD</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">determines the subframe within</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the cycle in which the paging</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">message is transmitted. Must</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">be smaller than</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PAGING_CYCLE.Paging</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Interval Length: Max duration</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">in subframes of paging interval.</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">(default = 1)Paging-</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">group-ID <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00049" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0118" num="0117">Referring to Table 5, paging offset and paging interval length can be established in a subframe unit.</div>
+<div class="description-paragraph" id="p-0119" num="0118">According to the embodiments of the present invention, the mobile stations belonging to the same paging sub group can have the same paging interval regardless of the paging group. Namely, the mobile stations belonging to different paging sub groups wake up at different paging intervals and then identify the paging message while the mobile stations belonging to the same paging sub group wake up at the subframe of the same paging interval and then identify the paging message.</div>
+<div class="description-paragraph" id="p-0120" num="0119">Hereinafter, a method for efficiently transmitting a paging message using the aforementioned paging sub group and paging subframe will be described in more detail.</div>
+<div class="description-paragraph" id="p-0121" num="0120">1. Pacing Scheme Using Arbitrary Paging Subframe</div>
+<div class="description-paragraph" id="p-0122" num="0121">According to one embodiment of the present invention, a paging message can be transmitted from a arbitrary subframe.</div>
+<div class="description-paragraph" id="p-0123" num="0122">Generally, a listening interval (MS Listening Interval) of a mobile station and a Paging Interval (BS paging interval) of a base station can be defined in a frame unit through paging information that can be transmitted to the mobile station through a deregistration command message or a ranging response message. However, in this embodiment, the mobile station can receive a paging message by waking up at only a arbitrary subframe of a corresponding frame. At this time, mobile stations belonging to the same sub group can check for the paging message by waking up at the same subframe. This will be described with reference to <figref idrefs="DRAWINGS">FIG. 7</figref>.</div>
+<div class="description-paragraph" id="p-0124" num="0123"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a diagram illustrating a paging subframe per paging sub group according to one embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0125" num="0124">In the following embodiments including the embodiment of <figref idrefs="DRAWINGS">FIG. 7</figref>, it is assumed that all paging sub groups belong to one paging group. It is also assumed that all mobile stations belonging to the same paging group have the same paging cycle regardless of a paging interval (paging subframe) that can be defined by the paging sub group.</div>
+<div class="description-paragraph" id="p-0126" num="0125">Referring to <figref idrefs="DRAWINGS">FIG. 7</figref>, mobile stations belonging to the paging sub group <b>1</b> can receive the paging message by waking up at only a arbitrary paging subframe of the first frame even though the first frame of the paging cycle is defined as the paging interval. Also, mobile stations belonging to the paging sub group <b>2</b> can receive the paging message by waking up at only a arbitrary paging subframe of the fourth frame even though the fourth frame of the paging cycle is defined as the paging interval.</div>
+<div class="description-paragraph" id="p-0127" num="0126">1-1. Method for Receiving a Paging Message from a Paging Subframe of a Paging Sub Group</div>
+<div class="description-paragraph" id="p-0128" num="0127">A mobile station woken up at a arbitrary paging subframe can receive a paging message, and can decode the paging message to identify whether the presence of its paging information. Mobile stations belonging to the same paging sub group receive the paging message from the same paging subframe.</div>
+<div class="description-paragraph" id="p-0129" num="0128">For example, it is assumed that a mobile station MS<b>1</b> belongs to a paging sub group <b>1</b>, and a paging subframe designated in the paging sub group <b>1</b> is N. At this time, if there is no paging message transmitted from the paging subframe of the MS<b>1</b>, i.e., subframe N, it may mean that all mobile stations belonging to the paging sub group <b>1</b> are not paged. In this case, all mobile stations belonging to the paging sub group <b>1</b> can enter an idle mode again.</div>
+<div class="description-paragraph" id="p-0130" num="0129">By contrast, if there is a paging message transmitted at the paging subframe N, all mobile stations belonging to the paging sub group <b>1</b> can identify the presence of its paging action code by decoding the paging message. The mobile station which is commanded to perform network reentry in accordance with the paging action code can be operated in a normal mode by waking up from the idle mode. The mobile station which is commanded to perform location update can enter the idle mode after performing location update. The mobile station which has not received any command can enter the idle mode until next paging subframe.</div>
+<div class="description-paragraph" id="p-0131" num="0130">1-2. Method for Updating System Information of a Paging Sub Group</div>
+<div class="description-paragraph" id="p-0132" num="0131">If a paging message is transmitted from a arbitrary subframe, a mobile station may have a difficulty to know the presence of system information update at the time when the mobile station wakes up. For this reason, according to the related art, the mobile station has known a frame where updated system information is transmitted using a broadcast control pointer information element (IE) which is transmitted to the mobile station during a paging interval.</div>
+<div class="description-paragraph" id="p-0133" num="0132">However, in an advanced system, for example, a system that periodically transmits system information, like a wireless communication system subject to the IEEE 802.16m standard, it is not required to notify the mobile station of a location where system information will be transmitted. In the current IEEE 802.16m system, the base station can transmit a broadcast channel (BCH) per 20 ms in a fixed location of a superframe.</div>
+<div class="description-paragraph" id="p-0134" num="0133">The BCH is divided into a primary BCH (PBCH) and a secondary BCH (SBCH). The PBCH can transmit network common information while the SBCH can transmit cell specific information. The base station can transmit update information of each system information block through the BCH, and can provide scheduling information so that the mobile station receives updated broadcast information. In this case, there may be provided a plurality of system information blocks, and the system information blocks may be regarded as a bundle of system information that can be transmitted at different cycles in accordance with a procedure.</div>
+<div class="description-paragraph" id="p-0135" num="0134">Accordingly, this embodiment suggests that a field indicating the presence of system information update is added to a paging message, instead of a broadcast control pointer information element according to the related art, wherein the broadcast control pointer information element indicates a location of a frame where system information is transmitted. This field will be referred to as a system information update indication (SIUI) field in the present invention. An example of this system information update indication field included in the paging message will be described with reference to Table 6.</div>
+<div class="description-paragraph" id="p-0136" num="0135">
+<tables id="TABLE-US-00006" num="00006">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 6</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Syntax</td>
+<td class="description-td">Size (bit)</td>
+<td class="description-td">Notes</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">MOB_PAG-ADV_Message_format</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">( ){</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Management Message Type = 61</td>
+<td class="description-td">8</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Num_Paging_Group_IDs</td>
+<td class="description-td">8</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00050" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">For(i=0;</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">i&lt;Num_Paging_Group_IDs; i++){</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging Group ID</td>
+<td class="description-td">16 </td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">System information update indication</td>
+<td class="description-td">1</td>
+<td class="description-td">Set to 1 if information transmitted</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00051" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td"> </td>
+<td class="description-td">through BCH is changed. <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00052" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Num_MACs</td>
+<td class="description-td">8</td>
+<td class="description-td">Number of MS MAC addresses</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">For(j=0; j&lt;Num_MACs; j++){</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">MS MAC Address hash</td>
+<td class="description-td">24 </td>
+<td class="description-td">The hash is obtained by computing a</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">CRC24 on the MS 48-bit MAC</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">address. The polynomial for the calculation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">is 0x1864CFB</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Action Code</td>
+<td class="description-td">2</td>
+<td class="description-td">Paging action instruction to MS0b00 =</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">No action required0b01 = Perform</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">ranging to establish location and acknowledge</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">message0b10 = Enter</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">network0b11 = reserved <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00053" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reserved <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00054" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">5</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">—</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Padding</td>
+<td class="description-td">Variable</td>
+<td class="description-td">Padding bits to ensure octet aligned</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">TLV Encoded Information</td>
+<td class="description-td">Variable</td>
+<td class="description-td">TLV-specific</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00055" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00056" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0137" num="0136">Referring to Table 6, the SIUI field can be set to a size of 1 bit. The mobile station which has received the paging message including the SIUI field set to ‘1’ can receive the BCH from a superframe header (SFH) by waking up at the first subframe of next superframe to receive system information regardless of the paging interval. This will be described with reference to <figref idrefs="DRAWINGS">FIG. 8</figref>.</div>
+<div class="description-paragraph" id="p-0138" num="0137"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a diagram illustrating an example of a method for updating system information of a mobile station which is in an idle mode in accordance with one embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0139" num="0138">Referring to <figref idrefs="DRAWINGS">FIG. 8</figref>, it is assumed that two different paging sub groups (paging sub group <b>1</b> and paging sub group <b>2</b>) exist in the same paging group. It is also assumed that a paging subframe of the paging sub group <b>1</b> is a arbitrary subframe of the first frame of the paging cycle, and a paging subframe of the paging sub group <b>2</b> is a arbitrary subframe of the fourth frame. At this time, the paging message including the SIUI field set to ‘1’ can be transmitted at each paging subframe of the paging sub group <b>1</b> and the paging sub group <b>2</b>. As a result, all mobile stations belonging to each paging sub group can update system information by waking up at the first subframe of next superframe of a superframe where the paging message is transmitted and receiving the BCH.</div>
+<div class="description-paragraph" id="p-0140" num="0139">If the SIUI field of the paging message transmitted to the paging subframe of each paging sub group is set to ‘0’ all mobile stations of each paging sub group can know that there is no update of system information, and can continuously be operated in the idle mode.</div>
+<div class="description-paragraph" id="p-0141" num="0140">Meanwhile, according to this embodiment, even though the mobile station fails to decode the BCH, since the time when next BCH is transmitted is always fixed, the mobile station does not need to stay up. Namely, even the mobile station fails to decode the BCH, the mobile station is operated in the idle mode and then again wakes up after 20 ms to receive the BCH. Also, the mobile station which has successfully decoded the BCH can wake up at a subframe other than the paging subframe to receive updated system information in accordance with information provided from the BCH.</div>
+<div class="description-paragraph" id="p-0142" num="0141">2. Paging Method Limiting Paging Subframe Using Subframe Including BCH</div>
+<div class="description-paragraph" id="p-0143" num="0142">In the current wireless communication system, for example, the system subject to the IEEE 802.16m standard, one superframe has a length of 20 ms, and each superframe which is transmitted includes a superframe header (SFH). The superframe header includes a synchronous channel (SCH) and a broadcast channel (BCH). The BCH is a channel that transmits broadcast information, and can be divided into a PBCH and a SBCH. System information is also broadcast information, and can be transmitted to the mobile station through the BCH. Accordingly, if a mobile station which is in an idle mode wakes up at only a subframe where the BCH is transmitted, the mobile station can be operated more efficiently.</div>
+<div class="description-paragraph" id="p-0144" num="0143">2-1. Paging Channel of Subframe Including BCH</div>
+<div class="description-paragraph" id="p-0145" num="0144">According to this embodiment, a method for transmitting a paging message at an SFH or a subframe where the SFH is transmitted, to a mobile station through a paging channel (PCH) that can include a paging message will be described.</div>
+<div class="description-paragraph" id="p-0146" num="0145"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a diagram illustrating a location where a paging channel can be transmitted in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0147" num="0146">The paging channel can be included in the SFH as illustrated in <figref idrefs="DRAWINGS">FIG. 9(<i>a</i>)</figref> or the BCH as illustrated in <figref idrefs="DRAWINGS">FIG. 9(<i>b</i>)</figref>. Also, the paging channel may be included in a predetermined location within a subframe where the SFH is transmitted, and may be transmitted to one of sub-packets of a secondary superframe header (SSFH).</div>
+<div class="description-paragraph" id="p-0148" num="0147"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a diagram illustrating a paging interval when a paging message is transmitted through a paging channel according to another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0149" num="0148">It is assumed that two different paging sub groups (paging sub group <b>1</b> and paging sub group <b>2</b>) exist. As described above, it is preferable that a paging subframe is differently established per paging sub group, and may be a subframe where the BCH is transmitted. Accordingly, the paging subframes can be established as the first subframes of different superframes per paging sub group.</div>
+<div class="description-paragraph" id="p-0150" num="0149">For example, as illustrated in <figref idrefs="DRAWINGS">FIG. 10</figref>, in case of the paging sub group <b>1</b>, the paging subframe can be established as the first subframe of the first superframe of the paging cycle. Also, in case of the paging sub group <b>2</b>, the paging subframe can be established as the first subframe of the second superframe of the paging cycle.</div>
+<div class="description-paragraph" id="p-0151" num="0150">2-2. Transmission of Paging Indication Bit from Subframe Including BCH</div>
+<div class="description-paragraph" id="p-0152" num="0151">In another aspect of this embodiment, a paging indication (PI) bit or field indicating whether the paging message is transmitted can be only transmitted at the subframe where the BCH is transmitted, and the paging message can be transmitted at another subframe. The paging indication bit may have a length of 1 bit or multi-bits as occasion demands. For example, when a plurality of paging sub groups exist, one bit can be allocated to each paging sub group. The mobile station can receive the paging message only if a paging indication bit allocated to its paging sub group is set to ‘1’.</div>
+<div class="description-paragraph" id="p-0153" num="0152"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a diagram illustrating a location where a paging indication bit in accordance with another embodiment of the present invention is transmitted.</div>
+<div class="description-paragraph" id="p-0154" num="0153">The paging indication bit may be included in the SFH as illustrated in <figref idrefs="DRAWINGS">FIG. 11(<i>a</i>)</figref> or the BCH as illustrated in <figref idrefs="DRAWINGS">FIG. 11(<i>b</i>)</figref>. Also, the paging indication bit may be included in a predetermined location within the subframe where the SFH is transmitted, as illustrated in <figref idrefs="DRAWINGS">FIG. 11(<i>c</i>)</figref>, or may be transmitted to one of sub-packets of a secondary superframe header (SSFH).</div>
+<div class="description-paragraph" id="p-0155" num="0154">Hereinafter, a location of a paging message that can be transmitted as a paging indication bit is set to ‘1’ and a method for notifying a mobile station of the location of the paging message will be described.</div>
+<div class="description-paragraph" id="p-0156" num="0155">2-2-1. Method for Notifying a Location where a Paging Message is Transmitted</div>
+<div class="description-paragraph" id="p-0157" num="0156">If a paging indication bit of a paging sub group to which the mobile station belongs is set to ‘1’, the mobile station should know the time when the paging message is transmitted and/or a location where the paging message is transmitted, so as to receive the paging message. Also, the mobile station is operated in the idle mode until it reaches the location where the paging message is transmitted, whereby the power can be saved efficiently.</div>
+<div class="description-paragraph" id="p-0158" num="0157"> <figref idrefs="DRAWINGS">FIG. 12</figref> is a diagram illustrating a location where a paging message is transmitted according to another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0159" num="0158">In a subframe including a superframe, it is assumed that a paging indication bit of a specific paging sub group is set to ‘1’ and is located to any one of locations described with reference to <figref idrefs="DRAWINGS">FIG. 11</figref>. At this time, a paging message of the specific paging sub group may be included in the same superframe as that where the paging indication bit is transmitted as illustrated in <figref idrefs="DRAWINGS">FIG. 12</figref>, or may be included in another superframe within the same paging cycle. This will be described in more detail with reference to <figref idrefs="DRAWINGS">FIG. 13</figref> and <figref idrefs="DRAWINGS">FIG. 14</figref>.</div>
+<div class="description-paragraph" id="p-0160" num="0159"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a diagram illustrating an example of a location where a paging message is transmitted if paging indication bits are transmitted at different times per paging sub group according to another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0161" num="0160">Referring to <figref idrefs="DRAWINGS">FIG. 13</figref>, it is assumed that two different paging sub groups (paging sub group <b>1</b> and paging sub group <b>2</b>) exist and paging indication bits of respective paging sub groups are respectively transmitted through the first subframes of different superframes. At this time, the paging message of each paging sub group is transmitted after a predetermined time, for example, i(i≧1) subframes, from the subframe where the paging indication bit is transmitted.</div>
+<div class="description-paragraph" id="p-0162" num="0161">Next, a case where a plurality of paging sub groups exist and paging indication bits of respective paging sub groups are transmitted at the same time will be described.</div>
+<div class="description-paragraph" id="p-0163" num="0162">The paging indication bits may have a bitmap type to simultaneously notify the mobile stations of the respective paging sub groups whether the paging message of each of the plurality of paging sub groups is transmitted. For example, if the paging messages of the paging sub group <b>1</b> and the paging sub group <b>2</b> are only transmitted, the paging indication bits of the paging groups are arranged starting from the most significant bit (MSB) of the bitmap in the order from the first paging sub group to the last paging sub group, thereby having a type of ‘110 . . . 0’. The location where the paging message is transmitted when this bitmap is used will be described with reference to <figref idrefs="DRAWINGS">FIG. 14</figref>.</div>
+<div class="description-paragraph" id="p-0164" num="0163"> <figref idrefs="DRAWINGS">FIG. 14</figref> is a diagram illustrating an example of a location where a paging message is transmitted if paging indication bits of a plurality of paging sub groups are transmitted at the same time according to another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0165" num="0164">In <figref idrefs="DRAWINGS">FIG. 14</figref>, it is assumed that N paging sub groups (paging sub group <b>1</b>, paging sub group <b>2</b>, . . . paging sub group N) exist. It is also assumed that paging indication bits indicating whether the paging message of each paging sub group is transmitted are transmitted through the first subframe of each paging cycle.</div>
+<div class="description-paragraph" id="p-0166" num="0165">If the paging indication bit is set to ‘110 . . . 0’ in the first subframe of the first paging cycle, it represents that only the paging messages for the paging sub group <b>1</b> and the paging sub group <b>2</b> are transmitted. In this case, the subframe where the paging message of the paging sub group having the paging indication bit set to 1 is transmitted can be determined using a number of the paging sub group (i.e., paging sub group ID). Namely, the paging message of the paging sub group <b>1</b> can be transmitted from the ith subframe of the subframes where the paging indication bit is transmitted. Also, the paging message of the paging sub group <b>2</b> can be transmitted from the i+8th subframe of the subframes where the paging indication bit is transmitted.</div>
+<div class="description-paragraph" id="p-0167" num="0166">If the paging indication bit is set to ‘11 . . . 1’ as illustrated in the second paging cycle of <figref idrefs="DRAWINGS">FIG. 14</figref>, in case of the paging sub group N, the paging indication bit can be transmitted from the i+8(N−1)th subframe of the subframes where the paging indication bit is transmitted. In this case, the transmission intervals of the paging message are spaced apart from each other by 8 subframes whenever the paging sub group increases by 1. However, the transmission intervals are only exemplary and may be modified if necessary.</div>
+<div class="description-paragraph" id="p-0168" num="0167">As described above, although the location where the paging message of the paging indication bit is transmitted may be defined in accordance with a previously determined rule, the location where the paging message is transmitted may be defined through predetermined signaling. For example, information of the location where the paging message is transmitted can be transmitted together with the paging indication bit.</div>
+<div class="description-paragraph" id="p-0169" num="0168">2-2-2. Method for Setting a Paging Indication Bit</div>
+<div class="description-paragraph" id="p-0170" num="0169">Hereinafter, a method for setting a paging indication bit in accordance with various sizes and formats will be described.</div>
+<div class="description-paragraph" id="p-0171" num="0170">2-2-2-1. 1 Bit Paging Indication Method</div>
+<div class="description-paragraph" id="p-0172" num="0171">If a 1 bit paging indication method is used, whether a paging message of one paging sub group is transmitted can be identified per superframe. Accordingly, if the paging indication bit is transmitted through any one of the locations described with reference to <figref idrefs="DRAWINGS">FIG. 11</figref>, it is preferable that the paging indication bit is transmitted through different superframes per paging sub group. This will be described with reference to <figref idrefs="DRAWINGS">FIG. 15</figref>.</div>
+<div class="description-paragraph" id="p-0173" num="0172"> <figref idrefs="DRAWINGS">FIG. 15</figref> is a diagram illustrating an example of a 1 bit paging indication method in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0174" num="0173">Referring to <figref idrefs="DRAWINGS">FIG. 15</figref>, a paging indication bit of the paging sub group <b>1</b> can be transmitted from the first superframe of the paging cycle, and a paging indication bit of the paging sub group <b>2</b> can be transmitted from the second superframe of the paging cycle. All mobile stations belonging to each paging sub group can wake up to receive the paging message only if the paging indication bit of the paging sub group to which the mobile stations belong is set to 1. It is preferable that the as any one of the locations described with reference to <figref idrefs="DRAWINGS">FIG. 11</figref> is designated as the location where the paging indication bit is transmitted. Also, the location where the paging indication bit is transmitted can be designated through one of the methods described in 2-2-1.</div>
+<div class="description-paragraph" id="p-0175" num="0174">2-2-2-2. n Bit Paging Indication Method</div>
+<div class="description-paragraph" id="p-0176" num="0175">In this embodiment, paging intervals for receiving paging indication (PI) in all mobile stations belonging to the same paging group can be established equally. Also, in this embodiment, paging information that includes paging cycle, paging offset, paging interval length and paging sub group number can be broadcasted through system information. This will be described with reference to Table 7.</div>
+<div class="description-paragraph" id="p-0177" num="0176">Table 7 illustrates an example that paging information related to another embodiment of the present invention is broadcasted through system information.</div>
+<div class="description-paragraph" id="p-0178" num="0177">
+<tables id="TABLE-US-00007" num="00007">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="4" nameend="4" namest="1" rowsep="1">TABLE 7</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00057" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Length <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00058" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Value <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00059" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Scope <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00060" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">xxx <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00061" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">x <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00062" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">PAGING_CYCLE</td>
+<td class="description-td">RNG-RSPDREG-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PAGING_OFFSETPaging</td>
+<td class="description-td">CMDSystem</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Interval LengthPaging-</td>
+<td class="description-td">Information</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">group-ID Paging sub</td>
+<td class="description-td">(BCH) <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00063" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">group number: the</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">number of paging sub</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">groups belonging to</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">paging group</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0179" num="0178">Referring to Table 7, paging information transferred to the mobile station through the ranging response message or the deregistration command message in the general wireless communication system can be included in the system information so that the information can be transmitted to the mobile station through the BCH. Also, the paging information can further include information of the number of paging sub groups.</div>
+<div class="description-paragraph" id="p-0180" num="0179">In this way, all mobile stations can identify the paging subframe where paging indication (PI) is transmitted, through the broadcasted paging information. Accordingly, each mobile station belonging to each paging sub group can identify paging indication of its paging sub group number, and can receive the paging message through any one of the methods described in 2-2-1 if the paging message of its paging sub group is transmitted.</div>
+<div class="description-paragraph" id="p-0181" num="0180">Also, in this embodiment, paging indication (PI) indicating whether the paging message of the mobile station belonging to each paging sub group is transmitted can have an n-bit bitmap type. This will be described with reference to <figref idrefs="DRAWINGS">FIG. 16</figref>.</div>
+<div class="description-paragraph" id="p-0182" num="0181"> <figref idrefs="DRAWINGS">FIG. 16</figref> is a diagram illustrating a method for transmitting a paging message using bitmap type paging indication in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0183" num="0182">In <figref idrefs="DRAWINGS">FIG. 16</figref>, it is assumed that N paging sub groups exist and N-bit paging indication is transmitted to the mobile stations, which belong to each paging sub group, through the first subframe of each paging cycle. It is also assumed that the location where the paging message of each paging sub group is designated through any one of the methods described in 2-2-1.</div>
+<div class="description-paragraph" id="p-0184" num="0183">In the first paging cycle, a paging indication bitmap of ‘10 . . . 0’ indicating that the paging message of the paging sub group <b>1</b> is only transmitted is transmitted to each paging sub group. As a result, all mobile stations belonging to the paging sub group <b>1</b> can receive the paging message by waking up in the previously determined location.</div>
+<div class="description-paragraph" id="p-0185" num="0184">In the second paging cycle, a paging indication bitmap of ‘010 . . . 1’ indicating that the paging messages of the paging sub group <b>2</b> and the paging sub group N are transmitted is transmitted to each paging sub group. As a result, the mobile stations belonging to the paging sub group <b>2</b> and the paging sub group N can receive the paging message by waking up at the time when the paging message of the corresponding paging sub group is transmitted.</div>
+<div class="description-paragraph" id="p-0186" num="0185">2-2-2-3. Grouping Method of n Bit Paging Indication</div>
+<div class="description-paragraph" id="p-0187" num="0186">According to the aforementioned n-bit bitmap paging indication method using a bitmap of multi-bits, mobile stations belonging to all paging sub groups of one paging group can identify paging indication by waking up at the same paging interval. However, if paging subframes where the paging indication using the multi-bit bitmap is transmitted are also grouped, all the mobile stations of the paging group may not wake up at the same time.</div>
+<div class="description-paragraph" id="p-0188" num="0187">In this embodiment, N paging sub groups belonging to one paging group can be divided into M paging indication groups. Namely, mobile stations belonging to N/M paging sub groups can simultaneously identify paging indication (PI) of N/M-bit size by waking up at the same paging interval (listening interval). In this case, N is divided by M when N is a multiple of M and the paging sub groups are allocated to the paging indication group at the same rate. However, the paging indication groups method can be used even though the paging sub groups are not allocated to the paging indication group at the same rate.</div>
+<div class="description-paragraph" id="p-0189" num="0188">The mobile stations of each paging group can wake up at the paging subframe determined per paging sub group to receive the paging message only if paging indication of the paging sub groups to which the mobile stations of each paging group belong is set. This will be described with reference to <figref idrefs="DRAWINGS">FIG. 17</figref>.</div>
+<div class="description-paragraph" id="p-0190" num="0189"> <figref idrefs="DRAWINGS">FIG. 17</figref> is a diagram illustrating an example that a paging indication grouping method in accordance with another embodiment of the present invention is used.</div>
+<div class="description-paragraph" id="p-0191" num="0190">Referring to <figref idrefs="DRAWINGS">FIG. 17</figref>, one paging group is divided into four paging sub groups, wherein the paging sub groups <b>1</b> and <b>2</b> are included in the paging indication group <b>1</b> and the paging sub groups <b>3</b> and <b>4</b> are included in the paging indication group <b>2</b>. In this case, paging indication of each paging indication group can be transmitted through the first subframes of different superframes. The mobile stations of the paging sub groups belonging to the same paging indication group can be established to have the same paging interval (or listening interval). Namely, supposing that the paging sub groups <b>1</b> and <b>2</b> belong to the paging indication group <b>1</b> and the paging sub groups <b>3</b> and <b>4</b> belong to the paging indication group <b>2</b>, the mobile stations of the idle mode, which belong to each paging indication group, identify the same paging indication bit with the same listening interval.</div>
+<div class="description-paragraph" id="p-0192" num="0191">In this case, the paging interval or the listening interval could be a superframe unit, and the mobile stations of the idle mode can identify the paging indication bit at the SFH which corresponds to a start part of the listening interval. Also, the mobile stations of the idle mode can identify the paging indication bit and at the same time receive system information transmitted through the SFH or the subframe including SFH.</div>
+<div class="description-paragraph" id="p-0193" num="0192">Furthermore, the mobile stations of the idle mode may identify the paging indication bit through system information. The mobile stations which have identified the paging indication bit can receive the paging message by waking up at the paging subframe or frame where the paging message of their paging sub group is transmitted, only if the paging indication bit of the paging sub group to which each mobile station of the idle mode belongs is set.</div>
+<div class="description-paragraph" id="p-0194" num="0193">For example, in the first paging cycle of <figref idrefs="DRAWINGS">FIG. 17</figref>, the paging indication bit of the paging indication group <b>1</b> is set to 10 through the first subframe of the first superframe. All mobile stations of the paging sub groups <b>1</b> and <b>2</b> receive the paging indication bit, and identify whether the paging message is transmitted to the paging sub group to which they belong. Since the paging indication bit is set to 10, the mobile stations belonging to the paging sub group <b>1</b> can receive the paging message at the previously determined subframe, and the mobile stations belonging to the paging sub group <b>2</b> continue to be operated in the idle mode.</div>
+<div class="description-paragraph" id="p-0195" num="0194">The mobile stations of the paging sub groups <b>3</b> and <b>4</b> belonging to the paging indication group <b>2</b> can receive the paging indication bit of the paging indication group <b>2</b> from the first subframe of the second superframe of the first paging cycle. Since the paging indication bit of the paging indication group <b>2</b> is set to 00, the mobile stations belonging to the paging indication group <b>2</b> can identify that the paging message is not transmitted, and can continuously be operated in the idle mode.</div>
+<div class="description-paragraph" id="p-0196" num="0195">In case of the second paging cycle, since the paging indication bit of the paging indication group <b>2</b> is 01 in the first subframe, only the mobile stations belonging to the paging sub group <b>2</b> can receive the paging message at the previously determined paging subframe. The mobile stations belonging to the paging sub groups <b>3</b> and <b>4</b> of the paging indication group <b>2</b> can receive the paging indication bit of the paging indication group <b>2</b> from the first subframe of the second superframe of the first paging cycle. Since the paging indication bit of the paging indication group <b>2</b> is set to 11, all the mobile stations belonging to the paging indication group <b>2</b> can receive the paging message from the paging subframe previously established for each paging sub group.</div>
+<div class="description-paragraph" id="p-0197" num="0196"> <figref idrefs="DRAWINGS">FIG. 18</figref> is a diagram illustrating another example that paging indication grouping method in accordance with another embodiment of the present invention is used.</div>
+<div class="description-paragraph" id="p-0198" num="0197">As illustrated in <figref idrefs="DRAWINGS">FIG. 18</figref>, if four paging sub groups exist within the paging group, the paging message of each paging sub group can be allocated one by one in a frame unit within one superframe. Namely, if the four paging sub groups belong to one paging indication group, the paging message of each paging sub group can be allocated either one by one in due order per frame or through modulo operation.</div>
+<div class="description-paragraph" id="p-0199" num="0198">2-2-2-4. Method for Transmitting a Paging Indication Bit Map Through SSFH</div>
+<div class="description-paragraph" id="p-0200" num="0199">In the IEEE 802.16m system, the SFH is divided into a primary superframe header (PSFH) and a secondary superframe header (SSFH). Although the PSFH is transmitted per superframe, the SSFH may not be transmitted per superframe. Information transmitted through the SSFH is divided into different sub-packets and then can be included in the SSFH. According to this embodiment, a method for transmitting a paging indicator having a similar function to that of the aforementioned paging indication bit through S-SFH SP5 IE (Paging Sub-Packet IE) that can be used to transfer paging information will be disclosed.</div>
+<div class="description-paragraph" id="p-0201" num="0200">Hereinafter, contents that can be included in the S-SFH SP5 IE will be described with reference to Table 8 to Table 10. In Table 8 to Table 10, it is assumed that four paging sub groups exist per paging group.</div>
+<div class="description-paragraph" id="p-0202" num="0201">First of all, Table 8 illustrates an example of contents that can be included in the S-SFH SP5 IE in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0203" num="0202">
+<tables id="TABLE-US-00008" num="00008">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 8</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Syntax</td>
+<td class="description-td">Size (bit)</td>
+<td class="description-td">Notes</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">S-SFH SP5 IE format ( ) { <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00064" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00065" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00066" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">N_PGID</td>
+<td class="description-td">3</td>
+<td class="description-td">Number of PGIDs in the</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">sub-packets</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">PGID List</td>
+<td class="description-td">16 * N_PGID</td>
+<td class="description-td">List of Paging group IDs</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">For (i=0;i&lt;N_PGID; i++){</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00067" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00068" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging group ID</td>
+<td class="description-td">TBD</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00069" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging indicator</td>
+<td class="description-td">4</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00070" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00071" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00072" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00073" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00074" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0204" num="0203">Referring to Table 8, since four paging sub groups are included in one paging ID, a paging indicator field is established to have a size of four bits.</div>
+<div class="description-paragraph" id="p-0205" num="0204">Table 9 illustrates another example of contents that can be included in the S-SFH SP5 IE in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0206" num="0205">
+<tables id="TABLE-US-00009" num="00009">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 9</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Syntax</td>
+<td class="description-td">Size (bit)</td>
+<td class="description-td">Notes</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">S-SFH SP5 IE format ( ) { <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00075" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00076" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00077" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">N_PGID</td>
+<td class="description-td">3</td>
+<td class="description-td">Number of PGIDs in</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the sub-packets</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging Indicator Usage</td>
+<td class="description-td">1</td>
+<td class="description-td">0b = 1 Paging indicator</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flag</td>
+<td class="description-td"> </td>
+<td class="description-td">bitmap is present0b = 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">paging indicator</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">bitmap is absent</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">PGID List</td>
+<td class="description-td">16 * N_PGID</td>
+<td class="description-td">List of Paging</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">group IDs</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">If( Paging Indicator Usage</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00078" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00079" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flag ==1) {</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">For (i=0;i&lt;N_PGID; i++){</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00080" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00081" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging group ID</td>
+<td class="description-td">TBD</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00082" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging indicator</td>
+<td class="description-td">4</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00083" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00084" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00085" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00086" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00087" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00088" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00089" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0207" num="0206">Referring to Table 9, a Paging Indicator Usage Flag field is set to 0 when the paging messages of all paging groups transmitted within the corresponding superframe are not transmitted at all.</div>
+<div class="description-paragraph" id="p-0208" num="0207">Table 10 illustrates other example of contents that can be included in the S-SFH SP5 IE in accordance with another embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0209" num="0208">
+<tables id="TABLE-US-00010" num="00010">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 10</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Syntax</td>
+<td class="description-td">Size (bit)</td>
+<td class="description-td">Notes</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">S-SFH SP5 IE format ( ) { <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00090" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00091" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00092" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">N_PGID</td>
+<td class="description-td">3</td>
+<td class="description-td">Number of PGIDs in</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the sub-packets</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">PGID List</td>
+<td class="description-td">16 * N_PGID <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00093" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">List of Paging group</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">IDs</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">For (i=0; i&lt;N_PGID; i++){</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00094" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00095" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging Indicator Usage Flag</td>
+<td class="description-td">1</td>
+<td class="description-td">0b = 1 Paging</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">indicator bitmap</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">is present0b = 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">paging indicator</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">bitmap is</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">absent</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">If( Paging Indicator Usage</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00096" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00097" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flag ==1) {</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging group ID</td>
+<td class="description-td">TBD</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00098" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Paging indicator</td>
+<td class="description-td">4</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00099" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00100" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00101" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00102" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00103" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">}</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00104" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+<td class="description-td">
+<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00105" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div>
+</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0210" num="0209">Referring to Table 10, unlike Table 9, a paging indicator usage flag can respectively be applied to each paging group instead of all paging groups transmitted within the corresponding superframe.</div>
+<div class="description-paragraph" id="p-0211" num="0210">3. Method for Detecting a Paging Message Using Paging CID</div>
+<div class="description-paragraph" id="p-0212" num="0211">According to still another embodiment, a method for detecting a paging message using paging CID is disclosed, in which decoding overhead of a mobile station can be reduced and the mobile station can detect the paging message more quickly.</div>
+<div class="description-paragraph" id="p-0213" num="0212">In the general wireless communication system, broadcast CID is used to transmit the paging message. However, in this embodiment, a method for transmitting a paging message using paging CID dedicated for the paging message is suggested. In this case, even if one CRC is attached to all sub-maps and the mobile station should perform blind decoding, mobile stations of an idle mode and mobile stations of a normal mode can be operated effectively. Namely, only the mobile stations of the idle mode can receive the message transmitted using the paging CID while the mobile stations of the normal mode do not receive the message transmitted using the paging CID. Accordingly, overall system throughput can be improved and power consumption of the mobile station can be reduced.</div>
+<div class="description-paragraph" id="p-0214" num="0213">Meanwhile, if a blind decoding scheme is used, in this embodiment, a method for transmitting control signaling for a paging message in a fixed location (for example, first location) of a sub-map can be used. Namely, the paging message can be transmitted from a paging subframe using a format of a fixed size in a fixed location of a sub-map. Accordingly, it is possible to reduce decoding overhead that may occur as the mobile station performs blind decoding for all sub-maps to detect control signaling. If the mobile station fails to perform blind decoding for control signaling of a previously set size in a fixed location, it can be determined that there is no paging message in the corresponding paging subframe. Accordingly, the mobile station can enter the idle mode directly without blind decoding for the other sub-map.</div>
+<div class="description-paragraph" id="p-0215" num="0214">Accordingly, in this method, since the mobile station of the idle mode decodes only a part which includes control information of the paging message from the sub-map of the paging subframe, it is effective in saving the power of the mobile station. This will be described with reference to <figref idrefs="DRAWINGS">FIG. 19</figref>.</div>
+<div class="description-paragraph" id="p-0216" num="0215"> <figref idrefs="DRAWINGS">FIG. 19</figref> is a diagram illustrating an example of a location where control signaling for a paging message in accordance with another embodiment of the present invention is transmitted.</div>
+<div class="description-paragraph" id="p-0217" num="0216">Referring to <figref idrefs="DRAWINGS">FIG. 19</figref>, supposing that the fourth subframe is a paging subframe, control signaling of the paging message can be transmitted to the mobile station through a sub-map of the corresponding subframe and is preferably located at the foremost part of the sub-map. In this case, it is efficient in that the mobile station can determine the presence of the paging message by decoding only the foremost part of the sub-map of the paging subframe.</div>
+<div class="description-paragraph" id="p-0218" num="0217">4. Multi-Level Paging Cycle</div>
+<div class="description-paragraph" id="p-0219" num="0218">According to a further embodiment, there is provided a method for establishing a paging cycle (PAGING_CYCLE) value in a multi-level, wherein the paging cycle value is one of parameters related to paging that can be set between the mobile station and the base station.</div>
+<div class="description-paragraph" id="p-0220" num="0219">In case of the mobile station which is not paged for a long time, power consumption and paging overhead can be reduced if the paging cycle of the mobile station increases to a maximum value, which is previously established, through a predetermined level. This will be described with reference to <figref idrefs="DRAWINGS">FIG. 20</figref>.</div>
+<div class="description-paragraph" id="p-0221" num="0220"> <figref idrefs="DRAWINGS">FIG. 20</figref> is a diagram illustrating an example that a paging cycle of a mobile station is established in a multi-level in accordance with the further embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0222" num="0221">First of all, as illustrated in <figref idrefs="DRAWINGS">FIG. 20(<i>a</i>)</figref>, the paging cycle of the mobile station is classified into three levels. If the mobile station is not paged for a time corresponding to one level, a time equivalent to twice of a previous level can be established as a paging cycle of next level. At this time, it is assumed that the paging cycle of the first level is 100 ms and the maximum paging cycle is 400 ms corresponding to the third level.</div>
+<div class="description-paragraph" id="p-0223" num="0222">If the mobile station is not paged for the paging interval of the first paging cycle of 100 ms after entering the idle mode, the mobile station performs the operation of the idle mode in a paging cycle of 200 ms of the second level. If the mobile station is not paged for the paging interval even by the paging cycle of the second level, the mobile station performs the operation of the idle mode in a paging cycle of 400 ms of the third level. If the mobile station is not paged for the paging interval even by the paging cycle of the third level, the mobile station performs the operation of the idle mode in a state that the paging cycle of the third level corresponding to the maximum paging cycle is maintained.</div>
+<div class="description-paragraph" id="p-0224" num="0223">Next, if the mobile station is not paged for the twice-repetition interval of the paging cycle of one level as illustrated in <figref idrefs="DRAWINGS">FIG. 20(<i>b</i>)</figref>, the mobile station can be operated in accordance with the paging cycle of next level. Of course, the number of repetition times can be changed in accordance with user s requirements or system status until the paging cycle of one level is converted to that of next level.</div>
+<div class="description-paragraph" id="p-0225" num="0224">The maximum value of the aforementioned paging cycle can be transmitted to the mobile station in a type illustrated in Table 11.</div>
+<div class="description-paragraph" id="p-0226" num="0225">Table 11 illustrates an example of contents included in a message notifying the mobile station of the maximum paging cycle of the multi-level paging cycle in accordance with the further embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0227" num="0226">
+<tables id="TABLE-US-00011" num="00011">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="4" nameend="4" namest="1" rowsep="1">TABLE 11</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type</td>
+<td class="description-td">Length <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00106" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Value <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00107" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">Scope <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00108" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Xxx <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00109" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">x <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00110" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+<td class="description-td">PAGING_CYCLE MAX</td>
+<td class="description-td">RNG-RSPDREG-CMD</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PAGING_CYCLE: Maximum value of</td>
+<td class="description-td">(System Information) D</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PAGING_CYCLEPAGING_OFFSETPaging</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Interval LengthPaging-group-ID <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png"><img alt="Figure US09681416-20170613-P00001" class="patent-full-image" file="US09681416-20170613-P00001.TIF" he="2.91mm" height="12" id="CUSTOM-CHARACTER-00111" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8b/51/5b/10cc1c8efcdef8/US09681416-20170613-P00001.png" wi="2.38mm" width="10"/></a></div> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0228" num="0227">Referring to Table 11, the maximum paging cycle (MAX PAGING_CYCLE) value can be added to the paging information that can be used in the general wireless communication system. In this case, it is preferable that the maximum paging cycle value is equal to or greater than a paging cycle (PAGING_CYCLE) parameter value. Although the paging information may be transmitted to the mobile station through the ranging response message or the deregistration command message, the paging information may be broadcasted through system information as described in 2-2-2-2.</div>
+<div class="description-paragraph" id="p-0229" num="0228">In this embodiment, the paging cycle increases by a predetermined rate or predetermined value if a paging cycle of a rule previously agreed between the mobile station and the base station, for example, a given time or a given number of times, passes. If the paging cycle reaches the maximum value, the maximum value can be maintained. Also, an increase value and an increase condition of the paging cycle may be established explicitly through a message unicasted between the mobile station and the base station.</div>
+<div class="description-paragraph" id="p-0230" num="0229">As a still further embodiment of the present invention, the mobile station and the base station through which the embodiments of the present invention can be performed will be described with reference to <figref idrefs="DRAWINGS">FIG. 5</figref> to <figref idrefs="DRAWINGS">FIG. 20</figref>.</div>
+<div class="description-paragraph" id="p-0231" num="0230">The mobile station can be operated as a transmitter in the uplink, and can be operated as a receiver in the downlink. Also, the base station can be operated as a receiver in the uplink, and can be operated as a transmitter in the downlink. Namely, the mobile station and the base station can include a transmitter and a receiver to transmit information or data.</div>
+<div class="description-paragraph" id="p-0232" num="0231">The transmitter and the receiver can include processor, module, part, and/or means for performing the embodiments of the present invention. Particularly, the transmitter and the receiver can include a module (means) for encoding a message, a module for decoding the encoded message, and an antenna for transmitting and receiving the message.</div>
+<div class="description-paragraph" id="p-0233" num="0232">The mobile station used in the embodiments of the present invention can include a low power radio frequency (RF)/intermediate frequency (IF) module. Also, the mobile station can include a means, module or part for performing controller function, medium access control (MAC) frame variable control function according to service characteristics and radio wave condition, handover function, authentication and encryption function, packet modulation and demodulation function for data transmission, quick packet channel coding function, and real-time modem control function, thereby performing the aforementioned embodiments of the present invention.</div>
+<div class="description-paragraph" id="p-0234" num="0233">The base station can transmit data received from an upper layer to the mobile station by wireless or wire. The base station can include a low power RF/IF module. Also, the base station can include a means, module or part for performing controller function, orthogonal frequency division multiple access (OFDMA) packet scheduling, time division duplex (TDD) packet scheduling and channel multiplexing function, medium access control (MAC) frame variable control function according to service characteristics and radio wave condition, handover function, authentication and encryption function, packet modulation and demodulation function for data transmission, quick packet channel coding function, and real-time modem control function, thereby performing the aforementioned embodiments of the present invention.</div>
+<div class="description-paragraph" id="p-0235" num="0234">It will be apparent to those skilled in the art that the present invention can be embodied in other specific forms without departing from the spirit and essential characteristics of the invention. Thus, the above embodiments are to be considered in all respects as illustrative and not restrictive. The scope of the invention should be determined by reasonable interpretation of the appended claims and all change which comes within the equivalent scope of the invention are included in the scope of the invention.</div>
+<heading id="h-0009">INDUSTRIAL APPLICABILITY</heading>
+<div class="description-paragraph" id="p-0236" num="0235">The embodiments of the present invention can be applied to various wireless access systems. Examples of various wireless access systems include 3GPP (3rd Generation Partnership Project) system, 3GPP2 system and/or IEEE 802.xx (Institute of Electrical and Electronic Engineers 802) system. The embodiments of the present invention can be applied to all technical fields to which the various access systems are applied, as well as the various access systems.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">3</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM109723511">
+<claim-statement>The invention claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method of receiving a message by a terminal, the method comprising:
+<div class="claim-text">receiving indication information included in a signaling part of a frame via a broadcast channel, wherein the indication information indicates whether the message is included in a first part of the frame other than the signaling part of the frame, wherein when the indication information is set to a first value, the message is included in the first part of the frame and when the indication information is set to a second value, the message is not included in the first part of the frame;</div>
+<div class="claim-text">when the indication information is set to the first value, obtaining the message in the first part of the frame according to the indication information, wherein the message includes update information indicating whether broadcast information is changed; and</div>
+<div class="claim-text">acquiring the changed broadcast information when the update information indicates that the broadcast information is changed,</div>
+<div class="claim-text">wherein both the indication information and the message are included in the frame,</div>
+<div class="claim-text">wherein the signaling part is located in front of the first part in the frame,</div>
+<div class="claim-text">wherein the first part of the frame is transmitted in a subframe unit, and</div>
+<div class="claim-text">wherein interval information which is set in the subframe unit is included in the signaling part of the frame.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the broadcast information is received periodically.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a location where the message in the frame is received is defined in accordance with a previously determined rule.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

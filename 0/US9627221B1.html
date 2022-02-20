@@ -1,0 +1,1501 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US9627221B1 - Continuous process incorporating atomic layer etching 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA193522289">
+<div class="abstract" id="p-0001" num="0000">A method of continuous fabrication of a layered structure on a substrate having a patterned recess, includes: (i) forming a dielectric layer on a substrate having a patterned recess in a reaction chamber by PEALD using a first RF power; (ii) continuously after completion of step (i) without breaking vacuum, etching the dielectric layer on the substrate in the reaction chamber by PEALE using a second RF power, wherein a pressure of the reaction chamber is controlled at 30 Pa to 1,333 Pa throughout steps (i) and (ii); a noble gas is supplied to the reaction chamber continuously throughout steps (i) and (ii); and the second RF power is higher than the first RF power.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES114778022">
+<heading id="h-0001">BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0002" num="0001">Field of the Invention</div>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention generally relates to a method of plasma-enhanced atomic layer deposition (PEALD) and plasma-enhanced atomic layer etching (PEALE) combined and performed continuously in a same reaction chamber.</div>
+<div class="description-paragraph" id="p-0004" num="0003">Description of the Related Art</div>
+<div class="description-paragraph" id="p-0005" num="0004">Atomic layer etching (ALE) is cyclic, self-limiting, atomic layer-level etching using an etchant gas adsorbed on a target film and reacted with excited reaction species, as disclosed in U.S. patent application Ser. No. 14/598,532 owned by the same applicant as in this application, the disclosure of which is incorporated herein by reference in its entirety. As compared with conventional etching technology, ALE can perform precise, atomic layer-level continuous etching to form fine, narrow convex-concave patterns and may be suitable for e.g., double-patterning processes. However, productivity and controllability over directionality of etching, or the like need to be improved in order to expand ALE's application in fine etching processes in advanced semiconductor processing.</div>
+<div class="description-paragraph" id="p-0006" num="0005">Any discussion of problems and solutions in relation to the related art has been included in this disclosure solely for the purposes of providing a context for the present invention, and should not be taken as an admission that any or all of the discussion was known at the time the invention was made.</div>
+<heading id="h-0002">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0007" num="0006">Conventionally, deposition and etching are performed typically in different reaction chambers. For example, after forming a film on a substrate by chemical vapor deposition (CVD) in a chamber for deposition, the substrate is transferred to another chamber for etching, and the film is etched in the chamber. This may be because use of different chambers for deposition and for etching is more productive when depositing and etching a thick layer, and can also avoid a particle contamination problem.</div>
+<div class="description-paragraph" id="p-0008" num="0007">ALE is relatively new technology, and a combination of ALD and ALE continuously performed in a same chamber is not known. In an embodiment, an ALE process is incorporated in an ALD process so that when conformity of a film (e.g., SiO film) deposited on a substrate surface with a fine pattern by ALD is not sufficient (e.g., less than 90%) due to less reactive precursor such as a hydrocarbon-based precursor, the conformity of the film can be improved by conducting ALE which can provide anisotropic etching so that a thick portion of the film can be etched more. On the other hand, anisotropic etching of ALE can lower the conformality of the film so that a carbon core material can be readily exposed in double-patterning processes, and by ashing (e.g., O<sub>2</sub>-ashing), the carbon core material can continuously be removed smoothly.</div>
+<div class="description-paragraph" id="p-0009" num="0008">Further, when conformity of a film deposited on a substrate surface with a fine pattern by ALD is sufficient (e.g., 90% or higher), etching can be performed while maintaining such a high conformity of the film by ALE which can also provide isotropic etching. The directionality of etching (i.e., isotropic or anisotropic etching) by ALE can be controlled by adjusting proper parameters described in this disclosure and/or performing surface treatment incorporated in an ALE process described in this disclosure.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Since an ALE process is incorporated into an ALD process to constitute a continuous fabrication process, i.e., depositing and etching an extremely thin layer (e.g., on a sub-manometer order), a particle contamination problem can be avoided even though the ALD and ALE processes are conducted in the same reaction chamber.</div>
+<div class="description-paragraph" id="p-0011" num="0010">In some embodiments, a method of continuous fabrication of a layered structure on a substrate having a patterned recess, comprises: (i) forming a dielectric layer on a substrate having a patterned recess in a reaction chamber by plasma-enhanced atomic layer deposition (PEALD) using a first RF power; (ii) continuously after completion of step (i) without breaking vacuum, etching the dielectric layer on the substrate in the reaction chamber by plasma-enhanced atomic layer etching (PEALE) using a second RF power, wherein a pressure of the reaction chamber is controlled at 30 Pa to 1,333 Pa throughout steps (i) and (ii); a noble gas is supplied to the reaction chamber continuously throughout steps (i) and (ii); and the second RF power is higher than the first RF power.</div>
+<div class="description-paragraph" id="p-0012" num="0011">For purposes of summarizing aspects of the invention and the advantages achieved over the related art, certain objects and advantages of the invention are described in this disclosure. Of course, it is to be understood that not necessarily all such objects or advantages may be achieved in accordance with any particular embodiment of the invention. Thus, for example, those skilled in the art will recognize that the invention may be embodied or carried out in a manner that achieves or optimizes one advantage or group of advantages as taught herein without necessarily achieving other objects or advantages as may be taught or suggested herein.</div>
+<div class="description-paragraph" id="p-0013" num="0012">Further aspects, features and advantages of this invention will become apparent from the detailed description which follows.</div>
+<description-of-drawings>
+<heading id="h-0003">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0014" num="0013">These and other features of this invention will now be described with reference to the drawings of preferred embodiments which are intended to illustrate and not to limit the invention. The drawings are greatly simplified for illustrative purposes and are not necessarily to scale.</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 1A</figref> is a schematic representation of a PEALD (plasma-enhanced atomic layer deposition) apparatus for depositing a protective film usable in an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 1B</figref> illustrates a schematic representation of a precursor supply system using a flow-pass system (FPS) usable in an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows a schematic process sequence of PEALD in one cycle in combination with a schematic process sequence of PEALE in one cycle according to an embodiment of the present invention wherein a cell in gray represents an ON state whereas a cell in white represents an OFF state, and the width of each column does not represent duration of each process.</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows a schematic process sequence of PEALD in one cycle in combination with a schematic process sequence of PEALE in one cycle and a schematic process sequence of ashing according to an embodiment of the present invention wherein a cell in gray represents an ON state whereas a cell in white represents an OFF state, and the width of each column does not represent duration of each process.</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows a schematic process sequence of PEALE in one cycle in combination with a schematic process sequence of O<sub>2 </sub>treatment in one cycle, constituting one cycle of a directionality-controlled etching process, according to an embodiment of the present invention, wherein a step illustrated in a line represents an ON state whereas no step illustrated in a line represents an OFF state, and the width of each step does not represent duration of each process.</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIGS. 5A, 5B, and 5C</figref> are Scanning Electron Microscope (SEM) photographs of cross-sectional views of conformal silicon oxide films wherein <figref idrefs="DRAWINGS">FIG. 5A</figref> shows a silicon oxide film prior to PEALE cycles, <figref idrefs="DRAWINGS">FIG. 5B</figref> shows a silicon oxide film after the PEALE cycles, and <figref idrefs="DRAWINGS">FIG. 5C</figref> shows a silicon oxide film after O<sub>2 </sub>treatment cycles subsequent to the PEALE cycles according to embodiments of the present invention.</div>
+</description-of-drawings>
+<heading id="h-0004">DETAILED DESCRIPTION OF EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0021" num="0020">In this disclosure, “gas” may include vaporized solid and/or liquid and may be constituted by a single gas or a mixture of gases. In this disclosure, a process gas introduced to a reaction chamber through a showerhead may be comprised of, consist essentially of, or consist of an etching gas and an additive gas. The additive gas typically includes a reactant gas for reacting with the etching gas when RF power is applied to the reactant gas. The reactant gas may be diluted with a dilution gas which is introduced to the reaction chamber as a mixed gas with the reactant gas or separately from the reactant gas. The etching gas can be introduced with a carrier gas such as a noble gas. Also, a gas other than the process gas, i.e., a gas introduced without passing through the showerhead, may be used for, e.g., sealing the reaction space, which includes a seal gas such as a noble gas. In some embodiments, the term “etchant gas” or “etching gas” refers generally to at least one gaseous or vaporized compound that participates in etching reaction that etches a layer on a substrate, and particularly to at least one compound that chemisorbs onto the layer in a non-excited state and etches the layer when being activated, whereas the term “reactant gas” refers to at least one gaseous or vaporized compound that contributes to activation of the etching gas or catalyzes an etching reaction by the etching gas. The term “etchant gas” or “etching gas” refers to an active gas without a carrier gas, or a mixture of an active gas and a carrier gas, depending on the context. Similarly, the term “reactant gas” refers to a reactant gas without a dilution gas, or a reactant gas diluted with a dilution gas, depending on the context. The term “carrier gas” refers to an inert or inactive gas in a non-excited state which carries an etching gas to the reaction space in a mixed state and enters the reaction space as a mixed gas including the etching gas. The inert gas and the etching gas can converge as a mixed gas anywhere upstream of the reaction space, e.g., (a) in an etching gas line upstream of a mass flow controller provided in the etching gas line, wherein the inert gas is provided as a carrier gas or purge gas flowing through the etching gas line, (b) in an etching gas line downstream of a mass flow controller provided in the etching gas line but upstream of a gas manifold where all or main process gases converge, wherein the inert gas is provided as a part of the etching gas (as a carrier gas or purge gas), and/or (c) in a gas manifold where all or main process gases converge, wherein the inert gas flows in a reactant gas line as a reactant gas or purge gas upstream of the gas manifold. In the above, typically, (a) is rare. Thus, the inert gas can serve as a carrier gas (as a part of etching gas) and/or at least a part of a reactant gas, wherein the above gases can serve also as purge gases.</div>
+<div class="description-paragraph" id="p-0022" num="0021">In some embodiments, “film” refers to a layer continuously extending in a direction perpendicular to a thickness direction substantially without pinholes to cover an entire target or concerned surface, or simply a layer covering a target or concerned surface. In some embodiments, “layer” refers to a structure having a certain thickness formed on a surface or a synonym of film or a non-film structure. A film or layer may be constituted by a discrete single film or layer having certain characteristics or multiple films or layers, and a boundary between adjacent films or layers may or may not be clear and may be established based on physical, chemical, and/or any other characteristics, formation processes or sequence, and/or functions or purposes of the adjacent films or layers.</div>
+<div class="description-paragraph" id="p-0023" num="0022">Further, in this disclosure, any two numbers of a variable can constitute a workable range of the variable as the workable range can be determined based on routine work, and any ranges indicated may include or exclude the endpoints. Additionally, any values of variables indicated (regardless of whether they are indicated with “about” or not) may refer to precise values or approximate values and include equivalents, and may refer to average, median, representative, majority, etc. in some embodiments. Additionally, the terms “constituted by” and “having” refer independently to “typically or broadly comprising”, “comprising”, “consisting essentially of”, or “consisting of” in some embodiments. Further, an article “a” or “an” refers to a species or a genus including multiple species. In this disclosure, any defined meanings do not necessarily exclude ordinary and customary meanings in some embodiments.</div>
+<div class="description-paragraph" id="p-0024" num="0023">In the present disclosure where conditions and/or structures are not specified, the skilled artisan in the art can readily provide such conditions and/or structures, in view of the present disclosure, as a matter of routine experimentation. In all of the disclosed embodiments, any element used in an embodiment can be replaced with any elements equivalent thereto, including those explicitly, necessarily, or inherently disclosed herein, for the intended purposes. Further, the present invention can equally be applied to apparatuses and methods.</div>
+<div class="description-paragraph" id="p-0025" num="0024">The embodiments will be explained with respect to preferred embodiments. However, the present invention is not limited to the preferred embodiments.</div>
+<div class="description-paragraph" id="p-0026" num="0025">A PEALE process can be incorporated into another process and performed in the same reaction chamber wherein the PEALE process and the other process can continuously be performed. In this disclosure, the word “continuously” refers to at least one of the following: without breaking vacuum, without opening a gate valve, without being exposed to air, without opening a chamber, as an in-situ process, without interruption as a step in sequence, and without interruption in space and in flow (e.g., there is at least one uninterrupted inflow over the substrate), depending on the embodiment. In some embodiments, an auxiliary step such as purging or other negligible step in the context does not count as a step, and thus, the word “continuously” does not exclude being intervened with the auxiliary step. For example, the following combinations can effectively be performed in the same reaction chamber:</div>
+<div class="description-paragraph" id="p-0027" num="0026">(a) PEALD+PEALE (continuous process of deposition and etching)</div>
+<div class="description-paragraph" id="p-0028" num="0027">(b) PECVD+PEALE (continuous process of deposition and etching)</div>
+<div class="description-paragraph" id="p-0029" num="0028">(c) PEALE+O<sub>2</sub>-ashing (continuous process of etching and ashing)</div>
+<div class="description-paragraph" id="p-0030" num="0029">(d) PEALD+PEALE+O<sub>2</sub>-ashing (continuous process of deposition, etching, and ashing)</div>
+<div class="description-paragraph" id="p-0031" num="0030">In order to increase productivity, the reaction chamber can be incorporated into a cluster-type multiple-chamber apparatus. In the above, a combination of PEALD and PEALE ((a) and (d)) is preferable since the combination uses a cycle targeting extremely thin layers and can constitute a continuous fabrication process. In the above, the following applications can effectively be performed:</div>
+<div class="description-paragraph" id="p-0032" num="0031">(e) Control over sidewall coverage by a combination of deposition and anisotropic etching of PEALE</div>
+<div class="description-paragraph" id="p-0033" num="0032">(f) Patterning (e.g., anisotropic etching by PEALE→core-ashing)</div>
+<div class="description-paragraph" id="p-0034" num="0033">(g) Deposition and patterning (e.g., deposition of a film by PEALD on a patterned core material→anisotropic etching by PEALE→core-ashing)</div>
+<div class="description-paragraph" id="p-0035" num="0034">In some embodiments, a plasma used for PEALE can be generated by a plasma-generating apparatus including a capacitive coupling type apparatus, inductively coupled apparatus, microwave type apparatus, and electron cyclotron resonance type apparatus, which can be used singly or in combination. In some embodiments, the apparatus is a capacitive coupling-type apparatus, wherein RF power can be applied to any one of upper and lower electrodes, and the other is grounded. For example, RF power is applied to the upper electrode (e.g., a showerhead) when PEALD is performed, whereas RF power is applied to the lower electrode (e.g., a susceptor) when PEALE is performed.</div>
+<div class="description-paragraph" id="p-0036" num="0035">In some embodiments, since a PEALE process and another process (preceding process and/or subsequent process) are performed in the same reaction chamber, the process pressure is maintained at about 30 Pa to about 1,333 Pa (10 Torr), typically about 100 Pa to about 666 Pa.</div>
+<div class="description-paragraph" id="p-0037" num="0036">PEALD and PEALE are entirely opposite processes (depositing and etching), and thus, PEALE may cause some problems to the film deposited by PEALD. For example, etching by PEALE progresses to the extent that a pre-coat deposited by PEALD is etched by PEALE, resulting in generation of particles and in removal of a protective layer for blocking metal contamination. The occurrence of the above problems can be inhibited by depositing a pre-coat having a thickness greater than the thickness reduced by etching, or by depositing a pre-coat before every combined cycle of PEALD and PEALE.</div>
+<div class="description-paragraph" id="p-0038" num="0037">In some embodiments, PEALE comprises repeating a cycle which comprises the steps of supplying an etchant precursor to a reaction space where a substrate with a patterned surface covered with a target film is placed, purging the reaction space, exposing the target film to a plasma in the reaction space to perform atomic layer-level etching of the target film, and purging the reaction space, wherein directionality of etching (anisotropic or isotropic etching) is controlled to manipulate three-dimensional dimensions of the target film in the patterned recesses. The directionality of etching can be controlled by using Ar/CF plasma for PEALE and incorporating surface treatment (e.g., O<sub>2 </sub>plasma treatment), and/or by modulating the RF frequency of plasma and the amplitude of RF power used for PEALE. Additionally, the directionality of etching can also be controlled by surface treatment which improves adsorption of etchant precursor on a surface by introducing OH groups and/or NH groups on the surface, which surface treatment includes exposing the surface to oxidizing gas, nitriding gas, or noble gas such as He and Ar.</div>
+<div class="description-paragraph" id="p-0039" num="0038">Some embodiments of the present invention provide a method of continuous fabrication of a layered structure on a substrate having a patterned recess, comprising: (i) forming a dielectric layer on a substrate having a patterned recess in a reaction chamber by plasma-enhanced atomic layer deposition (PEALD) using a first RF power; (ii) continuously after completion of step (i) without breaking vacuum, etching the dielectric layer on the substrate in the reaction chamber by plasma-enhanced atomic layer etching (PEALE) using a second RF power, wherein a pressure of the reaction chamber is controlled at 30 Pa to 1,333 Pa throughout steps (i) and (ii); a noble gas is supplied to the reaction chamber continuously throughout steps (i) and (ii); and the second RF power is higher than the first RF power.</div>
+<div class="description-paragraph" id="p-0040" num="0039">In some embodiments, step (ii) comprises: a PEALE cycle comprising: (iia) supplying a pulse of an etchant gas to the reaction chamber to chemisorb the etching gas in an unexcited state on a surface of the substrate in the reaction chamber; and (iib) applying a pulse of RF power to the reaction chamber to generate a reactive species of the noble gas and to contact the etchant gas-chemisorbed surface of the substrate with the reactive species so that the dielectric layer on the substrate is etched, wherein a portion of the dielectric layer on a top surface (a blanket surface) of the substrate is more etched than a portion of the dielectric layer on a sidewall of the recess.</div>
+<div class="description-paragraph" id="p-0041" num="0040">In some embodiments, step (ii) further comprises: a surface treatment cycle comprising: after step (iib), supplying an oxygen-containing gas to the reaction chamber; and applying a pulse of RF power to the reaction chamber to generate an oxygen plasma to further etch the dielectric layer, wherein the portion of the dielectric layer on the sidewall of the recess is more etched than the portion of the dielectric layer on the top surface of the substrate.</div>
+<div class="description-paragraph" id="p-0042" num="0041">In some embodiments, the etchant is a fluorocarbon. For example, as an etchant, C<sub>2</sub>F<sub>6</sub>, C<sub>4</sub>F<sub>8</sub>, etc. can be used singly or in combination.</div>
+<div class="description-paragraph" id="p-0043" num="0042">In some embodiments, the oxygen-containing gas is oxygen. Also, as an oxygen-containing gas, CO<sub>2</sub>, N<sub>2</sub>O, etc. can be used singly or in combination.</div>
+<div class="description-paragraph" id="p-0044" num="0043">In some embodiments, at least one surface treatment cycle is conducted after every at least one PEALE cycle or after completion of the PEALE cycles. The surface treatment is post-PEALE treatment, and at least one cycle of the surface treatment is conducted after repeating the PEALE cycle once or multiple times, wherein the cycle(s) of PEALE and the cycle(s) of the surface treatment constitute one etching cycle which may be repeated after conducting the PEALD cycle(s). When the number of a cycle or cycles of PEALE is p, the number of a cycle or cycles of the surface treatment conducted is q, and the number of a cycle or cycles of etching (including the PEALE and the surface treatment) is r, p is 1 to 20, typically 1 to 10, q is 1 to 5, typically 1 to 3, and r is 1 to 3,000 typically 1 to 1,000. When O<sub>2</sub>-plasma is used as the post-PEALE surface treatment, the thickness of a film deposited on sidewalls can be selectively reduced more than that of the film deposited on a top surface where a recess is formed or on a bottom surface of the recess. A by-product of PEALE such as a carbon polymer is re-deposited more on the sidewalls than on the top and bottom surfaces because ion bombardment by a plasma is weaker on the sidewalls than the top and bottom surfaces, and O<sub>2</sub>-plasma can selectively etch the re-deposited by-product layer while leaving the target film (e.g., SiO<sub>2</sub>, SiN) and the substrate (Si) substantially intact. In some embodiments, a duration of the pulse of RF power in the surface treatment cycle is longer than a duration of the pulse of RF power in the PEALE cycle.</div>
+<div class="description-paragraph" id="p-0045" num="0044">In some embodiments, the dielectric layer is a silicon oxide layer. Also, as a dielectric layer, a silicon nitride layer, silicon carbide, and silicon carbon-oxide can be used.</div>
+<div class="description-paragraph" id="p-0046" num="0045">In some embodiments, the patterned recess of the substrate is formed by a photoresist, and the dielectric layer is deposited on the substrate, wherein step (ii) is continued until only a portion of the dielectric layer on a top surface of the substrate is removed so as to expose the photoresist therefrom, and the method further comprises, continuously after step (ii) without breaking vacuum, (iii) ashing the photoresist by a plasma in the reaction chamber. In some embodiments, the plasma for ashing is an oxygen plasma. Also, as a plasma for ashing, CO<sub>2</sub>, H<sub>2</sub>O, etc. can be used singly or in combination.</div>
+<div class="description-paragraph" id="p-0047" num="0046">In some embodiments, the method further comprises, continuously before step (i) without breaking vacuum, forming a pre-coat layer on the substrate in the reaction chamber. In some embodiments, the pre-coat layer is constituted by a material which is the same as that constituting the dielectric layer.</div>
+<div class="description-paragraph" id="p-0048" num="0047">In some embodiments, the patterned recess has a depth of about 10 nm to about 1,000 nm (typically about 20 nm to about 300 nm), and an aspect ratio of about 1 to about 100 (typically about 1 to about 10). In some embodiments, the dielectric layer has a thickness of about 10 nm to about 100 nm (typically about 3 nm to about 80 nm).</div>
+<div class="description-paragraph" id="p-0049" num="0048">In some embodiments, a plasma used for the PEALD and PEALE is generated in situ in the reaction chamber using capacitive coupling type electrodes provided in the reaction chamber.</div>
+<div class="description-paragraph" id="p-0050" num="0049">Some embodiments will be explained with respect to the drawings. However, the present invention is not limited to the embodiments.</div>
+<div class="description-paragraph" id="p-0051" num="0050">In some embodiments, the process sequence may be set as illustrated in <figref idrefs="DRAWINGS">FIG. 2</figref>. <figref idrefs="DRAWINGS">FIG. 2</figref> shows a schematic process sequence of PEALD in one cycle in combination with a schematic process sequence of PEALE in one cycle according to an embodiment of the present invention wherein a cell in gray represents an ON state whereas a cell in white represents an OFF state, and the width of each column does not represent duration of each process. In this embodiment, one cycle of PEALD comprises “Si-Feed” where a Si-containing precursor gas (Si-precursor) is fed to a reaction space via a carrier gas which carries the Si-precursor without applying RF power to the reaction space, and also, a dilution gas and a reactant gas are fed to the reaction space, thereby chemisorbing the etching gas onto a surface of a substrate via self-limiting adsorption; “Purge” where no Si-precursor is fed to the reaction space, while the carrier gas, the dilution gas, and reactant gas are continuously fed to the reaction space, without applying RF power, thereby removing non-chemisorbed etching gas and excess gas from the surface of the substrate; “RF” where RF power is applied to the reaction space while the carrier gas, the dilution gas, and reactant gas are continuously fed to the reaction space, without feeding the Si-precursor, thereby depositing a dielectric layer through plasma surface reaction with the reactant gas in an excited state; and “Purge” where the carrier gas, the dilution gas, and reactant gas are continuously fed to the reaction space, without feeding the Si-precursor and without applying RF power to the reaction space, thereby removing by-products and excess gas from the surface of the substrate. The carrier gas can be constituted by the reactant gas. Due to the continuous flow of the carrier gas entering into the reaction space as a constant stream into which the Si-precursor is injected intermittently or in pulses, purging can be conducted efficiently to remove excess gas and by-products quickly from the surface of the layer, thereby efficiently continuing multiple ALD cycles.</div>
+<div class="description-paragraph" id="p-0052" num="0051">In the sequence illustrated in <figref idrefs="DRAWINGS">FIG. 2</figref>, after the PEALD cycles, the PEALE cycle starts in the same reaction chamber. In this sequence, one cycle of PEALE comprises: “Etchant-Feed” where an etchant precursor is fed to the reaction space without applying RF power to the reaction space, and also, the carrier gas and the dilution gas used in the PEALD cycle are continuously fed to the reaction space at the constant flow rates whereas no reactant gas used in the PEALD cycle is fed to the reaction space, thereby chemisorbing the etchant precursor onto the surface of the substrate via self-limiting adsorption; “Purge” where no etchant precursor is fed to the reaction space, while the carrier gas and the dilution gas are continuously fed to the reaction space, without applying RF power, thereby removing non-chemisorbed etchant precursor and excess gas from the surface of the substrate; “RF” where RF power is applied to the reaction space while the carrier gas and the dilution gas are continuously fed to the reaction space, without feeding the etchant precursor, thereby etching a layer on which the etchant precursor is chemisorbed through plasma reaction; and “Purge” where the carrier gas and the dilution gas are continuously fed to the reaction space, without feeding the etchant precursor and without applying RF power to the reaction space, thereby removing by-products and excess gas from the surface of the substrate. The carrier gas and/or the dilution gas are used as a reactant gas for PEALE. Due to the continuous flow of the carrier gas and the dilution gas entering into the reaction space as a constant stream into which the etchant precursor is injected intermittently or in pulses, purging can be conducted efficiently to remove excess gas and by-products quickly from the surface of the layer, thereby efficiently continuing multiple ALE cycles.</div>
+<div class="description-paragraph" id="p-0053" num="0052">In some embodiments, the carrier gas for the Si-precursor is fed to the reaction chamber through the same gas inlet port, wherein the carrier gas, which flows from a gas source through a line fluidically connected to a reservoir of the Si-precursor in the PEALD cycle, bypasses the reservoir and enters into the reaction chamber through the gas inlet port in the PEALE cycle at a constant flow rate. The dilution gas can also fed at a constant flow rate throughout the continuous fabrication process constituted by the PEALD cycles and the PEALE cycles. Accordingly, the fluctuation of pressure in the reaction chamber can effectively be avoided when changing the PEALD cycle to the PEALE cycle in the reaction chamber.</div>
+<div class="description-paragraph" id="p-0054" num="0053"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows a schematic process sequence of PEALD in one cycle in combination with a schematic process sequence of PEALE in one cycle and a schematic process sequence of ashing according to an embodiment of the present invention wherein a cell in gray represents an ON state whereas a cell in white represents an OFF state, and the width of each column does not represent duration of each process. In this embodiment, the PEALE cycles expose a core portion covered with the dielectric layer from the top surface. In the sequence illustrated in <figref idrefs="DRAWINGS">FIG. 3</figref>, after the PEALD cycles and the PEALE cycles, an ashing cycle starts in the same reaction chamber. In this sequence, one cycle of ashing comprises: “02 In” where an oxygen gas is fed to the reaction space without applying RF power to the reaction space, and also, the carrier gas and the dilution gas used in the PEALD and PEALE cycles are continuously fed to the reaction space at constant flow rates; “02 Stabilize” where the gas flows are maintained until the gas flows are stabilized in the reaction space without applying RF power; “RF” where RF power is applied to the reaction space while the oxygen gas, the carrier gas, and the dilution gas are continuously fed to the reaction space, thereby ashing a core portion by a plasma of the oxygen gas, the carrier gas, and the dilution gas, while leaving the dielectric layer as spacers; and “Purge” where the carrier gas and the dilution gas are continuously fed to the reaction space without feeding the oxygen gas and without applying RF power to the reaction space, thereby removing by-products and excess gas from the surface of the substrate. Due to the continuous flow of the carrier gas and the dilution gas entering into the reaction space as a constant stream into which the oxygen gas is injected intermittently or in pulses, purging can be conducted efficiently to remove excess gas and by-products quickly from the surface of the layer.</div>
+<div class="description-paragraph" id="p-0055" num="0054">In some embodiments, the carrier gas for the Si-precursor in the PEALD cycle and for the etchant precursor in the PEALE cycle is used without the Si-precursor and the etchant precursor in the ashing cycle even though the etchant precursor is gaseous at room temperature and does not require a carrier gas. The carrier gas is fed to the reaction chamber through the same gas inlet port, wherein the carrier gas bypasses the reservoir of the Si-precursor and enters into the reaction chamber through the gas inlet port of the reaction chamber at the same flow rate. The dilution gas can also fed at a constant flow rate throughout the continuous fabrication process constituted by the PEALD cycles, the PEALE cycles, and the ashing cycle. Accordingly, the fluctuation of pressure in the reaction chamber can effectively be avoided when changing the PEALE cycle to the ashing cycle in the reaction chamber.</div>
+<div class="description-paragraph" id="p-0056" num="0055">In some embodiments, PEALD may be conducted under conditions shown in Table 1 below.</div>
+<div class="description-paragraph" id="p-0057" num="0056">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conditions for PEALD</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Substrate temperature</td>
+<td class="description-td">0 to 600° C. (preferably 50 to 500° C.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pressure</td>
+<td class="description-td">30 to 1333 Pa (preferably 100 to 666 Pa)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Inert gas (as a carrier gas </td>
+<td class="description-td">Ar, He, N<sub>2</sub>,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">and/or dilution gas)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of carrier gas</td>
+<td class="description-td">500 to 4000 sccm (preferably 1000 to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(continuous)</td>
+<td class="description-td">2000 sccm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of dilution gas</td>
+<td class="description-td">100 to 3000 sccm (preferably 500 to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(continuous)</td>
+<td class="description-td">2000 sccm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reactant gas</td>
+<td class="description-td">O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>O.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of reactant gas</td>
+<td class="description-td">50 to 3000 sccm (preferably 100 to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(continuous)</td>
+<td class="description-td">1000 sccm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Precursor gas</td>
+<td class="description-td">Bis-Diethyl-Amino-Silane, </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Tris-Diethyl-Amino-Silane</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">RF power (13.56 MHz) </td>
+<td class="description-td">25 to 2000 W (preferably 100 to 500 W)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">for a 300-mm wafer</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Si-Feed”</td>
+<td class="description-td">0.1 to 5 sec. (preferably 0.1 to 1 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Purge” </td>
+<td class="description-td">0.2. to 10 sec. (preferably 0.2. to 1 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">after “Feed”</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “RF”</td>
+<td class="description-td">0.1 to 10 sec. (preferably 0.5 to 5 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Purge” </td>
+<td class="description-td">0.1 to 10 sec. (preferably 0.2 to 1. sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">after “RF”</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">GPC (nm/cycle)</td>
+<td class="description-td">0.03 to 0.2 (preferably 0.08 to 0.2) on</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">top surface</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0058" num="0057">In some embodiments, the inert gas is selected from the group consisting of a noble gas (such as He, Ne, Ar, Kr, and/or Xe, preferably Ar and/or He), nitrogen gas, or a combination of a noble gas and nitrogen gas.</div>
+<div class="description-paragraph" id="p-0059" num="0058">The dielectric film to be etched includes, but is not limited to, a low-k film made of: silicon-containing insulation film constituted by SiO, SiC, SiCN, SiN, or the like; metal-containing oxide film constituted by Al, Ti, or the like; nitride film; or metal film. In some embodiments, the dielectric film is formed in trenches or vias including side walls and bottom surfaces, and/or flat surfaces, by plasma-enhanced ALD, thermal ALD, radical-enhanced ALD, or any other thin film deposition method. Typically, the thickness of the dielectric film is in a range of about 50 nm to about 500 nm (a desired film thickness can be selected as deemed appropriate according to the application and purpose of film, etc.). The dielectric film may be used for double-patterning.</div>
+<div class="description-paragraph" id="p-0060" num="0059">In some embodiments, PEALE may be conducted under conditions shown in Table 2 below.</div>
+<div class="description-paragraph" id="p-0061" num="0060">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conditions for PEALE</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Substrate temperature</td>
+<td class="description-td">Same as in PEALD</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pressure</td>
+<td class="description-td">Same as in PEALD</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Inert gas (as a carrier gas </td>
+<td class="description-td">Same as in PEALD</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">and/or reactant gas)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of carrier gas</td>
+<td class="description-td">Same as in PEALD</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(continuous)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of dilution gas</td>
+<td class="description-td">Same as in PEALD</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(continuous)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Etchant gas</td>
+<td class="description-td">C<sub>2</sub>F<sub>6</sub>, C<sub>4</sub>F<sub>8</sub> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of etchant gas</td>
+<td class="description-td">0.1 to 50 sccm (preferably 0.5 to 5 sccm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">RF power (13.56 MHz) </td>
+<td class="description-td">50 to 3000 W (preferably 100 to 500 W)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">for a 300-mm wafer</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of </td>
+<td class="description-td">0.1 to 5 sec. (preferably 0.1 to 1 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">“Etchant Feed”</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Purge”</td>
+<td class="description-td">0.2 to 120 sec. (preferably 0.5 to 10 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “RF”</td>
+<td class="description-td">0.1 to 10 sec. (preferably 0.2 to 5 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Purge”</td>
+<td class="description-td">0.1 to 10 sec. (preferably 0.5 to 5 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EPC (nm/cycle)</td>
+<td class="description-td">0.005 to 0.2 (preferably 0.01 to 0.1) </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">on top surface</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0062" num="0061">In PEALE, oxygen gas is normally not used; however, in some embodiments, oxygen gas may be used, and in that case, oxygen gas may flow continuously.</div>
+<div class="description-paragraph" id="p-0063" num="0062">RF power for PEALE is n times greater than RF power for PEALD, wherein n is more than 1 and less than 20 (e.g., 1.5 times to 10 times, 2 times to 5 times) in some embodiments. In some embodiments, the etching gas is at least one halogen-containing gas such as C<sub>2</sub>F<sub>6</sub>, C<sub>4</sub>F<sub>8</sub>, C<sub>3</sub>F<sub>8</sub>, C<sub>5</sub>F<sub>8</sub>, and/or at least one hydrocarbon gas such as hexane In some embodiments, no gas other than a halogen-containing gas flows as the etching gas throughout the ALE process.</div>
+<div class="description-paragraph" id="p-0064" num="0063">In some embodiments, a precoat film is deposited prior to deposition of a dielectric film on a substrate so as to prevent over-etching by PEALE. In some embodiments, precoat deposition may be conducted under conditions shown in Table 3 below.</div>
+<div class="description-paragraph" id="p-0065" num="0064">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conditions for precoat deposition</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Substrate temperature</td>
+<td class="description-td">0 to 600° C. (preferably 50 to 500° C.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pressure</td>
+<td class="description-td">30 to 1333 Pa (preferably 100 to 666 Pa)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Inert gas (as a carrier gas </td>
+<td class="description-td">Ar, He, N<sub>2</sub>,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">and/or dilution gas)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of carrier gas</td>
+<td class="description-td">0 to 600° C. (preferably 50 to 500° C.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(continuous)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of dilution gas</td>
+<td class="description-td">30 to 1333 Pa (preferably 100 to 666 Pa)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(continuous)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reactant gas</td>
+<td class="description-td">Ar, He, N<sub>2</sub>,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Flow rate of reactant gas</td>
+<td class="description-td">500 to 4000 sccm (preferably 1000 to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(continuous)</td>
+<td class="description-td">2000 sccm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Precursor gas</td>
+<td class="description-td">100 to 3000 sccm (preferably 500 to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2000 sccm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">RF power (13.56 MHz) </td>
+<td class="description-td">O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>O.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">for a 300-mm wafer</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Si-Feed”</td>
+<td class="description-td">50 to 3000 sccm (preferably 100 to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1000 sccm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Purge”</td>
+<td class="description-td">Bis-Diethyl-Amino-Silane, </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">after “Feed”</td>
+<td class="description-td">Tris-Diethyl-Amino-Silane</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “RF”</td>
+<td class="description-td">25 to 2000 W (preferably 100 to 500 W)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Purge” </td>
+<td class="description-td">0.1 to 5 sec. (preferably 0.1 to 1 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">after “RF”</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">GPC (nm/cycle)</td>
+<td class="description-td">0.2. to 10 sec. (preferably 0.2. to 1 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0066" num="0065">In some embodiments, a precoat film is deposited using the same gas materials as for a dielectric film which is deposited on the precoat film, so that when the inside of the reaction chamber is cleaned, no special cleaning treatment is required, and in fact, when etching the dielectric film by PEALE, the inner surfaces of the reaction chamber on which unwanted particles accumulated during the precoat step can also be cleaned. In some embodiments, a precoat film has resistance against CF gas so as to prevent over-etching by PEALE. In some embodiments, a precoat has a thickness of about 10 nm to about 300 nm (typically about 100 nm to about 200 nm) so as to prevent over-etching by PEALD.</div>
+<div class="description-paragraph" id="p-0067" num="0066"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows a schematic process sequence of PEALE in one cycle in combination with a schematic process sequence of O<sub>2 </sub>treatment in one cycle, constituting one cycle of a directionality-controlled etching process, according to an embodiment of the present invention, wherein a step illustrated in a line represents an ON state whereas no step illustrated in a line represents an OFF state, and the width of each step does not represent duration of each process. In the sequence, the PEALE cycle comprises: continuously feeding a noble gas (e.g., Ar) to the reaction chamber, feeding an etchant (e.g., CF) in a pulse to the reaction chamber, purging the reaction chamber, applying RF power in a pulse to the reaction chamber, and purging the reaction chamber, wherein the noble gas flows continuously through the cycle, and no oxygen gas is fed throughout the cycle. In the sequence, the O<sub>2 </sub>treatment cycle comprises: continuously feeding the noble gas throughout the cycle, feeding oxygen gas to the reaction chamber throughout the cycle, and applying RF power in a pulse to the reaction chamber. The PEALE cycle can be repeated at least once, and the O<sub>2 </sub>treatment cycle also can be repeated at least once.</div>
+<div class="description-paragraph" id="p-0068" num="0067">The directionality-controlled etching cycle also can be repeated at least once. The directionality of etching can be controlled by changing the duration, RF power, pressure, etc. of the surface treatment. For example, the duration of the surface treatment is decreased to render etching anisotropic, whereas the duration of the surface treatment is increased to render etching isotropic; the RF power of the surface treatment is decreased to render etching isotropic, whereas the RF power of the surface treatment is increased to render etching anisotropic; and the pressure of the surface treatment is decreased to render etching anisotropic, whereas the pressure of the surface treatment is increased to render etching isotropic. Also, by changing a partial pressure of oxygen relative to the pressure of noble gas (e.g., Ar), the directionality of etching can be controlled, wherein the partial pressure of oxygen is decreased to render etching anisotropic whereas the partial pressure of oxygen is increased to render etching isotropic.</div>
+<div class="description-paragraph" id="p-0069" num="0068">Further, the directionality of etching can be controlled by changing the RF frequency, the amplitude of RF power, etc. of PEALE. For example, the RF frequency of PEALE is decreased to decrease the efficacy of surface reaction (decreasing the concentration of active species), rendering etching anisotropic, whereas the RF frequency of PEALE is increased to increase the efficacy of surface reaction (increasing the concentration of active species), rendering etching isotropic. Also, the amplitude of RF power of PEALE is modulated to reduce retraction of ions by a plasma sheath, rendering etching isotropic.</div>
+<div class="description-paragraph" id="p-0070" num="0069">The etching is “anisotropic” when conformality of etched surfaces which is a percentage calculated by dividing the etched thickness at a sidewall by the etched thickness at a top surface, is 30% or less. If the conformality is 20% or less, 10% or less, or 5% or less, the etching is highly anisotropic. In some embodiments, conformality or directionality of etching can be adjusted by including nitrogen-containing gas, oxidizing gas, and/or reducing gas in the reactant gas.</div>
+<div class="description-paragraph" id="p-0071" num="0070">The O<sub>2 </sub>treatment can control the directionality of etching by PEALE using a fluorocarbon such as CF4 and C2F6 as an etchant gas and using an inactive gas such as Ar as a purging gas, for example, wherein PEALE comprises: (1) continuously feeding Ar to the reaction chamber where a Si wafer, having a patterned surface covered with a to-be-etched layer, is placed, the pressure of which reaction chamber is maintained at about 100 Pa to about 1,000 Pa; (2) feeding an etchant precursor to the reaction chamber while continuously feeding Ar so as to adsorb gas molecules of etchant precursor onto the wafer surface; (3) discontinuing the etchant precursor flow while continuously feeding Ar, thereby purging the reaction chamber to remove etchant precursor residues from the gas phase; (4) applying an Ar plasma to activate the adsorbed etchant precursor gas molecules so as to etch the uppermost surface portion of the to-be-etched layer; and (5) repeating steps (1) to (4) to control the extent of etching on an atomic layer-level order, accomplishing PEALE. The above sequence can be applied to a PEALE process using an etchant precursor other than CF based gas or any other etchant precursor, wherein a by-product of PEALE is re-deposited on the etched surface in step (4), forming a film functioning as an etching mask.</div>
+<div class="description-paragraph" id="p-0072" num="0071">The etching mask is a polymer protective layer made of CxFy or carbon which is a by-product of PEALE. When ion bombardment by a plasma is great enough, the polymer layer can be decomposed and etching can continuously progress. However, when ion bombardment is insufficient, the polymer layer is not decomposed and remains, interfering with etching. In the above, ion bombardment is strong on the top surface where recesses are formed, and the bottom surfaces of the recesses, whereas ion bombardment is weak on sidewalls of the recesses, whereby a polymer layer tends to remain on the sidewalls and protect the sidewalls from etching. Thus, in PEALE using Ar and a fluorocarbon, for example, only flat surfaces can be etched (i.e., etching is highly anisotropic). The anisotropic etching is suitable for a double-patterning process to form spacers using Si-containing dielectric layers deposited on sidewalls, for example.</div>
+<div class="description-paragraph" id="p-0073" num="0072">An O<sub>2 </sub>plasma can remove the polymer layer, whereas the O<sub>2 </sub>plasma does not etch a dielectric layer (e.g., silicon oxide or silicon nitride film) or a Si wafer. Thus, by using an O<sub>2 </sub>plasma, the polymer layer can selectively be removed while leaving the dielectric layer substantially intact, thereby increasing conformality of the dielectric layer (performing isotropic etching as a whole, although the O<sub>2 </sub>treatment is highly anisotropic to selectively remove the polymer layer on sidewalls). In some embodiments, the O<sub>2 </sub>treatment comprises: (6) continuously feeding Ar, and starting feeding oxygen to the reaction chamber; (7) generating an Ar/O<sub>2 </sub>plasma to remove a CxFy polymer layer; (8) stopping oxygen flow, and replacing oxygen present in the reaction chamber with Ar; and (9) repeating steps (6) to (8) to perform isotropic etching while removing the polymer layer, thereby increasing conformality of the dielectric layer in recesses.</div>
+<div class="description-paragraph" id="p-0074" num="0073">In some embodiments, the O<sub>2 </sub>treatment may be conducted under conditions shown in Table 4 below.</div>
+<div class="description-paragraph" id="p-0075" num="0074">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conditions for O<sub>2 </sub>treatment</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Substrate temperature</td>
+<td class="description-td">Same as in PEALE</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure</td>
+<td class="description-td">Same as in PEALE</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Inert gas (as a carrier </td>
+<td class="description-td">Same as in PEALE</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">gas and/or reactant gas)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Flow rate of carrier gas</td>
+<td class="description-td">Same as in PEALE</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">(continuous)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Flow rate of dilution gas</td>
+<td class="description-td">Same as in PEALE</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">(continuous)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Ashing gas</td>
+<td class="description-td">O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>O</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Flow rate of ashing gas</td>
+<td class="description-td">10 to 5000 sccm (preferably 100 to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">2000 sccm)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">RF power (13.56 MHz) </td>
+<td class="description-td">50 to 2000 W (preferably 50 to 300 W)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">for a 300-mm wafer</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “O2 In”</td>
+<td class="description-td">1 to 20 sec. (preferably 1 to 5 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “O2 Stabilize”</td>
+<td class="description-td">2 to 10 sec. (preferably 2 to 5 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “RF”</td>
+<td class="description-td">1 to 300 sec. (preferably 1 to 10 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “Purge”</td>
+<td class="description-td">0.1 to 10 sec. (preferably 0.1 to 5 sec.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">EPC (nm/cycle)</td>
+<td class="description-td">0.005 to 0.2 (preferably 0.01 to 0.1) </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">on sidewall</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0076" num="0075">The O<sub>2 </sub>treatment need not be cyclic, and can be performed only once after the PEALE cycles. Typically, the total duration of the O<sub>2 </sub>treatment can be zero to about 5 seconds. The O<sub>2 </sub>treatment can be performed for a duration longer than 5 seconds, but it may not further improve the conformality of the target film since the O<sub>2 </sub>treatment etches selectively a carbon polymer film or the like deposited on sidewalls, not a silicon-containing dielectric film, and thus, once the carbon polymer film is removed, the conformality is not expected to be changed. The duration of the O<sub>2 </sub>treatment to achieve high conformality can be shortened by increasing RF power and/or pressure. The O<sub>2 </sub>treatment also may interfere with adsorption of carbon on the surface.</div>
+<div class="description-paragraph" id="p-0077" num="0076">In the sequence illustrated in <figref idrefs="DRAWINGS">FIG. 2</figref>, the precursor is supplied in a pulse using a carrier gas which is continuously supplied. This can be accomplished using a flow-pass system (FPS) wherein a carrier gas line is provided with a detour line having a precursor reservoir (bottle), and the main line and the detour line are switched, wherein when only a carrier gas is intended to be fed to a reaction chamber, the detour line is closed, whereas when both the carrier gas and a precursor gas are intended to be fed to the reaction chamber, the main line is closed and the carrier gas flows through the detour line and flows out from the bottle together with the precursor gas. In this way, the carrier gas can continuously flow into the reaction chamber, and can carry the precursor gas in pulses by switching the main line and the detour line. <figref idrefs="DRAWINGS">FIG. 1B</figref> illustrates a precursor supply system using a flow-pass system (FPS) according to an embodiment of the present invention (black valves indicate that the valves are closed). As shown in (a) in <figref idrefs="DRAWINGS">FIG. 1B</figref>, when feeding a precursor to a reaction chamber (not shown), first, a carrier gas such as Ar (or He) flows through a gas line with valves b and c, and then enters a bottle (reservoir) <b>30</b>. The carrier gas flows out from the bottle <b>30</b> while carrying a precursor gas in an amount corresponding to a vapor pressure inside the bottle <b>30</b>, and flows through a gas line with valves f and e, and is then fed to the reaction chamber together with the precursor. In the above, valves a and d are closed. When feeding only the carrier gas (noble gas) to the reaction chamber, as shown in (b) in <figref idrefs="DRAWINGS">FIG. 1B</figref>, the carrier gas flows through the gas line with the valve a while bypassing the bottle <b>30</b>. In the above, valves b, c, d, e, and fare closed.</div>
+<div class="description-paragraph" id="p-0078" num="0077">The precursor may be provided with the aid of a carrier gas. Since ALD is a self-limiting adsorption reaction process, the number of deposited precursor molecules is determined by the number of reactive surface sites and is independent of the precursor exposure after saturation, and a supply of the precursor is such that the reactive surface sites are saturated thereby per cycle. A plasma for deposition may be generated in situ, for example, in an ammonia gas that flows continuously throughout the deposition cycle. In other embodiments the plasma may be generated remotely and provided to the reaction chamber.</div>
+<div class="description-paragraph" id="p-0079" num="0078">As mentioned above, each pulse or phase of each deposition cycle is preferably self-limiting. An excess of reactants is supplied in each phase to saturate the susceptible structure surfaces. Surface saturation ensures reactant occupation of all available reactive sites (subject, for example, to physical size or “steric hindrance” restraints) and thus ensures excellent step coverage. In some embodiments the pulse time of one or more of the reactants can be reduced such that complete saturation is not achieved and less than a monolayer is adsorbed on the substrate surface.</div>
+<div class="description-paragraph" id="p-0080" num="0079">The process cycle can be performed using any suitable apparatus including an apparatus illustrated in <figref idrefs="DRAWINGS">FIG. 1A</figref>, for example. <figref idrefs="DRAWINGS">FIG. 1A</figref> is a schematic view of a PEALD apparatus, desirably in conjunction with controls programmed to conduct the sequences described below, usable in some embodiments of the present invention. In this figure, by providing a pair of electrically conductive flat-plate electrodes <b>4</b>, <b>2</b> in parallel and facing each other in the interior <b>11</b> (reaction zone) of a reaction chamber <b>3</b>, applying HRF power (13.56 MHz or 27 MHz) <b>20</b> to one side, and electrically grounding the other side <b>12</b>, a plasma is excited between the electrodes. A temperature regulator is provided in a lower stage <b>2</b> (the lower electrode), and a temperature of a substrate <b>1</b> placed thereon is kept constant at a given temperature. The upper electrode <b>4</b> serves as a shower plate as well, and reactant gas (and noble gas) and precursor gas are introduced into the reaction chamber <b>3</b> through a gas line <b>21</b> and a gas line <b>22</b>, respectively, and through the shower plate <b>4</b>. Additionally, in the reaction chamber <b>3</b>, a circular duct <b>13</b> with an exhaust line <b>7</b> is provided, through which gas in the interior <b>11</b> of the reaction chamber <b>3</b> is exhausted. Additionally, a dilution gas is introduced into the reaction chamber <b>3</b> through a gas line <b>23</b>. Further, a transfer chamber <b>5</b> disposed below the reaction chamber <b>3</b> is provided with a seal gas line <b>24</b> to introduce seal gas into the interior <b>11</b> of the reaction chamber <b>3</b> via the interior <b>16</b> (transfer zone) of the transfer chamber <b>5</b> wherein a separation plate <b>14</b> for separating the reaction zone and the transfer zone is provided (a gate valve through which a wafer is transferred into or from the transfer chamber <b>5</b> is omitted from this figure). The transfer chamber is also provided with an exhaust line <b>6</b>. In some embodiments, the deposition of multi-element film and surface treatment are performed in the same reaction space, so that all the steps can continuously be conducted without exposing the substrate to air or other oxygen-containing atmosphere. In some embodiments, a remote plasma unit can be used for exciting a gas.</div>
+<div class="description-paragraph" id="p-0081" num="0080">In some embodiments, in the apparatus depicted in <figref idrefs="DRAWINGS">FIG. 1A</figref>, the system of switching flow of an inactive gas and flow of a precursor gas illustrated in <figref idrefs="DRAWINGS">FIG. 1B</figref> (described earlier) can be used to introduce the precursor gas in pulses without substantially fluctuating pressure of the reaction chamber.</div>
+<div class="description-paragraph" id="p-0082" num="0081">In some embodiments, a dual chamber reactor (two sections or compartments for processing wafers disposed closely to each other) can be used, wherein a reactant gas and a noble gas can be supplied through a shared line whereas a precursor gas is supplied through unshared lines.</div>
+<div class="description-paragraph" id="p-0083" num="0082">In some embodiments, the PEALE cycle can be performed using the same apparatus as for the PEALD cycle, which is illustrated in <figref idrefs="DRAWINGS">FIG. 1A</figref>, wherein an etchant precursor is introduced into the reaction chamber <b>3</b> through a gas line <b>31</b>. Additionally, the ashing cycle can also be performed using the same apparatus as for the PEALD cycle, which is illustrated in <figref idrefs="DRAWINGS">FIG. 1A</figref>, wherein an oxidizing gas is introduced into the reaction chamber <b>3</b> through a gas line <b>32</b>.</div>
+<div class="description-paragraph" id="p-0084" num="0083">A skilled artisan will appreciate that the apparatus includes one or more controller(s) (not shown) programmed or otherwise configured to cause the deposition and reactor cleaning processes described elsewhere herein to be conducted. The controller(s) are communicated with the various power sources, heating systems, pumps, robotics, and gas flow controllers or valves of the reactor, as will be appreciated by the skilled artisan.</div>
+<div class="description-paragraph" id="p-0085" num="0084">The present invention is further explained with reference to working examples below. However, the examples are not intended to limit the present invention. In the examples where conditions and/or structures are not specified, the skilled artisan in the art can readily provide such conditions and/or structures, in view of the present disclosure, as a matter of routine experimentation. Also, the numbers applied in the specific examples can be modified by a range of at least ±50% in some embodiments, and the numbers are approximate.</div>
+<heading id="h-0005">EXAMPLES</heading>
+<heading id="h-0006">Examples 1-4, Reference Example 1, and Comparative Examples 1-2</heading>
+<div class="description-paragraph" id="p-0086" num="0085">A silicon oxide film, which was formed on a 300-mm substrate having a patterned surface having an aspect ratio of about 2 and an opening width of about 50 nm, was subjected to PEALE conducted thereon using the PEALE apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A</figref> and <b>1</b>B. In Comparative Example 1, the silicon oxide film was deposited by PEALD in a different apparatus substantially similar to the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, wherein PEALD and PEALE were conducted discontinuously in different chambers. In Comparative Example 2, in an apparatus substantially similar to the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, PEALE was conducted on a silicon oxide film deposited by CVD in a different apparatus, and O<sub>2</sub>-ashing was conducted in a different apparatus substantially similar to the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, wherein PEALE and O<sub>2</sub>-ashing were conducted discontinuously in different chambers. In Reference Example 1, in the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, PEALE was conducted on a silicon oxide film deposited by CVD in a different apparatus, and O<sub>2</sub>-ashing was conducted in the same apparatus as for PEALE, wherein PEALE and O<sub>2</sub>-ashing were conducted continuously in the same chamber. In Example 1, in the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, PEALE was conducted on a silicon oxide film deposited by PEALD in the same apparatus as for PEALE, wherein PEALD and PEALE were conducted continuously in the same chamber. In Example 2, in the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, PEALE was conducted on a silicon oxide film deposited by PEALD in the same apparatus as for PEALE, wherein prior to deposition of the film by PEALD, a precoat film was deposited by PEALD in the same apparatus, wherein deposition of the precoat, PEALD, and PEALE were conducted continuously in the same chamber. In addition, in Example 2, after PEALE, NF<sub>3 </sub>cleaning was conducted using a remote plasma unit to clean the inside of the reaction chamber. In Example 3, in the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, PEALE was conducted on a silicon oxide film deposited by PEALD in the same apparatus as for PEALE, and O<sub>2</sub>-ashing was conducted in the same apparatus as for PEALE, wherein PEALD, PEALE, and O<sub>2</sub>-ashing were conducted continuously in the same chamber. In Example 4, in the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, PEALE was conducted on a silicon oxide film deposited by PEALD in the same apparatus as for PEALE, and O<sub>2</sub>-ashing was conducted in the same apparatus as for PEALE, wherein prior to deposition of the film by PEALD, a precoat film was deposited by PEALD in the same apparatus, wherein deposition of the precoat, PEALD, PEALE, and O<sub>2</sub>-ashing were conducted continuously in the same chamber. In addition, in Example 4, after O<sub>2</sub>-ashing, NF<sub>3 </sub>cleaning was conducted using a remote plasma unit to clean the inside of the reaction chamber. The above-described combinations are shown in Table 5 below. Deposition of the precoat, PEALD, PEALE, O<sub>2</sub>-ashing, and NF<sub>3 </sub>cleaning were conducted under the conditions shown in Tables 6, 6, 7, 8, and 9 below, respectively, according to the sequences illustrated in <figref idrefs="DRAWINGS">FIG. 2 or 3</figref> (the sequence of the deposition cycle of the precoat was substantially similar to that of the PEALD cycle). In each example, the thickness of a blanket film deposited by PEALD, the thickness of a blanket film etched (reduced) by PEALE, and the thickness of a blanket film etched (reduced) by ashing applicable to each example were measured (the blanket film which was deposited on the top surface was subjected to thickness measurement). The results are shown in Table 10 below.</div>
+<div class="description-paragraph" id="p-0087" num="0086">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 5</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Process</td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="8" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">SiO<sub>2</sub>-</td>
+<td class="description-td"> </td>
+<td class="description-td">O<sub>2</sub>-</td>
+<td class="description-td">NF<sub>3</sub> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex</td>
+<td class="description-td">Precoat</td>
+<td class="description-td">PEALD</td>
+<td class="description-td">PEALE</td>
+<td class="description-td">ashing</td>
+<td class="description-td">Cleaning</td>
+<td class="description-td">Chamber</td>
+<td class="description-td">Application</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="8" nameend="8" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Com. 1</td>
+<td class="description-td"> </td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Separate</td>
+<td class="description-td">Improving sidewall</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">coverage</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Com. 2</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td"> </td>
+<td class="description-td">Separate</td>
+<td class="description-td">Etching + core-ashing</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ref. 1</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td"> </td>
+<td class="description-td">Single</td>
+<td class="description-td">Etching + core-ashing</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex 1</td>
+<td class="description-td"> </td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Single</td>
+<td class="description-td">Improving sidewall</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">coverage</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex 2</td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td"> </td>
+<td class="description-td">+</td>
+<td class="description-td">Single</td>
+<td class="description-td">Improving sidewall</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">coverage</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex 3</td>
+<td class="description-td"> </td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td"> </td>
+<td class="description-td">Single</td>
+<td class="description-td">SiO depo + etching +</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">core-ashing</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex 4</td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td">+</td>
+<td class="description-td">Single</td>
+<td class="description-td">SiO depo + etching +</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">core-ashing</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="8" nameend="8" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0088" num="0087">In Table 5, the cells with a symbol “+” indicate that the step was performed. “Separate” indicates that the steps were performed in different reaction chambers, whereas “Single” indicates that the steps were conducted in the same reaction chamber.</div>
+<div class="description-paragraph" id="p-0089" num="0088">
+<tables id="TABLE-US-00006" num="00006">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 6</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Parameter</td>
+<td class="description-td">Precoat</td>
+<td class="description-td">PEALD</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Temp (° C.)</td>
+<td class="description-td">50</td>
+<td class="description-td">50</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Precursor</td>
+<td class="description-td">Bis-diethyl-</td>
+<td class="description-td">Bis-diethyl-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Amino-Silane</td>
+<td class="description-td">Amino-Silane</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">O2 (slm)</td>
+<td class="description-td">0.5</td>
+<td class="description-td">0.1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Carrier Ar (slm)</td>
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Dilution Ar (slm)</td>
+<td class="description-td">0.5</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Pressure (Pa)</td>
+<td class="description-td">350</td>
+<td class="description-td">350</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">RF Power (W)</td>
+<td class="description-td">500</td>
+<td class="description-td">50</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “Si-Feed” (sec)</td>
+<td class="description-td">0.5</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of post Feed “Purge” (sec)</td>
+<td class="description-td">0.5</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of “RF” (sec)</td>
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Duration of post RF “Purge” (sec)</td>
+<td class="description-td">0.2</td>
+<td class="description-td">0.2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Number of cycles</td>
+<td class="description-td">1000</td>
+<td class="description-td">200</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0090" num="0089">
+<tables id="TABLE-US-00007" num="00007">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 7</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Parameter</td>
+<td class="description-td">PEALE</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Temp (° C.)</td>
+<td class="description-td">50</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant</td>
+<td class="description-td">C2F6</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">O2 (slm)</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Carrier Ar (slm)</td>
+<td class="description-td">2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Dilution Ar (slm)</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure (Pa)</td>
+<td class="description-td">350</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">RF Power (W)</td>
+<td class="description-td">200</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “Etchant-Feed” (sec)</td>
+<td class="description-td">0.1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of post Feed “Purge” (sec)</td>
+<td class="description-td">10</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “RF” (sec)</td>
+<td class="description-td">5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of post RF “Purge” (sec)</td>
+<td class="description-td">0.2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Number of cycles</td>
+<td class="description-td">2100</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0091" num="0090">
+<tables id="TABLE-US-00008" num="00008">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 8</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Parameter</td>
+<td class="description-td">O2 ashing</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Temp (° C.)</td>
+<td class="description-td">50</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">O2 (slm)</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Dilution Ar (slm)</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure (Pa)</td>
+<td class="description-td">300</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">RF Power (W)</td>
+<td class="description-td">100</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration (sec)</td>
+<td class="description-td">60</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0092" num="0091">
+<tables id="TABLE-US-00009" num="00009">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 9</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Parameter</td>
+<td class="description-td">NF3 cleaning</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Temp (° C.)</td>
+<td class="description-td">50</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">NF3 (slm)</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Dilution Ar (slm)</td>
+<td class="description-td">5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure (Pa)</td>
+<td class="description-td">300</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration (sec)</td>
+<td class="description-td">60</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0093" num="0092">
+<tables id="TABLE-US-00010" num="00010">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="5" nameend="5" namest="1" rowsep="1">TABLE 10</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Depo </td>
+<td class="description-td">Etched </td>
+<td class="description-td">Ashed </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">thickness</td>
+<td class="description-td">thickness</td>
+<td class="description-td">amount</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">by SiO<sub>2</sub>-</td>
+<td class="description-td">by </td>
+<td class="description-td">by O<sub>2</sub>-</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">PEALD</td>
+<td class="description-td">PEALE</td>
+<td class="description-td">ashing</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex</td>
+<td class="description-td">(nm)</td>
+<td class="description-td">(nm)</td>
+<td class="description-td">(nm)</td>
+<td class="description-td">Application</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Com. 1</td>
+<td class="description-td">20</td>
+<td class="description-td"> 5</td>
+<td class="description-td">—</td>
+<td class="description-td">Improving sidewall</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">coverage</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Com. 2</td>
+<td class="description-td">—</td>
+<td class="description-td">20</td>
+<td class="description-td">110</td>
+<td class="description-td">Etching + core-ashing</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ref 1</td>
+<td class="description-td">—</td>
+<td class="description-td">20</td>
+<td class="description-td">110</td>
+<td class="description-td">Etching + core-ashing</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex 1</td>
+<td class="description-td">20</td>
+<td class="description-td"> 5</td>
+<td class="description-td">—</td>
+<td class="description-td">Improving sidewall</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">coverage</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex 2</td>
+<td class="description-td">20</td>
+<td class="description-td"> 5</td>
+<td class="description-td">—</td>
+<td class="description-td">Improving sidewall</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">coverage</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex 3</td>
+<td class="description-td">20</td>
+<td class="description-td">20</td>
+<td class="description-td">110</td>
+<td class="description-td">SiO depo + etching + </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">core-ashing</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Ex 4</td>
+<td class="description-td">20</td>
+<td class="description-td">20</td>
+<td class="description-td">110</td>
+<td class="description-td">SiO depo + etching +</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">core-ashing</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0094" num="0093">As shown in Table 10, it is confirmed that the single-chamber operation according to the examples did not cause any defective characteristics to deposition and etching of a film, as compared with the separate-chambers operation, despite the fact that the entirely different processes were performed continuously in the same reaction chamber.</div>
+<heading id="h-0007">Examples 5 and 6</heading>
+<div class="description-paragraph" id="p-0095" num="0094">A silicon oxide film was formed on a 300-mm substrate having a patterned surface having an aspect ratio of about 2 and an opening width of about 30 nm, by PEALD under the conditions shown in Table 6 using the apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>. In Example 5, the silicon oxide film was continuously subjected to PEALE under the conditions shown in Table 7 using the same apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>. In Example 6, the silicon oxide film was continuously subjected to PEALE under the conditions shown in Table 11 below using the same apparatus illustrated in <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref>, wherein an O<sub>2 </sub>treatment cycle was incorporated into the PEALD cycle as illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref> (carrier gas flow and dilution gas flow are omitted). The results are shown in Table 12 below and <figref idrefs="DRAWINGS">FIGS. 5A to 5C</figref>. The total duration of the O<sub>2 </sub>treatment was 5 seconds.</div>
+<div class="description-paragraph" id="p-0096" num="0095">
+<tables id="TABLE-US-00011" num="00011">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 11</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Parameter</td>
+<td class="description-td">PEALE</td>
+<td class="description-td">O<sub>2 </sub>treatment</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Temp (° C.)</td>
+<td class="description-td">50</td>
+<td class="description-td">50</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Etchant</td>
+<td class="description-td">C2F6</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">O2 (slm)</td>
+<td class="description-td">0</td>
+<td class="description-td">. . .</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Carrier Ar (slm)</td>
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Dilution Ar (slm)</td>
+<td class="description-td">0.5</td>
+<td class="description-td">0.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Pressure (Pa)</td>
+<td class="description-td">2</td>
+<td class="description-td">350</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">RF Power (W)</td>
+<td class="description-td">0.5</td>
+<td class="description-td">100</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “Etchant-Feed” (sec)</td>
+<td class="description-td">350</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “O2 In” (sec)</td>
+<td class="description-td">200</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of post Feed “Purge” (sec)</td>
+<td class="description-td">0.1</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “O2 Stabilize” (sec)</td>
+<td class="description-td">10</td>
+<td class="description-td">5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of “RF” (sec)</td>
+<td class="description-td">5</td>
+<td class="description-td">60</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Duration of post RF “Purge” (sec)</td>
+<td class="description-td">0.2</td>
+<td class="description-td">5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Number of cycles per etching cycle</td>
+<td class="description-td">2100</td>
+<td class="description-td">1</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Number of etching cycles</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0097" num="0096">
+<tables id="TABLE-US-00012" num="00012">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 12</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(the numbers are approximate)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PEALE</td>
+<td class="description-td">PEALE + O<sub>2 </sub>treat</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Initial</td>
+<td class="description-td">(Example 5)</td>
+<td class="description-td">(Example 6)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Top [nm]</td>
+<td class="description-td">21.5</td>
+<td class="description-td">10.7 (−10.8)</td>
+<td class="description-td">17.6 (−3.9)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Side [nm] </td>
+<td class="description-td">21.0</td>
+<td class="description-td">17.5 (−3.5) </td>
+<td class="description-td">16.2 (−5.8)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Bottom [nm]</td>
+<td class="description-td">22.0</td>
+<td class="description-td">11.4 (−10.6)</td>
+<td class="description-td">15.6 (−6.4)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conformality % [S/T]</td>
+<td class="description-td">98%</td>
+<td class="description-td">164%</td>
+<td class="description-td"> 92%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Conformality % [S/B]</td>
+<td class="description-td">95%</td>
+<td class="description-td">154%</td>
+<td class="description-td">104%</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0098" num="0097">In Table 12, the numbers in the parentheses indicate reductions in thickness as compared with the initial thicknesses. <figref idrefs="DRAWINGS">FIGS. 5A, 5B, and 5C</figref> are Scanning Electron Microscope (SEM) photographs of cross-sectional views of the silicon oxide films wherein <figref idrefs="DRAWINGS">FIG. 5A</figref> shows the silicon oxide film prior to the PEALE cycles, <figref idrefs="DRAWINGS">FIG. 5B</figref> shows the silicon oxide film after the PEALE cycles (Example 5), and <figref idrefs="DRAWINGS">FIG. 5C</figref> shows the silicon oxide film after O<sub>2 </sub>treatment cycles subsequent to the PEALE cycles (Example 6). As shown in Table 12 and <figref idrefs="DRAWINGS">FIG. 5A</figref>, prior to the PEALE cycles, a SiO film <b>52</b> <i>a </i>having a thickness of about 22 nm was deposited on a Si substrate <b>51</b>, wherein the conformality (a ratio of thickness at a sidewall to thickness on a flat surface) of the initial film was about 98% relative to the top film thickness and about 95% relative to the bottom film thickness. In Example 5, as shown in Table 12 and <figref idrefs="DRAWINGS">FIG. 5B</figref>, in the film <b>52</b> <i>b </i>after the PEALE cycles, a film portion deposited on the top surface (blanket surface) and a film portion deposited on the bottom surface were more etched than a film portion deposited on the sidewalls, wherein the conformality of the etched film was about 164% relative to the top film thickness and about 154% relative to the bottom film thickness. The PEALE cycles were highly directional and performed anisotropic etching. In Example 6, as shown in Table 12 and <figref idrefs="DRAWINGS">FIG. 5C</figref>, in the film <b>52</b> <i>c </i>after the O<sub>2 </sub>treatment-incorporated PEALE cycles, a film portion deposited on the top surface (blanket surface), a film portion deposited on the bottom surface, and a film portion deposited on the sidewalls were substantially equally etched, wherein the conformality of the etched film was about 92% relative to the top film thickness and about 104% relative to the bottom film thickness. The O<sub>2 </sub>treatment-incorporated PEALE cycles were not directional and performed isotropic etching. In general, O<sub>2 </sub>treatment-incorporated PEALE cycles can perform isotropic etching at a conformality of about 90% to about 110%, which is substantially equal to that achieved by PEALD cycles.</div>
+<div class="description-paragraph" id="p-0099" num="0098">In the above, as shown in Table 12 and <figref idrefs="DRAWINGS">FIG. 5B</figref>, PEALE cycles can perform highly anisotropic etching, and thus, by continuously performing PEALD, PEALE, and core-ashing in the same reaction chamber as demonstrated in Examples 3 and 4, spacer-defined double patterning (SDDP) can effectively be performed, for example.</div>
+<div class="description-paragraph" id="p-0100" num="0099">It will be understood by those of skill in the art that numerous and various modifications can be made without departing from the spirit of the present invention. Therefore, it should be clearly understood that the forms of the present invention are illustrative only and are not intended to limit the scope of the present invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">17</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM108133188">
+<claim-statement>We claim:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method of continuous fabrication of a layered structure on a substrate having a patterned recess, comprising:
+<div class="claim-text">(i) forming a dielectric layer on a substrate having a patterned recess in a reaction chamber by plasma-enhanced atomic layer deposition (PEALD) using a first RF power;</div>
+<div class="claim-text">(ii) continuously from completion of step (i) without breaking vacuum, etching the dielectric layer on the substrate in the reaction chamber by plasma-enhanced atomic layer etching (PEALE) using a second RF power,</div>
+<div class="claim-text">wherein a pressure of the reaction chamber is controlled at 30 Pa to 1,333 Pa throughout steps (i) and (ii); a noble gas is supplied to the reaction chamber continuously throughout steps (i) and (ii); and the second RF power is higher than the first RF power.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein step (ii) comprises:
+<div class="claim-text">a PEALE cycle comprising: (iia) supplying a pulse of an etchant gas to the reaction chamber to chemisorb the etching gas in an unexcited state on a surface of the substrate in the reaction chamber; and (iib) applying a pulse of RF power to the reaction chamber to generate a reactive species of the noble gas and to contact the etchant gas-chemisorbed surface of the substrate with the reactive species so that the dielectric layer on the substrate is etched, wherein a portion of the dielectric layer on a top surface of the substrate is more etched than a portion of the dielectric layer on a sidewall of the recess.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the etchant is a fluorocarbon.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the patterned recess of the substrate is formed by a photoresist, and the dielectric layer is deposited on the substrate, wherein step (ii) is stopped when a portion of the dielectric layer on a top surface of the substrate is removed so as to expose the photoresist therefrom, and the method further comprises, continuously from step (ii) without breaking vacuum, (iii) ashing the photoresist by a plasma in the reaction chamber.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method according to <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein the plasma for ashing is an oxygen plasma.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein step (ii) further comprises:
+<div class="claim-text">a surface treatment cycle comprising: after step (iib), supplying an oxygen-containing gas to the reaction chamber; and applying a pulse of RF power to the reaction chamber to generate an oxygen plasma to further etch the dielectric layer, wherein the portion of the dielectric layer on the sidewall of the recess is more etched than the portion of the dielectric layer on the top surface of the substrate.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method according to <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the oxygen-containing gas is oxygen.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method according to <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein at least one surface treatment cycle is conducted after every at least one PEALE cycle or after completion of the PEALE cycles.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method according to <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein a duration of the pulse of RF power in the surface treatment cycle is longer than a duration of the pulse of RF power in the PEALE cycle.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the dielectric layer is a silicon oxide layer.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising, followed continuously by step (i) without breaking vacuum, forming a pre-coat layer on the substrate in the reaction chamber.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the pre-coat layer is constituted by a material which is the same as that constituting the dielectric layer.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the patterned recess has a depth of 10 nm to 1,000 nm, and an aspect ratio of 1 to 5.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the dielectric layer has a thickness of 10 nm to 100 nm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a plasma used for the PEALD and PEALE is generated in situ in the reaction chamber using capacitive coupling-type electrodes provided in the reaction chamber.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the noble gas is a carrier gas for a precursor for the PEALD, and in step (ii), the carrier gas is fed to the reaction chamber without the precursor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the pressure of the reaction chamber is maintained at a substantially constant level through steps (i) and (ii).</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

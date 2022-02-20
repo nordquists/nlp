@@ -1,0 +1,955 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US11029195B2 - Earhealth monitoring system and method II 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA450252835">
+<div class="abstract" id="p-0001" num="0000">Methods of operating an audio device are provided. A method includes measuring sound pressure levels (SPL<sub>ECM</sub>) for acoustic energy received by an ear canal microphone (ECM) during a time increment Δt and calculating a SPL_Dose<sub>Δt </sub>during the time increment Δt using SPL<sub>ECM</sub>.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES294538412">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATION(S)</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of and claims priority to U.S. patent application Ser. No. 16/258,127, filed on Jan. 25, 2019, which is a continuation of and claims priority to U.S. patent application Ser. No. 16/025,478, filed on Jul. 2, 2018, now U.S. Pat. No. 10,190,904, which is a continuation of and claims priority to U.S. patent application Ser. No. 13/424,537, filed on Mar. 20, 2012, now U.S. Pat. No. 10,012,529, which is a divisional of and claims priority to U.S. patent application Ser. No. 11/928,621, filed on Oct. 30, 2007, now U.S. Pat. No. 8,199,919, which is a continuation-in-part of and claims priority to U.S. patent application Ser. No. 11/757,152, filed on Jun. 1, 2007, now U.S. Pat. No. 8,311,228, which claims priority to U.S. Provisional patent application Ser. No. 60/803,708 filed Jun. 1, 2006, all of which are herein incorporated by reference in their entireties.</div>
+<heading id="h-0002">FIELD OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present disclosure relates to a device that monitors acoustic energy directed to an ear, and more particularly, though not exclusively, to an earpiece that monitors acoustic sound pressure level dose received by a user's ear.</div>
+<heading id="h-0003">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0004" num="0003">With the advent of an industrial society, people are exposed to noise pollution at greater and greater levels; both from background, such as street traffic, airplanes, construction sites and intentional exposure to high sound levels such as cell phones, MP3 players, and concerts. Studies show that ear damage, leading to permanent hearing impairment is not only increasing in the general population, but increasing at a significantly faster rate in younger populations.</div>
+<div class="description-paragraph" id="p-0005" num="0004">The potential for hearing damage is a function of both the level and the duration of exposure to the sound stimulus. Safe listening durations at various loudness levels are known, and can be calculated by averaging audio output levels over time to yield a time-weighted average. Standard damage-risk guidelines published by OSHA, NIOSH or other agencies are known. This calculation can be even further improved by accounting for aspects of the playback scenario, specifically the characteristics of the sound source and their proximity to the listener's ear.</div>
+<div class="description-paragraph" id="p-0006" num="0005">Studies have also indicated that hearing damage is a cumulative phenomenon. Although hearing damage due to industrial or background noise exposure is more thoroughly understood, the risk of exposing one's self to excessive noise, especially with the use of headphones has also been recently studied. Protecting the ear from ambient noise is primarily done with the use of static earplugs that attempt to shield the inner ear from excessively high decibel noise. Background noise canceling earphones such as those produced by Bose and others, attempt to protect the ear from excessive ambient noise by producing a counter noise wave to cancel out the ambient noise at the ear. These prior art devices have been less than satisfactory because they do not completely prevent high decibel noise from reaching the ear, and do not account for the duration of exposure to harmful sounds at the ear.</div>
+<div class="description-paragraph" id="p-0007" num="0006">It is also known from the prior art to provide active noise reduction at the ear to protect the ear from exposure to loud noises as disclosed in U.S. published patent application no. US2005/0254665. The art actively attenuating noise reaching the inner ear utilizing a control; a connection with an earpiece and attenuating the noise to the ear. However, there is no monitoring of the noise over time to account for the cumulative effect. Furthermore, there is no accounting for any restorative effects within the ear for sound level exposures which are sufficiently low to allow recovery, rather than destruction.</div>
+<div class="description-paragraph" id="p-0008" num="0007">Dosimeters, such as that described m U.S. published patent application no. US2005/0254667 are known. The device periodically measures prior sound level in the ambient environment. However, the device does not take into account the cumulative effect of the noise over multiple incidences of exposure (e.g., one day to the next) or the effect of any restorative period. Furthermore, no remedial action is automatically taken as a result of the readings.</div>
+<div class="description-paragraph" id="p-0009" num="0008">It is also known from the prior art that headphones for consumer electronics have been provided with a predetermined maximum output level in an attempt to prevent ear damage. This approach is ineffective as it does not take into account listening duration and the calculation of risk for auditory injury. Other headphones are maximum-limited to produce levels that can still result in significant overexposure given enough time, or limit the user to levels, which may not be sufficient to achieve an adequate short term listening level. In the latter case, consumer acceptance for the protective gear could be severely limited and a product would fail to survive in a competitive market and therefore be of no use.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Another alternative known m the art is to reduce the headphone output levels by increasing earphone impedance via an accessory placed between the media player and the earphones. The limitation of this approach is that it gives no consideration to the duration of exposure, and again either the user's chosen listening level cannot be achieved because the maximum level is too limited, or the level is sufficient to allow the user access to high enough sound levels, but risk overexposure. It is known from U.S. published patent application no. 2007/0129828 to provide automated control of audio volume parameters in order to protect hearing. A method of operating a media player includes the step of playing back audio media and refining a maximum volume parameter for the playing of the media by the media player. The refining is based at least in part on the playback of audio media during a time period existing prior to the execution of refining the maximum volume allowed. The refinement is intended to minimize harm to the user's hearing.</div>
+<div class="description-paragraph" id="p-0011" num="0010">Applicants cannot confirm that such an approach has been commercialized. However, even if commercialized, it suffers from the shortcomings that the refinement is based on a theoretical noise volume delivered to the ear as a function of the output signal of the device and parameters of the earpiece connected to the device and is based upon a credit system based on volume. There is no measurement of the actual noise delivered to the ear. Furthermore, the calculation does not take into account the ambient noise of the device user nor the noise reduction rate of the earpiece relative to the ambient noise. In other words, the actual volume level to which the ear is exposed is not taken into account. Accordingly, a severe miscalculation of the actual ear exposure, and resulting ear harm, may exist as a result of use of this related art method. Additionally the credit system is not described in detail sufficient for one of ordinary skill to construct the device. For example U.S. published patent application no. 2007/0129828 refers to Cal-OSHA profiles, and states in the same paragraph that Cal-OSHA appear to be rudimentary and does not deal with exposure “in a sophisticated way with varying exposure over time” and does not “ . . . account for recovery.” However, U.S. published patent application no. 2007/0129828 states in one example “ . . . the maximum allowed volume is determined based upon determined credits with reference to a profile such as profiles provided by . . . (Cal-OSHA) . . . ” However, U.S. Publication No. 2007/0129828, stated that Cal-OSHA doesn't take into effect recovery, and additionally fails to refer to any detailed recovery calculation. Additionally, the credit system is based upon volume, rather than a predicted sound pressure level (PSPL) emitted by a speaker, and thus is an inaccurate predictor of sound pressure level (SPL) experienced by a user's ears due to emissions from the speaker. Accordingly, a system that overcomes the shortcomings in the related art would be useful.</div>
+<heading id="h-0004">BRIEF SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0012" num="0011">At least one exemplary is directed to a method of operating an audio device comprising: measuring sound pressure levels (SPL<sub>ECM</sub>) for acoustic energy received by an ear canal microphone (ECM) during the time increment Δt; and calculating a SPL_Dose<sub>Δt </sub>during the time increment Δt using SPL<sub>ECM</sub>. Additional exemplary embodiments can calculate a remaining duration time, Time_100%, using SPL<sub>ECM</sub>, and then optionally calculate an SPL_Dose<sub>total </sub>using SPL_Dose<sub>Δt</sub>. At least one exemplary embodiment can also compare the total SPL_Dose to a threshold value and if the total SPL_Dose is greater than the threshold value then an action parameter is read from readable memory (e.g., RAM). At least one further exemplary embodiment can perform an action associated with the value of the action parameter, where the action is at least one of modifying the operation of the audio device, modifying the acoustic signals directed to the ECR, and sending a notification signal to a user.</div>
+<div class="description-paragraph" id="p-0013" num="0012">In at least one exemplary embodiment the action of modifying the operation of the audio device includes at least one of the following: setting a time after which the audio device will shut down; increasing the NRR of the audio device; and activating an active noise cancellation of non-ECR generated acoustic energy.</div>
+<div class="description-paragraph" id="p-0014" num="0013">In at least one exemplary embodiment the action of modifying the acoustic signals directed to the ECR includes at least one of the following: reducing the signal to noise ratio by reducing the intensity of the driver signals sent to the ECR; and chopping the driver signals at a rate unnoticeable by a user, where the chopping reduces the total sound pressure level generated by the driver signals.</div>
+<div class="description-paragraph" id="p-0015" num="0014">In at least one exemplary embodiment the action of sending a notification signal to a user includes at least one of the following: sending an acoustic voice notification; sending an acoustic non-voice notification; activating at least one indicator light; and activating a vibratory warning system.</div>
+<div class="description-paragraph" id="p-0016" num="0015">At least one exemplary embodiment is directed to a method of operating an audio device comprising: measuring sound pressure levels (SPL<sub>ECM1</sub>) for a first acoustic energy received by an ear canal receiver (ECR) operating in ECM mode during the time increment Δt; measuring sound pressure levels (SPL<sub>ECM2</sub>) for a second acoustic energy received by an ear canal microphone (ECM) during the time increment Δt; and calculating a calibration relationship between intensity of the second acoustic energy with pressure measurements made by the ECM during the time increment Δt. At least one exemplary embodiment can further include: measuring sound pressure levels (SPL<sub>ECM</sub>) for a third acoustic energy received by an ear canal microphone (ECM) during the time increment Δt<sub>1</sub>; updating SPL<sub>ECM </sub>using the calibration relationship to generate SPL<sub>ECM-update</sub>, and calculating a SPL_Dose<sub>Δt </sub>during the time increment Δt using SPL<sub>ECM_update</sub>.</div>
+<div class="description-paragraph" id="p-0017" num="0016">At least one exemplary embodiment is directed to a method of obtaining an NRR for an earpiece comprising: removing an earpiece from a user's ear; measuring sound pressure levels (SPL<sub>ECM</sub>) for a first acoustic energy received by an ear canal microphone (ECM) during the time increment Δt; checking whether an ear canal receiver ECR is operating and if operating calculating the sound pressure levels (SPL<sub>ECR</sub>), for the acoustic signals directed to the ECR, during the time increment Δt; calculating the removed earpiece's ambient SPL (SPL<sub>ambient1</sub>) during the time increment Δt using SPL<sub>ECM </sub>and SPL<sub>ECR</sub>; inserting the earpiece into a user's ear; measuring sound pressure levels (SPL<sub>ECM1</sub>) for a second acoustic energy received by the ECM during the time increment Δt<sub>1 </sub>checking whether the ECR is operating and if operating calculating the sound pressure levels (SPL<sub>ECR1</sub>), for the acoustic signals directed to an ear canal receiver (ECR), during the time increment Δt1; calculating the inserted earpiece's ambient SPL (SPL<sub>ambient2</sub>) during the time increment Δt<sub>1 </sub>using SPL<sub>ECM1 </sub>and SPL<sub>ECR1</sub>; and calculating an NRR for the earpiece using SPL<sub>ambient1 </sub>and SPL<sub>ambient2</sub>.</div>
+<div class="description-paragraph" id="p-0018" num="0017">Further areas of applicability of exemplary embodiments of the present invention will become apparent from the detailed description provided hereinafter. It should be understood that the detailed description and specific examples, while indicating exemplary embodiments of the invention, are intended for purposes of illustration only and are not intended to limit the scope of the invention.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram of the system for measuring and determining exposure to sound over time at the ear constructed in accordance with a first exemplary embodiment of the invention;</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram of the system in accordance with at least one exemplary embodiment of the invention in situ in the ear;</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a flow chart for calculating listening fatigue in accordance with at least one embodiment of the invention by measuring a quantity (e.g., the sound pressure level) over time as perceived at the ear;</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a flow chart for determining a weighted ear canal sound pressure level in accordance with another exemplary embodiment of the invention;</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a flow chart for determining a personalized recovery time constant m accordance with another exemplary embodiment of the invention;</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a flow chart for determining an update epoch in accordance with at least one exemplary embodiment of the invention;</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a flow chart for determining an update epoch in accordance with yet another exemplary embodiment of the invention;</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates the general configuration and terminology m accordance with descriptions of exemplary embodiments;</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIGS. 9A-9C</figref> illustrates an example of a temporal acoustic signal and its conversion into a spectral acoustic signature;</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 10</figref> illustrates a generalized version of an earpiece and some associated parts in an ear canal;</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 11</figref> illustrates an earpiece according to at least one exemplary embodiment;</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates a self contained version of an earpiece according to at least one exemplary embodiment;</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 13</figref> illustrates an earpiece where parts are not contained in the earpiece directly according to at least one exemplary embodiment;</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 14A</figref> illustrates a general configuration of some elements of an earpiece according to at least one exemplary embodiment;</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 14B</figref> illustrates a flow diagram of a method for SPL Dose calculation according to at least one exemplary embodiment;</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIGS. 15A-15J</figref> illustrate a method of calculating and modifying a total SPL value and the resultant SPL Dose in accordance with at least one exemplary embodiment;</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIGS. 16A-16B</figref> illustrate one method in accordance with at least one exemplary embodiment for modifying the SPL from an ECR to reduce the total SPL Dose;</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIGS. 17A-17B</figref> illustrate one method in accordance with at least one exemplary embodiment for modifying the SPL from an ECR to reduce the total SPL Dose;</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIGS. 18A to 18N</figref> illustrate various non-limiting examples of earpieces that can use methods according to at least one exemplary embodiment;</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 19</figref> illustrates a line diagram of an earpiece (e.g., earbud) that can use methods according to at least one exemplary embodiment; and</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIG. 20</figref> illustrates the earpiece of <figref idrefs="DRAWINGS">FIG. 19</figref> fitted in an ear canal.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0040" num="0039">The following description of at least one exemplary embodiment is merely illustrative in nature and is in no way intended to limit the invention, its application, or uses.</div>
+<div class="description-paragraph" id="p-0041" num="0040">Processes, techniques, apparatus, and materials as known by one of ordinary skill in the relevant art may not be discussed in detail but are intended to be part of the enabling description where appropriate, for example the fabrication and use of transducers. Additionally in at least one exemplary embodiment the sampling rate of the transducers can be varied to pick up pulses of sound, for example less than 50 milliseconds.</div>
+<div class="description-paragraph" id="p-0042" num="0041">In all of the examples illustrated and discussed herein, any specific values, for example the sound pressure level change, should be interpreted to be illustrative only and non-limiting. Thus, other examples of the exemplary embodiments could have different values.</div>
+<div class="description-paragraph" id="p-0043" num="0042">Note that similar reference numerals and letters refer to similar items in the following figures, and thus once an item is defined in one figure, it may not be discussed for following figures.</div>
+<div class="description-paragraph" id="p-0044" num="0043">Note that herein when referring to correcting or preventing an error or damage (e.g., hearing damage), a reduction of the damage or error and/or a correction of the damage or error are intended.</div>
+<div class="description-paragraph" id="p-0045" num="0044">At least one exemplary embodiment of the invention is directed to measuring and determining the exposure of sound to the ear over time. Reference is made to <figref idrefs="DRAWINGS">FIG. 1</figref> in which a system, generally indicated as <b>100</b>, is constructed in accordance with at least one exemplary embodiment of the invention. System <b>100</b> includes an audio input device <b>113</b> for receiving sound at the ear. As will be discussed below, audio input device <b>113</b> can include an analog audio input <b>11</b>, <b>23</b> and a digital audio input <b>19</b>. In at least one exemplary embodiment, audio input device <b>113</b> receives audio input from at least one of three sources, namely; ambient noise around the ear, direct input noise such as a MP3 player or other device which can produce a digital audio input at digital audio input <b>19</b>, and noise as detected within the ear canal <b>31</b> (<figref idrefs="DRAWINGS">FIG. 2</figref>). The audio input device <b>113</b> outputs an audio signal corresponding to the received sound. Analog output signals from analog audio inputs <b>11</b>, <b>23</b> are converted to a digital signal by an analog-to-digital (A/D) converter <b>118</b> so that digital sound signals are input into an input level detector <b>120</b>.</div>
+<div class="description-paragraph" id="p-0046" num="0045">Input level detector <b>120</b> determines the sound pressure level of the sound received at audio input device <b>113</b>. Input level detector <b>120</b> outputs a sound pressure level (SPL) signal, which is input to a minimum-level threshold detector <b>122</b>. Minimum level threshold detector <b>122</b> determines whether or not the sound pressure level as detected by input level detector <b>120</b> exceeds a minimum level threshold. As will be discussed below, the minimum level threshold can be the permitted sound level, PSL (e.g., effective quiet level) of the individual, or some predetermined level substantially corresponding to a level which is ear damage neutral over time or a level of interest, such as 80 dB, because of its effect on the ear. Therefore, if the minimum level threshold is detected as being exceeded, a signal indicating a sound pressure level in excess of the minimum level threshold is output to a start timer <b>124</b>, which triggers a digital timer system <b>126</b> to begin a clock. Conversely, if the input sound pressure level is detected as being below the minimum threshold, a signal indicating the sound pressure level is below the minimum level threshold is output to a start timer <b>124</b>, which triggers a digital timer system <b>126</b> to begin a clock of a restorative period. If the sound pressure level is at the minimum threshold (within a margin of error), no clock needs to be started because this is neutral to the desired effect. In a preferred embodiment, the clock signal is changed with every significant (more than 1 dB by way of example) change in sound pressure level to get an accurate profile of sound exposure over time.</div>
+<div class="description-paragraph" id="p-0047" num="0046">Once the sound pressure level as detected at input level detector <b>120</b> decreases to or is below the minimum threshold level, a stop timer signal is output from stop timer <b>128</b> to digital timer system <b>126</b> to stop the clock corresponding to exposure to the excessively intense level. Digital timer system <b>126</b> outputs a clock value corresponding to the time period at which the minimum level threshold was not met, or in the preferred embodiment, for each period corresponding to a discrete level change.</div>
+<div class="description-paragraph" id="p-0048" num="0047">A data memory or learning history database <b>127</b> receives the clock value from digital timer system <b>126</b> as well as the actual input level detected at input level detector <b>120</b> and determines a listening history or sound pressure level exposure history. The sound pressure level exposure history is a record of the user's exposure to sound pressure levels over time. Because the effect of exposure is cumulative, it is important that the exposure history be maintained. The listening history, as will be discussed below, can include real ear level data, listening duration data, time between listening sessions, absolute time, sound pressure level dose (SPL Dose) data, including any restorative sound level, number of acoustic transients and crest factor and other data.</div>
+<div class="description-paragraph" id="p-0049" num="0048">The sound pressure level exposure history or listening history includes both the listening habits history and the environmental or ambient noise exposure history. The environmental noise exposure history is the exposure of a user to environmental noise over time as a result of the auditory stimuli inherent to the environment where the user is present. This can be highway traffic, construction site, even the restorative effect of the quiet sound pressure levels, e.g., those typically encountered in a library whereas, the listening habits history is associated for the purposes for this disclosure with user-directed auditory stimuli such as music, words, other noises, which a user intentionally encounters for a purpose such as communication, learning, and enjoyment. Therefore, database <b>127</b>, as will be discussed below, stores the cumulative SPL exposure.</div>
+<div class="description-paragraph" id="p-0050" num="0049">It should be noted that in at least one exemplary embodiment, minimum level threshold detector <b>122</b> also starts the timer <b>124</b> when the sound pressure level is below the predetermined level. In this way, the restorative effect of below PSL (e.g., effective quiet noise) is accumulated for determining overall exposure damage potential.</div>
+<div class="description-paragraph" id="p-0051" num="0050">In effect, the only time that digital timer system <b>126</b> is not running is when the detected sound pressure level signal is at the minimum level threshold. A listening fatigue calculator <b>130</b> receives the input level signal from input level detector <b>120</b> and data from the data memory listening history <b>127</b>, and determines whether or not listening fatigue or hearing damage is likely to occur as a result of further exposure. Hearing damage is the injury to the hearing mechanism including conductive and sensorineural decrement in hearing threshold levels. It can be either temporary or permanent so long as it is a result of the noise exposure is above PSL (e.g., Effective Quiet). In other words, listening fatigue calculator <b>130</b> will output a signal when a threshold sound exposure, determined as a function of exposure time and sound pressure level, as will be discussed in greater detail below, is achieved. At that point, a listening fatigue signal is output.</div>
+<div class="description-paragraph" id="p-0052" num="0051">It should be noted that in an alternative embodiment, system <b>100</b> can make use of an ambient noise detection/cancellation system <b>142</b> as known in the art. These systems produce signals, which cancel sound pressure levels at certain frequencies and/or certain levels to reduce the effect of undesired noise, whether environmental noise or user directed noise. It will have some effect in elongating the permissible exposure time by negating the sound pressure level detected by input level detector <b>120</b>.</div>
+<div class="description-paragraph" id="p-0053" num="0052">In at least one exemplary embodiment, the signal from the listening fatigue calculator is utilized to prevent damage and encourages some action by the user when exposure levels are near damaging levels. Therefore, in one non-limiting example, a listening fatigue display <b>140</b> is provided for receiving the signal from the listening fatigue calculator and displaying to the user a prompt to discontinue exposure to the sound level from the damaging sound source or audio source.</div>
+<div class="description-paragraph" id="p-0054" num="0053">In another non-limiting example, the signal from the listening fatigue calculator is output to an audio warning source <b>132</b>, which outputs an output audio warning to the user notifying the user that exposure to the sound source has reached critical levels.</div>
+<div class="description-paragraph" id="p-0055" num="0054">In at least one exemplary, but non-limiting, embodiment, as will be discussed below, system <b>100</b> includes an output acoustical transducer <b>25</b> to provide an audio signal to the ear. Output acoustical transducer <b>25</b> operates under the control of a digital signal processor (DSP) <b>134</b>. Digital signal processor <b>134</b> receives a digital audio signal from input level detector <b>120</b>, which acts as a pass through for the digitized signals from audio input device <b>113</b>. Digital signal processor <b>134</b> passes the sound signals through to a digital to analog (D/A) converter <b>136</b> to drive acoustical transducers <b>25</b> to recreate the sound received at audio input device <b>113</b> inside the ear canal <b>31</b> in at least one exemplary embodiment of the invention as shown in <figref idrefs="DRAWINGS">FIG. 2</figref>. With such an exemplary embodiment, audio warning source <b>132</b> provides an output to digital sound processor <b>134</b> causing output acoustical transducer <b>25</b> to output a warning sound inside the ear of the user.</div>
+<div class="description-paragraph" id="p-0056" num="0055">Additionally, in at least one further exemplary embodiment, listening fatigue calculator <b>130</b> outputs a listening fatigue signal to digital processor <b>134</b> which causes digital signal processor <b>134</b> to attenuate the sound signal prior to output to acoustical transducer <b>25</b> to reduce the signal output level by any of the linear gain reduction, dynamic range reduction, a combination of both, or a complete shutdown of transducer <b>25</b>. Attenuation would be at least to the level, if not below, the PSL (e.g., effective quiet level) to allow for ear recovery prior to damage.</div>
+<div class="description-paragraph" id="p-0057" num="0056">It should be noted, that because personal hearing threshold and discomfort levels can change from person to person, and because both of the time intervals are a function of many variables, in a non-limiting example, to provide a dynamic ever-changing response, system <b>100</b> operates under software control. The configuration of the digital sound processor <b>134</b>, listening fatigue calculator <b>130</b>, the minimum level threshold detector <b>122</b>, and the input level detector <b>120</b> are operated under software control.</div>
+<div class="description-paragraph" id="p-0058" num="0057">In an exemplary embodiment of the present disclosure, the control programs are stored in a program memory <b>148</b> for operating the firmware/hardware identified above. Furthermore, the program stored within memory <b>148</b> can be personalized as a result of testing of the user's ear, or by other modeling methods, in which system <b>100</b> includes a software interface <b>144</b> for receiving online or remote source updates and configurations. The software interface <b>144</b> communicates with a data port interface <b>146</b> within system <b>100</b>, which allows the input of software updates to program memory <b>148</b>. The updates can be transmitted across a distributed communications network, such as the Internet, where the updates take the form of online updates and configurations <b>143</b>.</div>
+<div class="description-paragraph" id="p-0059" num="0058">It should be noted that there is multiple functionality distributed across system <b>100</b>. In at least one exemplary embodiment, at least audio input device <b>113</b> and acoustical transducer <b>25</b> are formed as an earpiece, which extends into the outer ear canal so that the processing of signals pertains to sound received at the ear. However, it is well within the scope of at least one exemplary embodiment of the invention to provide substantially all of the functionality in an earpiece so that system <b>100</b> is a “smart device.”</div>
+<div class="description-paragraph" id="p-0060" num="0059">Also note that when referring to measurements in decibels (dB), one is referring to a logarithmic ratio. For example dB is defined as:</div>
+<div class="description-paragraph" id="p-0061" num="0060">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>SPL</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mrow>
+<mi>β</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>dB</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mn>10</mn>
+<mo>⁢</mo>
+<mi>log</mi>
+<mo>⁢</mo>
+<mfrac>
+<mi>I</mi>
+<msub>
+<mi>I</mi>
+<mn>0</mn>
+</msub>
+</mfrac>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mn>10</mn>
+<mo>⁢</mo>
+<mi>log</mi>
+<mo>⁢</mo>
+<mfrac>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msup>
+<mi>P</mi>
+<mn>2</mn>
+</msup>
+</mrow>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msubsup>
+<mi>P</mi>
+<mn>0</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mfrac>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0062" num="0061">Where I is the intensity measured, I<sub>0 </sub>is a reference intensity, I<sub>0</sub>=10<sup>−12 </sup>W/m<sup>2</sup>, and P<sub>0 </sub>is a reference pressure, ΔP<sub>0</sub>=20 micropascals, and where ΔP is the root mean squared pressure amplitude in a measured pressure wave (e.g., using a transducer). Thus, the sound pressure level (SPL) can be measured in dB.</div>
+<div class="description-paragraph" id="p-0063" num="0062">Alternatively one can use the above equation and solve for measured pressures instead. For example:
+<br/>
+Δ<i>P</i>(<i>t</i>)=10<sup>(SPL(t)/20.0)</sup> <i>ΔP</i> <sub>0</sub>  (2)
+</div>
+<div class="description-paragraph" id="p-0064" num="0063">In the discussion of formulas herein we refer to SPL as a non-limiting example and one of ordinary skill in the arts could re-derive the equations in terms of measured pressures, ΔP, both are intended to lie within the scope of at least one exemplary embodiment. Reference is now made to <figref idrefs="DRAWINGS">FIG. 2</figref> in which system <b>100</b> in which the transducer configuration, that portion of system <b>100</b>, which converts sound pressure level variations into electrical voltages or vice versa is shown. In this embodiment, acoustic transducers include microphones as an input and loudspeakers as an acoustical output.</div>
+<div class="description-paragraph" id="p-0065" num="0064"> <figref idrefs="DRAWINGS">FIG. 2</figref> depicts the electro acoustical assembly <b>13</b> (also referred to herein as an in-the-ear acoustic assembly <b>13</b> or earpiece <b>13</b>), as it would typically be placed in the ear canal <b>31</b> of ear <b>17</b> of user <b>35</b>. The assembly is designed to be inserted into the user's ear canal <b>31</b>, and to form an acoustic seal with the walls <b>29</b> of the ear canal <b>31</b> at a location <b>27</b>, between the entrance <b>15</b> to the ear canal <b>31</b> and the tympanic membrane or eardrum <b>33</b>. Such a seal is typically achieved by means of a soft and compliant housing of assembly <b>13</b>. A seal is critical to the performance of the system in that it creates a closed cavity in ear canal <b>31</b> of approximately 0.5 cc in a non-limiting example between the in-ear assembly <b>13</b> and the ear's tympanic membrane <b>33</b>.</div>
+<div class="description-paragraph" id="p-0066" num="0065">As a result of this seal, the output transducer (speaker) <b>25</b> is able to generate a full range bass response when reproducing sounds for the system user. This seal also serves to significantly reduce the sound pressure level at the user's eardrum <b>33</b> resulting from the sound field at the entrance <b>15</b> to the ear canal <b>31</b>. This seal is also the basis for the sound isolating performance of the electroacoustic assembly <b>13</b>. Located adjacent to speaker <b>25</b>, is an ear canal microphone (ECM) <b>23</b>, which is also acoustically coupled to closed cavity <b>31</b>. One of its functions is that of measuring the sound pressure level in cavity <b>31</b> as a part of testing the hearing sensitivity of the user as well as confirming the integrity of the acoustic seal and the working condition of itself and speaker <b>25</b>. Audio input <b>11</b> (also referred to herein as ambient sound microphone (ASM) <b>11</b>) is housed in assembly <b>13</b> and monitors sound pressure at the entrance <b>15</b> to the occluded ear canal. The transducers can receive or transmit audio signals to an ASIC <b>21</b> that undertakes at least a portion of the audio signal processing described above and provides a transceiver for audio via the wired or wireless communication path <b>119</b>.</div>
+<div class="description-paragraph" id="p-0067" num="0066">In the above description the operation of system <b>100</b> is driven by sound pressure level, i.e. sound levels are monitored for time periods or epochs during which the sound pressure level does not equal the minimum level threshold or is constant. However, as will be discussed in connection with the next exemplary embodiments of the invention, system <b>100</b> can also operate utilizing fixed or variable sampling epochs determined as a function of one or more of time and changes in sound pressure level, sound pressure dosage level, weighting functions to the sound pressure level, and restorative properties of the ear.</div>
+<div class="description-paragraph" id="p-0068" num="0067">Reference is now made to <figref idrefs="DRAWINGS">FIG. 3</figref> in which a flow chart for monitoring the sound pressure level dose at various sample times n is provided. The process is started in a step <b>302</b>. An input audio signal is generated in a step <b>304</b> at either the ear canal microphone (ECM) <b>23</b> or the ambient sound microphone (ASM) <b>11</b>. Changes in SPL_Dose resulting from duration of exposure time is a function of the sound pressure level, therefore, the epoch or time period used to measure ear exposure or, more importantly, the time-period for sampling sound pressure level is determined in a step <b>305</b>. The update epoch is used in the SPL Dose function determination as well as to effect the integration period for the sound pressure level calculation that, as will be discussed below, is used to calculate the weighted ear canal sound pressure level.</div>
+<div class="description-paragraph" id="p-0069" num="0068">Reference is now made to <figref idrefs="DRAWINGS">FIGS. 6 and 7</figref>. In <figref idrefs="DRAWINGS">FIG. 6</figref>, a method is defined to change the update epoch as a function of the weighted ear canal sound pressure level, which will be discussed in greater detail below. System <b>100</b> is capable of determining when earpiece <b>13</b> is in a charger or communication cradle (i.e., not in use in the ear of the user). In a step <b>684</b>, a predetermined standard is provided for the update epoch, 60 seconds in this example. In step <b>688</b>, the update epoch is set as the in-cradle update epoch. The in-cradle state is detected in step <b>686</b>. If it is determined in a step <b>690</b> that earpiece <b>13</b> (also referred to herein as earphone device <b>13</b>) is in a charger or cradle mode, then the update epoch is set as the in-cradle epoch; in the step <b>688</b>.</div>
+<div class="description-paragraph" id="p-0070" num="0069">However, if in step <b>690</b> it is determined that the earphone device <b>13</b> is in use, in other words “not in the cradle”, then, by default, an audio signal is input to earpiece <b>13</b> in step <b>692</b>. In step <b>693</b>, an ear canal sound pressure level is estimated as a function of the audio input at step <b>692</b>. The current (n) ear canal sound pressure level estimate is stored as a delay level in a step <b>698</b>. An audio input is determined at a later time when step <b>692</b> is repeated so that a second in-time ear canal sound pressure level estimate is determined.</div>
+<div class="description-paragraph" id="p-0071" num="0070">In a step <b>600</b>, the delayed (n−1) or previous sound pressure level is compared with the current (n) ear canal sound pressure level estimate to calculate a rate of change of the sound pressure level. The change level is calculated in units of dB per second. This process of step <b>692</b> through <b>600</b> is periodically repeated.</div>
+<div class="description-paragraph" id="p-0072" num="0071">In a step <b>606</b>, it is determined whether or not the sound pressure level change is less than a predetermined amount (substantially 1 dB by way of non-limiting example) between iterations, i.e., since the last time the ear canal sound pressure level is calculated. If the change is less than the predetermined amount, then in step <b>604</b> the update epoch is increased. It is then determined in a step <b>602</b> whether or not the epoch update is greater than a predefined amount D set in step <b>694</b> as a maximum update epoch such as 60 seconds in a non-limiting example. If in fact, the update epoch has a value greater than the maximum update epoch D then the update epoch is set at the higher value D in step <b>608</b>.</div>
+<div class="description-paragraph" id="p-0073" num="0072">If it is determined in step <b>606</b> that the sound pressure level change is, in a non-limiting example, greater than −1 dB, but less than +1 dB as determined in step <b>612</b>, then the update epoch value is maintained in a step <b>610</b>. However, if it is determined that the sound pressure level change is, in a non-limiting example, greater than +1 dB, then the update epoch value is decreased in a step <b>618</b> to obtain more frequent sampling. A minimum predetermined update epoch value such as 250 microseconds is set in a step <b>614</b>. If the decreased update epoch determined in step <b>618</b> is less than, in other words an even smaller minimum time-period than the predetermined minimum update epoch E, then the new update epoch is set as the new minimum update epoch value in steps <b>616</b> and <b>622</b>. In this way, the sample period is continuously being adjusted as a function of the change in sound pressure level at the ear. As a result, if the noise is of a transient variety as opposed to a constant value, the sampling interval will be changed to detect such transients (e.g., spikes) and can protect the ear.</div>
+<div class="description-paragraph" id="p-0074" num="0073">Reference is now made to <figref idrefs="DRAWINGS">FIG. 7</figref> in which a method for changing the update epoch is illustrated as a function of the way that the ear canal sound pressure level estimate is provided. Again, in accordance with at least one exemplary embodiment of the invention, the update epoch is decreased when the ear canal sound pressure level is high or increasing.</div>
+<div class="description-paragraph" id="p-0075" num="0074">The difference between the embodiment of <figref idrefs="DRAWINGS">FIG. 7</figref> and the embodiment of <figref idrefs="DRAWINGS">FIG. 6</figref> is that the update epoch is not continuously adjusted, but is more static. If the ear canal sound pressure level is less than PSL (e.g., effective quiet, a decibel level which when the ear is exposed to over time does not damage or restore the ear), then the update epoch is fixed at a predefined maximum epoch value and this is the value used by system <b>100</b> as will be discussed in connection with <figref idrefs="DRAWINGS">FIG. 3</figref> below. In this embodiment, if the ear canal sound pressure level is determined to be greater than a permissible (or permitted) sound level (PSL) (e.g., effective quiet), then the update epoch is fixed at a shorter minimum value and this is returned as the update epoch to be utilized.</div>
+<div class="description-paragraph" id="p-0076" num="0075">In <figref idrefs="DRAWINGS">FIG. 7</figref>, specifically, as with <figref idrefs="DRAWINGS">FIG. 6</figref>, an in-cradle update epoch of 5 seconds by way of non-limiting example, is stored in system <b>100</b> in a step <b>784</b>. In a step <b>788</b>, the initial update epoch is set as the in-cradle update epoch. A maximum update epoch time, such as 2 seconds by way of non-limiting example, is stored in a step <b>794</b>. In a step <b>714</b>, an initial minimum update epoch (250 microseconds in this non-limiting example) is stored.</div>
+<div class="description-paragraph" id="p-0077" num="0076">In a step <b>786</b> and step <b>790</b> it is determined whether or not system <b>100</b> is in a non-use state, i.e., being charged or in a cradle. If so, then the update epoch is set at the in-cradle update epoch. If not, then a digital audio signal is input from ear canal microphone <b>23</b> in step <b>792</b>. A sound pressure level is estimated in step <b>795</b>. It is then determined whether or not the ear canal sound pressure level is less than PSL (e.g., effective quiet) in a step <b>732</b>. If the sound pressure level is less than the PSL (e.g., effective quiet) as determined in step <b>732</b>, then the update epoch is set at the maximum update epoch in a step <b>730</b>. If the sound pressure level is louder than the effective quiet, then in step <b>716</b>, the update epoch is set to the minimum update epoch.</div>
+<div class="description-paragraph" id="p-0078" num="0077">Returning to <figref idrefs="DRAWINGS">FIG. 3</figref>, in a non-limiting exemplary embodiment, the update epoch is set at 10 seconds in a step <b>302</b> utilizing either a constant predetermined sample time, or either of the methodologies discussed above in connection with <figref idrefs="DRAWINGS">FIGS. 6 and 7</figref>. In a step <b>306</b>, the input audio signal is sampled, held, and integrated over the duration of the epoch as determined in step <b>308</b>. As a result, the update epoch affects the integration period utilized to calculate the sound pressure level dose as a function of the sound pressure level and/or as the weighted ear canal sound pressure level.</div>
+<div class="description-paragraph" id="p-0079" num="0078">In a step <b>310</b>, an earplug noise reduction rating (NRR) is stored. The noise reduction rating corresponds to the attenuation effect of earpiece <b>13</b>, or system <b>100</b>, on sound as it is received at audio input <b>11</b> and output at the output transducer <b>25</b> or as it passes from the outer ear to the inner ear, if any exemplary embodiment has no ambient sound microphone <b>11</b>. In a step <b>311</b>, a weighted ear canal sound pressure level is determined, partially as a function of the earplug noise reduction rating value.</div>
+<div class="description-paragraph" id="p-0080" num="0079">Reference is now made to <figref idrefs="DRAWINGS">FIG. 4</figref> where a method for determining the weighted ear canal sound pressure level in accordance with at least one exemplary embodiment of the invention is illustrated. Like numerals are utilized to indicate like structure for ease of discussion and understanding. Weighting is done to compensate for the manner in which sound is perceived by the ear as a function of frequency and pressure level. As sounds increase in intensity, the ear perceived loudness of lower frequencies increases in a nonlinear fashion. By weighting, if the level of the sound of the field is low, the methodology and system utilized by at least one exemplary embodiment of the invention reduces the low frequency and high frequency sounds to better replicate the sound as perceived by the ear.</div>
+<div class="description-paragraph" id="p-0081" num="0080">Specifically, a weighting curve lookup table, such as A-weighting, acts as a virtual band-pass filter for frequencies at sound pressure levels. In a step <b>304</b>, the audio signal is input. In step <b>410</b>, frequency-dependent earplug noise reduction ratings are stored. These values are frequency-dependent and in most cases, set as manufacturer-specific characteristics.</div>
+<div class="description-paragraph" id="p-0082" num="0081">As discussed above, in a step <b>306</b>, the input audio signal is shaped, buffered and integrated over the duration of each epoch. The sound pressure level of the shaped signal is then determined in a step <b>436</b>. It is determined whether or not ambient sound microphone (ASM) <b>11</b> was utilized to determine the sound pressure level in a step <b>444</b>. If microphone <b>11</b> was utilized, then the frequency-dependent earplug noise reduction rating of earpiece <b>13</b> must be accounted for to determine the sound level within the ear. Therefore, the noise reduction rating, as stored in step <b>310</b>, is utilized with the sound pressure level to determine a true sound pressure level (at step <b>446</b>) as follows:
+<br/>
+SPL<sub>ACT</sub>=SPL−NRR:  (3)
+<br/>
+where sound pressure SPL<sub>ACT </sub>is the actual sound pressure level received at the ear medial to the ECR, SPL is the sound pressure level determined in step <b>436</b> and NRR is the noise reduction rating value stored in step <b>410</b>.
+</div>
+<div class="description-paragraph" id="p-0083" num="0082">If the ambient sound microphone (ASM) <b>11</b> is not used to determine the sound pressure level then the sound pressure level determined in step <b>436</b> is the actual sound pressure level. So that:
+<br/>
+SPL<sub>ACT</sub>=SPL  (4)
+</div>
+<div class="description-paragraph" id="p-0084" num="0083">It is well within the scope of at least one exemplary embodiment of the invention to utilize the actual sound pressure level as determined so far to determine the affect of the sound pressure level received at the ear on the health of the ear. However, in at least one exemplary embodiment, the sound pressure level is weighted to better emulate the sound as received at the ear. Therefore, in a step <b>412</b>, a weighting curve lookup table is stored within system <b>100</b>. In a step <b>440</b>, the weighting curve is determined as a function of the actual sound pressure level as calculated or determined above in steps <b>436</b>, <b>446</b> utilizing a weighting curve lookup table such as the A-weighting curve. The A-weighting curve is then applied as a filter in step <b>438</b> to the actual sound pressure level. A weighted sound pressure level value representative of a sampled time period (SPL_W(n)) is obtained to be utilized in a step <b>414</b>.</div>
+<div class="description-paragraph" id="p-0085" num="0084">The weighting curve can be determined in step <b>440</b> by applying a frequency domain multiplication of the sound pressure level vector and the weighting curve stored in step <b>412</b>. In this exemplary embodiment the weighting curve would be appropriate for direct multiplication with the SPL in the frequency domain (i.e., SPL(f)). In another exemplary embodiment the weighted SPL can be expressed as a weighting of the measured pressure vector as:</div>
+<div class="description-paragraph" id="p-0086" num="0085">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>SPL_W</mi>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mi>n</mi>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mn>20</mn>
+<mo>⁢</mo>
+<mrow>
+<mi>log</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mfrac>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msup>
+<mi>P</mi>
+<msub>
+<mi>W</mi>
+<mi>A</mi>
+</msub>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>P</mi>
+<mn>0</mn>
+</msub>
+</mrow>
+</mfrac>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>5</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0087" num="0086">where ΔP(t) is the measured temporal change in root mean squared pressure, which can be converted into spectral space (e.g., FFT) as ΔP(f) which is the measured spectral change in pressure, which can in tum be multiplied by a weighting function (e.g., A-weighting), W<sub>A</sub>(f) and expressed as ΔP<sup>WA </sup>(f)=ΔP(f)·W<sub>A</sub>(f)−, and then reconverted (e.g., inverse FFT) into temporal space to obtain ΔP<sup>WA </sup>(t). To obtain a single value various integration or summation over the n-th time interval (e.g., which can change in time) can be performed. For example:</div>
+<div class="description-paragraph" id="p-0088" num="0087">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>SPL_W</mi>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mi>n</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>t</mi>
+<mi>n</mi>
+</msub>
+</mrow>
+</mfrac>
+<mo>⁢</mo>
+<mrow>
+<msubsup>
+<mo>∫</mo>
+<msub>
+<mi>t</mi>
+<mrow>
+<mi>n</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<msub>
+<mi>t</mi>
+<mi>n</mi>
+</msub>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mn>10</mn>
+<mo>⁢</mo>
+<mrow>
+<mi>log</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mfrac>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msup>
+<mi>P</mi>
+<msub>
+<mi>W</mi>
+<mi>A</mi>
+</msub>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msubsup>
+<mi>P</mi>
+<mi>O</mi>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mfrac>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mi>dt</mi>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>6</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0089" num="0088">The time during which a user may be exposed to the sound level SPL_W(n), i.e. the time to 100% allowable dosage at SPL level SPL_W(n), is referred to below as Time_100% (n).</div>
+<div class="description-paragraph" id="p-0090" num="0089">The weighting curves can be stored as a lookup table on computer memory, or can be calculated algorithmically. Alternatively, the input audio signal can be filtered with a time or frequency domain filter utilizing the weighting curve stored in step <b>412</b> and the sound pressure level as calculated. For low-level sound pressure levels, those less than 50 dB, by way of non-limiting example, a weighting curve, which attenuates low and high frequencies can be applied (similar to an A-weighting curve). For higher sound pressure levels, such as more than 80 dB, by way of non-limiting example, the weighting curve can be substantially flat or a C-weighting curve. The resulting weighted ear canal sound pressure level during any respective sampling epoch is returned as the system output SPL_W(n) in step <b>414</b>. Note that herein various conventional weighting schemes are discussed (e.g., A-weighting, C-weighting) however in at least one exemplary embodiment non-conventional weighting schemes can be used. For example, generally dB is referenced to the threshold level of hearing sensitivity (threshold of detection), where 20 micropascals is typically used as the minimum threshold level of pressure variation that an average person can detect. This reference value tends to be used at all frequencies, although the threshold level varies with frequency. Thus, one weighting scheme is to adjust the reference 0 dB level on a frequency basis, by using a conventional dB of threshold hearing chart, which provides the dB (f) at threshold level. A weighting function can be used where the value is about 1 at the reference value (e.g., equivalent to 20 micropascals) at a reference frequency (e.g., 1000 Hz). The other values (e.g., as a function of frequency) of the weighting function can varying depending upon the reference threshold pressure variation for the particular frequency, for example if at 30 Hz the threshold level in dB is 65 dB, then the weighting value can be 1/65 at 30 Hz, de-emphasizing the loudness and/or intensity at 65 dB when SPL Dose (f) is calculated.</div>
+<div class="description-paragraph" id="p-0091" num="0090">Returning to <figref idrefs="DRAWINGS">FIG. 3</figref>, a safe listening time is calculated by comparing the weighted sound pressure level with the PSL (e.g., effective quiet level) in step <b>316</b>. Therefore, a value A corresponding to how far from safe listening the sound pressure level is, is determined by the equation:
+<br/>
+<i>A</i>=SPL_<i>W</i>(<i>n</i>)−PSL  (7)
+<br/>
+where PSL is the permissible sound level, for example PSL=EfQ, where EfQ is equal to the sound level of effective quiet (as stored at step <b>312</b>).
+</div>
+<div class="description-paragraph" id="p-0092" num="0091">By utilizing this simple comparative function, fewer machinations and processes are needed. System <b>100</b> takes advantage of the fact that because the PSL (e.g., effective quiet level) can be neutral to the ear, sound pressure levels significantly above the PSL (e.g., effective quiet level) are generally damaging and noise levels below the PSL (e.g., effective quiet) generally allow for restoration/recovery.</div>
+<div class="description-paragraph" id="p-0093" num="0092">In a step <b>318</b>, the remaining safe listening time at the beginning of any current sampling epoch can be calculated by Time 100% minus the time duration of exposure up to the current sampling epoch. Note that a negative number can occur, indicating that no safe listening time remains. The estimated time (e.g., in hours) until the individual's sound exposure is such that permanent threshold shift may occur, ignoring any previous sound exposure and assuming that the SPL of the sound field exposed to the individual remains at a constant level L can be calculated as follows:
+<br/>
+Time_100%(<i>n</i>)=<i>Tc</i>/(2{circumflex over ( )}((SPL_<i>W</i>(<i>n</i>)−PSL)/<i>ER</i>))  (8)
+</div>
+<div class="description-paragraph" id="p-0094" num="0093">Where PSL is the permissible sound level, and Tc is the critical time period. For example, if Tc (Critical Time) is 8 hours and PSL is 90 dBA, then that accepts that ˜22-29% of people are at risk for hearing loss. If Tc is 8 hours and PSL is 85 dBA, then that accepts that ˜7-15% of people are at risk, likewise for if Tc is 24 hours and PSL is 80 dBA, same 7-15% at risk. Thus Time_100% (n) reflects a reduction of the risk to a chosen level. Note that Tc is the critical time period of exposure that one is looking at (e.g., 8 hours, 24 hours), and ER is the exchange rate, for example can be expressed as:
+<br/>
+Time_100%(<i>n</i>)=8 (hours)/(2{circumflex over ( )}((SPL_<i>W</i>(<i>n</i>)−8 dBA)/3 dB))  (9)
+</div>
+<div class="description-paragraph" id="p-0095" num="0094">These values assume a recovery period of 16 hours at a SPL level during that time of less than 75 dBA (where dBA refers to Decibels of an A-weighted value). Of course the realism of such an assumption is questionable given music, TV, and other listening habits of individuals. Thus, we are concerned with exposure over a 24 hour period. Thus, Time_100% (n) can be expressed for a 24 hour period (e.g., Tc=24 (hours)), where, for example using an equal energy assumption (i.e., ER of 3 dBA), as:
+<br/>
+Time_100%(<i>n</i>)=24/(2{circumflex over ( )}((SPL_<i>W</i>(<i>n</i>)−PSL)/3)).  (10)
+</div>
+<div class="description-paragraph" id="p-0096" num="0095">Another further example is the situation where PSL=EfQ, where the Effective Quiet, EfQ is defined as the highest sound level that does not cause temporary or permanent hearing threshold shift, nor does it impede recovery from temporary hearing threshold shift. For broadband noise, it can be 76-78 dBA, although these numbers can be different or refined over time based upon research and/or measurement history.</div>
+<div class="description-paragraph" id="p-0097" num="0096">As a non-limiting example, the lower bound of SPL_W(n) dictating the Time_100% equation would be SPL_W(n)=PSL, and the upper bound of the SPL_W(n) dictating Time_100% equation would be about SPL_W(n)=115 dB, for example.</div>
+<div class="description-paragraph" id="p-0098" num="0097">In this embodiment, rather than make use of the Sound Level (L), the period is a function of the loudness and quietness of the weighted sound pressure level. It should be noted that PSL (e.g., effective quiet) is used in the above example, but any level of interest, such as 80 dB, or no sound level, i.e., SPL_W(n)−0, can be used. The weighted sound pressure level and PSL can be expressed as a frequency-dependent numerical array or a value scalar.</div>
+<div class="description-paragraph" id="p-0099" num="0098">It is next determined whether or not the difference between the current weighted sound pressure level and the PSL (e.g., effective quiet) is above a tolerable threshold for risk of hearing damage or not, i.e., whether the weighted SPL in the eardrum is considered to increase risk for hearing damage or not. A sound pressure level dose is calculated depending upon whether the sound level is loud or not. The sound pressure level dose (SPL Dose) is the measurement, which indicates an individual's cumulative exposure to sound pressure levels over time. It accounts for exposure to direct inputs such as MP3 players, phones, radios and other acoustic electronic devices, as well as exposure to environmental or background noise, also referred to as ambient noise. The SPL Dose is expressed as a percentage of some maximum time-weighted average for sound pressure level exposure.</div>
+<div class="description-paragraph" id="p-0100" num="0099">Because the sound pressure level dose is cumulative, there is no fixed time-period for ear fatigue or damage. At or below effective quiet, the sound pressure level exposure time would theoretically be infinite, while the time period for achieving the maximum allowable sound pressure level dose becomes smaller and smaller with exposure to increasingly more intense sound. A tolerable level change threshold corresponding to the amount of noise above or below the effective quiet which has no great effect on the ear as compared to effective quiet is determined and stored in memory <b>127</b> in a step <b>320</b>. In a step <b>322</b>, the differential between the weighted sound pressure level and the effective quiet is compared to the level change threshold.</div>
+<div class="description-paragraph" id="p-0101" num="0100">A differential value A, corresponding to the level change, can be calculated as follows:
+<br/>
+<i>A</i>=SPL_<i>W</i>(<i>n</i>)−PSL  (11)
+<br/>
+If A is greater than the level change threshold, the noise is considered to increase risk for hearing damage and the sound pressure level dose is calculated in a step <b>324</b> as follows:
+<br/>
+SPL_Dose(<i>n</i>)=SPL Dose(<i>n−</i>1)+(Update_Epoch(<i>n</i>)/Time_100%)  (12)
+<br/>
+where SPL Dose(n−1) is the SPL Dose calculated during the last epoch; Update_Epoch is the time (in hours) since the last SPL Dose was calculated. As described above, Update_Epoch can be adaptive, e.g., shortened when the sound pressure level is louder; and Time_100% (n), the time period remaining for safe exposure is determined by the equation:
+<br/>
+Time_100%(<i>n</i>)=24 hours(2{circumflex over ( )}((<i>L</i>−PSL)/3))  (13)
+<br/>
+where L=sound level (in dB) of the combination of environmental noise and audio playback. It should be noted that sound level (L) can be substituted for SPL_W(n).
+</div>
+<div class="description-paragraph" id="p-0102" num="0101">It should be noted, as can be seen from the equation, that the time value becomes more important than the sound pressure level as updates are spread apart. However, this is to protect overexposure to harmful sounds because a less accurate sample size must account for the unknown. The wider the periodicity, the less accurate determination of actual exposure. Infrequent updates of the SPL Dose assume a relatively constant sound level, ignoring transients (e.g. spikes) and intervening restorative periods. Accordingly, sound pressure level and epoch periodicity are weighed against each other to protect the ear.</div>
+<div class="description-paragraph" id="p-0103" num="0102">If in step <b>322</b> it is determined that the differential is not greater than the level change threshold, including negative values for A (which are restorative values), then in step <b>326</b> it is determined whether or not the differential, as determined in step <b>316</b>, is less than the level change threshold in a step <b>322</b>. If it is determined that the differential is not less than the level change threshold, then the received noise was the effective quiet level, i.e., the level change threshold equals zero and in a step <b>330</b>, the current SPL Dose is maintained at the same level. There is no change to the dose level. However, if the differential A is less than the level change threshold then this is a restorative quiet as determined in step <b>326</b>. Thus, if the differential A (e.g., A=SPL_W(n)−PSL) is less than zero, within measurement error, then this is considered a restorative quiet, then the n-th SPL dose is determined as:
+<br/>
+SPL Dose(<i>n</i>)=SPL Dose(<i>n−</i>1)*<i>e</i>{circumflex over ( )}(−Update_epoch/τ)  (14)
+<br/>
+Where: τ(referred to as “tau” in the following diagrams) can vary (e.g., equal to about 7 hours). In some exemplary embodiments, tau is adaptive for different users. In at least one exemplary embodiment, the level change threshold (e.g., measurement error) is set at substantially 0.9-1.0 dB.
+</div>
+<div class="description-paragraph" id="p-0104" num="0103">Note that other forms of a recovery function can be used and the description herein is not intended to limit the recover function to an exponential relationship. For example, during lower exposure times (e.g., 102 minutes) some SPL values (e.g., 95 dB) can be used, if the subsequent SPL is less than PSL, in a linear manner (for example linearly decreasing until there is a near zero threshold shift at 4000 Hz after one day from the time at which SPL&lt;PSL).</div>
+<div class="description-paragraph" id="p-0105" num="0104">Another non-limiting example of a recovery function can be a combination over certain exposure and decay periods (e.g., 7 day exposure at 90 dB, with an initial threshold shift after the 7 days of about 50 dB at 4000 Hz). For example a slow decaying linear relationship can be applied for the first few hours (e.g., 2 hours) where SPL&lt;PSL, then an exponential decay from after the first few hours to a few days (e.g., 4 days) after which a leveling trend can occur.</div>
+<div class="description-paragraph" id="p-0106" num="0105">Additionally although a fractional increase in SPL Dose is given as a non-limiting example, SPL Dose increase can be linear or exponential depending upon the exposure SPL level and the duration. For example the growth can be linear at a certain SPL values (e.g., 95 dB) during different ranges of exposure time (e.g., for 95 dB, from about 4 minutes to 12 hours), then leveling out (e.g., threshold shift of about 59.5 dB) when the exposure time exceeds a certain length (e.g., for 95 dB about 12 hours).</div>
+<div class="description-paragraph" id="p-0107" num="0106">In at least one exemplary embodiment the SPL values measured by an ECM (e.g., in an ECM mode) can be modified by a modification value (e.g., additive or multiplicative), for example SPL<sub>new</sub>=βSPL<sub>old</sub>+δ, where the values, β and δ, can be time variant, positive or negative. Alternatively the values can be applied to the measured pressure values in a similar manner. One can convert the SPL measured by an ECM to free field values, which then can be compared to free field standards for damage risk criteria. For example Table 1 lists several frequency dependent responses of an earpiece while inserted, the “A” weighting curve offset, and the modification values β and δ.</div>
+<div class="description-paragraph" id="p-0108" num="0107">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="5" nameend="5" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Earpiece Freq. Resp.</td>
+<td class="description-td">“A” weight offset</td>
+<td class="description-td">β</td>
+<td class="description-td">δ</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Freq. (Hz)</td>
+<td class="description-td">(dBSPL/V)</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">(dB)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">100</td>
+<td class="description-td">95</td>
+<td class="description-td">−19.1</td>
+<td class="description-td">1.0</td>
+<td class="description-td">0.00</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">500</td>
+<td class="description-td">103.5</td>
+<td class="description-td">−3.2</td>
+<td class="description-td">1.0</td>
+<td class="description-td">−0.13</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1000</td>
+<td class="description-td">104.0</td>
+<td class="description-td">0.0</td>
+<td class="description-td">1.0</td>
+<td class="description-td">−1.83</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2000</td>
+<td class="description-td">121.0</td>
+<td class="description-td">1.2</td>
+<td class="description-td">1.0</td>
+<td class="description-td">−7.84</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4000</td>
+<td class="description-td">106.0</td>
+<td class="description-td">1.0</td>
+<td class="description-td">1.0</td>
+<td class="description-td">−15.57</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0109" num="0108">Thus, for example an SPL(f) measured at 80 dB, at f=1000 Hz, would be subtracted by −1.83 to obtain a free field value to compare with damage-risk criteria, thus obtaining an SPL<sub>new </sub>of 78.13 dB. Note what is described is a non-limiting example, various other earpieces can have different values, and the SPL_DOSE equations, described herein, (e.g., SPL_Dose(n), Time_100%) can be based upon SPL<sub>new</sub>, Note that further discussions concerning frequency responses and free field estimate (FFE) conversion can be viewed in U.S. Pat. No. 6,826,515, Bernardi et al. Alternatively, ear canal dBA SPL (e.g., as measured by an ECM) may be converted to FFE dBA SPL using Table 1 of ISO 11904-1 (2002), incorporated herein by reference.</div>
+<div class="description-paragraph" id="p-0110" num="0109">In step <b>332</b>, the recovery time constant tau is determined. It may not be a function of exposure, but rather of recovery. It can be a default number or be determined as will be discussed below. As the SPL Dose is calculated by system <b>100</b>, it is also monitored. Once the SPL Dose reaches a certain level, as it is a cumulative calculation, ear fatigue calculator <b>130</b> determines whether or not the SPL Dose corresponds to a fatigued ear, and if so, it outputs warnings as discussed in connection with <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="p-0111" num="0110">Reference is now made to <figref idrefs="DRAWINGS">FIG. 5</figref> which depicts an optional methodology for not only updating the recovery time constant (tau) for individual users, but to provide additional methods for acting upon detected damaging exposure. The process is started at a step <b>548</b>. In a step <b>550</b>, it is determined whether or not the user wishes to make use of a registration process, for example online, for setting a personalized update epoch through communication with a remote registration system. If the user declines the registration, then the default tau is set at 7 hours in a step <b>552</b>. In a step <b>554</b>, this default value is transmitted to system <b>100</b> via a wired or wireless data communication network.</div>
+<div class="description-paragraph" id="p-0112" num="0111">Alternatively, if the user registers in step <b>550</b>, a questionnaire is presented in a step <b>556</b> in which the user informs system <b>100</b> regarding a user sound exposure history, age, work habits and other personal details that could affect the user's personal recovery function time, i.e., the time constant tau. The individual characteristics can be input to a formula or utilized as part of a look up table to determine the tau for the individual user. The estimate of tau determined in step <b>556</b> is transmitted to system <b>100</b> via a wireless or wired data communication system in a step <b>558</b>. In step <b>560</b>, the initial estimate of tau is set from the value determined in step <b>556</b> (or step <b>552</b>).</div>
+<div class="description-paragraph" id="p-0113" num="0112">An initial hearing test is performed in a step <b>581</b>, which acquires data indicative of the user's hearing sensitivity. The test may be an otoacoustic emission (OAE) test or audiogram administered utilizing the ear canal receiver or speaker <b>25</b>. However, the test can also be administered over the Internet, telephone or other communication device capable of outputting sounds sent across a distributed network and enabling responsive communication. The data is stored in a computer memory as an initial test value in a step <b>570</b> and is used in further processing to detect a change in the user hearing response.</div>
+<div class="description-paragraph" id="p-0114" num="0113">In a step <b>564</b>, it is determined whether the user has been recently exposed to intense sound pressure levels. This can be done utilizing the sound pressure level dose as stored or permanently calculated by system <b>100</b>. If it is decided in step <b>564</b> that the user's ear canal sound pressure level is low, then in a step <b>559</b> it is determined whether the time since the last test is greater than a maximum test epoch. At the outset, the maximum test epoch is a set number determined in a step <b>562</b>. In this non-limiting example, the maximum test epoch is set at 20 hours.</div>
+<div class="description-paragraph" id="p-0115" num="0114">If it is determined that the time since the last test is greater than the maximum test epoch or, that there has been recent exposure to intense sound pressure level, then another test is administered in a step <b>566</b>. The resulting test metrics are stored in steps <b>568</b>, <b>570</b>. In a step <b>571</b>, the newly determined test metrics are compared to the initial test metrics to calculate any change in the metrics. In step <b>572</b>, it is determined whether the change is predictive of hearing damage. If not, then in a step <b>582</b>, the tau is modified according the obtained metric.</div>
+<div class="description-paragraph" id="p-0116" num="0115">If it is determined that the hearing damage is predicted, then in a step <b>578</b> the user is recommended to remove themselves from the noise as discussed above with the operation of listening fatigue calculator <b>130</b> and furthermore, the user can be recommended to seek professional audiological evaluation in a step <b>578</b>. This could be done by an in situ auditory or visual warning in step <b>580</b> by system <b>100</b>. On the other hand, if system <b>100</b> is used in connection with a communications device such as a telephone or a personal digital assistant, an e-mail can be created in steps <b>574</b>, <b>576</b>; not only warning the user of potential damage, but notifying a health professional so that a follow up examination can be performed.</div>
+<div class="description-paragraph" id="p-0117" num="0116">It should be noted that a change in the hearing metric (e.g., a hearing sensitivity curve) is measured by system <b>100</b>. In response to the user's hearing metric, the recovery time constant tau is updated. For example, tau is lengthened if the change in the user's hearing metric indicates the user has “sensitive ears”, i.e., if, following loud sound exposure, the user's hearing sensitivity takes longer than seven hours to return to the individual's normal. This modified tau can be used to calculate the sound pressure level dose, in particular in a restorative phase, to determine better overall effect of sound pressure level exposure.</div>
+<div class="description-paragraph" id="p-0118" num="0117">By providing a monitoring and protective system which, in at least one mode, continuously monitors sound pressure level at the ear until a potentially harmful exposure has occurred, rather than only monitoring for a predetermined time as with noise dose monitors which monitor for work shifts, a more accurate predictor of harm to the ear is provided. By utilizing a method, which determines exposure in part as a function of effective quiet exposure as well as intense noise exposure, an enhanced model of potential risk is achieved. By providing a series of warning mechanisms and preventive measures as a function of the determined potentially harmful dosage levels ear damage is more likely to be prevented. By providing the system in an earpiece which substantially occludes the ear and making use of audio inputs at the lateral and medial portions of the ear canal (particularly with an occluding device between lateral and medial portions of the ear canal), a more accurate reading of noise level is provided and more control through a real time warning system is achievable.</div>
+<div class="description-paragraph" id="p-0119" num="0118">It should be known that values for level change threshold, effective quiet time, and epoch were used above as examples. However, it should be noted that any values which when input and utilized in accordance with the methodologies above prevent permanent damage to the ear are within the scope of the invention and the invention should not be so limited to the specific examples above.</div>
+<heading id="h-0007">Further Exemplary Embodiments</heading>
+<div class="description-paragraph" id="p-0120" num="0119"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates the general configuration and some terminology in accordance with descriptions of exemplary embodiments. An earpiece <b>800</b> can be inserted into an ear canal separating the ambient environment (AE) <b>890</b> from an inner ear canal (IEC) <b>880</b> region, where a portion of the earpiece <b>800</b> touches a part of the ear canal wall (ECW) <b>870</b>. The earpiece <b>800</b> can be designed to vary its distance from the ear drum (ED) <b>860</b>. The earpiece can have various elements, and the non-limiting example illustrated in <figref idrefs="DRAWINGS">FIG. 8</figref>, can include three sound producing or receiving elements coupled to input/output <b>840</b>: an ambient sound microphone (ASM) <b>830</b> configured to sample the AE <b>890</b>; an ear canal microphone (ECM) <b>820</b> configured to sample the IEC <b>880</b>; and an ear canal receiver (ECR) <b>810</b> configured to acoustically emit into the IEC <b>880</b>. Note that the ECR can operate to transmit acoustic signals (ECR mode) and receive (measure) acoustic signals (ECM mode).</div>
+<div class="description-paragraph" id="p-0121" num="0120"> <figref idrefs="DRAWINGS">FIGS. 9A-9C</figref> illustrates an example of a temporal acoustic signal and its conversion into a spectral acoustic signature. <figref idrefs="DRAWINGS">FIG. 9A</figref> illustrates a temporal acoustic signal (AS) <b>900</b> on a generic X-Y coordinate system (e.g., Y can be amplitude in dB, and X can be time in sec). A section <b>910</b> of the AS <b>900</b> can be selected for further processing (e.g., for applying filtering treatments such as a FFT). For the non-limiting example of using a Fast Fourier Transform (FFT) on section <b>910</b>, a window <b>920</b> can be applied to the section <b>910</b> to zero the ends of the data, creating a windowed acoustic signal (WAS) <b>930</b>. An FFT can then be applied <b>940</b> to the WAS <b>930</b> to generate a spectral acoustic signal (SAS) <b>950</b>, which is illustrated in <figref idrefs="DRAWINGS">FIG. 9C</figref>, where the Y-axis IS a parameter (e.g., normalized power) and the X-axis if frequency (e.g., in Hz).</div>
+<div class="description-paragraph" id="p-0122" num="0121"> <figref idrefs="DRAWINGS">FIG. 10</figref> illustrates a generalized version of an earpiece <b>800</b> and some associated parts (e.g., ASM <b>830</b>, ECM <b>820</b>, and ECR <b>810</b>) in an ear canal. When inserted the earpiece <b>800</b> generally defines the two regions <b>890</b> and <b>880</b>. Through the earpiece <b>800</b> there is some attenuation. For example an ambient acoustic signal (AAS) <b>1010</b>A, will travel through the earpiece <b>800</b> and/or via bone conduction (not shown) and be attenuated forming an attenuated ambient acoustic signal (AAAS) <b>1010</b>B. The AAAS <b>1010</b>B then travels to the ED <b>860</b>. The other additional acoustic signal <b>1010</b>C (e.g., the ECR generated AS or ECRAS), which can travel to the eardrum <b>860</b>, can be generated by the ECR <b>810</b>. Additionally head attenuated acoustic signals (e.g., voice) <b>1010</b>D can enter the inner ear canal IEC <b>880</b>, and can be measured by ECM <b>820</b> or ECR <b>810</b> in ECM mode. Thus the total AS imparting energy upon the ED <b>860</b> can be due to the AAAS <b>1010</b>B (which can include a bone conduction part not in the IEC <b>880</b>) and the ECRAS <b>1010</b>C. Various exemplary embodiments can calculate SPL Dosage due to the total imparting AS upon the ED <b>860</b>, using various combinations of elements (e.g., parts) such as the ECR <b>810</b> (e.g., Knowles FG3629), the ECM <b>820</b> (e.g., Knowles FK3451), and the ASM <b>830</b> (e.g., Knowles FG3629).</div>
+<div class="description-paragraph" id="p-0123" num="0122"> <figref idrefs="DRAWINGS">FIG. 11</figref> illustrates an earpiece <b>1100</b> according to at least one exemplary embodiment including an ECR <b>810</b> and an ECM <b>820</b>. Note that in at least one exemplary embodiment ECR <b>810</b> can have dual functionality serving as an ECR in an ECR mode and an ECM in an ECM mode. This can be useful for verifying the matching intensities in IEC <b>880</b> with the pressures measured by ECM <b>820</b>. ECRAS <b>1010</b>C generated by the ECR <b>810</b> can be predicted and used to predict an equivalent SPL Dose as discussed later, and/or ECM <b>820</b> can pickup AAAS <b>1010</b>B and ECRAS <b>1010</b>C directly. Note that in at least one exemplary embodiment ECM <b>820</b> measures the ambient sound pressure level (e.g., due to AAAS <b>1010</b>B, ECRAS <b>1010</b>C, and HAAS <b>1010</b>D) and an estimated value of SPL due to <b>1010</b>C ECRAS (e.g., SPL<sub>ECR</sub>) can be subtracted from that measured from ECM <b>820</b> (e.g., SPL<sub>ECM</sub>) to obtain the SPL due to AAAS <b>1010</b>B (e.g., SPL<sub>AAAS</sub>) and HAAS <b>1010</b>D (e.g., SPL<sub>HAAS</sub>).</div>
+<div class="description-paragraph" id="p-0124" num="0123">Note that additional elements (e.g., logic circuit(s) (LC), power source(s) (PS), can additionally be included in the earpiece <b>1100</b>). For example <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates a self contained version of an earpiece <b>1200</b> according to at least one exemplary embodiment, including a power source (PS) <b>1210</b> (e.g., zinc-air battery (ZeniPower A675P), Li-ion battery), and a logic circuit (LC, e.g., Gennum Chip GA3280) <b>1220</b> in addition to the ECR <b>810</b> and ECM <b>820</b>. Earpiece <b>1200</b> can also include a wireless module for wireless communications (not shown) or can be wired. Earpiece <b>1200</b> can also connect remotely to various parts (e.g., via a wired or wireless connection). For example <figref idrefs="DRAWINGS">FIG. 13</figref> illustrates an earpiece <b>1300</b> where parts are not contained in the earpiece directly according to at least one exemplary embodiment. As illustrated the LC <b>1220</b> and PS <b>1210</b> are operatively connected (OC) <b>1310</b> (e.g., via a wire or wirelessly) to the earpiece <b>1300</b>. For example earpiece <b>1300</b> can be an earbud that includes ECR <b>810</b> and ECM <b>820</b>, whose signals travel back and forth via a wire that is operatively connected via a wire to LC <b>1220</b>, which in tum can be operatively connected to PS <b>1210</b>. Note that <b>810</b> ECR can also be a dual purpose ECR/ECM, where when the receiver function (ECR mode) is not used the microphone function (ECM mode) can be used. For example U.S. Pat. No. 3,987,245 discusses a dual purpose transducer that can be used as a microphone and/or a receiver.</div>
+<div class="description-paragraph" id="p-0125" num="0124"> <figref idrefs="DRAWINGS">FIG. 14A</figref> illustrates a general configuration of some elements either in or connected to an earpiece <b>1400</b> (e.g., via a wired or wireless connection) according to at least one exemplary embodiment. Illustrated is a logic circuit LC <b>1220</b> that is operatively connected <b>1310</b>B to a readable memory <b>1420</b> (e.g., RAM). LC <b>1220</b> can store and read data on the readable memory <b>1420</b> (e.g., RAM). LC <b>1220</b> can also be operatively connected <b>1310</b>C to ECR <b>810</b>, such that acoustic signals can be received by LC <b>1220</b> from ECR <b>810</b> (e.g., in ECM mode if dual functionality) and signals sent from LC <b>1220</b> to ECR <b>810</b>, where ECR <b>810</b> is configured to direct acoustic energy toward the eardrum. LC <b>1220</b> can also be operatively connected <b>1310</b>D to ECM <b>820</b>, such that acoustic signals can be received by LC <b>1220</b> from ECM <b>820</b>. LC <b>1220</b> can also be operatively connected <b>1310</b>E (e.g., via wire or wireless) to a communication module <b>1410</b> (e.g., Bluetooth communication module). To power the various elements a power source <b>1210</b> PS can also be operatively connected <b>1310</b>F to LC <b>1220</b> and to any other element.</div>
+<div class="description-paragraph" id="p-0126" num="0125"> <figref idrefs="DRAWINGS">FIG. 14B</figref> illustrates a flow diagram of a method for SPL Dose calculation according to at least one exemplary embodiment. A signal (e.g., intended audio playback content, or received voice from a phone) can be sent to LC <b>1220</b> to be sent to the ECR <b>810</b>. The signal can be converted (e.g., using earpiece frequency response) to calculate the SPL(t) associated with the signal being sent to ECR <b>810</b>. Alternatively an SPL can be measured from ECM <b>820</b>. Thus the signal to the ECR <b>810</b> can be measured <b>1450</b>A, an SPL measured for a chosen period of time, and an SPL_Dose estimate calculated as described above, <b>1450</b>B. Alternatively, if measurements are made from an ECM <b>820</b>, the SPL measured from the ECM <b>820</b> can be used to calculate the SPL Dose for the chosen period of time. The SPL_Dose or SPL Dose estimate can be added/subtracted to/from a running SPL Dose total to obtain a new SPL Dose total <b>1450</b>C. The new SPL Dose total is compared to a threshold value, <b>1450</b>D, and if the threshold value is exceeded the LC <b>1220</b> compares a check action parameter, which can be a user defined variable, to determine one or more actions to take, <b>1450</b>E. For example if the action parameter is a certain value (e.g., 1) then the action can be to modify device operation <b>1450</b>H, for example to shut down the device after a period of time (e.g., 10 seconds). Alternatively or cumulatively, if the action parameter is another value (e.g., 2), a notification signal can be sent (e.g., acoustic notice, for example a musical score) <b>1450</b>F, and/or if the action parameter is still another value (e.g., 3) the audio content can be modified (e.g., SPL output by ECR is reduced), <b>1450</b>G. Note other actions can be included, <b>14501</b>, for example the NRR can be increased (e.g., if an inflatable system the inflatable system can be expanded, or active noise cancellation could be activated).</div>
+<div class="description-paragraph" id="p-0127" num="0126">Note that at least one exemplary embodiment can use an ECR <b>810</b> without dual functionality (e.g., where dual functionality is an ECR than can be a receiver and/or a microphone) and at least one further exemplary embodiment can be a dual function ECR/ECM. To measure the SPL for an ECR only mode (ECR mode) the same SPL Dose equations described above can be used for the SPL estimated as discussed with reference to <figref idrefs="DRAWINGS">FIG. 14B</figref>. Additionally the SPL<sub>ECR </sub>can be estimated by an ECR instrument response, e.g., a voltage to FFE dBA transfer function, which could be determined one of two ways: apply voltage to ECR <b>810</b> and follow the technique outlined in ISO 11904-2 (2002), using an acoustic manikin and/or apply voltage to ECR <b>810</b> and follow the technique outlined in ISO 11904-1 (2002), using probe microphone measurements in a human's ear canal; and/or about a 2 cc coupler could substitute for a human's ear canal.</div>
+<div class="description-paragraph" id="p-0128" num="0127">In at least one exemplary embodiment the ECM <b>820</b> can measure the SPL acoustic environment before the ECR <b>810</b> is activated, and using this value as the ambient measure, the total SPL value can be measured by the ECM <b>820</b> with the ECR <b>810</b> activated, and an SPL value associated only with the ECR <b>810</b> obtained, for example:
+<br/>
+SPL<sub>ECR-est</sub>(<i>t</i>)=SPL<sub>ECM</sub>(<i>t</i>)−SPL<sub>ECM</sub>(<i>t−Δt</i>),  (15)
+</div>
+<div class="description-paragraph" id="p-0129" num="0128">where SPL<sub>ECR-est</sub>(t) is the SPL due to acoustic emissions by the ECR <b>810</b> at time “t”, where the ECR <b>810</b> is activated, or above a threshold value in generated SPL, and the ECM <b>820</b> is activated; SPL<sub>ECM</sub>(t) is the SPL value measured by ECM <b>820</b> at time “t” which includes both ambient SPL and the SPL due to ECR <b>810</b>; and SPL<sub>ECM</sub>(t−Δt) is an SPL measured some time before time “t”, Δt, when ECR <b>810</b> is not activated or falls below a threshold value, and SPL<sub>ECM</sub>(t−Δt) is used as an estimated ambient SPL at time “t.” Thus, SPL<sub>ECR-est</sub>(t) can be compared with estimated SPL calculated using the signal sent to ECR <b>810</b>, and the calibration refined to improve the accuracy of estimating SPL calculated using the signal sent to ECR <b>810</b>.</div>
+<div class="description-paragraph" id="p-0130" num="0129">At least one exemplary embodiment includes an ECR <b>810</b> having dual ECR/ECM operability. Thus, ECR <b>810</b> can be switched in such a case between an ECR mode, where audio signal is directed to the ECR <b>810</b> (e.g., audio playback (e.g., music, audio book, voice message), or voice conversation (e.g., voice from a phone, TV, computer)) or ECM mode, where ECR <b>810</b> acts as an ECM and samples environmental SPL. This duality can be used for various reasons (e.g., to calibrate ECM <b>820</b>).</div>
+<div class="description-paragraph" id="p-0131" num="0130"> <figref idrefs="DRAWINGS">FIGS. 15A-15J</figref> illustrate a method of calculating a total SPL Dose, and modifying the SPL emitted by ECR <b>810</b> to modify the total SPL Dose so that a threshold value is not exceeded. Note that optionally one can use a dual ECR/ECM <b>810</b> to calibrate the signal being received by ECM <b>820</b>, where the SPL measured by ECM <b>820</b> can be used to obtain a total SPL, which can figure into calculating a total SPL Dose.</div>
+<div class="description-paragraph" id="p-0132" num="0131"> <figref idrefs="DRAWINGS">FIG. 15A</figref> illustrates the SPL generated by ECR <b>810</b> (SPL<sub>ECR</sub>), which can be either estimated using the signal sent to the ECR <b>810</b>, or by measurement by ECM <b>820</b>, with the ambient SPL values removed, for example in an environment where there is steady environmental noise which is then assumed and subtracted from any signal picked up by ECM <b>820</b> to get an SPL value from the ECR. Normally however one would estimate the SPL from ECR <b>810</b> from the signal being sent to ECR <b>810</b>. An example of SPL generated from ECR <b>810</b> is illustrated in <figref idrefs="DRAWINGS">FIG. 15A</figref>. Optionally a selected ECR floor value for the SPL generated from the ECR (SF<sub>ECR</sub>) can be set (e.g., 45 dB). When SPL<sub>ECR </sub>drops below SF<sub>ECR </sub>one can either flip to the ECM mode of ECR <b>810</b> if it is a dual mode receiver to calibrate ECM <b>820</b>, and/or measure the SPL by ECM <b>820</b> and calibrate the SPL<sub>ECR </sub>calculation. What is illustrated in <figref idrefs="DRAWINGS">FIGS. 15A, 15C, 15D and 15E</figref> are some of the steps in calibrating the signals measured by ECM <b>820</b> using a dual mode ECR <b>810</b>. For example when SPL<sub>ECR </sub>drops below SF<sub>ECR </sub>a calibration signal sets can be sent (<figref idrefs="DRAWINGS">FIG. 15A</figref>). There may be a time delay (t<sub>delay</sub>) before a start of ECM mode signal (e.g., sts<sub>ECM</sub>) (<figref idrefs="DRAWINGS">FIG. 15C</figref>) can be sent to trigger the ECM mode of ECR <b>810</b>. Likewise a signal (e.g., sts<sub>ECR</sub>) (<figref idrefs="DRAWINGS">FIG. 15D</figref>) triggering a switch back to ECR mode can be sent at the end of the measurement period. Note that the signal being sent to ECR <b>810</b> is known and thus one will know ahead of time when SPL<sub>ECR </sub>will rise above SF<sub>ECR</sub>. While in ECM mode, ECR <b>810</b> can measure the environmental SPL, SPL<sub>ECM1 . . . N </sub>(<figref idrefs="DRAWINGS">FIG. 15E</figref>). The values of SPL<sub>ECM1 . . . N </sub>can be compared with SPL<sub>ECM</sub>(t) measured by ECM <b>820</b> and a calibration of ECM <b>820</b> can be obtained to improve the values measured. Note that this is an optional feature and in some cases the measurement error of a dual ECR/ECM ECR <b>810</b> might be larger than that of ECM <b>820</b>, and thus ECR <b>810</b> may not want to be used for calibration ECM <b>820</b>. <figref idrefs="DRAWINGS">FIG. 15F</figref> illustrates the case where SPL<sub>ECM</sub>(t) has been calibrated SPL<sub>ECM-calibrated</sub>(t).</div>
+<div class="description-paragraph" id="p-0133" num="0132">Thus SPL<sub>total</sub>(t) can be the values of SPL<sub>ECM</sub>(t) with the most confidence (e.g., minimal standard deviation), which can be a combination of calibrated and uncalibrated parts (<figref idrefs="DRAWINGS">FIG. 15G</figref>). SPL<sub>total</sub>(t) can be compared with a PSL and modified (e.g., option B, <figref idrefs="DRAWINGS">FIG. 15H</figref>) to be equal to or lie below PSL. A SPL Dose<sub>total</sub>(t) value can be calculated using SPL<sub>total</sub>(t), and compared to an SPL Dose threshold value (<figref idrefs="DRAWINGS">FIG. 15I</figref>). When SPL Dose<sub>total</sub>(t) is greater than the threshold value SPL Dose<sub>threshold </sub>then several actions can be enacted. One action is notification of a user (audibly visually, or physically such as vibrating). Another action is to vary the SPL<sub>total </sub>value to adjust the SPL Dose<sub>total</sub>(t) value. This can be done by varying SPL<sub>ECR</sub>(t) and/or by varying other non-ECR generated SPL values (e.g., by increasing the effective NRR). Varying SPL can affect SPL_Dose in various ways, for example a reduction of the increase of SPL Dose (option A), a stable SPL_Dose at the threshold level (option B) or a reduction of SPL Dose (option C) (<figref idrefs="DRAWINGS">FIGS. 15I and 15J</figref>).</div>
+<div class="description-paragraph" id="p-0134" num="0133">There are multiple methods of modifying the SPL in the IEC <b>880</b> (e.g., modifying the SPL emitted by the ECR <b>810</b>, or increasing the effective NRR) and we will discuss several non-limiting examples in detail.</div>
+<heading id="h-0008">First Example of Modifying the IEC SPL Levels</heading>
+<div class="description-paragraph" id="p-0135" num="0134">The first non-limiting example for modifying SPL<sub>total </sub>is to modify SPL<sub>ECR</sub>(t). <figref idrefs="DRAWINGS">FIG. 16A</figref> illustrates modifying SPL<sub>ECR</sub>(t) beginning at the threshold time, t<sub>threshold</sub>, (note that it can be started at any time). In this non-limiting example a reference time section is chosen, Δt<sub>ref</sub>, during which one attempts to have a net zero contribution above or below PSL. For example region A equal to region B. Now in a further refinement, over the time period Δt<sub>ref </sub>SPL Dose will have decreased slightly (if SPL<sub>ECR</sub>(t) was exactly equal to PSL) and this can be taken into account as well, letting one choose a region A slightly smaller than region B. Thus there is some variation that can occur. Additionally one may choose a different level than PSL to balance contributions above and below the level chosen. For example if one chooses a level lower than PSL then SPL Dose<sub>total</sub>(t) will decrease an over time, whereas <figref idrefs="DRAWINGS">FIG. 16B</figref> illustrates oscillatory SPL Dose<sub>total</sub>(t) that can result from setting the balance level (i.e. reference sound level, RSL) directly equal PSL. Generally the matching of regions can be expressed as:
+<br/>
+∫<sub>t</sub> <sub> <sub2>threshold</sub2> </sub> <sup>t</sup> <sup> <sub2>m</sub2> </sup>|RSL−SPL<sub>ECR</sub>(<i>t</i>)|<i>dt=∫</i> <sub>t</sub> <sub> <sub2>m</sub2> </sub> <sup>Δt</sup> <sup> <sub2>ref</sub2> </sup> <sup>+t</sup> <sup> <sub2>threshold</sub2> </sup>|RSL−SPL<sub>ECR</sub>(<i>t</i>)|<i>dt</i>  (16)
+</div>
+<div class="description-paragraph" id="p-0136" num="0135">where t<sub>m </sub>(tm) is the time at which the SPL value is equal to RSL. Note that tm can also be an arbitrary value somewhere in the integrated region, and Δt<sub>ref </sub>can be chosen to vary over time.</div>
+<heading id="h-0009">Second Example of Modifying the IEC SPL Levels</heading>
+<div class="description-paragraph" id="p-0137" num="0136">The second non-limiting example for modifying SPL<sub>total </sub>also modifies SPL<sub>ECR</sub>(t). In this non-limiting example time sections of SPL<sub>ECR</sub>(t) are removed or reduced in a chopping fashion, where the time lengths of the chopped sections are less than that which is recognizable (e.g., tc=100 microsecond segments, measured for example at the half width of a gradually declining and rising signal chop). <figref idrefs="DRAWINGS">FIGS. 17A and 17B</figref> illustrate this approach for an analog signal. Alternatively in a digitized signal the time increments between the data points associated with an acoustic signal can be increased to the limit of detectability so as to decrease the number of acoustic data values per reference time, Δt<sub>ref</sub>, thus decreasing the SPL total value. Note that when using digitized data a summation replaces the integrals in the equations described. Note that the chop time widths tc can vary, as too can the position of the signal chop, as can the magnitude of the chop (<figref idrefs="DRAWINGS">FIG. 17A</figref>). In at least one exemplary embodiment, the chopped portions are from removed frequencies that are chosen. For example removing frequency components (e.g., filter applied to a frequency spectrum) not in the verbal range of about 300 Hz to 3000 Hz, this is also encompassed by the term chopping.</div>
+<div class="description-paragraph" id="p-0138" num="0137">The total amount of SPL<sub>ECR </sub>received over the reference time, Δt<sub>ref</sub>, can be expressed as:</div>
+<div class="description-paragraph" id="p-0139" num="0138">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mstyle>
+<mspace height="4.2ex" width="4.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>SPL</mi>
+<mi>ECR</mi>
+</msub>
+<mo>⁢</mo>
+<msubsup>
+<mo>❘</mo>
+<msub>
+<mi>t</mi>
+<mi>threshold</mi>
+</msub>
+<mrow>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>t</mi>
+<mi>ref</mi>
+</msub>
+</mrow>
+<mo>+</mo>
+<msub>
+<mi>t</mi>
+<mi>threshold</mi>
+</msub>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>≤</mo>
+<mi>PSL</mi>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="4.2ex" width="4.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>where</mi>
+<mo>,</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>17</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>SPL</mi>
+<mi>ECR</mi>
+</msub>
+<mo>⁢</mo>
+<msubsup>
+<mo>❘</mo>
+<msub>
+<mi>t</mi>
+<mi>threshold</mi>
+</msub>
+<mrow>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>t</mi>
+<mi>ref</mi>
+</msub>
+</mrow>
+<mo>+</mo>
+<msub>
+<mi>t</mi>
+<mi>threshold</mi>
+</msub>
+</mrow>
+</msubsup>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>t</mi>
+<mi>ref</mi>
+</msub>
+</mrow>
+</mfrac>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<msubsup>
+<mo>∫</mo>
+<msub>
+<mi>t</mi>
+<mi>threshold</mi>
+</msub>
+<mrow>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>t</mi>
+<mi>ref</mi>
+</msub>
+</mrow>
+<mo>+</mo>
+<msub>
+<mi>t</mi>
+<mi>threshold</mi>
+</msub>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>SPL</mi>
+<mi>ECR</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mi>dt</mi>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mi>n</mi>
+</munderover>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msubsup>
+<mo>∫</mo>
+<msub>
+<mi>t</mi>
+<mi>i</mi>
+</msub>
+<mrow>
+<msub>
+<mi>t</mi>
+<mi>i</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<mn>2</mn>
+<mo>⁢</mo>
+<msub>
+<mi>tc</mi>
+<mi>i</mi>
+</msub>
+</mrow>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>SPL</mi>
+<mi>chop</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>dt</mi>
+<mi>i</mi>
+</msub>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>18</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0140" num="0139">Σ<sub>i=0</sub> <sup>n</sup>SPL<sub>chop</sub>dt<sub>i </sub>is the summation of the SPL reduced due to chopping the original SPL<sub>ECR</sub>(t) at certain positions (e.g., at min and max value positions), for variable durations (e.g., tc of 40 microseconds, 100 microseconds), for various amplitude reductions (e.g., constant or variable % reduction (e.g., 10%), constant or variable dB reduction (e.g., 20 dB)). Thus to calculate SPL Dose total one can recalculate SPL<sub>total </sub>after each chop reduction, and update SPL Dose (<figref idrefs="DRAWINGS">FIG. 17B</figref>). Thus the SPL Dose can oscillate about the SPL Dose threshold, or if more chops (n increases within, Δt<sub>ref</sub>) the oscillation of the SPL Dose (<figref idrefs="DRAWINGS">FIG. 17B</figref>) can be about a position lower than SPL Dose threshold.</div>
+<heading id="h-0010">Third Example of Modifying the IEC SPL Levels</heading>
+<div class="description-paragraph" id="p-0141" num="0140">The third non-limiting example for modifying SPL<sub>total </sub>also modifies SPL<sub>ECR</sub>(t). In this non-limiting example SPL<sub>ECR</sub>(t) is converted into frequency space (e.g., FFT) for a section of time Δt<sub>ref </sub>and certain frequencies not needed are suppressed in frequency space (e.g., any frequency outside the range of 300 Hz-3000 Hz), generating a modified spectral signature of SPL<sub>ECR</sub>(t), which can then be converted into a temporal signature (e.g., inverse FFT) SPL<sub>ECR-mod</sub>(t) which will have a lower net SPL value over Δt<sub>ref</sub>, which in turn can result in options A, B, or C (<figref idrefs="DRAWINGS">FIG. 15I</figref>).</div>
+<div class="description-paragraph" id="p-0142" num="0141">Note that the above three examples of modifying the IEC SPL levels are non-limiting examples and other methods can be used.</div>
+<div class="description-paragraph" id="p-0143" num="0142">In at least one exemplary embodiment the total SPL_Dose is compared to a threshold value and if the total SPL_Dose is greater than the threshold value then an action parameter can be read from readable memory (e.g., DRAM). The action parameter can be numbers (e.g., binary), words, letters or a combination and can be matched to various actions. For example one action can be to modify the SPL emitted from the ECR as described above. Another action can be to vibrate so that a user knows that the SPL_Dose is exceeding the recommended limit. Another action can be to use visual warnings (e.g., a red light on an earpiece) to indicate exceeded SPL Dose limits or to indicate warnings (e.g., a yellow light) or to indicate acceptable levels (e.g., green lights). Another action that can be taken is to increase the effective NRR of the earpiece. For example if the earpiece has an inflatable bladder system, the bladder can be increased (increased portion of ear canal filled up with bladder), or decreased (deflate partially the bladder) to vary the effective NRR. Another action can be to shut down any ECR generated SPL after a period of time (e.g., 10 seconds). Another action that can be taken is to activate a noise cancellation system to mitigate some of the IEC SPL.</div>
+<div class="description-paragraph" id="p-0144" num="0143">At least one exemplary embodiment is directed to a method of operating an audio device comprising: measuring sound pressure levels (SPL<sub>ECM1</sub>) for a first acoustic energy received by an ear canal receiver (ECR) operating in ECM mode during the time increment Δt; measuring sound pressure levels (SPL<sub>ECM2</sub>) for a second acoustic energy received by an ear canal microphone (ECM) during the time increment Δt; and calculating a calibration relationship between intensity of the second acoustic energy with pressure measurements made by the ECM during the time increment Δt.</div>
+<div class="description-paragraph" id="p-0145" num="0144">Additional exemplary embodiments can include: measuring sound pressure levels (SPL<sub>ECM</sub>) for a third acoustic energy received by an ear canal microphone (ECM) during the time increment Δt<sub>1</sub>; updating SPL<sub>ECM </sub>using the calibration relationship to generate SPL<sub>ECM-update</sub>; and calculating a SPL_Dose<sub>Δt </sub>during the time increment Δt using SPL<sub>ECM-update</sub>. Then the method can optionally calculate an SPL_Dose<sub>total </sub>using SPL_Dose<sub>Δt</sub>. Then one can optionally compare the total SPL_Dose to a threshold value and if the total SPL_Dose is greater than the threshold value then an action parameter can be read from readable memory.</div>
+<div class="description-paragraph" id="p-0146" num="0145">At least one further exemplary embodiment can include: saving a portion, SPL<sub>ECMi</sub>, of SPL<sub>ECM-update </sub>for a sub time increment Δt<sub>i </sub>of Δt<sub>1</sub>; measuring sound pressure levels (SPL<sub>ECM4</sub>) for a fourth acoustic energy received by an ear canal microphone (ECM) during the time increment Δt<sub>2</sub>, calculating a SPL<sub>ECM5 </sub>for the time increment Δt<sub>2 </sub>using SPL<sub>ECMi</sub>, where SPL<sub>ECM5 </sub>is related to a measured value of the SPL generated by the ECR during the time increment Δt<sub>2</sub>; calculating estimated sound pressure levels (SPL<sub>ECR</sub>) for acoustic signals directed to an ear canal receiver (ECR) during the time increment Δt<sub>2</sub>; calculating an update ECR calibration relationship using SPL<sub>ECM5 </sub>and SPL<sub>ECR</sub>; calculating a new estimated sound pressure levels (SPL<sub>ECR-new</sub>), using the updated ECR calibration relationship, for the acoustic signals directed to an ear canal receiver (ECR), during a time increment Δt<sub>2</sub>; measuring sound pressure levels (SPL<sub>ECM6</sub>) for a fifth acoustic energy received by an ear canal microphone (ECM) during the time increment Δt<sub>3</sub>; calculating the sound pressure levels (SPL<sub>ECR1</sub>), using the updated ECR calibration relationship, for the acoustic signals directed to an ear canal receiver (ECR), during the time increment Δt<sub>3</sub>; and calculating the ambient SPL (SPL<sub>ambient</sub>) during the time increment Δt<sub>3 </sub>using SPL<sub>ECM6 </sub>and SPL<sub>ECR1</sub>.</div>
+<div class="description-paragraph" id="p-0147" num="0146">At least one further exemplary embodiment can include calculating an effective NRR of an earpiece. For example one method can include: removing an earpiece from a user's ear; measuring sound pressure levels (SPL<sub>ECM</sub>) for a first acoustic energy received by an ear canal microphone (ECM) during the time increment Δt; checking whether an ear canal receiver ECR is operating and if operating calculating the sound pressure levels (SPL<sub>ECR</sub>), for the acoustic signals directed to the ECR, during the time increment Δt; calculating the removed earpiece's ambient SPL (SPL<sub>ambient1</sub>) during the time increment Δt using SPL<sub>ECM </sub>and SPL<sub>ECR</sub>; inserting the earpiece into a user's ear; measuring sound pressure levels (SPL<sub>ECM1</sub>) for a second acoustic energy received by the ECM during the time increment Δt<sub>1</sub>; checking whether the ECR is operating and if operating calculating the sound pressure levels (SPL<sub>ECR1</sub>), for the acoustic signals directed to an ear canal receiver (ECR), during the time increment Δt<sub>1</sub>; calculating the inserted earpiece's ambient SPL (SPL<sub>ambient2</sub>) during the time increment Δt<sub>1 </sub>using SPL<sub>ECM1 </sub>and SPL<sub>ECR1</sub>; and calculating an NRR for the earpiece using SPL<sub>ambient1 </sub>and SPL<sub>ambient2</sub>.</div>
+<div class="description-paragraph" id="p-0148" num="0147">At least one exemplary embodiment can include the action of setting a time limit (e.g., Time_100%) for the present SPL level and turning off the ECR after that period of time.</div>
+<div class="description-paragraph" id="p-0149" num="0148">Exemplary embodiments of the present invention can be used in many platforms that direct and/or attenuate acoustic energy in the ear canal. <figref idrefs="DRAWINGS">FIGS. 18A to 18N</figref> illustrate various non-limiting examples of earpieces that can use methods according to at least one exemplary embodiment, when the various earpieces have an ECR <b>810</b> that is solely an ECR or have an ECR <b>810</b> that has dual ECR/ECM modes, and/or where such earpieces include an ECM <b>820</b>.</div>
+<div class="description-paragraph" id="p-0150" num="0149"> <figref idrefs="DRAWINGS">FIG. 19</figref> illustrates a line diagram of an earpiece <b>1900</b> (e.g., earbud) that can use methods according to at least one exemplary embodiment and <figref idrefs="DRAWINGS">FIG. 20</figref> illustrates the earpiece <b>2000</b> of <figref idrefs="DRAWINGS">FIG. 19</figref> fitted in an ear canal. Earbuds can be used with many devices such as audio playback devices, PDAs, phones, and other acoustic management devices. The software to implement exemplary embodiments can reside in the earpiece (e.g., hearing aid) or can reside in the acoustic management systems (e.g., iPod™, Blackberry™, and other acoustic management devices as known by one of ordinary skill in the relevant arts).</div>
+<div class="description-paragraph" id="p-0151" num="0150">While the present invention has been described with reference to exemplary embodiments, it is to be understood that the invention is not limited to the disclosed exemplary embodiments. The scope of the following claims is to be accorded the broadest interpretation so as to encompass all modifications, equivalent structures and functions of the relevant exemplary embodiments. For example, although specific numbers may be quoted in the claims, it is intended that a number close to the one stated is also within the intended scope, i.e., any stated number (e.g., 80 dB) should be interpreted to be “about” the value of the stated number (e.g., about 80 dB). Thus, the description of the invention is merely exemplary in nature and, thus, variations that do not depart from the gist of the invention are intended to be within the scope of the exemplary embodiments of the present invention. Such variations are not to be regarded as a departure from the spirit and scope of the present invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM290692964">
+<claim-statement>We claim:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. An earphone configured to monitor sound dosage levels comprising:
+<div class="claim-text">a microphone;</div>
+<div class="claim-text">a speaker;</div>
+<div class="claim-text">an eartip;</div>
+<div class="claim-text">a memory that stores instructions; and</div>
+<div class="claim-text">a processor, operatively connected to the microphone, where the processor is operatively connected to the speaker, where the processor is operatively connected to the memory, where the processor is configured to execute the instructions to perform operations, the operations comprising:
+<div class="claim-text">receiving a microphone signal from the microphone, where the microphone signal results from the microphone measuring sound pressure levels (SPL<sub>ECM</sub>) in a user's ear canal;</div>
+<div class="claim-text">converting the microphone signal into field equivalent values of the sound pressure levels; and</div>
+<div class="claim-text">calculating, during a time increment Δt, a SPL_Dose<sub>Δt </sub>based upon the field equivalent values, wherein the SPL_Dose<sub>Δt </sub>indicates a cumulative exposure to sound levels over the time increment Δt.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The earphone according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, where the operations further include:
+<div class="claim-text">measuring the SPL<sub>ECM</sub>.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The earphone according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, where the operations further include:
+<div class="claim-text">measuring, during the time increment Δt, sound pressure levels equivalent (SPL<sub>ECR</sub>) for an acoustic signal directed to the speaker.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The earphone according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, where the operations further include:
+<div class="claim-text">calculating a calibration relationship between an intensity of the microphone measured sound pressure levels with a pressure measurement.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The earphone according to <claim-ref idref="CLM-00004">claim 4</claim-ref>, where the operations further include:
+<div class="claim-text">updating SPL<sub>ECM </sub>using the calibration relationship to generate SPL<sub>ECM-UPDATE</sub>.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The earphone according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, where the operations further include:
+<div class="claim-text">determining when the device is in a charger or a communication cradle.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The earphone according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, where the operations further include:
+<div class="claim-text">sending a notification signal if SPL_Dose<sub>Δt </sub>exceeds a threshold value.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The earphone according to <claim-ref idref="CLM-00007">claim 7</claim-ref>, where the notification signal is audio.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The earphone according to <claim-ref idref="CLM-00007">claim 7</claim-ref>, where the notification signal is visual.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The earphone according to <claim-ref idref="CLM-00007">claim 7</claim-ref>, where the notification signal is a data stream.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The earphone according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, where the microphone is an ear canal microphone that is configured to monitor primarily the ear canal of a user.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The earphone according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, where the operations further include:
+<div class="claim-text">calculating a noise reduction signal, using the microphone signal, to send to the speaker.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The earphone according to <claim-ref idref="CLM-00012">claim 12</claim-ref>, where the operations further include:
+<div class="claim-text">sending the noise reduction signal to the speaker.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The earphone according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising:
+<div class="claim-text">a second microphone.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The earphone according to <claim-ref idref="CLM-00014">claim 14</claim-ref>, where the second microphone is an ambient sound microphone that is configured to monitor primarily the ambient environment of a user.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The earphone according to <claim-ref idref="CLM-00015">claim 15</claim-ref>, where the operations further include:
+<div class="claim-text">receiving a second microphone signal from the second microphone, where the second microphone signal results from the second microphone measuring sound pressure levels (SPL<sub>ASM</sub>) in a user's ambient environment.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The earphone according to <claim-ref idref="CLM-00016">claim 16</claim-ref>, where the operations further include:
+<div class="claim-text">comparing the first microphone signal to the second microphone signal to detect a voice.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The earphone according to <claim-ref idref="CLM-00017">claim 17</claim-ref>, where the operations further include:
+<div class="claim-text">sending a portion of the first microphone signal or a portion of the second microphone signal to a second processor.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The earphone according to <claim-ref idref="CLM-00018">claim 18</claim-ref>, where the operations further include:
+<div class="claim-text">receiving from the second processor a voice command equivalent of the portion sent to the second processor.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The earphone according to <claim-ref idref="CLM-00019">claim 19</claim-ref>, where the operations further include:
+<div class="claim-text">performing an action associated with the voice command equivalent.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

@@ -1,0 +1,708 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10701264B2 - Method for photographing panoramic image by preventing excessive perpendicular movement with the aid of a displayed icon 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA403709298" source="national office">
+<div class="abstract">Disclosed is a method for photographing a panoramic image including the steps of recognizing movement of a corresponding photographing apparatus by comparing a current real-time input image with a previous image through a motion estimation mechanism with exposure compensation, determining a time to photograph each next picture by determining whether movement in a photography direction reaches a preset threshold value, and photographing each next picture by manual or automatic operation at the determined time.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES268577474">
+<heading id="h-0001">CROSS REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a Continuation of U.S. Pat. No. 10,178,308 which is a Continuation of U.S. patent application Ser. No. 13/613,608 filed on Sep. 13, 2012 and assigned U.S. Pat. No. 9,482,939 issued on Nov. 1, 2016 which claims the benefit of the earlier U.S. patent application Ser. No. 12/082,103 filed on Apr. 7, 2008 and assigned U.S. Pat. No. 8,279,264 issued on Oct. 2, 2012 which claims the benefit of the earlier filing date, pursuant to 35 USC 119 filed with the Korean Intellectual Property Office on Apr. 12, 2007 and assigned Serial No. 10-2007-0036056, the contents of which are incorporated herein by reference.</div>
+<heading id="h-0002">BACKGROUND</heading>
+<heading id="h-0003">1. Field of the Invention</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention relates to digital image photography and more particularly to a method for photographing a panoramic image.</div>
+<heading id="h-0004">2. Description of the Related Art</heading>
+<div class="description-paragraph" id="p-0004" num="0003">Generally, a photographing unit of a digital-image photographing apparatus can obtain a picture formed within a focal length of its lens. The obtained picture has a viewing angle range of about 30˜50 degree in the case of a general camera, which is narrower than the viewing angle of a human being (about 150˜200 degree). Methods for creating an image with an angle of view similar to or more than the viewing angle of a human require, photographing multiple pictures with an appropriately changed photographing angle, and then putting together the photographed pictures in consecutive order to create one image. Such a method is referred to as panoramic photography.</div>
+<div class="description-paragraph" id="p-0005" num="0004">In a panoramic image photographing mode, a digital-image photographing apparatus photographs multiple pictures in consecutive order in a horizontal or vertical direction, and stores the pictures in a memory. Later, the pictures stored in the memory are provided to an image processor, and are put together into one image. The image processor may be internal or external to the photographing apparatus.</div>
+<div class="description-paragraph" id="p-0006" num="0005">In order to eliminate the difference in color and image boundaries between the pictures, multiple pictures are photographed in such a manner that the boundaries are appropriately overlapped, and the pictures are aligned in such a manner that the overlapped portions are synchronized with each other. Then, after the image processing operations, such as stitching and blending, the multiple pictures are smoothly put together into one image.</div>
+<div class="description-paragraph" id="p-0007" num="0006">In photographing such a panoramic image, it is important to photograph respective pictures in such a manner that the pictures are aligned as accurately as possible. Therefore, a user may manually photograph an image using an auxiliary device such as a tripod. In addition, recently, there is provided a method for rotating a photographing apparatus in accordance with each picture to be photographed in panoramic photography, by using auxiliary devices. The devices are attached to a tripod, etc. and a corresponding photographing apparatus is mounted thereon. An example of such a technology is Korea Patent Application No. 2003-0052444, entitled “Camera and Method for Photographing Panorama Picture” (Application date: Jul. 29, 2003, Applicant: Samsung-Techwin, and Inventor: Bae Sung-chul). Another method a photographing apparatus is provided with a device for detecting a rotation angle, and a user-preset rotation angle of the photographing apparatus. Accordingly, in panoramic photography, when a portable terminal is rotationally moved according to the user-set rotation angle, each picture is photographed.</div>
+<div class="description-paragraph" id="p-0008" num="0007">There is further provided a method for more accurately aligning respective pictures in panoramic photography, without an auxiliary device or additional hardware combined with a corresponding photographing apparatus. In this method, a part of the boundary of a previously photographed image is displayed while appropriately overlapping an image to be currently photographed so that a user can adjust an appropriate photography position by synchronizing the previously photographed image and the currently photographed image with each other. An example of such a technology is United States Patent Publication No. 2004-0189849, entitled “Panoramic Sequence Guide” (Application date: Mar. 31, 2003, and Inventor: Gregory V. Hofer).</div>
+<div class="description-paragraph" id="p-0009" num="0008">Such panoramic photography requires a user to be more sophisticated and skillful in the operation than for photography of a single-photo, and thus a more convenient operation mechanism and a more efficient photography mechanism are needed.</div>
+<heading id="h-0005">SUMMARY</heading>
+<div class="description-paragraph" id="p-0010" num="0009">The present invention provides a method for more easily and accurately recognizing the movement of a camera in photographing a panoramic image, so as to use the recognized movement in photographing the panoramic image.</div>
+<div class="description-paragraph" id="p-0011" num="0010">In accordance with an aspect of the present invention, there is provided a method for photographing a panoramic image, the method including the steps of recognizing movement of a corresponding photographing apparatus by comparing a current real-time input image with a previous image through a motion estimation mechanism with exposure compensation, in photographing each picture included in a panoramic image, determining whether it is time to photograph each picture by determining whether movement in a photography direction reaches a preset threshold value, according to the recognized movement of the corresponding photographing apparatus; and photographing each picture by manual or automatic operation at a moment when the picture is photographed.</div>
+<description-of-drawings>
+<heading id="h-0006">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0012" num="0011">The above and other exemplary features, aspects, and advantages of the present invention will be more apparent from the following detailed description taken in conjunction with the accompanying drawings, in which:</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram illustrating a mobile terminal according to the present invention;</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a flow diagram illustrating an operation of panoramic photography according to an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a detailed flow diagram illustrating steps for recognizing the movement of a camera in <figref idrefs="DRAWINGS">FIG. 2</figref>;</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 4</figref> is an example illustrating an image block with a variable size for detecting a motion vector in <figref idrefs="DRAWINGS">FIG. 3</figref>; and</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 5A</figref> and <figref idrefs="DRAWINGS">FIG. 5B</figref> illustrate integral images.</div>
+</description-of-drawings>
+<heading id="h-0007">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0018" num="0017">Exemplary embodiments of the present invention are described in detail with reference to the accompanying drawings. For the purposes of clarity and simplicity, a detailed description of known functions and configurations incorporated herein is omitted to avoid making the subject matter of the present invention unclear.</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram illustrating a mobile terminal according to the present invention. In the present invention, a mobile terminal as shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, among various apparatuses provided with a digital image photography function, will be considered as an example. A mobile terminal provided with a digital image photography function according to the present invention includes a camera <b>20</b>, an image processing unit <b>22</b>, a display unit <b>24</b>, a control unit <b>14</b>, a memory unit <b>16</b>, a key input unit <b>18</b>. The mobile terminal in this illustrated case also includes a wireless unit <b>10</b>, and a wireless-data processing unit <b>12</b>.</div>
+<div class="description-paragraph" id="p-0020" num="0019">The wireless unit <b>10</b> modulates a voice message, an SMS message, and control data of a user to a wireless signal, and transmits the wireless signal to a base station (not shown) of a mobile communication network. Also, the wireless unit <b>10</b> receives a wireless signal from the base station, demodulates the wireless signal in to a voice message, an SMS message, and control data, and outputs the voice message, the SMS message, and the control data. The wireless-data processing unit <b>12</b> under the control of the control unit <b>14</b> decodes voice data received from the wireless unit <b>10</b>, outputs the data as audible sounds through a speaker, turns a user's voice signal input from a microphone into data, and outputs the data to the wireless unit <b>10</b>. Also, the wireless-data processing unit <b>12</b> provides the SMS/control data input from the wireless unit <b>10</b> to the control unit <b>14</b>.</div>
+<div class="description-paragraph" id="p-0021" num="0020">The camera <b>20</b>, under the control of the control unit <b>14</b>, performs the function of a general digital camera, and photographs visible light input from an outside object. The camera <b>20</b> is provided with a photographing unit <b>20</b>-<b>2</b> including a CCD image sensor, etc., and also may be provided with an illumination sensor <b>20</b>-<b>4</b> for measuring illumination, and a distance sensor <b>20</b>-<b>6</b> for measuring a focal length from a subject. The image processing unit <b>22</b> processes output image data within the camera <b>20</b>, and converts the data into digital image data with an appropriate format.</div>
+<div class="description-paragraph" id="p-0022" num="0021">The key input unit <b>18</b>, by which a user inputs telephone numbers or characters, includes keys for inputting number/character information and function keys for setting a variety of functions, and outputs such input signals to the control unit <b>14</b>. The display unit <b>24</b> may include a display component such as a liquid crystal display (LCD), and displays messages about various operation states of a corresponding terminal and photographed digital image data, under the control of the control unit <b>14</b>.</div>
+<div class="description-paragraph" id="p-0023" num="0022">The control unit <b>14</b> performs the function of controlling overall operation of a mobile communication terminal by generally controlling operations of the respective functional units. In other words, the control unit <b>14</b> performs an operation according to signals of number/menu selection input through the key input unit <b>18</b>, performs an operation according to an outside photography signal input through the camera <b>20</b>, and outputs a camera-photographed image and image signals required for various operations via the display unit <b>24</b>. When necessary, the control unit <b>14</b> accesses content to be output from the memory unit <b>16</b>, or stores content in the memory unit <b>16</b>. The memory unit <b>16</b> stores many programs and data related to operations of the control unit <b>14</b>, and also stores information required for the use of a mobile terminal, and information on a photographed image of the camera.</div>
+<div class="description-paragraph" id="p-0024" num="0023">Generally, a mobile terminal with such a configuration performs an operation related to a general mobile communication service, including a camera function. Besides the above functions, the control unit <b>14</b> performs may perform panoramic photography operation according to the present invention. Also, according to the present invention, the memory unit <b>16</b> stores operation programs and relevant information for a panoramic photography operation in the control unit <b>14</b>, and when necessary, outputs such information to the control unit <b>14</b>.</div>
+<div class="description-paragraph" id="p-0025" num="0024">In panoramic photography according to the present invention, a subject picture is input to the mobile terminal in real time, like a moving picture. When the mobile terminal is moved by a user in a panoramic photography direction, (or when the mobile terminal is mounted to an additional device and is automatically rotationally moved by the device), the movement of the mobile terminal is recognized by comparing a current input image with a previous image. Then, after determining the direction and extent of the movement, an operation of obtaining consecutive pictures is performed in order to create an appropriate panoramic image. Hereinafter, a panoramic photography operation according to the present invention will be described in detail with reference to the accompanying drawings.</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a flow diagram illustrating an operation of panoramic photography according to an embodiment of the present invention. Step <b>200</b> is performed before actual panoramic photography is begun, and is for setting various photographic environments for panoramic photography. In step <b>200</b>, the direction (such as, an upward/downward/left/right direction) where pictures included a panoramic image are put together is determined. Also, the number of photographed pictures to be included in creation of a panoramic image is determined.</div>
+<div class="description-paragraph" id="p-0027" num="0026">Such an environment setup operation for panoramic photography in step <b>200</b> is performed through menu items (usually prepared in a mobile terminal) for setting various functions. For example, when a so-called ‘environment setup mode for panoramic photography’ is selected from among sub-menus of camera photography menus, a user can input respective environment settings. A setup and operation program, which are for displaying corresponding menu items and recognizing a user's key input on the key input unit, are previously prepared in the mobile terminal. Also, a part or the whole of such environment items for panoramic photography, which is set by a user in step <b>200</b>, may be previously provided as fixed settings appropriately established by a developer.</div>
+<div class="description-paragraph" id="p-0028" num="0027">In step <b>210</b>, a user selects a so-called ‘panoramic photography mode’ from among sub-menus of camera photography menus of the mobile terminal, and starts panoramic photography by photographing the first picture of a panoramic image. The first picture of a panoramic image is stored by a shutter operation of a user in a way similar to usual photography, and the following pictures are processed by a panoramic photography mechanism according to the present invention. When a panoramic image is photographed, images input to a photographing apparatus in real-time from the start time are stored in the memory unit. Later, such images are used for obtaining movement information of the photographing apparatus.</div>
+<div class="description-paragraph" id="p-0029" num="0028">In step <b>220</b>, according to the present invention, images are input to the photographing apparatus, like a video image, and the movement of a corresponding photographing apparatus (e.g., a camera) is recognized by using both a current input image and a previous input image. In recognizing the movement of the camera in step <b>220</b>, a motion vector between matching (most similar) blocks is detected by comparing image blocks having a appropriately set size with each other within a current frame and a previous frame. Such a mechanism may be similar to a mechanism used for a movement estimation/compensation technology in encoding and decoding of a general video image. In the present invention, a motion vector corresponding to a horizontal direction, that is, x-axis, is defined as m<sub>i,x</sub>, and a motion vector corresponding to a vertical direction, that is, y-axis, is defined as m<sub>i,y </sub>(herein, i indicates the number of each frame).</div>
+<div class="description-paragraph" id="p-0030" num="0029">In step <b>230</b>, for panoramic photography in accordance with the movement of the camera as recognized in step <b>220</b>, the direction where the camera is moved is provided to a user via an appropriate user interface (UI). The direction of the camera movement may be displayed as an appropriate icon, etc. on the display unit.</div>
+<div class="description-paragraph" id="p-0031" num="0030">For example, when it is detected by the motion vector m<sub>i,x </sub>of x-axis that the camera currently moves in a left/stop/right direction in a current “panoramic photography in progress mode” from left to right, a rightward arrow icon may be displayed on a preview screen so as to lead the movement of the camera in a proper direction for panoramic photography. Also, in the integration of the motion vector m<sub>i,y </sub>of y-axis as in formula (1) below, when the camera exceeds a preset threshold value (that is, τ<sub>2 </sub>in formula (1) below) in an upward and downward direction, an appropriate type icon for warning of the excessive movement may be displayed on a preview screen.
+<br/>
+|Σ<i>m</i> <sub>i,y</sub>|≤τ<sub>2</sub>  (1)
+</div>
+<div class="description-paragraph" id="p-0032" num="0031">Then, in step <b>240</b>, it is determined whether it is time to photograph each current (next) picture according to the movement of the camera as recognized in step <b>220</b>. When it is time to photograph each current/next picture, the process proceeds to step <b>250</b>, or otherwise, the process proceeds back to step <b>220</b>, and the above steps are repeated.</div>
+<div class="description-paragraph" id="p-0033" num="0032">For example, in the integration of the motion vector m<sub>i,x </sub>of x-axis as in formula (2) below in “current panoramic photography in progress mode” from left to right, when the integrated value reaches a preset threshold value (that is, τ<sub>1 </sub>in formula (2) below), it is determined that it is time to photograph a current/next picture.
+<br/>
+τ<i>m</i> <sub>i,x</sub>≤τ<sub>1</sub>  (2)
+</div>
+<div class="description-paragraph" id="p-0034" num="0033">In step <b>250</b>, a corresponding picture is then photographed. The time for photographing a current picture may be provided to a user via an appropriate user interface (UI). Also, preset settings, for example, manual/automatic panoramic photography, allows the user to perform the photography operation by shutter, or otherwise. Automatic photography operation is performed. The settings for the above manual/automatic panoramic photography may be set when an environment setup operation for panoramic photography is performed in step <b>200</b>.</div>
+<div class="description-paragraph" id="p-0035" num="0034">In step <b>260</b>, it is determined whether the number of pictures photographed reaches the total number preset in step <b>200</b>. When the number is less than the total number, the process proceeds back to step <b>220</b>, and the above steps are repeated. On the other hand, when the number has reached the total number, the panoramic photography process is completed.</div>
+<div class="description-paragraph" id="p-0036" num="0035">When the process proceeds back to step <b>220</b>, the values of the motion vectors, especially, the vector sum of the motion vector m<sub>i,x </sub>of x-axis (that is, Σm<sub>i,x</sub>), are reset as an initialized value (0). Also, after the panoramic photography is completed, respective photographed pictures are put together so as to create one panoramic image. In order to smoothly put together multiple pictures, general image processing mechanisms, including aligning, stitching, and blending, may be applied.</div>
+<div class="description-paragraph" id="p-0037" num="0036">Referring to <figref idrefs="DRAWINGS">FIG. 2</figref>, when photographing a panoramic image, a user is required to move a photographing apparatus at regular intervals in a photography direction (for example, from left to right). In the present invention, it is assumed that image frames are input at substantially constant speed via such a mechanism, and every frame has no motion blur effect. Thus, pictures with a fixed width, which are automatically overlapped, are obtained. Accordingly, in the integration of motion vectors (that is, the motion vector m<sub>i,x </sub>of x-axis) of input images according to a photography direction (for example, from left to right), whenever the integrated value reaches a preset threshold value (τ<sub>1</sub>), a next picture is photographed. When the photography for a picture is set as an automatic mode, each picture included in a panoramic image is automatically photographed at an appropriate position (according to the threshold value τ<sub>1</sub>) while a user appropriately moves the photographing apparatus.</div>
+<div class="description-paragraph" id="p-0038" num="0037">In recognizing the movement of the photographing apparatus in step <b>220</b> using a current input image and a previous input image, a motion vector between image blocks of frames is detected via a mechanism according to the principles of the present invention. Hereinafter, such a mechanism will be described in detail.</div>
+<div class="description-paragraph" id="p-0039" num="0038">In the mechanism of matching image blocks of frames and detecting a motion vector, a motion estimation mechanism may be applied. Motion estimation mechanism is usually used for a video image (for example, broadcast images) compression technology, such as MPEG-4, H.264, etc. However, in actual panoramic photography, a preview image of a camera is used. Therefore, differently from broadcast images, exposure compensation is not properly done, and the correlation between preview frames is not strong. Accordingly, when a general motion estimation mechanism is applied, it is difficult to find an accurate matching block. Furthermore, the general motion estimation mechanism is a technology based on a compression mechanism, and requires a very complicated computation mechanism, such as motion vector detection with subdivided block (macroblock) sizes. Therefore, in consideration of characteristics of the panoramic photography, an appropriate motion vector estimation mechanism is required.</div>
+<div class="description-paragraph" id="p-0040" num="0039">According to the present invention, movement from a previous frame to a current frame of input images is recognized by using an image block of a certain area, rather than using a general motion estimation mechanism. Thus, a motion estimation mechanism with exposure compensation is provided in consideration of principles of panoramic photography. In photography, a motion vector has to be quickly computed in such a manner that preview operation is normally performed during the computation. In order to reduce computational complexity, an integral image may be used. Also, a base block for finding a motion vector is variably adjusted according to a possible preview rate, and a relative size and distance of a photographed object. Herein, due to characteristics of a preview image, the correlation of frames is not stronger than a compression image. In order to maximize the correlation, it is possible to use a single-block search mechanism. In motion estimation of frames, instead of using a plane image, it is possible to perform the motion estimation on an image previously projected on a cylindrical panoramic projection space in consideration of characteristics of panoramic photography.</div>
+<div class="description-paragraph" id="p-0041" num="0040"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a detailed flow diagram illustrating steps for recognizing the movement of a camera. The operation of motion estimation according to the present invention will be described in detail with reference to <figref idrefs="DRAWINGS">FIG. 3</figref>. In step <b>222</b>, in order to obtain a motion vector between a current frame and a previous frame, a variable size block is set.</div>
+<div class="description-paragraph" id="p-0042" num="0041">In motion estimation on a preview image, especially, in the case of a mobile camera with a low-sensitivity sensor and hand-tremor, when the motion estimation is performed on a small size block (usually, a square block in a range of 4-16 pixels) in the manner of a video image compression mechanism, it is difficult to find an accurate motion vector value due to accumulated vector errors between blocks. Accordingly, in an embodiment of the present invention, the motion vector is detected on a few blocks (for example, just one block) with a relatively larger size.</div>
+<div class="description-paragraph" id="p-0043" num="0042">The size of the one block is variably adjusted by using the performance of a preview tool, the size and distance of a photographed object, and distance information on the area to be searched. <figref idrefs="DRAWINGS">FIG. 4</figref> is an example illustrating a variably set size of a block within a frame. SR (Search Range) indicates the area to be searched, and Bk (Block size) indicates the size of the block.</div>
+<div class="description-paragraph" id="p-0044" num="0043">A search range SR is an area for searching a block matching a base block within a frame to be searched. It is possible to set the entire area of the frame as the search range. On the other hand, instead of utilizing the entire image of the frame, it is possible to set an appropriate area as the search range. The search area may be determined based on the position of a base block within a frame to be searched. In this manner, it is possible to increase the efficiency by preventing unnecessary portions (such as the edges of a frame) from being searched.</div>
+<div class="description-paragraph" id="p-0045" num="0044">In an embodiment of the present invention, it is possible to variably set such a search range and a block size. For example, when photographing an object at a short distance, or the object size is relatively large, a more accurate motion vector is obtained by increasing the block size, and decreasing the search range. On the other hand, when photographing an object at a long distance, or the object size is relatively small, a more accurate motion vector is obtained by decreasing the block size, and widening the search range.</div>
+<div class="description-paragraph" id="p-0046" num="0045">In the case of a photographing apparatus with a low performance preview function, when the search range is excessively widened, it takes a lot of time to find a motion vector due to increased computational complexity, thereby decreasing a frame rate. Also, even if an accurate vector is obtained, the decreased frame rate may cause images between frames to be largely different from each other. As a result, errors causes by the difference are accumulated. Therefore, in extracting a motion vector from a camera preview, it is possible to obtain basic information on a photographed object by using object detector, automatic input information such as a focal length, etc., or user-manual input information, and to set the search range in accordance with a distance and a size of the object. The user-manual input information may include a distance and an object size, and may also be estimated based on user-set information including a short-distance mode, a scenery mode, and a portrait mode, etc. In addition, according to preview performance of a corresponding photographing apparatus, it is possible to set a basic block size in consideration of computational complexity.</div>
+<div class="description-paragraph" id="p-0047" num="0046">The setup of a block with a variable size in step <b>222</b> is performed only once when the size of a current block is not set, that is, the first time when the extraction of a motion vector is performed. Then, until the panoramic photography is completed, a block with the first set size is used.</div>
+<div class="description-paragraph" id="p-0048" num="0047">In step <b>224</b>, a matching block between a current frame and a previous frame is detected by using a block with a size set in step <b>222</b>. Basically, in detecting the matching block, error information of respective compared pixels between blocks is utilized. When the error between two blocks is the least (minimized), the corresponding block is considered a matching block.</div>
+<div class="description-paragraph" id="p-0049" num="0048">Usually, for error information for detecting a matching block, an error function such as SAD (Sum of Absolute Difference) or SSD (Sum of Squared Difference) is used. SAD and SSD generally used in a video image compression technology are defined by formula (3) below.</div>
+<div class="description-paragraph" id="p-0050" num="0049">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>SAD</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>E</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>,</mo>
+<mi>n</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munder>
+<mo>∑</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>∈</mo>
+<mi>block</mi>
+</mrow>
+</mrow>
+</munder>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mo></mo>
+<mrow>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>1</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>2</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>x</mi>
+<mo>+</mo>
+<mi>m</mi>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>+</mo>
+<mi>n</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mi>SSD</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>E</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>,</mo>
+<mi>n</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munder>
+<mo>∑</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>∈</mo>
+<mi>block</mi>
+</mrow>
+</mrow>
+</munder>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msup>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>1</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>2</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>x</mi>
+<mo>+</mo>
+<mi>m</mi>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>+</mo>
+<mi>n</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>3</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0051" num="0050">In formula (3), Ī<sub>1 </sub>and Ī<sub>2 </sub>indicate pixel values (luminance or color) of corresponding positions on blocks within respective frames (that is, a previous frame and a current frame). Herein, x and y indicate a pixel position on a base block in a previous frame, and x+m and y+n indicate a pixel position on a searched block in a current frame.</div>
+<div class="description-paragraph" id="p-0052" num="0051">Such functions can be appropriately applied when adjacent two frames have no difference in exposure, for example, in the case of a video image compression environment. However, when adjacent two frames have a difference in exposure, for example, in the case of a image frame directly input from a subject in an actual photography environment, it is difficult to use the functions as accurate information. Therefore, the present invention uses error functions reflecting the exposure difference as defined by formula (4) below.</div>
+<div class="description-paragraph" id="p-0053" num="0052">Modified SAD</div>
+<div class="description-paragraph" id="p-0054" num="0053">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mrow>
+<msup>
+<mi>E</mi>
+<mi>′</mi>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>,</mo>
+<mi>n</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munder>
+<mo>∑</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>∈</mo>
+<mi>block</mi>
+</mrow>
+</mrow>
+</munder>
+<mo>⁢</mo>
+<mrow>
+<mo></mo>
+<mrow>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>1</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<msub>
+<mover>
+<mi>I</mi>
+<mi>_</mi>
+</mover>
+<mn>1</mn>
+</msub>
+<mo>-</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>2</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>x</mi>
+<mo>+</mo>
+<mi>m</mi>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>+</mo>
+<mi>n</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mover>
+<mi>I</mi>
+<mi>_</mi>
+</mover>
+<mn>2</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>,</mo>
+<mi>n</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="1.1ex" width="1.1em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>modified</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>SSD</mi>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>E</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>,</mo>
+<mi>n</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munder>
+<mo>∑</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>∈</mo>
+<mi>block</mi>
+</mrow>
+</mrow>
+</munder>
+<mo>⁢</mo>
+<msup>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>1</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<msub>
+<mover>
+<mi>I</mi>
+<mi>_</mi>
+</mover>
+<mn>1</mn>
+</msub>
+<mo>-</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>I</mi>
+<mn>2</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>x</mi>
+<mo>+</mo>
+<mi>m</mi>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>+</mo>
+<mi>n</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mover>
+<mi>I</mi>
+<mi>_</mi>
+</mover>
+<mn>2</mn>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>,</mo>
+<mi>n</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>4</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0055" num="0054">Herein, Ī<sub>1 </sub>and Ī<sub>2 </sub>indicate average values of pixels corresponding to blocks within respective frames (that is, a previous frame and a current frame). In formula (4), exposure compensation is performed by compensating the pixel values of each frame block in accordance with the average of the image block (in the case of formula (4), the average value is subtracted).</div>
+<div class="description-paragraph" id="p-0056" num="0055">Since the position of a block in the previous frame is fixed (that is, a base block is known), there is no need to obtain Ī<sub>1 </sub>more than once. However, in the following frames, in order to find the best matching block, through the comparison with the current frame and the previous frame, it is required to search every block with the same size. Thus, whenever the search is performed, it is necessary to obtain the average value of pixels within a corresponding block. In other words, Ī<sub>2</sub>(m,n) has to be obtained with regard to every block.</div>
+<div class="description-paragraph" id="p-0057" num="0056">Herein, whenever the total sum and average value is obtained with regard to pixels of every block, computational complexity is increased. Accordingly, the present invention provides a mechanism for decreasing the computational complexity by using an integral image. In the integral image, a pixel value corresponding to coordinates indicates the total sum of pixels extending from the upper left side of the image to the coordinate. In other words, in <figref idrefs="DRAWINGS">FIG. 5A</figref> a pixel value of (x, y) indicates the total sum of pixels corresponding a dotted block area. Therefore, I<sub>int g </sub>(0, 0) indicates a pixel value at coordinates (0, 0), and I<sub>int g </sub>(width−1, height−1) indicates the total sum of all pixels of a given image.</div>
+<div class="description-paragraph" id="p-0058" num="0057">Through such an integral image, it is possible to obtain the total sum of pixels within a required area by using summation and subtraction of pixel values corresponding to four vertexes of the area. A total sum of pixels corresponding to a dotted block area in <figref idrefs="DRAWINGS">FIG. 5B</figref> can be obtained by using pixel values of four vertexes (x<sub>1</sub>, y<sub>1</sub>), (x<sub>2</sub>, y<sub>2</sub>), (x<sub>3</sub>, y<sub>3</sub>), and (x<sub>4</sub>, y<sub>4</sub>) through formula (5) defined below.
+<br/>
+<i>I</i> <sub>int g</sub>(<i>x</i> <sub>4</sub> <i>,y</i> <sub>4</sub>)+<i>I</i> <sub>int g</sub>(<i>x</i> <sub>1</sub> <i>,y</i> <sub>1</sub>)−<i>I</i> <sub>int g</sub>(<i>x</i> <sub>2</sub> <i>,y</i> <sub>2</sub>)−<i>I</i> <sub>int g</sub>(<i>x</i> <sub>3</sub> <i>,y</i> <sub>3</sub>)  (5)
+</div>
+<div class="description-paragraph" id="p-0059" num="0058">According to an embodiment of the present invention, an integral image with regard to a current frame is previously obtained as described above, and then, the average of pixels with regard to every block, that is, Ī<sub>2</sub>(m, n), can be simply obtained by using such an integral image.</div>
+<div class="description-paragraph" id="p-0060" num="0059">After the detection of a matching block between a current frame and a previous frame in step <b>224</b>, a motion vector between two blocks (that is, a motion vector m<sub>i,x </sub>of x-axis, and a motion vector m<sub>i,y </sub>of y-axis) is obtained in step <b>226</b>.</div>
+<div class="description-paragraph" id="p-0061" num="0060">A method for photographing a panoramic image according to an embodiment of the present invention is performed as described above. Although a specific embodiment has been described, it will be obvious that various modifications and variations can be made within the scope of this invention.</div>
+<div class="description-paragraph" id="p-0062" num="0061">Usually, a motion vector is detected with regard to a plane image. Such detection is efficient only for general compression images and broadcast images. On the other hand, in the case of panoramic photography, information on a motion vector is required in order to obtain a more accurate panoramic image. In another embodiment of the present invention, after panoramic photography, each image may be projected again on a mosaic plane or a curved plane because consecutive pictures obtained for a panoramic image make a cylindrical form as a camera rotates in a circle. Accordingly, in detection of a motion vector, in consideration of image movement in a curved form, not a plane form, an input image is projected on an appropriate projection plane (for example, a cylindrical plane), and then, the motion vector is detected with regard to the projected image. As a result, it is possible to obtain a more accurate value.</div>
+<div class="description-paragraph" id="p-0063" num="0062">Also, a motion vector is determining a preview image for which a panoramic image is input in real time, and whether to photograph an image is determined by using information on the motion vector. In consideration of such a characteristic, a motion vector may be determined by skipping some frames according to a preview rate of an photographing apparatus. Usually, in a case of video image compression, since vector information of each frame is important, a motion estimation operation has to be performed per frame. However, in a motion estimation operation for panoramic photography according to the present invention, the information of each frame is less important. Accordingly, in another embodiment of the present invention, a motion estimation operation may be performed by appropriately skipping some frames (for example, 1˜2 frames) according to related environments. In such a case, computational time and complexity may be reduced, and thus, a wider search range is secured. As a result, it is possible to calculate a more accurate motion vector.</div>
+<div class="description-paragraph" id="p-0064" num="0063">The above-described methods according to the present invention can be realized in hardware or via the execution of software or computer code that can be stored in a recording medium such as a CD ROM, an RAM, a floppy disk, a hard disk, or a magneto-optical disk or downloaded over a network, so that the methods described herein can be rendered in such software using a general purpose computer, or a special processor or in programmable or dedicated hardware, such as an ASIC or FPGA. As would be understood in the art, the computer, the processor or the programmable hardware include memory components, e.g., RAM, ROM, Flash, etc. that may store or receive software or computer code that when accessed and executed by the computer, processor or hardware implement the processing methods described herein.</div>
+<div class="description-paragraph" id="p-0065" num="0064">In addition, although in panoramic photography, a photographing apparatus according to the present invention is moved by a user as described above, the principles of the invention can be applied when the photographing apparatus according to the present invention is mounted to an additional moving device, and is automatically moved. Also, although in the above description, panoramic photography is in a horizontal or a vertical direction, the principles of the invention can be applied when the panoramic photography is in a horizontal-vertical mixed direction (that is, multiple pictures included in a panoramic image are disposed with a horizontal/vertical mosaic style). Besides, the above various UIs may be expressed as various ways different from the above description.</div>
+<div class="description-paragraph" id="p-0066" num="0065">As described above, in panoramic photography according to the present invention, movement information on a terminal mounted with a camera is recognized through an image processing operation. Then, it is automatically determined whether it is time to photograph an image. Accordingly, without an auxiliary device or additional hardware, a user can easily and accurately photograph an image.</div>
+<div class="description-paragraph" id="p-0067" num="0066">Especially, in motion vector detection according to the present invention, a motion estimation mechanism in accordance with the characteristics of a preview image of a camera is used. The size of a base block for detecting a motion vector is appropriately and variably set, and thus it is possible to more simply and accurately extract a motion vector.</div>
+<div class="description-paragraph" id="p-0068" num="0067">While the invention has been shown and described with reference to certain exemplary embodiments thereof, it will be understood by those skilled in the art that various changes in form and details may be made therein without departing from the spirit and scope of the invention as defined by the appended claims.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">24</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM263630187">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. An electronic device comprising:
+<div class="claim-text">an image sensor;</div>
+<div class="claim-text">a processor;</div>
+<div class="claim-text">a display; and</div>
+<div class="claim-text">a memory storing a plurality of instructions, wherein the plurality of instructions executed by the processor cause the electronic device to perform a plurality of operations comprising:
+<div class="claim-text">in response to receiving an input, starting capturing of a horizontal panoramic image;</div>
+<div class="claim-text">displaying, on a preview screen of the display, an icon for indicating a capturing direction;</div>
+<div class="claim-text">determining an amount of movement of the electronic device in a vertical direction during capturing of the horizontal panoramic image;</div>
+<div class="claim-text">when the amount of movement in the vertical direction satisfied a threshold condition, displaying, on the preview screen of the display, a visual indication relating to an excessive vertical movement, during capturing of the horizontal panoramic image; and</div>
+<div class="claim-text">completing capturing of the horizontal panoramic image.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The electronic device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the amount of movement of the electronic device is determined based on a first image and a second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The electronic device of <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the amount of movement of the electronic device is determined by comparing the first image and the second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The electronic device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the capturing of the horizontal panoramic image is completed based on a first image and a second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The electronic device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the icon for indicating the capturing direction is displayed when a movement direction of the electronic device is detected.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The electronic device of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the icon for indicating the capturing direction is at least a shape of arrow direct to the capturing direction.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. An electronic device comprising:
+<div class="claim-text">an image sensor;</div>
+<div class="claim-text">a processor;</div>
+<div class="claim-text">a display; and</div>
+<div class="claim-text">a memory storing a plurality of instructions, wherein the plurality of instructions executed by the processor cause the electronic device to:
+<div class="claim-text">in response to receiving an input, start capturing of a panoramic image in a direction selected from a horizontal direction and a vertical direction;</div>
+<div class="claim-text">display, on a preview screen of the display, an icon for indicating the selected capturing direction;</div>
+<div class="claim-text">determine movement information for the electronic device during capturing of the panoramic image;</div>
+<div class="claim-text">when the movement information for the electronic device satisfies a threshold condition, display on the preview screen of the display a visual indication relating to an excessive movement, wherein:
+<div class="claim-text">when the selected direction is the horizontal direction, determining the movement information for the electronic device comprises determining an amount of movement of the electronic device in the vertical direction, and the excessive movement is an excessive vertical movement; and</div>
+<div class="claim-text">when the selected direction is the vertical direction, determining the movement information for the electronic device comprises determining an amount of movement of the electronic device in the horizontal direction, and the excessive movement is a horizontal movement; and</div>
+</div>
+<div class="claim-text">complete capturing of the panoramic image based at least in part on a first image and a second image obtained by the image sensor.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The electronic device of <claim-ref idref="CLM-00007">claim 7</claim-ref>, wherein the amount of movement of the electronic device is determined based on thea first image and thea second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The electronic device of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the amount of movement of the electronic device is determined by comparing the first image and the second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The electronic device of <claim-ref idref="CLM-00007">claim 7</claim-ref>, wherein the capturing of the panoramic image is completed based on the first image and the second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The electronic device of <claim-ref idref="CLM-00007">claim 7</claim-ref>, wherein the icon for indicating the selected capturing direction is displayed when a movement direction of the electronic device is detected.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The electronic device of <claim-ref idref="CLM-00007">claim 7</claim-ref>, wherein the icon for indicating the selected capturing direction is at least a shape of arrow direct to the capturing direction.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. A method for generating at least one image with an electronic device comprising an image sensor and a display, the method comprising:
+<div class="claim-text">in response to receiving an input, starting capturing of a horizontal panoramic image;</div>
+<div class="claim-text">displaying, on a preview screen of the display, an icon for indicating a capturing direction;</div>
+<div class="claim-text">determining an amount of movement of the electronic device in a vertical direction during capturing of the horizontal panoramic image;</div>
+<div class="claim-text">when the amount of movement in the vertical direction satisfied a threshold condition, displaying, on the preview screen of the display, a visual indication relating to an excessive vertical movement, during capturing of the horizontal panoramic image; and</div>
+<div class="claim-text">completing capturing of the horizontal panoramic image.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method of <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein the amount of movement of the electronic device is determined based on a first image and a second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The method of <claim-ref idref="CLM-00014">claim 14</claim-ref>, wherein the amount of movement of the electronic device is determined by comparing the first image and the second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The method of <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein the capturing of the horizontal panoramic image is completed based on a first image and a second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The method of <claim-ref idref="CLM-00013">claim 13</claim-ref> wherein the icon for indicating the capturing direction is displayed when a movement direction of the electronic device is detected.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The method of <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein the icon for indicating the capturing direction is at least a shape of arrow direct to the capturing direction.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. A method for generating at least one image with an electronic device comprising an image sensor and a display, the method comprising:
+<div class="claim-text">in response to receiving an input, start capturing of a panoramic image in a direction selected from a horizontal direction and a vertical direction;</div>
+<div class="claim-text">display, on a preview screen of the display, an icon for indicating the selected capturing direction;</div>
+<div class="claim-text">determine movement information for the electronic device during capturing of the panoramic image;</div>
+<div class="claim-text">when the movement information for the electronic device satisfies a threshold condition, display on the preview screen of the display a visual indication relating to an excessive movement, wherein:
+<div class="claim-text">when the selected direction is the horizontal direction, determining the movement information for the electronic device comprises determining an amount of movement of the electronic device in the vertical direction, and the excessive movement is an excessive vertical movement; and</div>
+<div class="claim-text">when the selected direction is the vertical direction, determining the movement information for the electronic device comprises determining an amount of movement of the electronic device in the horizontal direction, and the excessive movement is a horizontal movement; and</div>
+<div class="claim-text">complete capturing of the panoramic image based at least in part on a first image and a second image obtained by the image sensor.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The method of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the amount of movement of the electronic device is determined based on the first image and the second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The method of <claim-ref idref="CLM-00020">claim 20</claim-ref>, wherein the amount of movement of the electronic device is determined by comparing the first image and the second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The method of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the capturing of the panoramic image is completed based on the first image and the second image obtained from the image sensor.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. The method of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the icon for indicating the selected capturing direction is displayed when a movement direction of the electronic device is detected.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The method of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the icon for indicating the selected capturing direction is at least a shape of arrow direct to the capturing direction.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

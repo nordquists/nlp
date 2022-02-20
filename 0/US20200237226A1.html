@@ -1,0 +1,2935 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US20200237226A1 - Systems and methods for real-time target validation for image-guided radiation therapy 
+      - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA405854347">
+<div class="abstract" id="p-0001" num="0000">Systems and methods for real-time target validation during radiation treatment therapy based on real-time target displacement and radiation dosimetry measurements.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><ul class="description" lang="EN" load-source="patent-office" mxw-id="PDES270597801">
+<heading id="h-0001">RELATED APPLICATIONS</heading>
+<li> <para-num num="[0001]"> </para-num> <div class="description-line" id="p-0002" num="0001">This application claims the benefit of U.S. Provisional Application No. 61/565,900 filed Dec. 1, 2011, the content of which is hereby incorporated by reference in its entirety.</div>
+</li> <heading id="h-0002">FIELD</heading>
+<li> <para-num num="[0002]"> </para-num> <div class="description-line" id="p-0003" num="0002">The present disclosure relates generally to delivering radiation to a treatment target, and more particularly to systems, methods, and computer program products for real-time target validation during image-guided radiation therapy treatment.</div>
+</li> <heading id="h-0003">BACKGROUND</heading>
+<li> <para-num num="[0003]"> </para-num> <div class="description-line" id="p-0004" num="0003">Radiosurgery and radiotherapy systems are radiation therapy treatment systems that use external radiation beams to treat pathological anatomies (tumors, lesions, vascular malformations, nerve disorders, etc.) by delivering prescribed doses of radiation (X-rays, gamma rays, electrons, protons, and/or ions) to the pathological anatomy while minimizing radiation exposure to the surrounding tissue and critical anatomical structures. Radiotherapy is characterized by a low radiation dose per fraction (e.g., 100-200 centiGray), shorter fraction times (e.g., 10-30 minutes per treatment), and hyper fractionation (e.g., 30-45 fractions), and repeated treatments. Radiosurgery is characterized by a relatively high radiation dose per fraction (e.g., 500-2000 centiGray), extended treatment times per fraction (e.g., 30-60 minutes per treatment), and hypo-fractionation (e.g. 1-5 fractions or treatment days). Due to the high radiation dose delivered to the patient during radiosurgery, radiosurgery requires high spatial accuracy to ensure that the tumor or abnormality (i.e., the target) receives the prescribed dose while the surrounding normal tissue is spared.</div>
+</li> <li> <para-num num="[0004]"> </para-num> <div class="description-line" id="p-0005" num="0004">In general, radiosurgery treatments consist of several phases. First, a precise three-dimensional (3D) map of the anatomical structures in the area of interest (head, body, etc.) is constructed using any one of (or combinations thereof) a computed tomography (CT), cone-beam CBCT, magnetic resonance imaging (MRI), positron emission tomography (PET), 3D rotational angiography (3DRA), or ultrasound techniques. This determines the exact coordinates of the target within the anatomical structure, namely, locates the tumor or abnormality within the body and defines its exact shape and size. Second, a motion path for the radiation beam is computed to deliver a dose distribution that the surgeon finds acceptable, taking into account a variety of medical constraints. During this phase, a team of specialists develop a treatment plan using special computer software to optimally irradiate the tumor and minimize dose to the surrounding normal tissue by designing beams of radiation to converge on the target area from different angles and planes. Third, the radiation treatment plan is executed. During this phase, the radiation dose is delivered to the patient according to the prescribed treatment plan.</div>
+</li> <li> <para-num num="[0005]"> </para-num> <div class="description-line" id="p-0006" num="0005">To help deliver radiation therapy to the target according to the radiation treatment plan, image-guided radiation therapy (IGRT) can be used. IGRT is a radiation therapy process that uses cross-sectional images of a patient's internal anatomy taken during the radiation therapy treatment session (i.e., in-treatment images) to provide information about the patient's position. IGRT is thus a process of frequent two or three-dimensional imaging during the course of the radiation treatment used to direct the therapeutic radiation utilizing the imaging coordinates of the actual radiation treatment plan. This ensures that the patient is localized in the radiation treatment system in the same position as planned, and that the patient is properly aligned during the treatment. The IGRT imaging process is different from the imaging process used to delineate targets and organs in the planning process of radiation therapy (i.e., different from the pre-treatment images obtained during the first phase). Although, the IGRT process involves conformal radiation treatment guided by specialized imaging tests taken during the first phase, it does rely on the imaging modalities from the planning process as the reference coordinates for localizing the patient during treatment. Thus, associated with each image-guided radiation therapy system is an imaging system to provide in-treatment images that are used to set-up the radiation delivery procedure.</div>
+</li> <li> <para-num num="[0006]"> </para-num> <div class="description-line" id="p-0007" num="0006">In-treatment images can include one or more two or three-dimensional images (typically X-ray) acquired at one or more different points of view during treatment. There are a variety of ways to acquire the in-treatment images. In certain approaches, distinct independent imaging systems and/or imaging methods are used for acquiring pre-treatment and in-treatment images, respectively. For example, a 3D IGRT could include localization of a cone-beam computed tomography (CBCT) dataset with a planning computed tomography (CT) dataset, and a 2D IGRT could include matching planar kilovoltage (kV) radiographs or megavoltage (MV) images with digital reconstructed radiographs (DRRs) obtained from the planning CT. Alternatively, another approach is to use portal imaging systems. In portal imaging systems, a detector is placed opposite the therapeutic radiation source to image the patient for setup and in-treatment images. Another approach is X-ray tomosynthesis which is an in-treatment imaging modality for use in conjunction with radiation treatment systems. X-ray tomosynthesis is a process of acquiring a number of two-dimensional X-ray projection images of a target volume using X-rays that are incident upon the target volume at respective number of different angles, followed by the mathematical processing of the two-dimensional X-ray projection images to yield a set of one or more tomosynthesis reconstruction images representative of one or more respective slices of the target volume.</div>
+</li> <li> <para-num num="[0007]"> </para-num> <div class="description-line" id="p-0008" num="0007">In image-guided radiotherapies, there are many factors that can contribute to differences between the prescribed radiation dose distribution and the actual dose delivered (i.e., the actual dose delivered to the target during the radiation treatment). One such factor is uncertainty in the patient's position in the radiation therapy system. Other factors involve uncertainty that is introduced by changes that can occur during the course of the patient's treatment. Such changes can include random errors, such as small differences in a patient's setup position. Other sources are attributable to physiological changes that might occur if a patient's tumor regresses or if the patient loses weight during therapy. Another category of uncertainty includes motion. Motion can potentially overlap with either of the categories as some motion might be more random and unpredictable, whereas other motion can be more regular. These uncertainties can affect the quality of a patient's treatment and the actual radiation dose delivered to the target.</div>
+</li> <li> <para-num num="[0008]"> </para-num> <div class="description-line" id="p-0009" num="0008">In existing radiosurgery therapy systems, establishing precision of therapeutic dose delivery is done by carefully calibrating the position and orientation of a well characterized imaging system with respect to the therapeutic radiation beam used during the treatment. The accuracy of the radiosurgery is, therefore, dependent on the fidelity with which this calibration process if performed.</div>
+</li> <li> <para-num num="[0009]"> </para-num> <div class="description-line" id="p-0010" num="0009">In stereotactic radiosurgery (SRS), which is a highly precise form of radiation therapy used to treat tumors and abnormalities of the brain, 3D imaging, such as CT, MRI, and PET/CT, is used to generate pre-treatment images to locate the tumor or abnormality within the body and define its exact size and shape. SRS also relies on systems to immobilize and carefully position the patient's head during the initial imaging phase (pre-treatment imaging) as well as during the radiation therapy session. Therefore, in SRS, the pre-treatment images show the exact location of the tumor in relation to the head frame. In stereotactic radiosurgery, this calibration can utilize rigid external frame-based head immobilization which, when properly calibrated, reliably locates the head or other body parts in a known position with respect to the therapeutic beams. However, if the calibration is done incorrectly or if post pre-treatment imaging the head slips inside the external frame or the radiosurgery instrument is knocked out of alignment after calibration, a user may not know, and serious consequences are possible.</div>
+</li> <li> <para-num num="[0010]"> </para-num> <div class="description-line" id="p-0011" num="0010">In the existing radiation therapies, therefore, radiation delivery is made based on the assumption that the radiation treatment plan was developed based on correct information, the position of the radiation beam relative to the patient set-up is correctly calibrated, and that the radiation therapy system not only functions properly but that it also functions based on correct and consistent external inputs used to program the system. However, if the calibration of the support device, for example, is incorrect, or the radiation therapy system functions improperly, or the treatment plan may include incorrect information, an incorrect dose will be delivered to the target during treatment even if the radiation therapy system operates as instructed.</div>
+</li> <li> <para-num num="[0011]"> </para-num> <div class="description-line" id="p-0012" num="0011">Also, radiation therapy detectors typically are either not designed to detect high energy therapeutic beams or not designed to be constantly operating during radiosurgery, and therefore real-time validation of the target treatment volume is not feasible.</div>
+</li> <heading id="h-0004">SUMMARY</heading>
+<li> <para-num num="[0012]"> </para-num> <div class="description-line" id="p-0013" num="0012">The accuracy in delivering a predicted radiation dose to a target based on a predetermined treatment plan plays an important role in the ultimate success or failure of the radiation treatment. Inaccurate dose delivery can result in either insufficient radiation for cure, or excessive radiation to nearby healthy tissue. Therefore, validating in real-time that the predicted radiation dose is delivered to the actual treatment target volume according to the treatment plan is desirable.</div>
+</li> <li> <para-num num="[0013]"> </para-num> <div class="description-line" id="p-0014" num="0013">The present disclosure includes systems, methods, and computer program products for confirming in real-time that a therapeutic beam in a radiation therapy system is delivered to the intended target.</div>
+</li> <li> <para-num num="[0014]"> </para-num> <div class="description-line" id="p-0015" num="0014">The present disclosure also provides systems, methods, and computer program products for validating the target in real-time during image-guided radiosurgery.</div>
+</li> <li> <para-num num="[0015]"> </para-num> <div class="description-line" id="p-0016" num="0015">The present disclosure also provides systems, methods, and computer program products for real-time target validation during radiation treatment therapy based on real-time target displacement and radiation dosimetry measurements.</div>
+</li> <li> <para-num num="[0016]"> </para-num> <div class="description-line" id="p-0017" num="0016">The present disclosure also provides systems, methods, and computer program products for corroborating in real-time the spatial position and orientation of the actual treatment target volume with respect to the pretreatment planning target volume.</div>
+</li> <li> <para-num num="[0017]"> </para-num> <div class="description-line" id="p-0018" num="0017">The present disclosure also provides systems, methods, and computer program products that serve as quality assurance tools for the accuracy of radiosurgery in real-time, and to allow surgeons to interrupt the surgery to recalibrate the system during the treatment.</div>
+</li> <li> <para-num num="[0018]"> </para-num> <div class="description-line" id="p-0019" num="0018">In various embodiments, the systems, methods and computer program products include means for real-time target validation based on a determination of a three-dimensional (3D) path of the radiation penetrating the target and the amount of delivered therapeutic radiation dose.</div>
+</li> <li> <para-num num="[0019]"> </para-num> <div class="description-line" id="p-0020" num="0019">In various embodiments, the real-time validation process includes determining the three-dimensional (3D) path of the radiation penetrating the target based on transmitted radiation intensity measurements.</div>
+</li> <description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<li> <para-num num="[0020]"> </para-num> <div class="description-line" id="p-0021" num="0020">The drawings described herein are for illustration purposes only and are not intended to limit the scope of the present disclosure in any way. The invention will be best understood by reading the ensuing specification in conjunction with the drawing figures, in which like elements are designated by like reference numerals. As used herein, various embodiments can mean some or all embodiments.</div>
+</li> <li> <para-num num="[0021]"> </para-num> <div class="description-line" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref> are perspective views of a radiation therapy system according to an embodiment of the invention;</div>
+</li> <li> <para-num num="[0022]"> </para-num> <div class="description-line" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a schematic illustration of the radiation therapy system of <figref idrefs="DRAWINGS">FIG. 1</figref>;</div>
+</li> <li> <para-num num="[0023]"> </para-num> <div class="description-line" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a schematic illustration of generating DRRs according to various embodiments;</div>
+</li> <li> <para-num num="[0024]"> </para-num> <div class="description-line" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 4A</figref> illustrates a library of (keV) synthesized DRRs according to various embodiments;</div>
+</li> <li> <para-num num="[0025]"> </para-num> <div class="description-line" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 4B</figref> illustrates a library of (MeV) synthesized DRRs according to various embodiments;</div>
+</li> <li> <para-num num="[0026]"> </para-num> <div class="description-line" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIGS. 5A-5B</figref> illustrate a library of DRRs for different gantry angles;</div>
+</li> <li> <para-num num="[0027]"> </para-num> <div class="description-line" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates a correlation graph between DRRs and live images at different gantry angles;</div>
+</li> <li> <para-num num="[0028]"> </para-num> <div class="description-line" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIGS. 7A-7B</figref> illustrate correlation between detector resolution and displacement detection;</div>
+</li> <li> <para-num num="[0029]"> </para-num> <div class="description-line" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIGS. 8A-8C</figref> show differences between different image reconstruction methods;</div>
+</li> <li> <para-num num="[0030]"> </para-num> <div class="description-line" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a flow chart of a real-time target validation method according to various embodiments;</div>
+</li> <li> <para-num num="[0031]"> </para-num> <div class="description-line" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a flow chart of a method to determine target displacement according to various embodiments;</div>
+</li> <li> <para-num num="[0032]"> </para-num> <div class="description-line" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a flow chart of a method to reconstruct an actual 3D target volume according to various embodiments;</div>
+</li> <li> <para-num num="[0033]"> </para-num> <div class="description-line" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 12</figref> is a schematic diagram of computer-based modules comprising a sequence of programmed instructions used in the radiation therapy treatment system of <figref idrefs="DRAWINGS">FIG. 1</figref> to implement a real-time target validation process;</div>
+</li> <li> <para-num num="[0034]"> </para-num> <div class="description-line" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 13</figref> illustrates a multi-layered media (MCML) simulation method;</div>
+</li> <li> <para-num num="[0035]"> </para-num> <div class="description-line" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 14A</figref> illustrates a design matrix Φ for a collection of linear projections; and</div>
+</li> <li> <para-num num="[0036]"> </para-num> <div class="description-line" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 14B</figref> illustrates a design matrix Φ for a collection of linear projections for volume reconstruction.</div>
+</li> </description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION</heading>
+<li> <para-num num="[0037]"> </para-num> <div class="description-line" id="p-0038" num="0037">Real-time validation according to various embodiments can include real-time displacement detection, real-time target volume reconstruction, real-time feedback, and real-time dosimeter monitoring. The displacement detection, the target volume reconstruction, and the dosimeter monitoring functions are based on computational algorithms incorporating transmitted therapeutic radiation trajectory and radiation fluence (i.e., energy per unit area) measurements.</div>
+</li> <li> <para-num num="[0038]"> </para-num> <div class="description-line" id="p-0039" num="0038">Displacement detection is performed to ascertain any displacement of a therapeutic radiation beam with respect to the target. This detection can be obtained, for example, by correlating a previously generated and stored library of projection images of predicted beam trajectories with live projection images of beam trajectories obtained during radiation treatment. The live and the stored projection images can include radiation fluence information. During displacement detection, a comparison of the predicted radiation fluence from the library of predicted beam trajectories and the actual measured radiation fluence can be made to compute similarity measures between the two sets of fluences.</div>
+</li> <li> <para-num num="[0039]"> </para-num> <div class="description-line" id="p-0040" num="0039">Real-time target volume reconstruction is performed to reconstruct a 3D target volume which is actually targeted by the therapeutic radiation beam. Such information can in real-time confirm to the operator that the treatment is being executed as planned. This can be done using reconstruction algorithms which use information based on the obtained projection images, the transmitted radiation fluence, and the geometry of the targeting device, and as explanatory variables the positions and orientations of the therapeutic beam. Parallel computing architectures may be used to accelerate the computation.</div>
+</li> <li> <para-num num="[0040]"> </para-num> <div class="description-line" id="p-0041" num="0040">Real-time dosimetry is performed to compare in real-time the actual dose delivered to the target during the radiation treatment and the planned radiation dose. This comparison provides added quality assurance that the treatment therapy is being properly administered.</div>
+</li> <li> <para-num num="[0041]"> </para-num> <div class="description-line" id="p-0042" num="0041">Real-time feedback is performed to correct the position of the therapeutic beam in real-time should any displacement of the target be determined or recorded. The feedback is triggered by a detected displacement signal being above a threshold displacement signal. The detected displacement signal is obtained by comparing the library of predicted projection images with the in-treatment image X-ray fluence information, and/or by comparing the the in-treatment dosimetry measurement with previously recorded dosimetry measurements. If the detected displacement signal is larger than a predetermined threshold displacement signal, or if the detected dose is significantly larger than a prescribed dose, the feedback signal can automatically cause the radiation treatment to stop or can indicate to a medical personnel (e.g., surgeon) that the radiation delivery is not as planned and allow the medical personnel to stop the radiation treatment. This gives the operating surgeon the option to stop the treatment or surgery and to recalibrate the radiation treatment device or the treatment procedure accordingly.</div>
+</li> <li> <para-num num="[0042]"> </para-num> <div class="description-line" id="p-0043" num="0042"> <figref idrefs="DRAWINGS">FIGS. 1A and 1B</figref> illustrate an exemplary radiation therapy treatment system <b>100</b> that can provide radiation therapy to a patient <b>5</b> and provide real-time target validation. The radiation therapy treatment can include photon-based radiation therapy, particle therapy, electron beam therapy, or any other type of treatment therapy. In an embodiment, the radiation therapy treatment system <b>100</b> includes a radiation treatment device <b>10</b>, such as, but not limited to, a radiosurgery device, which can include a gantry <b>7</b> supporting a radiation module <b>8</b> which includes one or more radiation sources <b>3</b> and a linear accelerator <b>2</b> operable to generate a beam of kV or MV X-ray radiation. The gantry <b>7</b> can be a ring gantry (i.e., it extends through a full 360 degree arc to create a complete ring or circle), but other types of mounting arrangements may also be employed. For example, a C-type, partial ring gantry, or robotic arm could be used. Any other framework capable of positioning the radiation module <b>8</b> at various rotational and/or axial positions relative to the patient <b>5</b> may also be used. The radiation source <b>3</b> can also travel in a non-circular path that does not follow the shape of the gantry <b>7</b>. The radiation module <b>8</b> can also include a modulation device (not shown) operable to modulate the radiation beam as well as to direct a therapeutic radiation beam toward the patient <b>5</b> and toward a portion of the patient which is desired to be irradiated. The portion desired to be irradiated is referred to as the target or target region or a region of interest. The patient <b>5</b> may have one or more regions of interest that need to be irradiated. A collimation device (not shown) may be included in the modulation device to define and adjust the size of an aperture through which the radiation beam may pass from the source <b>3</b> toward the patient <b>5</b>. The collimation device may be controlled by an actuator (not shown) which can be controlled by a computer processing system <b>50</b> and/or a controller <b>40</b>.</div>
+</li> <li> <para-num num="[0043]"> </para-num> <div class="description-line" id="p-0044" num="0043">In an embodiment, the radiation therapy includes, but is not limited to, a kV or MV energy image-guided arc-type radiation therapy or radiosurgery, such as, but not limited to, stereotactic radiosurgery (SRS). The radiosurgery device <b>10</b> can be a self-shielded radiosurgery device, such as but not limited to, an arc-type X-ray image guided self-shielded radiosurgery device. Such a set-up enables the radiation sensor(s) <b>4</b> to be positioned directly opposite the therapeutic radiation source(s) <b>3</b> because it can be positioned outside specialized radiation bunkers. This setup makes it possible to continuously detect the therapeutic beam energy after it passes through the target volume.</div>
+</li> <li> <para-num num="[0044]"> </para-num> <div class="description-line" id="p-0045" num="0044">To provide image-guidance, the radiosurgery device <b>10</b> includes an imaging device <b>30</b> for detecting and recording the transmission of the therapeutic X-ray beams from the source <b>3</b>. The imaging device <b>30</b> can be a digital imaging device including a CMOS detector or an amorphous silicon detector or any other radiation detectors capable of receiving the therapeutic radiation that passes through the patient <b>5</b> and capable of measuring transmitted X-rays. These imaging devices can include, but are not limited to, segmented ion chambers, multiwire proportional counters, scintillating fibers, and Cerenkov detectors. The digital imaging device <b>30</b> can be positioned so that the detector <b>4</b> and the therapeutic radiation source <b>3</b> are arranged to be directly opposite from each other, and so that the detector <b>4</b> can continuously receive during the treatment the therapeutic radiation beams that passed through the target region of the patient <b>5</b>. The imaging device <b>30</b> generally consists of picture elements (pixels) that register the amount of radiation that falls on them and that convert the received amount of radiation into a corresponding number of electrons. The electrons are converted into electrical signals which are further processed using either the imaging device <b>30</b> or the computer <b>50</b>. Such a configuration (i.e., digital imaging detector(s) positioned opposite the therapeutic source(s)) provides the ability to capture in real-time the energy and intensity of the therapeutic radiation transmitted through the target volume and to generate two-dimensional (2D) in-treatment images of digitized X-ray measurements.</div>
+</li> <li> <para-num num="[0045]"> </para-num> <div class="description-line" id="p-0046" num="0045">In an embodiment, a photodetector system with a scintillating fiber detector in connection with either a CCD camera, an a-Si TFT photodiode array, or a CMOS sensor, or any other device capable of producing a reproducible image with the level of light produced by the scintillating fiber, is used. The scintillating optical fibers function as small radiation detectors. These scintillating fibers can be distributed as desired within a three-dimensional detection space so as to gather radiation beam data, e.g., energy distribution within the space. The photodetector system includes an imager that converts the optical energy transmitted by the collection of optical fibers to an electric signal that may be thereafter converted to a radiation dose. The photo-detector imager can also take a 2D image of the input optical signals from the scintillating fibers.</div>
+</li> <li> <para-num num="[0046]"> </para-num> <div class="description-line" id="p-0047" num="0046">Since each discrete therapeutic radiation beam that passes through the patient <b>5</b> carries with it a unique signature of the specific anatomy through which it passes, the detector <b>4</b> is operable to measure the intensity of the transmitted therapeutic radiation through the specific anatomy, the amount of radiation absorbed by the specific anatomy, and the trajectory of the beam through the anatomy. A precise analysis of the transmitted beams (beam trajectory) through the patient, together with a detector pixel by pixel measurement of the beam fluence (i.e., energy per unit area) allows for a determination of the three-dimensional (3D) path of therapeutic radiation penetrating a known object, when the radiation scatter of the anatomy in question is known. The radiation scatter of the anatomy in question can be determined by CT scanning, for example, prior to commencing the radiation therapy. The radiation scatter can be estimated based on knowledge of the CT number (Hounsfield unit HU) derived from previous or current scans. Knowing the 3D path of radiation that is delivered to the target volume during treatment allows for real-time determination of the spatial position and orientation of the actual treatment target volume, i.e., the actual volume of the target that is being irradiated during the treatment. Corroborating the spatial position and orientation of the actual treatment target volume in real-time with respect to the pretreatment planning target volume, i.e., the volume of the target planned during the planning phase, can validate the prescribed radiation treatment delivery. In addition, knowledge of the radiation dose delivered to the actual target volume in real-time can corroborate the radiation dose delivery treatment plan.</div>
+</li> <li> <para-num num="[0047]"> </para-num> <div class="description-line" id="p-0048" num="0047">Generally, in radiosurgery, given the small volume of the targets (approximately 3 cm in diameter) and the greater penetration and less scatter of the megavolt (MV) therapeutic radiation, the resulting in-treatment images may have a limited field, poor resolution, and may be noisy, and therefore precise analysis of the transmitted beams can be difficult because at MV energies Compton Scattering is the dominant process until the energy of the photon beam is more than 10 MeV, whereas, at lower (keV) energies there is a competing mechanism, such as the photoelectric effect, to Compton Scattering. However, by using statistical measures and fast computational algorithms as described herein, embodiments can determine in real-time the 3D path of therapeutic radiation penetrating the treatment target volume, as well as the actual therapeutic dose delivered to the treatment target volume. The actual 3D path of therapeutic radiation penetrating the treatment target can also be corroborated with the prescribed 3D path, and therefore, real-time validation of the radiation delivery treatment plan can be achieved.</div>
+</li> <li> <para-num num="[0048]"> </para-num> <div class="description-line" id="p-0049" num="0048">In operation, prior to radiation therapy treatment, a previously constructed model which embodies the 3D geometry of the patient and the linear accelerator and any additional hardware, such as, but not limited to, collimators, which are used as the final therapeutic radiation field defining devices, of the specific radiation treatment device <b>10</b> together with the patient's <b>5</b> anatomy is stored in a storage device in the computer <b>50</b>. In order to generate a treatment plan, the patient <b>5</b> undergoing radiosurgery or radiotherapy treatment is imaged with diagnostic CT scanning, for example. Other forms of diagnostic scanning, such as, but not limited to, MRI can also be used. The CT scan provides pre-treatment images including a 3D Hounsfield map of the anatomy in question. Since most forms of radiosurgery require placement of a light-weight head frame (when the anatomy in question is the head) to help define the exact location of the tumor and to help immobilize the head so there is no movement during the treatment, the CT scan is done with the head frame on. A treatment planning module (shown in <figref idrefs="DRAWINGS">FIG. 12</figref>) can configure the computer <b>50</b> using specially designed planning software to precisely determine the treatment plan for the patient <b>5</b>. Alternatively, the pre-treatment images and the treatment plan are developed externally and the information is transferred to the computer <b>50</b>. Once the treatment plan is generated, the patient <b>5</b> is positioned on a sliding surgical bed <b>1</b> encircled by the linear accelerator <b>2</b>. This subsequent position (bounded by certain approximations) of the constrained patient's anatomy (for example, the head with the head frame) within the radiosurgery device <b>10</b> can be estimated prior to radiosurgery.</div>
+</li> <li> <para-num num="[0049]"> </para-num> <div class="description-line" id="p-0050" num="0049">The estimated position of the patient <b>5</b> anatomy within the radiosurgery device <b>10</b>, combined with the previously stored 3D model of the patient along with the linear accelerator geometry and any additional hardware used in radiotherapy to define the therapeutic radiation field of the radiation treatment device <b>10</b>, enable algorithms included in the analysis module (shown in <figref idrefs="DRAWINGS">FIG. 12</figref>) to predict the approximate trajectory of one or more treatment beams through the anatomy in question (or each of the treatment beam planned in the treatment plan). In order to generate the prediction, a library of digitally reconstructed radiographs (DRRs) is synthesized by simulating the projection of therapeutic beams at the targeted volume at different isocenters of radiation and different projection angles, as shown in <figref idrefs="DRAWINGS">FIG. 3</figref>, for example. One of the more rigorous methods by which projection images for individual beams can be synthesized is the Monte Carlo simulation for multi-layered media (MCML) method. The MCML method models how steady light transports in multi-layered media. It assumes infinitely wide layers and models an incident pencil beam that is perpendicular to the surface. The MCML approach scores absorption, reflectance, and transmittance of light in the tissue. The key steps in the MCML program are shown in the diagram of <figref idrefs="DRAWINGS">FIG. 13</figref>.</div>
+</li> <li> <para-num num="[0050]"> </para-num> <div class="description-line" id="p-0051" num="0050">Each photon packet undergoes three steps, hop, drop, and spin that are repeated continuously in the simulation. The hop step moves the photon packets from a current position to the next interaction site by computing the step size through sampling a probability distribution based on the photon's free path. The drop step adjusts the photon packet's weight to simulate absorption based on the absorption coefficient at the site of the interaction. The spin step computes the scattering angle. When a photon exits the tissue through the top or bottom layer, it is terminated. If the photon weight has reached a threshold value, a survival roulette is performed to determine if tracking of the photon packet should end. If the photon survives, its weight is increased. Using this model, projection images for individual beams can be synthesized.</div>
+</li> <li> <para-num num="[0051]"> </para-num> <div class="description-line" id="p-0052" num="0051">Taking advantage of the fact that the therapeutic beam has megavoltage (MeV) energy, which leads to little scattering, the MCML simulation can be simplified via ray tracking models which simulate primary radiation transmission only and do not consider any scattered radiation either from the patient's body or the collimator. In such models, the primary transmission I can be calculated by: I=I<sub>o</sub>R<sup>−2</sup>exp(−∫μdx), where I<sub>o </sub>is the incident fluence without attenuation, μ is the total linear attenuation coefficient, and R is the distance from the virtual source position to the point of calculation. This approximation method can be used to speed up the synthesizing process.</div>
+</li> <li> <para-num num="[0052]"> </para-num> <div class="description-line" id="p-0053" num="0052">Parallel computing architectures, such as, but not limited to, GPU (graphic processing unit) and multi-core environment, or distributed computing with GPU clusters installed in different computers within a local area network (LAN), or parallel computing architecture with a cluster of servers within high-speed interconnect, can be employed to accelerate the simulation computation. The parallelization of the MCML model on parallel computing architectures can be done by employing an embarrassingly parallel computation where the MCML algorithm is kept intact and paralleled across an expanded search space of head positions and beam trajectories, or through divide and conquer parallelization which uses optimization inside the MCML model by minimizing divergent behavior due to photon-electron coupling, for example. These calculations can be performed over an expanded search space of head positions and beam trajectories, and the resulting images can be stored as synthetic DRR images in a look up table in the computer <b>50</b>. <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates a library of DRRs obtained under different energy levels using the ray tracing method. <figref idrefs="DRAWINGS">FIG. 4A</figref> shows synthesized (keV) DRRs, and <figref idrefs="DRAWINGS">FIG. 4B</figref> shows synthesized (MeV) DRRs.</div>
+</li> <li> <para-num num="[0053]"> </para-num> <div class="description-line" id="p-0054" num="0053">Also prior to the commencement of the radiation treatment, and prior to the positioning of the patient <b>5</b> on the surgical bed <b>1</b>, a trial run or a cross check of the dose rates and positions of the device <b>10</b> for the prescribed radiation dose can be performed. The radiation dose prediction module uses this information to determine a baseline for radiation dosimetry during the treatment. Since the therapeutic beam assumes a specific shape based on the shape and size of the collimator present in the radiation therapy device <b>10</b>, this shape information also provides a signature for the prescribed therapeutic treatment for each projection angle. The shape and dose distribution for each projection angle obtained during the cross check is stored in the computer <b>50</b> as a library of shape and dose distributions. This information can be used for real-time dosimetry monitoring during the treatment.</div>
+</li> <li> <para-num num="[0054]"> </para-num> <div class="description-line" id="p-0055" num="0054"> <figref idrefs="DRAWINGS">FIG. 2</figref> illustrates schematically the radiation treatment device <b>10</b> used for real-time validation. In operation, during the treatment session, namely, during delivery of the radiation therapy treatment according to the treatment plan, the detector(s) <b>4</b> in the digital imaging device <b>30</b> receives data from different projection angles θθ≤360° as the linear accelerator <b>2</b> rotates around the gantry <b>7</b> and emits therapeutic radiation toward the patient <b>5</b>. The digital imaging device <b>30</b> collects in real time the transmitted energy and produces 2D digital images which represent two-dimensional arrays of digitized X-ray measurements. These live in-treatment images are sent to the computer <b>50</b> for further processing. In another embodiment, both, the live in-treatment images, as well as images obtained using an additional kV source (not shown) obtained are sent to the computer <b>50</b> for further processing.</div>
+</li> <li> <para-num num="[0055]"> </para-num> <div class="description-line" id="p-0056" num="0055">In an embodiment, digital tomosynthesis is performed to generate the in-treatment images. To acquire the images, the therapeutic X-ray source <b>3</b> emits X-rays toward the target from a discrete number of angles during one sweep of the linear accelerator and produces a plurality of cross-sectional images which are reconstructed to produce images at different planes within the patient <b>5</b>. The transmitted X-ray radiation is detected using a flat panel digital detector <b>4</b>. Shift- and add (SAA) reconstruction algorithms and/or other applicable mathematical de-blurring techniques can be used to reconstructs the in-treatment images and to improve quality of the images.</div>
+</li> <li> <para-num num="[0056]"> </para-num> <div class="description-line" id="p-0057" num="0056">Embodiments of the system <b>100</b> can include the computer <b>50</b> including typical hardware such as a processor, and an operating system for running various software programs and/or communication applications. The computer can include software programs that operate to communicate with the radiation therapy device <b>10</b>, and the software programs are also operable to receive data from any external software programs and hardware. The computer <b>50</b> can also include any suitable input/output devices adapted to be accessed by medical personnel, as well as I/O interfaces, storage devices, memory, keyboard, mouse, monitor, printers, scanner, etc. The computer <b>50</b> can also be networked with other computers and radiation therapy systems <b>20</b>. Both the radiation therapy device <b>10</b> and the computer <b>50</b> can communicate with a network as well as a database and servers. The computer <b>50</b> is also adapted to transfer medical image related data between different pieces of medical equipment.</div>
+</li> <li> <para-num num="[0057]"> </para-num> <div class="description-line" id="p-0058" num="0057">The system <b>100</b> can also include a plurality of modules containing programmed instructions which, as shown in <figref idrefs="DRAWINGS">FIG. 12</figref>, communicate with each other and cause the system <b>100</b> to perform different functions related to radiation therapy/surgery, as discussed herein, when executed. For example, the system <b>100</b> can include a treatment plan module operable to generate the treatment plan for the patient <b>5</b> based on a plurality of data input to the system by the medical personnel, a patient positioning module operable to position and align the patient <b>5</b> with respect to the isocenter of the gantry <b>7</b> for a particular radiation therapy treatment, an image acquiring module operable to instruct the radiation therapy device (e.g., radiosurgery device) <b>10</b> to acquire images of the patient <b>5</b> prior to the radiation therapy treatment (i.e., pre-treatment images used for treatment planning and patient positioning) and/or during the radiation therapy treatment (i.e., in-treatment images), and to instruct other imaging devices or systems <b>20</b> to acquire images of the patient <b>5</b>.</div>
+</li> <li> <para-num num="[0058]"> </para-num> <div class="description-line" id="p-0059" num="0058">The system <b>100</b> can further include a radiation dose prediction module operable to predict a dose to be delivered to the patient <b>5</b> before commencement of the radiation treatment therapy, a dose calculation module operable to calculate the actual dose delivered to the patient <b>5</b> during radiation therapy treatment, a treatment delivery module operable to instruct the radiation therapy device <b>10</b> to deliver the treatment plan to the patient <b>5</b>, a correlation module operable to correlate the DRRs with the in-treatment images obtained during radiation therapy, a computation module operable to reconstruct a three-dimensional target volume from in-treatment images, an analysis module operable to compute displacement measurements, and a feedback module operable to instruct the controller in real-time to stop radiation therapy based on a comparison of the calculated displacement with a predetermined threshold value (range). The modules can be written in the C or C++ programming language, for example.</div>
+</li> <heading id="h-0007">Displacement Measurement</heading>
+<li> <para-num num="[0059]"> </para-num> <div class="description-line" id="p-0060" num="0059">Upon receipt of the live in-treatment images, the correlation module in the computer <b>50</b> executes one or more algorithms to compare the live in-treatment images with the stored library of synthetic DRRs, and the correlation module executes one or more algorithms to compute similarity measures between the live images and the DRRs. Since the information contained in the live images are primarily due to bone structures (for instance the skull if the surgery is performed for treating a brain tumor) over a span of projection angles, the series of collected live images carry variations that constitute unique signatures of the skull thickness and curvatures. For example, the variation of collected live images over a span of projection angles will be different when such projections are focused over the thickest or thinnest part of the skull. Therefore, one parameter (metric) that can be estimated is the correlation between the live in-treatment images (i.e., live image series) and the synthesized DRRs over a span of projection angles. Variations in the anatomy, such as skull thickness, imaging geometry, tissue density, tissue type, tissue attenuation coefficients, tumor properties, etc., can also be utilized to generate similarity measures between synthesized DRRs and in-treatment images. These variations are effective indicators for detecting displacement. This type of similarity measurement is in the space of therapeutic fluence.</div>
+</li> <li> <para-num num="[0060]"> </para-num> <div class="description-line" id="p-0061" num="0060">The correlation between these two sets of images, namely, the live in-treatment images and the synthesized DRRs, results in a statistical measure of correspondence. Based on the measured correspondence, a series of beam trajectories, and locations of the targeted energy between the two sets of images can be corroborated. A change in the correlation between the beam trajectories and locations of the targeted energy and the beam trajectories and energy locations in the DRRs indicates that the target is displaced. If the target displacement is larger than a certain predetermined threshold value, a stop signal is generated by the computation module and sent as a feedback signal to the controller <b>40</b>, which upon receiving the feedback signal, can generate an output prompting the surgeon to optionally interrupt the radiosurgery, or the feedback signal can be used to automatically interrupt the radiosurgery. This process allows a surgeon to confirm the fidelity of radiosurgery during the procedure.</div>
+</li> <li> <para-num num="[0061]"> </para-num> <div class="description-line" id="p-0062" num="0061">A library of synthesized DRRs obtained for different gantry angles (i.e., projection angles) is shown in <figref idrefs="DRAWINGS">FIGS. 5A-5B</figref>. <figref idrefs="DRAWINGS">FIG. 5A</figref> shows a library of synthesized DRRs for gantry angles spanning a range between 0-30° with a 1 degree increment (i.e., one DRR image for every angle between 0° and 30°), and <figref idrefs="DRAWINGS">FIG. 5B</figref> shows DRRs for projections at 0°, 45°, 90°, 135°, 180σ, and 270°. The correlation over a series of projections angles between live in-treatment images obtained using a process as shown and described throughout the specification and the synthesized DRRs is shown in <figref idrefs="DRAWINGS">FIG. 6</figref>. A significant change in the correlation between the beam trajectories and locations of the targeted energy and the beam trajectories and energy locations in the DRRs can be seen in the graph. This is an indication that the target is displaced.</div>
+</li> <li> <para-num num="[0062]"> </para-num> <div class="description-line" id="p-0063" num="0062">A study of the impact of detector resolution on displacement is shown in <figref idrefs="DRAWINGS">FIGS. 7A-7B</figref>. <figref idrefs="DRAWINGS">FIG. 7A</figref> illustrates three different images obtained using detectors having different resolutions, with the first detector having a resolution of 200 pixel/mm, the second detector a resolution of 400 pixel/mm, and a third detector a resolution of 800 pixel/mm. <figref idrefs="DRAWINGS">FIG. 7B</figref> illustrates that resolution has no significant impact on the displacement, and therefore, a detector with high resolution is not required for the purpose of displacement detection.</div>
+</li> <li> <para-num num="[0063]"> </para-num> <div class="description-line" id="p-0064" num="0063">As an alternative to the therapeutic fluence space correlation metric described above, a compressive sensing algorithm can also be applied. While the correlation approach described above formulates the therapeutic beam as a forward problem, compressive sensing algorithm can cast it as an inverse problem. In the inverse problem, one can solve for an estimated thickness of the skull, for example, and then compute a correlation between the estimated and prescribed thicknesses. Thereby, the similarity measure will be cast back in a space of skull thickness (when the target is the brain tumor for instance), instead of the fluence space, using a compressive sensing algorithm.</div>
+</li> <li> <para-num num="[0064]"> </para-num> <div class="description-line" id="p-0065" num="0064">The compressive sensing algorithm is designed to detect signal changes using incomplete and noisy measurements. This is beneficial because in order to validate a target in real time during radiosurgery, for example, one cannot afford to wait until the completion of the surgery to get enough samples (projection angles) for computation because by then it would be too late to correct the displacement and error. Since the objective is to validate the target in real-time, constructing meaningful quantities online using as fewer number of samples as possible is key. Therefore, an undersampled environment is present.</div>
+</li> <li> <para-num num="[0065]"> </para-num> <div class="description-line" id="p-0066" num="0065">The essence of compressive sensing is to solve, in a linear system, for unknown variables using under-sampled measurements. Using this technique, in-treatment images using the therapeutic beam can be acquired over a span of projection angles as under-sampled measurements y, the transmittance over the therapeutic target can be modeled as design matrix Φ, and solutions x for signatures of the skull (such as but not limited to, skull thickness and curvature) can be acquired. Specifically, since the under-sampled measurements are sparse in the space of projection angles, sparsity can be modeled using a convex form of a sparse promoting norm, such as an L1 norm, and the linear system can be solved for the convex optimization problem. Since the image signatures are piece-wise constant, total variation (TV) can be employed as a type of structured sparsity to enhance the quality of the algorithm. In addition, theoretical guarantees for the minimum number of projection angles to detect signal changes can be predicted. This form of compressive sensing tackles the problem of solving an underdetermined linear system, with fewer samples compared to unknowns.</div>
+</li> <li> <para-num num="[0066]"> </para-num> <div class="description-line" id="p-0067" num="0066">Suppose the unknown variable is x, a collection of linear projections is represented by design matrix Φ, and measurement is represented by y, as illustrated in <figref idrefs="DRAWINGS">FIG. 14A</figref>. In the case of radiosurgery, the unknown variable x could describe the properties of the skull, such as, but not limited to, thickness and position. The design matrix Φ could denote the path of therapeutic beam from different projection angles. Measurement y could be the energy X-ray fluence acquired by the detector <b>4</b>.</div>
+</li> <li> <para-num num="[0067]"> </para-num> <div class="description-line" id="p-0068" num="0067">Compressive sensing exploits the fact that the measurement is limited in the space of projections, and tackles the problem by explicitly imposing sparsity promoting regularization in the reconstruction algorithm. The compressive sensing solution can be formulated as the following constrained optimization:</div>
+</li> <li> <div class="description-line" id="p-0069" num="0000">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mover>
+<mi>x</mi>
+<mo>^</mo>
+</mover>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>J</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0070" num="0000">where the first term is the fidelity term and the second term is the regularization term. The fidelity term is modeled as the square error between reconstructed signal and measurement H(x)=∥y−Φx∥<sub>2</sub> <sup>2</sup>. The regularization term takes the form of a sparsity promoting norm. Depending on the property of the anatomy in question, different types of sparsity promoting norms can be used in the optimization. When the convex form of sparsity promoting norm is chosen, both algorithms A and B described below leverage convex optimization techniques.</div>
+</li> <heading id="h-0008">Model A</heading>
+<li> <para-num num="[0068]"> </para-num> <div class="description-line" id="p-0071" num="0068">The simplest form of sparsity can be modeled as an L1 norm J(x)=λ∥x∥<sub>l</sub>, derived from a Laplacian prior. With such regularization, a Model A algorithm can be obtained, which takes the form:</div>
+</li> <li> <div class="description-line" id="p-0072" num="0000">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mover>
+<mi>x</mi>
+<mo>^</mo>
+</mover>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>y</mi>
+<mo>-</mo>
+<mrow>
+<mi>Φ</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>x</mi>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>λ</mi>
+<mo></mo>
+<msub>
+<mrow>
+<mo></mo>
+<mi>x</mi>
+<mo></mo>
+</mrow>
+<mn>1</mn>
+</msub>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>2</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0069]"> </para-num> <div class="description-line" id="p-0073" num="0069">Since there is no closed-form solution for Model A due to the non-differentiability of the L1 norm, an iterative algorithm, such as, but not limited to, the linearized Bregman algorithm can be used to solve the problem for this model.</div>
+</li> <heading id="h-0009">Algorithm for Model A</heading>
+<li> <para-num num="[0070]"> </para-num> <div class="description-line" id="p-0074" num="0070">Linearized Bregman Algorithm:</div>
+</li> <li> <para-num num="[0071]"> </para-num> <div class="description-line" id="p-0075" num="0071">Define Bregman divergence as D<sub>J</sub> <sup>P</sup>(u,v)=J(u)−J(v)−<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/f7/9e/c1/b995727b813fb6/US20200237226A1-20200730-P00001.png"><img alt="Figure US20200237226A1-20200730-P00001" class="patent-full-image" file="US20200237226A1-20200730-P00001.TIF" he="3.22mm" height="13" id="CUSTOM-CHARACTER-00001" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/f7/9e/c1/b995727b813fb6/US20200237226A1-20200730-P00001.png" wi="0.68mm" width="3"/></a></div>p,u−v<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8f/f6/36/bf4f670de91767/US20200237226A1-20200730-P00002.png"><img alt="Figure US20200237226A1-20200730-P00002" class="patent-full-image" file="US20200237226A1-20200730-P00002.TIF" he="3.22mm" height="13" id="CUSTOM-CHARACTER-00002" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8f/f6/36/bf4f670de91767/US20200237226A1-20200730-P00002.png" wi="0.68mm" width="3"/></a></div>, where p denotes the subgradient of J.</div>
+</li> <li> <para-num num="[0072]"> </para-num> <div class="description-line" id="p-0076" num="0072">Seek a sequence of solution {u<sup>k</sup>} in the iterative algorithm, where each subproblem is the solution of the following minimization:</div>
+</li> <li> <div class="description-line" id="p-0077" num="0000">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>J</mi>
+<msup>
+<mi>p</mi>
+<mi>k</mi>
+</msup>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>3</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0073]"> </para-num> <div class="description-line" id="p-0078" num="0073">In order to solve for this problem more efficiently, a linearization technique can be applied to the fidelity term,</div>
+</li> <li> <div class="description-line" id="p-0079" num="0000">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>J</mi>
+<msup>
+<mi>p</mi>
+<mi>k</mi>
+</msup>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<mrow>
+<mo>∇</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mi>x</mi>
+</mrow>
+<mo>〉</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mrow>
+<mn>2</mn>
+<mo></mo>
+<mi>α</mi>
+</mrow>
+</mfrac>
+<mo></mo>
+<msup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>x</mi>
+<mo>-</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>4</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0080" num="0000">and an update for subgradient p is specified based on an optimality condition of the minimization to obtain the linearized Bregman algorithm shown below.</div>
+</li> <heading id="h-0010">Linearized Bregman Algorithm</heading>
+<heading id="h-0011">Input: Φ, y, J(x), H(x), λ&gt;0, α&gt;0</heading>
+<heading id="h-0012">Algorithm:</heading>
+<li> <para-num num="[0074]"> </para-num> <div class="description-line" id="p-0081" num="0074">Initialize: k=0, x<sup>0</sup>=0, p<sup>0</sup>=0
+<br/>
+while stopping criteria not satisfied do
+</div>
+</li> <li> <div class="description-line" id="p-0082" num="0000">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>J</mi>
+<msup>
+<mi>p</mi>
+<mi>k</mi>
+</msup>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<mrow>
+<mo>∇</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mi>x</mi>
+</mrow>
+<mo>〉</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mrow>
+<mn>2</mn>
+<mo></mo>
+<mi>α</mi>
+</mrow>
+</mfrac>
+<mo></mo>
+<msup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>x</mi>
+<mo>-</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>5</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>p</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mrow>
+<msup>
+<mi>p</mi>
+<mi>k</mi>
+</msup>
+<mo>-</mo>
+<mrow>
+<mo>∇</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mi>α</mi>
+</mfrac>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>-</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>6</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0083" num="0000">If x<sup>k+1</sup>=x<sup>k</sup>, then apply kicking</div>
+</li> <li> <div class="description-line" id="p-0084" num="0000"> <br/>Update <i>k=k+</i>1  (7)
+</div>
+</li> <li> <div class="description-line" id="p-0085" num="0000">end while
+<br/>
+Output: optimal solution x<sup>k </sup>
+<br/>
+In this algorithm, λ&gt;0 is a regularization parameter that controls the degree of sparsity, α&gt;0 is a constant specified by the user, which affects the speed of the algorithm, k=1, . . . , n is an integer that indexes the iterate of the algorithm, and p<sup>k </sup>is the subgradient on J(x). The regularization parameter can be determined based on prior knowledge or by cross validation. The linearized Bregman algorithm computes the full regularization path (solution path) corresponding to different levels of sparsity in a computationally efficient manner. The linearized Bregman algorithm has competitive scaling with data dimension, thereby making it an ideal algorithm for large-scale data computation.
+</div>
+</li> <heading id="h-0013">Model B</heading>
+<li> <para-num num="[0075]"> </para-num> <div class="description-line" id="p-0086" num="0075">Depending on the structure of the anatomy in question, structured sparsity can also be employed in the regularization term to improve reconstruction. One type of structured sparsity that can be used is total variation (TV), which denotes a semi-norm with bounded variation:</div>
+</li> <li> <div class="description-line" id="p-0087" num="0000"> <br/> <i>TV</i>(<i>x</i>)=∫|∇<i>x|</i>  (8)
+</div>
+</li> <li> <para-num num="[0076]"> </para-num> <div class="description-line" id="p-0088" num="0076">Total variation characterizes an edge of the signal. In the case of bone structures in the skull, since the anatomy is piecewise constant, total variation is suitable since sharp edges are preserved in the reconstruction. Therefore, by using J(x)=λ∫|∇x| and H(x)=∥y−Φx∥<sub>2</sub> <sup>2</sup>, the total variation regularized reconstruction leads to Model B:</div>
+</li> <li> <div class="description-line" id="p-0089" num="0000">
+<maths id="MATH-US-00006" num="00006">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mover>
+<mi>x</mi>
+<mo>^</mo>
+</mover>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>λ</mi>
+<mo></mo>
+<mrow>
+<mo>∫</mo>
+<mrow>
+<mo></mo>
+<mrow>
+<mo>∇</mo>
+<mi>x</mi>
+</mrow>
+<mo></mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>y</mi>
+<mo>-</mo>
+<mrow>
+<mi>Φ</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>x</mi>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>9</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0077]"> </para-num> <div class="description-line" id="p-0090" num="0077">Model B differs from Model A in that it imposes sparsity in the space of edge variation, where (TV) serves as a global operator for preserving edges. Like Model A, there is no closed-form solution for Model B and therefore, an iterative algorithm is used. In order to solve for such a model, the split Bregman algorithm can be used.</div>
+</li> <heading id="h-0014">Algorithm for Model B</heading>
+<heading id="h-0015">Split Bregman Algorithm:</heading>
+<li> <para-num num="[0078]"> </para-num> <div class="description-line" id="p-0091" num="0078">The split Bregman algorithm splits the energy between the first term J and second term H via variable splitting technique, by introducing another variable u=g(x). The optimization therefore becomes:</div>
+</li> <li> <div class="description-line" id="p-0092" num="0000">
+<maths id="MATH-US-00007" num="00007">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>u</mi>
+</mrow>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>J</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>u</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mi>μ</mi>
+<mn>2</mn>
+</mfrac>
+<mo></mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>10</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0093" num="0000">Solving for a sequence of minimizers is next, where each subproblem solves for:</div>
+</li> <li> <div class="description-line" id="p-0094" num="0000">
+<maths id="MATH-US-00008" num="00008">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>u</mi>
+</mrow>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>J</mi>
+<mi>p</mi>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<msup>
+<mi>u</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>H</mi>
+<mi>p</mi>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mi>α</mi>
+<mn>2</mn>
+</mfrac>
+<mo></mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>11</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0095" num="0000">The terms J and H are replaced by the associated Bregman divergence respectively.</div>
+</li> <heading id="h-0016">Split Bregman Algorithm</heading>
+<heading id="h-0017">Input: Φ, y, J(x), H(x), λ&gt;0, α&gt;0</heading>
+<heading id="h-0018">Algorithm:</heading>
+<li> <para-num num="[0079]"> </para-num> <div class="description-line" id="p-0096" num="0079">Initialize: k=0, x<sup>0</sup>=0, u<sup>0</sup>=0, p<sub>x</sub> <sup>0</sup>=0, p<sub>u</sub> <sup>0</sup>=0
+<br/>
+while stopping criteria not satisfied do
+</div>
+</li> <li> <div class="description-line" id="p-0097" num="0000">
+<maths id="MATH-US-00009" num="00009">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>,</mo>
+<msup>
+<mi>u</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>u</mi>
+</mrow>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>J</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>u</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>x</mi>
+<mi>k</mi>
+</msubsup>
+<mo>,</mo>
+<mrow>
+<mi>x</mi>
+<mo>-</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+</mrow>
+<mo>〉</mo>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>u</mi>
+<mi>k</mi>
+</msubsup>
+<mo>,</mo>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<msup>
+<mi>u</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+</mrow>
+<mo>〉</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mi>α</mi>
+<mn>2</mn>
+</mfrac>
+<mo></mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>12</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mstyle>
+<mspace height="4.2ex" width="4.2em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>x</mi>
+<mi>k</mi>
+</msubsup>
+<mo>-</mo>
+<mrow>
+<mi>μ</mi>
+<mo></mo>
+<mrow>
+<mo>∇</mo>
+<msup>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mi>T</mi>
+</msup>
+</mrow>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<msup>
+<mi>u</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>13</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mstyle>
+<mspace height="4.2ex" width="4.2em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>u</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>u</mi>
+<mi>k</mi>
+</msubsup>
+<mo>-</mo>
+<mrow>
+<mi>α</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msup>
+<mi>u</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>-</mo>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>14</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mstyle>
+<mspace height="4.2ex" width="4.2em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mrow>
+<mi>Update</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>k</mi>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>15</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0098" num="0000">end while
+<br/>
+Output: optimal solution x<sup>k </sup>
+<br/>
+In this algorithm, λ&gt;0 is a regularization parameter that controls the degree of sparsity, α&gt;0 is a constant specified by the user, which affects the speed of the algorithm, k=1, . . . , n is an integer that indexes the iterate of the algorithm, p<sub>x</sub> <sup>k </sup>is the subgradient on H(x), and p<sub>u</sub> <sup>k </sup>is the subgradient on J(u). The regularization parameter λ can be determined based on prior knowledge or by cross validation. The split Bregman algorithm is synonymous with the Alternating Direction Method of Multipliers (ADMM) method, which is also referred to as the Alternating Direction Augmented Lagrangian (ADAL) method.
+</div>
+</li> <li> <para-num num="[0080]"> </para-num> <div class="description-line" id="p-0099" num="0080">For displacement detection, either Model A or Model B can be used to solve for the inverse problem. In either model, the input for the algorithm can be: 1) design matrix Φ which is constructed by the collection of projection angles and thickness of skull in each projection angles, and 2) measurement y, which is the detected therapeutic fluence. The output of the algorithm can be the estimated thickness of the skull during the treatment, if the anatomy in question is the brain. The choice between Model A and Model B depends on the image quality acquired by the imaging device <b>30</b>.</div>
+</li> <li> <para-num num="[0081]"> </para-num> <div class="description-line" id="p-0100" num="0081">Since sensitivity of the therapeutic X-ray detection depends on the variations of the anatomical structures, such as bone and fiducial landmarks, the sensitivity can be further enhanced using contrast agents.</div>
+</li> <heading id="h-0019">Volume Reconstruction</heading>
+<li> <para-num num="[0082]"> </para-num> <div class="description-line" id="p-0101" num="0082">In addition to displacement detection, a 3D volume that is actually targeted by the therapeutic beam can also be reconstructed using reconstruction algorithms included in the computation module (shown in <figref idrefs="DRAWINGS">FIG. 11</figref>) to be added as a second real-time validation parameter (metric). This additional information can in real-time confirm to an operator that the treatment is being executed as planned. Computational efficiency is the key to real-time 3D target volume reconstruction. Given the limited number of projections for the therapeutic beam and noisy nature of the data, compressive sensing techniques can also be utilized to perform 3D volume reconstruction. For example, suppose the unknown variable is x, a collection of linear projections is represented by design matrix Φ, and measurement is represented by y, as illustrated in <figref idrefs="DRAWINGS">FIG. 14B</figref>. In the case of radiosurgery, the unknown variable x could be the positions of the target. The design matrix Φ could denote the collection of X-ray projections. Measurement y could be the detected therapeutic energy. Specifically, for volume reconstruction, the geometry of the therapeutic beam projections can be formulated as the design matrix Φ, while the transmitted X-ray fluence as observations y. The explanatory variables x that are sought are the positions of the target.</div>
+</li> <li> <para-num num="[0083]"> </para-num> <div class="description-line" id="p-0102" num="0083">Compressive sensing exploits the fact that the measurement is limited in the space of projections, and tackles the problem by explicitly imposing sparsity promoting regularization in the reconstruction algorithm. The compressive sensing solution can be formulated as the following constrained optimization:</div>
+</li> <li> <div class="description-line" id="p-0103" num="0000">
+<maths id="MATH-US-00010" num="00010">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mover>
+<mi>x</mi>
+<mo>^</mo>
+</mover>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>J</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>16</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0104" num="0000">where the first term is the fidelity term and the second term is the regularization term. The fidelity term is modeled as the square error between reconstructed signal and measurement H(x)=∥y−Φx∥<sub>2</sub> <sup>2</sup>. The regularization term takes the form of a sparsity promoting norm. Depending on the property of the anatomy in question, different types of sparsity promoting norms can be used in the optimization. When the convex form of sparsity promoting norm is chosen, both algorithms A and B described below leverage convex optimization techniques.</div>
+</li> <heading id="h-0020">Model A</heading>
+<li> <para-num num="[0084]"> </para-num> <div class="description-line" id="p-0105" num="0084">The simplest form of sparsity can be modeled as an L1 norm J(x)=λ∥x∥<sub>l</sub>, derived from a Laplacian prior. With such regularization, a Model A algorithm can be obtained, which takes the form:</div>
+</li> <li> <div class="description-line" id="p-0106" num="0000">
+<maths id="MATH-US-00011" num="00011">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mover>
+<mi>x</mi>
+<mo>^</mo>
+</mover>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>y</mi>
+<mo>-</mo>
+<mrow>
+<mi>Φ</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>x</mi>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>λ</mi>
+<mo></mo>
+<msub>
+<mrow>
+<mo></mo>
+<mi>x</mi>
+<mo></mo>
+</mrow>
+<mn>1</mn>
+</msub>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>17</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0085]"> </para-num> <div class="description-line" id="p-0107" num="0085">Since there is no closed-form solution for Model A due to the non-differentiability of the L1 norm, an iterative algorithm, such as, but not limited to, the linearized Bregman algorithm can be used to solve the problem for this model.</div>
+</li> <heading id="h-0021">Algorithm for Model A</heading>
+<heading id="h-0022">Linearized Bregman Algorithm:</heading>
+<li> <para-num num="[0086]"> </para-num> <div class="description-line" id="p-0108" num="0086">Define Bregman divergence as D<sub>J</sub> <sup>P</sup>(u,v)=J(u)−J(v)−<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/f7/9e/c1/b995727b813fb6/US20200237226A1-20200730-P00001.png"><img alt="Figure US20200237226A1-20200730-P00001" class="patent-full-image" file="US20200237226A1-20200730-P00001.TIF" he="3.22mm" height="13" id="CUSTOM-CHARACTER-00003" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/f7/9e/c1/b995727b813fb6/US20200237226A1-20200730-P00001.png" wi="0.68mm" width="3"/></a></div>p,u−v<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/8f/f6/36/bf4f670de91767/US20200237226A1-20200730-P00002.png"><img alt="Figure US20200237226A1-20200730-P00002" class="patent-full-image" file="US20200237226A1-20200730-P00002.TIF" he="3.22mm" height="13" id="CUSTOM-CHARACTER-00004" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/8f/f6/36/bf4f670de91767/US20200237226A1-20200730-P00002.png" wi="0.68mm" width="3"/></a></div>, where p denotes the subgradient of J.
+<br/>
+Seek a sequence of solution {u<sup>k</sup>} in the iterative algorithm, where each subproblem is the solution of the following minimization:
+</div>
+</li> <li> <div class="description-line" id="p-0109" num="0000">
+<maths id="MATH-US-00012" num="00012">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>J</mi>
+<msup>
+<mi>p</mi>
+<mi>k</mi>
+</msup>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>18</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0110" num="0000">In order to solve for this problem more efficiently, a linearization technique is applied to the fidelity term,</div>
+</li> <li> <div class="description-line" id="p-0111" num="0000">
+<maths id="MATH-US-00013" num="00013">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>J</mi>
+<msup>
+<mi>p</mi>
+<mi>k</mi>
+</msup>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<mrow>
+<mo>∇</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mi>x</mi>
+</mrow>
+<mo>〉</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mrow>
+<mn>2</mn>
+<mo></mo>
+<mi>α</mi>
+</mrow>
+</mfrac>
+<mo></mo>
+<msup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>x</mi>
+<mo>-</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>19</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0112" num="0000">and an update for subgradient p is specified based on an optimality condition of the minimization to obtain the linearized Bregman algorithm shown below.</div>
+</li> <heading id="h-0023">Linearized Bregman Algorithm</heading>
+<heading id="h-0024">Input: Φ, y, J(x), H(x), λ&gt;0, α&gt;0</heading>
+<heading id="h-0025">Algorithm:</heading>
+<li> <para-num num="[0087]"> </para-num> <div class="description-line" id="p-0113" num="0087">Initialize: k=0, x<sup>0</sup>=0, p<sup>0</sup>=0
+<br/>
+while stopping criteria not satisfied do
+</div>
+</li> <li> <div class="description-line" id="p-0114" num="0000">
+<maths id="MATH-US-00014" num="00014">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>J</mi>
+<msup>
+<mi>p</mi>
+<mi>k</mi>
+</msup>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<mrow>
+<mo>∇</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mi>x</mi>
+</mrow>
+<mo>〉</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mrow>
+<mn>2</mn>
+<mo></mo>
+<mi>α</mi>
+</mrow>
+</mfrac>
+<mo></mo>
+<msup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>x</mi>
+<mo>-</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>20</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>p</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mrow>
+<msup>
+<mi>p</mi>
+<mi>k</mi>
+</msup>
+<mo>-</mo>
+<mrow>
+<mo>∇</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mi>α</mi>
+</mfrac>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>-</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>21</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0115" num="0000">If x<sup>k+1</sup>=x<sup>k</sup>, then apply kicking</div>
+</li> <li> <div class="description-line" id="p-0116" num="0000"> <br/>Update <i>k=k+l</i>  (22)
+</div>
+</li> <li> <div class="description-line" id="p-0117" num="0000">end while
+<br/>
+Output: optimal solution x<sup>k </sup>
+<br/>
+In this algorithm, λ&gt;0 is a regularization parameter that controls the degree of sparsity, α&gt;0 is a constant specified by the user, which affects the speed of the algorithm, k=1, . . . , n is an integer that indexes the iterate of the algorithm, and p<sup>k </sup>is the subgradient on J (x).
+</div>
+</li> <heading id="h-0026">Model B</heading>
+<li> <para-num num="[0088]"> </para-num> <div class="description-line" id="p-0118" num="0088">Depending on the structure of the anatomy in question, structured sparsity can also be employed in the regularization term to improve reconstruction. One type of structured sparsity that can be used is total variation (TV), which denotes a semi-norm with bounded variation:</div>
+</li> <li> <div class="description-line" id="p-0119" num="0000"> <br/> <i>TV</i>(<i>x</i>)=∫|∇<i>x|</i>  (23)
+</div>
+</li> <li> <para-num num="[0089]"> </para-num> <div class="description-line" id="p-0120" num="0089">Total variation characterizes an edge of the signal. In the case of bone structures in the skull, since the anatomy is piecewise constant, total variation is suitable since sharp edges are preserved in the reconstruction. Therefore, by using J(x)=λ∫|∇x| and H(x)=∥y−Φx∥<sub>2</sub> <sup>2</sup>, the total variation regularized reconstruction leads to Model B:</div>
+</li> <li> <div class="description-line" id="p-0121" num="0000">
+<maths id="MATH-US-00015" num="00015">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mover>
+<mi>x</mi>
+<mo>^</mo>
+</mover>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mi>x</mi>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>λ</mi>
+<mo></mo>
+<mrow>
+<mo>∫</mo>
+<mrow>
+<mo></mo>
+<mrow>
+<mo>∇</mo>
+<mi>x</mi>
+</mrow>
+<mo></mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>y</mi>
+<mo>-</mo>
+<mrow>
+<mi>Φ</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>x</mi>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>24</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0090]"> </para-num> <div class="description-line" id="p-0122" num="0090">Model B differs from Model A in that it imposes sparsity in the space of edge variation, where (TV) serves as a global operator for preserving edges. Like Model A, there is no closed-form solution for Model B and therefore, an iterative algorithm is used. In order to solve for such a model, the split Bregman algorithm can be used.</div>
+</li> <heading id="h-0027">Algorithm for Model B</heading>
+<heading id="h-0028">Split Bregman Algorithm:</heading>
+<li> <para-num num="[0091]"> </para-num> <div class="description-line" id="p-0123" num="0091">The split Bregman algorithm splits the energy between the first term J and second term H via variable splitting technique, by introducing another variable u=g(x). The optimization therefore becomes:</div>
+</li> <li> <div class="description-line" id="p-0124" num="0000">
+<maths id="MATH-US-00016" num="00016">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>u</mi>
+</mrow>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>J</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>u</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mi>μ</mi>
+<mn>2</mn>
+</mfrac>
+<mo></mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>25</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0125" num="0000">Solving for a sequence of minimizers is next, where each subproblem solves for:</div>
+</li> <li> <div class="description-line" id="p-0126" num="0000">
+<maths id="MATH-US-00017" num="00017">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>u</mi>
+</mrow>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>J</mi>
+<mi>p</mi>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<msup>
+<mi>u</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msubsup>
+<mi>D</mi>
+<mi>H</mi>
+<mi>p</mi>
+</msubsup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mi>α</mi>
+<mn>2</mn>
+</mfrac>
+<mo></mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>26</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0127" num="0000">The terms J and H are replaced by the associated Bregman divergence respectively.</div>
+</li> <heading id="h-0029">Split Bregman Algorithm</heading>
+<heading id="h-0030">Input: Φ, y, J(x), H(x), λ&gt;0, α&gt;0</heading>
+<heading id="h-0031">Algorithm:</heading>
+<li> <para-num num="[0092]"> </para-num> <div class="description-line" id="p-0128" num="0092">Initialize: k=0, x<sup>0</sup>=0, u<sup>0</sup>=0, p<sup>0</sup>=0, p<sub>u</sub> <sup>0</sup>=0
+<br/>
+while stopping criteria not satisfied do
+</div>
+</li> <li> <div class="description-line" id="p-0129" num="0000">
+<maths id="MATH-US-00018" num="00018">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>,</mo>
+<msup>
+<mi>u</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>u</mi>
+</mrow>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>J</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>u</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>H</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>x</mi>
+<mi>k</mi>
+</msubsup>
+<mo>,</mo>
+<mrow>
+<mi>x</mi>
+<mo>-</mo>
+<msup>
+<mi>x</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+</mrow>
+<mo>〉</mo>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>u</mi>
+<mi>k</mi>
+</msubsup>
+<mo>,</mo>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<msup>
+<mi>u</mi>
+<mi>k</mi>
+</msup>
+</mrow>
+</mrow>
+<mo>〉</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mi>α</mi>
+<mn>2</mn>
+</mfrac>
+<mo></mo>
+<msubsup>
+<mrow>
+<mo></mo>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>x</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+</mrow>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>27</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mstyle>
+<mspace height="4.2ex" width="4.2em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>x</mi>
+<mi>k</mi>
+</msubsup>
+<mo>-</mo>
+<mrow>
+<mi>μ</mi>
+<mo></mo>
+<mrow>
+<mo>∇</mo>
+<msup>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mi>T</mi>
+</msup>
+</mrow>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<msup>
+<mi>u</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>28</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mstyle>
+<mspace height="4.2ex" width="4.2em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>u</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<msubsup>
+<mi>p</mi>
+<mi>u</mi>
+<mi>k</mi>
+</msubsup>
+<mo>-</mo>
+<mrow>
+<mi>α</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msup>
+<mi>u</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>-</mo>
+<mrow>
+<mi>g</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msup>
+<mi>x</mi>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>29</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mstyle>
+<mspace height="4.2ex" width="4.2em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mrow>
+<mi>Update</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>k</mi>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>30</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0130" num="0000">end while
+<br/>
+Output: optimal solution x<sup>k </sup>
+<br/>
+In this algorithm, λ&gt;0 is a regularization parameter that controls the degree of sparsity, α&gt;0 is a constant specified by the user, which affects the speed of the algorithm, k=1, . . . , n is an integer that indexes the iterate of the algorithm, p<sub>x</sub> <sup>k </sup>is the subgradient on H(x), and p<sub>u</sub> <sup>k </sup>is the subgradient on J(u).
+</div>
+</li> <li> <para-num num="[0093]"> </para-num> <div class="description-line" id="p-0131" num="0093">As a regression problem, the sparse nature of projections can be exploited, and L1 regularization as part of the optimization objective can be used. Computationally efficient and accurate algorithms as shown above via convex optimization can also be used. Structured sparsity such as Total Variation (TV) can be employed as a regularization form during the reconstruction, if the target profile is piece-wise constant. Model A or Model B can be used to perform the 3D volume reconstruction. The input of the algorithm can include: 1) design matrix Φ, which is the collection of projections, and 2) measurement y, which is the detected therapeutic energy. The output of the algorithm can include the 3D volume of therapeutic energy distribution.</div>
+</li> <li> <para-num num="[0094]"> </para-num> <div class="description-line" id="p-0132" num="0094">In contrast to filtered back projection algorithms used in traditional CT reconstruction, compressive sensing algorithms are associated with an iterative method and need fewer projections to reconstruct the volume. As shown in <figref idrefs="DRAWINGS">FIGS. 8A-8C</figref>, even with fewer number of projection angles, compressive sensing leads to a better image reconstruction than the filtered back projection. Sparsity promoting norms are key to the compressive sensing algorithm, because they exploit prior information in the observations to improve reconstruction. The algorithm is iterative in nature. In each iteration, the system <b>100</b> evaluates the residual reconstruction error, and uses the algorithm to update the current iteration. Convex relaxation of sparsity promoting norms can also be used as regularizations, and therefore convex optimization techniques can be used to solve for Models A and B. When the regularization takes the form of L1 norm, the linearized Bregman algorithm can be used to solve for it. When the regularization takes the form of Total Variation semi-norm, the split Bregman algorithm can be used.</div>
+</li> <li> <para-num num="[0095]"> </para-num> <div class="description-line" id="p-0133" num="0095">If the reconstruction is very good compared to the normal environment, the threshold for generating an alarm signal when a displacement is present can have a first value. If the reconstruction is not very good, for example, when the number of samples is very low or when the projection angles are too coherent, a different, second threshold value can be set for generating an alarm signal in case of a displacement.</div>
+</li> <heading id="h-0032">Theoretical Guarantees</heading>
+<li> <para-num num="[0096]"> </para-num> <div class="description-line" id="p-0134" num="0096">The quality of the 3D volume reconstruction depends on the number of projections and geometry of the radiation therapy device. Theoretical guarantees can also be derived, and statistical simulations can be performed to determine the minimum number of projections required to achieve volume reconstruction of sufficient quality. The minimum number of projections will depend on how sparse the anatomy in question is and how many unknown variables are present. For a linear system, such as in Model A, if the measurement is randomly sampled, the anatomy is k-sparse, the dimension of unknown variables is n, then the minimum number of samples can be:</div>
+</li> <li> <div class="description-line" id="p-0135" num="0000"> <br/> <i>m≥Ck </i>log(<i>n/k</i>)  (31)
+</div>
+</li> <li> <div class="description-line" id="p-0136" num="0000">where C is a constant. A variant of such guarantee can be explored with respect to the specific detector <b>4</b> design, since the geometry of the problem poses constraints on the randomness of measurement, and thus offers different bounds. Due to the local operator used in the reconstruction algorithm, the nature of the computation can be parallel. Thus, parallel computing architectures such as GPU can be used to accelerate the computations.</div>
+</li> <heading id="h-0033">Dosimetry</heading>
+<li> <para-num num="[0097]"> </para-num> <div class="description-line" id="p-0137" num="0097">In addition to the real-time correlation and 3D actual target volume reconstruction steps, the radiation dose delivered to the target can also be computed in real-time and added as a third real-time target validation parameter (metric).</div>
+</li> <li> <para-num num="[0098]"> </para-num> <div class="description-line" id="p-0138" num="0098">During the treatment, the radiation detector <b>4</b> in the imaging device <b>30</b> collects radiation projection data. The radiation dose calculation module (shown in <figref idrefs="DRAWINGS">FIG. 12</figref>) includes computational algorithms configured to extract both the shape and dose distribution from the collected in-treatment images and to compare this information with the library of predicted radiation doses stored in the computer <b>50</b>. In intensity modulated treatment therapies, additional information regarding the variation in the shape of the therapeutic beam based on the different projection angles, and even different time points, can also be used. The combination of the shape and dose distribution information helps to determine whether any inconsistency in the actual treatment dose delivered is due to incorrect dose delivery or the target displacement. The radiation calculation module calculates the total dose delivered over the entire surgery as a metric. During the treatment, the system <b>100</b> can continuously compare the actual delivered radiation dose with the prescribed dose. If the delivered dose is significantly different from the prescribed dose, under certain statistical criterion, a feedback signal can be sent to the controller <b>40</b> to interrupt the radiosurgery or radiation treatment therapy. A dose evaluation method as described in U.S. application Ser. No. 13/650,980, filed Oct. 12, 2012, titled “SYSTEMS, DEVICES, AND METHODS FOR QUALITY ASSURANCE OF RADIATION THERAPY”, the content of which is incorporated herein by reference in its entirety, can be used to quantitatively evaluate the differences between the measured and the predicted dose distributions.</div>
+</li> <heading id="h-0034">Closed-Loop Feedback</heading>
+<li> <para-num num="[0099]"> </para-num> <div class="description-line" id="p-0139" num="0099">If a displacement of the target is detected, the analysis module sends a closed-loop feedback signal to the linear accelerator controller <b>40</b> to stop radiation treatment and/or to allow the surgeon to adjust the delivery of the radiation therapy treatment during the therapy session. The system <b>100</b> can perform this function based on instructions provided in the computation module to determine the displacement. This can also be done by combining the displacement information obtained from the correlation and the actual 3D target volume reconstruction steps with the dosimetry information in the dosimeter monitoring step. If it is determined by the analysis module that the displacement is outside a predetermined threshold range, a feedback module generates a feedback signal which is sent to the controller <b>40</b>, thereby allowing the surgeon to stop the surgery during the treatment and recalibrate the radiation therapy/radiosurgery device <b>10</b>. Additional information obtained from a (keV) X-ray imaging device (not shown), which can be turned on during the treatment, can augment this process and improve displacement detection.</div>
+</li> <heading id="h-0035">Recalibration</heading>
+<li> <para-num num="[0100]"> </para-num> <div class="description-line" id="p-0140" num="0100">In addition to the stop signal, which is a binary decision signal, an additional parameter (metric) can be computed to guide the recalibration process. A repositioning signal is helpful for the surgeon to determine where and how to place the patient <b>5</b> with respect to the isocenter of radiation inside the radiation radiosurgery device <b>10</b>, after stopping for recalibration. Given the library of DRRs computed and stored prior to treatment, and the collected live therapeutic in-treatment images acquired for displacement detection, a gradient field of signal change can be computed. A search direction can be optimized to seek the direction of the displacement in order to maximize the correlation between the in-treatment projection images and the DRRs. Since the displacement of the patient <b>5</b> is relatively small for radiosurgeries, it can be assumed that the perturbations are linear and that a unique maximum exists for the correlation landscape. In doing so, the adjustment and the direction of the adjustment can be determined during the recalibration process.</div>
+</li> <li> <para-num num="[0101]"> </para-num> <div class="description-line" id="p-0141" num="0101">For example, given a span of isocenters, a library of DRR images for each angle can be simulated. This is denoted by L(i,j,k), where (i,j,k) denotes the coordinate for isocenters, i=1 . . . n, j=1 . . . n, k=1 . . . n. In other words, a collection of DRR images based on a 3D grid of all possible isocenters is obtained. During the treatment, an image is acquired using the therapeutic imaging device <b>30</b> for that same angle, denoted by I(i<sub>c</sub>,j<sub>c</sub>,k<sub>c</sub>). The correlation between the I(x<sub>o</sub>,y<sub>o</sub>,z<sub>o</sub>) and each image in the DRR library can be computed using:</div>
+</li> <li> <div class="description-line" id="p-0142" num="0000"> <br/> <i>C</i>(<i>i,j,k</i>)=corr(<i>L</i>(<i>i,j,k</i>),<i>I</i>(<i>i</i> <sub>c</sub> <i>,j</i> <sub>c</sub> <i>,k</i> <sub>c</sub>))  (32)
+</div>
+</li> <li> <div class="description-line" id="p-0143" num="0000">A gradient field can be computed based on a correlation map:</div>
+</li> <li> <div class="description-line" id="p-0144" num="0000">
+<maths id="MATH-US-00019" num="00019">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>g</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>g</mi>
+<mi>x</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>g</mi>
+<mi>y</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>g</mi>
+<mi>z</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mfrac>
+<mrow>
+<mo>∂</mo>
+<mi>C</mi>
+</mrow>
+<mrow>
+<mo>∂</mo>
+<mi>x</mi>
+</mrow>
+</mfrac>
+<mo>,</mo>
+<mfrac>
+<mrow>
+<mo>∂</mo>
+<mi>C</mi>
+</mrow>
+<mrow>
+<mo>∂</mo>
+<mi>y</mi>
+</mrow>
+</mfrac>
+<mo>,</mo>
+<mfrac>
+<mrow>
+<mo>∂</mo>
+<mi>C</mi>
+</mrow>
+<mrow>
+<mo>∂</mo>
+<mi>z</mi>
+</mrow>
+</mfrac>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>33</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0145" num="0000">Once a displacement signal is detected, the direction to mitigate the displacement can be determined by going in the opposite direction as the gradient field. To minimize the correlation, an estimate of the step size to be taken can be computed using:</div>
+</li> <li> <div class="description-line" id="p-0146" num="0000">
+<maths id="MATH-US-00020" num="00020">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>dx</mi>
+<mo>,</mo>
+<mi>dy</mi>
+<mo>,</mo>
+<mi>dz</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>arg</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<munder>
+<mi>min</mi>
+<mrow>
+<mi>dx</mi>
+<mo>,</mo>
+<mi>dy</mi>
+<mo>,</mo>
+<mi>dz</mi>
+</mrow>
+</munder>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>C</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>i</mi>
+<mo>,</mo>
+<mi>j</mi>
+<mo>,</mo>
+<mi>k</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>〈</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>g</mi>
+<mi>x</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>g</mi>
+<mi>y</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>g</mi>
+<mi>z</mi>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>dx</mi>
+<mo>,</mo>
+<mi>dy</mi>
+<mo>,</mo>
+<mi>dz</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>〉</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>34</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0147" num="0000">When a step size and direction are computed, they can be sent as feedback to the controller <b>40</b> for the linear accelerator <b>2</b> to close the loop. This information act as a fourth metric and can assist the surgeon to recalibrate the device <b>10</b> and to adjust the aim of the therapeutic beam.</div>
+</li> <li> <para-num num="[0102]"> </para-num> <div class="description-line" id="p-0148" num="0102">The real-time target validation process steps are shown in <figref idrefs="DRAWINGS">FIGS. 9-11</figref>. During radiation treatment, in-treatment images are generated in S<b>42</b> by the digital imaging device <b>30</b>. Also, in S<b>41</b> the radiation detector <b>4</b> detects the radiation dose delivered to the target. The live in-treatment images and the dosimeter information are sent in S<b>51</b> to the computer <b>50</b> for processing. Using compressive sensing techniques, as discussed hereinabove, for example, in real-time, the computer <b>50</b>, in parallel, computes similarity measurements between the live images and the previously generated DRRs in S<b>52</b>, reconstructs the 3D targeted volume in S<b>53</b>, and calculates the delivered radiation dose in S<b>54</b>. The system then computes a displacement measurement signal in S<b>55</b>, and upon determination that the displacement measurement signal is larger than a threshold signal, transmits a feedback signal in S<b>61</b> to the controller <b>40</b> to either automatically stop the radiation treatment or to allow a medical personnel to stop the treatment.</div>
+</li> <li> <para-num num="[0103]"> </para-num> <div class="description-line" id="p-0149" num="0103">The similarity measurement computation, according to various embodiments, is shown in <figref idrefs="DRAWINGS">FIG. 10</figref>. In Step S<b>521</b>, prior to radiation treatment, the system <b>100</b> predicts the approximate trajectory and X-ray fluence of the treatment beams by synthesizing DRRs. Upon receiving the in-treatment live images, the system <b>100</b> generates actual trajectory and fluence of treatment beams from the live in-treatment images in S<b>522</b> and compares in S<b>523</b> and correlates in S<b>524</b> in real-time the beam trajectories and locations of targeted energies of the two sets of images. Using compressive sensing techniques as discussed herein, the system <b>100</b> detects in S<b>525</b> whether there are significant changes in the correlation and computes a target displacement in S<b>526</b>.</div>
+</li> <li> <para-num num="[0104]"> </para-num> <div class="description-line" id="p-0150" num="0104">The 3D actual target volume reconstruction is shown in <figref idrefs="DRAWINGS">FIG. 11</figref>.</div>
+</li> <li> <para-num num="[0105]"> </para-num> <div class="description-line" id="p-0151" num="0105">Using parallel computing techniques, while the similarity measures are computed, as shown in <figref idrefs="DRAWINGS">FIG. 10</figref>, the system <b>100</b> can also use compressive sensing techniques as discussed herein to formulate the geometry of the therapeutic beams as a design matrix in S<b>531</b>, the transmitted X-ray fluences as observations in S<b>532</b>, and the sought target positions as explanatory variables in S<b>533</b>. Using compressive sensing techniques as discussed previously, in S<b>534</b> together with the application of total variation as regularization in S<b>535</b> and optimization techniques in S<b>536</b>, the system <b>100</b> in S<b>537</b> reconstructs the actual 3D target volume. If there is a difference between the actual 3D target volume and the planned 3D target volume, a displacement is registered and a feedback signal is generated, as shown in <figref idrefs="DRAWINGS">FIG. 9</figref>.</div>
+</li> <li> <para-num num="[0106]"> </para-num> <div class="description-line" id="p-0152" num="0106">A non-transitory computer readable medium can be used to store the software or programmed instructions and data which when executed by a computer processing system <b>50</b> causes the system to perform various methods of the present invention, as discussed herein. The executable software and data may be stored in various places, including, for example, the memory and storage of the computer processing system <b>50</b> or any other device that is capable of storing software and/or data.</div>
+</li> <li> <para-num num="[0107]"> </para-num> <div class="description-line" id="p-0153" num="0107">Accordingly, embodiments of real-time target validation systems, methods and computer program products have been disclosed. Many alternatives, modifications, and variations are enabled by the present disclosure. Features of the disclosed embodiments can be combined, rearranged, omitted, etc. within the scope of the invention to produce additional embodiments.</div>
+</li> <li> <para-num num="[0108]"> </para-num> <div class="description-line" id="p-0154" num="0108">Further, a method of adjusting further administration of a therapeutic radiation beam to a target during a radiation treatment session is also disclosed, the adjusting being performed based on a determination made during the treatment session that there is a change in a parameter of the target, the determination being performed based on target projection images continually generated during the treatment using the therapeutic radiation beam.</div>
+</li> <li> <para-num num="[0109]"> </para-num> <div class="description-line" id="p-0155" num="0109">Also, a non-transitory computer-readable storage medium is disclosed upon which is embodied a sequence of programmed instructions for validating in real-time a target exposed to radiation therapy in a radiation therapy treatment system including a computer processing system which executes the sequence of programmed instructions embodied on the computer-readable storage medium to cause the computer processing system to perform the steps of: comparing X-ray images of a target volume obtained during treatment using a therapeutic radiation beam with a corresponding previously obtained 2D projections of the target volume; determining similarity measures between the X-ray images and the reference images; detecting a displacement of the target volume based on the similarity measures; comparing the displacement with a threshold displacement; and generating a feedback signal if the displacement exceeds the threshold displacement.</div>
+</li> <li> <para-num num="[0110]"> </para-num> <div class="description-line" id="p-0156" num="0110">Further, systems and methods of adjusting further administration of a therapeutic radiation beam to a target during a radiation treatment session based on a determination made during the treatment session of a change in a parameter of the target, the determination being performed based on target projection images continually generated during the treatment using the therapeutic radiation beam, are also disclosed.</div>
+</li> <li> <para-num num="[0111]"> </para-num> <div class="description-line" id="p-0157" num="0111">Furthermore, certain features of the disclosed embodiments may sometimes be used to advantage without a corresponding use of other features. Accordingly, Applicants intend to embrace all such alternatives, modifications, equivalents, and variations that are within the spirit and scope of the present disclosure.</div>
+</li> <li> <para-num num="[0112]"> </para-num> <div class="description-line" id="p-0158" num="0112">While embodiments and applications of this invention have been shown and described, it would be apparent to those skilled in the art that many more modifications are possible without departing from the inventive concepts herein. The invention is not limited to the description of the embodiments contained herein, but rather is defined by the claims appended hereto and their equivalents.</div>
+</li> </ul>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">21</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM265685381">
+<div class="claim"> <div class="claim" id="CLM-01-51" num="01-51">
+<div class="claim-text"> <b>1</b>-<b>51</b>. (canceled)</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00052" num="00052">
+<div class="claim-text"> <b>52</b>. A method for real-time validation of a radiation treatment session, comprising:
+<div class="claim-text">obtaining images of a target under treatment;</div> <div class="claim-text">comparing, over a series of projection angles, the obtained images with corresponding reference images; and</div> <div class="claim-text">evaluating whether there is a change in a parameter of the treatment session by:
+<div class="claim-text">determining a first difference between the compared images at a first projection angle;</div>
+<div class="claim-text">determining a second difference between the compared images at a second, subsequent projection angle;</div>
+<div class="claim-text">computing the difference between the first and second differences; and</div>
+<div class="claim-text">comparing the computed difference with a predetermine threshold,</div>
+</div> <div class="claim-text">wherein a computed difference above the predetermined threshold indicates a change in one or more treatment parameters.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00053" num="00053">
+<div class="claim-text"> <b>53</b>. The method of <claim-ref idref="CLM-00052">claim 52</claim-ref>, wherein the treatment parameters include target spatial position, target orientation, target volume position, beam trajectory through the target, and radiation dose.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00054" num="00054">
+<div class="claim-text"> <b>54</b>. The method of <claim-ref idref="CLM-00053">claim 53</claim-ref>, wherein a change in the treatment parameter indicates one or more of target displacement and radiation dose delivery error.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00055" num="00055">
+<div class="claim-text"> <b>55</b>. The method of <claim-ref idref="CLM-00052">claim 52</claim-ref>, wherein the evaluating includes evaluating a similarity between a beam trajectory in a 3D target volume reconstructed from the obtained images and a 3D target volume reconstructed from the reference images.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00056" num="00056">
+<div class="claim-text"> <b>56</b>. The method of <claim-ref idref="CLM-00055">claim 55</claim-ref>, wherein the 3D reconstructing includes using a compressive sensing computation algorithm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00057" num="00057">
+<div class="claim-text"> <b>57</b>. The method of <claim-ref idref="CLM-00056">claim 56</claim-ref>, further comprising validating spatial position and orientation of the target volume based on the reconstructed 3D target volumes.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00058" num="00058">
+<div class="claim-text"> <b>58</b>. The method of <claim-ref idref="CLM-00057">claim 57</claim-ref>, wherein the reconstructing is in real-time.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00059" num="00059">
+<div class="claim-text"> <b>59</b>. The method of <claim-ref idref="CLM-00052">claim 52</claim-ref>, wherein the evaluating includes evaluating, in real-time, a similarity between the total radiation dose in a target volume determined from the obtained images and the total radiation dose in the target volume determined from the reference images.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00060" num="00060">
+<div class="claim-text"> <b>60</b>. The method of <claim-ref idref="CLM-00052">claim 52</claim-ref>, wherein the comparing and evaluating are continually performed during the treatment session.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00061" num="00061">
+<div class="claim-text"> <b>61</b>. The method of <claim-ref idref="CLM-00052">claim 52</claim-ref>, further comprising generating a feedback signal upon indication of a change in one or more parameters.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00062" num="00062">
+<div class="claim-text"> <b>62</b>. The method of <claim-ref idref="CLM-00061">claim 61</claim-ref>, further comprising applying an adjustment in the treatment session in response to the feedback signal.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00063" num="00063">
+<div class="claim-text"> <b>63</b>. A system for real-time validation of a radiation treatment session, comprising:
+<div class="claim-text">an imaging device to generate a series of images of a target volume exposed to radiation; and</div> <div class="claim-text">a computer processing system configured to:
+<div class="claim-text">obtain the series of images;</div>
+<div class="claim-text">compare, over a series of projection angles, the obtained images with corresponding reference images; and</div>
+<div class="claim-text">evaluate whether there is a change in a parameter of the treatment session by:
+<div class="claim-text">determining a first difference between the compared images at a first projection angle;</div>
+<div class="claim-text">determining a second difference between the compared images at a second, subsequent projection angle;</div>
+<div class="claim-text">computing the difference between the first and second differences; and</div>
+<div class="claim-text">comparing the computed difference with a predetermine threshold,</div>
+</div>
+</div> <div class="claim-text">wherein a computed difference above the predetermined threshold indicates a change in one or more treatment parameters.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00064" num="00064">
+<div class="claim-text"> <b>64</b>. The system of <claim-ref idref="CLM-00063">claim 63</claim-ref>,
+<div class="claim-text">wherein the treatment parameters include target spatial position, target orientation, target volume position, beam trajectory through the target, and radiation dose, and</div> <div class="claim-text">wherein a change in the treatment parameter indicates one or more of target displacement and radiation dose delivery error.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00065" num="00065">
+<div class="claim-text"> <b>65</b>. The system of <claim-ref idref="CLM-00063">claim 63</claim-ref>,
+<div class="claim-text">wherein the evaluating includes evaluating a similarity between a beam trajectory in a 3D target volume reconstructed from the obtained images and a 3D target volume reconstructed from the reference images, the 3D reconstructing including using a compressive sensing computation algorithm,</div> <div class="claim-text">wherein the reconstructing is in real-time, and</div> <div class="claim-text">wherein the system further comprises validating spatial position and orientation of the target volume based on the reconstructed 3D target volumes.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00066" num="00066">
+<div class="claim-text"> <b>66</b>. The system of <claim-ref idref="CLM-00063">claim 63</claim-ref>, wherein the evaluating includes evaluating, in real-time, a similarity between the total radiation dose in a target volume determined from the obtained images and the total radiation dose in the target volume determined from the reference images.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00067" num="00067">
+<div class="claim-text"> <b>67</b>. The system of <claim-ref idref="CLM-00063">claim 63</claim-ref>, wherein the computer processing system is further configured to generate a feedback signal upon indication of a change in one or more parameters, and apply an adjustment in the treatment session in response to the feedback signal.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00068" num="00068">
+<div class="claim-text"> <b>68</b>. A non-transitory computer-readable storage medium upon which is embodied a sequence of programmed instructions which when executed by a computer processing system causes the computer processing system to:
+<div class="claim-text">obtain a series of images of a target volume;</div> <div class="claim-text">compare, over a series of projection angles, the obtained images with corresponding reference images; and</div> <div class="claim-text">evaluate whether there is a change in a parameter of the treatment session by:
+<div class="claim-text">determining a first difference between the compared images at a first projection angle;</div>
+<div class="claim-text">determining a second difference between the compared images at a second, subsequent projection angle;</div>
+<div class="claim-text">computing the difference between the first and second differences; and</div>
+<div class="claim-text">comparing the computed difference with a predetermine threshold,</div>
+</div> <div class="claim-text">wherein a computed difference above the predetermined threshold indicates a change in one or more treatment parameters.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00069" num="00069">
+<div class="claim-text"> <b>69</b>. The computer-readable medium of <claim-ref idref="CLM-00068">claim 68</claim-ref>, further causing the computer processing system to:
+<div class="claim-text">evaluate a similarity between a beam trajectory in a 3D target volume reconstructed from the obtained images and a 3D target volume reconstructed from the reference images, the 3D reconstructing including using a compressive sensing computation algorithm, wherein the reconstructing is in real-time; and</div> <div class="claim-text">validate spatial position and orientation of the target volume based on the reconstructed 3D target volumes.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00070" num="00070">
+<div class="claim-text"> <b>70</b>. The computer-readable medium of <claim-ref idref="CLM-00068">claim 68</claim-ref>, further causing the computer processing system to evaluate, in real-time, a similarity between the total radiation dose in a target volume determined from the obtained images and the total radiation dose in the target volume determined from the reference images.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00071" num="00071">
+<div class="claim-text"> <b>71</b>. The computer-readable medium of <claim-ref idref="CLM-00068">claim 68</claim-ref>, further causing the computer processing system to generate a feedback signal upon indication of a change in one or more parameters, and apply an adjustment in the treatment session in response to the feedback signal.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

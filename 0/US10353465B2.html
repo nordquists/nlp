@@ -1,0 +1,1047 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10353465B2 - Iris and pupil-based gaze estimation method for head-mounted device 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA301882885">
+<div class="abstract" id="p-0001" num="0000">The present invention discloses a gaze estimation method for a headset device based, on iris and pupil. In the method, only a single camera, a single infrared light source and a central calibration point which is each provided within four average regions at a screen are used, 3D modeling of the pupil and iris is performed through an extracted 2D central feature of eye movement, and a 3D gaze direction vector is established and combined with angle information of the gaze direction, so as to estimate a gaze point position of human eyes. Fully taking a characteristic of applying the headset device into account, the present invention guarantees an accuracy of the gaze point estimation in the headset device and meanwhile greatly reduces the complexity of an entire system structure and a calibration process, and provides a solution with high accuracy and little complexity for the gaze tracking in the headset device.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES195132394">
+<heading id="h-0001">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0002" num="0001">The present invention relates to a technical field of gaze tracking in human-computer interaction, and specifically relates to a gaze estimation method for a headset device based on iris and pupil.</div>
+<heading id="h-0002">BACKGROUND OF THE PRESENT INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">Gaze tracking technology, as a most innovative human-computer interaction, has advantages such as high accuracy, simple to use, good stability, little interference to users and the like. Therefore, the gaze tracking technology possesses a wide application prospect in several fields such as medical aided diagnosis, auxiliary equipment for the disabled, advertising and marketing analysis, daily human-computer interaction and the like. Besides, augmented reality is penetrating into people's life increasingly, and how to combine the gaze tracking technology with the augmented reality to establish the visualized augmented reality in real-time interaction has been a focus to which people more and more pay attention.</div>
+<div class="description-paragraph" id="p-0004" num="0003">Augmented Reality (AR) is to augment the reality information in the real world around the user through a 3D registration technology, so as to reach a “seamless” integration between the information of the real world and the information of the virtual world, bringing the user surreal sense experience. In order to provide a simple, efficient and bidirectional interactive mode to an augmented reality system, a combination of the gaze tracking technology with the augmented reality can not only track a gaze direction of the user, acquire an interested region by the user in a scene, but also present a characteristic of the augmented reality system combining virtuality with reality, wherein through a human eye image captured by an infrared camera, the augmented reality system based on a headset display with a gaze tracking function tracks the gaze direction and performs operations such as gaze transferring view, playing music and opening a video, and it has a strong effect of the augmented reality with an important research significance and has attracted extensive attention in recent years.</div>
+<div class="description-paragraph" id="p-0005" num="0004">A structure of a headset gaze tracking system has its particularity. When the human eyes gaze at an object in a space with the head moving randomly, relative positions and distances between the human eyes and the screen as well as the human eyes and the camera remain constant, and there's no need to take an effect of the head's movement on gaze point estimation into account. Thus, a design of the headset gaze tracking system provides a new concept for the research of the technical field of gaze tracking, converting from researching how to avoid the influence of the head's extensive movement during estimating a gaze point position, into researching how to track movement information of the human eyes more simply and accurately inside a small space of the headset system to acquire the gaze direction of the human eyes. To sum up, extracting the eye movement feature accurately under the near-infrared light which represents the gaze direction, and establishing a simple and efficient gaze mapping model have become two key missions in the research of the headset gaze tracking system.</div>
+<div class="description-paragraph" id="p-0006" num="0005">As for the eye movement feature extraction, an extraction effect thereof should satisfy requirements for high accuracy and strong real-time performance. Inside the headset gaze tracking system, the camera is closed to the human eyes and the human eye image captured by it is clear, but an uneven illumination would lead to a difference of the human eye image in the clarity; besides, owing to an effect of a reflector in the system, the human eye image captured by the camera would produce a deformation, and when the eye balls rotate in a relatively large angle, part of the eye movement feature would be covered by the eyelid or eyelash, leading to an incomplete outline or a false outline. At present, an eye movement feature extraction algorithm mostly extracts a feature of the pupil and combines a light spot of corneal reflex or the inner and outer eye corners, to extract the eye movement feature that accurately represents the gaze direction. These algorithms are usually so complicated that the real-time performance of the eye movement feature extraction cannot be guaranteed. Therefore, it has become one of the technical difficulties of the headset gaze tracking system that how to extract the eye movement feature rapidly and accurately under the near-infrared light.</div>
+<div class="description-paragraph" id="p-0007" num="0006">As for establishment of the gaze mapping model, an object thereof is to obtain the gaze point position by using the extracted eye movement feature. Inside the headset gaze tracking system, the position of the camera is fixed, relative to the position of the human eyes, and the head's movement would not make an influence on calculation of the gaze point. However, the user tends to expect to put on the headset easily and use it conveniently when using the system. In the present gaze mapping model, a 2D mapping model algorithm is so simple that there's no need to achieve position information of a system device and that of the user in advance, but a plurality of infrared light sources or several calibration points of a screen are often used to establish a 2D mapping formula; whereas a 3D mapping model algorithm is so complicated that a complicated stereo camera or several cameras are needed to collect the human eye image so as to achieve a mapping relation of a 3D center of eyes and the gaze point of the screen, so that a hardware of the entire gaze tracking system is complicated. Thus, it has become a major technical difficulty existing in the headset gaze tracking system that how to guarantee the high accuracy of the gaze point estimation and meanwhile only a single camera and a single infrared light source are used to establish a simple gaze mapping model during calibration.</div>
+<heading id="h-0003">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0008" num="0007">The present invention discloses a gaze estimation method for a headset device based on iris and pupil. In such method, only a single camera, a single infrared light source and a central calibration point which is each provided within four average regions at a screen are used, 3D modeling of the pupil and iris is performed through an extracted 2D central feature of eye movement, and a 3D gaze direction vector is established and combined with angle information of the gaze direction, so as to estimate a gaze point position of human eyes. Fully taking a characteristic of applying the headset device into account, the present invention guarantees an accuracy of the gaze point estimation in the headset device and meanwhile greatly reduces the complexity of an entire system structure and a calibration process.</div>
+<div class="description-paragraph" id="p-0009" num="0008">An objective of the present invention is realized by at least one of the following technical solutions.</div>
+<div class="description-paragraph" id="p-0010" num="0009">The gaze estimation method for a headset device based on iris and pupil, only needs the single camera, the single infrared light source and the central calibration point which is each provided within four average regions at the screen, including following steps:</div>
+<div class="description-paragraph" id="p-0011" num="0010">(1) the eye movement feature extraction: inside the headset device, the human eyes are close to the screen and the camera, a concept of first acquiring an outline of the eye movement feature and then positioning an eye movement feature center is used for a human eye image captured by the camera under a near-infrared light, and as for segmented feature regions of the pupil and iris, 2D central parameters of the pupil and iris are acquired by using an edge detection and an ellipse fitting algorithm;</div>
+<div class="description-paragraph" id="p-0012" num="0011">(2) 3D modeling of the eye movement feature: relative positions and distances between the human eyes and the screen as well as the human eyes and the camera remain constant, and meanwhile the pupil and the iris are not located in the same plane and the iris is in front of the pupil; according to a conversion formula from an image pixel coordinate system to a camera coordinate system, 2D image information of the human eyes, which is captured by the camera when the human eyes observe the central calibration points within four regions at the screen, is combined with position information of the calibration points, and a 3D gaze mapping model is obtained by 3D modeling an eye movement feature vector, i.e. 3D central coordinate parameters of the pupil and iris when the human eyes gaze at the central calibration points within four regions are obtained; and</div>
+<div class="description-paragraph" id="p-0013" num="0012">(3) estimation of the gaze point position: when the human eyes gaze at any point on the screen, the central parameters of the pupil and iris extracted from the 2D human eye image are compared with a 2D center of four calibration points to position a gaze region of the human eyes, by using the established 3D gaze mapping model to calculate 3D coordinates of a pupil center and an iris center within the gaze region, a pupil-iris 3D gaze direction vector is obtained and combined with the angle information of the gaze estimation to obtain a final gaze point position of the human eyes.</div>
+<div class="description-paragraph" id="p-0014" num="0013">Further, the step (1) includes:</div>
+<div class="description-paragraph" id="p-0015" num="0014">a. as for an input human eye image, a template matching algorithm is used to initially position a right eye region;</div>
+<div class="description-paragraph" id="p-0016" num="0015">b. as for a feature extraction part of the pupil center, an OTSU algorithm which is combined with a compensation algorithm using a histogram peak as a search threshold, is firstly used to achieve an automatic segmentation of the pupil region, and a maximum connected region search algorithm is used to eliminate a noise block on a binary image of the pupil, an edge of the pupil is obtained by using a Sobel edge detection, and finally central parameter information of the pupil is acquired through a RANSAC ellipse fitting algorithm;</div>
+<div class="description-paragraph" id="p-0017" num="0016">c. as for a feature extraction part of the iris center, an iris-interested region is determined by using a feature extraction center of the iris as a center of a ROI region, and a binary image of the iris is acquired by using a digital morphology combined with a histogram iterative algorithm, since upper and lower edges of the iris are easily covered by eyelid and eyelash, after a vertical edge information of the iris is acquired by using the Sobel vertical edge detection, central parameter information of the iris is obtained through the ellipse fitting.</div>
+<div class="description-paragraph" id="p-0018" num="0017">Further, the step (2) includes:</div>
+<div class="description-paragraph" id="p-0019" num="0018">a. calibration of an intrinsic parameter of the camera, wherein Zhang's plane calibration is used, and the intrinsic parameter of the camera is calibrated through a checkerboard pattern at different angles and distances shot by the camera at a fixed position, to acquire parameter information of a zoom factor in the conversion formula from a 2D image coordinate system of an object to the camera coordinate system;</div>
+<div class="description-paragraph" id="p-0020" num="0019">b. a gaze screen is divided into four regions with the same size and the center of each region is provided with one calibration point, by substituting a 2D′ central coordinate of the pupil and a known depth information value of the pupil, i.e. a distance from a 3D center of the pupil to an optical center of the camera, into the formula in step a, the 3D coordinate parameter of the pupil is obtained;</div>
+<div class="description-paragraph" id="p-0021" num="0020">c. according to a geometric similarity between the gaze direction of the human eyes in an iris plane and the gaze in a projection of the screen, a depth information value of the iris is calculated by using the coordinate of the calibration point on the screen and the 3D coordinate of the pupil acquired in step b, and then by substituting a 2D central coordinate of the iris and the depth information value of the iris into the formula in step a, the 3D coordinate parameter of the iris is obtained.</div>
+<div class="description-paragraph" id="p-0022" num="0021">Further, the step (3) includes:</div>
+<div class="description-paragraph" id="p-0023" num="0022">a. when the human eyes gaze at any point on the screen, the extracted 2D central coordinate of the pupil is compared with the 2D center of the pupil which corresponds to four calibration points, to position the gaze region of the human eyes;</div>
+<div class="description-paragraph" id="p-0024" num="0023">b. according to a characteristic that the pupil center and the iris center are non-concurrent in the 3D space leading to that the pupil center and the iris center are non-collinear in the 2D plane, the angle information of the human eye gaze estimation is acquired by using the 2D central coordinates of the pupil and iris;</div>
+<div class="description-paragraph" id="p-0025" num="0024">c. the 3D coordinates of the pupil center and the iris center within the gaze region are calculated by using the 3D gaze mapping model established in step (2), the pupil-iris 3D gaze direction vector is obtained and combined with the angle information of the gaze estimation to obtain the final gaze point position of the human eyes.</div>
+<div class="description-paragraph" id="p-0026" num="0025">Further preferably, the step (1) includes:</div>
+<div class="description-paragraph" id="p-0027" num="0026">as for the human eye image acquired from the camera, the template matching algorithm is used to position the right eye region; as for the positioned right eye region, in order to achieve accurate central parameter information of the pupil, the OTSU which is combined with the compensation algorithm using the histogram peak as the search threshold, is used to determine a segmented threshold value of the pupil, and an image connected region search algorithm is used to eliminate the noise block on the binary image of the pupil, the edge of the pupil is obtained by using the Sobel edge detection, and, then the central parameter information of the pupil is acquired through the RANSAC ellipse fitting; after the feature parameter of the pupil is accurately extracted, the iris-interested region is determined by using the pupil center as the center of ROI region, and the binary image of the iris is acquired by using the digital morphology combined with the histogram iterative algorithm, and after the vertical edge information of the iris is acquired by using the Sobel vertical edge detection, the central parameter information of the iris is obtained through the ellipse fitting.</div>
+<div class="description-paragraph" id="p-0028" num="0027">Further preferably, the step (2) includes:</div>
+<div class="description-paragraph" id="p-0029" num="0028">the gaze screen is divided into four regions with the same size and the center of each region is provided with one calibration point, the 2D central coordinates of the pupil and iris when the human eyes gaze at four calibration points respectively are extracted through step (1); the intrinsic parameter of the camera is calibrated by using the Zhang's plane calibration, and the parameter of the zoom factor in the conversion formula from the image pixel coordinate system to the camera coordinate system is acquired; by substituting the 2D central coordinate of the pupil and the known depth information value of the pupil into the formula, the 3D coordinate parameter of the pupil is obtained; according, to the geometric similarity between the gaze direction in the iris plane and that in the projection of the screen, the depth information value of the iris is calculated by using the acquired 3D center of the pupil and the coordinate of the calibration point on the screen, and the depth information value of the iris as well as the 2D central coordinate of the iris is substituted into the formula to acquire the 3D central coordinate information of the iris.</div>
+<div class="description-paragraph" id="p-0030" num="0029">Further preferably, the step (3) includes:</div>
+<div class="description-paragraph" id="p-0031" num="0030">when the human eyes gaze at any point on the screen, the 2D central coordinate of the pupil extracted in step (1) is compared with the 2D center of the pupil which corresponds to four calibration points, to position the gaze region of the human eyes; according to a principle that the pupil center and the iris center are non-concurrent in the 3D space leading to that the pupil, center and the iris center are non-collinear in the 2D plane, the angle information of the human eye gaze estimation is acquired by using the 2D central coordinates of the pupil and iris; the angle information of the gaze estimation is combined with the pupil-iris 3D gaze direction vector to obtain the final gaze point position of the human eyes.</div>
+<div class="description-paragraph" id="p-0032" num="0031">Compared with the prior art, advantages and positive effects of the present invention lie in that:</div>
+<div class="description-paragraph" id="p-0033" num="0032">1. Accurate and rapid eye movement feature extraction. Accurate eye movement feature extraction is a basis of guaranteeing each performance of the gaze tracking system. At present, an eye movement feature extraction algorithm mostly extracts the pupil center, combining with the Purkinje image or the inner and outer eye corners as the eye movement feature. Inside the headset gaze tracking system, the infrared light source and a reflector would leads to an uneven contrast ratio of the human eye image and deformation of the human eye image, resulting in that the extracted eye movement feature cannot reflect an actual variation of the human eye movement. The present invention selects stable features of the pupil and iris as the eye movement feature for the gaze tracking of the headset device, uses the concept of first acquiring the outline of the eye movement feature and then positioning the eye movement feature center, realizes accurate segmentation of the pupil region based on the traditional OTSU algorithm which is combined with the compensation algorithm using the histogram peak as the search threshold, acquires the segmented threshold value of the iris by using the histogram iterative algorithm, extracts the central feature parameters of the pupil and iris respectively by using the Sobel edge detection and the RANSAC ellipse fitting algorithm, and satisfies requirements of the headset gaze tracking system for the accuracy and real-time performance of the eye movement extraction.</div>
+<div class="description-paragraph" id="p-0034" num="0033">2. Accurate and efficient establishment of the gaze mapping model. A final objective of the gaze tracking system is to estimate the gaze point position of the human eyes by using the established gaze mapping model. At present, in the gaze mapping model, the 2D gaze mapping model is simple, and has high accuracy of gaze point estimation when the head holds still, but the establishment of the mapping model needs assistance of a plurality of infrared light sources or several calibration points. The 3D gaze mapping model is complicated, and in order to acquire an accurate estimated gaze point position by using the 3D information of eyes directly, it often needs a plurality of cameras and several infrared light sources cooperating with each other for use. The above two gaze mapping models increase the complexity of the system at a certain extent and are limited in being applied in the headset gaze tracking system. Sufficiently taking a characteristic that the relative positions and distances between the human eyes and the gaze screen as well as the human eyes and the camera remain constant in the headset gaze tracking system, into account, the present invention proposes an innovative 3D gaze mapping model based on the pupil and the iris when only the single camera, the single infrared light source and four calibration points which are each provided within the specified regions at the screen are used. The 3D modeling of the pupil and iris is performed through the extracted 2D central feature of the eye movement, and the 3D gaze direction vector is established and combined with the gaze angle information, so as to estimate the gaze point position of the human eyes. Such mapping model has generality for different users, guarantees the accuracy of the gaze point estimation in the headset gaze tracking system and meanwhile greatly reduces the complexity of the entire system structure and the calibration process.</div>
+<description-of-drawings>
+<heading id="h-0004">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 1</figref> is an overall frame diagram of establishment of a gaze mapping model in the embodiment.</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a distribution diagram of fixed points (4 calibration points and 16 gaze points) on a screen in the embodiment.</div>
+</description-of-drawings>
+<heading id="h-0005">DETAILED DESCRIPTION OF THE PREFERRED EMBODIMENT</heading>
+<div class="description-paragraph" id="p-0037" num="0036">Specific implementations of the present invention will be further described by accompanied drawings in combination with an embodiment, but the implementation and the protection of the present invention are not limited to these.</div>
+<div class="description-paragraph" id="p-0038" num="0037">In the present invention, a camera and an infrared light source are fixed near the head with a headset device, wherein the camera which captures a human eye image has a resolution ratio of 640*480, and an infrared camera has a power of 3 W and a wavelength of 850 mm.</div>
+<div class="description-paragraph" id="p-0039" num="0038">As shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, establishment of a gaze mapping model for the headset device based on pupil and iris includes following implementation steps:</div>
+<div class="description-paragraph" id="p-0040" num="0039">step 1: eyes gaze at four calibration points on a screen and eye movement feature information is extracted;</div>
+<div class="description-paragraph" id="p-0041" num="0040">step 2: the eye movement features of the pupil and iris are 3D modeled;</div>
+<div class="description-paragraph" id="p-0042" num="0041">step 3: eyes gaze at 16 gaze points on the screen and a gaze point position is estimated with the established 3D gaze mapping model.</div>
+<div class="description-paragraph" id="p-0043" num="0042">Particularly, specific implementation steps of the step 1 include:</div>
+<div class="description-paragraph" id="p-0044" num="0043">1. After the observer puts on the headset device, the eyes successively gaze at four calibration points on the screen ahead, wherein a distribution diagram of the calibration point is shown as <figref idrefs="DRAWINGS">FIG. 2</figref> and the calibration points are the center points within four regions with the same size on the screen.</div>
+<div class="description-paragraph" id="p-0045" num="0044">2. The eye movement feature information is extracted when the eyes gaze at the calibration points: as for each calibration point, pupil center and iris center are respectively extracted as the eye movement feature information, wherein specific implementation steps include:</div>
+<div class="description-paragraph" id="p-0046" num="0045">2.1 Positioning of a Monocular Region</div>
+<div class="description-paragraph" id="p-0047" num="0046">Inside the headset gaze tracking system, the infrared light source is close to the human eyes and the camera only captures the human eye image, rather than a whole human face. However, a gaze tracking algorithm of the present, invention is based on monocular data information, therefore a template matching algorithm, is first used in the present invention to position a right eye region before the eye movement feature is extracted.</div>
+<div class="description-paragraph" id="p-0048" num="0047">2.2 Feature Extraction of the Pupil Center</div>
+<div class="description-paragraph" id="p-0049" num="0048">a. A dark pupil effect in the human eye image is apparent under the near-infrared light and a pupil region shows a characteristic of an apparent black spot. In order to eliminate an influence of an image noise on the feature extraction of the pupil, a median filter technology is first used in the present invention to pretreat the human eye image, eliminate part of the noises around the eyes and acquire a human eye image with more apparent details in the pupil region.</div>
+<div class="description-paragraph" id="p-0050" num="0049">b. In the human eye image inside the headset gaze tracking system, feature of the pupil region is apparent but has an uneven contrast ratio to other regions. Therefore in the present invention, after a maximum variance cluster algorithm (OTSU algorithm) is used to acquire a primary segmented threshold value of the pupil region, according to a characteristic of a human eye image histogram, the primary segmented threshold value is compensated through a compensation algorithm using a histogram peak as a search threshold to acquire a final segmented threshold value of the pupil. The pupil region is automatically segmented from a background region to acquire a segmented binary image of the pupil region.</div>
+<div class="description-paragraph" id="p-0051" num="0050">c. The infrared light would generate a reflected light spot on cornea. When the eye balls move, the reflected light spot would appear at three positions which are, exterior of the pupil, interior of the pupil and boundary of the pupil respectively. Especially when the reflected light spot appears on the boundary of the pupil, it would influence the segmentation of the pupil, resulting in a concave of the segmented binary image of the pupil on the reflected light spot, rather than a complete ellipse. In order to acquire effective edge information of the pupil, a Sobel edge detection algorithm is used in the present invention to extract a vertical edge and a horizontal edge respectively, and longest edges in both directions are selected respectively as a result of extracting the edge of the pupil, and as an effective edge point set of a successive ellipse fitting of the pupil.</div>
+<div class="description-paragraph" id="p-0052" num="0051">d. Final feature parameters of a 2D center of the pupil is acquired through continuous iteration by using a RANSAC ellipse fitting algorithm.</div>
+<div class="description-paragraph" id="p-0053" num="0052">2.3 Feature Extraction of the Iris Center</div>
+<div class="description-paragraph" id="p-0054" num="0053">a. In the human eye image under the near-infrared light; the pupil region is located within iris region. Therefore, after the pupil center is extracted accurately, in order to eliminate an influence of other regions of the face on the feature extraction of the iris, in the present invention, the pupil center is first taken as a center of an iris-interested region and an iris region is initially positioned with a suitable length as a side, length of a rectangle of the interested region.</div>
+<div class="description-paragraph" id="p-0055" num="0054">b. In order to make a pixel value of the iris region take up a larger gray scale range and distribute uniformly, and to make the iris region has a higher contrast ratio, a histogram equalization algorithm is used in the present invention to non-linear expand the image, to enhance a difference between the iris region and a background gray scale.</div>
+<div class="description-paragraph" id="p-0056" num="0055">c. Owing to that a segmented threshold value of the iris is between the segmented threshold value of the pupil and a maximum value of pixel gray scale, the determined segmented threshold value of the pupil is served as a starting point and a histogram iterative algorithm is used to acquire a segmented binary image of the iris.</div>
+<div class="description-paragraph" id="p-0057" num="0056">d. Compared to a proportion of the pupil region in the human eye image, a proportion of the iris region is larger and upper and lower eyelids are easily covered by the eyelid and eyelash. Therefore, a Sobel vertical edge detection operator is used in the present invention to extract a vertical edge of the iris, and the RANSAC ellipse fitting algorithm is used to perform ellipse fitting on the iris, to acquire feature parameters of a 2D center of the iris.</div>
+<div class="description-paragraph" id="p-0058" num="0057">Particularly, specific implementation steps of the step 2 include:</div>
+<div class="description-paragraph" id="p-0059" num="0058">1. Calibration of Intrinsic Parameters of the Camera</div>
+<div class="description-paragraph" id="p-0060" num="0059">After the human eye image is captured by the camera, a conversion formula from a human eye image pixel coordinate system to a camera coordinate system is as follow:</div>
+<div class="description-paragraph" id="p-0061" num="0060">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>Z</mi>
+<mi>c</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<mi>u</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>v</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>/</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mi>dx</mi>
+</mrow>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<msub>
+<mi>u</mi>
+<mn>0</mn>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>/</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mi>dy</mi>
+</mrow>
+</mtd>
+<mtd>
+<msub>
+<mi>v</mi>
+<mn>0</mn>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mi>X</mi>
+<mi>c</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>Y</mi>
+<mi>c</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>Z</mi>
+<mi>c</mi>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0062" num="0061">wherein, coordinate (u,v) represents a column number and a line number of a pixel point of the human eye image in a pixel array, (dx,dy) represents physical dimensions of each pixel in a horizontal axis and a vertical axis respectively, (u<sub>0</sub>,v<sub>0</sub>) represents an image principal point, and f represents a camera focal length. While (X<sub>c</sub>,Y<sub>c</sub>,Z<sub>c</sub>) represents a 3D position coordinate of the eye movement feature in the camera coordinate system, and Z<sub>c </sub>is depth information representing a distance from a 3D center of the human eyes to an optical center of the camera along an optical axis of the camera. Inside the headset device, the camera is always located at the front of the screen and the human face always faces toward the camera, so that it is impossible to calibrate the intrinsic parameters of the camera by continuous movement of the pupil in the plane. According to such characteristic, Zhang's plane calibration is used in the present invention, and the intrinsic parameters of the camera are calculated through 20 planar checkerboard patterns alternating with black and white which are shot by the camera at different angles and distances, to acquire all known parameter information in the establishment process of the gaze mapping model.</div>
+<div class="description-paragraph" id="p-0063" num="0062">2. 3D Modeling of the Eye Movement Feature</div>
+<div class="description-paragraph" id="p-0064" num="0063">The 3D modeling of the eye movement feature is a key of establishing the 3D gaze mapping model. The 3D central coordinates of the pupil and iris are acquired through the 2D central coordinate of the eye movement feature, and the 3D gaze direction vector is constructed to estimate the gaze point position. It can be known from the formula in step 1 that Z<sub>c1 </sub>and Z<sub>c2</sub>, the depth information of 3D positions of the pupil and iris relative to the camera coordinate system, still need to be known to acquire the 3D coordinates of the eye movement feature of the pupil and iris. Owing to that inside the headset gaze tracking device, distances and positions of the head, relative to the screen and the camera, remain constant always, when the human eyes gaze at any point on the screen, variation of central positions of the pupil and iris can be approximately represented as the movement within two small rectangular planes and the depth information Z<sub>c1 </sub>and Z<sub>c2 </sub>of those two remains constant always. Therefore, after the intrinsic parameters of the camera are calibrated and acquired by the camera, in order to reduce an error of the gaze point estimation, the gaze screen is divided into four small regions with the same size followed by the 3D modeling of the eye movement feature, and the 3D coordinates of the pupil and iris when the human eyes gaze at a central point within each small region are acquired respectively.</div>
+<div class="description-paragraph" id="p-0065" num="0064">2.1 Acquiring the 3D Coordinate of the Pupil</div>
+<div class="description-paragraph" id="p-0066" num="0065">The following formulas can be obtained by transforming the formula in step 1:
+<br/>
+(<i>u</i> <sub>1</sub> <i>−u</i> <sub>0</sub>)×<i>Z</i> <sub>c1</sub> <i>=f</i> <sub>x</sub> <i>×X</i> <sub>c1 </sub>
+<br/>
+(<i>v</i> <sub>1</sub> <i>−v</i> <sub>0</sub>)×<i>Z</i> <sub>c1</sub> <i>=f</i> <sub>y</sub> <i>×Y</i> <sub>c1 </sub>
+</div>
+<div class="description-paragraph" id="p-0067" num="0066">wherein, (f<sub>x</sub>,f<sub>y</sub>) and (u<sub>0</sub>,v<sub>0</sub>) are the intrinsic parameters of the camera, (u<sub>1</sub>,v<sub>1</sub>) is a pixel point position of the 2D center of the pupil in the human eye image, and (X<sub>c1</sub>,Y<sub>c1</sub>,Z<sub>c1</sub>) represents the 3D coordinate of the pupil to be acquired. According to the characteristic of the headset device, when the human eyes gaze at different positions on the screen resulting in the variation of the pupil center, provided that the depth information value of the pupil equals to the distance from the human face to the optical center of the camera, such value is known and remains constant always. A process of acquiring the 3D coordinate of the eye movement feature of the pupil, is as follow:</div>
+<div class="description-paragraph" id="p-0068" num="0067">1) the gaze screen is divided into four regions with the same size and the center of each region is provided with one calibration point;</div>
+<div class="description-paragraph" id="p-0069" num="0068">2) the human eye images when the human eyes gaze at four calibration points respectively are captured by the camera, and an eye movement extraction algorithm under the near-infrared light is used to acquire four pixel point position coordinates of the 2D center of the pupil;</div>
+<div class="description-paragraph" id="p-0070" num="0069">3) the 2D central coordinates of the pupil, the depth information of the pupil and the intrinsic parameters of the camera are each substituted into above two formulas, and the 3D coordinate of the pupil can be obtained.</div>
+<div class="description-paragraph" id="p-0071" num="0070">2.2 Acquiring 3D Coordinate of the Iris</div>
+<div class="description-paragraph" id="p-0072" num="0071">The gaze direction of the human eyes can be approximately represented as a line direction through the 3D center of the pupil and the iris center, thus after the 3D central coordinate of the pupil is acquired, in order to obtain the gaze direction, the 3D central coordinate of the iris still needs to be calculated. Owing to that an iris plane is in front of a pupil plane, the depth information of the iris is not equal to that of the pupil. According to a geometric similarity between the pupil center in the iris plane and that in a projection of the screen, the following formulas can be obtained:</div>
+<div class="description-paragraph" id="p-0073" num="0072">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mrow>
+<msub>
+<mi>Z</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>Z</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<mi>d</mi>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<msqrt>
+<mrow>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>X</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>X</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</msqrt>
+<msqrt>
+<mrow>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>X</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<mi>x</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<mi>y</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</msqrt>
+</mfrac>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00002-2" num="00002.2">
+<math overflow="scroll">
+<mrow>
+<msub>
+<mi>X</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>u</mi>
+<mn>2</mn>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>u</mi>
+<mn>0</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>Z</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<msub>
+<mi>f</mi>
+<mi>x</mi>
+</msub>
+</mfrac>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00002-3" num="00002.3">
+<math overflow="scroll">
+<mrow>
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>v</mi>
+<mn>2</mn>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>v</mi>
+<mn>0</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msub>
+<mi>Z</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<msub>
+<mi>f</mi>
+<mi>y</mi>
+</msub>
+</mfrac>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0074" num="0073">wherein, d represents a distance from the pupil plane to the screen, (x,y) is a coordinate of the gaze point on the screen, (u<sub>2</sub>,v<sub>2</sub>) is a pixel point position of the 2D center of the iris in the human eye image, (X<sub>c1</sub>,Y<sub>c1</sub>,Z<sub>c1</sub>) represents the 3D coordinate of the pupil that has been acquired in 2.1, and (X<sub>c2</sub>,Y<sub>c2</sub>,Z<sub>c2</sub>) is the 3D central coordinate of the iris to be acquired. Therefore, through the above formulas, i.e. through the known coordinate of the gaze point on the screen, the corresponding 3D central coordinate of the pupil and the depth information value of the pupil, the depth information value of the iris can be first calculated and substituted into the above two formulas at the below to obtain the 3D coordinate of the iris.</div>
+<div class="description-paragraph" id="p-0075" num="0074">Particularly, specific implementation steps of the step 3 include:</div>
+<div class="description-paragraph" id="p-0076" num="0075">1. Positioning of a Gaze Region of the Human Eyes</div>
+<div class="description-paragraph" id="p-0077" num="0076">The human eyes gaze at 16 gaze points on the screen respectively, and the extracted 2D central coordinate of the pupil is compared with the 2D central coordinate of the pupil which corresponds to four calibration points, to position the gaze region of the human eyes. To reduce a range of the gaze region, accuracy of the gaze point position estimation is enhanced. After the gaze point region is positioned, according to the formula of 2.1 in step 2, owing to that the depth information of the pupil and the depth information of the iris remain constant when the human eyes move, when the human eyes move resulting in the movement of the 3D central positions of the pupil and iris, the corresponding 2D centers of the pupil and iris vary in the image plane as well. Therefore, the 3D central coordinates of the pupil and iris can be obtained through the following formulas:</div>
+<div class="description-paragraph" id="p-0078" num="0077">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mrow>
+<msup>
+<mi>u</mi>
+<mi>′</mi>
+</msup>
+<mo>-</mo>
+<msub>
+<mi>u</mi>
+<mn>0</mn>
+</msub>
+</mrow>
+<mrow>
+<mi>u</mi>
+<mo>-</mo>
+<msub>
+<mi>u</mi>
+<mn>0</mn>
+</msub>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<msubsup>
+<mi>X</mi>
+<mi>c</mi>
+<mi>′</mi>
+</msubsup>
+<msub>
+<mi>X</mi>
+<mi>c</mi>
+</msub>
+</mfrac>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00003-2" num="00003.2">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mrow>
+<msup>
+<mi>v</mi>
+<mi>′</mi>
+</msup>
+<mo>-</mo>
+<msub>
+<mi>v</mi>
+<mn>0</mn>
+</msub>
+</mrow>
+<mrow>
+<mi>v</mi>
+<mo>-</mo>
+<msub>
+<mi>v</mi>
+<mn>0</mn>
+</msub>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<msubsup>
+<mi>Y</mi>
+<mi>c</mi>
+<mi>′</mi>
+</msubsup>
+<msub>
+<mi>Y</mi>
+<mi>c</mi>
+</msub>
+</mfrac>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0079" num="0078">wherein, (u,v) is the 2D central coordinate of the pupil (iris) corresponding to the calibration point in the positioned gaze region, (u′,v′) is the 2D central coordinate of the pupil (iris) corresponding to the gaze point; (X<sub>c</sub>,Y<sub>c</sub>) is a 3D central coordinate component of the pupil (iris) corresponding to the calibration point in the positioned gaze region, and (X<sub>c</sub>′,Y<sub>c</sub>′) is the 3D central coordinate of the pupil (iris) corresponding to the gaze point to be acquired.</div>
+<div class="description-paragraph" id="p-0080" num="0079">2. Acquiring of Angle Information of the Gaze Estimation</div>
+<div class="description-paragraph" id="p-0081" num="0080">According to a mapping principle from the 3D space to the 2D space, a spinning circle in the 3D space shows an ellipse outline when mapped to the 2D space. Therefore, when the human eyes gaze at an object in the space so that the eye balls move, there are relationships of reciprocal representation between the 3D gaze direction, the 3D center of the pupil and the 2D center of the pupil, and thus an angle value of the gaze deviating the x-y plane can be obtained through the 2D central coordinate of the pupil (u,v), with the formula shown as follow:
+<br/>
+φ=tan<sup>−1</sup>(<i>v/u</i>)
+</div>
+<div class="description-paragraph" id="p-0082" num="0081">Because when the human eyes observe an object in the space region ahead, the angle in which the eye balls move varies in a certain range. When the angle that deviates the z axis is the same and the angle that deviates the x-y plane differs 180 degree, a size and a shape of a 2D-mapped ellipse of the pupil is the same. A second eye movement feature (the 2D central coordinate of the iris) is needed at this moment to construct a pupil-iris compensated vector to eliminate an interference angle therein which is opposite the actual gaze direction, and calculation formulas thereof are shown as follows:</div>
+<div class="description-paragraph" id="p-0083" num="0082">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mrow>
+<mi>φ</mi>
+<mo>=</mo>
+<mrow>
+<msup>
+<mi>tan</mi>
+<mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mover>
+<mi>v</mi>
+<mi>_</mi>
+</mover>
+<mo>-</mo>
+<mrow>
+<mi>v</mi>
+<mo>/</mo>
+<mover>
+<mi>u</mi>
+<mi>_</mi>
+</mover>
+</mrow>
+<mo>-</mo>
+<mi>u</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00004-2" num="00004.2">
+<math overflow="scroll">
+<mrow>
+<mi>ϕ</mi>
+<mo>=</mo>
+<mrow>
+<mo>{</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>φ</mi>
+<mn>1</mn>
+</msub>
+<mo>=</mo>
+<mrow>
+<msup>
+<mi>tan</mi>
+<mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>v</mi>
+<mo>-</mo>
+<mi>u</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mrow>
+<mo></mo>
+<mrow>
+<msub>
+<mi>φ</mi>
+<mn>1</mn>
+</msub>
+<mo>-</mo>
+<mi>φ</mi>
+</mrow>
+<mo></mo>
+</mrow>
+<mo>&lt;</mo>
+<mrow>
+<mo></mo>
+<mrow>
+<msub>
+<mi>φ</mi>
+<mn>2</mn>
+</msub>
+<mo>-</mo>
+<mi>φ</mi>
+</mrow>
+<mo></mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>φ</mi>
+<mn>2</mn>
+</msub>
+<mo>=</mo>
+<mrow>
+<mrow>
+<msup>
+<mi>tan</mi>
+<mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>v</mi>
+<mo>-</mo>
+<mi>u</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mi>π</mi>
+</mrow>
+</mrow>
+<mo>,</mo>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mrow>
+<mo></mo>
+<mrow>
+<msub>
+<mi>φ</mi>
+<mn>1</mn>
+</msub>
+<mo>-</mo>
+<mi>φ</mi>
+</mrow>
+<mo></mo>
+</mrow>
+<mo>&lt;</mo>
+<mrow>
+<mo></mo>
+<mrow>
+<msub>
+<mi>φ</mi>
+<mn>2</mn>
+</msub>
+<mo>-</mo>
+<mi>φ</mi>
+</mrow>
+<mo></mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0084" num="0083">wherein, (u,v) represents the 2D central coordinate of the pupil and (ū,<o>v</o>) represents the 2D central coordinate of the iris. The compensated angle is compared with two angle information acquired, and the angle that is closest to the gaze compensated angle is selected as an angle information value of the gaze estimation finally acquired.</div>
+<div class="description-paragraph" id="p-0085" num="0084">3. Calculation of the Gaze Point Position:</div>
+<div class="description-paragraph" id="p-0086" num="0085">When the human eyes gaze at any point on the screen, the gaze point position is obtained by the gaze direction through a line that is between the 3D center of the pupil and the 3D center of the iris, crossing the screen. A projected vector of the gaze direction vector in the x-y plane is calculated first, and then it is combined with the angle information of the gaze direction to obtain a final gaze point position on the screen, and calculation formulas thereof are shown as follows:</div>
+<div class="description-paragraph" id="p-0087" num="0086">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mrow>
+<msqrt>
+<mrow>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>X</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<mi>x</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<mi>y</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</msqrt>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<msqrt>
+<mrow>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>X</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>X</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</msqrt>
+<mo>·</mo>
+<mi>d</mi>
+</mrow>
+<mrow>
+<msub>
+<mi>Z</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>Z</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mrow>
+</mfrac>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00005-2" num="00005.2">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<mi>y</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>X</mi>
+<mrow>
+<mi>c</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>-</mo>
+<mi>x</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<mrow>
+<mi>tan</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>ϕ</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0088" num="0087">wherein, (X<sub>c1</sub>,Y<sub>c1</sub>,Z<sub>c1</sub>) is the 3D central coordinate of the pupil, (X<sub>c2</sub>,Y<sub>c2</sub>,Z<sub>c2</sub>) is the 3D central coordinate of the iris, d is the distance from the pupil plane to a screen plane, and ϕ is the angle information of the gaze direction. Therefore, through the 3D center of the pupil and the 3D center of the iris obtained in the first step in step 3, by combining the angle information of the gaze direction and the distance from the pupil to the screen, a coordinate of the gaze point position on the screen can be accurately acquired, so as to guarantee the accuracy of the gaze point estimation and meanwhile greatly reduce the complexity of the system structure and the calibration process.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">4</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM189059149">
+<claim-statement>What is claimed:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A gaze estimation method for a headset device based on iris and pupil, which only needs a single camera, a single infrared light source and a central calibration point which is each provided within four average regions at a screen, characterized in that the method includes following steps:
+<div class="claim-text">(1) eye movement feature extraction: inside the headset device, human eyes are close to the screen and the camera, a concept of first acquiring an outline of the eye movement feature and then positioning an eye movement feature center is used for a human eye image captured by the camera under a near-infrared light, and as for segmented feature regions of the pupil and iris, 2D central parameters of the pupil and iris are acquired by using an edge detection and an ellipse fitting algorithm;</div>
+<div class="claim-text">(2) 3D modeling of the eye movement feature: relative positions and distances between the human eyes and the screen as well as the human eyes and the camera remain constant, and meanwhile the pupil and the iris are not located in the same plane and the iris is in front of the pupil; according to a conversion formula from an image pixel coordinate system to a camera coordinate system, 2D image information of the human eyes, which is captured by the camera when the human eyes observe the central calibration points within four regions at the screen, is combined with position information of the calibration points, and a 3D gaze mapping model is obtained by 3D modeling an eye movement feature vector, i.e. 3D central coordinate parameters of the pupil and iris when the human eyes gaze at the central calibration points within four regions are obtained; and</div>
+<div class="claim-text">(3) estimation of a gaze point position: when the human eyes gaze at any point on the screen, the central parameters of the pupil and iris extracted from the 2D human eye image are compared with a 2D center of four calibration points, to position a gaze region of the human eyes, by using the established 3D gaze mapping model to calculate 3D coordinates of a pupil center and an iris center within the gaze region, a pupil-iris 3D gaze direction vector is obtained and combined with angle information of the gaze estimation to obtain a final gaze point position of the human eyes.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The gaze estimation method for the headset device based on the iris and the pupil according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the step (1) includes:
+<div class="claim-text">a. as for an input human eye image, a template matching algorithm is used to initially position a right eye region;</div>
+<div class="claim-text">b. as for a feature extraction part of the pupil center, first an OTSU algorithm which is combined with a compensation algorithm using a histogram peak as a search threshold, is used to achieve an automatic segmentation of the pupil region, and a maximum connected region search algorithm is used to eliminate a noise block on a binary image of the pupil, an edge of the pupil is obtained by using a Sobel edge detection, and finally central parameter information of the pupil is acquired through a RANSAC ellipse fitting algorithm;</div>
+<div class="claim-text">c. as for a feature extraction part of the iris center, an iris-interested region is determined by using a feature extraction center of the iris as a center of a ROI region, and a binary image of the iris is acquired by using a digital morphology combined with a histogram iterative algorithm, since upper and lower edges of the iris are easily covered by eyelid and eyelash, after a vertical edge information of the iris is acquired by using the Sobel vertical edge detection, central parameter information of the iris is obtained through the ellipse fitting.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The gaze estimation method for the headset device based on the iris and the pupil according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the step (2) includes:
+<div class="claim-text">a. calibration of an intrinsic parameter of the camera, wherein Zhang's plane calibration is used, and the intrinsic parameter of the camera is calibrated through a checkerboard pattern at different angles and distances shot by the camera at a fixed position, to acquire parameter information of a zoom factor in the conversion formula from a 2D image coordinate system of an object to the camera coordinate system;</div>
+<div class="claim-text">b. a gaze screen is divided into four regions with the same size and the center of each region is provided with one calibration point, by substituting a 2D central coordinate of the pupil and a known depth information value of the pupil, i.e. a distance from a 3D center of the pupil to an optical center of the camera, into the formula in step a, the 3D coordinate parameter of the pupil is obtained;</div>
+<div class="claim-text">c. according to a geometric similarity between the gaze direction of the human eyes in an iris plane and the gaze in a projection of the screen, a depth information value of the iris is calculated by using the coordinate of the calibration point on the screen and the 3D coordinate of the pupil acquired in step b, and then by substituting a 2D central coordinate of the iris and the depth information value of the iris into the formula in step a, the 3D coordinate parameter of the iris is obtained.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The gaze estimation method for the headset device based on the iris and the pupil according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the step (3) includes:
+<div class="claim-text">a. when the human eyes gaze at any point on the screen, the extracted 2D central coordinate of the pupil is compared with the 2D center of the pupil which corresponds to four calibration points, to position the gaze region of the human eyes;</div>
+<div class="claim-text">b. according to a characteristic that the pupil center and the iris center are non-concurrent in the 3D space leading to that the pupil center and the iris center are non-collinear in the 2D plan; the angle information of the human eye gaze estimation is acquired by using the 2D central coordinates of the pupil and iris;</div>
+<div class="claim-text">c. the 3D coordinates of the pupil center and the iris center within the gaze region are calculated by using the 3D gaze mapping model established in step (2), the pupil-iris 3D gaze direction vector is obtained and combined with the angle information of the gaze estimation to obtain the final gaze point position of the human eyes.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

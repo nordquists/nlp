@@ -1,0 +1,2796 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10785796B2 - Preamble group selection in random access of wireless networks 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA413893298">
+<div class="abstract" id="p-0001" num="0000">A transport block size (TBS) of a first uplink message (RACH Msg3) transmitted on a Physical Uplink Shared Channel (PUSCH) during a random access procedure in a User Equipment (UE) accessing a radio access network may be determined by receiving a pathloss threshold parameter. A downlink pathloss value indicative of radio link conditions between the UE and a base station (eNB) serving the UE is then determined. A smaller value of TBS is selected from a set of TBS values if the determined pathloss value is greater than an operating power level of the UE minus the pathloss threshold parameter. A larger value of TBS is selected if the pathloss value is less than the operating power level of the UE minus the pathloss threshold parameter and the TBS required to transmit the RACH Msg3 exceeds the smaller TBS value.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES274338154">
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of application Ser. No. 14/444,896, filed Jul. 28, 2014 (now U.S. Pat. No. 9,629,165), which is a division of application Ser. No. 13/413,450, filed Mar. 6, 2012 (now U.S. Pat. No. 8,792,377), which is a division of application Ser. No. 12/563,281, filed Sep. 21, 2009 (now U.S. Pat. No. 8,130,667), which claims the benefit of U.S. Provisional Application No. 61/098,346, filed Sep. 19, 2008, and entitled “Preamble Group Selection in Random Access of Wireless Networks,” which are incorporated herein by reference.</div>
+<heading id="h-0001">FIELD OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">This invention generally relates to wireless cellular communication, and in particular non-synchronous random access transmission in orthogonal and single carrier frequency division multiple access (OFDMA) (SC-FDMA) systems.</div>
+<heading id="h-0002">BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0004" num="0003">Wireless cellular communication networks incorporate a number of mobile UEs and a number of NodeBs. A NodeB is generally a fixed station, and may also be called a base transceiver system (BTS), an access point (AP), a base station (BS), or some other equivalent terminology. In general, NodeB hardware, when deployed, is fixed and stationary, while the UE hardware is portable.</div>
+<div class="description-paragraph" id="p-0005" num="0004">In contrast to NodeB, the mobile UE can be portable hardware. User equipment (UE), also commonly referred to as a terminal or a mobile station, may be fixed or mobile device and may be a wireless device, a cellular phone, a personal digital assistant (PDA), a wireless modem card, and so on. Uplink communication (UL) refers to a communication from the mobile UE to the NodeB, whereas downlink (DL) refers to communication from the NodeB to the mobile UE. Each NodeB contains radio frequency transmitter(s) and the receiver(s) used to communicate directly with the mobiles, which move freely around it. Similarly, each mobile UE contains radio frequency transmitter(s) and the receiver(s) used to communicate directly with the NodeB. In cellular networks, the mobiles cannot communicate directly with each other but have to communicate with the NodeB.</div>
+<div class="description-paragraph" id="p-0006" num="0005">Long Term Evolution (LTE) wireless networks, also known as Evolved Universal Terrestrial Radio Access (E-UTRA), are being standardized by the 3GPP working groups (WG). OFDMA and SC-FDMA (single carrier FDMA) access schemes were chosen for the down-link (DL) and up-link (UL) of E-UTRA, respectively. User Equipments (UE's) are time and frequency multiplexed on a physical uplink shared channel (PUSCH), and a fine time and frequency synchronization between UE's guarantees optimal intra-cell orthogonality. In case the UE is not UL synchronized, it uses a non-synchronized Physical Random Access Channel (PRACH), and the Base Station provides back some allocated UL resource and timing advance information to allow the UE to transmit on the PUSCH. The general operations of the physical channels are described in the EUTRA specifications, for example: “3rd Generation Partnership Project; Technical Specification Group Radio Access Network; Evolved Universal Terrestrial Radio Access (E-UTRA); Physical Channels and Modulation (TS 36.211 Release 8, or later).” As improvements of networks are made, the NodeB functionality evolves; a NodeB in the EUTRA environment is also referred to as an evolved NodeB (eNB).</div>
+<div class="description-paragraph" id="p-0007" num="0006">Random access transmission denotes a transmission by the mobile terminal, of at least one signal, from a plurality of pre-defined signals. The plurality of pre-defined signals is specified by the random access structure. Random access transmissions may also be referred to as ranging transmissions, or any other analogous term which typically designates an autonomously initiated transmission by a mobile UE. Random access transmissions are incorporated in practically all wireless cellular standards, including EUTRA, 802.16, etc.</div>
+<div class="description-paragraph" id="p-0008" num="0007">User Equipment may be either up-link (“UL”) synchronized or UL non-synchronized. When the UE UL has not been time synchronized, or has lost time synchronization, the UE can perform a non-synchronized random access to request allocation of up-link resources. Additionally, a UE can perform non-synchronized random access to register itself at the access point, or for numerous other reasons. Possible uses of random access transmission are many, and do not restrict the scope of the invention. For example, the non-synchronized random access allows the access point (“Node B”) to estimate, and if necessary, to adjust the UE's transmission timing, as well as to allocate resources for the UE's subsequent up-link transmission. Resource requests from UL non-synchronized UEs may occur for a variety of reasons, for example: new network access, data ready to transmit, or handover procedures. A Node B is generally a fixed station and may be called a base transceiver system (BTS), an access point, a base station, or various other names.</div>
+<div class="description-paragraph" id="p-0009" num="0008">As wireless systems proliferate, the expanding user base and the demand for new services necessitate the development of technologies capable of meeting users' ever increasing expectations. Users of mobile telecommunications devices expect not only globally available reliable voice communications, but a variety of data services, such as email, text messaging, and internet access. These factors conjoin to compel collaboration between telecommunications service providers in the development of advanced telecommunications technologies.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Consequently, the random access channel is intended to encompass a wider range of functionalities than in previous or current cellular networks, thus increasing its expected load. Further, the random access signal, through which the UE initiates the random access procedure, must reliably accommodate variable cell sizes, and provide the Node B with sufficient information to effectively prioritize resource requests. Also, because of its potentially non-synchronized nature, the random access signal must be designed to minimize interference with other UL (nearly) orthogonal transmissions.</div>
+<div class="description-paragraph" id="p-0011" num="0010">The random access signal is based on a preamble based physical structure of the PRACH. A number of available preambles are provided that can be used concurrently to minimize the collision probability between UEs accessing the PRACH in a contention-based manner. The signatures for random access preambles are partitioned into two configurable-size groups, enabling carrying 1-bit of information on the preamble. This information indicates to the eNB the preferred size of the first post-preamble PUSCH transmission, chosen by the UE from among two possible sizes based on the amount of data available for transmission and the radio conditions. 3GPP Document R1-083476 suggests use of a Pathloss measurement as a radio-link metric for preamble group selection in the Random Access procedure.</div>
+<description-of-drawings>
+<heading id="h-0003">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0012" num="0011">Particular embodiments in accordance with the invention will now be described, by way of example only, and with reference to the accompanying drawings, in which:</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 1</figref> shows an illustrative telecommunications network;</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows an illustrative up-link time/frequency allocation;</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows illustrative 1 and 2 sub-frame random access signals;</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows a first illustrative embodiment of random access signal transmitter;</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows a second illustrative embodiment of a random access signal transmitter;</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 6</figref> shows a third illustrative embodiment of a random access signal transmitter;</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 7</figref> shows an illustrative non-synchronous random access signal receiver;</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows a flow diagram of an illustrative random access preamble signal length adjustment and transmission method;</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 9</figref> shows a flow diagram of an illustrative alternative random access preamble signal length adjustment and transmission method; and</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a block diagram of an exemplary UE and NodeB for use in the network of <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+</description-of-drawings>
+<heading id="h-0004">DETAILED DESCRIPTION OF EMBODIMENTS OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0023" num="0022">Most of the time, the eNB is not aware of the use-case that triggered a Random Access procedure, nor is it aware of the UE's buffer status. In absence of any information, the eNB can only allocate blindly one single standard resource for the first transmission on the PUSCH following a successful RACH preamble attempt, also referred to as message 3 of the Random Access procedure. The maximum message 3 size a cell-edge UE can afford in the worst-case coverage situation is 80 bits. It is generally agreed that this particular transmission sets the limits of the overall LTE UL coverage. However, even in such a scenario, it would be unnecessarily restrictive to impose this unique minimum transport block size (TBS) for message 3 to all UEs in the cell. As a result, two message sizes, or TBSs, are considered for message 3, namely a “smaller” message size, MESSAGE_SIZE_GROUP_A, and a “larger” message size, MESSAGE_SIZE_GROUP_B, as defined in 3GPP TS 36.321, Technical Specification Group Radio Access Network; Evolved Universal Terrestrial Radio Access (E-UTRA); “Medium Access Control (MAC) protocol specification (Release 8).” Only MESSAGE_SIZE_GROUP_A needs to be either broadcast on a system information block (SIB) or hard-coded in the specification. The UE indicates which of the two TBSs is more appropriate based on both the amount of data available for transmission and the radio conditions. For the latter aspect, it is agreed that the Pathloss measurement would be used as radio-link metric. The power control setting of message 3, can be summarized as follows:</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <maths id="MATH-US-00001" num="00001"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msub> <mi>P</mi> <mrow> <mi>msg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>3</mn> </mrow> </msub> <mo>=</mo> <mrow> <mi>min</mi> <mo>⁢</mo> <mrow> <mo>{</mo> <mtable> <mtr> <mtd> <mrow> <msub> <mi>P</mi> <mrow> <mi>MA</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>X</mi> </mrow> </msub> <mo>;</mo> <mrow> <mrow> <mn>10</mn> <mo>⁢</mo> <mrow> <msub> <mi>log</mi> <mn>10</mn> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>N</mi> <mi>RB</mi> </msub> <mo>)</mo> </mrow> </mrow> </mrow> <mo>+</mo> <msub> <mi>P</mi> <mrow> <mn>0</mn> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>_</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>PRE</mi> </mrow> </msub> <mo>+</mo> </mrow> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <msub> <mi>Δ</mi> <mrow> <mi>PREAMBLE</mi> <mo>-</mo> <mrow> <mi>Msg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>3</mn> </mrow> </mrow> </msub> <mo>+</mo> <mi>PL</mi> <mo>+</mo> <msub> <mi>Δ</mi> <mi>TF</mi> </msub> <mo>+</mo> <mrow> <mi>Δ</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <msub> <mi>P</mi> <mi>rampup</mi> </msub> </mrow> <mo>+</mo> <msub> <mi>δ</mi> <mrow> <mi>msg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>2</mn> </mrow> </msub> </mrow> </mtd> </mtr> </mtable> <mo>}</mo> </mrow> </mrow> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>1</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where:
+<br/>
+P<sub>msg3 </sub>is the UE's transmit power for message 3 transmission
+<br/>
+P<sub>MAX </sub>is the maximum allowed power that depends on the UE power class
+<br/>
+N<sub>RB </sub>is the number of RBs allocated on PUSCH to message 3
+<br/>
+P<sub>0</sub> <sub>_</sub> <sub>PRE </sub>is the initial target received preamble power at eNB antenna port
+<br/>
+Δ<sub>PREAMBLE-Msg3 </sub>is the nominal power gap between the preamble and message 3, signaled by the eNB
+<br/>
+PL is the downlink pathloss estimate calculated in the UE
+<br/>
+ΔP<sub>rampup </sub>is the power offset reflecting the accumulated optional power rampup of the preamble during potential retries
+<br/>
+δ<sub>msg2 </sub>is the TPC command indicated in the random access response
+<br/>
+Δ<sub>TF </sub>is an optional MCS-dependent power offset defined as:
+</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <maths id="MATH-US-00002" num="00002"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mo>{</mo> <mtable> <mtr> <mtd> <mrow> <msub> <mi>Δ</mi> <mi>TF</mi> </msub> <mo>=</mo> <mrow> <mn>10</mn> <mo>⁢</mo> <mrow> <msub> <mi>log</mi> <mn>10</mn> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <msup> <mn>2</mn> <mrow> <mn>1.25</mn> <mo>⁢</mo> <mi>MPR</mi> </mrow> </msup> <mo>-</mo> <mn>1</mn> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mi>MPR</mi> <mo>=</mo> <mrow> <mi>TBS</mi> <mo>/</mo> <msub> <mi>N</mi> <mi>RE</mi> </msub> </mrow> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <msub> <mi>N</mi> <mi>RE</mi> </msub> <mo>=</mo> <mrow> <mn>2</mn> <mo>⁢</mo> <mrow> <msub> <mi>N</mi> <mi>RB</mi> </msub> <mo>·</mo> <msubsup> <mi>N</mi> <mi>sc</mi> <mi>RB</mi> </msubsup> <mo>·</mo> <msubsup> <mi>N</mi> <mi>symb</mi> <mi>UL</mi> </msubsup> </mrow> </mrow> </mrow> </mtd> </mtr> </mtable> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>2</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where:
+<br/>
+MPR is the modulation power ratio,
+<br/>
+N<sub>RE </sub>is the number of resource elements available in the allocated message 3 resource.
+<br/>
+Δ<sub>TF </sub>is a function of both the TBS and the number of allocated RBs.
+</div>
+<div class="description-paragraph" id="p-0026" num="0025">The aim of setting the TBS of message 3 based on radio-link conditions is to prevent from choosing larger message 3 TBS, MESSAGE_SIZE_GROUP_B, leading to a required transmit power exceeding the maximum allowed power, P<sub>MAX</sub>. In other words, the larger message 3 size, MESSAGE_SIZE_GROUP_B, should only be selected by the UE under the following condition:
+<br/>
+10 log<sub>10</sub>(<i>N</i> <sub>RB</sub> <sub>_</sub> <sub>2</sub>)+<i>P</i> <sub>0</sub> <sub>_</sub> <sub>PRE</sub>+Δ<sub>PREAMBLE-Msg3</sub> <i>+PL+Δ</i> <sub>TF</sub> <sub>_</sub> <sub>2</sub> <i>+ΔP</i> <sub>rampup</sub>+δ<sub>msg2</sub> <i>&lt;P</i> <sub>MAX</sub>  (3)
+<br/>
+where N<sub>RB-2 </sub>and Δ<sub>TF-2 </sub>are the number of RBs and the MCS-dependent power offset of message 3 of size MESSAGE_SIZE_GROUP_B.
+</div>
+<div class="description-paragraph" id="p-0027" num="0026">This translates into the following threshold on Pathloss, PARTITION_PATHLOSS_THRESHOLD, beyond which a MESSAGE_SIZE_GROUP_A preamble group should always be selected:</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <maths id="MATH-US-00003" num="00003"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mi>PARTITION_PATHLOSS</mi> <mo>⁢</mo> <mi>_THRESHOLD</mi> </mrow> <mo>=</mo> <mrow> <munder> <mrow> <msub> <mi>P</mi> <mrow> <mi>MA</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>X</mi> </mrow> </msub> <mo>-</mo> <msub> <mi>P</mi> <mrow> <mn>0</mn> <mo>⁢</mo> <mi>_</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>PRE</mi> </mrow> </msub> <mo>-</mo> <msub> <mi>Δ</mi> <mrow> <mi>PREAMBLE</mi> <mo>-</mo> <mrow> <mi>Msg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>3</mn> </mrow> </mrow> </msub> </mrow> <munder> <mi>︸</mi> <mrow> <mi>known</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>before</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>msg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>3</mn> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>allocation</mi> </mrow> </munder> </munder> <mo>-</mo> <munder> <mrow> <msub> <mi>Δ</mi> <mrow> <mi>TF</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>_</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>2</mn> </mrow> </msub> <mo>-</mo> <mrow> <mi>Δ</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <msub> <mi>P</mi> <mi>rampup</mi> </msub> </mrow> <mo>-</mo> <msub> <mi>δ</mi> <mrow> <mi>msg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>2</mn> </mrow> </msub> <mo>-</mo> <mrow> <mn>10</mn> <mo>⁢</mo> <mrow> <msub> <mi>log</mi> <mn>10</mn> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>N</mi> <mrow> <mi>RB</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>_</mi> <mo>⁢</mo> <mn>2</mn> </mrow> </msub> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <munder> <mi>︸</mi> <mrow> <mi>unknown</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>before</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>msg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>3</mn> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>allocation</mi> </mrow> </munder> </munder> </mrow> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>4</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+Where the first grouping of terms in Equation (4), known before msg3 allocation, defines the operating power level of the UE to be P<sub>MAX</sub>−P<sub>0</sub> <sub>_</sub> <sub>PRE</sub>−Δ<sub>PREAMBLE-Msg3</sub>.
+<br/>
+As shown in Equation (4), part of the information related to the message 3 allocation is not available at the UE when it prepares for preamble transmission, as follows:
+</div> <ul> <li id="ul0001-0001" num="0000"> <ul> <li id="ul0002-0001" num="0028">N<sub>RB-2</sub>: here it is questionable why the eNB would use a different number of RBs when allocating different messages 3 of MESSAGE_SIZE_GROUP_B size. Practically, a common sense allocation will consist in using 1-RB allocation for MESSAGE_SIZE_GROUP_A and 2-RB allocation for MESSAGE_SIZE_GROUP_B. Some flexibility may be used to allow for different settings in different cells or at different times, but such flexibility does not seem to be justified on a sub-frame basis. Therefore, in at least some embodiments N<sub>RB-2 </sub>is treated as a semi-static parameter in the eNB.</li> <li id="ul0002-0002" num="0029">Δ<sub>TF-2</sub>, when applied, is a function defined by equation (2) of MESSAGE_SIZE_GROUP_B and the number of allocated RBs for message 3, N<sub>RB-2</sub>, so given MESSAGE_SIZE_GROUP_B is known, by the eNB, the same above discussion on N<sub>RB-2 </sub>applies.</li> <li id="ul0002-0003" num="0030">ΔP<sub>rampup</sub>: RAN4 has specified conformance tests on the PRACH preamble choosing an operational point for the probability of missed detection of 1%, as defined in 3GPP TS 36.104 v8.2.0 (2008-05), Technical Specification Group Radio Access Network; Evolved Universal Terrestrial Radio Access (E-UTRA); “Base Station (BS) radio transmission and reception” (Release 8). Under this assumption, only 1% of preambles will ramp-up their power, which can be neglected here.</li> <li id="ul0002-0004" num="0031">δ<sub>msg2</sub>: this is TPC command conveyed by Random Access Response (RAR) that neither the UE nor the eNB can predict before preamble transmission. Ignoring this parameter only has a coverage impact for message 3 when δ<sub>msg2</sub>&gt;0, i.e. the TPC requests the UE to increase its power for message 3 transmission, which may cause erroneous MESSAGE_SIZE_GROUP_B selection when MESSAGE_SIZE_GROUP_A would have been safer. However the percentage of occurrence of this event depends on the range of δ<sub>msg2 </sub>which currently does not exceed 8 dB on the positive side. It is believed that a cautious usage of δ<sub>msg2 </sub>should be foreseen anyway as, in most practical cases, the instantaneous fading nature of the preamble disallows any accurate long-term power estimation. To be conservative, some Pathloss margin should be provisioned for this potential correction.</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0029" num="0032">Therefore, the above information can be signaled by the eNB in a single parameter not exceeding 2-3 bits, referred to as RACH_MSG3_THRESHOLD, computed as follows:
+<br/>
+RACH_MSG3_THRESHOLD=Δ<sub>TF</sub> <sub>_</sub> <sub>2</sub>+10 log<sub>10</sub>(<i>N</i> <sub>RB</sub> <sub>_</sub> <sub>2</sub>)+margin  (5)
+</div>
+<div class="description-paragraph" id="p-0030" num="0033">It follows that the resulting condition under which the UE can select MESSAGE_SIZE_GROUP_B size for message 3 transmission is:</div>
+<div class="description-paragraph" id="p-0031" num="0034"> <maths id="MATH-US-00004" num="00004"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mo>{</mo> <mtable> <mtr> <mtd> <mrow> <mi>PL</mi> <mo>&lt;</mo> <mrow> <mi>PARTITION_PATHLOSS</mi> <mo>⁢</mo> <mi>_THRESHOLD</mi> </mrow> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mi>with</mi> <mo>⁢</mo> <mstyle> <mtext>:</mtext> </mstyle> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mrow> <mi>PARTITION_PATHLOSS</mi> <mo>⁢</mo> <mi>_THRESHOLD</mi> </mrow> <mo>=</mo> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <msub> <mi>P</mi> <mrow> <mi>MA</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>X</mi> </mrow> </msub> <mo>-</mo> <msub> <mi>P</mi> <mrow> <mn>0</mn> <mo>⁢</mo> <mi>_</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mi>PRE</mi> </mrow> </msub> <mo>-</mo> <msub> <mi>Δ</mi> <mrow> <mi>PREAMBLE</mi> <mo>-</mo> <mrow> <mi>Msg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>3</mn> </mrow> </mrow> </msub> <mo>-</mo> <mrow> <mi>RACH_MSG3</mi> <mo>⁢</mo> <mi>_THRESHOLD</mi> </mrow> </mrow> </mtd> </mtr> </mtable> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>6</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where the terms at the right side of the equation are all available at the UE before preamble transmission. The parameter RACH_MSG3_THRESHOLD should not exceed 2-3 bits and is either broadcasted on SIB or hard-coded in the specification. The former case provides some flexibility to the network in using different values for MESSAGE_SIZE_GROUP_B and N<sub>RB-2 </sub>at different times and in different cells. In the latter case, the value of RACH_MSG3_THRESHOLD should be specified based on the TS 36.321 specification using a default value for MESSAGE_SIZE_GROUP_B and N<sub>RB-2</sub>.
+</div>
+<div class="description-paragraph" id="p-0032" num="0035">In some embodiments, RACH_MSG3_THRESHOLD is referred to as messagePowerOffsetGroupB and N<sub>RB-2</sub>, Δ<sub>TF-2 </sub>are referred to N<sub>RB-B </sub>and Δ<sub>TF-B </sub>respectively.</div>
+<div class="description-paragraph" id="p-0033" num="0036">Table 1 provides a range of values of this parameter, computed according to Equation (7), when considering MESSAGE_SIZE_GROUP_B ranging from 104 bits (1 RB, QPSK) up to 1544 bits (5 RBs, 64QAM), which is considered to be sufficient to cover the range of message 3 TBSs when coverage restrictions apply. This range also reflects the limited TBS range of Msg3 (TBS index I<sub>TBS</sub>≤15), resulting from the truncated modulation and coding scheme field as defined in R2-084964/R1-083431, “LS Reply to Uplink grant format in Random Access Response.” As can be observed, messagePowerOffsetGroupB ranges from 0 dB up to 12 dB, which in an exemplary embodiment of Table 1 is extended to [0, 18] dB to include some margin.</div>
+<div class="description-paragraph" id="p-0034" num="0037">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">messagePowerOffsetGroupB parameter values</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Field value</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="9" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">4</td>
+<td class="description-td">5</td>
+<td class="description-td">6</td>
+<td class="description-td">7</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="9" nameend="9" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Parameter value (dB)</td>
+<td class="description-td">−∞</td>
+<td class="description-td">0</td>
+<td class="description-td">3</td>
+<td class="description-td">6</td>
+<td class="description-td">9</td>
+<td class="description-td">12</td>
+<td class="description-td">15</td>
+<td class="description-td">18</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="9" nameend="9" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0035" num="0038">Note that the value of −∞ is included to be compatible with an embodiment responsive to R2-087402/R1-090003, “LS on preamble group selection based on radio link condition.”</div>
+<div class="description-paragraph" id="p-0036" num="0039">Appendix A and Appendix B contain spreadsheets that illustrate calculation details that are used to select the values for Table 1. Appendix A provides a detailed range of values for messagePowerOffsetGroupB while Appendix B shows the benefit of the preamble group selection, and shows the limit where the maximum Tx power is reached when transmitting the larger message size, which is the limit by which UE should select the smaller message size.</div>
+<div class="description-paragraph" id="p-0037" num="0040"> <figref idrefs="DRAWINGS">FIG. 1</figref> shows an exemplary wireless telecommunications network <b>100</b>. The illustrative telecommunications network includes base stations <b>101</b>, <b>102</b>, and <b>103</b>. Each of base stations <b>101</b>, <b>102</b>, and <b>103</b> are operable over corresponding coverage areas <b>104</b>, <b>105</b>, and <b>106</b>. Each base station's coverage area is further divided into cells. In the illustrated network, each base station's coverage area is divided into three cells. Handset or other UE <b>109</b> is shown in Cell A <b>108</b>, which is within coverage area <b>104</b> of base station <b>101</b>. Base station <b>101</b> is transmitting to and receiving transmissions from UE <b>109</b>. As UE <b>109</b> moves out of Cell A <b>108</b>, and into Cell B <b>107</b>, UE <b>109</b> may be handed over to base station <b>102</b>. Because UE <b>109</b> is synchronized with base station <b>101</b>, UE <b>109</b> can employ non-synchronized random access to initiate handover to base station <b>102</b>.</div>
+<div class="description-paragraph" id="p-0038" num="0041">The UE <b>109</b> can also employ non-synchronous random access to request allocation of up-link <b>111</b> time or frequency or code resources. If UE <b>109</b> has data ready for transmission, for example, traffic data, measurements report, tracking area update, etc., UE <b>109</b> can transmit a random access signal on up-link <b>111</b>. The random access signal notifies base station <b>101</b> that UE <b>109</b> requires up-link resources to transmit its data. Base station <b>101</b> responds by transmitting to UE <b>109</b>, via down-link <b>110</b>, a message containing the parameters of the resources allocated for UE <b>109</b> up-link transmission along with a possible timing error correction. After receiving the resource allocation and a possible timing advance message transmitted on down-link <b>110</b> by base station <b>101</b>, UE <b>109</b> (possibly) adjusts its transmit timing and transmits its data on up-link <b>111</b> employing the allotted resources during the prescribed time interval.</div>
+<div class="description-paragraph" id="p-0039" num="0042">For a random access transmission, UE <b>109</b> selects a message 3 size to be conveyed to the NodeB by the random access signal as described above and with regard to equation 6.</div>
+<div class="description-paragraph" id="p-0040" num="0043"> <figref idrefs="DRAWINGS">FIG. 2</figref> illustrates an exemplary up-link transmission frame <b>202</b>, and the allocation of the frame to scheduled and random access channels. The illustrative up-link transmission frame <b>202</b>, comprises a plurality of transmission sub-frames. Sub-frames <b>203</b> are reserved for scheduled UE up-link transmissions. Interspersed among scheduled sub-frames <b>203</b>, are time and frequency resources allocated to random access channels <b>201</b>. In the illustration of <figref idrefs="DRAWINGS">FIG. 2</figref>, a single sub-frame supports two random access channels. Note that the illustrated number and spacing of random access channels is purely a matter of convenience; a particular transmission frame implementation may allocate more or less resources to random access channels. Including multiple random access channels allows multiple UEs to simultaneously transmit a random access signal without collision. However, because each UE independently chooses the random access channel on which it transmits, collisions between UE random access signals may occur and must be resolved.</div>
+<div class="description-paragraph" id="p-0041" num="0044"> <figref idrefs="DRAWINGS">FIG. 3</figref> illustrates one embodiment of a random access signal. Random access signal <b>301</b> occupies a single sub-frame <b>308</b>, while random access signal <b>311</b> occupies two sub-frames <b>318</b>. In the illustrative embodiment of one sub-frame random access signal <b>301</b>, duration <b>302</b> is included prior to transmission of random access preamble signal <b>304</b>, to prevent interference between random access preamble signal <b>304</b> and any transmission on the random access preamble signal frequency bands during the previous sub-frame. This duration <b>302</b> may or may not be realized as a cyclic prefix (“CP”) attached at the preamble start to allow simplified frequency-domain receiver implementation. Random access preamble signal <b>304</b> follows duration <b>302</b>. Random access preamble signal <b>304</b> is designed to maximize the probability of preamble detection by the Node B and to minimize the probability of false preamble detections by the Node B, while maximizing the total number of resource opportunities. Similarly random access signal <b>311</b> includes cyclic prefix <b>312</b> and preamble <b>314</b> occupy two sub-frames <b>318</b>.</div>
+<div class="description-paragraph" id="p-0042" num="0045">Embodiments of the invention utilize CAZAC sequences to generate the random access preamble signal. CAZAC sequences are complex-valued sequences with following two properties: 1) constant amplitude (CA), and 2) zero cyclic autocorrelation (ZAC). Well-known examples of CAZAC sequences include (but are not limited to): Chu Sequences, Frank-Zadoff Sequences, Zadoff-Chu (ZC) Sequences, and Generalized Chirp-Like (GCL) Sequences.</div>
+<div class="description-paragraph" id="p-0043" num="0046">As is well known in the art, Zadoff-Chu (ZC) sequences, as defined by:
+<br/>
+<i>aM</i>(<i>k</i>)=exp[<i>j</i>2π(<i>M/N</i>)[<i>k</i>(<i>k+</i>1)/2<i>+qk</i>]] for <i>N </i>odd
+<br/>
+<i>aM</i>(<i>k</i>)=exp[<i>j</i>2π(<i>M/N</i>)[<i>k</i>2/2<i>+qk</i>]] for <i>N </i>even
+</div>
+<div class="description-paragraph" id="p-0044" num="0047">are representative examples of CAZAC sequences. Alternative convention for ZC definition replaces “j” in the above formula by “−j.” Either convention can be adopted. In the above formula, “M” and “N” are relatively prime, and “q” is any fixed integer. Also, “N” is the length of the sequence, “k” is the index of the sequence element (k is from {0, 1, . . . , N−1}), and “M” is the index of the root ZC sequence. Making “N” a prime number maximizes the set of non-orthogonal root ZC sequences having optimal cross-correlation. Thus, when “N” is prime, there are “(N−1)” possible choices for “M,” where each choice results in a distinct root ZC CAZAC sequence. In this invention, terms: Zadoff-Chu, ZC, and ZC CAZAC, are used interchangeably. Term CAZAC denotes any CAZAC sequence, like ZC, or otherwise.</div>
+<div class="description-paragraph" id="p-0045" num="0048">In this disclosure, the cyclically shifted or phase ramped CAZAC-like sequence is sometimes denoted as cyclic shifted base sequence, cyclic shifted root sequence, phase ramped base sequence, phase ramped root sequence, or any other equivalent term.</div>
+<div class="description-paragraph" id="p-0046" num="0049">In one embodiment of the invention, random access preamble signal <b>304</b> (or <b>314</b>) is constructed from a constant amplitude zero autocorrelation (“CAZAC”) sequence, such as a ZC sequence. Additional modifications to the selected CAZAC sequence can be performed using any of the following operations: multiplication by a complex constant, DFT, IDFT, FFT, IFFT, cyclic shifting, zero—padding, sequence block—repetition, sequence truncation, sequence cyclic—extension, and others. Thus, in the primary embodiment of the invention, a UE constructs random access preamble signal (<b>304</b> or <b>314</b>), by selecting a CAZAC sequence, possibly performing a combination of described modifications to the selected CAZAC sequence, modulating the modified sequence, and transmitting the resulting random access signal over the air.</div>
+<div class="description-paragraph" id="p-0047" num="0050">In practical systems, there is a need to specify or pre-define the set of allowed random access preamble signals. Thus, a UE autonomously selects (or can be allocated) at least one random access preamble signal from the pre-defined set of random access preamble signals. Consecutively, UE transmits the selected signal over the air. Node B searches within the finite pre-defined set of random access signals, and is therefore able to detect an occurrence of a random access transmission by the UE.</div>
+<div class="description-paragraph" id="p-0048" num="0051">One method of pre-defining the set of random access preamble signals is to allow a choice of modifications to a fixed root CAZAC sequence, such as a ZC CAZAC sequence. For example, in one embodiment of the invention, distinct random access preamble signals are constructed by applying distinct cyclic shifts when performing the modification of a root CAZAC sequence. Thus, in this embodiment of the invention, UE autonomously selects the random preamble access signal by selecting a value for the cyclic shift. The selected value of the cyclic shift is applied during the process of modification of the root CAZAC sequence. For sequence [c(0) c(1) c(2) . . . c(L−1)], the corresponding cyclically shifted sequence is [c(n) c(n+1) c(n+2) . . . c(L−1) c(0) c(1) . . . c(n−1)], where “n” is the value of the cyclic shift. Thus, in this embodiment, the set of possible cyclic shifts defines the set of allowed random access preamble signals.</div>
+<div class="description-paragraph" id="p-0049" num="0052">An alternate method of pre-defining the set of random access preamble signals is to permit a choice of used root CAZAC sequences, such as ZC sequences. For example, in this embodiment of the invention, distinct random access preamble signals are constructed by applying pre-defined common modifications to distinct root CAZAC sequences. Consequently, UE autonomously selects the random access preamble signal by selecting a distinct root CAZAC sequence, which it (UE) then modifies to produce the random access preamble signal. Thus, in this alternate embodiment of the invention, the set of allowed root CAZAC sequences also defines the set of allowed random access preamble signals.</div>
+<div class="description-paragraph" id="p-0050" num="0053">In a general embodiment of the invention, the set of allowed random access preamble signals is defined by two sets: 1) set of allowed root CAZAC sequences, and 2) set of allowed modifications to a given root CAZAC sequence. For example, in this general embodiment of the invention, a random access preamble signal is constructed by first selecting the root ZC CAZAC sequence, and second, by selecting the value of the cyclic shift. Selections can be performed autonomously by the UE, and the UE applies the selected value of the cyclic shift during the process of modification of the selected root ZC CAZAC sequence.</div>
+<div class="description-paragraph" id="p-0051" num="0054"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a block diagram showing an apparatus in accordance with an embodiment of the invention. Apparatus <b>400</b> comprises ZC Root Sequence Selector <b>401</b>, Cyclic Shift Selector <b>402</b>, Repeat Selector <b>403</b>, ZC Root Sequence Generator <b>404</b>, Cyclic Shifter <b>405</b>, DFT <b>406</b>, Tone Map <b>407</b>, other signals or zero-padding in <b>411</b>, IDFT <b>408</b>, Repeater <b>409</b>, optional repeated samples <b>412</b>, Add CP <b>410</b>, and the random access signal <b>413</b>. Elements of the apparatus may be implemented as components in a programmable processor. At times, the IDFT block <b>408</b> may be implemented using an Inverse Fast Fourier Transform (IFFT), and at times the DFT block <b>406</b> may be implemented using Fast Fourier Transform (FFT). Apparatus <b>400</b> is used to select and perform the random access preamble signal transmission as follows. The UE performs selection of the ZC CAZAC root sequence using ZC Root Sequence Selector <b>401</b> and the selection of the cyclic shift value using <b>402</b>. Next, UE generates the ZC sequence using ZC Root Sequence Generator <b>404</b>. Then, if necessary, the UE performs cyclic shifting of the selected ZC sequence using Cyclic Shifter <b>405</b>. The UE performs DFT (Discrete Fourier Transform) of the cyclically shifted ZC sequence DFT <b>406</b>. The result of the DFT operation is mapped onto designated set of tones (sub-carriers) using Tone Map <b>407</b>. Additional signals or zero-padding signals <b>411</b>, may or may not be present. The UE next performs IDFT of the mapped signal using IDFT <b>408</b>. Size of the IDFT <b>408</b> can be bigger than the size of DFT <b>406</b>. Block-Repetition of the IDFT-ed signal is optional, and performed using Repeater <b>409</b>. Note that signals <b>412</b> represent optional repeated samples. This repetition can be applied when the preamble transmission occupies two or more sub-frames. An optional cyclic prefix (CP) can then be added using Add CP <b>410</b>, to arrive at the random access signal <b>413</b>. The random access signal <b>413</b> is transmitted over the air.</div>
+<div class="description-paragraph" id="p-0052" num="0055"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a block diagram showing an apparatus in accordance with an alternative embodiment of the invention. Apparatus <b>500</b> comprises ZC Root Sequence Selector <b>501</b>, Cyclic Shift Selector <b>502</b>, Repeat Selector <b>503</b>, ZC Root Sequence Generator <b>504</b>, Cyclic Shifter <b>505</b>, DFT <b>506</b>, Tone Map <b>507</b>, other signals or zero-padding <b>511</b>, IDFT <b>508</b>, Repeater <b>509</b>, optional repeated samples <b>512</b>, Add CP <b>510</b>, and the random access signal <b>513</b>. Elements of the apparatus may be implemented as components in a programmable processor. At times, the IDFT <b>508</b> may be implemented using an Inverse Fast Fourier Transform (IFFT), and at times the DFT <b>506</b> may be implemented using Fast Fourier Transform (FFT). Apparatus <b>500</b> is used to select and perform the random access preamble signal transmission as follows. The UE performs selection of the ZC CAZAC root sequence using ZC Root Sequence Selector <b>501</b> and the selection of the cyclic shift value using Cyclic Shifter <b>502</b>. Then, UE generates the ZC sequence using ZC Root Sequence Generator <b>504</b>. The selected ZC sequence is transformed using DFT <b>506</b>. The result of the DFT operation is then mapped onto designated set of tones (sub-carriers) using Tone Map <b>507</b>. Additional signals or zero-padding <b>511</b>, may or may not be present. The UE then performs IDFT of the mapped signal using IDFT <b>508</b>. Using Cyclic Shifter <b>505</b>, the selected value of the cyclic shift is then applied to the IDFT-ed signal. The value of the cyclic shift is obtained from <b>502</b>. Block-Repetition of the cyclically shifted IDFT-ed signal is optional, and performed using <b>509</b>. Note that <b>512</b> represent optional repeated samples. This repetition can be applied when the preamble transmission occupies two or more sub-frames. An optional cyclic prefix (CP) can then be added using <b>510</b>, to arrive at the random access signal <b>513</b>. The random access signal <b>513</b> is transmitted over the air.</div>
+<div class="description-paragraph" id="p-0053" num="0056"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a block diagram showing an apparatus in accordance with a third embodiment of the invention. Apparatus <b>600</b> comprises ZC Root Sequence Selector <b>601</b>, Cyclic Shift Selector <b>602</b>, Repeat Selector <b>603</b>, ZC Root Sequence Generator <b>604</b>, Cyclic Shifter <b>605</b>, Tone Map <b>607</b>, other signals or zero-padding in <b>611</b>, IDFT <b>608</b>, Repeater <b>609</b>, optional repeated samples <b>612</b>, Add CP <b>610</b>, and the random access signal <b>613</b>. Elements of the apparatus may be implemented as components in a programmable processor. At times, the IDFT <b>608</b> may be implemented using an Inverse Fast Fourier Transform (IFFT). Apparatus <b>600</b> is used to select and perform the random access preamble signal transmission as follows. The UE performs selection of the ZC CAZAC root sequence using ZC Root Sequence Selector <b>601</b> and the selection of the cyclic shift value using Cyclic Shift Selector <b>602</b>. Then, UE generates the ZC sequence using ZC Root Sequence Generator <b>604</b>. Selected ZC sequence is mapped onto designated set of tones (sub-carriers) using Tone Map <b>607</b>. Additional signals or zero-padding signals <b>611</b>, may or may not be present. The UE then performs IDFT of the mapped signal using IDFT <b>608</b>. Using Cyclic Shifter <b>605</b>, the selected value of the cyclic shift is applied to the IDFT-ed signal. Value of the cyclic shift is obtained from Cyclic Shift Selector <b>602</b>. Block-Repetition of the cyclically shifted IDFT-ed signal is optional, and performed using Repeater <b>609</b>. Note that signals <b>612</b> represent optional repeated samples. This repetition can be applied when the preamble transmission occupies two or more sub-frames. An optional cyclic prefix (CP) can then be added using Add CP <b>610</b>, to arrive at the random access signal <b>613</b>. The random access signal <b>613</b> is then transmitted over the air.</div>
+<div class="description-paragraph" id="p-0054" num="0057">In all embodiments of the invention, the set of allowed cyclic shifts can be dimensioned in accordance with the physical limitations of the cell, which include cells maximum round trip delay plus the delay spread of the channel. For example, a single root ZC CAZAC sequence may be cyclically shifted by any integer multiple of the cell's maximum round trip delay plus the delay spread, to generate a set of pre-defined random access preamble signals. The maximum round trip delay plus the delay spread of the channel must be converted to the sampling unit of the sequence. Thus, if the maximum round trip plus the delay spread of the channel is given as “x,” then possible choices for cyclic shift values can be dimensioned as n from {0, x, 2x, . . . , (u−1)x} where ux can't exceed the length of the sequence which is being cyclically shifted.</div>
+<div class="description-paragraph" id="p-0055" num="0058">Round trip delay is a function of cell size, where cell size is defined as the maximum distance d at which a UE can interact with the cell's base station, and can be approximated using the formula t=6.67d, where t and d are expressed in μs and km respectively. The round-trip delay is the delay of the earlier radio path. A typical earlier path is the line-of-sight path, defined as the direct (straight-line) radio path between the UE and the base station. When the UE is surrounded by reflectors, its radiated emission is reflected by these obstacles, creating multiple, longer traveling radio paths. Consequently, multiple time-delayed copies of the UE transmission arrive at the base station. The time period over which these copies are delayed is referred to as “delay spread,” and for example, in some cases, 5 μs may be considered a conservative value thereof.</div>
+<div class="description-paragraph" id="p-0056" num="0059">When the set {0, x, 2x, . . . , (u−1)x} of cyclic shift values generates an insufficient number of distinct random access preamble signals, then additional root ZC CAZAC sequences (for example, for M=2 and M=3) can be employed for random access preamble signal generation. In this situation, selection of prime N shows to be advantageous, because in that case, the set of all possible choices for M is {1, 2, . . . , (N−1)}. Thus, in one embodiment of the invention, distinct random access preamble signals are identified by the set of all possible choices for the cyclic shift value and the set of allowed choices for M. In addition to providing supplementary intra-cell sequences, when used in neighboring cells, these additional root ZC CAZAC sequences provide good inter-cell interference mitigation. Thus, during the cellular system design, a scenario where adjacent cells use identical root sequences should be avoided. This can be achieved through a number of possible techniques, including but not limited to: cellular system planning, sequence hopping, or a combination thereof.</div>
+<div class="description-paragraph" id="p-0057" num="0060">The set of allowed random access preamble signals must be revealed to the UE prior to the random access transmission. This can be achieved in a number of different ways, including hard-wiring this information in the UE. The preferred approach, however, is for the Node B to broadcast information which allows the UE to infer the set of allowed random access preamble signals. For example, the Node B can broadcast: 1) which root CAZAC sequences are permitted, and 2) which values of the “cyclic—shift” are permitted. The UE reads the broadcasted information, infers the allowed set of random access preamble signals, selects at least one signal from the set, and performs the random access transmission. Note that the selection of the random access preamble signal amounts to the selection of the root ZC CAZAC sequence, the selection of the value of the cyclic shift, and possibly the selection of the frequency bin (in case multiple bins are configured per random access time slot). In certain cases, additional broadcasted information may be required, such as whether or not the UE needs to perform signal repetition of or not. Overall, this approach, based on broadcasting the required information, is preferred, because it allows for optimizing the cellular network based on physical limitations, such as the cell-size. Any given UE is then flexible enough to be used in all types of cells, and system optimization is performed by the cell design.</div>
+<div class="description-paragraph" id="p-0058" num="0061">Sequences obtained from cyclic shifts of a single CAZAC root sequence (ZC or otherwise) are orthogonal to one another if the cyclic shift value is larger than the maximum time uncertainty of the received signal, including the delay spread and the spill-over. In other words, the cyclic shifts create zones with zero correlation between distinct random access preamble signals. Thus, a cyclically shifted sequence can be observed without any interference from sequences created using different cyclic shifts. Sequences obtained from cyclic shifts of different Zadoff-Chu (ZC) sequences are not orthogonal, but have optimal cross-correlation as long as the sequence length is a prime number. Therefore, it is recommended that orthogonal sequences should be favored over non-orthogonal sequences. For this reason, additional Zadoff-Chu (ZC) root sequences should be used only when the required number of sequences cannot be generated by cyclic shifts of a single root sequence. As a result, cyclic shift dimensioning is of primary importance in the random access sequence design. As mentioned above, the cyclic shift value is dimensioned to account for the maximum time uncertainty in random access preamble reception. This time uncertainty reflects the Node B-UE-Node B signal propagation delay (“round-trip time”) plus the delay spread. Thus, cyclic shift dimensioning ensures that distinct random access signals, generated from a single root CAZAC sequence, are received within the zone of zero mutual correlation. Although delay spread can be assumed to be constant, signal round-trip time depends on the cell size. Thus, the larger the cell, the larger the cyclic shift required to generate orthogonal sequences, and correspondingly, the larger the number of Zadoff-Chu (ZC) root sequences necessary to provide the required number of sequences.</div>
+<div class="description-paragraph" id="p-0059" num="0062">Table 2 provides an example of random access preamble sequence design for different cell sizes. Table 2 illustrates how the number of required root ZC CAZAC sequences increases from 1 to 8, when the cell size is increased from 0.8 km (Cell Scenario 1) to 13.9 km (Cell Scenario 4). Table 2 is derived using following parameters: Maximum delay spread is 5 μsec, root ZC CAZAC sequence length is 863 samples, preamble sampling rate is 1.07875 MHz, and spill-over guard period is 2 samples. Because the expected inter-cell interference and load (user density) increases as cell size decreases, smaller cells need more protection from co-preamble interference than larger cells. Thus, the relationship between cell size and the required number of Zadoff-Chu (ZC) root sequences allows for system optimization, and the Node B should configure the primitive cyclic shift to be used in each cell independently. The set of used cyclic shifts values is then built as integral multiples of the primitive cyclic shift value. As shown in Table 2, this can be done either by configuring either the primitive cyclic shift value, or by configuring the number of different root Zadoff-Chu (ZC) sequences to be used in a cell. This configurability provides the benefit of providing a constant number of distinct random access preamble signals irrespective of the cell size, which simplifies the specification of the Medium Access Control (MAC) procedure</div>
+<div class="description-paragraph" id="p-0060" num="0063">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Cell Scenarios With Respect to Different Cyclic Shift Increments</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Number of</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Distinct</td>
+<td class="description-td">Number</td>
+<td class="description-td"> </td>
+<td class="description-td">Primitive</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Random</td>
+<td class="description-td">Of Used</td>
+<td class="description-td"> </td>
+<td class="description-td">Cyclic</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Cellular</td>
+<td class="description-td">Cell</td>
+<td class="description-td">Access</td>
+<td class="description-td">Root ZC</td>
+<td class="description-td">Number of Used</td>
+<td class="description-td">Shift</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Scenario</td>
+<td class="description-td">Size</td>
+<td class="description-td">Preamble</td>
+<td class="description-td">CAZAC</td>
+<td class="description-td">Cyclic Shifts Per</td>
+<td class="description-td">Value</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Index</td>
+<td class="description-td">[km]</td>
+<td class="description-td">Signals</td>
+<td class="description-td">Sequences</td>
+<td class="description-td">ZC Sequence</td>
+<td class="description-td">[samples]</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">0.8</td>
+<td class="description-td">64</td>
+<td class="description-td">1</td>
+<td class="description-td">64</td>
+<td class="description-td">13</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">2.6</td>
+<td class="description-td">64</td>
+<td class="description-td">2</td>
+<td class="description-td">32</td>
+<td class="description-td">26</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">6.3</td>
+<td class="description-td">64</td>
+<td class="description-td">4</td>
+<td class="description-td">16</td>
+<td class="description-td">53</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">13.9</td>
+<td class="description-td">64</td>
+<td class="description-td">8</td>
+<td class="description-td">8</td>
+<td class="description-td">107</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0061" num="0064"> <figref idrefs="DRAWINGS">FIG. 7</figref> shows an embodiment of a random access signal receiver. This receiver advantageously makes use of the time and frequency domain transforming components used to map and de-map data blocks in the SC-FDMA up-link sub-frame. The received random access signal <b>701</b> comprising cyclic prefix and random access preamble signal is input to cyclic prefix removal component <b>702</b> which strips cyclic prefix from the random access signal producing signal <b>703</b>. Frequency domain transforming component <b>704</b> is coupled to cyclic prefix removal component <b>702</b>. Frequency domain transforming component <b>704</b> converts signal <b>703</b> into sub-carrier mapped frequency tones <b>705</b>. Sub-carrier de-mapping component <b>706</b> is coupled to frequency domain transforming component <b>704</b>. Sub-carrier de-mapping component <b>706</b> de-maps sub-carrier mapped frequency tones <b>705</b> to produce useful frequency tones <b>707</b>. Product component <b>711</b> is coupled to both sub-carrier de-mapping component <b>706</b> and the complex conjugation component <b>709</b>. Frequency domain transforming component <b>709</b> converts a preamble root sequence <b>710</b>, such as a prime length Zadoff-Chu sequence, into a corresponding set of preamble frequency tones <b>708</b>. Product component <b>711</b> computes a tone by tone complex multiplication of received frequency tones <b>707</b> with samples <b>708</b> to produce a set of frequency tones <b>712</b>. Time domain transforming component <b>713</b> is coupled to product component <b>711</b>. Time domain transforming component <b>713</b> converts multiplied frequency tones <b>712</b> into correlated time signal <b>714</b>. Correlated time signal <b>714</b> contains concatenated power delay profiles of all cyclic shift replicas of the preamble root sequence <b>710</b>. Energy detection block <b>715</b> is coupled to time domain transforming block <b>713</b>. Energy detection block <b>715</b> identifies received preamble sequences by detecting the time of peak correlation between received random access signal <b>701</b> and preamble root sequence <b>710</b>. Note that DFT <b>709</b> is required when the corresponding transmitter diagram is given as in either <figref idrefs="DRAWINGS">FIG. 4</figref>, or as in <figref idrefs="DRAWINGS">FIG. 5</figref>. In case that transmitter diagram is as in <figref idrefs="DRAWINGS">FIG. 6</figref>, the DFT <b>709</b> is omitted.</div>
+<div class="description-paragraph" id="p-0062" num="0065">As pointed out earlier, a prime length preamble sequence is recommended for use with the SC-FDMA up-link transmitter system. To achieve this, following steps can be taken. Preamble duration Tp is selected to optimize cell coverage (cell size, noise and interference conditions), and to be an integer multiple of the SC-FDMA data block duration. A reference length Npi=Tp×Rsi samples is selected, where Rsi is the allocated random access signal bandwidth, which is not used by data transmissions. Preamble sequence is then generated with sequence length corresponding to the largest prime number Np which is less than reference length Npi. Thus, since preamble duration remains Tp, preamble sampling rate becomes Rsi×Np/Npi. Because Npi sub-carriers are allocated to the random-access channel, and the preamble was shortened to the nearest lower prime number of samples (Np), there are unused sub-carriers that may be zeroed and distributed outside the preamble sub-carriers to isolate the preamble from the surrounding frequency bands.</div>
+<div class="description-paragraph" id="p-0063" num="0066"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows a flow diagram of an illustrative method for constructing a prime length sequence for use with an SC-FDMA up-link transmitter. In block <b>800</b>, a RACH message 3 threshold value encoded as a <b>2</b> or three bit value is received from the serving NodeB via an SIB. The threshold value is calculated by the NodeB as described with respect to equation 5. The UE then uses the threshold value to determine in block <b>801</b> its requested message 3 length as described in more detail with regard to equation 6. Since there are two choices for the message 3 length, the UE forms the preamble by selecting from one of two defined sets of sequences in order to convey the preferred message 3 size to the NodeB.</div>
+<div class="description-paragraph" id="p-0064" num="0067">In block <b>802</b>, a preamble duration T<sub>p </sub>is selected. T<sub>p </sub>is an integer multiple of the SC-FDMA up-link data block duration.</div>
+<div class="description-paragraph" id="p-0065" num="0068">In block <b>804</b>, a reference length is derived. This reference length is N<sub>pi </sub>samples, where N<sub>pi</sub>=T<sub>p</sub>×R<sub>si</sub>, and Rsi is the allocated random access signal bandwidth. In block <b>806</b>, the reference length derived in block <b>804</b> is shortened to the nearest lower prime number of samples, N<sub>p</sub>. In block <b>807</b>, the N<sub>p</sub>-length sequence is generated. In block <b>808</b>, the N<sub>p </sub>time samples are converted into N<sub>p </sub>frequency tones. The N<sub>p </sub>frequency tones are mapped onto the allocated random-access channel sub-carriers in block <b>810</b>. Because N<sub>pi </sub>sub-carriers are allocated to the random-access channel, and the preamble sequence length was shortened to N<sub>p </sub>samples resulting in only N<sub>p </sub>frequency tones to be mapped onto the sub-carriers, N<sub>pi</sub>−N<sub>p </sub>sub-carriers remain unused. In block <b>812</b>, the unused sub-carriers are zeroed and distributed around the preamble sub-carriers to provide isolation from adjacent frequency bands. These unused sub-carriers can be potentially be re-used for cubic metric (or PAPR) reduction through either cyclic extension or tone reservation.</div>
+<div class="description-paragraph" id="p-0066" num="0069"> <figref idrefs="DRAWINGS">FIG. 9</figref> shows a flow diagram of an alternative method of generating a prime length sequence for use with an SC-FDMA up-link transmitter. Because the preamble sequence is deterministic, prime length preamble sequences can be predefined and stored for later use.</div>
+<div class="description-paragraph" id="p-0067" num="0070">In block <b>900</b>, a RACH message 3 threshold value encoded as a two or three bit value is received from the serving NodeB via an SIB. The threshold value is calculated by the NodeB as described with respect to equation 5.</div>
+<div class="description-paragraph" id="p-0068" num="0071">In block <b>902</b>, once configured by the Node B, the prime length preamble sequences are generated and converted into frequency domain preamble samples. In block <b>904</b>, the frequency domain preamble samples are stored in a storage device to be retrieved as needed. In block <b>906</b>, a random access signal transmission is initiated, and preamble duration is selected. The selected duration is an integer multiple of up-link sub-carrier data block duration, and is chosen to meet system coverage requirements.</div>
+<div class="description-paragraph" id="p-0069" num="0072">The UE then uses the threshold value to determine block <b>908</b> its requested message 3 length as described in more detail with regard to equation 6. Since there are two choices for the message 3 length, the UE forms the preamble by selecting from one of two defined sets of sequences in order to convey the preferred message 3 size to the NodeB.</div>
+<div class="description-paragraph" id="p-0070" num="0073">In block <b>910</b>, a stored preamble sequence is selected. The selected sequence will preferably be the sequence having the number of samples immediately lower than the number of samples computed from the duration selected in block <b>906</b> and random access signal bandwidth. In block <b>912</b>, the preamble frequency samples are read from the storage device and mapped onto the sub-carriers allocated to the random access channel. Because more sub-carriers are allocated to the random access channel than there are preamble frequency samples, unused sub-carriers are zeroed and distributed in block <b>914</b> around the preamble sub-carriers to provide isolation from adjacent frequency bands. This alternate implementation allows omission of the frequency domain transforming component <b>402</b> from the random access preamble transmitter. The preamble samples are frequency domain transformed only once, prior to storage, and therefore the transform process is not concerned with the latency requirements of the random access preamble transmitter, and can be implemented in a simpler and less costly manner. It should be further noted that frequency domain transforming component <b>402</b> can be totally eliminated if the preamble root sequence is configured directly in frequency representation by the Node B. However, because the preamble sequence is defined to be a Cyclic Shifted Zadoff-Chu sequence, the cyclic shift must still be implemented. The cyclic shift may be performed at the system sampling rate before cyclic prefix insertion <b>410</b>.</div>
+<div class="description-paragraph" id="p-0071" num="0074">For orthogonal multiplexing in Orthogonal Frequency Division Multiplexed (“OFDM”) systems, each tone carries a modulated symbol according to a frequency overlapped time limited orthogonal structure. The frequency tones overlap with each other so that in the center of a tone, the spectral envelopes of all surrounding tones are null. This principle allows multiplexing of different transmissions in the same system bandwidth in an orthogonal manner. However, this only holds true if the sub-carrier spacing δf is kept constant. δf is equal to the inverse of the OFDM symbol duration T, used to generate the frequency tones by DFT. Because the preamble OFDM symbol is longer than the data OFDM symbol, the sub-carrier spacing of the preamble OFDM symbol will be shorter than the sub-carrier spacing of the data OFDM symbol. In addition, since data and preamble OFDM symbols are neither aligned nor have same durations, strict orthogonality cannot be achieved. However, the following design rules aim at minimizing the co-interference between preamble and data OFDM symbols: 1) fixing the preamble OFDM symbol duration to an integer multiple of the data symbol duration provides some commensurability between preamble and data sub-carriers thus providing interference reduction between these sub-carriers, and 2) this also assumes that the preamble sampling frequency is an integer multiple of the data symbol sub-carrier spacing.</div>
+<div class="description-paragraph" id="p-0072" num="0075">In OFDM systems, different UEs' transmissions are dynamically allocated to different non overlapping frequency bands. This allocation is generally based on a minimum frequency granularity, called a resource block (RB). In order to facilitate the frequency multiplexing of the random access preamble and the data transmission, the preamble should be allocated an integer number of resource blocks</div>
+<div class="description-paragraph" id="p-0073" num="0076">In addition to the detection process, random access preamble <b>304</b> allows base station <b>101</b> to analyze the frequency response of up-link <b>111</b>, over a range of frequencies within the preamble bandwidth. Characterization of up-link <b>111</b> frequency response allows base station <b>101</b> to tailor the narrow band up-link <b>111</b> resources allocated to UE <b>109</b> within the preamble bandwidth to match up-link <b>111</b> frequency response, resulting in more efficient utilization of up-link resource.</div>
+<heading id="h-0005">System Example</heading>
+<div class="description-paragraph" id="p-0074" num="0077"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a block diagram illustrating operation of a NodeB <b>1002</b> and a mobile UE <b>1001</b> in the network system of <figref idrefs="DRAWINGS">FIG. 1</figref>. The mobile UE device <b>1001</b> may represent any of a variety of devices such as a server, a desktop computer, a laptop computer, a cellular phone, a Personal Digital Assistant (PDA), a smart phone or other electronic devices. In some embodiments, the electronic mobile UE device <b>1001</b> communicates with the NodeB <b>1002</b> based on a LTE or E-UTRAN protocol. Alternatively, another communication protocol now known or later developed can be used.</div>
+<div class="description-paragraph" id="p-0075" num="0078">As shown, the mobile UE device <b>1001</b> comprises a processor <b>1010</b> coupled to a memory <b>1012</b> and a Transceiver <b>1020</b>. The memory <b>1012</b> stores (software) applications <b>1014</b> for execution by the processor <b>1010</b>. The applications could comprise any known or future application useful for individuals or organizations. As an example, such applications could be categorized as operating systems (OS), device drivers, databases, multimedia tools, presentation tools, Internet browsers, e-mailers, Voice-Over-Internet Protocol (VOIP) tools, file browsers, firewalls, instant messaging, finance tools, games, word processors or other categories. Regardless of the exact nature of the applications, at least some of the applications may direct the mobile UE device <b>1001</b> to transmit UL signals to the NodeB (base-station) <b>1002</b> periodically or continuously via the transceiver <b>1020</b>. In at least some embodiments, the mobile UE device <b>1001</b> identifies a Quality of Service (QoS) requirement when requesting an uplink resource from the NodeB <b>1002</b>. In some cases, the QoS requirement may be implicitly derived by the NodeB <b>1002</b> from the type of traffic supported by the mobile UE device <b>1001</b>. As an example, VOIP and gaming applications often involve low-latency uplink (UL) transmissions while High Throughput (HTP)/Hypertext Transmission Protocol (HTTP) traffic can involve high-latency uplink transmissions.</div>
+<div class="description-paragraph" id="p-0076" num="0079">Transceiver <b>1020</b> includes uplink logic which may be implemented by execution of instructions that control the operation of the transceiver. Some of these instructions may be stored in memory <b>1012</b> and executed when needed by processor <b>1010</b>. As would be understood by one of skill in the art, the components of the Uplink Logic may involve the physical (PHY) layer and/or the Media Access Control (MAC) layer of the transceiver <b>1020</b>. Transceiver <b>1020</b> includes one or more receivers <b>1022</b> and one or more transmitters <b>1024</b>.</div>
+<div class="description-paragraph" id="p-0077" num="0080">Processor <b>1010</b> may send or receive data to various input/output devices <b>1026</b>. A subscriber identity module (SIM) card stores and retrieves information used for making calls via the cellular system. A Bluetooth baseband unit may be provided for wireless connection to a microphone and headset for sending and receiving voice data. Processor <b>1010</b> may send information to a display unit for interaction with a user of the mobile UE during a call process. The display may also display pictures received from the network, from a local camera, or from other sources such as a USB connector. Processor <b>1010</b> may also send a video stream to the display that is received from various sources such as the cellular network via RF transceiver <b>1022</b> or the camera.</div>
+<div class="description-paragraph" id="p-0078" num="0081">During transmission and reception of voice data or other application data, transmitter <b>1024</b> may be or become non-synchronized with its serving NodeB. In this case, it sends a random access signal as described in more detail with respect to <figref idrefs="DRAWINGS">FIGS. 2-9</figref>. As part of this procedure, it determines a preferred size for the next data transmission, referred to as message 3, by using a power threshold value provided by the serving NodeB, as described in more detail above. In this embodiment, the message 3 preferred size determination is embodied by executing instructions stored in memory <b>1012</b> by processor <b>1010</b>. In other embodiments, the message 3 size determination may be embodied by a separate processor/memory unit, by a hardwired state machine, or by other types of control logic, for example.</div>
+<div class="description-paragraph" id="p-0079" num="0082">NodeB <b>1002</b> comprises a Processor <b>1030</b> coupled to a memory <b>1032</b>, symbol processing circuitry <b>1038</b>, and a transceiver <b>1040</b> via backplane bus <b>1036</b>. The memory stores applications <b>1034</b> for execution by processor <b>1030</b>. The applications could comprise any known or future application useful for managing wireless communications. At least some of the applications <b>1034</b> may direct the base-station to manage transmissions to or from the user device <b>1001</b>.</div>
+<div class="description-paragraph" id="p-0080" num="0083">Transceiver <b>1040</b> comprises an uplink Resource Manager, which enables the NodeB <b>1002</b> to selectively allocate uplink PUSCH resources to the user device <b>1001</b>. As would be understood by one of skill in the art, the components of the uplink resource manager may involve the physical (PHY) layer and/or the Media Access Control (MAC) layer of the transceiver <b>1040</b>. Transceiver <b>1040</b> includes a Receiver(s) <b>1042</b> for receiving transmissions from various UE within range of the NodeB and transmitter(s) <b>1044</b> for transmitting data and control information to the various UE within range of the NodeB.</div>
+<div class="description-paragraph" id="p-0081" num="0084">The uplink resource manager executes instructions that control the operation of transceiver <b>1040</b>. Some of these instructions may be located in memory <b>1032</b> and executed when needed on processor <b>1030</b>. The resource manager controls the transmission resources allocated to each UE that is being served by NodeB <b>1002</b> and broadcasts control information via the physical downlink control channel PDCCH.</div>
+<div class="description-paragraph" id="p-0082" num="0085">Symbol processing circuitry <b>1038</b> performs demodulation using known techniques. Random access signals are demodulated in symbol processing circuitry <b>1038</b> as described in more detail above with regard to <figref idrefs="DRAWINGS">FIG. 7</figref>.</div>
+<div class="description-paragraph" id="p-0083" num="0086">During transmission and reception of voice data or other application data, receiver <b>1042</b> may receive a random access signal from a UE, as described in more detail above. The random access signal is encoded to request a message 3 size that is preferred by the UE. The UE determines the preferred message 3 size by using a message 3 threshold provided by the NodeB. In this embodiment, the message 3 threshold calculation is embodied by executing instructions stored in memory <b>1032</b> by processor <b>1030</b>. In other embodiments, the threshold calculation may be embodied by a separate processor/memory unit, by a hardwired state machine, or by other types of control logic, for example. Alternatively, in some networks the message 3 threshold is a fixed value that may be stored in memory <b>1032</b>, for example. In response to receiving the message 3 size request, the NodeB schedules an appropriate set of resources and notifies the UE with a resource grant.</div>
+<heading id="h-0006">Other Embodiments</heading>
+<div class="description-paragraph" id="p-0084" num="0087">While the invention has been described with reference to illustrative embodiments, this description is not intended to be construed in a limiting sense. Various other embodiments of the invention will be apparent to persons skilled in the art upon reference to this description. For example, more than two message 3 sizes may be allowed and encoded in the RA preamble.</div>
+<div class="description-paragraph" id="p-0085" num="0088">Embodiments of the described invention applies to any systems where random access signaling is implemented, including but not limited to TDD, FDD, and HD-FDD systems.</div>
+<div class="description-paragraph" id="p-0086" num="0089">The term “frame” and “subframe” are not restricted to the structure of <figref idrefs="DRAWINGS">FIG. 2</figref> and <figref idrefs="DRAWINGS">FIG. 3</figref>. Other configurations of frames and/or subframes may be embodied. In general, the term “frame” may refer to a set of one or more subframes. A transmission instance likewise refers to a frame, subframe, or other agreed upon quantity of transmission resource.</div>
+<div class="description-paragraph" id="p-0087" num="0090">An embodiment of the invention may include a system with a processor coupled to a computer readable medium in which a software program is stored that contains instructions that when executed by the processor perform the functions of modules and circuits described herein. The computer readable medium may be memory storage such as dynamic random access memory (DRAM), static RAM (SRAM), read only memory (ROM), Programmable ROM (PROM), erasable PROM (EPROM) or other similar types of memory. The computer readable media may also be in the form of magnetic, optical, semiconductor or other types of discs or other portable memory devices that can be used to distribute the software for downloading to a system for execution by a processor. The computer readable media may also be in the form of magnetic, optical, semiconductor or other types of disc unit coupled to a system that can store the software for downloading or for direct execution by a processor.</div>
+<div class="description-paragraph" id="p-0088" num="0091">As used herein, the terms “applied,” “coupled,” “connected,” and “connection” mean electrically connected, including where additional elements may be in the electrical connection path. “Associated” means a controlling relationship, such as a memory resource that is controlled by an associated port.</div>
+<div class="description-paragraph" id="p-0089" num="0092">It is therefore contemplated that the appended claims will cover any such modifications of the embodiments as fall within the true scope and spirit of the invention.</div>
+<div class="description-paragraph" id="p-0090" num="0093">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">APPENDIX A</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">messagePowerOffsetGroupB = ΔTF + 10log10(N<sub>RB</sub>) + margin (=0) (dB)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="9" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">N<sub>SC</sub> <sup>RB</sup> </td>
+<td class="description-td">12</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">N<sub>symh</sub> <sup>PUSCH</sup> </td>
+<td class="description-td"> 6</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="9" nameend="9" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">N<sub>RB</sub> </td>
+<td class="description-td"> </td>
+<td class="description-td"> 1</td>
+<td class="description-td">0</td>
+<td class="description-td">dB</td>
+<td class="description-td">N<sub>RB</sub> </td>
+<td class="description-td"> </td>
+<td class="description-td"> 2</td>
+<td class="description-td">3.01 </td>
+<td class="description-td">dB</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nre</td>
+<td class="description-td"> </td>
+<td class="description-td">144</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Nre</td>
+<td class="description-td"> </td>
+<td class="description-td">288</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Mod </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">ΔTF </td>
+<td class="description-td">messagePowerOff-</td>
+<td class="description-td">Mod</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">ΔTF </td>
+<td class="description-td">messagePowerOff-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">I<sub>TBS</sub> </td>
+<td class="description-td">msg3</td>
+<td class="description-td">TBS</td>
+<td class="description-td">MPR</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">setGroupB (dB)</td>
+<td class="description-td">msg3</td>
+<td class="description-td">TBS</td>
+<td class="description-td">MPR</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">setGroupB (dB)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">16</td>
+<td class="description-td">0.11</td>
+<td class="description-td">−9.95</td>
+<td class="description-td">−9.95</td>
+<td class="description-td">2</td>
+<td class="description-td">32</td>
+<td class="description-td">0.11</td>
+<td class="description-td">−9.95</td>
+<td class="description-td">−6.94</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">24</td>
+<td class="description-td">0.17</td>
+<td class="description-td">−8.09</td>
+<td class="description-td">−8.09</td>
+<td class="description-td">2</td>
+<td class="description-td">56</td>
+<td class="description-td">0.19</td>
+<td class="description-td">−7.36</td>
+<td class="description-td">−4.35</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+<td class="description-td">32</td>
+<td class="description-td">0.22</td>
+<td class="description-td">−6.73</td>
+<td class="description-td">−6.73</td>
+<td class="description-td">2</td>
+<td class="description-td">72</td>
+<td class="description-td">0.25</td>
+<td class="description-td">−6.16</td>
+<td class="description-td">−3.15</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">2</td>
+<td class="description-td">40</td>
+<td class="description-td">0.28</td>
+<td class="description-td">−5.65</td>
+<td class="description-td">−5.65</td>
+<td class="description-td">2</td>
+<td class="description-td">104</td>
+<td class="description-td">0.36</td>
+<td class="description-td">−4.35</td>
+<td class="description-td">−1.34</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">2</td>
+<td class="description-td">56</td>
+<td class="description-td">0.39</td>
+<td class="description-td">−3.97</td>
+<td class="description-td">−3.97</td>
+<td class="description-td">2</td>
+<td class="description-td">120</td>
+<td class="description-td">0.42</td>
+<td class="description-td">−3.62</td>
+<td class="description-td">−0.61</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">2</td>
+<td class="description-td">72</td>
+<td class="description-td">0.50</td>
+<td class="description-td">−2.66</td>
+<td class="description-td">−2.66</td>
+<td class="description-td">2</td>
+<td class="description-td">144</td>
+<td class="description-td">0.50</td>
+<td class="description-td">−2.66</td>
+<td class="description-td">0.35</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">2</td>
+<td class="description-td">na</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">2</td>
+<td class="description-td">176</td>
+<td class="description-td">0.61</td>
+<td class="description-td">−1.56</td>
+<td class="description-td">1.45</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">104</td>
+<td class="description-td">0.72</td>
+<td class="description-td">−0.61</td>
+<td class="description-td">−0.61</td>
+<td class="description-td">2</td>
+<td class="description-td">224</td>
+<td class="description-td">0.78</td>
+<td class="description-td">−0.17</td>
+<td class="description-td">2.84</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">2</td>
+<td class="description-td">120</td>
+<td class="description-td">0.83</td>
+<td class="description-td">0.25</td>
+<td class="description-td">0.25</td>
+<td class="description-td">2</td>
+<td class="description-td">256</td>
+<td class="description-td">0.89</td>
+<td class="description-td">0.65</td>
+<td class="description-td">3.66</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">2</td>
+<td class="description-td">136</td>
+<td class="description-td">0.94</td>
+<td class="description-td">1.03</td>
+<td class="description-td">1.03</td>
+<td class="description-td">2</td>
+<td class="description-td">286</td>
+<td class="description-td">0.99</td>
+<td class="description-td">1.35</td>
+<td class="description-td">4.36</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">2/4</td>
+<td class="description-td">144</td>
+<td class="description-td">1.00</td>
+<td class="description-td">1.39</td>
+<td class="description-td">1.39</td>
+<td class="description-td">2/4</td>
+<td class="description-td">328</td>
+<td class="description-td">1.14</td>
+<td class="description-td">2.26</td>
+<td class="description-td">5.27</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">4</td>
+<td class="description-td">176</td>
+<td class="description-td">1.22</td>
+<td class="description-td">2.75</td>
+<td class="description-td">2.75</td>
+<td class="description-td">4</td>
+<td class="description-td">376</td>
+<td class="description-td">1.31</td>
+<td class="description-td">3.22</td>
+<td class="description-td">6.23</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">12</td>
+<td class="description-td">4</td>
+<td class="description-td">208</td>
+<td class="description-td">1.44</td>
+<td class="description-td">3.97</td>
+<td class="description-td">3.97</td>
+<td class="description-td">4</td>
+<td class="description-td">440</td>
+<td class="description-td">1.53</td>
+<td class="description-td">4.40</td>
+<td class="description-td">7.42</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">13</td>
+<td class="description-td">4</td>
+<td class="description-td">224</td>
+<td class="description-td">1.56</td>
+<td class="description-td">4.55</td>
+<td class="description-td">4.55</td>
+<td class="description-td">4</td>
+<td class="description-td">488</td>
+<td class="description-td">1.69</td>
+<td class="description-td">5.24</td>
+<td class="description-td">8.25</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">14</td>
+<td class="description-td">4</td>
+<td class="description-td">256</td>
+<td class="description-td">1.78</td>
+<td class="description-td">5.64</td>
+<td class="description-td">5.64</td>
+<td class="description-td">4</td>
+<td class="description-td">552</td>
+<td class="description-td">1.92</td>
+<td class="description-td">6.30</td>
+<td class="description-td">9.31</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">15</td>
+<td class="description-td">4/6</td>
+<td class="description-td">280</td>
+<td class="description-td">1.94</td>
+<td class="description-td">6.43</td>
+<td class="description-td">6.43</td>
+<td class="description-td">4/6</td>
+<td class="description-td">600</td>
+<td class="description-td">2.08</td>
+<td class="description-td">7.06</td>
+<td class="description-td">10.07</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">N<sub>RB</sub> </td>
+<td class="description-td"> </td>
+<td class="description-td"> 3</td>
+<td class="description-td">4.77</td>
+<td class="description-td">dB</td>
+<td class="description-td">N<sub>RB</sub> </td>
+<td class="description-td"> </td>
+<td class="description-td"> 4</td>
+<td class="description-td">6.02 </td>
+<td class="description-td">dB</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nre</td>
+<td class="description-td"> </td>
+<td class="description-td">432</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Nre</td>
+<td class="description-td"> </td>
+<td class="description-td">576</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Mod </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">ΔTF </td>
+<td class="description-td">messagePowerOff-</td>
+<td class="description-td">Mod</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">ΔTF </td>
+<td class="description-td">messagePowerOff-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">I<sub>TBS</sub> </td>
+<td class="description-td">msg3</td>
+<td class="description-td">TBS</td>
+<td class="description-td">MPR</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">setGroupB (dB)</td>
+<td class="description-td">msg3</td>
+<td class="description-td">TBS</td>
+<td class="description-td">MPR</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">setGroupB (dB)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">56</td>
+<td class="description-td">0.13</td>
+<td class="description-td">−9.25</td>
+<td class="description-td">−4.48</td>
+<td class="description-td">2</td>
+<td class="description-td">88</td>
+<td class="description-td">0.15</td>
+<td class="description-td">−8.49</td>
+<td class="description-td">−2.47</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">88</td>
+<td class="description-td">0.20</td>
+<td class="description-td">−7.14</td>
+<td class="description-td">−2.37</td>
+<td class="description-td">2</td>
+<td class="description-td">144</td>
+<td class="description-td">0.25</td>
+<td class="description-td">−6.16</td>
+<td class="description-td">−0.14</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+<td class="description-td">144</td>
+<td class="description-td">0.33</td>
+<td class="description-td">−4.75</td>
+<td class="description-td">0.02</td>
+<td class="description-td">2</td>
+<td class="description-td">176</td>
+<td class="description-td">0.31</td>
+<td class="description-td">−5.18</td>
+<td class="description-td">0.84</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">2</td>
+<td class="description-td">176</td>
+<td class="description-td">0.41</td>
+<td class="description-td">−3.73</td>
+<td class="description-td">1.04</td>
+<td class="description-td">2</td>
+<td class="description-td">208</td>
+<td class="description-td">0.36</td>
+<td class="description-td">−4.35</td>
+<td class="description-td">1.67</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">2</td>
+<td class="description-td">208</td>
+<td class="description-td">0.48</td>
+<td class="description-td">−2.86</td>
+<td class="description-td">1.91</td>
+<td class="description-td">2</td>
+<td class="description-td">256</td>
+<td class="description-td">0.44</td>
+<td class="description-td">−3.28</td>
+<td class="description-td">2.74</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">2</td>
+<td class="description-td">224</td>
+<td class="description-td">0.52</td>
+<td class="description-td">−2.46</td>
+<td class="description-td">2.31</td>
+<td class="description-td">2</td>
+<td class="description-td">328</td>
+<td class="description-td">0.57</td>
+<td class="description-td">−1.95</td>
+<td class="description-td">4.07</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">2</td>
+<td class="description-td">256</td>
+<td class="description-td">0.59</td>
+<td class="description-td">−1.73</td>
+<td class="description-td">3.04</td>
+<td class="description-td">2</td>
+<td class="description-td">392</td>
+<td class="description-td">0.68</td>
+<td class="description-td">−0.95</td>
+<td class="description-td">5.07</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">328</td>
+<td class="description-td">0.76</td>
+<td class="description-td">−0.31</td>
+<td class="description-td">4.46</td>
+<td class="description-td">2</td>
+<td class="description-td">472</td>
+<td class="description-td">0.82</td>
+<td class="description-td">0.15</td>
+<td class="description-td">6.17</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">2</td>
+<td class="description-td">392</td>
+<td class="description-td">0.91</td>
+<td class="description-td">0.77</td>
+<td class="description-td">5.55</td>
+<td class="description-td">2</td>
+<td class="description-td">536</td>
+<td class="description-td">0.93</td>
+<td class="description-td">0.93</td>
+<td class="description-td">6.95</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">2</td>
+<td class="description-td">456</td>
+<td class="description-td">1.06</td>
+<td class="description-td">1.75</td>
+<td class="description-td">6.52</td>
+<td class="description-td">2</td>
+<td class="description-td">616</td>
+<td class="description-td">1.07</td>
+<td class="description-td">1.84</td>
+<td class="description-td">7.86</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">2/4</td>
+<td class="description-td">504</td>
+<td class="description-td">1.17</td>
+<td class="description-td">2.43</td>
+<td class="description-td">7.20</td>
+<td class="description-td">2/4</td>
+<td class="description-td">680</td>
+<td class="description-td">1.18</td>
+<td class="description-td">2.51</td>
+<td class="description-td">8.53</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">4</td>
+<td class="description-td">584</td>
+<td class="description-td">1.35</td>
+<td class="description-td">3.48</td>
+<td class="description-td">8.25</td>
+<td class="description-td">4</td>
+<td class="description-td">776</td>
+<td class="description-td">1.35</td>
+<td class="description-td">3.45</td>
+<td class="description-td">9.47</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">12</td>
+<td class="description-td">4</td>
+<td class="description-td">680</td>
+<td class="description-td">1.57</td>
+<td class="description-td">4.64</td>
+<td class="description-td">9.41</td>
+<td class="description-td">4</td>
+<td class="description-td">904</td>
+<td class="description-td">1.57</td>
+<td class="description-td">4.62</td>
+<td class="description-td">10.64</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">13</td>
+<td class="description-td">4</td>
+<td class="description-td">744</td>
+<td class="description-td">1.72</td>
+<td class="description-td">5.37</td>
+<td class="description-td">10.15</td>
+<td class="description-td">4</td>
+<td class="description-td">1000</td>
+<td class="description-td">1.74</td>
+<td class="description-td">5.44</td>
+<td class="description-td">11.46</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">14</td>
+<td class="description-td">4</td>
+<td class="description-td">840</td>
+<td class="description-td">1.94</td>
+<td class="description-td">6.43</td>
+<td class="description-td">11.20</td>
+<td class="description-td">4</td>
+<td class="description-td">1128</td>
+<td class="description-td">1.96</td>
+<td class="description-td">6.49</td>
+<td class="description-td">12.51</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">15</td>
+<td class="description-td">4/6</td>
+<td class="description-td">902</td>
+<td class="description-td">2.09</td>
+<td class="description-td">7.10</td>
+<td class="description-td">11.87</td>
+<td class="description-td">4/6</td>
+<td class="description-td">1224</td>
+<td class="description-td">2.13</td>
+<td class="description-td">7.25</td>
+<td class="description-td">13.27</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">N<sub>RB</sub> </td>
+<td class="description-td"> </td>
+<td class="description-td"> 5</td>
+<td class="description-td">6.99</td>
+<td class="description-td">dB</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nre</td>
+<td class="description-td"> </td>
+<td class="description-td">720</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Mod </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">ΔTF </td>
+<td class="description-td">messagePowerOff-</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">I<sub>TBS</sub> </td>
+<td class="description-td">msg3</td>
+<td class="description-td">TBS</td>
+<td class="description-td">MPR</td>
+<td class="description-td">(dB)</td>
+<td class="description-td">setGroupB (dB)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">120</td>
+<td class="description-td">0.17</td>
+<td class="description-td">−8.09</td>
+<td class="description-td">−1.10</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">176</td>
+<td class="description-td">0.24</td>
+<td class="description-td">−6.27</td>
+<td class="description-td">0.72</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+<td class="description-td">208</td>
+<td class="description-td">0.29</td>
+<td class="description-td">−5.46</td>
+<td class="description-td">1.53</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">2</td>
+<td class="description-td">256</td>
+<td class="description-td">0.36</td>
+<td class="description-td">−4.43</td>
+<td class="description-td">2.56</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">2</td>
+<td class="description-td">328</td>
+<td class="description-td">0.46</td>
+<td class="description-td">−3.15</td>
+<td class="description-td">3.84</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">2</td>
+<td class="description-td">424</td>
+<td class="description-td">0.59</td>
+<td class="description-td">−1.77</td>
+<td class="description-td">5.22</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">2</td>
+<td class="description-td">504</td>
+<td class="description-td">0.70</td>
+<td class="description-td">−0.79</td>
+<td class="description-td">6.20</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">584</td>
+<td class="description-td">0.81</td>
+<td class="description-td">0.08</td>
+<td class="description-td">7.07</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">2</td>
+<td class="description-td">680</td>
+<td class="description-td">0.94</td>
+<td class="description-td">1.03</td>
+<td class="description-td">8.02</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">2</td>
+<td class="description-td">776</td>
+<td class="description-td">1.08</td>
+<td class="description-td">1.89</td>
+<td class="description-td">8.88</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">2/4</td>
+<td class="description-td">872</td>
+<td class="description-td">1.21</td>
+<td class="description-td">2.69</td>
+<td class="description-td">9.67</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">4</td>
+<td class="description-td">1000</td>
+<td class="description-td">1.39</td>
+<td class="description-td">3.68</td>
+<td class="description-td">10.67</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">12</td>
+<td class="description-td">4</td>
+<td class="description-td">1128</td>
+<td class="description-td">1.57</td>
+<td class="description-td">4.60</td>
+<td class="description-td">11.59</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">13</td>
+<td class="description-td">4</td>
+<td class="description-td">1256</td>
+<td class="description-td">1.74</td>
+<td class="description-td">5.48</td>
+<td class="description-td">12.47</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">14</td>
+<td class="description-td">4</td>
+<td class="description-td">1416</td>
+<td class="description-td">1.97</td>
+<td class="description-td">6.53</td>
+<td class="description-td">13.52</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">15</td>
+<td class="description-td">4/6</td>
+<td class="description-td">1544</td>
+<td class="description-td">2.14</td>
+<td class="description-td">7.33</td>
+<td class="description-td">14.32</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0091" num="0094">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">APPENDIX B</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Power control of Msg:</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">P<sub>Msg3 </sub>= min(P<sub>max</sub>: 10log10(N<sub>RB</sub>) + Po_pre + Δ<sub>Preamble</sub>_msg3 + PL + Δ<sub>TP </sub>+ Δ<sub>prampup</sub>(=0) +δmsg2(=0))</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">UE-eNB distance (km)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">1</td>
+<td class="description-td">1.5</td>
+<td class="description-td">2</td>
+<td class="description-td">2.5</td>
+<td class="description-td">3</td>
+<td class="description-td">3.5</td>
+<td class="description-td">4</td>
+<td class="description-td">4.5</td>
+<td class="description-td">5</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="10" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Pathloss (dB)</td>
+<td class="description-td">125.492</td>
+<td class="description-td">131.6948</td>
+<td class="description-td">136.095789</td>
+<td class="description-td">139.5094</td>
+<td class="description-td">142.2986</td>
+<td class="description-td">144.6568</td>
+<td class="description-td">146.6995</td>
+<td class="description-td">148.5014</td>
+<td class="description-td">150.1132</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="10" nameend="10" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Msg3 Allocation</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Modulation TBS</td>
+<td class="description-td">P<sub>Msg3 </sub>(dBm)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="10" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">N<sub>RB-Msg3 </sub>= 1</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">104</td>
+<td class="description-td">0.487073</td>
+<td class="description-td">6.689662</td>
+<td class="description-td">11.0908111</td>
+<td class="description-td">14.50445</td>
+<td class="description-td">17.2936 </td>
+<td class="description-td">19.65179</td>
+<td class="description-td">21.69455</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">120</td>
+<td class="description-td">1.340903</td>
+<td class="description-td">7.543692</td>
+<td class="description-td">11.9446415</td>
+<td class="description-td">15.35828</td>
+<td class="description-td">18.14743</td>
+<td class="description-td">20.50562</td>
+<td class="description-td">22.54838</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">136</td>
+<td class="description-td">2.1201</td>
+<td class="description-td">8.322889</td>
+<td class="description-td">12.7238377</td>
+<td class="description-td">16.13748</td>
+<td class="description-td">18.92663</td>
+<td class="description-td">21.28482</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK/16QAM</td>
+<td class="description-td">144</td>
+<td class="description-td">2.487363</td>
+<td class="description-td">8.690153</td>
+<td class="description-td">13.0911017</td>
+<td class="description-td">16.50474</td>
+<td class="description-td">19.29389</td>
+<td class="description-td">21.65208</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">176</td>
+<td class="description-td">3.843023</td>
+<td class="description-td">10.04581 </td>
+<td class="description-td">14.4467612</td>
+<td class="description-td">17.8604 </td>
+<td class="description-td">20.64955</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">208</td>
+<td class="description-td">5.065381</td>
+<td class="description-td">11.26817 </td>
+<td class="description-td">15.6691191</td>
+<td class="description-td">19.08276</td>
+<td class="description-td">21.87191</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">224</td>
+<td class="description-td">5.640331</td>
+<td class="description-td">11.84312 </td>
+<td class="description-td">16.2440692</td>
+<td class="description-td">19.65771</td>
+<td class="description-td">22.44686</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">256</td>
+<td class="description-td">6.735828</td>
+<td class="description-td">12.93842 </td>
+<td class="description-td">17.3393664</td>
+<td class="description-td">20.75301</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM/64QAM</td>
+<td class="description-td">280</td>
+<td class="description-td">7.51921</td>
+<td class="description-td">13.722  </td>
+<td class="description-td">18.1229484</td>
+<td class="description-td">21.53659</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="10" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">N<sub>RB-Msg3 </sub>= 2</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">104</td>
+<td class="description-td">−0.24526</td>
+<td class="description-td">5.857526</td>
+<td class="description-td">10.3584753</td>
+<td class="description-td">13.77212</td>
+<td class="description-td">16.56126</td>
+<td class="description-td">18.91946</td>
+<td class="description-td">20.96221</td>
+<td class="description-td">22.76405</td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">120</td>
+<td class="description-td">0.486599</td>
+<td class="description-td">6.689388</td>
+<td class="description-td">11.0903374</td>
+<td class="description-td">14.50398</td>
+<td class="description-td">17.29313</td>
+<td class="description-td">19.65132</td>
+<td class="description-td">21.69408</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">144</td>
+<td class="description-td">1.445548</td>
+<td class="description-td">7.648337</td>
+<td class="description-td">12.049286 </td>
+<td class="description-td">15.46293</td>
+<td class="description-td">18.25208</td>
+<td class="description-td">20.61027</td>
+<td class="description-td">22.65302</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">176</td>
+<td class="description-td">2.542804</td>
+<td class="description-td">8.745593</td>
+<td class="description-td">13.1465423</td>
+<td class="description-td">16.56018</td>
+<td class="description-td">19.34933</td>
+<td class="description-td">21.70752</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">224</td>
+<td class="description-td">3.934985</td>
+<td class="description-td">10.13777 </td>
+<td class="description-td">14.5387236</td>
+<td class="description-td">17.95236</td>
+<td class="description-td">20.74151</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">256</td>
+<td class="description-td">4.748893</td>
+<td class="description-td">10.95168 </td>
+<td class="description-td">15.3526313</td>
+<td class="description-td">18.78627</td>
+<td class="description-td">21.55542</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">286</td>
+<td class="description-td">5.452476</td>
+<td class="description-td">11.65527 </td>
+<td class="description-td">16.0562143</td>
+<td class="description-td">19.46989</td>
+<td class="description-td">22.259 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK/16QAM</td>
+<td class="description-td">328</td>
+<td class="description-td">6.363575</td>
+<td class="description-td">12.56636 </td>
+<td class="description-td">16.967313 </td>
+<td class="description-td">20.38095</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">376</td>
+<td class="description-td">7.32462</td>
+<td class="description-td">13.52741 </td>
+<td class="description-td">17.9283583</td>
+<td class="description-td">21.342 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">440</td>
+<td class="description-td">8.508812</td>
+<td class="description-td">14.7116  </td>
+<td class="description-td">19.1125507</td>
+<td class="description-td">22.52619</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">488</td>
+<td class="description-td">9.342741</td>
+<td class="description-td">15.54553 </td>
+<td class="description-td">19.946479 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">552</td>
+<td class="description-td">10.40083</td>
+<td class="description-td">16.60382 </td>
+<td class="description-td">21.004564 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM/64QAM</td>
+<td class="description-td">600</td>
+<td class="description-td">11.16285</td>
+<td class="description-td">17.36564 </td>
+<td class="description-td">21.7665848</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">N<sub>RB-Msg3 </sub>= 3</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">144</td>
+<td class="description-td">1.11315</td>
+<td class="description-td">7.315939</td>
+<td class="description-td">11.7168882</td>
+<td class="description-td">15.13053</td>
+<td class="description-td">17.91968</td>
+<td class="description-td">20.27787</td>
+<td class="description-td">22.32063</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">176</td>
+<td class="description-td">2.131458</td>
+<td class="description-td">8.334248</td>
+<td class="description-td">12.7351966</td>
+<td class="description-td">16.14884</td>
+<td class="description-td">18.93799</td>
+<td class="description-td">21.29618</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">208</td>
+<td class="description-td">3.005253</td>
+<td class="description-td">9.208042</td>
+<td class="description-td">13.6089913</td>
+<td class="description-td">17.02263</td>
+<td class="description-td">19.81178</td>
+<td class="description-td">22.16997</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">224</td>
+<td class="description-td">3.401798</td>
+<td class="description-td">9.604588</td>
+<td class="description-td">14.0055367</td>
+<td class="description-td">17.41918</td>
+<td class="description-td">20.20833</td>
+<td class="description-td">22.56652</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">256</td>
+<td class="description-td">4.132221</td>
+<td class="description-td">10.33501 </td>
+<td class="description-td">14.7359594</td>
+<td class="description-td">18.1496 </td>
+<td class="description-td">20.93875</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">328</td>
+<td class="description-td">5.552564</td>
+<td class="description-td">11.75535 </td>
+<td class="description-td">16.156302 </td>
+<td class="description-td">19.56994</td>
+<td class="description-td">22.35909</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">392</td>
+<td class="description-td">6.63867</td>
+<td class="description-td">12.84146 </td>
+<td class="description-td">17.2424077</td>
+<td class="description-td">20.65605</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">456</td>
+<td class="description-td">7.613223</td>
+<td class="description-td">13.81601 </td>
+<td class="description-td">18.2169613</td>
+<td class="description-td">21.6306 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK/16QAM</td>
+<td class="description-td">504</td>
+<td class="description-td">8.289963</td>
+<td class="description-td">14.49276 </td>
+<td class="description-td">18.8937007</td>
+<td class="description-td">22.30734</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">584</td>
+<td class="description-td">9.340326</td>
+<td class="description-td">15.54312 </td>
+<td class="description-td">19.9440666</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">680</td>
+<td class="description-td">10.50542</td>
+<td class="description-td">16.70821 </td>
+<td class="description-td">21.1091615</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">744</td>
+<td class="description-td">11.23898</td>
+<td class="description-td">17.44177 </td>
+<td class="description-td">21.8427174</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">840</td>
+<td class="description-td">12.29042</td>
+<td class="description-td">18.49321 </td>
+<td class="description-td">22.8941609</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM/64QAM</td>
+<td class="description-td">904</td>
+<td class="description-td">12.96543</td>
+<td class="description-td">18.16822 </td>
+<td class="description-td">23     </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">N<sub>RB-Msg3 </sub>= 4</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">144</td>
+<td class="description-td">0.949767</td>
+<td class="description-td">7.152556</td>
+<td class="description-td">11.5535053</td>
+<td class="description-td">14.96715</td>
+<td class="description-td">17.75629</td>
+<td class="description-td">20.11449</td>
+<td class="description-td">22.15724</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">176</td>
+<td class="description-td">1.928982</td>
+<td class="description-td">8.132771</td>
+<td class="description-td">12.53372 </td>
+<td class="description-td">15.94736</td>
+<td class="description-td">18.73651</td>
+<td class="description-td">21.0947 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">208</td>
+<td class="description-td">2.765037</td>
+<td class="description-td">8.967826</td>
+<td class="description-td">13.3687753</td>
+<td class="description-td">16.78242</td>
+<td class="description-td">19.57156</td>
+<td class="description-td">21.92976</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">256</td>
+<td class="description-td">3.83269</td>
+<td class="description-td">10.03548 </td>
+<td class="description-td">14.4364286</td>
+<td class="description-td">17.85007</td>
+<td class="description-td">20.63922</td>
+<td class="description-td">22.99741</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">328</td>
+<td class="description-td">5.161369</td>
+<td class="description-td">11.36416 </td>
+<td class="description-td">15.7651076</td>
+<td class="description-td">19.17875</td>
+<td class="description-td">21.9679 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">392</td>
+<td class="description-td">6.163315</td>
+<td class="description-td">12.3661  </td>
+<td class="description-td">16.7670536</td>
+<td class="description-td">20.18069</td>
+<td class="description-td">22.96984</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">472</td>
+<td class="description-td">7.259288</td>
+<td class="description-td">13.46208 </td>
+<td class="description-td">17.8630259</td>
+<td class="description-td">21.27667</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">536</td>
+<td class="description-td">8.046728</td>
+<td class="description-td">14.24952 </td>
+<td class="description-td">18.6504661</td>
+<td class="description-td">22.06411</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">616</td>
+<td class="description-td">8.949467</td>
+<td class="description-td">15.15226 </td>
+<td class="description-td">19.5532049</td>
+<td class="description-td">22.95685</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK/16QAM</td>
+<td class="description-td">680</td>
+<td class="description-td">9.621231</td>
+<td class="description-td">15.82402 </td>
+<td class="description-td">20.2249696</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">776</td>
+<td class="description-td">10.56445</td>
+<td class="description-td">16.76724 </td>
+<td class="description-td">21.168185 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">904</td>
+<td class="description-td">11.73139</td>
+<td class="description-td">17.93418 </td>
+<td class="description-td">22.3351278</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">1000</td>
+<td class="description-td">12.55567</td>
+<td class="description-td">18.75846 </td>
+<td class="description-td">23     </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">1128</td>
+<td class="description-td">13.60389</td>
+<td class="description-td">19.80668 </td>
+<td class="description-td">23     </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM/64QAM</td>
+<td class="description-td">1224</td>
+<td class="description-td">14.36014</td>
+<td class="description-td">20.56293 </td>
+<td class="description-td">23     </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="10" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">N<sub>RB-Msg3 </sub>= 5</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="11" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">120</td>
+<td class="description-td">−0.00355</td>
+<td class="description-td">6.199243</td>
+<td class="description-td">10.6001922</td>
+<td class="description-td">14.01383</td>
+<td class="description-td">16.80296</td>
+<td class="description-td">19.16117</td>
+<td class="description-td">21.20393</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">176</td>
+<td class="description-td">1.810444</td>
+<td class="description-td">8.013233</td>
+<td class="description-td">12.4141818</td>
+<td class="description-td">15.82782</td>
+<td class="description-td">18.61697</td>
+<td class="description-td">20.97516</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">208</td>
+<td class="description-td">2.622787</td>
+<td class="description-td">8.825576</td>
+<td class="description-td">13.226525 </td>
+<td class="description-td">16.64017</td>
+<td class="description-td">19.42931</td>
+<td class="description-td">21.78751</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">256</td>
+<td class="description-td">3.655811</td>
+<td class="description-td">9.8586 </td>
+<td class="description-td">14.2595492</td>
+<td class="description-td">17.67319</td>
+<td class="description-td">20.46234</td>
+<td class="description-td">22.82053</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">328</td>
+<td class="description-td">4.931289</td>
+<td class="description-td">11.13408 </td>
+<td class="description-td">15.5350273</td>
+<td class="description-td">18.94867</td>
+<td class="description-td">21.73782</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">424</td>
+<td class="description-td">6.31592</td>
+<td class="description-td">12.51871 </td>
+<td class="description-td">16.9196582</td>
+<td class="description-td">20.3333 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">504</td>
+<td class="description-td">7.294969</td>
+<td class="description-td">13.49776 </td>
+<td class="description-td">17.8987069</td>
+<td class="description-td">21.31235</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">584</td>
+<td class="description-td">8.166487</td>
+<td class="description-td">14.36928 </td>
+<td class="description-td">18.770225 </td>
+<td class="description-td">22.18387</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">680</td>
+<td class="description-td">9.1098</td>
+<td class="description-td">15.31259 </td>
+<td class="description-td">19.7135378</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK</td>
+<td class="description-td">776</td>
+<td class="description-td">9.970352</td>
+<td class="description-td">16.17314 </td>
+<td class="description-td">20.57409 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">QPSK/16QAM</td>
+<td class="description-td">872</td>
+<td class="description-td">10.76855</td>
+<td class="description-td">16.97134 </td>
+<td class="description-td">21.3722879</td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">1000</td>
+<td class="description-td">11.75936</td>
+<td class="description-td">17.96215 </td>
+<td class="description-td">22.363097 </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">1126</td>
+<td class="description-td">12.68642</td>
+<td class="description-td">18.88921 </td>
+<td class="description-td">23     </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">1256</td>
+<td class="description-td">13.56505</td>
+<td class="description-td">19.76784 </td>
+<td class="description-td">23     </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM</td>
+<td class="description-td">1416</td>
+<td class="description-td">14.61135</td>
+<td class="description-td">20.81414 </td>
+<td class="description-td">23     </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">16QAM/64QAM</td>
+<td class="description-td">1544</td>
+<td class="description-td">15.41606</td>
+<td class="description-td">21.61685 </td>
+<td class="description-td">23     </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+<td class="description-td">23    </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="11" nameend="11" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Pathloss model:</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% 1) Okumura-Hata empirical distance-dependent path loss mode defined in:</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% M. Shafi, S. Ogose and T. Hattori, Wireless Communications in the 21st Century, IEEE press, Wiley-Interscience, 2002</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">pI = 69.55 + 26.16*log10(f) − 13.82*log10(hb) − (3.2*(log10(11.75*hm)){circumflex over ( )}2 − 4.97) + (44.9 − 6.55*log10(hb))*log10(d) −</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(2 − 19*log10(alpha));</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% k(hm) is the correction factor for UE antenna height</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% alpha: The ground cover factor alpha is defined as the percentage of the area covered by buildings.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% f is the carrier frequency (MHz). Range: 400-2200 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% hb is the Node-B antenna height (m). Range: 30-200 m</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% hm is the UE antenna height in meters (m). Range: 1-10 m</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% d is the distance betw Range: 1-20 km</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% A typical configuration is:</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% f = 2000 MHz,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% hb = 30/50 m,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% hm = 1.5 m,             1.5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% alpha = 10%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">% 2) TR25.814; 128.1 + 37.6log10(r)s in km</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Parameters</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Name</td>
+<td class="description-td">Value</td>
+<td class="description-td">Unit</td>
+<td class="description-td">Range</td>
+<td class="description-td">Meaning</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1) Pathloss </td>
+<td class="description-td">Type</td>
+<td class="description-td">Okumura</td>
+<td class="description-td">NA</td>
+<td class="description-td">25.814 or</td>
+<td class="description-td">Type of pathloss model used</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">and link </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Okumura</td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">budget</td>
+<td class="description-td">Nrx</td>
+<td class="description-td">5</td>
+<td class="description-td">dB</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Receiver Noise Figure</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">LF</td>
+<td class="description-td">0</td>
+<td class="description-td">dB</td>
+<td class="description-td">[0, 8]</td>
+<td class="description-td">Log-Normal Fade Margin</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">PI</td>
+<td class="description-td">0</td>
+<td class="description-td">dB</td>
+<td class="description-td">[0, 20]</td>
+<td class="description-td">Penetration loss</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">f</td>
+<td class="description-td">2000</td>
+<td class="description-td">MHz</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Carrier frequency</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">hm</td>
+<td class="description-td">1.5</td>
+<td class="description-td">m</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">UE height</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">alpha</td>
+<td class="description-td">10</td>
+<td class="description-td">%</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">hb</td>
+<td class="description-td">30</td>
+<td class="description-td">m</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">eNB antenna height</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">T<sub>K</sub> </td>
+<td class="description-td">308.15</td>
+<td class="description-td">° K.</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Temperature (308.15° K. = 35° C.)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">K</td>
+<td class="description-td">1.38E−23</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Boltzmann constant</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">N<sub>0</sub> </td>
+<td class="description-td">−173.71</td>
+<td class="description-td">dBm/Hz</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Noise Power Density</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">N</td>
+<td class="description-td">−108.38</td>
+<td class="description-td">dBm</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Noise Power</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">I</td>
+<td class="description-td">3.00</td>
+<td class="description-td">dB</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Interference margin</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">E<sub>p</sub>/N<sub>0</sub> </td>
+<td class="description-td">18</td>
+<td class="description-td">dB</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Target (total) preamble energy to noise</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">density ratio</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">E<sub>s</sub>/N<sub>0</sub>(= C/N)</td>
+<td class="description-td">−11.2376</td>
+<td class="description-td">dB</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Target preamble subcarrier energy to </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">noise density ratio at eNB antenna port</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">2) Power </td>
+<td class="description-td">Pmax</td>
+<td class="description-td">23</td>
+<td class="description-td">dBm</td>
+<td class="description-td">[−40, 23]</td>
+<td class="description-td">UE max transmit power</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">control</td>
+<td class="description-td">P<sub>o</sub>_pre</td>
+<td class="description-td">−116.62</td>
+<td class="description-td">dBm</td>
+<td class="description-td">[−120, −90]</td>
+<td class="description-td">Received preamble power at antenna port</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Po_pre_min −120 dBm</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">ΔPreamble_Msg3</td>
+<td class="description-td">−7.78</td>
+<td class="description-td">dB</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="7" nameend="7" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">66</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM269483427">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method comprising:
+<div class="claim-text">receiving, at a user equipment (UE), a threshold parameter via a system information block (SIB);</div>
+<div class="claim-text">selecting, by the UE, a random access preamble group for use in a random access procedure based on whether a pathloss is less than a maximum power parameter minus an initial preamble power parameter minus a Δ<sub>PREAMBLE-Msg3</sub>parameter minus the threshold parameter received via the SIB; and</div>
+<div class="claim-text">performing, by the UE, the random access procedure based on the selected random access preamble group.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein selecting the random access preamble group includes:
+<div class="claim-text">selecting one of a first random access preamble group and a second random access preamble group based on whether the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein selecting the random access preamble group includes:
+<div class="claim-text">selecting a first random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3</sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein selecting the random access preamble group further includes:
+<div class="claim-text">selecting a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein selecting the random access preamble group includes:
+<div class="claim-text">selecting a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein selecting the random access preamble group further includes:
+<div class="claim-text">selecting one of a first random access preamble group and the second random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein performing the random access procedure includes:
+<div class="claim-text">transmitting, by the UE, a message 3 of the random access procedure.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein performing the random access procedure includes:
+<div class="claim-text">transmitting, by the UE, a random access preamble from the selected random access preamble group.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to an offset between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method of <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter further corresponds to a nominal power gap between the preamble and the message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to a nominal power gap between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. A user equipment (UE) comprising one or more processors configured to:
+<div class="claim-text">receive, at the UE, a threshold parameter via a system information block (SIB);</div>
+<div class="claim-text">select a random access preamble group for use in a random access procedure based on whether a pathloss is less than a maximum power parameter minus an initial preamble power parameter minus a Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB; and</div>
+<div class="claim-text">perform the random access procedure based on the selected random access preamble group.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The UE of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select one of a first random access preamble group and a second random access preamble group based on whether the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The UE of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a first random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The UE of <claim-ref idref="CLM-00014">claim 14</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The UE of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB,</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The UE of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select one of a first random access preamble group and the second random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The UE of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">transmit a message 3 of the random access procedure.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The UE of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">transmit a random access preamble from the selected random access preamble group.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The UE of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to an offset between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The UE of <claim-ref idref="CLM-00020">claim 20</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter further corresponds to a nominal power gap between the preamble and the message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The UE of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to a nominal power gap between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. A user equipment (UE) comprising:
+<div class="claim-text">a transceiver configured to receive a threshold parameter via a system information block (SIB);</div>
+<div class="claim-text">one or more processors configured to:
+<div class="claim-text">select a random access preamble group for use in a random access procedure based on whether a pathloss is less than a maximum power parameter minus an initial preamble power parameter minus a Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB; and</div>
+<div class="claim-text">perform the random access procedure based on the selected random access preamble group.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The UE of <claim-ref idref="CLM-00023">claim 23</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select one of a first random access preamble group and a second random access preamble group based on whether the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00025" num="00025">
+<div class="claim-text">25. The UE of <claim-ref idref="CLM-00023">claim 23</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a first random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00026" num="00026">
+<div class="claim-text">26. The UE of <claim-ref idref="CLM-00025">claim 25</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00027" num="00027">
+<div class="claim-text">27. The UE of <claim-ref idref="CLM-00023">claim 23</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00028" num="00028">
+<div class="claim-text">28. The UE of <claim-ref idref="CLM-00027">claim 27</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select one of a first random access preamble group and the second random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00029" num="00029">
+<div class="claim-text">29. The UE of <claim-ref idref="CLM-00023">claim 23</claim-ref>, wherein the transceiver is further configured to:
+<div class="claim-text">transmit a message 3 of the random access procedure.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00030" num="00030">
+<div class="claim-text">30. The UE of <claim-ref idref="CLM-00023">claim 23</claim-ref>, wherein the transceiver is further configured to:
+<div class="claim-text">transmit a random access preamble from the selected random access preamble group.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00031" num="00031">
+<div class="claim-text">31. The UE of <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to an offset between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00032" num="00032">
+<div class="claim-text">32. The UE of <claim-ref idref="CLM-00031">claim 31</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter further corresponds to a nominal power gap between the preamble and the message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00033" num="00033">
+<div class="claim-text">33. The UE of <claim-ref idref="CLM-00023">claim 23</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to a nominal power gap between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00034" num="00034">
+<div class="claim-text">34. A method comprising:
+<div class="claim-text">receiving, at a user equipment (UE), a threshold parameter via a system information block (SIB);</div>
+<div class="claim-text">selecting, by the UE, a random access preamble group for use in a random access procedure based on whether a pathloss is less than a maximum power parameter minus an initial preamble power parameter minus a Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB; and</div>
+<div class="claim-text">performing the random access procedure based on the selected random access preamble group, wherein performing the random access procedure includes:
+<div class="claim-text">receiving, at the UE, an uplink resource allocation as part of the random access procedure; and</div>
+<div class="claim-text">transmitting, by the UE, a message on a physical uplink shared channel (PUSCH) based on the uplink resource allocation as part of the random access procedure.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00035" num="00035">
+<div class="claim-text">35. The method of <claim-ref idref="CLM-00034">claim 34</claim-ref>, wherein selecting the random access preamble group includes:
+<div class="claim-text">selecting one of a first random access preamble group and a second random access preamble group based on whether the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00036" num="00036">
+<div class="claim-text">36. The method of <claim-ref idref="CLM-00034">claim 34</claim-ref>, wherein selecting the random access preamble group includes:
+<div class="claim-text">selecting a first random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00037" num="00037">
+<div class="claim-text">37. The method of <claim-ref idref="CLM-00036">claim 36</claim-ref>, wherein selecting the random access preamble group further includes:
+<div class="claim-text">selecting a second random access preamble group if the pathless is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00038" num="00038">
+<div class="claim-text">38. The method of <claim-ref idref="CLM-00034">claim 34</claim-ref>, wherein selecting the random access preamble group includes:
+<div class="claim-text">selecting a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00039" num="00039">
+<div class="claim-text">39. The method of <claim-ref idref="CLM-00038">claim 38</claim-ref>, wherein selecting the random access preamble group further includes:
+<div class="claim-text">selecting one of a first random access preamble group and the second random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00040" num="00040">
+<div class="claim-text">40. The method of <claim-ref idref="CLM-00034">claim 34</claim-ref>, wherein the message is a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00041" num="00041">
+<div class="claim-text">41. The method of <claim-ref idref="CLM-00034">claim 34</claim-ref>, wherein performing the random access procedure further includes:
+<div class="claim-text">transmitting, by the UE, a random access preamble from the selected random access preamble group.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00042" num="00042">
+<div class="claim-text">42. The method of <claim-ref idref="CLM-00024">claim 24</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to an offset between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00043" num="00043">
+<div class="claim-text">43. The method of <claim-ref idref="CLM-00042">claim 42</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter further corresponds to a nominal power gap between the preamble and the message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00044" num="00044">
+<div class="claim-text">44. The method of <claim-ref idref="CLM-00024">claim 24</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to a nominal power gap between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00045" num="00045">
+<div class="claim-text">45. A user equipment (UE) comprising one or more processors configured to:
+<div class="claim-text">receive a threshold parameter via a system information block (SIB);</div>
+<div class="claim-text">select a random access preamble group for use in a random access procedure based on whether a pathloss is less than a maximum power parameter minus an initial preamble power parameter minus a Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB; and</div>
+<div class="claim-text">perform the random access procedure based on the selected random access preamble group;</div>
+<div class="claim-text">receive an uplink resource allocation as part of the random access procedure; and</div>
+<div class="claim-text">transmit a message on a physical uplink shared channel (PUSCH) based on the uplink resource allocation as part of the random access procedure.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00046" num="00046">
+<div class="claim-text">46. The UE of <claim-ref idref="CLM-00045">claim 45</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select one of a first random access preamble group and a second random access preamble group based on whether the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00047" num="00047">
+<div class="claim-text">47. The UE of <claim-ref idref="CLM-00045">claim 45</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a first random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00048" num="00048">
+<div class="claim-text">48. The UE of <claim-ref idref="CLM-00047">claim 47</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00049" num="00049">
+<div class="claim-text">49. The UE of <claim-ref idref="CLM-00045">claim 45</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00050" num="00050">
+<div class="claim-text">50. The UE of <claim-ref idref="CLM-00049">claim 49</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select one of a first random access preamble group and the second random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00051" num="00051">
+<div class="claim-text">51. The UE of <claim-ref idref="CLM-00045">claim 45</claim-ref>, wherein the message is a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00052" num="00052">
+<div class="claim-text">52. The UE of <claim-ref idref="CLM-00045">claim 45</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">transmit a random access preamble from the selected random access preamble group.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00053" num="00053">
+<div class="claim-text">53. The UE of <claim-ref idref="CLM-00045">claim 45</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to an offset between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00054" num="00054">
+<div class="claim-text">54. The UE of <claim-ref idref="CLM-00053">claim 53</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter further corresponds to a nominal power gap between the preamble and the message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00055" num="00055">
+<div class="claim-text">55. The UE of <claim-ref idref="CLM-00045">claim 45</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to a nominal power gap between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00056" num="00056">
+<div class="claim-text">56. A user equipment (UE) comprising:
+<div class="claim-text">a transceiver configured to receive a threshold parameter via a system information block (SIB); and</div>
+<div class="claim-text">one or more processors configured to select a random access preamble group for use in a random access procedure based on whether a pathloss is less than a maximum power parameter minus an initial preamble power parameter minus a Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB, and to perform the random access procedure based on the selected random access preamble group,</div>
+<div class="claim-text">wherein the transceiver is further configured to:
+<div class="claim-text">receive an uplink resource allocation as part of the random access procedure; and</div>
+<div class="claim-text">transmit a message on a physical uplink shared channel (PUSCH) based on the uplink resource allocation as part of the random access procedure.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00057" num="00057">
+<div class="claim-text">57. The UE of <claim-ref idref="CLM-00056">claim 56</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select one of a first random access preamble group and a second random access preamble group based on whether the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00058" num="00058">
+<div class="claim-text">58. The UE of <claim-ref idref="CLM-00056">claim 56</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a first random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00059" num="00059">
+<div class="claim-text">59. The UE of <claim-ref idref="CLM-00058">claim 58</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00060" num="00060">
+<div class="claim-text">60. The UE of <claim-ref idref="CLM-00056">claim 56</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select a second random access preamble group if the pathloss is not less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00061" num="00061">
+<div class="claim-text">61. The UE of <claim-ref idref="CLM-00060">claim 60</claim-ref>, wherein the one or more processors are further configured to:
+<div class="claim-text">select one of a first random access preamble group and the second random access preamble group if the pathloss is less than the maximum power parameter minus the initial preamble power parameter minus the Δ<sub>PREAMBLE-Msg3 </sub>parameter minus the threshold parameter received via the SIB.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00062" num="00062">
+<div class="claim-text">62. The UE of <claim-ref idref="CLM-00056">claim 56</claim-ref>, wherein the message is a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00063" num="00063">
+<div class="claim-text">63. The UE of <claim-ref idref="CLM-00056">claim 56</claim-ref>, wherein the transceiver is further configured to:
+<div class="claim-text">transmit a random access preamble from the selected random access preamble group.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00064" num="00064">
+<div class="claim-text">64. The UE of <claim-ref idref="CLM-00056">claim 56</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to an offset between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00065" num="00065">
+<div class="claim-text">65. The UE of <claim-ref idref="CLM-00064">claim 64</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter further corresponds to a nominal power gap between the preamble and the message 3 of the random access procedure.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00066" num="00066">
+<div class="claim-text">66. The UE of <claim-ref idref="CLM-00056">claim 56</claim-ref>, wherein the Δ<sub>PREAMBLE-Msg3 </sub>parameter corresponds to a nominal power gap between a preamble and a message 3 of the random access procedure.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

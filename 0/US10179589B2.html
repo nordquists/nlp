@@ -1,0 +1,659 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10179589B2 - System and method for optimizing fuel economy using predictive environment and driver behavior information 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA282626020" source="national office">
+<div class="abstract">Disclosed is an exemplary method for optimizing vehicle performance. The method includes determining an optimized drive torque for maximizing vehicle fuel economy and detecting a driver requested drive torque. A determination is made on whether the driver requested drive torque is performance related or safety related. The arbitrated drive torque is set to the optimized drive torque when it is determined that the driver requested drive torque is not performance and safety related. The arbitrated drive torque is set to the driver requested drive torque when it is determined that the driver requested drive torque is either performance or safety related.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES182478682">
+<heading id="h-0001">CROSS REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation application of U.S. patent application Ser. No. 13/188,320, filed Jul. 21, 2011, which claims priority to U.S. provisional application Ser. No. 61/366,322, filed on Jul. 21, 2010, and U.S. provisional application Ser. No. 61/391,229, filed on Oct. 8, 2010, the disclosures of which are incorporated herein by reference in their entirety.</div>
+<heading id="h-0002">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0003" num="0002">Driver bias may cause significant variations in the fuel economy of a vehicle. For example, studies conducted by the U.S. Environmental Protection Agency (EPA) have shown that, even when holding the vehicle and the route constant, driver behavior may account for up to 35% variation in fuel economy (FE).</div>
+<div class="description-paragraph" id="p-0004" num="0003">Driver assistance systems for optimizing fuel economy may be categorized into two general groups based on their mechanisms of influence. Passive assistance systems include those where only advisory feedback is provided to the driver. In active assistance systems, system automation takes over some portion of vehicle control. Some active automation technologies work relatively independent of the driver, such as adaptive cruise control, and some work in conjunction with the driver, such as an automated/automatic transmission.</div>
+<div class="description-paragraph" id="p-0005" num="0004">Passive driver assistance schemes for fuel economy have been around for some time. Many of the original equipment manufacturers (OEMs) offer some type of driver interface for fuel economy in at least some of their vehicle models. The commercial vehicle market, on the other hand, is typically dominated by aftermarket devices, which are often coupled with telematic solutions. In recent years, nomadic devices have also emerged, boosted by smart phone technology, but their effectiveness may be hindered due to limited access to the vehicle's data bus and limited capability as a driver interface.</div>
+<div class="description-paragraph" id="p-0006" num="0005">Existing fuel-economy interface devices may provide visual feedback of instantaneous or average fuel economy. Some may also provide a fuel efficiency “score” to the driver. The existing interface devices, however, are not noted for providing actionable information to the driver in terms of which behavior is related to poor fuel economy or how to operate the vehicle in a more fuel-efficient manner. In addition, existing fuel economy driver feedback schemes are typically based on vehicle operations rather than the driver's interaction with the vehicle operating environment. For example, an aggressive driver braking hard while tailgating may be rated the same as a conservative driver being forced to brake hard because another vehicle suddenly cut in front of him, as both will lead to the same hard braking event and the same fuel economy assessment. As a result, the fuel economy score or rating given to the driver is often confusing and misleading, which makes it difficult for both the driver to make use of the data.</div>
+<div class="description-paragraph" id="p-0007" num="0006">Currently there is a general lack of actionable information and a poor differentiation between driver-caused and environment-caused fuel economy inefficiency. Both of these factors limit the effectiveness of existing fuel-economy driver interface technologies. In addition, since the driver's response to any passive feedback is typically going to be slow and coarse by nature, passive feedback may become distracting and ineffective in situations that require fast, frequent, or high-accuracy response from the driver.</div>
+<div class="description-paragraph" id="p-0008" num="0007">As for active feedback technologies, examples include synthetic brake pulse or acceleration resistance, road speed governor, automated/automatic transmission, and standard or adaptive cruise control, to name a few. Some of these technologies were not intentionally introduced for the purpose of improving fuel efficiency, but have advanced in recent years to assist fuel economy determinations. For instance, current automated/automatic transmissions may have the capability of estimating road grade and load and adjusting gearshift schedule for better fuel economy.</div>
+<div class="description-paragraph" id="p-0009" num="0008">Existing active feedback devices, however, have limitations similar to passive devices. Many existing active feedback solutions do not have the intelligence to differentiate between driver-caused and environment-caused fuel economy inefficiency. In addition, many of the control strategies employed in active assistance solutions are based only on instantaneous information, such as the load-based gearshift scheduling of many newer automated/automatic transmissions.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Achieving optimum driver behavior and powertrain operation to maximize fuel efficiency depends on the ability to estimate future conditions of the driver, vehicle and environment. Lack of knowledge of or inappropriate response to such future conditions may limit the effectiveness of vehicle automation systems. In recent years, progress in intelligent transportation systems (ITS) has increased availability of road and traffic information at both vehicle level and fleet level. Since fuel consumption is a cumulative measure over time, the optimality of instantaneous driver behavior is significantly dependent on future conditions. The availability of predictive road and traffic information from modern ITS technologies, such as global positioning systems (GPS), digital maps and radars, make it feasible and affordable to reduce driver bias through enhanced driver feedback and/or powertrain automation. Most of the early solutions have been focused on utilizing predictive topographical information to reduce fuel consumption in a cruise control context, where the vehicle is switching between full autonomy and full driver control per driver's choice. Since the fuel-efficient control strategy will only be active in the full autonomy mode, accurate, predictive sensor information is generally required to enable the system to make appropriate decisions consistently to avoid frequent driver intervention. With the help of technologies such as GPS and digital maps, reasonably accuracy information is readily available for simple and largely static environments, such as long distance travel on an open freeway. For the more complex urban environment, where future traffic conditions may be fluid and unpredictable, sensor and decision errors are inevitable and the driver is more likely to simply take over control of the vehicle, which makes cruise-control based solutions less effective.</div>
+<description-of-drawings>
+<heading id="h-0003">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0011" num="0010"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a schematic illustration of an automotive vehicle employing an exemplary active driver assistance system (ADAS);</div>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a more detailed schematic illustration of the ADAS of <figref idrefs="DRAWINGS">FIG. 1</figref>;</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a schematic illustration of an exemplary look-ahead powertrain management module (LPM) that may be employed with the ADAS;</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a schematic illustration of an exemplary sensor fusion module that may be employed with the LPM;</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 5</figref> schematically illustrates operation of an exemplary scenario recognition module that may be employed with the LPM;</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates an exemplary method for determining a vehicle speed profile for maximizing fuel economy;</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a schematic illustration of an exemplary arbitration module that may be employed with the LPM; and</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 8</figref> schematically illustrates an exemplary operating scheme that may be employed with the arbitration module.</div>
+</description-of-drawings>
+<heading id="h-0004">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0019" num="0018">Referring now to the discussion that follows and the drawings, illustrative approaches to the disclosed systems and methods are described in detail. Although the drawings represent some possible approaches, the drawings are not necessarily to scale and certain features may be exaggerated, removed, or partially sectioned to better illustrate and explain the present disclosure. Further, the descriptions set forth herein are not intended to be exhaustive, otherwise limit, or restrict the claims to the precise forms and configurations shown in the drawings and disclosed in the following detailed description.</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 1</figref> schematically illustrates a motor vehicle <b>20</b> employing an exemplary active driver assistance system (ADAS) <b>22</b> for optimizing vehicle fuel economy. For purposes of discussion, the features and operation of ADAS <b>22</b> are described primarily in connection with a goal of maximizing fuel economy, but it shall be appreciated that the features of ADAS <b>22</b> may also be utilized to improve other performance characteristics in addition to fuel economy, for example, minimizing vehicle wear and tear and travel time. An exemplary arrangement of ADAS <b>22</b> is illustrated in more detail in <figref idrefs="DRAWINGS">FIG. 2</figref>. More specifically, <figref idrefs="DRAWINGS">FIG. 2</figref> schematically illustrates the exemplary arrangement of the various elements of ADAS <b>22</b>. As noted above, the disclosed arrangement is merely to facilitate discussion and the arrangement is not limiting. Moreover, certain elements may be added or removed without compromising the relevant operation of ADAS <b>22</b>.</div>
+<div class="description-paragraph" id="p-0021" num="0020">ADAS <b>22</b> may be configured to interact with a vehicle driver and utilize driver input when formulating a strategy for maximizing fuel economy. ADAS <b>22</b> generally operates in the background to continuously formulate and update vehicle operating strategies to maximize fuel economy and evaluate whether and how to communicate with or influence the driver's operation of the vehicle, through either active transmission/engine control and/or advisory driver feedback. ADAS <b>22</b> will not, however, request more power from the vehicle engine than requested by the driver. ADAS <b>22</b> may utilize historical and predictive information of both the vehicle operating environment (i.e., route and traffic information), as well as how the vehicle is being operated by the driver. The information may be obtained from on-board vehicle sensors, digital maps, vehicle-to-vehicle (V2V) communication systems, and vehicle-to-infrastructure (V2I) communication systems.</div>
+<div class="description-paragraph" id="p-0022" num="0021">The environment factors effecting fuel economy may be separated from driver behaviors factors, with the environment factors being categorized into individual driving scenarios. Driver assistance decisions may be based on real-time scenario recognition and scenario-specific strategies that target non-safety related driving behavior and which may significantly effect fuel economy. Although ADAS <b>22</b>, as described herein in an exemplary manner, is particularly applicable to commercial vehicles having an automated/automatic transmission, it may also be employed with other vehicle configurations as well, including semi-automatic and manual shift transmissions.</div>
+<div class="description-paragraph" id="p-0023" num="0022">Continuing to refer to <figref idrefs="DRAWINGS">FIG. 1</figref>, vehicle <b>20</b> may include four rear drive wheels <b>24</b> and two front non-drive wheels <b>26</b>. In other illustrative configurations, all wheels may be drive wheels. Moreover, there may be more or fewer wheels for vehicle <b>20</b>. Operably associated with each of the wheels <b>24</b> and <b>26</b> may be a conventional type of wheel brake <b>28</b>.</div>
+<div class="description-paragraph" id="p-0024" num="0023">Vehicle <b>20</b> includes a vehicle drive system, generally designated <b>30</b>. Vehicle drive system <b>30</b> includes a vehicle engine <b>32</b> and a transmission <b>34</b>. Transmission <b>34</b> operatively connects to engine <b>32</b> and transmits drive torque generated by engine <b>32</b> to rear drive wheels <b>24</b>. Extending rearward from the transmission <b>34</b>, and also forming a portion of vehicle drive system <b>30</b>, is a drive-line, generally designated <b>36</b>. A drive shaft <b>38</b> interconnects transmission <b>34</b> to an inter-wheel differential <b>40</b> for transferring drive torque to a left rear axle shaft <b>42</b> and right rear axle shaft <b>44</b>. Drive-line <b>36</b> is illustrated and described as including shafts <b>38</b>, <b>42</b> and <b>44</b> primarily to facilitate understanding of the overall vehicle drive system <b>30</b>, and not by way of limitation. For example, in the illustrated vehicle <b>20</b>, and by way of example only, drive shaft <b>38</b> is illustrated as including a single shaft, but in practice may be configured to include additional shafts connected by way of universal joints or other suitable coupling mechanisms.</div>
+<div class="description-paragraph" id="p-0025" num="0024">Vehicle <b>20</b> may include a transmission/engine control unit (TECU) <b>46</b> for controlling operation of engine <b>32</b> and transmission <b>34</b>. TECU <b>46</b> may receive signals generated by various engine, transmission and vehicle sensors, and process the signals to control operation of engine <b>32</b> and transmission <b>34</b>. Although illustrated as a separate component from transmission <b>34</b>, TECU <b>46</b> may also be integrated with transmission <b>34</b>. Moreover, TECU <b>46</b> may be a single computing module or a plurality of computing modules at different locations within vehicle <b>20</b> and communicatively connected as discussed in more detail below.</div>
+<div class="description-paragraph" id="p-0026" num="0025">Referring to <figref idrefs="DRAWINGS">FIGS. 1 and 2</figref>, ADAS <b>22</b> may include an on-board look-ahead powertrain management module (LPM) <b>48</b> that may provide primary control of the ADAS system. LPM <b>48</b> may form a portion of the more general system based TECU <b>46</b>, or may be in operational communication with TECU <b>46</b>. LPM <b>48</b> may include, for example, a microprocessor, a central processing unit (CPU), and a digital controller, among others.</div>
+<div class="description-paragraph" id="p-0027" num="0026">LPM <b>48</b> may employ a mix of passive and active driver assistance system architecture aimed at improving vehicle fuel economy by assisting the driver to optimize a vehicle drive-cycle with respect to fuel economy without compromising safety, operating comfortableness, or the productivity of the vehicle operator. Fuel economy optimization may be achieved through a combination of engine and transmission shift and drive torque controls and actionable driver feedback. When employed with commercial vehicle fleets, LPM <b>48</b> may also provide commercial fleet managers with actionable driver fuel economy performance information. Depending on the requirements of a particular application, LPM <b>48</b> may be fully integrated with TECU <b>46</b>, or configured as a slave module of TECU <b>46</b>.</div>
+<div class="description-paragraph" id="p-0028" num="0027">With continued reference to <figref idrefs="DRAWINGS">FIGS. 1 and 2</figref>, LPM <b>48</b> may be configured to communicate with an externally located back-office route/driver database (BORD) <b>50</b> for storing various information used in connection with ADAS <b>22</b>. BORD <b>50</b> may include a route database <b>52</b> configured to store data on a particular route that vehicle <b>20</b> operates, as well as a compilation of historical real-time traffic information occurring over the route. BORD <b>50</b> may also be configured store three-dimensional coordinates of a road network that vehicle <b>20</b> will be operating on, and the corresponding traffic constraints, such as speed limits, traffic lights, stop signs, and real-time traffic information. The real-time traffic information may be provided by a third-party service. The information stored on BORD <b>50</b> may include high-fidelity, third-party digital maps, or may be derived from aggregated route data received from LPM <b>48</b> over time. In the case of the latter, BORD <b>50</b> may also include a route learning module that compiles a knowledge base of the road network over time by combining route information learned from vehicle <b>20</b> and other vehicles through their daily operations.</div>
+<div class="description-paragraph" id="p-0029" num="0028">BORD <b>50</b> may also maintain an operator driving behavior database <b>54</b> for each driver of vehicle <b>20</b>, which may be updated over time using data received from LPM <b>48</b>. Driving performance data with respect to individual operating scenarios may be downloaded and stored on BORD <b>50</b>. BORD <b>50</b> may also include a driver fuel economy performance evaluation module <b>58</b> configured to evaluate each driver's fuel economy under various operating scenarios.</div>
+<div class="description-paragraph" id="p-0030" num="0029">Although illustrated as a component separate from vehicle <b>20</b>, BORD <b>50</b> may be configured as a simplified on-board sub-module of LPM <b>48</b>.</div>
+<div class="description-paragraph" id="p-0031" num="0030">A data-link interface unit <b>58</b> selectively establishes a wired <b>60</b> and/or wireless <b>62</b> communication link between LPM <b>48</b> and BORD <b>50</b>. For purposes of discussion, wireless communication links are indicated throughout the drawing figures by a dashed line, and wired communication links are indicated by a solid line. However, in practice, it may be possible for wired and wireless communication links to be used interchangeably depending on the requirements of a particular application. Data-link interface unit <b>58</b> may be used to upload pre-acquired (or learned-on-the-fly) route information and driver operating behavior data information to an on-broad route/driver behavior database <b>64</b> located on vehicle <b>20</b>. Data-link unit <b>58</b> may also be used to download new route and driver operating behavior data compiled by ADAS <b>22</b> from recent trips to BORD <b>50</b>. The route and driver operating behavior database <b>52</b>,<b>54</b> stored on BORD <b>50</b> may include a comprehensive digital map of an entire geographic region within which a business operates, and driving behavior information on multiple drivers. To minimized the size and cost of on-broad route/driver behavior database <b>64</b>, the on-board database may be configured to only store route and driver operating information specific to a particular route vehicle <b>20</b> will be traveling. The upload and download process may occur at a vehicle distribution terminal before and after a trip, or may take place in real-time through wireless communication between BORD <b>50</b> and ADAS <b>22</b>.</div>
+<div class="description-paragraph" id="p-0032" num="0031">Information/data used by LPM <b>48</b> to formulate a vehicle operating strategy for maximizing fuel economy may be obtained from a variety of sensors and information systems, which may include conventional on-board sensors, such as radar, vision, and a vehicle databus, and information technology services (ITS), such as a global positioning system (GPS), three-dimensional digital maps, and vehicle-to-vehicle (V2V) and vehicle-to-infrastructure (V2I) communication devices. For example, ADAS <b>22</b> may include various on-board sensors <b>66</b> configured to provide information regarding the operating environment immediately surrounding vehicle <b>20</b>. Sensors <b>66</b> collect information concerning potential obstacles, such as other vehicles, present within the immediate vicinity of vehicle <b>20</b>. Data collected by sensors <b>66</b> may be used by ADAS <b>22</b> to estimate, for example, a distance between vehicle <b>20</b> and the adjacent vehicles, as well as a speed and trajectory of the adjacent vehicles. Sensors <b>66</b> may include radar <b>68</b> and vision sensors. ADAS <b>22</b> may further include one or more data receivers <b>70</b> for receiving data transmitted over various wireless communication systems. Such systems may include dedicated short range communication systems (DSRC) <b>72</b>, which may include for example, vehicle-to-vehicle (V2V) communication devices. ADAS <b>22</b> may also receive data transmitted over dedicated government frequencies from a data transmitter <b>73</b>, for example, a global positioning system (GPS) <b>74</b> that may be used to generate three-dimensional digital maps <b>77</b>, and a traffic message channel (TMC) <b>76</b>.</div>
+<div class="description-paragraph" id="p-0033" num="0032">Information and data received from sensors <b>66</b>, data receiver <b>70</b>, and various other vehicle sensors, may be communicated to LPM <b>48</b> across a vehicle Controller Area Network (CAN) <b>78</b>. A known communications standard defined by the Society of Automotive Engineers (SAE) is SAE J1939 for CAN-based communications. SAE J1587 is another possible communications standard that may also be used. Moreover, other communications standards, such as ISO9141 K, or other known standards, may be employed.</div>
+<div class="description-paragraph" id="p-0034" num="0033">ADAS <b>22</b> may also include a driver interface <b>79</b> that operably communicates with LPM <b>48</b>. Driver interface <b>79</b> provides the driver of vehicle <b>20</b> with information concerning fuel economy and feedback for modifying driving behavior to help maximize fuel economy. Driver interface <b>79</b> may included various visual displays, audio sources, such as speakers, and haptic devices. Haptic technology is a tactile feedback technology that takes advantage of a user's sense of touch by applying forces, vibrations, and/or motions to the user.</div>
+<div class="description-paragraph" id="p-0035" num="0034">Referring to <figref idrefs="DRAWINGS">FIG. 3</figref>, LPM <b>48</b> may be configured to generate one or more output signals. For example, a first output signal <b>92</b> may be transmitted to TECU <b>46</b> for use in connection with controlling engine <b>32</b> and transmission <b>34</b>. A second output signal <b>94</b> may be transmitted to driver interface <b>79</b>. The output signals from LPM <b>48</b> may be used to provide engine drive torque/speed control, transmission shift control and advisory driver information (i.e., through driver interface <b>79</b>). Although exemplarily configured LPM <b>48</b> is not described as employing brake control as a means for providing active assistance, the illustrated system architecture may nevertheless be adapted to include active safety features, such as brake control.</div>
+<div class="description-paragraph" id="p-0036" num="0035">Continuing to refer to <figref idrefs="DRAWINGS">FIG. 3</figref>, LPM <b>48</b> may include five primary modules: a vehicle condition module <b>82</b>; an environment awareness module <b>84</b>; a driver intent recognition module <b>86</b>; a FE-optimal behavior estimation module <b>88</b>; and an arbitration module <b>90</b>. Although identified as individual modules for purposes of discussion, in practice, the individual modules may be combined into one or more integrated modules. The modules may be implemented as a combination of hardware and software, and may include one or more software applications or processes for causing one or more computer processors to perform the operations of LPM <b>48</b>. The preceding discussion is equally applicable to TECU <b>46</b>, which as noted, above may incorporate LPM <b>48</b> in one exemplary approach. The operation of each module is described in more below.</div>
+<div class="description-paragraph" id="h-0005" num="0000">Vehicle Condition Module (<b>82</b>)</div>
+<div class="description-paragraph" id="p-0037" num="0036">Vehicle condition module <b>82</b> operates to estimate vehicle load. This may be accomplished, for example, by using an extended Kalman filter (KF) based method employing data provided by GPS <b>74</b>, digital maps <b>77</b>, and vehicle CAN <b>78</b>. Vehicle load estimates may also be obtained through other means, such as private and governmental operated weigh stations. Vehicle condition module <b>82</b> may also determine engine and transmission configurations based on data received, for example, from vehicle CAN <b>78</b>, or through offline calibration procedures.</div>
+<div class="description-paragraph" id="h-0006" num="0000">Environment Awareness Module (<b>84</b>)</div>
+<div class="description-paragraph" id="p-0038" num="0037">Environment awareness module (<b>84</b>) may include a sensor fusion module <b>96</b> and a scenario recognition module <b>98</b>. The two modules are identified separately for purposes of discussion, but in practice, sensor fusion module <b>96</b> and scenario recognition module <b>98</b> may be integrated into fewer or more modules.</div>
+<div class="description-paragraph" id="p-0039" num="0038">Referring also to <figref idrefs="DRAWINGS">FIG. 4</figref>, sensor fusion module <b>96</b> may employ an algorithm that utilizes the available sensor information from sensors <b>66</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) and data receiver <b>70</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) to predict future speed constraints that a driver may be facing within a look-ahead window <b>100</b>. Sensor fusion module <b>96</b> receives information/data from on-board vehicle sensors <b>66</b> concerning the operating environment within an immediate vicinity of vehicle <b>20</b>, and integrates that information/data with environment information/data received by data receiver <b>70</b> from various external data systems, such as GPS <b>74</b>, traffic message channel (TMC) <b>76</b>, and vehicle-to-infrastructure (V2I) communications. Sensor fusion module <b>96</b> may use the available sensor information/data to formulate a digital model <b>101</b> of the current vehicle operating environment occurring within an operating window <b>103</b>. Operating window <b>103</b> includes look-ahead window <b>100</b>, which extends a selected distance <b>102</b> in front of vehicle <b>20</b> along the vehicle's path of travel.</div>
+<div class="description-paragraph" id="p-0040" num="0039">In the example illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref>, operating window <b>103</b> is divided into three segments: a first segment <b>104</b>; a second <b>106</b>; and a third segment <b>108</b>. In practice, however, operating window <b>103</b> may also be divided into fewer or more segments. Further, the number of segments need not remain constant, and may be varied based on various factors, including the operating environment in which vehicle <b>20</b> is operating. The operating environment may include, for example, road conditions (i.e., number of lanes, curvature of the road, whether the road or snow covered, etc.), traffic density and the proximity of other vehicles to vehicle <b>20</b>.</div>
+<div class="description-paragraph" id="p-0041" num="0040">Each segment <b>104</b>, <b>106</b> and <b>108</b>, may be defined by a starting node and an ending node. For example, a first node <b>110</b> corresponds to the starting node of segment <b>104</b>, and a second node <b>112</b> correspond to its ending node. The ending node of a segment corresponds to the starting node of the next subsequent segment. For example, second node <b>112</b>, which corresponds to the ending node of segment <b>106</b>, also corresponds to the starting node of second segment <b>106</b>. Similarly, a third node <b>114</b> correspond to the ending node of second segment <b>106</b>, and the starting node of third segment <b>108</b>. A fourth node <b>116</b> corresponds to an ending node of third segment <b>108</b>. First node <b>110</b> also coincides with a beginning of operating window <b>103</b>, and fourth node <b>116</b> coincides with an end of operating window <b>103</b>. Operating window <b>103</b> may be continuously updated in order that vehicle <b>20</b> is never located outside the beginning and ending boundaries of operating window <b>103</b>, as defined by first node <b>110</b> and fourth node <b>116</b>.</div>
+<div class="description-paragraph" id="p-0042" num="0041">Sensor fusion module <b>96</b> may generate a road condition database <b>118</b> that may include information on road conditions occurring within first segment <b>104</b>, such as, for example, a length of the segment, the node type, posted speed limits, road class, number of lanes, and grade and curvature profiles. Exemplary node types may include a point at which a speed change occurs, an intersection, traffic light, stop sign and other points of the road where either road topology or a road speed limit change occurs. Similar road condition databases <b>120</b> and <b>122</b> may be compiled for second and third segments <b>106</b> and <b>108</b>.</div>
+<div class="description-paragraph" id="p-0043" num="0042">Sensor fusion model <b>96</b> may receive information/data from various sources. For example, information/data concerning location and speed of vehicles traveling in the vicinity of vehicle <b>20</b> may be obtained from sensors <b>66</b>, and may include an estimated actual distance (Range {r′<sub>i</sub>}) between vehicle <b>20</b> and each adjacent vehicle, a speed (Range rate {r′<sub>i</sub>}) of the adjacent vehicle, and a confidence factor (Confidence {C′<sub>i</sub>}). Confidence {C′<sub>i</sub>} provides an indication of the accuracy of the data used to determine Range {r′<sub>i</sub>} and Range rate {r′<sub>i</sub>}. Information/data concerning traffic patterns in the vicinity of vehicle <b>20</b> may be obtained from data receiver <b>70</b>, which may include, for example, an estimated speed at which traffic is flowing within look-ahead window <b>100</b> (Traffic flow speed {s′<sub>i</sub>}), a geographical location of the traffic flow (Traffic flow location {d′<sub>i</sub>}), and a computed factor (Confidence {C′<sub>i</sub>}). Confidence {C′<sub>i</sub>} provides an indication of the accuracy of the data used to determine Traffic flow speed {s′<sub>i</sub>} and Traffic flow location {d′<sub>i</sub>}. Sensor fusion model <b>96</b> may also receive road and route information from GPS and third party mapping services.</div>
+<div class="description-paragraph" id="p-0044" num="0043">Sensor fusion module <b>96</b> uses the information received from sensors <b>68</b> and data receiver <b>70</b> to generate a digital target overlay with road geometry <b>124</b>, which may be filtered through a bank of extended Kalman filter (EKF) type trackers to determine various operating parameters of a nearest in-path vehicle <b>125</b> relative to vehicle <b>20</b>. The computed operating parameters may include a relative speed (v<sub>i</sub>), a lane position (l<sub>i</sub>), a direction (h<sub>i</sub>); and a relative distance (d<sub>i</sub>) of nearest in-path vehicle <b>125</b> relative to vehicle <b>20</b>. Relative distance (d<sub>i</sub>) takes into account the speed of the vehicles, and consequently, is typically less than the actual distance (Range {r′<sub>i</sub>}). The computed properties may be used to determine an available space <b>127</b> between vehicle <b>20</b> and nearest in-path vehicle <b>125</b>. The relative speed (v<sub>i</sub>), lane position (l<sub>i</sub>), direction (h<sub>i</sub>) and relative distance (d<sub>i</sub>) of nearest in-path vehicle <b>125</b> may be used in conjunction with the traffic flow information (when available) obtained by data receiver <b>70</b> to generate a micro traffic prediction model <b>126</b> describing traffic conditions occurring immediately in front of vehicle <b>20</b>. Micro traffic prediction model <b>126</b> may be used to compute a speed profile <b>128</b> of nearest in-path vehicle <b>125</b>.</div>
+<div class="description-paragraph" id="p-0045" num="0044">The individual in-path vehicle information (i.e., relative speed (v<sub>i</sub>), lane position (l<sub>i</sub>), direction (h<sub>i</sub>) and relative distance (d<sub>i</sub>)) may also be integrated with the traffic flow information (when available) obtained by data receiver <b>70</b> and a historical host vehicle speed profile <b>130</b>, which may be obtained, for example, from BORD <b>50</b>, to generate a macro traffic prediction model <b>132</b>. An averaged traffic speed profile <b>134</b> may be computed for each segment <b>104</b>, <b>106</b> and <b>108</b> of operating window <b>103</b> using macro traffic prediction model <b>132</b>.</div>
+<div class="description-paragraph" id="p-0046" num="0045">With continued reference to <figref idrefs="DRAWINGS">FIG. 3</figref> and Table 1 below, scenario recognition module <b>98</b> may use the output from sensor fusion module <b>96</b> (i.e., speed profile <b>128</b> of nearest in-path vehicle <b>125</b> and averaged traffic speed profile <b>134</b>) to identify an operating scenario occurring within look-ahead window <b>100</b>. Scenario recognition module <b>98</b> may include multiple predefined operating scenarios from which to select. Each operating scenario may be defined by mission and environment conditions that a driver encounters, and generally includes two attributes. The first attribute may include static environment constraints <b>136</b>, shown in <figref idrefs="DRAWINGS">FIG. 5</figref> and Table 1, and the second attribute may include dynamic environment constraints <b>138</b>. Static environment constraints <b>136</b> may include, for example, road geometry and posted speed limits, which information may be obtained from GPS and digital map systems. Dynamic environment constraints <b>138</b>, shown in <figref idrefs="DRAWINGS">FIG. 5</figref> and Table 1, may include real-time traffic information, such as the relative speed and location of surrounding vehicles, and phasing of traffic lights located along the look-ahead window route. This information may be obtained from on-board sensors <b>66</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>), which may include radar and vision systems, and remote information technology systems, such as vehicle-to-vehicle (V2V) and vehicle-to-infrastructure (V2I) communication devices that transmit information to data receiver <b>70</b>.</div>
+<div class="description-paragraph" id="p-0047" num="0046">The exemplary implementation of scenario recognition module <b>98</b> includes eight predefined operating scenarios. In practice, however, fewer or more operating scenarios may be defined depending on the requirements of a particular application. Each operating scenario may include a set of static environment constraints <b>136</b> and a set of dynamic environment constraints <b>138</b>. For example, the eight predefined operating scenarios are arrived at by combining four sets of static environment constraints with two sets of dynamic environment constraints. The four sets of static environment constraints <b>136</b> may be include the following:
+</div> <ul> <li id="ul0001-0001" num="0000"> <ul> <li id="ul0002-0001" num="0047">1. “Up-speed” <b>142</b>: defined by a road segment in look-ahead window <b>100</b> that includes an increase in the posted speed limit, such as may occur when entering a freeway on-ramp or a segment of road following a stop sign;</li> <li id="ul0002-0002" num="0048">2. “Down-speed” <b>144</b>: defined by a road segment in the look-ahead window <b>100</b> that includes a decrease in the posted speed limit, such as may occur when exiting a freeway off-ramp or a segment of road approaching a stop sign;</li> <li id="ul0002-0003" num="0049">3. “Speed keeping” <b>146</b>: defined by a road segment in the look-ahead window <b>100</b> with a constant speed limit; and</li> <li id="ul0002-0004" num="0050">4. “ELSE” <b>148</b>: defined by a low speed environment or off-road condition, such as may occur in a parking lot and on a non-public service road.</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0048" num="0051">The two sets of dynamic environment constraints <b>138</b> may include a “Traffic” condition and a “No Traffic” condition, depending on whether the traffic flow is significantly lower than the posted speed limit or there is an impeding vehicle in a path of travel of vehicle <b>20</b> (i.e., “Traffic”).</div>
+<div class="description-paragraph" id="p-0049" num="0052">LPM <b>48</b> may utilize a finite state algorithm to determine a current value of static environment constraints <b>136</b> and dynamic environment constraints <b>138</b>. <figref idrefs="DRAWINGS">FIG. 5</figref> schematically illustrates an exemplary decision making process that may be employed by the finite state algorithm to determine a current value of the static and dynamic environment constraints. The current value of static environment constraint <b>136</b> and dynamic environment constraint <b>138</b> may be determined by evaluating a value of various predefined parameters. The predefined parameters may include, for example, a first distance parameter (F<b>1</b>) and a second distance parameter (F<b>2</b>). First distance parameter (F<b>1</b>) corresponds to a condition in which a distance (Dist<b>2</b>PrevNode) between vehicle <b>20</b> and a node immediately behind vehicle <b>20</b> (i.e., node <b>110</b> in <figref idrefs="DRAWINGS">FIG. 4</figref>) is greater than a threshold distance computed as function of a maximum operating speed (SpdLmt) at which vehicle <b>20</b> may be operated. The maximum operating speed (SpdLmt) may correspond to the lesser of a speed of the surrounding traffic (TraFlow), a posted road speed limit (RdSpdLmt), and a maximum speed limit set in accordance with a vehicle fleet policy (FleetPolicy). Second distance parameter (F<b>2</b>) corresponds to a condition in which a distance (Dist<b>2</b>NextNode) between vehicle <b>20</b> and a node immediately proceeding vehicle <b>20</b> (i.e., node <b>112</b> in <figref idrefs="DRAWINGS">FIG. 4</figref>) is greater than a threshold distance computed as function of the maximum operating speed (SpdLmt) at which vehicle <b>20</b> may be operated.</div>
+<div class="description-paragraph" id="p-0050" num="0053">The predefined parameters may also include a first speed parameter (P<b>0</b>) and a second speed parameter (P<b>1</b>). First speed parameter (P<b>0</b>) corresponds to a condition in which a speed of the traffic within look-ahead window <b>100</b> (TraFlow) is less than a first selected percentage (p<b>0</b>) of the posted road speed limit (RdSpdLmt). Second speed parameter (P<b>1</b>) corresponds to a condition in which the speed of the traffic within look-ahead window <b>100</b> (TraFlow) is greater than a second selected percentage (p<b>1</b>) of the posted road speed limit (RdSpdLmt). First and second percentages (p<b>0</b>) and (p<b>1</b>) are expressed in decimal form, and range between zero and one, with (p<b>0</b>) being less than (p<b>1</b>).</div>
+<div class="description-paragraph" id="p-0051" num="0054">The predefined parameters may also include a first time parameter (T<b>0</b>) and a second time parameter (T<b>1</b>). First time parameter (T<b>0</b>) corresponds to a condition in which a distance (ImpVeh) between vehicle <b>20</b> and nearest in-path vehicle <b>125</b> is less than a minimum threshold value computed as a function of the following: a time (Headway) for vehicle <b>20</b> to travel the distance (ImpVeh) between vehicle between vehicle <b>20</b> and nearest in-path vehicle <b>125</b>; the amount of time (TTC) it would take vehicle <b>20</b> to collide with nearest in-path vehicle <b>125</b> computed based on a relative speed between the two vehicles; and empirically determined factors (t<b>1</b>) and (t<b>2</b>). Factor (t<b>1</b>) has a value much greater than zero and less than (t<b>2</b>).</div>
+<div class="description-paragraph" id="p-0052" num="0055">Second time parameter (T<b>1</b>) corresponds to a condition in which distance (ImpVeh) between vehicle <b>20</b> and nearest in-path vehicle <b>125</b> is greater than a maximum threshold value computed as a function of following: the time (Headway) for vehicle <b>20</b> to travel the distance (ImpVeh) between vehicle between vehicle <b>20</b> and nearest in-path vehicle <b>125</b>; the amount of time (TTC) it would take vehicle <b>20</b> to collide with nearest in-path vehicle <b>125</b> computed based on a relative speed between the two vehicles; and empirically determined factors (t<b>3</b>) and (t<b>4</b>). Factor (t<b>3</b>) has a value much greater than zero and less than (t<b>4</b>).</div>
+<div class="description-paragraph" id="p-0053" num="0056">The current value of the dynamic environment constraint <b>138</b> may be determined by evaluating the status of parameters P<b>0</b>, P<b>1</b>, T<b>0</b> and T<b>1</b>. If it is determined that parameters P<b>1</b> and T<b>1</b> are satisfied, the dynamic environment constraint is set to “No Traffic” <b>137</b>. If it is determined that parameters P<b>0</b> and T<b>0</b> are satisfied, the dynamic environment constraint is set to “Traffic” <b>139</b>.</div>
+<div class="description-paragraph" id="p-0054" num="0057">The current value of the static environment constraint <b>136</b> may be determined by evaluating a current speed (V) of vehicle <b>20</b>; the status of parameters F<b>0</b> and F<b>2</b>; whether vehicle <b>20</b> is being operated off-road (i.e., OffRoad=true) or on road (i.e., OffRoad=false); and whether a maximum operating speed (SpdLmt) of vehicle <b>20</b> is increasing or decreasing. Static environment constraint <b>136</b> is initially set to a value of “ELSE” <b>148</b>. Static environment constraint <b>136</b> will also be set to “ELSE” <b>148</b> whenever vehicle <b>20</b> is operated off-road (i.e., OffRoad=true). Static environment constraint <b>136</b> transitions from “ELSE” <b>148</b> to “Up-Speed” <b>142</b> when it is determined that the velocity (V) of vehicle <b>20</b> is greater than zero (i.e., vehicle <b>20</b> is moving) and parameter F<b>1</b> is not satisfied. Static environment constraint <b>136</b> transitions from “ELSE” <b>148</b> to “Down-Speed” <b>144</b> when it is determined that the velocity (V) of vehicle <b>20</b> is greater than zero (i.e., vehicle <b>20</b> moving) and parameter F<b>2</b> is satisfied. Static environment constraint <b>136</b> transitions from “Up-speed” <b>142</b> to “Down-Speed” <b>144</b> when the maximum speed (SpdLmt) of vehicle <b>20</b> is set to decrease at the next node (i.e., node <b>112</b> in <figref idrefs="DRAWINGS">FIG. 4</figref>) and parameter F<b>2</b> is not satisfied. Static environment constraint <b>136</b> transitions from “Up-speed” <b>142</b> to “Speed Keeping” <b>146</b> when both parameters F<b>1</b> and F<b>2</b> are satisfied. Static environment constraint <b>136</b> transitions from “ELSE” <b>148</b> to “Down-Speed” <b>144</b> when it is determined that the velocity (V) of vehicle <b>20</b> is greater than zero (i.e., vehicle <b>20</b> moving) and parameter F<b>2</b> is satisfied. Static environment constraint <b>136</b> transitions from “Down-speed” <b>144</b> to “Up-Speed” <b>142</b> whenever vehicle <b>20</b> passes a new node (i.e., node <b>112</b> in <figref idrefs="DRAWINGS">FIG. 14</figref>) and the maximum speed (SpdLmt) of vehicle <b>20</b> has increased. Static environment constraint <b>136</b> transitions from “Down-speed” <b>144</b> to “Speed Keeping” <b>146</b> when both parameters F<b>1</b> and F<b>2</b> are satisfied. Static environment constraint <b>136</b> transitions from “ELSE” <b>148</b> to “Down-Speed” <b>144</b> when it is determined that the velocity (V) of vehicle <b>20</b> is greater than zero (i.e., vehicle <b>20</b> moving) and parameter F<b>2</b> is satisfied. Static environment constraint <b>136</b> transitions from “Speed Keeping” <b>146</b> to “Up-Speed” <b>142</b> whenever vehicle <b>20</b> passes a new node (i.e., node <b>112</b> in <figref idrefs="DRAWINGS">FIG. 4</figref>) and the maximum speed (SpdLmt) of vehicle <b>20</b> has increased. Static environment constraint <b>136</b> transitions from “Speed Keeping” <b>142</b> to “Down-Speed” <b>144</b> when the maximum speed (SpdLmt) of vehicle <b>20</b> is set to decrease at the next node (i.e., node <b>112</b> in <figref idrefs="DRAWINGS">FIG. 4</figref>) and parameter F<b>2</b> is not satisfied.</div>
+<div class="description-paragraph" id="p-0055" num="0058">The control strategy implemented by LPM <b>48</b> is dependent on the current operating scenario in which vehicle <b>20</b> is operating. For example, with reference to Table 1 below, if static environment constraint <b>136</b> is set to “Up-Speed” <b>142</b>, which may occur, for example, when vehicle <b>20</b> is operating on a road segment that includes an in increase in speed limit, such as a freeway on ramp, and a value of “No traffic” <b>137</b> is assigned to dynamic environment constraint <b>138</b>, scenario recognition module <b>98</b> will determine that no intervention is necessary and LPM <b>48</b> will not attempt to influence the driving behavior of the vehicle operator. On the other hand, if static environment constraint <b>136</b> is set to “Down-Speed” <b>144</b>, which may occur, for example, when vehicle <b>20</b> is exiting a freeway off-ramp, and a value of “Traffic” <b>139</b> is assigned to dynamic environment constraint <b>138</b>, scenario recognition module <b>98</b> will determine there is a potential for intervening in the operation of vehicle <b>20</b> or otherwise influencing the driving behavior of the vehicle operator.</div>
+<div class="description-paragraph" id="p-0056" num="0059">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="2" nameend="1" namest="offset" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="2" nameend="1" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Dynamic Environmental Constraints (138)</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">No traffic (137)</td>
+<td class="description-td">Traffic (139)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Static</td>
+<td class="description-td">Up-Speed (142)</td>
+<td class="description-td">No intervention</td>
+<td class="description-td">Potential</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Environmental</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Intervention</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Constraints</td>
+<td class="description-td">Down-Speed (144)</td>
+<td class="description-td">Potential</td>
+<td class="description-td">Potential</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(136)</td>
+<td class="description-td"> </td>
+<td class="description-td">Intervention</td>
+<td class="description-td">Intervention</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Speed keeping (146)</td>
+<td class="description-td">Potential</td>
+<td class="description-td">Potential</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Intervention</td>
+<td class="description-td">Intervention</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">ELSE (148)</td>
+<td class="description-td">No Intervention</td>
+<td class="description-td">No Intervention</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0057" num="0060">Environment awareness module <b>98</b> only determines if there is a potential for intervening in the operation of vehicle <b>20</b> and/or influencing the driving behavior of the vehicle operator. The decision on whether LPM <b>48</b> actually intervenes in the operation of vehicle <b>20</b>, or otherwise attempts to influence the driving behavior of the vehicle operator occurs within arbitration module <b>90</b>, which is described in more detail below.</div>
+<div class="description-paragraph" id="h-0007" num="0000">FE-Optimal Behavior Estimation Module (<b>88</b>)</div>
+<div class="description-paragraph" id="p-0058" num="0061">FE-optimal behavior estimation module <b>88</b> may use the output from environment awareness module <b>84</b> and vehicle condition module <b>84</b> to derive an optimized drive cycle (i.e., target speed profile v*(t)) by determining a fuel economy that may be achievable under the environment constraints determined by environment awareness module <b>84</b>. Target speed profile v*(t) may include acceleration intensity and gearshift timing. Target speed profile v*(t) may be determined based on the following optimization scheme, where D<sub>up </sub>is a predicted travel distance profile assuming vehicle <b>20</b> will be following the micro/macro traffic flow as determined by environment awareness module <b>84</b>. The result of this optimization process is a speed profile v*(t) that enables vehicle <b>20</b> to travel distance D<sub>up </sub>within look-ahead window <b>100</b> (<figref idrefs="DRAWINGS">FIG. 4</figref>) with minimum fuel usage and without having to pass any vehicles or incurring any additional travel time.</div>
+<div class="description-paragraph" id="p-0059" num="0062">The following is an example of the calculations that may be employed by FE-optimal behavior estimation module <b>88</b> to compute speed profile v*(t):</div>
+<div class="description-paragraph" id="p-0060" num="0063">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mrow>
+<msup>
+<mi>v</mi>
+<mo>*</mo>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munder>
+<mrow>
+<mi>arg</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>min</mi>
+</mrow>
+<mrow>
+<mi>v</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</munder>
+<mo>⁢</mo>
+<mrow>
+<msubsup>
+<mo>∫</mo>
+<mn>0</mn>
+<mrow>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>LookAhead</mi>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>Fuel</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mi>dt</mi>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>such</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>that</mi>
+</mrow>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00001-2" num="00001.2">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mrow>
+<msup>
+<mi>v</mi>
+<mo>*</mo>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>T</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>≤</mo>
+<mrow>
+<msub>
+<mi>V</mi>
+<mi>SpdLmt</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msubsup>
+<mo>∫</mo>
+<mn>0</mn>
+<mi>T</mi>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>v</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mi>dt</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>for</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mo>∀</mo>
+<mi>T</mi>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mn>0</mn>
+<mo>&lt;</mo>
+<mi>T</mi>
+<mo>≤</mo>
+<msub>
+<mi>T</mi>
+<mi>LookAhead</mi>
+</msub>
+</mrow>
+<mo>,</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>and</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msubsup>
+<mo>∫</mo>
+<mn>0</mn>
+<mi>t</mi>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msup>
+<mi>v</mi>
+<mo>*</mo>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mi>dt</mi>
+</mrow>
+</mrow>
+</mrow>
+<mo>≤</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>up</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>for</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mo>∀</mo>
+<mi>t</mi>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mn>0</mn>
+<mo>&lt;</mo>
+<mi>t</mi>
+<mo>≤</mo>
+<msub>
+<mi>T</mi>
+<mi>LookAhead</mi>
+</msub>
+</mrow>
+<mo>,</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>and</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msubsup>
+<mo>∫</mo>
+<mn>0</mn>
+<mrow>
+<mi>T</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>LookAhead</mi>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msup>
+<mi>v</mi>
+<mo>*</mo>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mi>dt</mi>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<msub>
+<mi>D</mi>
+<mi>LookAhead</mi>
+</msub>
+</mrow>
+<mo>,</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>where</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="1.1ex" width="1.1em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>up</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>T</mi>
+<mi>LookAhead</mi>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<msub>
+<mi>D</mi>
+<mi>LookAhead</mi>
+</msub>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div> <ul>
+<li id="ul0003-0001" num="0000">
+<ul>
+<li id="ul0004-0001" num="0064">and where T<sub>lookahead </sub>is a user defined parameter that defines a forward time horizon over which the system will predict the FE-optimal behavior</li>
+</ul>
+</li>
+</ul>
+<div class="description-paragraph" id="p-0061" num="0065">Depending on the particular scenario, the calculation of speed profile v*(t) may vary from computational sequence described above. An exemplary speed profile v*(t) computational method <b>148</b> is illustrated in <figref idrefs="DRAWINGS">FIG. 6</figref>. Information/data received from environment awareness module <b>84</b> (block <b>150</b>) may be used in conjunction with macro traffic prediction <b>132</b> generated by sensor fusion module <b>96</b> to determine an average distance (D<sub>avg</sub>) (block <b>152</b>) that corresponds to an available open distance <b>127</b> (<figref idrefs="DRAWINGS">FIG. 4</figref>) between vehicle <b>20</b> and a nearest in-path vehicle <b>125</b> (<figref idrefs="DRAWINGS">FIG. 4</figref>) (block. A determination is made at block <b>154</b> on whether vehicle <b>20</b> is operating in traffic based on the status of dynamic environment constraint <b>138</b>, as provided by environment awareness module <b>84</b>. If dynamic environment constraint <b>138</b> is set to “No Traffic” (<figref idrefs="DRAWINGS">FIG. 5</figref>), the computation proceeds to block <b>156</b>, where an initial target speed profile is determined based on the current road speed limit and node type. The computation then proceeds to block <b>158</b>, where the previously computed speed profile may be modified, if necessary, to accommodate a particular grade and curvature of the road within look-ahead window <b>100</b>. The resulting output (block <b>160</b>) is a target speed profile v*(Δx), which may be used by FE-optimal behavior estimation module <b>88</b> to determine a corresponding engine/transmission optimized drive torque estimated to produce the target speed profile.</div>
+<div class="description-paragraph" id="p-0062" num="0066">Continuing to refer to <figref idrefs="DRAWINGS">FIG. 6</figref>, if it is determined at block <b>154</b> that vehicle <b>20</b> is operating in traffic based on the status of dynamic environment constraint <b>138</b>, the computation proceeds to block <b>162</b>, where a travel distance D<sub>up </sub>within look-ahead window <b>100</b> (<figref idrefs="DRAWINGS">FIG. 4</figref>) is computed based on the macro/micro traffic prediction provided by environment awareness module <b>84</b>. The process then proceeds to block <b>164</b>, where an initial target speed profile is determined based on the determined travel distance D<sub>up</sub>. The computation proceeds to block <b>166</b>, where the previously computed initial speed profile may modified, if necessary, in accordance with a current road speed limit within look-ahead window <b>100</b> and a node type. The resulting output is a target speed profile v*(Δx), which may be used by FE-optimal behavior estimation module <b>88</b> to determine a corresponding engine/transmission optimized drive torque calculated to produce the target speed profile.</div>
+<div class="description-paragraph" id="p-0063" num="0067">The computed target speed profile may be used to determine a corresponding throttle position, acceleration command or drive torque, for enabling vehicle <b>20</b> to track the target speed determined by FE-optimal behavior estimation module <b>88</b>. This may be accomplished by tracking a reference command, such as a reference or a reference speed, using feedback linearization. The process may employ an approximate validated plant model for determining a drive torque estimated to achieve the target speed profile. A set of exemplary equations that may be employed by the plant model algorithm are described below. A vehicle speed (V) can be expressed as a function of engine torque (T<sub>e</sub>), braking torque (T<sub>b</sub>) and vehicle drag forces. These dynamic forces may be obtained from the validated plant model. The corresponding velocity dynamics, expressed in control affine form, are as follows:
+<br/>
+<i>{dot over (V)}=f</i> <sub>1</sub>(<i>i</i>)<i>T</i> <sub>e</sub> <i>+f</i> <sub>2</sub> <i>u</i> <sub>b</sub> <i>+f</i> <sub>3</sub>(<i>V</i>,α)  (a)
+</div> <ul> <li id="ul0005-0001" num="0000"> <ul> <li id="ul0006-0001" num="0068">where:
+        <ul> <li id="ul0007-0001" num="0069">i is the gear ratio;</li> <li id="ul0007-0002" num="0070">u<sub>b </sub>is a brake command; and</li> <li id="ul0007-0003" num="0071">α is a grade angle.</li> </ul>
+</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0064" num="0072">Since the disclosed exemplary configuration of ADAS <b>22</b> does not include control of brake command u<sub>b</sub>, control over speed profile v*(t) may be accomplished by manipulating the engine torque T<sub>e </sub>produced by engine <b>32</b> and the gear ratio on the transmission to achieve the target speed V<sub>target</sub>. Using first order speed error dynamics, the relationship between vehicle velocity (V) and target speed V<sub>target </sub>may be expressed as:
+<br/>
+(<i>{dot over (V)}−{dot over (V)}</i> <sub>target</sub>)+<i>k</i> <sub>v</sub>(<i>V−V</i> <sub>target</sub>)=0<div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/5f/29/cf/5db186611cbcbb/US10179589-20190115-P00001.png"><img alt="Figure US10179589-20190115-P00001" class="patent-full-image" file="US10179589-20190115-P00001.TIF" he="2.46mm" height="10" id="CUSTOM-CHARACTER-00001" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/5f/29/cf/5db186611cbcbb/US10179589-20190115-P00001.png" wi="3.22mm" width="13"/></a></div> <i>ė</i> <sub>v</sub> <i>+k</i> <sub>v</sub> <i>e</i> <sub>v</sub>=0  (b)
+</div>
+<div class="description-paragraph" id="p-0065" num="0073">Target speed V<sub>target </sub>may be assumed to have a relatively low rate of change, and as such, V<sub>target </sub>closely approximates zero. This reduces equation (b) above to:
+<br/>
+<i>{dot over (V)}=−k</i> <sub>v</sub>(<i>V−V</i> <sub>target</sub>)  (c)
+</div>
+<div class="description-paragraph" id="p-0066" num="0074">Substituting equation (c) into equation (a) yields the following:
+<br/>
+<i>f</i> <sub>1</sub>(<i>i</i>)<i>T</i> <sub>e</sub> <i>+f</i> <sub>2</sub> <i>u</i> <sub>b</sub> <i>+f</i> <sub>3</sub>(<i>V,a</i>)=−<i>k</i> <sub>v</sub>(<i>V−V</i> <sub>target</sub>))+<i>V</i> <sub>target</sub>  (d)
+</div>
+<div class="description-paragraph" id="p-0067" num="0075">Solving equation (d) for T<sub>e </sub>results in the following equation for computing an optimized drive torque T<sub>e </sub>estimated to attain the vehicle target speed V<sub>target </sub>for a particular gear option
+<br/>
+<i>T</i> <sub>e</sub> <i>=f</i> <sub>1</sub>(<i>i</i>)<sup>−1</sup>(−<i>k</i> <sub>v</sub>(<i>V−V</i> <sub>target</sub>)−<i>f</i> <sub>2</sub> <i>u</i> <sub>b</sub> <i>−f</i> <sub>3</sub>(<i>V,a</i>))  (e)
+</div>
+<div class="description-paragraph" id="p-0068" num="0076">Multiple gear options may be feasible to achieve the same demand drive torque. In that case, the estimated vehicle fuel economy with respect to other feasible gear options may be estimated and the best gear selection with respect to fuel economy may be chosen and the corresponding engine torque may become the final recommended engine torque.</div>
+<div class="description-paragraph" id="h-0008" num="0000">Driver Intent Recognition Module (<b>86</b>)</div>
+<div class="description-paragraph" id="p-0069" num="0077">Operating in parallel with environment awareness module <b>84</b> and FE-optimal behavior estimation module <b>88</b>, driver intent recognition module <b>86</b> accumulates historical driving data under various environment conditions. The compiled data may be used to formulate a statistical model for estimating a vehicle driver's current and future intent regarding the operation of vehicle <b>20</b>, and estimate if the driver's actions are being executed, for example, in connection passing, merging, and performing a lane change, to name a few. Driver intent recognition module <b>86</b> provides information/data that may be used by arbitration module <b>90</b> when assessing whether to actively intervene in the operation of vehicle <b>20</b> and/or prompt the driver to modify their driving behavior.</div>
+<div class="description-paragraph" id="h-0009" num="0000">Arbitration Module (<b>90</b>)</div>
+<div class="description-paragraph" id="p-0070" num="0078">A schematic illustration of an exemplarily configured arbitration module <b>90</b> is illustrated in <figref idrefs="DRAWINGS">FIG. 7</figref>. Arbitration module <b>90</b> determines an arbitrated drive torque for propelling vehicle <b>20</b>. The arbitrated drive torque may fall within a range bounded by and including the optimized torque determined by FE-optimal behavior estimation module <b>88</b> and a drive torque requested by the vehicle driver. The arbitrated drive torque may be used by various vehicle controls, such as TECU <b>46</b>, to control operation of engine <b>32</b>, for example, through manipulation of an engine throttle position, and transmission <b>34</b>, for example, through initiation of a gear range shift. The arbitrated torque may also be used to formulate a strategy for passively prompting the driver of the vehicle to adjust their driving behavior, for example, by manually manipulating a vehicle accelerator pedal to adjust an engine throttle position, or manually initiating a transmission gear shift.</div>
+<div class="description-paragraph" id="p-0071" num="0079">Arbitration module <b>90</b> may utilize the information/data compiled and/or determined by vehicle condition module <b>82</b>, environment awareness module <b>84</b>, driver intent recognition module <b>86</b>, and FE-optimal behavior estimation module <b>88</b>, when determining the arbitrated torque. Factors that may be considered include a difference between the driver demand/intent, as determined by driver intent recognition module <b>86</b>, and the fuel economy optimal behavior profile, as determined by FE-optimal behavior estimation module <b>88</b>. Another factor is the nature of the perceived driver intent, for example, whether the driver's actions are safety and/or performance related. In instances where environment awareness module <b>84</b> determines that driver assistance may benefit fuel economy (i.e., there is a potential for intervention, as indicated, for example, in Table 1), arbitration module <b>90</b> determines whether to provide advisory feedback to the driver or actively assist the driver through powertrain automation, for example, performing gearshifts and controlling engine torque and speed. The determination whether to engage in advisory feedback and active assistance may take into consideration related safety and drivability factors, the accuracy of the output from environment awareness module <b>84</b>, and the manner in which the driver behavior deviates from the fuel economy optimal behavior determined by FE-optimal behavior estimation module <b>88</b>.</div>
+<div class="description-paragraph" id="p-0072" num="0080">When determining whether to actively intervene in the operation of vehicle <b>20</b> and/or encourage modifications in driving behavior, arbitration module <b>90</b> evaluates various sets of sub-scenarios. For purposes of discussion, exemplary arbitration module <b>90</b> is described as evaluating three sub-scenarios. In practice, however, fewer or more sub-scenarios may be specified. With reference to <figref idrefs="DRAWINGS">FIG. 7</figref>, the three exemplary sub-scenarios may include a safety scenario identification <b>168</b>, a system confidence <b>170</b> and a driver acceptance identification <b>172</b>.</div>
+<div class="description-paragraph" id="p-0073" num="0081">Sub-scenario <b>168</b> is concerned with identifying safety and performance related events that may require a driver to maintain full control of vehicle <b>20</b>. This may be accomplished by assessing the driver's intent to override the actions of LPM <b>48</b> in an effort to obtain complete and full control of vehicle <b>20</b>, as may be indicated by the operation of various vehicle controls The following is an exemplary list of various vehicle controls and operating conditions that may be monitored by arbitration module <b>90</b> when evaluating vehicle safety and/or performance related conditions:
+</div> <ul> <li id="ul0008-0001" num="0000"> <ul> <li id="ul0009-0001" num="0082">a) Vehicle braking—indicated by a brake pedal position greater or lesser than zero;</li> <li id="ul0009-0002" num="0083">b) Decelerating—indicated by an accelerator pedal position at time t<sub>i </sub>that is greater than an accelerator pedal position at time t<sub>i</sub>+1 for j consecutive time steps;</li> <li id="ul0009-0003" num="0084">c) Coasting—indicated by an accelerator pedal position at time t<sub>i</sub>+1 that is less than an accelerator pedal position at time which is less than an accelerator pedal position at time t+1 for j consecutive time steps;</li> <li id="ul0009-0004" num="0085">d) Just before changing lane—indicated by a turn signal on and vehicle (<b>20</b>) not decelerating;</li> <li id="ul0009-0005" num="0086">e) Just before turning—indicated by turn signal on and vehicle (<b>20</b>) decelerating or coasting;</li> <li id="ul0009-0006" num="0087">f) Attempting to catch a traffic light—indicated by the next node being a traffic light and vehicle (<b>20</b>) has passed a slowing down distance from the node (i.e., traffic light) and the vehicle (<b>20</b>) is not decelerating;</li> <li id="ul0009-0007" num="0088">g) Just prior to commencing passing—(similar to changing lane); and</li> <li id="ul0009-0008" num="0089">h) Just prior to commencing merging—(similar to changing lane)</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0074" num="0090">A safety flag is activated (i.e., set to “YES”) if any of the above identified safety and/or performance conditions is detected by arbitration module <b>90</b>.</div>
+<div class="description-paragraph" id="p-0075" num="0091">Sub-scenario <b>172</b> is concerned the driver's acceptance or resistance to LPM <b>48</b> exerting control over the operation of vehicle <b>20</b>. The following is a list of vehicle operating conditions, which if detected by arbitration module <b>90</b> may indicate the driver of vehicle <b>20</b> is resisting the actions of LPM <b>48</b>:
+</div> <ul> <li id="ul0010-0001" num="0000"> <ul> <li id="ul0011-0001" num="0092">a) Continuous driver demand for acceleration (CDA) (as indicated by the driver requested drive torque) that exceeds an LPM <b>48</b> determined optimized drive torque, and no deceleration detected for a certain time period, and which a previous arbitration was in disfavor of the driver's actions;</li> <li id="ul0011-0002" num="0093">b) Driver fully actuating accelerator pedal—indicated by an accelerator pedal position greater than a threshold position; and</li> <li id="ul0011-0003" num="0094">c) Driver demand for acceleration under load—indicated by factors similar to CDA, but occurring over a shorter time period and the product of (road grade)×(vehicle mass) exceeds a threshold load.</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0076" num="0095">A driver resistance flag is activated (i.e., set to “YES”) if any of the above identified operating conditions is detected by arbitration module <b>90</b>.</div>
+<div class="description-paragraph" id="p-0077" num="0096">Sub-scenario <b>170</b> evaluates the accuracy of the information/data provided to the various LPM modules and assigns a corresponding rating value. By way of example, arbitration module <b>90</b> may employ three rating designations, including a “High Confidence”, “Medium Confidence”, and “Low Confidence”.</div>
+<div class="description-paragraph" id="p-0078" num="0097">Arbitration module <b>90</b> may transition between various operating modes depending on the status of the safety flag and the driver resistance flag. The exemplarily configured arbitration module <b>90</b> employs three operating modes, but in practice, fewer or more operating modes may be defined. The three operating modes may include the following:
+</div> <ul> <li id="ul0012-0001" num="0000"> <ul> <li id="ul0013-0001" num="0098">a) Driver Mode <b>174</b>—no intervention: arbitrated drive torque is equal to 100% driver requested drive torque;</li> <li id="ul0013-0002" num="0099">b) LPM Mode <b>176</b>—full intervention: arbitrated drive torque is equal to 100% LPM determined optimized drive torque; and</li> <li id="ul0013-0003" num="0100">c) Transition Mode <b>178</b>—when transitioning between Driver Mode <b>174</b> and the LPM Mode <b>176</b>, arbitrated torque may be ramped between the driver requested drive torque and the LPM determined optimized drive torque.</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0079" num="0101"> <figref idrefs="DRAWINGS">FIG. 8</figref> schematically illustrates an exemplary arbitration algorithm <b>179</b> that may be employed by arbitration module <b>90</b>. The decision process commences at start <b>180</b>. Arbitration module <b>90</b> checks the status of the safety flag and driver resistance flag. If either flag is activated (i.e., set to “YES”), arbitration module <b>90</b> will proceed to activate Driver Mode <b>174</b>. Driver Mode <b>174</b> will continue to remain activated so long as either the safety flag or driver resistance flag is activated (i.e., set to “YES”). If, on the other hand, arbitration module <b>90</b> determines that neither the safety flag nor the driver resistance flags are activated (i.e., both flags set to “NO”), arbitration module <b>90</b> will than proceed to activate LPM Mode <b>176</b>. LPM Mode <b>176</b> will remain activated until either the safety flag or the driver resistance flag is activated (i.e., set to “YES”).</div>
+<div class="description-paragraph" id="p-0080" num="0102">Continuing to refer to <figref idrefs="DRAWINGS">FIG. 8</figref>, if the safety flag is activated (i.e., set to “YES”) while operating in LPM Mode <b>176</b>, arbitration module <b>90</b> will proceed to activate Driver Mode <b>174</b>. If the driver resistance flag is activated (i.e., set to “YES”) while operating in LPM Mode <b>176</b>, and the status of the safety flag remains unchanged (i.e., set to “NO”), arbitration module <b>90</b> will proceed to activate Transition Mode <b>178</b>. Arbitration module <b>90</b> will continue to operate in Transition Mode <b>178</b> so long as the safety flag is deactivated (i.e., set to “NO”) and the transition between the LPM Mode and the Driver Mode has not yet been completed. If the safety flag is activated (i.e., set to “YES”) while operating in Transition Mode <b>178</b>, arbitration module <b>90</b> will proceed to activate Driver Mode <b>174</b>. If the driver resistance flag is deactivated (i.e., set to “NO”) while operating in Transition Mode <b>178</b>, and the status of the safety flag remains unchanged (i.e., set to “NO”), arbitration module <b>90</b> will proceed to activate LPM Mode <b>176</b>.</div>
+<div class="description-paragraph" id="p-0081" num="0103">Continuing to refer to <figref idrefs="DRAWINGS">FIG. 8</figref>, if the safety flag is deactivated (i.e., set to “NO”) while operating in Driver Mode <b>174</b>, arbitration module <b>90</b> will proceed to activate Transition Mode <b>178</b>. Arbitration module <b>90</b> will continue to operate in Transition Mode <b>178</b> so long as the safety flag is deactivated (i.e., set to “NO”) and the transition between the LPM Mode and the Driver Mode has not yet been completed.</div>
+<div class="description-paragraph" id="p-0082" num="0104">It will be appreciated that the exemplary active driver assistance system described herein has broad applications. The foregoing configurations were chosen and described in order to illustrate principles of the methods and apparatuses as well as some practical applications. The preceding description enables others skilled in the art to utilize methods and apparatuses in various configurations and with various modifications as are suited to the particular use contemplated. In accordance with the provisions of the patent statutes, the principles and modes of operation of the disclosed container have been explained and illustrated in exemplary configurations.</div>
+<div class="description-paragraph" id="p-0083" num="0105">In general, computing systems and/or devices, such as TECU <b>46</b> and LPM <b>48</b> (when not incorporated into TECU <b>46</b>), may employ any of a number of computer operating systems, including, but by no means limited to, versions and/or varieties of the Microsoft Windows® operating system, the Unix operating system (e.g., the Solaris® operating system distributed by Oracle Corporation of Redwood Shores, Calif.), the AIX UNIX operating system distributed by International Business Machines of Armonk, N.Y., the Linux operating system, and the Mac OS X and iOS operating systems distributed by Apple Inc. of Cupertino, Calif. Examples of computing devices include, without limitation, a module, a computer workstation, a server, a desktop, notebook, laptop, or handheld computer, or some other computing system and/or device.</div>
+<div class="description-paragraph" id="p-0084" num="0106">Computing devices generally include computer-executable instructions, where the instructions may be executable by one or more computing devices such as those listed above. Computer-executable instructions may be compiled or interpreted from computer programs created using a variety of programming languages and/or technologies, including, without limitation, and either alone or in combination, Java™, C, C++, Visual Basic, Java Script, Perl, etc. In general, a processor (e.g., a microprocessor) receives instructions, e.g., from a memory, a computer-readable medium, etc., and executes these instructions, thereby performing one or more processes, including one or more of the processes described herein. Such instructions and other data may be stored and transmitted using a variety of computer-readable media.</div>
+<div class="description-paragraph" id="p-0085" num="0107">A computer-readable medium (also referred to as a processor-readable medium) includes any non-transitory (e.g., tangible) medium that participates in providing data (e.g., instructions) that may be read by a computer (e.g., by a processor of a computer). Such a medium may take many forms, including, but not limited to, non-volatile media and volatile media. Non-volatile media may include, for example, optical or magnetic disks and other persistent memory. Volatile media may include, for example, dynamic random access memory (DRAM), which typically constitutes a main memory. Such instructions may be transmitted by one or more transmission media, including coaxial cables, copper wire and fiber optics, including the wires that comprise a system bus coupled to a processor of a computer. Common forms of computer-readable media include, for example, a floppy disk, a flexible disk, hard disk, magnetic tape, any other magnetic medium, a CD-ROM, DVD, any other optical medium, punch cards, paper tape, any other physical medium with patterns of holes, a RAM, a PROM, an EPROM, a FLASH-EEPROM, any other memory chip or cartridge, or any other medium from which a computer can read.</div>
+<div class="description-paragraph" id="p-0086" num="0108">Databases, data repositories or other data stores described herein such as those involved in BORD <b>50</b> (e.g., Route database <b>52</b> and Driver behavior database <b>54</b>), may include various kinds of mechanisms for storing, accessing, and retrieving various kinds of data, including a hierarchical database, a set of files in a file system, an application database in a proprietary format, a relational database management system (RDBMS), etc. Each such data store is generally included within a computing device employing a computer operating system such as one of those mentioned above, and are accessed via a network in any one or more of a variety of manners. A file system may be accessible from a computer operating system, and may include files stored in various formats. An RDBMS generally employs the Structured Query Language (SQL) in addition to a language for creating, storing, editing, and executing stored procedures, such as the PL/SQL language mentioned above.</div>
+<div class="description-paragraph" id="p-0087" num="0109">In some examples, system elements may be implemented as computer-readable instructions (e.g., software) on one or more computing devices (e.g., modules, servers, personal computers, etc.), stored on computer readable media associated therewith (e.g., disks, memories, etc.). A computer program product may comprise such instructions stored on computer readable media for carrying out the functions described herein.</div>
+<div class="description-paragraph" id="p-0088" num="0110">It is intended that the scope of the present methods and apparatuses be defined by the following claims. However, it must be understood that the disclosed active driver assistance system may be practiced otherwise than is specifically explained and illustrated without departing from its spirit or scope. It should be understood by those skilled in the art that various alternatives to the configuration described herein may be employed in practicing the claims without departing from the spirit and scope as defined in the following claims. The scope of the disclosed container should be determined, not with reference to the above description, but should instead be determined with reference to the appended claims, along with the full scope of equivalents to which such claims are entitled. It is anticipated and intended that future developments will occur in the arts discussed herein, and that the disclosed systems and methods will be incorporated into such future examples. Furthermore, all terms used in the claims are intended to be given their broadest reasonable constructions and their ordinary meanings as understood by those skilled in the art unless an explicit indication to the contrary is made herein. In particular, use of the singular articles such as “a,” “the,” “said,” etc., should be read to recite one or more of the indicated elements unless a claim recites an explicit limitation to the contrary. It is intended that the following claims define the scope of the device and that the method and apparatus within the scope of these claims and their equivalents be covered thereby. In sum, it should be understood that the device is capable of modification and variation and is limited only by the following claims.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM176356403">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method for optimizing vehicle performance, the method comprising:
+<div class="claim-text">determining, by at least one processor, an optimized drive torque;</div>
+<div class="claim-text">detecting a driver requested drive torque;</div>
+<div class="claim-text">determining if the driver requested drive torque is at least one of performance related and safety related; and</div>
+<div class="claim-text">setting an arbitrated drive torque to the optimized drive torque when determining the driver requested drive torque is not performance related and safety related, and setting the arbitrated drive torque to the driver requested drive torque when determining the driver requested drive torque to be at least one of performance related and safety related;</div>
+<div class="claim-text">wherein the driver requested drive torque is at least one of performance related and safety related if related to at least one of:
+<div class="claim-text">vehicle braking indicated by a brake pedal position greater or lesser than zero;</div>
+<div class="claim-text">decelerating indicated by an accelerator position at a time t<sub>i </sub>that is greater than an accelerator pedal position at a set time interval after t<sub>i</sub>;</div>
+<div class="claim-text">coasting indicated by an accelerator pedal position at a time of the driver requested drive torque that is less than an accelerator pedal position before the passage of a set time interval;</div>
+<div class="claim-text">changing lanes indicated by a turn signal on and the vehicle not decelerating;</div>
+<div class="claim-text">turning indicated by the turn signal on and the vehicle decelerating or coasting; and</div>
+<div class="claim-text">catching a traffic light indicated by a traffic light being within a predetermined distance of the vehicle, the vehicle has passed a slowing down distance from the traffic light, and the vehicle is not decelerating.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> further comprising:
+<div class="claim-text">determining if the detected driver requested drive torque is less than the determined optimized drive torque; and</div>
+<div class="claim-text">setting the arbitrated drive torque to the driver requested drive torque when determining the optimized drive torque to be greater than the driver requested drive torque.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00002">claim 2</claim-ref> further comprising setting the arbitrated drive torque to the driver requested drive torque whenever the optimized drive torque is determined to be greater than the driver requested drive torque.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00002">claim 2</claim-ref> further comprising monitoring operation of at least one vehicle control in connection with determining if the driver requested drive torque is at least one of performance related and safety related.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00004">claim 4</claim-ref> further comprising determining the driver requested drive torque to be at least one of performance related and safety related when operation of the monitored vehicle control is detected.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein the at least one vehicle control includes at least one of a vehicle brake pedal position, vehicle accelerator pedal position, and vehicle turn signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> further comprising:
+<div class="claim-text">monitoring a driver resistance to setting the arbitrated drive torque to the optimized drive torque; and</div>
+<div class="claim-text">setting the arbitrated drive torque between the driver requested drive torque and the optimized drive torque when driver resistance is detected.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method of <claim-ref idref="CLM-00007">claim 7</claim-ref>, wherein driver resistance is indicated by at least one of a driver requested drive torque exceeding the optimized drive torque for a selected time period, a fully actuated vehicle accelerator pedal, and a driver initiated request for drive torque occurring under a load condition.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> further comprising:
+<div class="claim-text">determining a potential for optimizing fuel economy;</div>
+<div class="claim-text">setting the arbitrated drive torque to the driver requested drive torque when it is determined there is no potential for optimizing fuel economy.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method of <claim-ref idref="CLM-00009">claim 9</claim-ref> further comprising:
+<div class="claim-text">determining at least one of a static environment constraint and a dynamic environment constraint; and</div>
+<div class="claim-text">determining the potential for optimizing fuel economy based on at least one of the static environment constraint and the dynamic environment constraint.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein at least one of the static environment constraint and the dynamic environment constraint is determined based on a vehicle speed limit.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> further comprising adjusting a vehicle throttle position in response to the arbitrated drive torque.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein adjusting the vehicle throttle position comprises manually manipulating a position of a vehicle accelerator pedal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> further comprising initiating a transmission gear shift in response to the arbitrated drive torque.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. A method for optimizing vehicle performance, the method comprising:
+<div class="claim-text">determining, by at least one processor an optimized drive torque;</div>
+<div class="claim-text">detecting a driver requested drive torque;</div>
+<div class="claim-text">determining a static environment constraint;</div>
+<div class="claim-text">determining a dynamic environment constraint defined by whether or not traffic flow is lower than a threshold level;</div>
+<div class="claim-text">determining a potential for optimizing fuel economy based on at least one of the static environment constraint and the dynamic environment constraint;</div>
+<div class="claim-text">setting an arbitrated drive torque to the driver requested drive torque when determining there is no potential for optimizing fuel economy;</div>
+<div class="claim-text">setting the arbitrated drive torque to the optimized drive torque when determining there is a potential for optimizing fuel economy.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The method of <claim-ref idref="CLM-00015">claim 15</claim-ref>, further comprising
+<div class="claim-text">determining if the driver requested drive torque is at least one of performance related and safety related; and</div>
+<div class="claim-text">setting the arbitrated drive torque to the optimized drive torque when determining the driver requested drive torque is not performance related and safety related, and setting the arbitrated drive torque to the driver requested drive torque when determining the driver requested drive torque is at least one of performance related and safety related.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The method of <claim-ref idref="CLM-00016">claim 16</claim-ref> further comprising monitoring operation of at least one vehicle control in connection with determining if the driver requested drive torque is at least one of performance related and safety related.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The method of <claim-ref idref="CLM-00017">claim 17</claim-ref> further comprising determining the driver requested drive torque to be at least one of performance related and safety related when operation of the monitored vehicle control is detected.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The method of <claim-ref idref="CLM-00017">claim 17</claim-ref>, wherein the at least one vehicle control includes at least one of a vehicle brake pedal position, vehicle accelerator pedal position, and vehicle turn signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The method of <claim-ref idref="CLM-00015">claim 15</claim-ref> further comprising:
+<div class="claim-text">monitoring a driver resistance to setting the arbitrated drive torque to the optimized drive torque; and</div>
+<div class="claim-text">setting the arbitrated drive torque between the driver requested drive torque and the optimized drive torque when driver resistance is detected.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

@@ -1,0 +1,1816 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10103741B2 - Method for controlling digital fractional frequency-division phase-locked loop and phase-locked loop 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA243225497" source="national office">
+<div class="abstract">A method for controlling a digital fractional frequency-division phase-locked loop and a phase-locked loop are disclosed. The phase-locked loop includes a control apparatus, a TDC, a DLF, a DCO, a DIV, and an SDM. The control apparatus performs delay processing on an active edge of a reference clock according to a frequency control word and a frequency division control word to obtain a delayed reference clock; and sends the delayed reference clock to the TDC so that the TDC performs phase discrimination processing on the delayed reference clock and a feedback clock. A control apparatus added to a phase-locked loop may perform delay processing on a reference clock according to a current frequency control word and a current frequency division control word, so that a feedback clock and a delayed reference clock have active edges that approximately correspond in time.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES144584185">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of International Application No. PCT/CN2015/095566, filed on Nov. 25, 2015, which claims priority to Chinese Patent Application No. 201410802184.3, filed on Dec. 18, 2014. The disclosures of the aforementioned applications are hereby incorporated by reference in their entireties.</div>
+<heading id="h-0002">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention pertains to the field of electronic technologies, and in particular, relates to a method for controlling a digital fractional frequency-division phase-locked loop and a phase-locked loop.</div>
+<heading id="h-0003">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0004" num="0003">In radio frequency transceivers, a frequency synthesizer based on a phase-locked loop (PLL) structure is widely adopted to generate a local oscillation signal, referred to as a local-frequency signal for short, so as to complete frequency shifting of a data signal.</div>
+<div class="description-paragraph" id="p-0005" num="0004">In a wireless communications system, particularly in a wireless terminal, a zero intermediate-frequency (ZIF) radio frequency transceiver architecture is widely adopted in consideration of costs and other factors. In such a radio frequency transceiver architecture, both a signal transmit channel and a signal receive channel require that a frequency of the local-frequency signal be exactly the same as a frequency of a radio frequency carrier signal. In other words, as a local-frequency signal generating apparatus, a frequency synthesizer based on a phase-locked loop has a high enough output frequency precision. For example, for a cellular radio communications system, a frequency step of a radio frequency is 100 kHz. This requires that a phase-locked loop frequency synthesizer applied to such a system be capable of outputting a local-frequency signal at an precision of 100 kHz.</div>
+<div class="description-paragraph" id="p-0006" num="0005">In a wireless communications system, for a phase-locked loop module serving as a frequency synthesizer, a multiplication relationship expressed by the following formula needs to hold between an output radio frequency f<sub>RF </sub>and an input reference clock frequency f<sub>REF</sub>:
+<br/>
+<i>f</i> <sub>RF</sub>=FCW×<i>f</i> <sub>REF </sub>
+</div>
+<div class="description-paragraph" id="p-0007" num="0006">In the foregoing formula, FCW (Frequency Control Word) is a frequency control word of the phase-locked loop. By FCW value type, that is, a relative relationship between the output radio frequency and the input reference clock frequency, phase-locked loops may be categorized into two types as follows:</div>
+<div class="description-paragraph" id="p-0008" num="0007">(1) Integral frequency-division phase-locked loop. In this type of phase-locked loop, the FCW is a positive integer, which means that the output radio frequency is an integer multiple of the input reference clock frequency. For the foregoing frequency synthesizer requiring a frequency precision of 100 kHz, the input reference clock frequency is required to be f<sub>REF</sub>=100 kHz.</div>
+<div class="description-paragraph" id="p-0009" num="0008">(2) Fractional frequency-division phase-locked loop. In this type of phase-locked loop, the FCW may have a fractional part. Therefore, an output radio frequency precision of the phase-locked loop may be less than the reference clock frequency. That is, a frequency selection for a reference clock is no longer restricted by the radio frequency precision. Because of advantages in such aspects as locking time, integral phase noise, and design flexibility, the fractional frequency-division phase-locked loop is more widely applied in modern wireless communications systems than the integral frequency-division phase-locked loop.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Additionally, a digital phase-locked loop architecture appearing in recent years transfers phase signal processing of the phase-locked loop to a digital domain, and outputs a high-precision oscillator control signal by using a digital over-sampling technology. In this way, digital design of the phase-locked loop is well implemented. The digital phase-locked loop architecture replaces a traditional phase-locked loop of an analog structure with significant advantages, and has been widely used.</div>
+<div class="description-paragraph" id="p-0011" num="0010">A digital fractional frequency-division phase-locked loop structure widely used at present, shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, includes the following few basic composition elements:</div>
+<div class="description-paragraph" id="p-0012" num="0011">(1) a time-to-digital converter (TDC), configured to identify a time difference between a reference clock CLK_REF and a feedback clock signal CLK_DIV, and converts this time difference to a digital signal TDC_OUT;</div>
+<div class="description-paragraph" id="p-0013" num="0012">(2) a digital loop filter (DLF), configured to filter a TDC_OUT signal, and output a digital oscillator frequency control signal DLF_OUT;</div>
+<div class="description-paragraph" id="p-0014" num="0013">(3) a digital controlled oscillator (DCO), configured to generate an oscillation signal F_DCO, which is a digital signal;</div>
+<div class="description-paragraph" id="p-0015" num="0014">(4) a feedback frequency divider (DIV), configured to output a frequency division value under control of a Sigma-Delta modulator, perform frequency division processing on the F_DCO by using this frequency division value, and input the signal CLK_DIV that has undergone the frequency division processing to the TDC so as to perform phase discrimination processing on the CLK_REF and the CLK_DIV; and</div>
+<div class="description-paragraph" id="p-0016" num="0015">(5) the sigma-Delta modulator (SDM), configured to implement a fractional frequency division operation. A basic principle of this operation is to use the SDM to regularly control a frequency division ratio of the DIV so that a feedback frequency division ratio of the phase-locked loop regularly switches between two or more positive integer values, and finally obtains an average frequency division ratio as a required fractional frequency division value. For example, the frequency control word specified by the fractional frequency-division phase-locked loop is:</div>
+<div class="description-paragraph" id="p-0017" num="0016">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<mi>FCW</mi>
+<mo>=</mo>
+<mrow>
+<mfrac>
+<msub>
+<mi>f</mi>
+<mi>DCO</mi>
+</msub>
+<msub>
+<mi>f</mi>
+<mi>REF</mi>
+</msub>
+</mfrac>
+<mo>=</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0018" num="0017">In the foregoing formula, f<sub>DCO </sub>and f<sub>REF </sub>are a frequency of an oscillator output signal and a frequency of the reference clock respectively. A form of N.F is used in the foregoing formula to denote a fractional frequency division ratio, where N is an integer part of the frequency division ratio, and F is a fractional part of the frequency division ratio. By sending the frequency control word FCW into the SDM, a series of integral frequency division values in the vicinity of N can be obtained from an SDM output, that is:
+<br/>
+N<sub>DIV </sub>∈ { . . . , N−2, N−1, N, N+1, N+2, . . . }
+</div>
+<div class="description-paragraph" id="p-0019" num="0018">In the foregoing formula, N<sub>DIV </sub>is a frequency division control word output by the SDM for the feedback frequency divider, and N is an integer part of the frequency control word FCW) of the phase-locked loop. A specific value range of the NDIV depends on a design type of the SDM.</div>
+<div class="description-paragraph" id="p-0020" num="0019">In the foregoing existing digital fractional frequency-division phase-locked loop, subject to control by the SDM, the frequency division ratio of the frequency divider DIV regularly changes among multiple integer values. Therefore, in a locked state of the phase-locked loop, the output CLK_DIV of the DIV is not a signal of a steady frequency. As shown in <figref idrefs="DRAWINGS">FIG. 2</figref>, it is assumed that an output frequency of the digital controlled oscillator DCO in the phase-locked loop is f<sub>DCO</sub>. Then its cycle is T<sub>DCO</sub>=1/f<sub>DCO</sub>. It is assumed that at the k<sup>th </sup>sampling point, the frequency division ratio of the DIV is N<sub>DIV</sub>[k], and at this point, an instantaneous cycle of the feedback clock CLK_DIV is:
+<br/>
+<i>T</i> <sub>DIV</sub> <i>[k]=T</i> <sub>DCO</sub> <i>×N</i> <sub>DIV</sub> <i>[k]</i>
+</div>
+<div class="description-paragraph" id="p-0021" num="0020">It can be learned from the foregoing formula that because, in the locked state of the fractional frequency-division phased-locked loop, the NDIV value changes regularly subject to control by the SDM, the cycle of the feedback clock CLK_DIV changes accordingly. Corresponding to that, the cycle T<sub>REF </sub>of the reference clock CLK_REF is steady and unchanged. Therefore, as shown in <figref idrefs="DRAWINGS">FIG. 2</figref>, in a fractional frequency-division locked state, there is always a relatively large time domain deviation that changes in accordance with a particular rule between the reference clock CLK_REF and the feedback clock CLK_DIV. In <figref idrefs="DRAWINGS">FIG. 2</figref>, a time domain deviation at the k<sup>th </sup>sampling point is denoted by ΔT<sub>TDC</sub>[k]. In other words, in the existing digital fractional phase-locked loop, the TDC used to discriminate the time deviation between the CLK_REF and the CLK_DIV needs to be capable of precisely processing a given range of time domain inputs.</div>
+<div class="description-paragraph" id="p-0022" num="0021">Another important constraint to design of the TDC is its resolution. In the digital phase-locked loop, a function of the TDC is to identify the time difference (or a phase difference) between the reference clock CLK_REF and the feedback clock CLK_DIV, and to convert the time difference into a digital signal at a particular resolution. Such operation may be described as:</div>
+<div class="description-paragraph" id="p-0023" num="0022">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>INT</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>T</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<msub>
+<mi>R</mi>
+<mi>TDC</mi>
+</msub>
+</mfrac>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0024" num="0023">In the foregoing formula, R<sub>TDC </sub>is a resolution of the TDC; the INT( ) function competes a rounding operation. As a special type of analog-to-digital converter, the resolution R<sub>TDC </sub>determines a level of quantization noise output by the TDC, and also determines an in-band phase noise level in the digital phase-locked loop. For a digital phase-locked loop applied to a cellular mobile communications system, a calculated TDC resolution is generally required to be R<sub>TDC</sub>&lt;10 ps. For systems that have more stringent requirements on in-band phase noise, such as a wireless LAN, a higher requirement on the TDC resolution is imposed.</div>
+<div class="description-paragraph" id="p-0025" num="0024">To sum up, two important factors need to be taken into consideration in design of the TDC: the input time domain range and the resolution. However, there is usually a tight trade-off between a range and an precision, and it is often difficult to meet the two dimensions at the same time. Due to a limitation of the structure of the TDC itself, a great challenge has been posed to the design of the TDC to meet the foregoing requirements. Therefore, how to reduce design difficulty of the TDC using a simple and effective means to ensure good convenience in design of a digital fractional frequency-division phase-locked loop system is an urgent issue to be resolved.</div>
+<heading id="h-0004">SUMMARY</heading>
+<div class="description-paragraph" id="p-0026" num="0025">In view of the foregoing problem, embodiments of the present invention provide a method for controlling a digital fractional frequency-division phase-locked loop and a phase-locked loop, to reduce a time domain range input to a TDC using a simple and effective means, thereby ensuring convenience, ease and efficiency in design of a digital fractional frequency-division phase-locked loop system while reducing design difficulty of the TDC.</div>
+<div class="description-paragraph" id="p-0027" num="0026">In a first aspect, an embodiment of the present invention provides a digital fractional frequency-division phase-locked loop, including:</div>
+<div class="description-paragraph" id="p-0028" num="0027">a control apparatus, a time-to-digital converter TDC, a digital loop filter DLF, a digital controlled oscillator DCO, a feedback frequency divider DIV, and a Sigma-Delta modulator SDM, where</div>
+<div class="description-paragraph" id="p-0029" num="0028">an output end of the control apparatus is connected to a first input end of the TDC; an output end of the TDC is connected to an input end of the DLF; an output end of the DLF is connected to an input end of the DCO; an output end of the DCO is connected to a first input end of the DIV; an output end of the DIV is connected to a second input end of the TDC, a second input end of the DIV is connected to an output end of the SDM; a first input end of the control apparatus is connected to the output end of the SDM; a second input end of the control apparatus is connected to an input end of the SDM; and a third input end of the control apparatus receives a reference clock of the phase-locked loop;</div>
+<div class="description-paragraph" id="p-0030" num="0029">the SDM is configured to obtain a frequency division control word according to a frequency control word input to the SDM;</div>
+<div class="description-paragraph" id="p-0031" num="0030">the DIV is configured to perform frequency division processing on an output signal of the DCO according to the frequency division control word to obtain a feedback clock;</div>
+<div class="description-paragraph" id="p-0032" num="0031">the control apparatus is configured to perform delay processing on an active edge of the reference clock according to the frequency control word and the frequency division control word to obtain a delayed reference clock;</div>
+<div class="description-paragraph" id="p-0033" num="0032">the TDC is configured to perform phase discrimination processing on the feedback clock and the delayed reference clock to obtain a time difference between the delayed reference clock and the feedback clock;</div>
+<div class="description-paragraph" id="p-0034" num="0033">the DLF is configured to perform filtering processing on the time difference that is output after the TDC performs the phase discrimination processing to obtain a processing result; and</div>
+<div class="description-paragraph" id="p-0035" num="0034">the DCO is configured to obtain the output signal according to the processing result.</div>
+<div class="description-paragraph" id="p-0036" num="0035">In a first possible implementation manner of the first aspect, the control apparatus includes: a controller and a digital-to-time converter DTC, where</div>
+<div class="description-paragraph" id="p-0037" num="0036">a first input end of the controller is connected to the first input end of the control apparatus, and a second input end of the controller is connected to the second input end of the control apparatus;</div>
+<div class="description-paragraph" id="p-0038" num="0037">a first output end of the controller is connected to a first input end of the DTC;</div>
+<div class="description-paragraph" id="p-0039" num="0038">a second input end of the DTC is connected to a third input end of the control apparatus;</div>
+<div class="description-paragraph" id="p-0040" num="0039">an output end of the DTC is connected to the output end of the control apparatus;</div>
+<div class="description-paragraph" id="p-0041" num="0040">the controller is configured to receive the frequency control word and the frequency division control word, and determine a value of a delay control signal according to the frequency control word and the frequency division control word; and</div>
+<div class="description-paragraph" id="p-0042" num="0041">the DTC is configured to perform the delay processing on the active edge of the reference clock according to the value of the delay control signal to obtain the delayed reference clock.</div>
+<div class="description-paragraph" id="p-0043" num="0042">With reference to the first possible implementation manner of the first aspect, in a second possible implementation manner of the first aspect, the controller is a digital logic circuit.</div>
+<div class="description-paragraph" id="p-0044" num="0043">With reference to the first or second possible implementation manner of the first aspect, in a third possible implementation manner of the first aspect, the controller is specifically configured to determine a value D<sub>DTC</sub>[k] of the delay control signal, according to the following formula:</div>
+<div class="description-paragraph" id="p-0045" num="0044">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0046" num="0045">where D<sub>DTC</sub>[k] is a value of the delay control signal at the k<sup>th </sup>sampling point, N<sub>DIV</sub>[i] is an instantaneous value of the frequency division control word output by the SDM at the i<sup>th </sup>sampling point, and N.F is a value of the frequency control word, where N is an integer part of the frequency control word, and .F denotes a fractional part of the frequency control word.</div>
+<div class="description-paragraph" id="p-0047" num="0046">With reference to the first, second, or third possible implementation manner of the first aspect, in a fourth possible implementation manner of the first aspect, a third input end of the controller is connected to the output end of the TDC and the second input end of the controller is connected to the second input end of the DTC; and</div>
+<div class="description-paragraph" id="p-0048" num="0047">the controller is further configured to determine a value of a gain control signal according to the frequency control word, the frequency division control word, and the time difference that is output by the TDC, where the gain control signal is used to control an adjustment gain of the delay control signal.</div>
+<div class="description-paragraph" id="p-0049" num="0048">With reference to the fourth possible implementation manner of the first aspect, in a fifth possible implementation manner of the first aspect, the controller is specifically configured to, by using a preset adaptive correction algorithm, determine a value G<sub>DTC</sub>[k] of the gain control signal, according to the following formula:</div>
+<div class="description-paragraph" id="p-0050" num="0049">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>G</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>K</mi>
+<mi>LMS</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>×</mo>
+<mrow>
+<mi>sgn</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0051" num="0050">where G<sub>DTC</sub>[k] is a value of the gain control signal at the k<sup>th </sup>sampling point, K<sub>LMS </sub>is a gain of the adaptive correction algorithm, D<sub>TDC</sub>[i] is a time difference that is output by the TDC at the i<sup>th </sup>sampling point, and sgn( ) is a sign function.</div>
+<div class="description-paragraph" id="p-0052" num="0051">With reference to the fourth or fifth possible implementation manner of the first aspect, in a sixth possible implementation manner of the first aspect, a delay of the delayed reference clock relative to the reference clock is ΔT<sub>DTC</sub>[k]=D<sub>DTC</sub>[k]×K<sub>DTC</sub>[k], where K<sub>DTC</sub>[k] is an adjustment gain of the delay control signal at the k<sup>th </sup>sampling point.</div>
+<div class="description-paragraph" id="p-0053" num="0052">With reference to the sixth possible implementation manner of the first aspect, in a seventh possible implementation manner of the first aspect, the DTC is specifically configured to obtain the adjustment gain according to the following formula: K<sub>DTC</sub>[k]=K<b>0</b> <sub>DTC</sub>+G<sub>DTC</sub>[k]×R<sub>DTC</sub> <sub>_</sub> <sub>GAIN</sub>, where K<b>0</b> <sub>DTC </sub>is a corresponding adjustment gain of the delay control signal when the value of the gain control signal, G<sub>DTC</sub>[k], is 0; and R<sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>is a control coefficient of the gain control signal to the adjustment gain K<sub>DTC</sub>[k].</div>
+<div class="description-paragraph" id="p-0054" num="0053">In a second aspect, an embodiment of the present invention provides a method for controlling a digital fractional frequency-division phase-locked loop, including:</div>
+<div class="description-paragraph" id="p-0055" num="0054">receiving a frequency control word and a frequency division control word of the phase-locked loop, where the frequency division control word is obtained by a Sigma-Delta modulator SDM in the phase-locked loop according to the frequency control word input to the SDM;</div>
+<div class="description-paragraph" id="p-0056" num="0055">performing delay processing on an active edge of a reference clock according to the frequency control word and the frequency division control word to obtain a delayed reference clock; and</div>
+<div class="description-paragraph" id="p-0057" num="0056">sending the delayed reference clock to a time-to-digital converter in the phase-locked loop, so that the TDC performs phase discrimination processing on the delayed reference clock and a feedback clock to obtain a time difference between the delayed reference clock and the feedback clock;</div>
+<div class="description-paragraph" id="p-0058" num="0057">where the feedback clock is obtained by a feedback frequency divider DIV in the phase-locked loop according to the frequency division control word received from the SDM by performing frequency division processing on a DCO output signal received from a digital controlled oscillator DCO, the DCO output signal is obtained by the DCO according to a filtering processing result, and the filtering processing result is obtained by a digital loop filter DLF by performing filtering processing on the time difference that is output after the TDC performs the phase discrimination processing.</div>
+<div class="description-paragraph" id="p-0059" num="0058">In a first possible implementation manner of the second aspect, the performing delay processing on an active edge of a reference clock according to the frequency control word and the frequency division control word to obtain a delayed reference clock, includes:</div>
+<div class="description-paragraph" id="p-0060" num="0059">determining a value of a delay control signal according to the frequency control word and the frequency division control word; and</div>
+<div class="description-paragraph" id="p-0061" num="0060">performing the delay processing on the active edge of the reference clock according to the value of the delay control signal to obtain the delayed reference clock.</div>
+<div class="description-paragraph" id="p-0062" num="0061">With reference to the first possible implementation manner of the second aspect, in a second possible implementation manner of the second aspect, the determining a value of a delay control signal according to the frequency control word and the frequency division control word, includes:</div>
+<div class="description-paragraph" id="p-0063" num="0062">determining a value D<sub>DTC</sub>[k] of the delay control signal, according to the following formula:</div>
+<div class="description-paragraph" id="p-0064" num="0063">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0065" num="0064">where D<sub>DTC</sub>[k] is a value of the delay control signal at the k<sup>th </sup>sampling point, N<sub>DIV</sub>[i] is an instantaneous value of the frequency division control word output by the SDM at the i<sup>th </sup>sampling point, and N.F is a value of the frequency control word, where N is an integer part of the frequency control word, and .F denotes a fractional part of the frequency control word.</div>
+<div class="description-paragraph" id="p-0066" num="0065">With reference to the second aspect, or the first or second possible implementation manner of the second aspect, in a third possible implementation manner of the second aspect, the method further includes:</div>
+<div class="description-paragraph" id="p-0067" num="0066">determining a value of a gain control signal according to the frequency control word, the frequency division control word, and the time difference that is output by the TDC, where the gain control signal is used to control an adjustment gain of the delay control signal.</div>
+<div class="description-paragraph" id="p-0068" num="0067">With reference to the third possible implementation manner of the second aspect, in a fourth possible implementation manner of the second aspect, the determining a value of a gain control signal according to the frequency control word, the frequency division control word, and the time difference that is output by the TDC, includes:</div>
+<div class="description-paragraph" id="p-0069" num="0068">determining, by using a preset adaptive correction algorithm, a value G<sub>DTC</sub>[k] of the gain control signal, according to the following formula:</div>
+<div class="description-paragraph" id="p-0070" num="0069">
+<maths id="MATH-US-00006" num="00006">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>G</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>K</mi>
+<mi>LMS</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>×</mo>
+<mrow>
+<mi>sgn</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0071" num="0070">where G<sub>DTC</sub>[k] is a value of the gain control signal at the k<sup>th </sup>sampling point, K<sub>LMS </sub>is a gain of the adaptive correction algorithm, D<sub>TDC</sub>[i] is a time difference that is output by the TDC at the i<sup>th </sup>sampling point, and sgn( ) is a sign function.</div>
+<div class="description-paragraph" id="p-0072" num="0071">With reference to the third or fourth possible implementation manner of the second aspect, in a fifth possible implementation manner of the second aspect, a delay of the delayed reference clock relative to the reference clock is ΔT<sub>DTC</sub>[k]=D<sub>DTC</sub>[k]×K<sub>DTC</sub>[k], where K<sub>DTC</sub>[k] is an adjustment gain of the delay control signal at the k<sup>th </sup>sampling point.</div>
+<div class="description-paragraph" id="p-0073" num="0072">With reference to the fifth possible implementation manner of the second aspect, in a sixth possible implementation manner of the second aspect, the method further includes:</div>
+<div class="description-paragraph" id="p-0074" num="0073">obtaining the adjustment gain according to the following formula: K<sub>DTC</sub>[k]=K<b>0</b> <sub>DTC</sub>+G<sub>DTC</sub>[k]×R<sub>DTC</sub> <sub>_</sub> <sub>GAIN</sub>, where K<b>0</b> <sub>DTC </sub>is a corresponding adjustment gain of the delay control signal when the value of the gain control signal, G<sub>DTC</sub>[k] is 0; and R<sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>is a control coefficient of the gain control signal to the adjustment gain K<sub>DTC</sub>[k].</div>
+<div class="description-paragraph" id="p-0075" num="0074">According to the method for controlling a digital fractional frequency-division phase-locked loop and the phase-locked loop provided in the embodiments of the present invention, a control apparatus is configured in a phase-locked loop to perform delay processing on an active edge of a reference clock. The control apparatus performs the delay processing on the active edge of the reference clock according to a frequency control word and a frequency division control word currently used by the phase-locked loop to obtain a delayed reference clock. Further, the delayed reference clock is sent to a time-to-digital converter TDC in the phase-locked loop so that the TDC performs phase discrimination processing on the delayed reference clock and a feedback clock. The feedback clock is obtained by performing frequency division processing on a DCO output signal according to the frequency control word and the frequency division control word that are currently used by a feedback frequency divider, and the frequency division control word is not a steady value. As a result, the reference clock and the feedback clock have an indefinite time difference. In this solution, a control apparatus is added to a phase-locked loop. The control apparatus may perform delay processing on a reference clock according to a current frequency control word and a current frequency division control word, so that an input signal output to a TDC by a feedback frequency divider, that is, a feedback clock, and a delayed reference clock resulting from delay processing on the feedback clock and the reference clock, have approximate active edges corresponding time. In this way, the TDC only needs to process phase discrimination signals within a relatively small time domain input range. This greatly reduces design difficulty of the TDC and lowers a requirement on a resolution of the TDC, and makes design of the TDC simple and free, thereby ensuring convenience, ease, and efficiency in design of a phase-locked loop.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0076" num="0075"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a schematic structural diagram of an existing digital fractional frequency-division phase-locked loop;</div>
+<div class="description-paragraph" id="p-0077" num="0076"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a schematic diagram of phase discrimination of the digital fractional frequency-division phase-locked loop shown in <figref idrefs="DRAWINGS">FIG. 1</figref>;</div>
+<div class="description-paragraph" id="p-0078" num="0077"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a schematic structural diagram of a digital fractional frequency-division phase-locked loop according to Embodiment 1 of the present invention;</div>
+<div class="description-paragraph" id="p-0079" num="0078"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a schematic structural diagram of a digital fractional frequency-division phase-locked loop according to Embodiment 2 of the present invention;</div>
+<div class="description-paragraph" id="p-0080" num="0079"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a schematic structural diagram of a digital fractional frequency-division phase-locked loop according to Embodiment 3 of the present invention;</div>
+<div class="description-paragraph" id="p-0081" num="0080"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a schematic diagram of a timing description of a reference clock, a delayed reference clock and a feedback clock in an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0082" num="0081"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a schematic diagram of working of a digital-to-time converter DTC in an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0083" num="0082"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a schematic diagram of a compositional structure of a controller in an embodiment of the present invention; and</div>
+<div class="description-paragraph" id="p-0084" num="0083"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a flowchart of a method for controlling a digital fractional frequency-division phase-locked loop according to Embodiment 4 of the present invention.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0085" num="0084"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a schematic structural diagram of a digital fractional frequency-division phase-locked loop according to Embodiment 1 of the present invention. As shown in <figref idrefs="DRAWINGS">FIG. 3</figref>, the phase-locked loop includes a control apparatus, a time-to-digital converter TDC, a digital loop filter DLF, a digital controlled oscillator DCO, a feedback frequency divider DIV, and a Sigma-Delta modulator SDM.</div>
+<div class="description-paragraph" id="p-0086" num="0085">An output end of the control apparatus is connected to a first input end of the TDC; an output end of the TDC is connected to an input end of the DLF; an output end of the DLF is connected to an input end of the DCO; an output end of the DCO is connected to a first input end of the DIV; an output end of the DIV is connected to a second input end of the TDC; a second input end of the DIV is connected to an output end of the SDM; a first input end of the control apparatus is connected to the output end of the SDM; a second input end of the control apparatus is connected to an input end of the SDM; and a third input end of the control apparatus receives a reference clock of the phase-locked loop.</div>
+<div class="description-paragraph" id="p-0087" num="0086">In the phase-locked loop, components other than the control apparatus have functions similar to those in a prior-art phase-locked loop. Therefore, detailed working principles of these components are not described repeatedly, and their functions are only introduced simply as follows:</div>
+<div class="description-paragraph" id="p-0088" num="0087">the SDM is configured to obtain a frequency division control word NDIV according to a frequency control word FCW input to the SDM;</div>
+<div class="description-paragraph" id="p-0089" num="0088">the DIV is configured to perform frequency division processing on an output signal F_DCO of the DCO according to the frequency division control word NDIV received from the SDM to obtain a feedback clock CLK_DIV;</div>
+<div class="description-paragraph" id="p-0090" num="0089">the control apparatus is configured to perform delay processing on an active edge of the reference clock CLK_REF according to the frequency control word FCW and the frequency division control word NDIV to obtain a delayed reference clock CLK_DTC;</div>
+<div class="description-paragraph" id="p-0091" num="0090">the TDC is configured to perform phase discrimination processing on the feedback clock CLK_DIV and the delayed reference clock CLK_DTC to obtain a time difference between the delayed reference clock CLK_DTC and the feedback clock CLK_DIV;</div>
+<div class="description-paragraph" id="p-0092" num="0091">the DLF is configured to perform filtering processing on the time difference that is output after the TDC performs the phase discrimination processing to obtain a processing result; and</div>
+<div class="description-paragraph" id="p-0093" num="0092">the DCO is configured to obtain the output signal F_DCO according to the processing result.</div>
+<div class="description-paragraph" id="p-0094" num="0093">In this embodiment, based on an existing basic digital fractional frequency-division phase-locked loop, a phase-locked loop control apparatus is added. The control apparatus performs delay processing on an active edge of a reference clock CLK_REF according to a frequency control word FCW used by the phase-locked loop and a current frequency division control word NDIV used by a feedback frequency divider DIV, so that a time difference between a delayed reference clock CLK_DTC and a feedback clock CLK_DIV is small as much as possible. In this way, the TDC only needs to process inputs within a relatively small time domain and complexity of TDC design is simplified.</div>
+<div class="description-paragraph" id="p-0095" num="0094">Specifically, in the existing basic digital fractional frequency-division phase-locked loop, after the frequency control word FCW is sent to the SDM, the SDM outputs a series of integer frequency division values. These integer frequency division values are used as the frequency division control word NDIV of the feedback frequency divider DIV, for performing frequency division processing on the output signal F_DCO of the digital controlled oscillator DCO received by the DIV to obtain the feedback clock CLK_DIV. Then the feedback clock is input as one of inputs to the TDC together with another input, the reference clock CLK_REF, to complete phase discrimination processing, so as to achieve basic functions of the phase-locked loop. However, the NDIV is a series of regular integer values, and the frequency division control word that is input to the DIV changes among these integer values regularly, without being a fixed value. Therefore, a cycle of the feedback clock CLK_DIV changes accordingly. There is always a relatively large time domain deviation that changes in a given rule between the feedback clock and the reference clock CLK_REF that has a fixed cycle. As shown in <figref idrefs="DRAWINGS">FIG. 2</figref>, the time domain deviation at the k<sup>th </sup>sampling point is expressed as ΔT<sub>TDC</sub>[k]. In other words, in the existing digital fractional frequency-division phase-locked loop, the TDC used to discriminate the time deviation between the CLK_REF and the CLK_DIV needs to be capable of precisely processing a wider range of time domain inputs.</div>
+<div class="description-paragraph" id="p-0096" num="0095">In this embodiment, to reduce the time-domain input range that the TDC needs to process so as to ease difficulty and complexity challenges on TDC design, the control apparatus performs particular delay control on the reference clock CLK_REF according to the FCW of the phase-locked loop and the NDIV that is currently input to the DIV, so that the active edge of the delayed reference clock CLK_DTC resulting from the delay processing according to the FCW and the NDIV and the active edge of the CLK_DIV resulting from the frequency division processing on the F_DCO according to the FCW and the NDIV have approximate corresponding time, that is, they have a relatively small time difference or phase difference. In this case, the two input signals CLK_DIV and CLK_DTC that are input to the TDC for phase discrimination processing, have a relatively small time difference. Therefore, the TDC only needs to process the two input signals with a small time difference, or ideally even with a 0 time difference. The complexity of TDC design is greatly reduced.</div>
+<div class="description-paragraph" id="p-0097" num="0096">In specific implementation, the foregoing control apparatus added to the digital fractional frequency-division phase-locked loop includes a controller and a digital-to-time converter DTC. As shown in <figref idrefs="DRAWINGS">FIG. 4</figref>, specifically, a first input end of the controller is connected to the first input end of the control apparatus, that is, the output end of the SDM; a second input end of the controller is connected to the second input end of the control apparatus, that is, the input end of the SDM; a first output end of the controller is connected to the first input end of the DTC for transferring a delay control signal DTC_CTRL to the DTC; a second input end of the DTC is connected to the third input end of the control apparatus for receiving the reference clock CLK_REF; and an output end of the DTC is connected to the output end of the control apparatus, that is, the first input end of the TDC.</div>
+<div class="description-paragraph" id="p-0098" num="0097">The controller is configured to: receive the frequency control word used by the phase-locked loop, that is, the frequency control word that is input to the SDM; receive the frequency division control word, that is, the frequency division control word used to perform the frequency division processing on the output signal F_DCO of the DCO and obtained by the SDM according to the frequency control word; determine a value of the delay control signal according to the frequency control word and the frequency division control word; and send the delay control signal to the DTC. The DTC is configured to perform delay processing, according to the value of the delay control signal, on the active edge of the reference clock CLK_REF that is input to the DTC. It is assumed that a rising edge of the clock is the active edge, that is, the phase-locked loop considers the rising edge of the clock as a basis for phase judgment. For a system that considers a falling edge of the clock as the active edge, analogy maybe made accordingly. A delayed output clock signal is the delayed reference clock CLK_DTC.</div>
+<div class="description-paragraph" id="p-0099" num="0098">It should be noted that the value of the delay control signal may desirably characterize using this value to perform delay processing on the active edge of the reference clock CLK_REF, that is, the time difference between the delayed reference clock CLK_DTC and CLK_DIV is approximately 0. Therefore, the TDC only needs to process phase discrimination signals within a very small time domain input range. In addition, the two signals input to the TDC have a relatively small phase difference, which directly makes a requirement on a resolution of the TDC greatly reduced, and further in-band quantization noise caused by the TDC is reduced.</div>
+<div class="description-paragraph" id="p-0100" num="0099">In this embodiment, a control apparatus including a controller and a DTC is added to a digital fractional frequency-division phase-locked loop. After receiving a frequency control word and a frequency division control word of the phase-locked loop, the controller determines a value of a delay control signal according to the frequency control word and the frequency division control word, so that the DTC can perform delay processing on an active edge of a reference clock according to the value of the delay control signal to obtain a delayed reference clock, and transmits the delayed reference clock to a time-to-digital converter TDC in the phase-locked loop, so that the TDC performs phase discrimination processing on the delayed reference clock and a feedback clock. Because the delay processing on the reference clock is performed in accordance with the current frequency control word and the frequency division control word that are used by a feedback frequency divider, an input signal output to the TDC by the feedback frequency divider and the delayed reference clock after the delay processing on the reference clock have a similar phase. In this way, the TDC only needs to process phase discrimination signals within a relatively small time domain input range. This greatly reduces design difficulty of the TDC and lowers a requirement on a resolution of the TDC, and makes design of the TDC simple and free, thereby ensuring convenience, ease, and efficiency in design of a phase-locked loop.</div>
+<div class="description-paragraph" id="p-0101" num="0100">The following describes specific working processes of the controller and the DTC in detail. As described above, the controller needs to determine the value of the delay control signal input to the DTC according to the frequency control word FCW and the frequency division control word NDIV, so that the DTC acts on the reference clock CLK_REF according to the value of the delay control signal. In specific implementation, the controller is configured to determine a value D<sub>DTC</sub>[k] of the delay control signal, according to the following formula (1):</div>
+<div class="description-paragraph" id="p-0102" num="0101">
+<maths id="MATH-US-00007" num="00007">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0103" num="0102">where D<sub>DTC</sub>[k] is a value of the delay control signal at the k<sup>th </sup>sampling point, N<sub>DIV</sub>[i] is an instantaneous value of the frequency division control word output by the SDM at the i<sup>th </sup>sampling point, and N.F is a value of the frequency control word FCW, where N is an integer part of the FCW, and .F denotes a fractional part of the FCW.</div>
+<div class="description-paragraph" id="p-0104" num="0103">That the controller determines the value of the delay control signal according to the formula (1) is obtained based on the following mathematical theory model.</div>
+<div class="description-paragraph" id="p-0105" num="0104">First, before the mathematical theory model is introduced, it should be noted that in the digital fractional frequency-division phase-locked loop, the SDM is employed to control a frequency division ratio, that is, the frequency division control word, of the feedback frequency divider DIV. Since the SDM is employed, the time domain deviation between the reference clock CLK_REF and the feedback clock CLK_DIV, observed from a frequency domain, exhibits a high-pass characteristic in energy. That is, the quantization noise introduced by the SDM is pushed toward the high frequency end in the frequency domain. For the phase-locked loop, in a closed-loop locking condition, the loop itself may have a given low-pass suppression capability on noise introduced by the SDM, and a magnitude of the suppression capability depends mainly on a bandwidth of the DLF. A smaller bandwidth of the DLF bandwidth makes a stronger far-end suppression capability, that is, the quantization noise introduced by the SDM is better suppressed. However, an excessively small bandwidth of the DLF has other impact on characteristics of the phase-locked loop. First, an excessively narrow loop bandwidth affects an establishment time of the phase-locked loop. This is not satisfactory for a system that requires quick locking. Second, since noise contribution of the oscillator DCO in the phase-locked loop is affected by the high-pass characteristic of the loop, an excessively narrow bandwidth leads to an increase in contribution of the oscillator to in-band noise of the phase-locked loop, affecting integral phase noise performance of the loop.</div>
+<div class="description-paragraph" id="p-0106" num="0105">To sum up, the SDM applied in the digital fractional frequency-division phase-locked loop introduces phase noise energy with high-pass distribution in the frequency domain. To suppress this part of noise, an additional constraint is placed on loop bandwidth design of the phase-locked loop. A requirement of this part on the loop bandwidth affects other characteristics of the phase-locked loop, introducing a new trade-off relationship.</div>
+<div class="description-paragraph" id="p-0107" num="0106">Provided in this embodiment of the present invention, the digital fractional frequency-division phase-locked loop that incorporates a controller and a DTC can overcome this problem. In this embodiment of the present invention, when the controller and the DTC are introduced to perform delay processing on the active edge of the reference clock, that is, when a specific delay amount is added, the delayed reference clock CLK_DTC resulting from the processing, if aligned with the active edge of the feedback clock signal CLK_DIV, can resolve the design difficulty with an excessively high requirement on the time-domain input range for processing of the DTC. <figref idrefs="DRAWINGS">FIG. 6</figref> is a schematic diagram of a timing description of a reference clock, a delayed reference clock and a feedback clock in an embodiment of the present invention. As shown in <figref idrefs="DRAWINGS">FIG. 6</figref>, in one hand, in the digital fractional frequency-division phase-locked loop to which the DTC is added, what the TDC processes is a time difference between active edges of the two clocks CLK_DTC and CLK_DIV. If the active edges of the two clocks CLK_DTC and CLK_DIV can be aligned before being input to the TDC, a time-domain length that the TDC processes is greatly reduced. As shown in <figref idrefs="DRAWINGS">FIG. 6</figref>, if the CLK_DTC and the CLK_DIV can be aligned completely as in theory, using any k<sup>th </sup>sampling cycle as an example, an input time quantity of the TDC may be ΔT<sub>TDC</sub>[k]=0 in theory. In the other hand, because the active edges of the two clocks CLK DTC and CLK_DIV are aligned completely, a quantization noise error introduced by the Sigma-Delta modulator SDM may be considered to have been offset at the input of the TDC without affecting a phase noise characteristic of the fractional phase-locked loop system.</div>
+<div class="description-paragraph" id="p-0108" num="0107">Specifically, it can be seen from the foregoing basic idea, a key point of the added phase-locked loop control apparatus is to add a particular delay amount to the active edge of the reference clock CLK_REF by using the DTC, so that the active edges of the delayed reference clock CLK_DTC and the feedback clock CLK_DIV that are output by the DTC are aligned, as shown in <figref idrefs="DRAWINGS">FIG. 6</figref>. To implement this operation, first, the DTC needs to be made to know a magnitude of a delay amount added at a particular sampling point. That is, as shown in <figref idrefs="DRAWINGS">FIG. 6</figref>, the DTC knows an accurate value of the delay amount ΔT<sub>DTC</sub>[k] at the k<sup>th </sup>sampling point. According to the basic idea of the present invention, the delay added by the DTC to the active edge of CLK_REF at a particular sampling point is actually the time difference between active edges of the CLK_REF and CLK_DIV at the same sampling time in the existing basic digital fractional frequency-division phase-locked loop. That is, ΔT<sub>DTC</sub>[k] in <figref idrefs="DRAWINGS">FIG. 6</figref> should be equal to ΔT<sub>TDC</sub>[k] in <figref idrefs="DRAWINGS">FIG. 2</figref>. Therefore, a DTC delay amount parameter required in the structure of the present invention can be deducted based on the basic digital fractional frequency-division phase-locked loop.</div>
+<div class="description-paragraph" id="p-0109" num="0108">The following describes why the controller determines the value of the delay control signal input to the DTC according to the formula (1). This is obtained based on the following mathematical theory model. Specifically, according to the foregoing analysis, to determine the delay amount applied to the reference clock CLK_REF, a time difference between the reference clock CLK_REF and the feedback clock CLK_DIV needs to be first determined.</div>
+<div class="description-paragraph" id="p-0110" num="0109">The time difference between the reference clock CLK_REF and the feedback clock CLK_DIV is determined in the following method.</div>
+<div class="description-paragraph" id="p-0111" num="0110">An absolute time point t<sub>REF</sub>[k] of the active edge of the reference clock CLK_REF is determined at the k<sup>th </sup>sampling point according to a formula (2), where k is an integer greater than or equal to 1:
+<br/>
+<i>t</i> <sub>REF</sub> <i>[k]=T</i> <sub>REF</sub> <i>×k </i>  (2)
+</div>
+<div class="description-paragraph" id="p-0112" num="0111">where T<sub>REF </sub>is a cycle of the reference clock CLK_REF, and T<sub>REF</sub>=T<sub>DCO</sub>×N.F. T<sub>DCO </sub>is a cycle of the output signal F_DCO of the DCO when the digital fractional frequency-division phase-locked loop is in a locked state. It is assumed that a frequency of F_DCO is f<sub>DCO</sub>, and then T<sub>DCO</sub>=1/f<sub>DCO</sub>. Because FCW=f<sub>DCO</sub>/f<sub>REF</sub>=N.F, T<sub>REF</sub>=T<sub>DCO</sub>×N.F.</div>
+<div class="description-paragraph" id="p-0113" num="0112">Because the reference clock CLK_REF is a periodic clock signal of a stable frequency, the absolute time point of the active edge of the CLK_REF at the k<sup>th </sup>sampling point can be obtained according to the formula (2). Corresponding to that, because the frequency division control word of the feedback divider DIV is affected by the SDM, the cycle of the feedback clock CLK_DIV is not steady. Therefore,</div>
+<div class="description-paragraph" id="p-0114" num="0113">an absolute time point t<sub>DIV</sub>[k] of the active edge of the feedback clock at the k<sup>th </sup>sampling point can be determined according to a formula (3):</div>
+<div class="description-paragraph" id="p-0115" num="0114">
+<maths id="MATH-US-00008" num="00008">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>t</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>3</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0116" num="0115">where T<sub>DIV</sub>[k] represents an instantaneous cycle of the feedback clock at the k<sup>th </sup>sampling point. From a working principle of the digital fractional phase-locked loop, it is known that the instantaneous cycle of the CLK_DIV is related to the frequency division control word of the feedback divider DIV at the current point. It is assumed that, at the k<sup>th </sup>sampling point, the value of the control word NDIV output by the SDM to the DIV is N<sub>DIV</sub>[k]. Then, T<sub>DIV</sub>[k]=N<sub>DIV</sub>[k]×T<sub>DCO</sub>,</div>
+<div class="description-paragraph" id="p-0117" num="0116">where N<sub>DIV</sub>[k] is an instantaneous value of the frequency division control word output by the SDM at the k<sup>th </sup>sampling point. In a broad sense, the operation of the SDM may be considered as an integer quantization on the fractional frequency control word FCW input to the SDM and shaping the quantization noise to the high frequency end in the frequency domain. Therefore, the instantaneous frequency division control word output by the SDM may be represented as: N<sub>DIV</sub>[k]=N.F+N<sub>QERR</sub>[k], where N.F is a value of the frequency division control word FCW; N is an integer part of the frequency control word, and .F denotes a fractional part of the frequency control word; N<sub>QERR</sub>[k] is a difference value between the instantaneous value of the frequency division control word NDIV at the k<sup>th </sup>sampling point and the corresponding frequency control word FCW, which is referred to as a quantization error of the frequency division control word.</div>
+<div class="description-paragraph" id="p-0118" num="0117">By substituting the foregoing formulas into the formula (3), the formula (3) may be represented as:</div>
+<div class="description-paragraph" id="p-0119" num="0118">
+<maths id="MATH-US-00009" num="00009">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>t</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>REF</mi>
+</msub>
+<mo>×</mo>
+<mi>k</mi>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>DCO</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>QERR</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>t</mi>
+<mi>REF</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>DCO</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>QERR</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0120" num="0119">Therefore, the time difference ΔT<sub>TDC</sub>[k] between the reference clock CLK_REF and the feedback clock CLK_DIV is determined in the following formula (4):</div>
+<div class="description-paragraph" id="p-0121" num="0120">
+<maths id="MATH-US-00010" num="00010">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>t</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<msub>
+<mi>t</mi>
+<mi>REF</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>DCO</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>QERR</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>4</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0122" num="0121">So far the time difference between the reference clock CLK_REF and the feedback clock CLK_DIV has been obtained. The following analyzes the time difference between the reference clock CLK_REF and the delayed reference clock CLK_DTC.</div>
+<div class="description-paragraph" id="p-0123" num="0122">As described above, the DTC performs the delay processing on the reference clock CLK_REF under action of the control signal of the controller to obtain the delayed reference clock CLK_DTC. <figref idrefs="DRAWINGS">FIG. 7</figref> is a schematic diagram of working of a digital-to-time converter DTC in an embodiment of the present invention. As shown in <figref idrefs="DRAWINGS">FIG. 7</figref>, it is assumed that an absolute time point of the active edge of the reference clock CLK_REF at the k<sup>th </sup>sampling point is t<sub>REF</sub>[k]. After adjustment by the DTC, the absolute time point of the corresponding active edge of the output delayed reference clock CLK_DTC is t<sub>DTC</sub>[k]. It can be seen from the figure that, at this sampling point, a time-domain delay introduced by the DTC is ΔT<sub>DTC</sub>[k], that is, t<sub>DTC</sub>[k]=t<sub>REF</sub>[k]+ΔT<sub>DTC</sub>[k].</div>
+<div class="description-paragraph" id="p-0124" num="0123">Since the working of the DTC is controlled by the controller, in particular, the control on the DTC by the controller is mainly embodied in two aspects: one is inputting the delay control signal DTC_CTRL to the DTC, and the other is inputting a gain control signal DTC_GAIN to the DTC.</div>
+<div class="description-paragraph" id="p-0125" num="0124">It should be noted that the control on the working of the DTC by the controller may be embodied only in inputting the delay control signal DTC_CTRL to the DTC. Optionally, in order to further implement accurate control, the gain control signal DTC_GAIN may also be input to the DTC on the basis of inputting the delay control signal DTC_CTRL to the DTC.</div>
+<div class="description-paragraph" id="p-0126" num="0125">The delay control signal DTC_CTRL of the DTC is used to control a magnitude of the delay introduced by the DTC. It is assumed that, at the k<sup>th </sup>sampling point, the value of DTC_CTRL is D<sub>DTC</sub>[k]. Then, at a corresponding point, a time-domain delay introduced by the reference clock CLK_REF, that is, a delay of the delayed reference clock with respect to the reference clock is:
+<br/>
+Δ<i>T</i> <sub>DTC</sub> <i>[k]=D</i> <sub>DTC</sub> <i>[k]×K</i> <sub>DTC</sub> <i>[k]</i>  (5)
+</div>
+<div class="description-paragraph" id="p-0127" num="0126">where ΔT<sub>DTC</sub>[k] is the time difference between the reference clock CLK_REF and the delayed reference clock CLK_DTC, and K<sub>DTC</sub>[k] is an adjustment gain of the delay control signal at the k<sup>th </sup>point, that is, representing a delay time amount changed by each least significant bit (LSB) of the delay control signal DTC_CTRL. It can be seen from the foregoing formula that the delay introduced by the DTC to the reference clock CLK_REF is controlled in real time by the digital control signal DTC_CTRL.</div>
+<div class="description-paragraph" id="p-0128" num="0127">In addition, the DTC is further controlled by the gain control signal DTC_GAIN for the purpose of controlling the adjustment gain K<sub>DTC</sub>[k] of the delay control signal DTC_CTRL of the DTC that is described in a formula (5). It is assumed that, at the k<sup>th </sup>sampling point, a value of the DTC_GAIN is G<sub>DTC</sub>[k]. Then, at this sampling point, the adjustment gain of the DTC delay control signal DTC_CTRL is:
+<br/>
+<i>K</i> <sub>DTC</sub> <i>[k]=K</i>0<sub>DTC</sub> <i>+G</i> <sub>DTC</sub> <i>[k]×R</i> <sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>  (6)
+</div>
+<div class="description-paragraph" id="p-0129" num="0128">In the foregoing formula, K<b>0</b> <sub>DTC </sub>is an adjustment gain of the delay control signal DTC_CTRL of the DTC when a value of the gain control signal DTC_GAIN is 0, and R<sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>is a control coefficient of the adjustment gain K<sub>DTC</sub>[k] of the gain control signal DTC_GIN to the delay control signal DTC_CTRL, that is, representing a capability of each LSB of the DTC_GAIN in changing the magnitude of the adjustment gain K<sub>DTC</sub>[k].</div>
+<div class="description-paragraph" id="p-0130" num="0129">In other words, in actual working, the DTC determines the adjustment gain of the delay control signal according to the foregoing formula (6), where the gain control signal DTC_GAIN is input to the DTC by the controller.</div>
+<div class="description-paragraph" id="p-0131" num="0130">It should be noted that, as described above, the control on the working of the DTC by the controller may be embodied only in inputting the delay control signal DTC_CTRL to the DTC. In this case, it may be assumed that the adjustment gain K<sub>DTC</sub>[k] of the delay control signal DTC_CTRL is a constant, for example, 1. That is, the value of the gain control signal DTC_GAIN is 0 at this time. At this time, the specific value of the delay control signal DTC_CTRL may be determined according to the formula (5) in combination with the following formula (7).
+<br/>
+|Δ<i>T</i> <sub>DTC</sub> <i>[k]−ΔT</i> <sub>TDC</sub> <i>[k]|≤ε</i>  (7)
+</div>
+<div class="description-paragraph" id="p-0132" num="0131">where ε is the preset threshold with a value greater than or equal to 0.</div>
+<div class="description-paragraph" id="p-0133" num="0132">A meaning expressed by the formula (7) is that the time difference between the reference clock CLK_REF and the feedback clock CLK_DIV is almost equal to the time difference between the reference clock CLK_REF and the delayed reference clock CLK_DTC.</div>
+<div class="description-paragraph" id="p-0134" num="0133">However, in order to implement accurate control, further, the gain control signal DTC_GAIN may also be input to the DTC on the basis of inputting the delay control signal DTC_CTRL to the DTC, that is, the value of the gain control signal DTC_GAIN is not 0.</div>
+<div class="description-paragraph" id="p-0135" num="0134">In order to implement accurate control, the preset threshold is set to be ε=0. Then, |ΔT<sub>DTC</sub>[k]−ΔT<sub>TDC</sub>[k]|=0. In this case, according to the formula (4), the delay caused by the DTC to the active edge of the reference clock CLK_REF is also</div>
+<div class="description-paragraph" id="p-0136" num="0135"> <maths id="MATH-US-00011" num="00011"> <math overflow="scroll"> <mrow> <mrow> <mi>Δ</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <msub> <mi>T</mi> <mi>TDC</mi> </msub> <mo>⁡</mo> <mrow> <mo>[</mo> <mi>k</mi> <mo>]</mo> </mrow> </mrow> </mrow> <mo>=</mo> <mrow> <msub> <mi>T</mi> <mi>DCO</mi> </msub> <mo>×</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>i</mi> <mo>=</mo> <mn>1</mn> </mrow> <mi>k</mi> </munderover> <mo>⁢</mo> <mrow> <mrow> <msub> <mi>N</mi> <mi>QERR</mi> </msub> <mo>⁡</mo> <mrow> <mo>[</mo> <mi>i</mi> <mo>]</mo> </mrow> </mrow> <mo>.</mo> </mrow> </mrow> </mrow> </mrow> </math> </maths> <br/>
+With reference to the formula (5), it can be seen that the value D<sub>DTC</sub>[k] of the delay control signal DTC_CTRL is:
+</div>
+<div class="description-paragraph" id="p-0137" num="0136">
+<maths id="MATH-US-00012" num="00012">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>QERR</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0138" num="0137">That is, the controller determines the value D<sub>DTC</sub>[k] of the delay control signal according to the following formula (1):</div>
+<div class="description-paragraph" id="p-0139" num="0138">
+<maths id="MATH-US-00013" num="00013">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0140" num="0139">Correspondingly, in an ideal situation, the adjustment gain K<sub>DTC</sub>[k] of the delay control signal is:
+<br/>
+K<sub>DTC</sub>[k]=T<sub>DCO </sub>  (8)
+</div>
+<div class="description-paragraph" id="p-0141" num="0140">The formula (7) is digital signal processing that can be implemented in the controller, that is, the controller is a digital logic circuit.</div>
+<div class="description-paragraph" id="p-0142" num="0141">Specifically, as shown in <figref idrefs="DRAWINGS">FIG. 8</figref>, the operation in the formula (7) may be completed by a subtractor and an integrator that are provided in the controller.</div>
+<div class="description-paragraph" id="p-0143" num="0142">The adjustment gain in the formula (8) is an analog quantity which needs to be designed and implemented in the DTC.</div>
+<div class="description-paragraph" id="p-0144" num="0143">According to the deduction of the foregoing mathematical model, it is found that the value of the delay control signal output to the DTC is determined according to the formula (1) for the frequency control word and the frequency division control word when the controller has a practical application. Therefore, based on the foregoing theoretical analysis, it is understood that the delayed reference clock obtained by performing the delay processing on the reference clock by the DTC under the effect of the delay control signal has almost the same phase as the feedback clock.</div>
+<div class="description-paragraph" id="p-0145" num="0144">Although a theoretical value of the adjustment gain of the delay control signal has been obtained in the foregoing model deduction, the adjustment gain is controlled by the gain control signal output by the controller in the case of accurate control. The following mathematically deduces a process for determining the value of the gain control signal to determine a more preferred structure of the control apparatus added to the phase-locked loop, for example, a structure shown in <figref idrefs="DRAWINGS">FIG. 5</figref>.</div>
+<div class="description-paragraph" id="p-0146" num="0145">First, the structure of the control apparatus shown in <figref idrefs="DRAWINGS">FIG. 5</figref> and the working process of the controller are described. Then, a theoretical model on which the structure and the theoretical model depend is introduced.</div>
+<div class="description-paragraph" id="p-0147" num="0146">As shown in <figref idrefs="DRAWINGS">FIG. 5</figref>, a third input end of the controller is connected to the output end of the TDC, and a second output end of the controller is connected to the second input end of the DTC for transferring the gain control signal DTC_GAIN to the DTC.</div>
+<div class="description-paragraph" id="p-0148" num="0147">In this case, the controller is configured to determine the value of the gain control signal according to the frequency control word, the frequency division control word and the time difference that is output by the TDC, that is, the time difference between the delayed reference clock and the feedback clock.</div>
+<div class="description-paragraph" id="p-0149" num="0148">Specifically, the controller determines, by using a preset adaptive correction algorithm, a value G<sub>DTC</sub>[k] of the gain control signal, according to the following formula (9):</div>
+<div class="description-paragraph" id="p-0150" num="0149">
+<maths id="MATH-US-00014" num="00014">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>G</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>K</mi>
+<mi>LMS</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>×</mo>
+<mrow>
+<mi>sgn</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>9</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0151" num="0150">where G<sub>DTC</sub>[k] is a value of the gain control signal at the k<sup>th </sup>sampling point, K<sub>LMS </sub>is a gain of the adaptive correction algorithm, D<sub>DTC</sub>[i] is a time difference that is output by the TDC at the i<sup>th </sup>sampling point, and sgn( ) is a sign function.</div>
+<div class="description-paragraph" id="p-0152" num="0151">The following describes structures of the controller and the DTC, and a theoretical model on which their working process depends.</div>
+<div class="description-paragraph" id="p-0153" num="0152">Specifically, it can be seen from the foregoing analysis that, for the adjustment gain of the delay control signal described in the formula (8), its generation method depends on design of an analog circuit. With respect to a digital control, precision control is harder. There are problems mainly in the following two aspects:</div>
+<div class="description-paragraph" id="p-0154" num="0153">Firstly, as described in the formula (8), the magnitude of the adjustment gain of the delay control signal is required to be equal to a cycle of the output oscillation signal F_DCO in the locked state of the phase-locked loop. For the phase-locked loop applied to a communications system, it is generally required that the frequency of the output oscillation signal F_DCO can be adjusted at a given frequency step within a considerably wide frequency range. In other words, in practical application, the adjustment gain of the delay control signal needs to be controlled according to the output signal frequency specified by the phase-locked loop.</div>
+<div class="description-paragraph" id="p-0155" num="0154">Secondly, the adjustment gain of the delay control signal needs to be designed and implemented in an analog circuit. Therefore, the magnitude of its value is affected by factors such as chip processing fluctuation and chip working environment, and it is difficult to keep it stay at a given value.</div>
+<div class="description-paragraph" id="p-0156" num="0155">According to the aforementioned working principle of the digital fractional frequency-division phase-locked loop, it is known that the magnitude the adjusting gain of the delay control signal determines whether the DTC can add a delay of a desired value to the active edge of the reference clock CLK_REF. In addition, in the foregoing ideal situation, still because the adjustment gain K<sub>DTC</sub>[k] of the delay control signal determined according to the formula (8) is an analog quantity and cannot be easily controlled or implemented, the DTC can adjust K<sub>DTC</sub>[k] according to the foregoing formula (6), so that it can be made as close as possible to the ideal value in the formula (8) by using a simple and effective means.
+<br/>
+<i>K</i> <sub>DTC</sub> <i>[k]=K</i>0<sub>DTC</sub> <i>+G</i> <sub>DTC</sub> <i>[k]×R</i> <sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>  (6)
+</div>
+<div class="description-paragraph" id="p-0157" num="0156">where K<b>0</b> <sub>DTC </sub>is the corresponding adjustment gain of the delay control signal when the value of the gain control signal, G<sub>DTC</sub>[k], is 0; and R<sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>is the control coefficient of the gain control signal to the adjustment gain. These two parameters are implemented by design of a DTC analog circuit.</div>
+<div class="description-paragraph" id="p-0158" num="0157">For the value G<sub>DTC</sub>[k] of the gain control signal, the controller may obtain by employing the adaptive correction algorithm according to the formula (9):</div>
+<div class="description-paragraph" id="p-0159" num="0158">
+<maths id="MATH-US-00015" num="00015">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>G</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>K</mi>
+<mi>LMS</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>×</mo>
+<mrow>
+<mi>sgn</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>9</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0160" num="0159">where K<sub>LMS </sub>is the gain of the adaptive correction algorithm, used for controlling the precision and speed of the correction algorithm. K<sub>LMS </sub>is a constant value in a given system and does not change with an environment in which the system operates; D<sub>TDC</sub>[k] is a value of the output signal TDC_OUT of the TDC at the k<sup>th </sup>sampling point and is determined according to D<sub>TDC</sub>[k]=INT(ΔT<sub>TDC</sub>[k]/R<sub>TDC</sub>); R<sub>TDC </sub>is a resolution of the TDC; and INT( ) is a rounding function.</div>
+<div class="description-paragraph" id="p-0161" num="0160">It can be seen from this that the formula (9) is a digital signal processing process that can be completed in the controller. As shown in <figref idrefs="DRAWINGS">FIG. 8</figref>, the operation of the sgn( ) sign function can be completed by a sign device provided in the controller. The multiplication and integral operations in the formula (9) can be completed by related devices provided in the controller.</div>
+<div class="description-paragraph" id="p-0162" num="0161">To sum up, in order to complete the delay processing on the reference clock, the DTC only needs to contain processing logic of a few simple analog circuits, and most processing is a digital signal processing process that is all implemented in the controller. Therefore, digital signal processing ensures precision of the control.</div>
+<div class="description-paragraph" id="p-0163" num="0162">With reference to the deduction processes of the foregoing two mathematical models, a connection relationship between the controller and the DTC that are working practically and other components in the phase-locked loop, and internal compositions and working processes of the controller and the DTC can be obtained. That is, the controller determines, according to the formulas (1) and (9) respectively, the values of the delay control signal DTC_CTRL and the gain control signal DTC_GAIN that are transferred to the DTC. Therefore, after receiving the two control signals, the DTC performs the computation processes in the formula (6) and the formula (5), obtains a delay amount applied to the reference clock, and performs delay processing on the active edge of the reference clock by using the delay amount.</div>
+<div class="description-paragraph" id="p-0164" num="0163">In the foregoing embodiment, an input time range of the time-to-digital converter TDC can be effectively reduced by introducing the digital-to-time converter DTC and the controller in the digital fractional frequency-division phase-locked loop. In general, design difficulty of a DTC is much lower than that of a TDC, and power consumption and an area of the DTC can be almost ignored with respect to the TDC. Therefore, in this embodiment of the present invention, the design difficulty of the TDC is greatly reduced with a small cost. On the other hand, in current mainstream TDC design, operating power consumption of the TDC in the locked state is often directly proportional to the input range of the DTC. That is, a larger input time value indicates greater power consumption required for the TDC to complete a time-to-digital conversion. In this embodiment of the present invention, because the input time range of the TDC can be reduced to a very small range, the operating power consumption of the TDC in the locked state is greatly reduced. Furthermore, the digital-to-time converter DTC is used to align the reference clock and the feedback clock signal, the quantization noise introduced due to use of the Delta-Sigma modulator is eliminated after clock alignment, and therefore makes no noise contribution to the phase-locked loop system. This greatly improves the noise characteristic of the phase-locked loop.</div>
+<div class="description-paragraph" id="p-0165" num="0164"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a flowchart of a method for controlling a digital fractional frequency-division phase-locked loop according to Embodiment 4 of the present invention. As shown in <figref idrefs="DRAWINGS">FIG. 9</figref>, the method for controlling a digital fractional frequency-division phase-locked loop provided in this embodiment specifically includes the following steps.</div>
+<div class="description-paragraph" id="p-0166" num="0165">Step <b>101</b>. Receive a frequency control word and a frequency division control word of the phase-locked loop, where the frequency division control word is obtained by a Sigma-Delta modulator SDM in the phase-locked loop according to the frequency control word input to the SDM.</div>
+<div class="description-paragraph" id="p-0167" num="0166">The method provided in this embodiment is executed by a control apparatus added to the digital fractional frequency-division phase-locked loop. Specifically, with reference to specific compositional structures of the control apparatus shown in <figref idrefs="DRAWINGS">FIG. 4</figref> and <figref idrefs="DRAWINGS">FIG. 5</figref>, the control apparatus includes a controller and a DTC. The controller is connected to an input end and an output end of the SDM separately, so that the controller can obtain the frequency control word input to the SDM and the frequency division control word output by the SDM.</div>
+<div class="description-paragraph" id="p-0168" num="0167">Step <b>102</b>. Perform delay processing on an active edge of a reference clock according to the frequency control word and the frequency division control word to obtain a delayed reference clock.</div>
+<div class="description-paragraph" id="p-0169" num="0168">Specifically, the controller first determines a value of a delay control signal transferred to the DTC according to the frequency control word and the frequency division control word, and then transmits the determined value of the delay control signal to the DTC, so that the DTC can perform delay processing, according to the value of the delay control signal, on the active edge, for example a rising edge, of the reference clock input to the DTC, to obtain the delayed reference clock.</div>
+<div class="description-paragraph" id="p-0170" num="0169">The controller specifically determines a value D<sub>DTC</sub>[k] of the delay control signal, according to the following formula:</div>
+<div class="description-paragraph" id="p-0171" num="0170">
+<maths id="MATH-US-00016" num="00016">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0172" num="0171">where D<sub>DTC</sub>[k] is a value of the delay control signal at the k<sup>th </sup>sampling point, N<sub>DIV</sub>[i] is an instantaneous value of the frequency division control word output by the SDM at the i<sup>th </sup>sampling point, and N.F is a value of the frequency control word, where N is an integer part of the frequency control word, and .F denotes a fractional part of the frequency control word.</div>
+<div class="description-paragraph" id="p-0173" num="0172">In another optional embodiment, based on the deduction process of the foregoing mathematical deduction model, in addition to inputting the delay control signal to the DTC, the control on the DTC by the controller may further be inputting a gain control signal to the DTC in order to implement more accurate delay control on the active edge of the reference clock, so as to control an adjustment gain of the delay control signal to the active edge of the reference clock. Accordingly, based on the foregoing model, when determining the value of the delay control signal input to the DTC according to the formula (1), the controller may also determine a value of the gain control signal according to the frequency control word, the frequency division control word, and the time output by the TDC, that is, the time difference between the clock and the feedback clock. Specifically, the controller determines, by using a preset adaptive correction algorithm, a value G<sub>DTC</sub>[k] of the gain control signal, according to the following formula:</div>
+<div class="description-paragraph" id="p-0174" num="0173">
+<maths id="MATH-US-00017" num="00017">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>G</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>K</mi>
+<mi>LMS</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>×</mo>
+<mrow>
+<mi>sgn</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0175" num="0174">where G<sub>DTC</sub>[k] is a value of the gain control signal at the k<sup>th </sup>sampling point, K<sub>LMS </sub>is a gain of the adaptive correction algorithm, D<sub>TDC</sub>[i] is a time difference that is output by the TDC at the i<sup>th </sup>sampling point, and sgn( ) is a sign function.</div>
+<div class="description-paragraph" id="p-0176" num="0175">Therefore, after the controller determines and inputs to the DTC the values of the delay control signal and the gain control signal according to the foregoing two formulas, the DTC first obtains the adjustment gain of the delay control signal according to the following formula: K <sub>DTC</sub>[k]=K<b>0</b> <sub>DTC</sub>+G<sub>DTC</sub>[k]×R<sub>DTC</sub> <sub>_</sub> <sub>GAIN</sub>, where K<sub>DTC</sub>[k] is the adjustment gain of the delay control signal at the k<sup>th </sup>sampling point, K<b>0</b> <sub>DTC </sub>is a corresponding adjustment gain of the delay control signal when the value of the gain control signal, G<sub>DTC</sub>[k], is 0, and R<sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>is a control coefficient of the gain control signal to the adjustment gain K<sub>DTC</sub>[k]. Afterwards, the DTC determines, according to the following formula ΔT<sub>DTC</sub>[k]=D<sub>DTC</sub>[k]×K<sub>DTC</sub>[k], a delay amount acting on the active edge of the reference clock, that is, the delay of the delayed reference clock relative to the reference clock is ΔT<sub>DTC</sub>[k]=D<sub>DTC</sub>[k]×K<sub>DTC</sub>[k].</div>
+<div class="description-paragraph" id="p-0177" num="0176">After determining the delay amount, the DTC performs the delay processing on the active edge of the reference clock to obtain the delayed reference clock.</div>
+<div class="description-paragraph" id="p-0178" num="0177">Step <b>103</b>. Send the delayed reference clock to a time-to-digital converter TDC in the phase-locked loop, so that the TDC performs phase discrimination processing on the delayed reference clock and a feedback clock to obtain a time difference between the delayed reference clock and the feedback clock.</div>
+<div class="description-paragraph" id="p-0179" num="0178">The feedback clock is obtained by a feedback frequency divider DIV in the phase-locked loop according to the frequency division control word received from the SDM, by performing frequency division processing on a DCO output signal received from a digital controlled oscillator DCO. The DCO output signal is obtained by the DCO according to a filtering processing result, and the filtering processing result is obtained by a digital loop filter DLF by performing filtering processing on the time difference that is output after the TDC performs the phase discrimination processing.</div>
+<div class="description-paragraph" id="p-0180" num="0179">Specifically, the DTC inputs the delayed reference clock obtained after the delay processing to the TDC. The TDC is a device for implementing phase discrimination, and performs phase discrimination on the input delayed reference clock and the feedback clock fed back from the DCO to the TDC.</div>
+<div class="description-paragraph" id="p-0181" num="0180">In this embodiment, by adding a control apparatus including a controller and a DTC to a basic digital fractional frequency-division phase-locked loop, the controller can determine a delay control signal input to the DTC and a gain control signal for controlling an adjustment gain of the delay control signal based on a frequency control word, a frequency division control word, and a TDC output signal that are currently used by the phase-locked loop, so that the DTC obtains the adjustment gain of the delay control signal according to the gain control signal and then obtains, based on the adjustment gain and the delay control signal, a delay amount acting to an active edge of the reference clock, so as to perform delay processing on the active edge of the reference clock with the delay amount. This ensures that a time difference between the delayed reference clock and the feedback clock fed back by a DCO and a DIV is almost zero, thereby greatly reducing a time-domain input range of the TDC and lowering a requirement on a resolution of the TDC resolution, and also effectively suppressing in-band noise, making design difficulty of the phase-locked loop greatly reduced. A person of ordinary skill in the art may understand that all or some of the steps of the method embodiments may be implemented by a program instructing relevant hardware. The program may be stored in a computer readable storage medium. When the program runs, the steps of the method embodiments are performed. The foregoing storage medium includes: any medium that can store program code, such as a ROM, a RAM, a magnetic disk, or an optical disc.</div>
+<div class="description-paragraph" id="p-0182" num="0181">Finally, it should be noted that the foregoing embodiments are merely intended for describing the technical solutions of the present invention, but not for limiting the present invention. Although the present invention is described in detail with reference to the foregoing embodiments, a person of ordinary skill in the art should understand that they may still make modifications to the technical solutions described in the foregoing embodiments or make equivalent replacements to some or all technical features thereof, without departing from the scope of the technical solutions of the embodiments of the present invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">15</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM138256472">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A digital fractional frequency-division phase-locked loop, comprising:
+<div class="claim-text">a control apparatus;</div>
+<div class="claim-text">a time-to-digital converter (TDC);</div>
+<div class="claim-text">a digital loop filter (DLF);</div>
+<div class="claim-text">a digital controlled oscillator (DCO);</div>
+<div class="claim-text">a feedback frequency divider (DIV); and</div>
+<div class="claim-text">a Sigma-Delta modulator (SDM); wherein:</div>
+<div class="claim-text">an output end of the control apparatus is connected to a first input end of the TDC;</div>
+<div class="claim-text">an output end of the TDC is connected to an input end of the DLF;</div>
+<div class="claim-text">an output end of the DLF is connected to an input end of the DCO;</div>
+<div class="claim-text">an output end of the DCO is connected to a first input end of the DIV;</div>
+<div class="claim-text">an output end of the DIV is connected to a second input end of the TDC;</div>
+<div class="claim-text">a second input end of the DIV is connected to an output end of the SDM;</div>
+<div class="claim-text">a first input end of the control apparatus is connected to the output end of the SDM;</div>
+<div class="claim-text">a second input end of the control apparatus is connected to an input end of the SDM; and</div>
+<div class="claim-text">a third input end of the control apparatus receives a reference clock of the phase-locked loop;</div>
+<div class="claim-text">the SDM is configured to obtain a frequency division control word according to a frequency control word input to the SDM;</div>
+<div class="claim-text">the DIV is configured to perform frequency division processing on an output signal of the DCO according to the frequency division control word to obtain a feedback clock;</div>
+<div class="claim-text">the control apparatus is configured to perform delay processing on an active edge of the reference clock according to the frequency control word and the frequency division control word to obtain a delayed reference clock;</div>
+<div class="claim-text">the TDC is configured to perform phase discrimination processing on the feedback clock and the delayed reference clock to obtain a time difference between the delayed reference clock and the feedback clock;</div>
+<div class="claim-text">the DLF is configured to perform filtering processing on the time difference that is output after the TDC performs the phase discrimination processing to obtain a processing result; and</div>
+<div class="claim-text">the DCO is configured to obtain the output signal according to the processing result.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The phase-locked loop according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the control apparatus comprises:
+<div class="claim-text">a controller; and</div>
+<div class="claim-text">a digital-to-time converter (DTC);</div>
+<div class="claim-text">a first input end of the controller is connected to the first input end of the control apparatus, and a second input end of the controller is connected to the second input end of the control apparatus;</div>
+<div class="claim-text">a first output end of the controller is connected to a first input end of the DTC;</div>
+<div class="claim-text">a second input end of the DTC is connected to a third input end of the control apparatus;</div>
+<div class="claim-text">an output end of the DTC is connected to the output end of the control apparatus;</div>
+<div class="claim-text">the controller is configured to receive the frequency control word and the frequency division control word, and determine a value of a delay control signal according to the frequency control word and the frequency division control word; and</div>
+<div class="claim-text">the DTC is configured to perform the delay processing on the active edge of the reference clock according to the value of the delay control signal to obtain the delayed reference clock.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The phase-locked loop according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the controller is a digital logic circuit.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The phase-locked loop according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the controller is configured to determine a value D<sub>DTC</sub>[k] of the delay control signal, according to the following formula:</div>
+<div class="claim-text">
+<maths id="MATH-US-00018" num="00018">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+<div class="claim-text">wherein D<sub>DTC</sub>[k] is a value of the delay control signal at the k<sup>th </sup>sampling point, N<sub>DIV</sub>[i] is an instantaneous value of the frequency division control word output by the SDM at the i<sup>th </sup>sampling point, and N.F is a value of the frequency control word, wherein N is an integer part of the frequency control word, and .F denotes a fractional part of the frequency control word.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The phase-locked loop according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein a third input end of the controller is connected to the output end of the TDC and the second input end of the controller is connected to the second input end of the DTC; and
+<div class="claim-text">the controller is further configured to determine a value of a gain control signal according to the frequency control word, the frequency division control word, and the time difference that is output by the TDC, wherein the gain control signal is used to control an adjustment gain of the delay control signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The phase-locked loop according to <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein the controller is configured to, by using a preset adaptive correction algorithm, determine a value G<sub>DTC</sub>[k] the gain control signal, according to the following formula:</div>
+<div class="claim-text">
+<maths id="MATH-US-00019" num="00019">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>G</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>K</mi>
+<mi>LMS</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>×</mo>
+<mrow>
+<mi>sgn</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+<div class="claim-text">wherein G<sub>DTC</sub>[k] is a value of the gain control signal at the k<sup>th </sup>sampling point, K<sub>LMS </sub>is a gain of the adaptive correction algorithm, D<sub>TDC</sub>[i] is a time difference that is output by the TDC at the i<sup>th </sup>sampling point, and sgn( ) is a sign function.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The phase-locked loop according to <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein a delay of the delayed reference clock relative to the reference clock is ΔT<sub>DTC</sub>[k]=D<sub>DTC</sub>[k]×K<sub>DTC</sub>[k], wherein K<sub>DTC</sub>[k] is an adjustment gain of the delay control signal at the k<sup>th </sup>sampling point.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The phase-locked loop according to <claim-ref idref="CLM-00007">claim 7</claim-ref>, wherein the DTC is configured to obtain the adjustment gain according to the following formula: K<sub>DTC</sub>[k]=K<b>0</b> <sub>DTC</sub>+G<sub>DTC</sub>[k]×R<sub>DTC</sub> <sub>_</sub> <sub>GAIN</sub>, wherein K<b>0</b> <sub>DTC </sub>is a corresponding adjustment gain of the delay control signal when the value of the gain control signal, G<sub>DTC</sub>[k], is 0; and R<sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>is a control coefficient of the gain control signal to the adjustment gain K<sub>DTC</sub>[k].</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. A method for controlling a digital fractional frequency-division phase-locked loop, the method comprising:
+<div class="claim-text">receiving a frequency control word and a frequency division control word of the phase-locked loop, wherein the frequency division control word is obtained by a Sigma-Delta modulator (SDM) in the phase-locked loop according to the frequency control word input to the SDM;</div>
+<div class="claim-text">performing delay processing on an active edge of a reference clock according to the frequency control word and the frequency division control word to obtain a delayed reference clock; and</div>
+<div class="claim-text">sending the delayed reference clock to a time-to-digital converter (TDC) in the phase-locked loop, so that the TDC performs phase discrimination processing on the delayed reference clock and a feedback clock to obtain a time difference between the delayed reference clock and the feedback clock;</div>
+<div class="claim-text">wherein the feedback clock is obtained by a feedback frequency divider (DIV) in the phase-locked loop according to the frequency division control word received from the SDM by performing frequency division processing on a digital controlled oscillator (DCO) output signal received from a DCO, the DCO output signal is obtained by the DCO according to a filtering processing result, and the filtering processing result is obtained by a digital loop filter (DLF) by performing filtering processing on the time difference that is output after the TDC performs the phase discrimination processing.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The phase-locked loop according to <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein performing delay processing on an active edge of a reference clock according to the frequency control word and the frequency division control word to obtain a delayed reference clock comprises:
+<div class="claim-text">determining a value of a delay control signal according to the frequency control word and the frequency division control word; and</div>
+<div class="claim-text">performing the delay processing on the active edge of the reference clock according to the value of the delay control signal to obtain the delayed reference clock.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method according to <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein determining a value of a delay control signal according to the frequency control word and the frequency division control word comprises:
+<div class="claim-text">determining a value D<sub>DTC</sub>[k] of the delay control signal, according to the following formula:</div>
+</div>
+<div class="claim-text">
+<maths id="MATH-US-00020" num="00020">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>DIV</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>N</mi>
+<mo>.</mo>
+<mi>F</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+<div class="claim-text">wherein D<sub>DTC</sub>[k] is a value of the delay control signal at the k<sup>th </sup>sampling point, N<sub>DIV</sub>[i] is an instantaneous value of the frequency division control word output by the SDM at the i<sup>th </sup>sampling point, and N.F is a value of the frequency control word, wherein N is an integer part of the frequency control word, and .F denotes a fractional part of the frequency control word.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method according to <claim-ref idref="CLM-00009">claim 9</claim-ref>, further comprising:
+<div class="claim-text">determining a value of a gain control signal according to the frequency control word, the frequency division control word, and the time difference that is output by the TDC, wherein the gain control signal is used to control an adjustment gain of the delay control signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method according to <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein determining a value of a gain control signal according to the frequency control word, the frequency division control word, and the time difference that is output by the TDC comprises:
+<div class="claim-text">determining, by using a preset adaptive correction algorithm, a value G<sub>DTC</sub>[k] of the gain control signal, according to the following formula:</div>
+</div>
+<div class="claim-text">
+<maths id="MATH-US-00021" num="00021">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<msub>
+<mi>G</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>k</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>K</mi>
+<mi>LMS</mi>
+</msub>
+<mo>×</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>k</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>DTC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>×</mo>
+<mrow>
+<mi>sgn</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>D</mi>
+<mi>TDC</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mi>i</mi>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+<div class="claim-text">wherein G<sub>DTC</sub>[k] is a value of the gain control signal at the k<sup>th </sup>sampling point, K<sub>LMS </sub>is a gain of the adaptive correction algorithm, D<sub>TDC</sub>[i] is a time difference that is output by the TDC at the i<sup>th </sup>sampling point, and sgn( ) is a sign function.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method according to <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein a delay of the delayed reference clock relative to the reference clock is ΔT<sub>DTC</sub>[k]=D<sub>DTC</sub>[k]×K<sub>DTC</sub>[k], wherein K<sub>DTC</sub>[k] is an adjustment gain of the delay control signal at the k<sup>th </sup>sampling point.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The method according to <claim-ref idref="CLM-00014">claim 14</claim-ref>, further comprising:
+<div class="claim-text">obtaining the adjustment gain according to the following formula: K<sub>DTC</sub>[k]=K<b>0</b> <sub>DTC</sub>+G<sub>DTC</sub>[k]×R<sub>DTC</sub> <sub>_</sub> <sub>GAIN</sub>, wherein K<b>0</b> <sub>DTC </sub>is a corresponding adjustment gain of the delay control signal when the value of the gain control signal, G<sub>DTC</sub>[k] is 0; and R<sub>DTC</sub> <sub>_</sub> <sub>GAIN </sub>is a control coefficient of the gain control signal to the adjustment gain K<sub>DTC</sub>[k].</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

@@ -1,0 +1,524 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US11012728B2 - Predictive allocation of multimedia server resources 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA448562339" source="national office">
+<div class="abstract">A system that incorporates teachings of the present disclosure may include, for example, a dispatch system having a controller element to receive from a communication device a first wireless message including a location coordinate and a request for taxicab service, and determine available taxicab services according to the location coordinate and the request. Additional embodiments are disclosed.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES293006558">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATION</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a divisional of U.S. application Ser. No. 11/972,369, filed on Jan. 10, 2008, which is incorporated by reference herein in its entirety.</div>
+<heading id="h-0002">FIELD OF THE DISCLOSURE</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present disclosure generally relates to multimedia content distribution, and more particularly relates to the usage of multimedia servers in the provision of multimedia content via a network.</div>
+<heading id="h-0003">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0004" num="0003">Internet Protocol Television (IPTV) systems and other packet network-based multimedia systems typically utilize one or more multimedia servers to process multimedia content for distribution to viewers via a packet-switched network. These multimedia servers typically provide multiple transmission services simultaneously, such as broadcasting network television programming and multicasting pay-per-view programming while simultaneously handling packet retransmission requests for lost and corrupted packets. Conventional systems often implement a best-effort approach to try to ensure that each service is accorded sufficient resources of the multimedia server, but it often is the case that changing circumstances can leave one or more of the services without sufficient resources to meet quality constraints while other services have more than sufficient resources, thereby degrading some services without necessarily benefiting the quality of other services at the multimedia server.</div>
+<description-of-drawings>
+<heading id="h-0004">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0005" num="0004">It will be appreciated that for simplicity and clarity of illustration, elements illustrated in the Figures have not necessarily been drawn to scale. For example, the dimensions of some of the elements are exaggerated relative to other elements. Embodiments incorporating teachings of the present disclosure are shown and described with respect to the drawings presented herein, in which:</div>
+<div class="description-paragraph" id="p-0006" num="0005"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a diagram illustrating an example multimedia content distribution system having dynamic multimedia server resource allocation in accordance with at least one embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0007" num="0006"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a diagram illustrating an example intra-server resource allocation mechanism in accordance with at least one embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0008" num="0007"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a diagram illustrating an example inter-server resource allocation mechanism in accordance with at least one embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0009" num="0008"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a diagram illustrating an example multimedia server resource allocation module in accordance with at least one embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0010" num="0009"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a flow diagram illustrating an example method for generating a predictive usage model for resource allocation in accordance with at least one embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0011" num="0010"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a flow diagram illustrating an example method for dynamic allocation of multimedia server resources based on a predictive usage model in accordance with at least one embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a diagram illustrating an example Internet Protocol Television (IPTV) network in which the multimedia content distribution system of <figref idrefs="DRAWINGS">FIG. 1</figref> can be implemented in accordance with at least one embodiment of the present disclosure; and</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a diagram illustrating an example computer system for implementing one or more of the techniques described herein in accordance with at least one embodiment of the present disclosure.</div>
+</description-of-drawings>
+<div class="description-paragraph" id="p-0014" num="0013">The use of the same reference symbols in different drawings indicates similar or identical items.</div>
+<heading id="h-0005">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0015" num="0014">The numerous innovative teachings of the present application will be described with particular reference to the presently preferred example embodiments. However, it should be understood that this class of embodiments provides only a few examples of the many advantageous uses of the innovative teachings herein. In general, statements made in the specification of the present application do not necessarily delimit any of the various claimed inventions. Moreover, some statements may apply to some inventive features but not to others.</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIGS. 1-8</figref> illustrate example techniques for dynamic allocation of multimedia server resources among multimedia transmission services of a service provider based on predicted resource usage by each multimedia transmission service. In at least one embodiment, a predictive usage model of the utilization of server resources by one or more multimedia transmission services is generated for various combinations of operating characteristics, such as time of day, day of week, programming event or content, network status, and the like. The predictive usage model can be generated using past resource utilization characteristics of the multimedia transmission services from prior time periods having the same or similar characteristics. The service provider then can use the predictive usage model to more efficiently allocate multimedia server resources among the multimedia transmission services for upcoming time periods, which may be of fixed or variable duration.</div>
+<div class="description-paragraph" id="p-0017" num="0016">The term “multimedia” refers to video content, audio content, or a combination thereof. Accordingly, the term “multimedia content” refers to a stream of video content, a stream of audio content, or a combination thereof. In the context of the output of audio content, either alone or in combination with the display of video content, a viewer is understood to be a listener. The term “multimedia transmission service” refers to a service or process performed by multimedia content service to affect the distribution of multimedia content to one or more viewer premises via a network (or via a plurality of networks). Example multimedia transmission services include, but are not limited to, linear program broadcasting (e.g., the broadcast transmission of network television program content or cable television program content), program multicasting (e.g., the multicast transmission of pay-per-view content), dropped/corrupted packet retransmission (e.g., packet retransmission to a single viewer via a unicast or packet retransmission to a group of viewers via a multicast), burst content unicasting (e.g., a burst transmission of multimedia content to a viewer in response to an instant channel change (ICC) request), multimedia encoding or transcoding, and the like. For readability purposes, multimedia transmission services are also referred to herein simply as “services.”</div>
+<div class="description-paragraph" id="p-0018" num="0017">The term “multimedia server resource” refers to a hardware or software resource of a multimedia server. Examples of multimedia server resources include operating system resources, thread resources, processor resources, bus resources, cache resources, memory resources, hard disk resources, network interface resources, bus resources, input/output (I/O) resources, and the like. For ease of reference, multimedia server resources are also referred to herein simply as “resources.” The allocation of multimedia server resources to a particular multimedia transmission service can include, but is not limited to, the allocation of a quantity or proportion of a resource (e.g., a particular proportion of a processor's bandwidth for processing the multimedia transmission service or a particular proportion of a cache for caching data related to the multimedia transmission service), an allocation of a priority (e.g., assigning a particular priority to thread scheduling and processing for the multimedia transmission service), a selective enabling of a filtering mechanism (e.g., configuring a network interface to filter out incoming network packets associated with the multimedia transmission service), or combinations thereof.</div>
+<div class="description-paragraph" id="p-0019" num="0018">For ease of illustration, certain techniques disclosed herein are described in an example context of an Internet Protocol Television (IPTV) network utilizing a multimedia receiver (e.g., a set top box (STB) device) at a viewer premises to interface between a display device, such as a television, monitor or display screen, and the multimedia content distribution network of a service provider. However, these techniques also can be implemented in other contexts without departing from the scope of the present disclosure. In the context of a relatively fixed multimedia receiver, a viewer premises can include, for example, a residence or place of work of the viewer, a car, a boat, a plane or other vehicle, and the like. In the context of a portable multimedia receiver, such as a multimedia-enabled cellular phone, a viewer premises can include the viewer's personal space while operating the multimedia receiver.</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates an example multimedia content distribution system <b>100</b> having dynamic allocation of multimedia server resources in accordance with at least one embodiment of the present disclosure. In the depicted example, the multimedia content distribution system <b>100</b> includes a service provider <b>102</b>, a plurality of viewer premises (viewer premises <b>104</b>-<b>107</b>), and a network <b>108</b>, whereby the network <b>108</b> connects the service provider <b>102</b> and the viewer premises <b>104</b>-<b>107</b>. The service provider <b>102</b> can include, for example, a cable television provider, a satellite television provider, an Internet-based multimedia content provider, and the like. Each of the viewer premises can include, for example, a display device <b>110</b> and a set top box (STB) device <b>112</b> or other multimedia receiver, such as a digital network radio receiver, a multimedia-enabled cellular phone, a digital radio receiver, and the like. The display device <b>110</b> can include, for example, a television, a monitor, or other display screen.</div>
+<div class="description-paragraph" id="p-0021" num="0020">The network <b>108</b> can include any of a variety of digital networks or a combination thereof. Examples of the network <b>108</b> can include an Internet-Protocol (IP)-based network, such as the Internet, an Ethernet network, a wireless network (e.g., an IEEE 802.1a/b/g/n-compatible network), a satellite network, a Bluetooth™-based network, and the like. The transmission medium of the network <b>108</b> for wire-based implementations can include, for example, a coaxial cable-based medium (e.g., a cable television medium), a digital subscriber line (DSL)-based medium (e.g., a plain old telephone system (POTS) medium), a fiber-optic medium, and the like.</div>
+<div class="description-paragraph" id="p-0022" num="0021">The service provider <b>102</b> includes one or more multimedia servers (not shown in <figref idrefs="DRAWINGS">FIG. 1</figref>) configured to provide one more multimedia transmission services supporting the distribution of multimedia content <b>114</b> to the viewer premises <b>104</b>-<b>107</b> via the network <b>108</b>. These multimedia transmission services can include, but are not limited to, a linear program broadcast service <b>116</b>, a program multicast service <b>117</b>, a packet retransmission service <b>118</b>, and a burst unicast service <b>119</b>. The linear program broadcast service <b>116</b> represents a broadcast transmission of multimedia content to at least a substantial subset of the viewers associated with the service provider <b>102</b>, such as an IP-based broadcast transmission of regular network television programming and regular cable television programming. The program multicast service <b>117</b> represents a multicast transmission of multimedia content to a more restricted subset of the viewers, such as an IP-based multicast of the multimedia content of a pay-per-view program event. The packet retransmission service <b>118</b> represents a retransmission of dropped or corrupted network packets for any of the other services, where the packet retransmission can be multicast when a significant proportion of the viewers are experiencing packet reception difficulties or, in some instances, unicast transmission to each viewer experiencing difficulties. Other examples of multimedia transmission services include multimedia encoding or transcoding (e.g., encoding video and audio information into compressed data in accordance with the H.264 format (also referred to as the MPEG4 format), the MPEG 2 format, the SMPTE 421M (VC-1) standard, and the like.</div>
+<div class="description-paragraph" id="p-0023" num="0022">The service provider <b>102</b> and the network <b>108</b> each typically has a relatively fixed processing bandwidth and it often is the case that there are not enough multimedia server resources at the service provider <b>102</b> to ensure that each multimedia transmission service receives sufficient resources to achieve optimum performance of the multimedia transmission service. However, due to changing conditions, certain multimedia transmission services temporarily may have a higher precedence. To illustrate, due to the popularity of the National Football League (NFL™) Super Bowl as a televised event, viewers are unlikely to change channels frequently during the transmission of the football game itself, but there are likely to be many instant channel change requests during halftime as viewers browse other channels while waiting for the second half of the game to begin. Accordingly, since video quality is likely to be a more pressing issue than satisfactory performance for instant channel changes during the transmission of the football game, the linear program broadcast service <b>116</b> (which transmits the multimedia content of the game to the viewers) could be considered to have a higher priority than the burst unicast service <b>119</b> (which bursts video content to a viewer at the initiation of an instant channel change (ICC) request from the viewer) during the game itself. In contrast, the expected number of ICC requests during the halftime of the football game may make it appropriate to prioritize the burst unicast service <b>119</b> over the linear program broadcast service <b>116</b> to help ensure that the ICC requests from the viewers are satisfactorily handled.</div>
+<div class="description-paragraph" id="p-0024" num="0023">To facilitate the more optimal processing of the multimedia transmission services, in one embodiment the service provider <b>102</b> includes a multimedia server resource allocation mechanism <b>120</b> to generate a predictive usage model <b>122</b> that provides a prediction of the resource needs of the multimedia transmission services for a given set of operating parameters (e.g., time of day, network status, special programming events, etc). The multimedia server resource allocation mechanism <b>120</b> further is configured to determine the operating parameters <b>124</b> for each successive time period (fixed or dynamic), and allocate multimedia server resources between the multimedia transmission services <b>116</b> based on the operating parameters <b>124</b> and the predictive usage model <b>122</b>.</div>
+<div class="description-paragraph" id="p-0025" num="0024">To illustrate, the predictive usage model <b>122</b> may be conceptually represented by a matrix indicating a particular allocation of resources between the multimedia transmission services <b>116</b>-<b>119</b> for each matrix entry. Each matrix entry can be indexed based on a particular combination of operating parameters (e.g., combinations of the time of day, the day of the week, the programming content, and the status of the network <b>108</b>). The particular allocation for a given matrix entry can include, for example, a relative prioritization of the multimedia transmission services so as to determine the priority given by one or more multimedia servers in processing the multimedia transmission services. To illustrate, the particular allocation for a given time period could assign packets associated with the packet retransmission service <b>118</b> a higher priority for outgoing processing at a network interface of a multimedia server compared to packets associated with the linear program broadcast service <b>116</b>. The particular allocation alternately can include a specific allocation of resources to each multimedia transmission service. To illustrate, the particular allocation could allocate a first number of processor cores of a multiple-processor multimedia server to the burst unicast service <b>119</b> and allocate a second number of the processor cores to the linear program broadcast service <b>116</b>. The particular allocation of resources also can include the selective implementation of a filtering mechanism for one or more multimedia transmission services. To illustrate, a filtering mechanism can be enabled so that the network interface of a multimedia server disregards all incoming packet retransmission requests for the packet retransmission service <b>118</b> when it is appropriate to do so. The particular allocation also can include a combination of any of a priority assignment, a quantity/proportion allocation, or selective implementation of a filtering mechanism. Further, as discussed below with reference to <figref idrefs="DRAWINGS">FIGS. 2 and 3</figref>, the particular allocation can be on an intra-server allocation, an inter-server allocation, or a combination thereof.</div>
+<div class="description-paragraph" id="p-0026" num="0025">By using the predictive usage model <b>122</b>, in at least one embodiment the particular allocation implemented by the multimedia server resource allocation mechanism <b>120</b> can dynamically change as the operating parameters <b>124</b> change. The change in operating parameters <b>124</b> can result from the typical change in programming over the course of a day or a week, as a result in the change in the status of the network <b>108</b>, and the like. The time period for which a particular resource allocation is implemented can be fixed, such as on a half-hour basis corresponding to the typical division of television programming into thirty-minute time slots. Alternately, the time period during which a particular allocation is implemented can be dynamic and can end in response to particular occurrences or non-occurrences of certain events. For example, one of the operating characteristics <b>124</b> can include a number of dropped packets such that once the number of dropped packets (or the proportion of dropped packets) exceeds a predetermined level, a new allocation is implemented that prioritizes the packet retransmission service <b>118</b>.</div>
+<div class="description-paragraph" id="p-0027" num="0026">Table 1 below illustrates a brief portion of a simple matrix representation of the predictive usage model <b>122</b>. Table 2 illustrates the corresponding relative resource utilization characteristic for each service.</div>
+<div class="description-paragraph" id="p-0028" num="0027">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example Predictive Usage Model Matrix</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Time/Day</td>
+<td class="description-td">Monday</td>
+<td class="description-td">Tuesday</td>
+<td class="description-td">Wednesday</td>
+<td class="description-td">Thursday</td>
+<td class="description-td">Friday</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5:00 PM</td>
+<td class="description-td">USAGE_1</td>
+<td class="description-td">USAGE_1</td>
+<td class="description-td">USAGE_2</td>
+<td class="description-td">USAGE_3</td>
+<td class="description-td">USAGE_1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5:30 PM</td>
+<td class="description-td">USAGE_2</td>
+<td class="description-td">USAGE_1</td>
+<td class="description-td">USAGE_2</td>
+<td class="description-td">USAGE_3</td>
+<td class="description-td">USAGE_1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6:00 PM</td>
+<td class="description-td">USAGE_1</td>
+<td class="description-td">USAGE_1</td>
+<td class="description-td">USAGE_3</td>
+<td class="description-td">USAGE_3</td>
+<td class="description-td">USAGE_2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7:00 PM</td>
+<td class="description-td">USAGE_3</td>
+<td class="description-td">USAGE_1</td>
+<td class="description-td">USAGE_3</td>
+<td class="description-td">USAGE_4</td>
+<td class="description-td">USAGE_3</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="6" nameend="6" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0029" num="0028">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example Usage Types</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Packet</td>
+<td class="description-td">Program</td>
+<td class="description-td">Linear Program</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Usage</td>
+<td class="description-td">Burst Unicast</td>
+<td class="description-td">Retransmission</td>
+<td class="description-td">Multicast</td>
+<td class="description-td">Broadcast</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">USAGE_1</td>
+<td class="description-td">Low</td>
+<td class="description-td">Low</td>
+<td class="description-td">Low</td>
+<td class="description-td">Medium</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">USAGE_2</td>
+<td class="description-td">Low</td>
+<td class="description-td">High</td>
+<td class="description-td">Medium</td>
+<td class="description-td">High</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">USAGE_3</td>
+<td class="description-td">High</td>
+<td class="description-td">Medium</td>
+<td class="description-td">Low</td>
+<td class="description-td">Medium</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0030" num="0029">In the example of Tables 1 and 2, the particular resource utilization characteristic of the multimedia transmission services for a given thirty minute time period on a given day of the week can be predicted from the matrix entry of the predictive usage model <b>122</b> indexed by the time period and day of the week. The identified resource utilization then can be used by the multimedia server resource allocation mechanism <b>120</b> to set relative priorities between the multimedia transmission services, to set particular hardware and software allocations, or to implement particular filter mechanisms as appropriate. To illustrate, the predicted usage for the time period at 7:00-7:30 PM on Monday is USAGE.sub.—3, which indicates that the burst unicast service <b>119</b> has a high resource utilization for this time period, whereas the program multicast service <b>117</b> and the linear program broadcast service <b>116</b> have a low resource utilization and a medium resource utilization, respectively, for this time period. Thus, the multimedia server resource allocation mechanism <b>120</b> may skew the allocation of multimedia server resources in favor of the burst unicast service <b>1</b> <b>19</b> during this time period.</div>
+<div class="description-paragraph" id="p-0031" num="0030">In addition to operating parameters associated with the multimedia content being transmitted, the status of the network <b>108</b> can be used as an operating parameter in predictive modeling of future resource needs. To illustrate, a network outage typically causes a significant increase in the number of lost packets and, consequently, a corresponding increase in the number of packet retransmission requests from the receiving devices. Depending on the scope of a network outage in the multimedia content distribution system <b>100</b>, the service provider <b>102</b> could be flooded with millions of packet retransmission requests. The servicing of all of these packet retransmission requests could require extensive use of the multimedia server resources and therefore negatively impact the quality of other multimedia transmission services provided by the service provider <b>102</b>. Accordingly, as illustrated by Table 3 below, when a network outage is not detected, the default resource allocation resulting from the predicted usage of Table 1 can be utilized. In contrast, when a network outage is detected (e.g., either as a total outage or when a proportion of dropped packets to overall packets exceeds a threshold), the default allocation is overridden by a different allocation whereby the packet retransmission service <b>118</b> is deprioritized and packet retransmission requests are filtered out so as to prevent the multimedia servers of the service provider <b>102</b> from being overwhelmed from processing of a flood of packet retransmissions.</div>
+<div class="description-paragraph" id="p-0032" num="0031">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resource Allocation Override Based On Network Status</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Linear</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Network</td>
+<td class="description-td">Burst</td>
+<td class="description-td">Packet</td>
+<td class="description-td">Program</td>
+<td class="description-td">Program</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Status</td>
+<td class="description-td">Unicast</td>
+<td class="description-td">Retransmission</td>
+<td class="description-td">Multicast</td>
+<td class="description-td">Broadcast</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Normal</td>
+<td class="description-td">Default</td>
+<td class="description-td">Default</td>
+<td class="description-td">Default</td>
+<td class="description-td">Default</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Outage</td>
+<td class="description-td">Default</td>
+<td class="description-td">Filter Out Incoming Packets</td>
+<td class="description-td">Default</td>
+<td class="description-td">Default</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Priority = Low</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0033" num="0032">Although the time period for a determine allocation of resources can be of a relatively fixed duration, in certain instances the allocation of resources may change dynamically based on a non-fixed event. To illustrate, Table 4 provides an example predictive usage model for the Super Bowl event described above.</div>
+<div class="description-paragraph" id="p-0034" num="0033">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 4</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">TABLE-US-00004 Resource allocations during Super Bowl </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Programming Event </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Event</td>
+<td class="description-td">Burst </td>
+<td class="description-td">Packet</td>
+<td class="description-td">Program</td>
+<td class="description-td">Linear Program</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Portion</td>
+<td class="description-td">Unicast</td>
+<td class="description-td">Retransmission</td>
+<td class="description-td">Multicast</td>
+<td class="description-td">Broadcast</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Game Time</td>
+<td class="description-td">Priority = 3</td>
+<td class="description-td">Priority = 1</td>
+<td class="description-td">Priority = 2</td>
+<td class="description-td">Priority = 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Halftime</td>
+<td class="description-td">Priority = 1</td>
+<td class="description-td">Priority = 2</td>
+<td class="description-td">Priority = 3</td>
+<td class="description-td">Priority = 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Commercial</td>
+<td class="description-td">Priority = 1</td>
+<td class="description-td">Priority = 3</td>
+<td class="description-td">Priority = 2</td>
+<td class="description-td">Priority = 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Break</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="5" nameend="5" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0035" num="0034">As illustrated by Table 4, the assignment of relative priorities among the multimedia transmission services for scheduling of processing within the multimedia servers of the service provider <b>102</b> (with a priority of 0 being highest priority) can dynamically at the change between one portion of the programming event to another (e.g., from broadcast of the game to a commercial break or from broadcast of the game to halftime) rather than, or in addition to, at a particular time or after a particular fixed duration. Further, as Table 4 illustrates, the predictive usage model <b>122</b> can include resource allocation information for the particular operating parameters <b>124</b> in addition to, or in place of, the predicted resource allocation information for the particular operating parameters <b>124</b>.</div>
+<div class="description-paragraph" id="p-0036" num="0035">The predictive usage model <b>122</b> can be generated in any of a variety of manners. In one embodiment, predictive usage model <b>122</b> is generated from historical resource utilization characteristics as reported by the multimedia servers for time periods having one or more characteristics in common, such as occurring at the same time of day, during the same day of the week, during the same day of the month, having the same programming category (e.g., sports, movies, or a particular series), or being used to transmit the same programming event (e.g., the transmission of a particular movie on two successive weekend nights), and the like. In addition to, or instead of, historical modeling, a designer or programmer can generate the predictive usage model <b>122</b> based on expectations of resource utilization by multimedia transmission services for future events for which there is little or no historical information.</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 2</figref> illustrates an example implementation of a multimedia server <b>200</b> having dynamic intra-server resource allocation in accordance with at least one embodiment of the present disclosure. The multimedia server <b>200</b> corresponds to one or more multimedia servers implemented by the service provider <b>102</b> of <figref idrefs="DRAWINGS">FIG. 1</figref> for the distribution of multimedia content to one or more viewer premises. In the illustrated example, the multimedia server <b>200</b> includes a processor bank <b>202</b> comprising one or more central processing units (CPUs) <b>204</b> or other processor cores, a memory <b>206</b> (e.g., random access memory), one or more busses <b>208</b> (e.g., a cross-point switch, a memory bus, etc.), a bus controller <b>210</b>, a direct memory access (DMA) controller <b>212</b>, a hard drive <b>214</b>, a network interface <b>216</b>, and an intra-server resource allocation module <b>220</b> (corresponding to the multimedia server resource allocation mechanism <b>120</b>, <figref idrefs="DRAWINGS">FIG. 1</figref>). The intra-server resource allocation module <b>220</b> can be implemented as software, hardware, firmware, or a combination thereof. To illustrate, the intra-server resource allocation module <b>220</b> can be implemented as a computer program <b>222</b> stored in the memory <b>206</b> or the hard drive <b>214</b>, whereby the computer program <b>222</b> comprises a set of instructions executed by one or more of the CPUs <b>204</b> so as to manipulate the one or more CPUs to perform the processes described herein.</div>
+<div class="description-paragraph" id="p-0038" num="0037">The network interface <b>216</b> is coupled to the network <b>108</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) and performs network-level processing of incoming and outgoing data for the multimedia transmission services of the service provider <b>102</b>, such as the packetization of outgoing data, the depacketization of incoming data, the filtering of data packets, and requests for lost/damaged packet retransmission. The processor bank <b>202</b> handles the processing of data for the multimedia transmission services, such as the encoding or transcoding of multimedia content, multicast and broadcast group management, digital rights management (DRM), and the processing of incoming ICC requests and the processing of the resulting outgoing burst of multimedia content. The DMA controller <b>212</b> manages direct memory accesses to the memory <b>206</b> for the data associated with the multimedia transmission services. The bus controller <b>210</b> manages access to the one or more buses <b>208</b> for transferring data between the components of the multimedia server <b>200</b>.</div>
+<div class="description-paragraph" id="p-0039" num="0038">The intra-server resource allocation module <b>220</b> includes inputs <b>231</b>-<b>235</b> to receive information from some or all of the resources of the multimedia server <b>200</b> regarding past utilization of the resources of the multimedia server <b>200</b> by the multimedia transmission services. To illustrate: the processor bank <b>202</b> can report processor utilization characteristics, cache utilization characteristics, and I/O utilization characteristics for each of the multimedia transmission services for particular past time periods; the memory <b>206</b> can provide memory utilization characteristics for past time periods, the bus controller <b>210</b> can provide bus utilization characteristics for past time periods, and so forth. The intra-server resource allocation module <b>220</b> can use these past resource utilization characteristics to generate the predictive usage model <b>122</b> as described in greater detail below with reference to <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0040" num="0039">The intra-server resource allocation module <b>220</b> further includes outputs <b>241</b>-<b>245</b> to the resources of the multimedia server <b>220</b> so as to configure the resources to process the multimedia transmission services in accordance with an allocation of resources determined from the predictive usage model <b>122</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>). To illustrate, the intra-server resource allocation module <b>220</b> can configure the network interface <b>216</b> to flag packets associated with a particular multimedia transmission service as high priority, which may afford them a larger share of an incoming queue <b>224</b> or an outgoing queue <b>226</b> of the network interface <b>216</b>. The intra-server resource allocation module <b>220</b> further can configure the network interface <b>216</b> to implement filtering of incoming and outgoing packets based on the multimedia transmission service with which they are associated (e.g., by filtering out packets associated with a very low priority multimedia transmission service). Likewise, the intra-server resource allocation module <b>220</b> can configure the DMA <b>212</b> and the bus controller <b>210</b> to process data from the multimedia transmission services based on their respective priorities. Further, the intra-server resource allocation module <b>220</b> can allocate the CPUs <b>204</b> and caches (not shown) of the processor bank <b>202</b> based on the determined allocation, as well as prioritize execution threads and interrupts associated with the multimedia transmission services based on their respective priorities, and the like. Thus, in effect, the intra-server resource allocation module <b>220</b> can distribute the “processing bandwidth” of the multimedia server <b>200</b> among the multimedia transmission services based on their relative priorities for a given time period as determined from the predictive usage model <b>122</b>. Table 5 below is a non-limiting list of multimedia server resources which may be allocated by the intra-server resource allocation module <b>220</b>.</div>
+<div class="description-paragraph" id="p-0041" num="0040">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 5</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Example multimedia server resources</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Process/Thread Prioritization </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Interrupt Prioritization </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Interrupt Prioritization </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">TP/IP Incoming/Outgoing Queue Prioritization </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">I/O Prioritization </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Memory Bus Prioritization </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Cache Utilization </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Cache Coherency Prioritization </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Processor Core Utilization</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 3</figref> illustrates an example implementation of the service provider <b>102</b> having dynamic inter-server resource allocation in accordance with at least one embodiment of the present disclosure. In the illustrated example, the service provider <b>102</b> includes a plurality of multimedia servers <b>301</b>-<b>304</b> coupled to one or more switches <b>306</b> or routers, which in turn are connected to the network <b>108</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>). The service provider <b>102</b> further includes an inter-server resource allocation module <b>320</b> corresponding to the multimedia server resource allocation mechanism <b>120</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>. As with the intra-server resource allocation module <b>220</b> of <figref idrefs="DRAWINGS">FIG. 2</figref>, the inter-server resource allocation module <b>320</b> can be implemented as firmware, hardware, software, or a combination thereof.</div>
+<div class="description-paragraph" id="p-0043" num="0042">The multimedia servers <b>301</b>-<b>304</b> are configured to support the multimedia transmission services of the service provider <b>102</b> via the switch <b>306</b> and the network <b>108</b>. The inter-server resource allocation module <b>320</b> includes inputs <b>321</b>-<b>325</b> to receive past resource utilization characteristics for the multimedia transmission services from the multimedia servers <b>301</b>-<b>304</b>, from which the inter-server resource allocation module <b>320</b> can generate the prediction model <b>122</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) as described above. From the current operation characteristics <b>124</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) and the prediction usage model <b>122</b>, the inter-server resource allocation module <b>320</b> can allocate the each of at least a subset of the multimedia servers <b>301</b>-<b>304</b> to a corresponding multimedia transmission service using outputs <b>331</b>-<b>335</b>. To illustrate, inter-server resource allocation module <b>320</b> may allocate more of the multimedia servers <b>301</b>-<b>304</b> to a multimedia transmission service identified by the prediction usage model <b>122</b> as high priority or resource intensive for the corresponding time period and allocate fewer of the multimedia servers <b>301</b>-<b>304</b> to a multimedia transmission service identified as lower-priority or less resource intensive for the corresponding time period. The inter-server allocation of multimedia servers to multimedia transmission serves can occur in addition to, or instead of, the intra-server allocation described above with respect to <figref idrefs="DRAWINGS">FIG. 2</figref>.</div>
+<div class="description-paragraph" id="p-0044" num="0043"> <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates an example resource allocation module <b>400</b> in accordance with at least one embodiment of the present disclosure. The resource allocation module <b>400</b> corresponds to the multimedia server resource allocation mechanism <b>120</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>, the intra-server resource allocation module <b>220</b> of <figref idrefs="DRAWINGS">FIG. 2</figref>, or the inter-server resource allocation module <b>320</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>.</div>
+<div class="description-paragraph" id="p-0045" num="0044">In the illustrated example, the resource allocation module <b>400</b> includes a historical analysis module <b>402</b>, a data store <b>404</b> (e.g., one or more data files, a database, etc. stored at a storage device), a predictive modeling module <b>406</b>, and a resource control module <b>408</b>. The modules <b>402</b>, <b>406</b>, and <b>408</b> can be implemented as software, firmware, hardware, or a combination thereof.</div>
+<div class="description-paragraph" id="p-0046" num="0045">The historical analysis module <b>402</b> includes an input to receive server input representative of resource utilization characteristics by one or more of the multimedia transmission services of the service provider <b>102</b> for a particular time period. The historical analysis module <b>402</b> further includes inputs indicating operating characteristics associated with the particular time period for which the resource utilization characteristics are provided. These operating characteristics can include the time of day, the day of the week or the day of the month, the date, the programming available or subscribed to for the time period, and the network status (e.g., packet loss ratio, effective bandwidth, etc.) of the network <b>108</b> for the time period. The historical analysis module <b>402</b> filters, transforms, and otherwise processes this information to generate multimedia server resource utilization characteristic data <b>410</b> for the multimedia transmission services for the time period and for similar time periods that share one or more characteristics in common. The multimedia server resource utilization characteristic data <b>410</b> is stored in the data store <b>404</b>.</div>
+<div class="description-paragraph" id="p-0047" num="0046">The predictive modeling module <b>406</b> accesses the multimedia server resource utilization characteristic data <b>410</b> from the data store <b>404</b> and uses it to generate a predictive usage model <b>422</b> (corresponding to the predictive usage model <b>122</b>, <figref idrefs="DRAWINGS">FIG. 1</figref>). To illustrate, the predictive modeling module <b>406</b> can use the resource utilization characteristics of the multimedia transmission services from past time periods occurring on the same day of the week and at the same time to predict the resource needs of the multimedia transmission resources for a future tie period occurring on the same day of the week and at the same time period. Other common characteristics of past time periods, such as a common programming event (e.g., the broadcast of the same episode of a show on two successive Tuesdays), a common programming category (e.g., sports, action, romance, etc.), a common special event (e.g., the annual Super Bowl event), a similar network status, and the like. Data representative of the predictive usage model <b>422</b> is stored at the data store <b>404</b> or another data store for subsequent access by the resource control module <b>408</b>.</div>
+<div class="description-paragraph" id="p-0048" num="0047">The resource control module <b>408</b> accesses the predictive usage model <b>422</b> to determine an allocation of multimedia server resources for a present or upcoming time period based on the predictive usage model <b>422</b> and one or more operating characteristics for the current or upcoming time period, such as the time of day, the day of the week or month, the date, the programming event or programming category, the network status, etc. To illustrate, the resource control module <b>408</b> can search or index the predictive usage model <b>422</b> to identify the resource utilization characteristics for past time periods sharing one or more operating characteristics in common with the current operating characteristics (e.g., the same time of day and day of the week or the same annual programming event). As these past resource utilization characteristics are predictive of the likely resource utilizations of the multimedia transmission services for a time period with similar characteristics, the past resource utilization characteristics as represented by the predictive usage model <b>422</b> can be used to allocate multimedia server resources between the multimedia transmission services. These resource allocations can include hardware allocation (e.g., cache allocation, memory allocation, processing bandwidth allocation), software allocation (e.g., thread allocation), prioritization allocation (e.g., thread prioritization, network interface prioritization), and filtering allocation (e.g., packet filtering at the network interface).</div>
+<div class="description-paragraph" id="p-0049" num="0048"> <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates an example method <b>500</b> for generating a predictive usage model for dynamic multimedia server resource allocation among a plurality of multimedia transmission services of a service provider in accordance with at least one embodiment of the present disclosure. At block <b>502</b>, the service provider determines the multimedia server resource utilization characteristics of each multimedia transmission service for one or more past time periods. At block <b>504</b>, the service provider generates a predictive usage model of the multimedia server resources by the multimedia transmission services based on the multimedia server resource utilization characteristics determined at block <b>502</b>. At block <b>506</b>, the service provider stores data representative of the predictive usage model at a data store (e.g., a file or a database) for subsequent access and use in determining a more optimum allocation of multimedia server resources for time periods having one or more characteristics in common with the one or more past time periods.</div>
+<div class="description-paragraph" id="p-0050" num="0049"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates an example method <b>600</b> for determining an allocation of multimedia server resources for each of a series of time periods in accordance with at least one embodiment of the present disclosure. At block <b>602</b>, a service provider prepares for multimedia transmission services to be provided during the upcoming time period. At block <b>604</b>, the service provider determines one or more characteristics associated with the upcoming time period, such as the time of day, the date, the day of the week, the programming event occurring during the upcoming time period, and the like. Based on these identified characteristics, the service provider uses a predictive usage model to determine an allocation of multimedia server resources for the upcoming time period. In at least one embodiment, the predictive usage model provides the resource utilization characteristics of the multimedia transmission services for past time periods having the same or similar characteristics, and thus may be predictive of the resource needs of the multimedia transmission services for the upcoming time period. At block <b>606</b>, the service provider allocates the resources of one or more multimedia servers between the multimedia transmission services based on the allocation determined at block <b>606</b>. The allocation of resources can include the allocation of particular resources (e.g., a number of processors allocated to each multimedia transmission service) or a relative prioritization between the multimedia transmission services, from which the utilization of resources by a multimedia transmission service depends. At block <b>610</b>, the service provider processes the multimedia transmission services for the time period based on the resource allocation at block <b>608</b>. The process represented by blocks <b>602</b>-<b>610</b> can be repeated for the next upcoming time period.</div>
+<div class="description-paragraph" id="p-0051" num="0050"> <figref idrefs="DRAWINGS">FIG. 7</figref> illustrates an example Internet Protocol Television (IPTV) system <b>700</b> in which the disclosed video monitoring techniques can be implemented in accordance with at least one embodiment of the present disclosure. The IPTV system <b>700</b> can include a client facing tier <b>702</b>, an application tier <b>704</b>, an acquisition tier <b>706</b>, and an operations and management tier <b>708</b>. Each tier <b>702</b>, <b>704</b>, <b>706</b>, and <b>708</b> is coupled to a private network <b>710</b>, a public network <b>712</b>, or both the private network <b>710</b> and the public network <b>712</b>. For example, the client-facing tier <b>702</b> can be coupled to the private network <b>710</b>. Further, the application tier <b>704</b> can be coupled to the private network <b>710</b> and to the public network <b>712</b>, such as the Internet. The acquisition tier <b>706</b> can also be coupled to the private network <b>710</b> and to the public network <b>712</b>. Moreover, the operations and management tier <b>708</b> can be coupled to the public network <b>712</b>.</div>
+<div class="description-paragraph" id="p-0052" num="0051">The various tiers <b>702</b>, <b>704</b>, <b>706</b>, and <b>708</b> communicate with each other via the private network <b>710</b> and the public network <b>712</b>. For instance, the client-facing tier <b>702</b> can communicate with the application tier <b>704</b> and the acquisition tier <b>706</b> via the private network <b>710</b>. The application tier <b>704</b> can also communicate with the acquisition tier <b>706</b> via the private network <b>710</b>. Further, the application tier <b>704</b> can communicate with the acquisition tier <b>706</b> and the operations and management tier <b>708</b> via the public network <b>712</b>. Moreover, the acquisition tier <b>706</b> can communicate with the operations and management tier <b>708</b> via the public network <b>712</b>. In a particular embodiment, elements of the application tier <b>704</b> can communicate directly with the client-facing tier <b>702</b>.</div>
+<div class="description-paragraph" id="p-0053" num="0052">The client-facing tier <b>702</b> can communicate with user equipment via a private access network <b>766</b>, such as an Internet Protocol Television (IPTV) network. In an illustrative embodiment, modems, such as a first modem <b>714</b> and a second modem <b>722</b> can be coupled to the private access network <b>766</b>. The client-facing tier <b>702</b> can communicate with a first representative STB device <b>716</b> via the first modem <b>714</b> and with a second representative STB device <b>724</b> via the second modem <b>722</b>. The client-facing tier <b>702</b> can communicate with a large number of set-top boxes, such as the representative set-top boxes <b>716</b> and <b>724</b>, over a wide geographic area, such as a regional area, a metropolitan area, a viewing area, or any other suitable geographic area that can be supported by networking the client-facing tier <b>702</b> to numerous set-top box devices. In an illustrative embodiment, the client facing tier or any portion thereof can be included at a video head-end office.</div>
+<div class="description-paragraph" id="p-0054" num="0053">In one embodiment, the client-facing tier <b>702</b> can be coupled to the modems <b>714</b> and <b>722</b> via fiber optic cables. Alternatively, the modems <b>714</b> and <b>722</b> can be digital subscriber line (DSL) modems that are coupled to one or more network nodes via twisted pairs, and the client-facing tier <b>702</b> can be coupled to the network nodes via fiber-optic cables. Each set-top box device <b>716</b> and <b>724</b> can process data received through the private access network <b>766</b> via an IPTV software platform such as Microsoft® TV IPTV Edition.</div>
+<div class="description-paragraph" id="p-0055" num="0054">Additionally, the first set-top box device <b>716</b> can be coupled to a first display device <b>718</b>, such as a first television monitor, and the second set-top box device <b>724</b> can be coupled to a second display device <b>726</b>, such as a second television monitor. Moreover, the first set-top box device <b>716</b> can communicate with a first remote control <b>720</b>, and the second set-top box device can communicate with a second remote control <b>728</b>. In an exemplary, non-limiting embodiment, each set-top box device <b>716</b> and <b>724</b> can receive data or video from the client-facing tier <b>702</b> via the private access network <b>766</b> and render or display the data or video at the display devices <b>718</b> and <b>726</b> to which it is coupled. In an illustrative embodiment, the set-top box devices <b>716</b> and <b>724</b> can include tuners that receive and decode television programming information for transmission to the display devices <b>718</b> and <b>726</b>. The television tuner can be National Television System Committee (NTSC) tuner, an Advanced Television System Committee (ATSC), another suitable analog or digital tuner, or any combination thereof. A signal for a television channel can pass through the tuner before the content is displayed on a monitor.</div>
+<div class="description-paragraph" id="p-0056" num="0055">In an exemplary, non-limiting embodiment, STB devices <b>716</b> and <b>724</b> can receive a data stream including video content data and audio content data from the client-facing tier <b>702</b> via the private access network <b>766</b>. The STB device <b>716</b> and <b>724</b> can transmit the video content to an external display device, such as the television monitors <b>718</b> and <b>726</b>. The STB devices <b>716</b> and <b>724</b> can also communicate commands received from the remote control devices <b>720</b> and <b>728</b> to the client-facing tier <b>702</b> via the private access network <b>766</b>.</div>
+<div class="description-paragraph" id="p-0057" num="0056">In an illustrative embodiment, the client-facing tier <b>702</b> can include a client-facing tier (CFT) switch <b>730</b> that manages communication between the client-facing tier <b>702</b> and the private access network <b>766</b> and between the client-facing tier <b>702</b> and the private network <b>710</b>. As shown, the CFT switch <b>730</b> is coupled to one or more data servers <b>732</b> that store data transmitted in response to viewer requests, such as video-on-demand material. The CFT switch <b>730</b> can also be coupled to a terminal server <b>734</b> that provides terminal devices, such as a game application server and other devices with a common connection point to the private network <b>710</b>. In a particular embodiment, the CFT switch <b>730</b> can also be coupled to a video-on-demand (VOD) server <b>736</b> that stores or provides VOD content imported by the IPTV system <b>700</b>. The client-facing tier <b>702</b> can also include one or more channel provision servers <b>780</b> that transmit video content requested by viewers via their STB devices <b>716</b> and <b>724</b>. In an illustrative, non-limiting embodiment, the channel provision servers <b>780</b> can include one or more of the multimedia servers of <figref idrefs="DRAWINGS">FIGS. 1-6</figref>.</div>
+<div class="description-paragraph" id="p-0058" num="0057">As shown in <figref idrefs="DRAWINGS">FIG. 7</figref>, the application tier <b>704</b> can communicate with both the private network <b>710</b> and the public network <b>712</b>. In this embodiment, the application tier <b>704</b> can include a first application tier (APP) switch <b>738</b> and a second APP switch <b>740</b>. In a particular embodiment, the first APP switch <b>738</b> can be coupled to the second APP switch <b>740</b>. The first APP switch <b>738</b> can be coupled to an application server <b>742</b> and to an OSS/BSS gateway <b>744</b>. The application server <b>742</b> provides applications to the set-top box devices <b>716</b> and <b>724</b> via the private access network <b>766</b>, so the set-top box devices <b>716</b> and <b>724</b> can provide functions, such as display, messaging, processing of IPTV data and VOD material, etc. In a particular embodiment, the OSS/BSS gateway <b>744</b> includes operation systems and support (OSS) data, as well as billing systems and support (BSS) data.</div>
+<div class="description-paragraph" id="p-0059" num="0058">Further, the second APP switch <b>740</b> can be coupled to a domain controller <b>746</b> that provides web access, for example, to users via the public network <b>712</b>. The second APP switch <b>740</b> can be coupled to a subscriber and system store <b>748</b> that includes account information, such as account information that is associated with users who access the system <b>700</b> via the private network <b>710</b> or the public network <b>712</b>. In a particular embodiment, the application tier <b>704</b> can also include a client gateway <b>750</b> that communicates data directly to the client-facing tier <b>702</b>. In this embodiment, the client gateway <b>750</b> can be coupled directly to the CFT switch <b>730</b>. The client gateway <b>750</b> can provide user access to the private network <b>710</b> and the tiers coupled thereto.</div>
+<div class="description-paragraph" id="p-0060" num="0059">In a particular embodiment, the set-top box devices <b>716</b> and <b>724</b> can access the system via the private access network <b>766</b>, using information received from the client gateway <b>750</b>. The private access network <b>766</b> provides security for the private network <b>710</b>. User devices can access the client gateway <b>750</b> via the private access network <b>766</b>, and the client gateway <b>750</b> can allow such devices to access the private network <b>710</b> once the devices are authenticated or verified. Similarly, the client gateway <b>750</b> can prevent unauthorized devices, such as hacker computers or stolen set-top box devices from accessing the private network <b>710</b>, by denying access to these devices beyond the private access network <b>766</b>.</div>
+<div class="description-paragraph" id="p-0061" num="0060">For example, when a set-top box device <b>716</b> accesses the system <b>700</b> via the private access network <b>766</b>, the client gateway <b>750</b> can verify subscriber information by communicating with the subscriber and system store <b>748</b> via the private network <b>710</b>, the first APP switch <b>738</b> and the second APP switch <b>740</b>. Further, the client gateway <b>750</b> can verify billing information and status by communicating with the OSS/BSS gateway <b>744</b> via the private network <b>710</b> and the first APP switch <b>738</b>. The OSS/BSS gateway <b>744</b> can transmit a query across the first APP switch <b>738</b> to the second APP switch <b>740</b>, and the second APP switch <b>740</b> can communicate the query across the public network <b>712</b> to an OSS/BSS server <b>764</b>. After the client gateway <b>750</b> confirms subscriber and/or billing information, the client gateway <b>750</b> can allow the set-top box device <b>716</b> access to IPTV content and VOD content. If the client gateway <b>750</b> cannot verify subscriber information for the set-top box device <b>716</b>, for example because it is connected to a different twisted pair, the client gateway <b>750</b> can deny transmissions to and from the set-top box device <b>716</b> beyond the private access network <b>766</b>.</div>
+<div class="description-paragraph" id="p-0062" num="0061">The acquisition tier <b>706</b> includes an acquisition tier (AQT) switch <b>752</b> that communicates with the private network <b>710</b>. The AQT switch <b>752</b> can also communicate with the operations and management tier <b>708</b> via the public network <b>712</b>. In a particular embodiment during operation of the IPTV system, the live acquisition server <b>754</b> can acquire television or movie content. The live acquisition server <b>754</b> can transmit the television or movie content to the AQT switch <b>752</b>, and the AQT switch can transmit the television or movie content to the CFT switch <b>730</b> via the private network <b>710</b>.</div>
+<div class="description-paragraph" id="p-0063" num="0062">Further, the television or movie content can be transmitted to the channel provision servers <b>780</b>, where it can be encoded, formatted, stored, or otherwise manipulated and prepared for communication to the STB devices <b>716</b> and <b>724</b>. The CFT switch <b>730</b> can communicate the television or movie content to the modems <b>714</b> and <b>722</b> via the private access network <b>766</b>. The STB devices <b>716</b> and <b>724</b> can receive the television or movie content via the modems <b>714</b> and <b>722</b>, and can transmit the television or movie content to the television monitors <b>718</b> and <b>726</b>. In an illustrative embodiment, video or audio portions of the television or movie content can be streamed to the STB devices <b>716</b> and <b>724</b>.</div>
+<div class="description-paragraph" id="p-0064" num="0063">Further, the AQT switch can be coupled to a VOD importer server <b>758</b> that stores television or movie content received at the acquisition tier <b>706</b> and communicates the stored content to the VOD server <b>736</b> at the client-facing tier <b>702</b> via the private network <b>710</b>. Additionally, at the acquisition tier <b>706</b>, the VOD importer server <b>758</b> can receive content from one or more VOD sources outside the IPTV system <b>700</b>, such as movie studios and programmers of non-live content. The VOD importer server <b>758</b> can transmit the VOD content to the AQT switch <b>752</b>, and the AQT switch <b>752</b>, in turn, can communicate the material to the CFT switch <b>730</b> via the private network <b>710</b>. The VOD content can be stored at one or more servers, such as the VOD server <b>736</b>.</div>
+<div class="description-paragraph" id="p-0065" num="0064">When users issue requests for VOD content via the STB devices <b>716</b> and <b>724</b>, the requests can be transmitted over the private access network <b>766</b> to the VOD server <b>736</b> via the CFT switch <b>730</b>. Upon receiving such requests, the VOD server <b>736</b> can retrieve the requested VOD content and transmit the content to the STB devices <b>716</b> and <b>724</b> across the private access network <b>766</b> via the CFT switch <b>730</b>. The STB devices <b>716</b> and <b>724</b> can transmit the VOD content to the television monitors <b>718</b> and <b>726</b>. In an illustrative embodiment, video or audio portions of VOD content can be streamed to the STB devices <b>716</b> and <b>724</b>.</div>
+<div class="description-paragraph" id="p-0066" num="0065">The operations and management tier <b>708</b> can include an operations and management tier (OMT) switch <b>760</b> that conducts communication between the operations and management tier <b>708</b> and the public network <b>712</b>. In the embodiment illustrated by <figref idrefs="DRAWINGS">FIG. 7</figref>, the OMT switch <b>760</b> is coupled to a TV2 server <b>762</b>. Additionally, the OMT switch <b>760</b> can be coupled to the OSS/BSS server <b>764</b> and to a simple network management protocol (SNMP) monitor <b>777</b> that monitors network devices within or coupled to the IPTV system <b>700</b>. In a particular embodiment, the OMT switch <b>760</b> can communicate with the AQT switch <b>752</b> via the public network <b>712</b>.</div>
+<div class="description-paragraph" id="p-0067" num="0066">In a particular embodiment during operation of the IPTV system, the live acquisition server <b>754</b> can acquire television content from the broadcast service <b>756</b>. The live acquisition server <b>754</b> can transmit the television or movie content to the AQT switch <b>752</b>, and the AQT switch <b>752</b> in turn can transmit the television content to the CFT switch <b>730</b> via the private network <b>710</b> or to the OMT switch <b>760</b> via the public network <b>712</b>. Further, the television content can be encoded at the D-servers <b>732</b>, and the CFT switch <b>730</b> can communicate the television content to the modems <b>714</b> and, <b>722</b> via the private access network <b>766</b>. The set-top box devices <b>716</b> and <b>724</b> can receive the television content from the modems <b>714</b> and <b>722</b>, decode the television content, and transmit the content to the display devices <b>718</b> and <b>726</b> according to commands from the remote control devices <b>720</b> and <b>728</b>.</div>
+<div class="description-paragraph" id="p-0068" num="0067">Additionally, at the acquisition tier <b>706</b>, the video-on-demand (VOD) importer server <b>758</b> can receive content from one or more VOD sources outside the IPTV system <b>700</b>, such as movie studios and programmers of non-live content. The VOD importer server <b>758</b> can transmit the VOD content to the AQT switch <b>752</b>, and the AQT switch <b>752</b> in turn can communicate the material to the CFT switch <b>730</b> via the private network <b>710</b>. The VOD content can be stored at one or more servers, such as the VOD server <b>736</b>.</div>
+<div class="description-paragraph" id="p-0069" num="0068">When a user issues a request for VOD content to set-top box devices <b>716</b> and <b>724</b>, the request can be transmitted over the private access network <b>766</b> to the VOD server <b>736</b> via the CFT switch <b>730</b>. Upon receiving such a request, the VOD server <b>736</b> can retrieve requested VOD content and transmit the content to the set-top box devices <b>716</b> and <b>724</b> across the private access network <b>766</b> via the CFT switch <b>730</b>. In an illustrative embodiment, the live acquisition server <b>754</b> can transmit the television content to the AQT switch <b>752</b>, and the AQT switch <b>752</b> in turn can transmit the television content to the OMT switch <b>760</b> via the public network <b>712</b>. In this embodiment, the OMT switch <b>760</b> can transmit the television content to the TV2 server <b>762</b> for display to users accessing the user interface at the TV2 server. For example, a user can access the TV2 server <b>762</b> using a personal computer <b>768</b> coupled to the public network <b>712</b>.</div>
+<div class="description-paragraph" id="p-0070" num="0069">The domain controller <b>746</b> communicates with the public network <b>712</b> via the second APP switch <b>740</b>. Additionally, the domain controller <b>746</b> can communicate via the public network <b>712</b> with the personal computer <b>768</b>. For example, the domain controller <b>746</b> can display a web portal via the public network <b>712</b> and allow users to access the web portal using the PC <b>768</b>. Further, in an illustrative embodiment, the domain controller <b>746</b> can communicate with at least one wireless network access point <b>778</b> over a data network <b>776</b>. In this embodiment, each wireless network access device <b>778</b> can communicate with user wireless devices, such as a cellular telephone <b>784</b>.</div>
+<div class="description-paragraph" id="p-0071" num="0070">In a particular embodiment, a set-top box device such as the second set-top box device <b>724</b> can include an STB processor <b>771</b> and an STB memory device <b>772</b> that is accessible to the STB processor <b>771</b>. The set-top box device <b>724</b> also includes a STB computer program <b>774</b> that is embedded within the STB memory device <b>772</b>. In a particular embodiment, the STB computer program <b>774</b> can contain instructions to receive and execute at least one user television viewing preference that a user has entered by accessing an Internet user account via the domain controller <b>746</b>. For example, the user can use the PC <b>768</b> to access a web portal maintained by the domain controller <b>746</b> via the Internet. The domain controller <b>746</b> can query the subscriber and system store <b>748</b> via the private network <b>710</b> for account information associated with the user. In a particular embodiment, the account information can associate the user's Internet account with the second set-top box device <b>724</b>. For instance, in an illustrative embodiment, the account information can relate the user's account to the second set-top box device <b>724</b>, by associating the user account with an IP address of the second set-top box device with data relating to one or more twisted pairs connected with the second set-top box device <b>724</b>, with data related to one or more fiber optic cables connected with the second set-top box device <b>724</b>, with an alphanumeric identifier of the second set-top box device <b>724</b>, with any other data that is suitable for associating second set-top box device <b>724</b> with a user account, or with any combination of these.</div>
+<div class="description-paragraph" id="p-0072" num="0071">The STB computer program <b>774</b> can contain instructions to receive many types of user preferences from the domain controller <b>746</b> via the access network <b>766</b>. For example, the STB computer program <b>774</b> can include instructions to receive a request to record at least one television program at a video content storage module such as a digital video recorder (DVR) <b>782</b> within the second set-top box device <b>724</b>. In this example embodiment, the STB computer program <b>774</b> can include instructions to transmit the request to the DVR <b>782</b>, where the television program(s) are recorded. In an illustrative embodiment, the STB computer program <b>774</b> can include instructions to receive from the DVR <b>782</b> a recording status with respect to one or more of the television programs and to transmit at least one message regarding the status to a wireless device, such as the cellular telephone <b>784</b>. The message can be received at the CFT switch <b>730</b>, for instance, and communicated to the domain controller <b>746</b> across the private network <b>710</b> via the second APP switch <b>740</b>. Further, the domain controller <b>746</b> can transmit the message to the wireless data network <b>776</b>, directly or via the public network <b>712</b>, and on to the wireless network access point <b>778</b>. The message can then be transmitted to the cellular telephone <b>784</b>. In an illustrative embodiment, the status can be sent via a wireless access protocol (WAP). Further details of the IPTV system are taught in U.S. Patent Application Publication No. 2007/0199041, the disclosure of which is hereby incorporated by reference.</div>
+<div class="description-paragraph" id="p-0073" num="0072"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows an illustrative embodiment of a general computer system <b>800</b> in accordance with at least one embodiment of the present disclosure. The computer system <b>800</b> can include a set of instructions that can be executed to cause the computer system <b>800</b> to perform any one or more of the methods or computer based functions disclosed herein. The computer system <b>800</b> may operate as a standalone device or may be connected, e.g., using a network, to other computer systems or peripheral devices.</div>
+<div class="description-paragraph" id="p-0074" num="0073">In a networked deployment, the computer system may operate in the capacity of a server or as a client user computer in a server-client user network environment, or as a peer computer system in a peer-to-peer (or distributed) network environment. The computer system <b>800</b> can also be implemented as or incorporated into, for example, a STB device. In a particular embodiment, the computer system <b>800</b> can be implemented using electronic devices that provide voice, video or data communication. Further, while a single computer system <b>800</b> is illustrated, the term “system” shall also be taken to include any collection of systems or sub-systems that individually or jointly execute a set, or multiple sets, of instructions to perform one or more computer functions.</div>
+<div class="description-paragraph" id="p-0075" num="0074">The computer system <b>800</b> may include a processor <b>802</b>, e.g., a central processing unit (CPU), a graphics processing unit (GPU), or both. Moreover, the computer system <b>800</b> can include a main memory <b>804</b> and a static memory <b>806</b> that can communicate with each other via a bus <b>808</b>. As shown, the computer system <b>800</b> may further include a video display unit <b>810</b>, such as a liquid crystal display (LCD), an organic light emitting diode (OLED), a flat panel display, a solid state display, or a cathode ray tube (CRT). Additionally, the computer system <b>800</b> may include an input device <b>812</b>, such as a keyboard, and a cursor control device <b>814</b>, such as a mouse. The computer system <b>800</b> can also include a disk drive unit <b>816</b>, a signal generation device <b>818</b>, such as a speaker or remote control, and a network interface device <b>820</b>.</div>
+<div class="description-paragraph" id="p-0076" num="0075">In a particular embodiment, as depicted in <figref idrefs="DRAWINGS">FIG. 8</figref>, the disk drive unit <b>816</b> may include a computer-readable medium <b>822</b> in which one or more sets of instructions <b>824</b>, e.g. software, can be embedded. Further, the instructions <b>824</b> may embody one or more of the methods or logic as described herein. In a particular embodiment, the instructions <b>824</b> may reside completely, or at least partially, within the main memory <b>804</b>, the static memory <b>806</b>, and/or within the processor <b>802</b> during execution by the computer system <b>800</b>. The main memory <b>804</b> and the processor <b>802</b> also may include computer-readable media. The network interface device <b>820</b> can provide connectivity to a network <b>826</b>, e.g., a wide area network (WAN), a local area network (LAN), or other network.</div>
+<div class="description-paragraph" id="p-0077" num="0076">In an alternative embodiment, dedicated hardware implementations such as application specific integrated circuits, programmable logic arrays and other hardware devices can be constructed to implement one or more of the methods described herein. Applications that may include the apparatus and systems of various embodiments can broadly include a variety of electronic and computer systems. One or more embodiments described herein may implement functions using two or more specific interconnected hardware modules or devices with related control and data signals that can be communicated between and through the modules, or as portions of an application-specific integrated circuit. Accordingly, the present system encompasses software, firmware, and hardware implementations.</div>
+<div class="description-paragraph" id="p-0078" num="0077">In accordance with various embodiments of the present disclosure, the methods described herein may be implemented by software programs executable by a computer system. Further, in an exemplary, non-limited embodiment, implementations can include distributed processing, component/object distributed processing, and parallel processing. Alternatively, virtual computer system processing can be constructed to implement one or more of the methods or functionality as described herein.</div>
+<div class="description-paragraph" id="p-0079" num="0078">The present disclosure contemplates a computer-readable medium that includes instructions or receives and executes instructions responsive to a propagated signal, so that a device connected to a network can communicate voice, video or data over the network <b>826</b>. Further, the instructions <b>824</b> may be transmitted or received over the network <b>826</b> via the network interface device <b>820</b>.</div>
+<div class="description-paragraph" id="p-0080" num="0079">While the computer-readable medium is shown to be a single medium, the term “computer-readable medium” includes a single medium or multiple media, such as a centralized or distributed database, and/or associated caches and servers that store one or more sets of instructions. The term “computer-readable medium” shall also include any medium that is capable of storing a set of instructions for execution by a processor or that cause a computer system to perform any one or more of the methods or operations disclosed herein.</div>
+<div class="description-paragraph" id="p-0081" num="0080">In a particular non-limiting, exemplary embodiment, the computer-readable medium can include a solid-state memory such as a memory card or other package that houses one or more non-volatile read-only memories. Further, the computer-readable medium can be a random access memory or other volatile re-writeable memory.</div>
+<div class="description-paragraph" id="p-0082" num="0081">Additionally, the computer-readable medium can include a magneto-optical or optical medium, such as a disk or tapes or other storage device to capture carrier wave signals such as a signal communicated over a transmission medium. A digital file attachment to an e-mail or other self-contained information archive or set of archives may be considered a distribution medium that is equivalent to a tangible storage medium. Accordingly, the disclosure is considered to include any one or more of a computer-readable medium or a distribution medium and other equivalents and successor media, in which data or instructions may be stored.</div>
+<div class="description-paragraph" id="p-0083" num="0082">Although the present specification describes components and functions that may be implemented in particular embodiments with reference to particular standards and protocols, the disclosure is not limited to such standards and protocols. For example, standards for Internet and other packet switched network transmission (e.g., TCP/IP, UDP/IP, HTML, HTTP) represent examples of the state of the art. Such standards are periodically superseded by faster or more efficient equivalents having essentially the same functions. Accordingly, replacement standards and protocols having the same or similar functions as those disclosed herein are considered equivalents thereof.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM289171143">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A multimedia content distribution system comprising:
+<div class="claim-text">a first multimedia server and a second multimedia server each coupled to a network, the first multimedia server and the second multimedia server respectively comprising first multimedia server resources and second multimedia server resources configured to support multimedia transmission services for transmission of multimedia content via the network;</div>
+<div class="claim-text">a data store to store data representative of a predictive resource usage model for a plurality of multimedia transmission services, wherein the predictive resource usage model is generated according to a prediction of resource needs of the plurality of multimedia transmission services, wherein the prediction is determined based on historical resource usage data for historical operating parameters including a time of day, a network status, and a plurality of event portions of a first programming event, and wherein the predictive resource usage model comprises a matrix that is indexed based upon combinations of the historical operating parameters;</div>
+<div class="claim-text">a resource allocation module that performs operations comprising: for each event portion of a plurality of event portions of a second programming event, determining operating parameters and applying the predictive resource usage model to the first multimedia server and to the second multimedia server according to the operating parameters, to determine for each of the first multimedia server and the second multimedia server, respectively, a relative priority for the plurality of multimedia transmission services, the relative priority including a relative level of predicted server resource usage during the event portion, and thereby determine a first allocation of the first multimedia server resources and a second allocation of the second multimedia server resources between the plurality of multimedia transmission services, wherein the resource allocation module receives inputs indicating resource utilization characteristics associated with a first event portion of the first programming event, and generates resource utilization characteristic data for the plurality of multimedia transmission services for a second event portion of the second programming event, wherein the first event portion corresponds to a first commercial break in the first programming event, and the second event portion corresponds to a second commercial break in the second programming event; and</div>
+<div class="claim-text">allocating the first multimedia server resources and the second multimedia server resources to the plurality of multimedia transmission services for the event portion based respectively on the first allocation and the second allocation.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The multimedia content distribution system of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the first multimedia server resources and the second multimedia server resources comprise at least one of: network interface resources; bus resources; input/output (I/O) resources; memory resources; cache resources; and processor resources.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The multimedia content distribution system of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the plurality of multimedia transmission services comprises: a linear program broadcast service; a packet retransmission multicast service; a program multicast service; or a content burst unicast service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The multimedia content distribution system of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein the content burst unicast service comprises an instant channel change service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The multimedia content distribution system of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the plurality of multimedia transmission services comprises: a linear program broadcast service, a packet retransmission multicast service, a program multicast service, and a content burst unicast service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The multimedia content distribution system of <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein the plurality of multimedia transmission services comprises: a linear program broadcast service; a packet retransmission multicast service; a program multicast service; or a content burst unicast service, wherein the content burst unicast service comprises an instant channel change service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The multimedia content distribution system of <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein the relative priority is determined for event portion of the second programming event.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. A method comprising:
+<div class="claim-text">generating, by a processing system of a multimedia content distribution system, a predictive resource usage model for a plurality of multimedia transmission services according to a prediction of resource needs of the plurality of multimedia transmission services, wherein the prediction is determined based on historical resource usage data for historical operating parameters including a time of day, a network status, and a plurality of event portions of a first programming event;</div>
+<div class="claim-text">storing, by the processing system, data representative of the predictive resource usage model for the plurality of multimedia transmission services, wherein the multimedia content distribution system comprises a first multimedia server and a second multimedia server, the first multimedia server and the second multimedia server respectively comprising first multimedia server resources and second multimedia server resources configured to support the multimedia transmission services;</div>
+<div class="claim-text">determining, by the processing system for each event portion of a plurality of event portions of a second programming event and for each of the first multimedia server and the second multimedia server, respectively, operating parameters and a relative priority for the plurality of multimedia transmission services, the relative priority including a relative level of predicted server resource usage during the event portion, to determine a first allocation of the first multimedia server resources and a second allocation of the second multimedia server resources between the plurality of multimedia transmission services based on the predictive resource usage model, the relative priority being determined by applying the predictive resource usage model to the operating parameters, wherein the determining comprises:
+<div class="claim-text">receiving, by the processing system, inputs indicating resource utilization characteristics associated with a first event portion of the first programming event; and</div>
+<div class="claim-text">generating, by the processing system, resource utilization characteristic data for the plurality of multimedia transmission services for a second event portion of the second programming event, wherein the first event portion corresponds to a first commercial break in the first programming event, and the second event portion corresponds to a second commercial break in the second programming event; and</div>
+</div>
+<div class="claim-text">allocating, by the processing system, the first multimedia server resources and the second multimedia server resources to the plurality of multimedia transmission services for the event portion based respectively on the first allocation and the second allocation.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the first multimedia server and the second multimedia server are coupled to a network, and wherein the first multimedia server resources and the second multimedia server resources comprise at least one of: network interface resources; bus resources; input/output (I/O) resources; memory resources; cache resources; and processor resources.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the plurality of multimedia transmission services comprises: a linear program broadcast service; a packet retransmission multicast service; a program multicast service; or a content burst unicast service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the content burst unicast service comprises an instant channel change service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the predictive resource usage model comprises a matrix that is indexed based upon combinations of the historical operating parameters.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the plurality of multimedia transmission services comprises: a linear program broadcast service, a packet retransmission multicast service, a program multicast service, and a content burst unicast service.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. A non-transitory machine-readable medium comprising executable instructions that, when executed by a processing system of a multimedia content distribution system including a processor, facilitate performance of operations comprising:
+<div class="claim-text">generating a predictive resource usage model for a plurality of multimedia transmission services according to a prediction of resource needs of the plurality of multimedia transmission services, wherein the prediction is determined based on historical resource usage data for historical operating parameters including a time of day, a network status, and a plurality of event portions of a first programming event;</div>
+<div class="claim-text">storing in a data store the predictive resource usage model for the plurality of multimedia transmission services, wherein the multimedia content distribution system comprises a first multimedia server and a second multimedia server, the first multimedia server and the second multimedia server respectively comprising first multimedia server resources and second multimedia server resources configured to support the multimedia transmission services;</div>
+<div class="claim-text">determining, for each event portion of a plurality of event portions of a second programming event, and for each of the first multimedia server and the second multimedia server, respectively, operating parameters and a relative priority for the plurality of multimedia transmission services, the relative priority including a relative level of predicted server resource usage during the event portion, to determine a first allocation of the first multimedia server resources and a second allocation of the second multimedia server resources between the plurality of multimedia transmission services based on the predictive resource usage model, wherein the determining is based in part on applying the predictive resource usage model to the operating parameters, wherein the determining comprises:
+<div class="claim-text">receiving, by the processing system, inputs indicating resource utilization characteristics associated with a first event portion of the first programming event; and</div>
+<div class="claim-text">generating, by the processing system, resource utilization characteristic data for the plurality of multimedia transmission services for a second event portion of the second programming event, wherein the first event portion corresponds to a first commercial break in the first programming event, and the second event portion corresponds to a second commercial break in the second programming event; and</div>
+</div>
+<div class="claim-text">allocating the first multimedia server resources and the second multimedia server resources to the plurality of multimedia transmission services for the event portion based respectively on the first allocation and the second allocation.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The non-transitory machine-readable medium of <claim-ref idref="CLM-00014">claim 14</claim-ref>, wherein the first multimedia server and the second multimedia server are coupled to a network, and wherein the first multimedia server resources and the second multimedia server resources comprise at least one of: network interface resources; bus resources; input/output (I/O) resources; memory resources; cache resources; and processor resources.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The non-transitory machine-readable medium of <claim-ref idref="CLM-00014">claim 14</claim-ref>, wherein the plurality of multimedia transmission services comprises: a linear program broadcast service; a packet retransmission multicast service; a program multicast service; or a content burst unicast service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The non-transitory machine-readable medium of <claim-ref idref="CLM-00014">claim 14</claim-ref>, wherein the predictive resource usage model comprises a matrix that is indexed based upon combinations of the historical operating parameters.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The non-transitory machine-readable medium of <claim-ref idref="CLM-00014">claim 14</claim-ref>, wherein the plurality of multimedia transmission services comprises: a linear program broadcast service, a packet retransmission multicast service, a program multicast service, and a content burst unicast service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The non-transitory machine-readable medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the content burst unicast service comprises an instant channel change service.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The non-transitory machine-readable medium of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the predictive resource usage model comprises a matrix that is indexed based upon combinations of the historical operating parameters.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

@@ -1,0 +1,591 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10929951B2 - Anatomically intelligent echocardiography for point-of-care 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA435512846">
+<div class="abstract" id="p-0001" num="0000">An apparatus includes an imaging probe and is configured for dynamically arranging presentation of visual feedback for guiding manual adjustment, via the probe, of a location, and orientation, associated with the probe. The arranging is selectively based on comparisons between fields of view of the probe and respective results of segmenting image data acquired via the probe. In an embodiment, the feedback does not include a grayscale depiction of the image data. Coordinate system transformations corresponding to respective comparisons may be computed. The selecting may be based upon and dynamically responsive to content of imaging being dynamically acquired via the probe.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES286438542">
+<heading id="h-0001">RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This is a Divisional of U.S. application Ser. No. 14,652,317, filed Jun. 15, 2015, which claims priority to PCT Application PCT/IB2013/060908, filed Dec. 13, 2013, which claims priority to the US Application No. 61/740,595, filed Dec. 21, 2012, the contents of which are incorporated herein by reference.</div>
+<heading id="h-0002">FIELD OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention relates to user guidance in adjusting imaging probe location and orientation and, more particularly, to the guidance being visual.</div>
+<heading id="h-0003">BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0004" num="0003">Heart failure is a major disease with five million patients in the United States alone and tens of millions worldwide. The individuals at risk of heart failure are estimated at 60 million in the United States only; one million are hospitalized, the rest being in the care of heart failure clinics. Basic information about the heart is needed in the heart failure clinics or general practitioners' offices for patient management. This information includes images as well as quantification data, such as ejection fraction, computed from the image once the image is acquired. Ultrasound is a reliable and cost-effective imaging modality for soft tissue such as the heart.</div>
+<div class="description-paragraph" id="p-0005" num="0004">Acquisition of an ultrasound image requires a skilled sonographer. One parameter the sonographer, or other clinician trained in sonography, optimizes is the field of view. The apical four chamber view is a standard one for routine cardiac checkups. The clinician places the head of the ultrasound probe, or “transducer probe”, on the patient. An effective site on the patient's skin for placement of the probe for various views is part of the clinician's training, and the site can vary from patient to patient. For the apical four chamber view the probe is placed over the apex of the heart. The probe also needs to be manually tilted, typically in different directions until the organ is captured for imaging. This is all done interactively, with the clinician viewing the image, which is usually a sonogram, on-screen. Interpreting a sonogram is a skill that must be developed, e.g., through training and practice. The clinician's experience tells him or her, in an ongoing iterative process, how to shift and tilt the probe to achieve an effective acoustic window.</div>
+<heading id="h-0004">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0006" num="0005">What is proposed herein below is directed to addressing one or more of the above concerns.</div>
+<div class="description-paragraph" id="p-0007" num="0006">Access to a full ultrasound scan in heart failure clinics and general practitioner's offices is not easy. Making the ultrasound system portable would help. However, although most cardiologists would be able to use a conventional portable ultrasound system, they are generally too busy to carry out this procedure themselves.</div>
+<div class="description-paragraph" id="p-0008" num="0007">Yet, serial imaging, in which images of the heart are taken periodically for example, would improve patient treatment.</div>
+<div class="description-paragraph" id="p-0009" num="0008">What is needed is a point-of-care solution that enables automatic ultrasound-based volumetric measurement of the heart during the patient's regular visit, which would be especially useful in heart failure clinics. A nurse trained in placing ECG leads, but with no training in echocardiography, would operate the portable system and the cardiologist would be provided with the diagnostic images together with automatic measurements such as ventricle size and ejection fraction.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Such a technology would lower the barrier to use of ultrasound data for cardiac diagnostic and follow-up examinations.</div>
+<div class="description-paragraph" id="p-0011" num="0010">In accordance with an aspect of the present invention, an apparatus includes an imaging probe. It further includes a user-guidance processor configured for dynamically arranging presentation of visual feedback for guiding manual adjustment, via the probe, of a location, and orientation, associated with the probe. The arranging is selectively based on comparisons between fields of view of the probe and respective results of segmenting image data acquired via the probe.</div>
+<div class="description-paragraph" id="p-0012" num="0011">In a sub-aspect, the arranging includes presenting the feedback. The feedback includes user instructions on manually maneuvering the probe.</div>
+<div class="description-paragraph" id="p-0013" num="0012">In a further sub-aspect, the feedback does not include a grayscale depiction of image data acquired via the probe.</div>
+<div class="description-paragraph" id="p-0014" num="0013">In another sub-aspect, the apparatus is configured for computing coordinate system transformations corresponding to respective ones of the comparisons.</div>
+<div class="description-paragraph" id="p-0015" num="0014">In a first further sub-aspect, the computing is dynamically based on the results.</div>
+<div class="description-paragraph" id="p-0016" num="0015">In a second further sub-aspect, the selecting is respectively based on magnitudes of translational and rotational components of the transformations.</div>
+<div class="description-paragraph" id="p-0017" num="0016">In a third further sub-aspect, the computing is responsive to respective pauses in the adjusting.</div>
+<div class="description-paragraph" id="p-0018" num="0017">In a relevent sub-aspect, the probe includes a sensor. The apparatus is configured for deciding, based on output of the sensor, that acoustic coupling quality is insufficient and for issuing a user alert upon the decision.</div>
+<div class="description-paragraph" id="p-0019" num="0018">In a related sub-aspect, the segmenting is model-based.</div>
+<div class="description-paragraph" id="p-0020" num="0019">In an associated sub-aspect, the selecting is based upon and dynamically responsive to content of imaging being dynamically acquired via the probe.</div>
+<div class="description-paragraph" id="p-0021" num="0020">In a particular sub-aspect, the imaging probe is or includes an ultrasound imaging probe.</div>
+<div class="description-paragraph" id="p-0022" num="0021">In a more overall sub-aspect, the presenting dynamically guides a user in a procedure for achieving an apical view of a heart.</div>
+<div class="description-paragraph" id="p-0023" num="0022">As an added sub-aspect, at least one of the fields of view is three-dimensional.</div>
+<div class="description-paragraph" id="p-0024" num="0023">In a different sub-aspect, the acquiring of the image data to be segmented occurs respectively from the fields of view.</div>
+<div class="description-paragraph" id="p-0025" num="0024">In a specific sub-aspect, a field of view from among the fields of view has a viewpoint coinciding with the location. The orientation coincides with a viewing orientation of the field of view.</div>
+<div class="description-paragraph" id="p-0026" num="0025">From an implementational sub-aspect, the apparatus further comprises a display and a user-operable console. The apparatus is configured for: a) acquiring the image data via the probe b) the segmenting c) displaying the feedback via the display; and d) portability, as a hand-carriable unit.</div>
+<div class="description-paragraph" id="p-0027" num="0026">In still another sub-aspect, issuing a user alert for halting the adjustment is responsive to content of imaging dynamically acquired via the probe.</div>
+<div class="description-paragraph" id="p-0028" num="0027">As a further sub-aspect, the apparatus is configured for detecting the halting.</div>
+<div class="description-paragraph" id="p-0029" num="0028">In a yet, further sub-aspect, the apparatus is further configured for, responsive to detecting that the halting has occurred, performing the segmenting.</div>
+<div class="description-paragraph" id="p-0030" num="0029">In one other particular sub-aspect, the apparatus is configured for the segmenting in a relatively coarse mode and in a relatively fine mode. It is further configured for making a volumetric measurement based on one or more segments formed as a result of the spatially finer segmenting. Making the measurements is responsive to completion of the spatially finer segmenting.</div>
+<div class="description-paragraph" id="p-0031" num="0030">In still one more sub-aspect, an instruction to halt, as part of the feedback, is subject to an outcome of a comparison between a current location, and current orientation, of the probe and a location and orientation derived from the segmenting.</div>
+<div class="description-paragraph" id="p-0032" num="0031">In a similar sub-aspect, the feedback includes a progressive indicator of overall progress in acquiring a target view.</div>
+<div class="description-paragraph" id="p-0033" num="0032">Details of the novel, real-time, user-pause-driven, acoustic-window identification guidance technology are set forth further below, with the aid of the following drawings, which are not drawn to scale.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a perspective view of one form of portable apparatus in accordance with the present invention;</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIGS. 2A and 2B</figref> are flow charts of an exemplary ultrasound clinical procedure in accordance with the present invention;</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a conceptual diagram of how the apparatus is able to guide, in real time, the placement of the acoustic window;</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIGS. 4A and 4B</figref> are diagrams showing examples of schemes for imaging-blockage avoidance that use on-screen guidance images of segments disposed with respect to a field of view of an ultrasonic probe, in accordance with the present invention;</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a flow chart, and formula list, relating to <figref idrefs="DRAWINGS">FIG. 4A</figref>;</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIGS. 6A, 6B and 6C</figref> are, respectively, exemplary graphs of radiofrequency data used to distinguish lung tissue from heart tissue, and an algorithm used in the distinguishing, in accordance with the present invention;</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a flow chart representative of an exemplary lung identification algorithm based on a one-dimensional probe; and</div>
+<div class="description-paragraph" id="p-0041" num="0040"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a flow chart representative of an exemplary lung identification algorithm based on a matrix probe.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION OF EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 1</figref> depicts a portable apparatus <b>100</b> as one example of an implementation of the novel, real-time, user-pause-driven, acoustic-window identification guidance technology proposed herein. Although shown here in a form factor easily transportable from room to room in a clinical environment, the apparatus <b>100</b> may instead be implemented as a stationary device. The apparatus <b>100</b> includes a display <b>110</b>, a user console <b>120</b>, a transthoracic echocardiography (TTE) probe <b>130</b>, and a probe cable <b>140</b> of extended length as represented by the broken lines in <figref idrefs="DRAWINGS">FIG. 1</figref>. The display <b>110</b> and user console may be similar to those used in a laptop computer. At a total weight of about 10 pounds, the unit <b>100</b> can be carried by hand. The description below will assume an ultrasound system, although any kind of hand-steered, imaging-probe-based system is within the intended scope of the invention. Also, although volumetric quantification and live three-dimensional imaging are features of the embodiment below, what is proposed herein applies also to two-dimensional imaging.</div>
+<div class="description-paragraph" id="p-0043" num="0042">The apparatus <b>100</b> is configured for using ultrasound to perform volumetric imaging, such as computing the size of the left ventricle of the heart or computing ejection fraction. The computation results are stored in a memory (not shown). Live imaging acquired via the probe <b>130</b>, and upon which the computations are based, is also stored in memory. Circuitry (not shown) for standard functions such as dynamic beamforming, scan conversion and image rendering is also included within the apparatus <b>100</b>. Two or more beamformers can be included for automatic image blockage detection, which is discussed further below. Additional circuitry (not shown) includes a user-guidance processor configured for dynamically presenting visual feedback, i.e., user instructions. They are of a kind specifically for guiding manual adjustment, via the probe <b>130</b>, of a location and orientation associated with the probe, and accordingly an acoustic window. The processor dynamically arranges the presentation, and selectively arranges it for guiding the user and in conformity with “updates” to respective three-dimensional fields of view. The update is a new field of view, one that is suggested by one or more segments created by segmenting an image in the current field of view of the probe. The model upon which the segmentation is based provides the new field of view, based on an orientation and position of the segment(s). This new field of view, when compared to the current field of view of the probe, serves as the guidepost in notifying the clinician, untrained in sonography, on how to next manipulate the probe <b>130</b>. The processor issues all instructions to the user on how to manually maneuver the probe <b>130</b> to iteratively achieve the optimal acoustic window.</div>
+<div class="description-paragraph" id="p-0044" num="0043">Segmentation need not be as detailed for the above-described “steering” of the field of view as it is for quantification once the target acoustic window is achieved. An example of model-based segmentation that uses coarse and fine meshes is found in commonly-assigned U.S. Patent Publication Number 2009/0202150 to Fradkin et al. (“Fradkin”). The adaptation termination criterion in Fradkin can be set to keep segmentation coarse for field-of-view steering in the present embodiment of apparatus <b>100</b>, or set to proceed to fine segmentation for volumetric-data-based quantification in the present embodiment. Steering and quantification are discussed further below.</div>
+<div class="description-paragraph" id="p-0045" num="0044">In order to locate an image for segmentation, the apparatus <b>100</b> is further configured for performing a generalized Hough transform (GHT). A method for performing a GHT is discussed in commonly-assigned U.S. Patent Publication No. 2008/0260254 to Schramm et al.</div>
+<div class="description-paragraph" id="p-0046" num="0045">The entire disclosure of both publications is incorporated herein by reference.</div>
+<div class="description-paragraph" id="p-0047" num="0046">The apparatus <b>100</b> further has the capability of detecting motion of the probe <b>130</b>. The user will often pause movement of the probe so that image segmentation can occur. Also, the apparatus <b>100</b> will check on whether an instruction to pause, e.g., because the probe <b>130</b> is close to attaining a target acoustic window, has yet been followed. In one embodiment, the apparatus <b>100</b> includes the increment calculator <b>80</b> disclosed in commonly-assigned U.S. Pat. No. 5,529,070 to Augustine et al (“Augustine”). The increment calculator <b>80</b> is supplied values by means of the probe cable <b>140</b> that originate from accelerometers (not shown) residing in the probe <b>130</b>. Unlike in Augustine, the positional readings need not be matched with image acquisition. So, the increment calculator can be simplified to merely detect movement in location and/or orientation of the probe <b>130</b>. The accelerometers can be apportioned between the distal and proximal parts of the probe <b>130</b>, as seen from <figref idrefs="DRAWINGS">FIGS. 4, 5 and 5</figref> <i>a </i>of Augustine. The entire disclosure in Augustine relating to the accelerometer embodiment is incorporated herein by reference. Alternatively, an example of using electromagnetic (EM) sensors in tracking a medical tool is provided in commonly-owned U.S. Pat. No. 7,933,007 to Stanton et al. A similar system which also attaches to the tool an optical sensor is disclosed in commonly-owned U.S. Patent Publication No. 2010/0168556 to Shen et al. Motion may also be sensed by comparing successive real time images as described in commonly-owned U.S. Pat. No. 6,299,579 to Peterson et al. All three documents are incorporated herein by reference in their entirety.</div>
+<div class="description-paragraph" id="p-0048" num="0047">The above functions for which the apparatus <b>100</b> is configured may be implemented with any suitable and known combination of software, firmware and hardware. The user-guidance processor may be realized, for example, on a device having one or more integrated circuits, or as a suitably programmed computer readable medium.</div>
+<div class="description-paragraph" id="p-0049" num="0048">The probe <b>130</b> has a head <b>150</b> containing a matrix array <b>160</b> that includes transducer elements <b>170</b>. Although, for simplicity, a relatively small number of elements <b>170</b> are shown in <figref idrefs="DRAWINGS">FIG. 1</figref>, the number might typically be in the thousands. Also, although the array <b>160</b> is shown as generally rectangular, it might be square, circular, oval or in another shape. It also might be flat, as in a linear array, or curved, as in a sector array.</div>
+<div class="description-paragraph" id="p-0050" num="0049">Shown for purposes of illustration, on the display <b>110</b>, is visual feedback <b>144</b> of kind specifically for guiding manual adjustment, via the probe <b>130</b>, of the array's location and orientation. Advantageously, a user untrained in sonography need not rely on grayscale images, such as sonograms, for guidance. So, there is no reliance on a grayscale display function (GSDF), as represented by the on-screen annotation <b>175</b> that is struck out and depicted in <figref idrefs="DRAWINGS">FIG. 1</figref>. In particular, the visual feedback <b>144</b> of the embodiment shown in <figref idrefs="DRAWINGS">FIG. 1</figref> does not include a grayscale depiction of image data acquired via the probe <b>130</b>. Another example of visual feedback <b>144</b> is the on-screen overall progress bar <b>178</b>. It can be annotated with a percentage such as “82%” or it can be progressively filled in and bordered by a frame that represents 100%, i.e., completion.</div>
+<div class="description-paragraph" id="p-0051" num="0050">The probe <b>130</b> also has a pair of pause/go indicator lights <b>180</b> (one of which is visible in <figref idrefs="DRAWINGS">FIG. 1</figref>, with the other on the opposite side of the probe) realizable as a red/green light-emitting diodes (LEDs). When green, the light <b>180</b> indicates that the user should look to the display <b>100</b> for directions and then proceed by moving the probe <b>130</b> as instructed. When red, the light <b>180</b> indicates that the user should pause movement of the probe <b>130</b>. Both lights are concurrently the same color.</div>
+<div class="description-paragraph" id="p-0052" num="0051">As an alternative for the lights <b>180</b>, or as an implementation of additional lights, directional indicator lights can be provided. In this alternative embodiment, when one light is green, the other is red. When green, the light indicates that the user should shift in the direction of the green light beam. The apparatus <b>100</b> will already have determined that the probe <b>130</b> is validly positioned along the intercostal space between the two ribs currently surrounding the matrix array <b>160</b>, as discussed further below. Conversely, when red, the light indicates that the user should shift in the opposite direction. Alternatively or in addition, the instruction to shift, and the directionality, may appear on the display <b>110</b>.</div>
+<div class="description-paragraph" id="p-0053" num="0052">The probe may also incorporate an acoustic coupling quality sensor (not shown). Distributed sparsely among the transducer elements <b>170</b>, i.e., in replacement of individual elements, are pressure sensors <b>190</b> devoted to detecting pressure. Detection is interleaved with image acquisition. When transducer elements <b>170</b> in proximity of a pressure sensor <b>190</b> are active, and the pressure sensor reading implies lack of pressure, this indicates weak acoustic coupling. More generally, if and when the apparatus <b>100</b> decides, based on output of the acoustic coupling quality sensor, that acoustic coupling quality is insufficient, a user alert is issued upon that decision. Visual or auditory user alerts can be provided, via the probe <b>130</b> or other parts of the apparatus <b>100</b>. As an example, the acoustic coupling quality sensor can comprise merely <b>8</b> pressure sensors <b>190</b> that are disposed among <b>10</b>,<b>000</b> transducer elements <b>170</b>.</div>
+<div class="description-paragraph" id="p-0054" num="0053"> <figref idrefs="DRAWINGS">FIGS. 2A and 2B</figref> depict, by way of illustrative and non-limitative example, a clinical ultrasound procedure <b>200</b> demonstrating how the apparatus <b>100</b> visually guides a nurse, or other user, unskilled in sonography. In this embodiment, a four-chamber apical view of the heart for imaging is to be recorded and volumetric cardiac measurements are to be taken and stored. The process is in two stages. In the first stage, the user moves the probe <b>130</b> until the imaging detects at least part of the heart, or other organ of interest. In the second stage, the user moves the probe <b>130</b>, pausing frequently and receiving further instructions shortly after each pause. Sometimes, the apparatus <b>100</b> determines that a transition is to be made, from the second stage, back to the first stage. Successful completion of the ultrasound procedure <b>200</b> occurs during, i.e., at the end of, the second stage.</div>
+<div class="description-paragraph" id="p-0055" num="0054">Operationally, first, the nurse places the electrocardiogram (ECG) leads on the patient or ultrasound subject, human or animal (step S<b>202</b>). The ECG will serve as part of the cardiac checkup. It also facilitates analysis of the live cardiac imaging that will be recorded. At the outset, the user is instructed generally about the imaging that is to be done, that instructions will be visible on the display <b>110</b> and via the lights <b>180</b>, to stop movement of the probe <b>130</b> promptly when instructed, and, when instructed to move the probe, to pause frequently so that the system can take readings (step S<b>204</b>). Also, a stage two flag is cleared as part of the initialization, since the user is initially in stage one of the procedure <b>200</b>. The user is then instructed to have the patient lie on his or her left side, so that the heart will fall forward in the patient's chest for easier imaging (step S<b>206</b>). The user is instructed to start from the bottom of the rib cage at a point below the left nipple, and to count up to between the fourth and fifth ribs from the bottom of the rib cage (step S<b>208</b>) for a point at which to place the head <b>150</b> of the probe <b>130</b> for an initial acoustic window. Image acquisition by the probe is live and continuous. The instructions also mention that the probe should be tilted upward to point toward the base of the patient's neck as a first estimate. The instruction now is to: remembering the placement, lift away the probe <b>130</b>; apply coupling gel around the probe face covering the matrix array <b>160</b>; and reassume the probe placement as to location, and as to orientation (step S<b>210</b>). If, by a blockage-identification algorithm discussed further below, no ribs are detected (steps S<b>212</b>, S<b>214</b>), a branch back is taken to step S<b>206</b>. Otherwise, if only one rib is detected (step S<b>214</b>), the user is instructed to shift up or down slightly to get between the two ribs (step S<b>216</b>). On-screen, a graphic depiction can be displayed of a probe aimed at one rib being shifted up/down to placement between two ribs. Processing returns to step S<b>212</b>. In this processing loop, and all processing loops that involve issuing a user instruction, the instruction is not listed again if already shown on-screen. If, on the other hand, both ribs are detected, then this aspect of correct probe placement is validated. Query is made as to whether a lung is blocking the current field of view of the probe <b>130</b> (step S<b>218</b>). This determination is made by a blockage-identification algorithm discussed further below. If lung tissue is in the field of view (step S<b>218</b>), the user is instructed to have the patient exhale and hold his or her breath (step S<b>220</b>). This might take the lung out of the field of view, since the lung may venture in and out of the field of view with each breath and expiration by the patient. If the lung is detected again and therefore is still blocking the field of view (step S<b>222</b>), the user is instructed to have the patient resume normal breathing (step S<b>224</b>). Since the lung blocking the heart would be the left lung and since the lung is less central on the chest than is the heart, the user is instructed to shift the probe <b>130</b> upward, i.e., toward the breastbone (step S<b>226</b>). The pause/go indicator lights <b>180</b> on the probe <b>130</b> will be green. The user may also be told to tilt the probe <b>130</b> slightly to aim more to the left side of the patient, as the probe is shifted up. Return is made to step S<b>212</b>. Alternatively or in addition, the user may be shown an on-screen inverted “V” display by which the user can interactively shift and tilt the probe <b>130</b> to avoid the lung. The same “V” display could be used to guide the user to tilt and translate the probe to avoid the ribs. If, on the other hand, after having the patient hold his or her breath (step S<b>220</b>), the lungs are no longer blocking the field of view (step S<b>222</b>), or if the lungs were not initially blocking (step S<b>218</b>), query is made as to whether at least part of the heart is detected in the live imaging by the probe <b>130</b> (S<b>228</b>). The Schramm GHT, mentioned above, is utilized for this detecting. Although the left ventricle (LV) may be the part of the heart for which quantification is desired, detecting part of the heart can even involve detecting merely the left atrium, or the mitral valve, for example. A predetermined confidence level must be met in deciding whether the detection has occurred. For example, in the Schramm reference the measure of optimality in determining the set of transformation parameters can be required to meet a predetermined threshold.</div>
+<div class="description-paragraph" id="p-0056" num="0055">If the heart is not detected (S<b>228</b>), the user is instructed to “Shift slowly down away from the breastbone, shift slowly up toward the breastbone, each time to a greater extent.” A graphic moving depiction of the pattern may be displayed on the display <b>110</b> (step S<b>230</b>). The procedure <b>200</b> branches back to step S<b>212</b>.</div>
+<div class="description-paragraph" id="p-0057" num="0056">If, on the other hand, part of the heart is detected (step S<b>228</b>), query is made as to whether the stage two flag, which was cleared during initialization in step S<b>204</b>, is set (step S<b>232</b>). If it is not set (step S<b>232</b>), the user is instructed to pause and wait for instructions (step S<b>234</b>). The pause is needed, because segmentation, even coarse segmentation, requires a short time period, e.g., two seconds. Specifically, the pause/go indicator lights <b>180</b> on the probe <b>130</b> will turn red and/or the display <b>110</b> will show, in red, an instruction to pause. A short audio beep may also issue. The apparatus <b>100</b> detects, via the accelerometers in the probe <b>130</b>, whether motion of the probe has paused (step S<b>236</b>). Until the movement pauses (step S<b>236</b>), the visual and audio feedback to pause is maintained (step S<b>238</b>). When a pause is detected (step S<b>236</b>), a check is again made as to whether part of the heart is detected (step S<b>240</b>). This precaution is taken to determine whether the user has paused quickly enough to still be imaging part of the heart.</div>
+<div class="description-paragraph" id="p-0058" num="0057">If there no longer exists detection of part of the heart (step S<b>240</b>), the instruction (step S<b>242</b>) is “Slowly backtrack your most recent movement and pause when instructed to regain (partial) view of the heart . . . otherwise shift as instructed.” Return is then made to step S<b>212</b>.</div>
+<div class="description-paragraph" id="p-0059" num="0058">On the other hand, if at least part of the heart is still detected (step S<b>240</b>), a coarse image-segmentation of the bodily organ, here the heart, is performed (step S<b>244</b>) using a model (step S<b>245</b>).</div>
+<div class="description-paragraph" id="p-0060" num="0059">Provided that the apparatus <b>100</b> has electronic steering capability, query is now made as to whether the entire heart, judging from the segment(s), is within the current field of view of the probe <b>130</b> (step S<b>246</b>).</div>
+<div class="description-paragraph" id="p-0061" num="0060">If the entire heart is not within the current field of view (step S<b>246</b>) or if the apparatus <b>100</b> lacks an electronic steering capability, a coordinate system transformation is computed (step S<b>247</b>). In particular, the segmenting produces one or more segments of the heart having a location and orientation in the image space of the probe <b>130</b>. The location and orientation are known from the model. Based on the location and orientation, it is determined what would be an optimal viewpoint and viewing orientation for a geometrically-fixed field of view of the probe that covers the entire heart or heart section, e.g., the left ventricle, being investigated. For example, both the mitral valve and the apex of the heart can be identified by segmentation, and an axis connecting them may be, or may be close to, an optimal viewing orientation for quantification and diagnostic cardiac images. The field of view is geometrically fixed, because it is assumed that the user is untrained in sonography and, for simplicity, is being guided merely to move the probe according to visual instructions. The derived optimal viewpoint and viewing orientation will, in general, differ from the current viewpoint and current orientation of the probe. The viewpoints and viewing orientations are all in the image space of the probe <b>130</b>. The apparatus <b>100</b> computes a coordinate system transformation that would bring the current viewpoint and orientation into coincidence with the derived optimal viewpoint and orientation.</div>
+<div class="description-paragraph" id="p-0062" num="0061">After the transformation is computed, the on-screen overall progress bar <b>178</b> is updated (step S<b>248</b>).</div>
+<div class="description-paragraph" id="p-0063" num="0062">The progress is based on the magnitude of the translation component of the transformation and, to a lesser degree or at a later stage, on the magnitude of the rotation component of the transformation.</div>
+<div class="description-paragraph" id="p-0064" num="0063">The length of the progress bar <b>177</b> could therefore be, percentage-wise, <b>100</b> minus a weighted average of the two components that is non-negative and less than unity.</div>
+<div class="description-paragraph" id="p-0065" num="0064">The same or a similar metric is used by the apparatus <b>100</b> to decide whether the current view is sufficiently on target for commencing quantification and optionally live imaging acquisition for storage. Alternatively or in addition, the apparatus <b>100</b> can determine, based on the model, whether the heart, or heart section, is entirely or sufficiently within the current field of view of the probe <b>130</b> (step S<b>249</b>).</div>
+<div class="description-paragraph" id="p-0066" num="0065">If it is determined in step S<b>249</b> that the current field of view of the probe <b>130</b> is not sufficiently close to the optimal field of view, a decision is made as to whether tilting or shifting predominates as the selection for the next user instruction (step S<b>250</b>). Generally, shifting will predominate if any remains; although, if the remainder is small enough, tilting may be sufficient. The parameters for making the decision can be empirically established. Going forward from this part of the procedure <b>200</b>, presentation to the user of the visual feedback <b>144</b> is dynamically arranged selectively based on a comparison between the current field of view of the probe <b>130</b> and the derived optimal viewpoint and viewing orientation from step S<b>247</b>. For example, it is based on the need for shifting and/or tilting, those needs being assessed based on the comparison. The selecting inherently occurs according to which of the user instructions mentioned below issues in the procedure <b>200</b>. It is noted here that the arranging of the presentation of visual feedback <b>144</b> earlier in the procedure <b>200</b>, such as in the steps S<b>212</b>-S<b>228</b>, is done dynamically and selectively and is based on image content acquired but not on the above-mentioned comparison. Therefore, some but not all of the dynamic, selective arranging of visual feedback <b>144</b> within the procedure <b>200</b> is based on the comparison.</div>
+<div class="description-paragraph" id="p-0067" num="0066">If shifting predominates (step S<b>250</b>), query is made as to whether the translation indicated would involve crossing a rib to enter an adjoining intercostal space, given the position of the ribs (step S<b>251</b>). The apparatus <b>100</b> is aware of the position of the ribs through a blockage-identification algorithm mentioned above in relation to steps S<b>212</b> and S<b>214</b> and discussed further herein below. If the translation is not feasible (step S<b>251</b>), the user is accordingly instructed to, after re-applying coupling gel to the probe <b>130</b>, move up, or down, the ribcage (step S<b>253</b>). The stage two flag is cleared, and processing returns to step S<b>210</b>. If, on the other hand, the translation is feasible (step S<b>251</b>), the user is instructed to shift slowly in the direction determined by the apparatus <b>100</b>, pausing frequently (step S<b>254</b>). Thus, this user instruction is among those dynamically and selectively arranged based on the above-mentioned comparison.</div>
+<div class="description-paragraph" id="p-0068" num="0067">If, on the other hand, shifting does not predominate in step S<b>250</b>, the user is instructed to tilt the probe <b>130</b> slowly in the determined direction (step S<b>255</b>). The instruction may be “tilt slowly aiming inward toward the breastbone, stopping frequently” or “tilt slowly aiming downward toward the patient's feet, stopping frequently”, some combination of these two instructions, etc. This instruction then is among those dynamically and selectively arranged based on the above-mentioned comparison.</div>
+<div class="description-paragraph" id="p-0069" num="0068">Alternatively or in addition, the display <b>110</b> may show an interactive graphical depiction of the segmented organ, here segments defining a heart, as a segmented on-screen object with a superimposed, inverted “V” representing the field of view of the probe <b>130</b>. A second, separate, concurrent depiction may be shown for a “V” in the orthogonal direction. This graphical depiction is discussed further below.</div>
+<div class="description-paragraph" id="p-0070" num="0069">After the instruction for either step S<b>254</b> or S<b>255</b> issues, query is made as to whether movement since step S<b>236</b> has occurred. This can be determined via the accelerometers in the probe <b>130</b>. If such movement has occurred and if there is no movement now (step S<b>256</b>), the stage two flag is set (step S<b>257</b>), and processing returns to step S<b>212</b>.</div>
+<div class="description-paragraph" id="p-0071" num="0070">If, on the other hand, it is determined in step S<b>249</b> that the current field of view of the probe <b>130</b> is sufficiently close to the optimal field of view, the apparatus <b>100</b> issues an instruction to halt (step S<b>258</b>). Specifically, the pause/go indicator lights <b>180</b> on the probe <b>130</b> will turn red and/or the display <b>110</b> will show, in red, an instruction to halt. A short audio beep may also issue. The apparatus <b>100</b> detects, via the accelerometers in the probe <b>130</b>, whether motion of the probe has halted, i.e., paused or terminated (step S<b>260</b>). Until the movement halts (step S<b>260</b>), the visual and audio feedback to halt is maintained (step S<b>262</b>). Once the movement halts (step S<b>260</b>), query is made, as in step S<b>249</b>, as to whether the current view is sufficiently on target for commencing quantification and optionally live imaging acquisition for storage (step S<b>264</b>). If the current view is not, i.e., is no longer, on target (step S<b>264</b>), the progress bar <b>178</b> is accordingly shortened to reflect the setback in progress toward completion of the procedure <b>200</b> (step S<b>266</b>). An instruction issues for the user to slowly backtrack the most recent probe movement, stopping frequently (step S<b>268</b>). Processing branches to step S<b>257</b>. If, on the other hand, the current view is sufficiently on target for commencing quantification and optionally live imaging acquisition for storage (step S<b>264</b>), the user is notified to hold the probe still for completion of the procedure <b>200</b> (step S<b>270</b>). Fine segmentation is performed for quantification (step S<b>272</b>). The model is utilized for this purpose (step S<b>274</b>). The apparatus <b>100</b> starts recording live imaging of the heart or heart section (step S<b>276</b>). If the apparatus <b>100</b> includes an electronic steering capability, various views of the heart such as the standard views can be played back from the recording. The apparatus also and makes volumetric measurements from the segmentation (step S<b>278</b>). For example, left ventricle (LV) size is computed, over a heart cycle, by finding the average or maximum length and finding the average or maximum breadth, for example. Likewise, ejection fraction is computed by detecting, over a cardiac cycle, maximum and minimum LV volume, and taking a ratio of the two quantities. The quantification data is stored in memory (step S<b>280</b>).</div>
+<div class="description-paragraph" id="p-0072" num="0071">If, on the other hand, the entire heart is within the current field of view (step S<b>246</b>) and if the apparatus <b>100</b> has an electronic steering capability, the progress bar <b>177</b> is made to reflect near completion (step S<b>282</b>). An instruction to halt is given in step S<b>284</b>. While movement of the probe <b>130</b> is detected (step S<b>286</b>), a user alert to halt is maintained (step S<b>288</b>). Once it is detected that the probe <b>130</b> is halted (step S<b>286</b>), query is again made as to whether the entire heart is in the field of view (step S<b>290</b>). If the entire heart is still in the field of view (step S<b>290</b>), processing branches to step S<b>270</b> to instruct the user to pause for completion of the procedure <b>200</b>. Otherwise, if the entire heart is no longer within the field of view (step S<b>290</b>), processing branches to step S<b>266</b> to try to recover the image of the entire heart.</div>
+<div class="description-paragraph" id="p-0073" num="0072"> <figref idrefs="DRAWINGS">FIG. 3</figref> depicts, conceptually, how the apparatus <b>100</b> is able to guide, in real time, placement of the acoustic window. A probe <b>302</b> is held by the clinician's hand <b>304</b> against the skin <b>306</b> of a patient. More specifically, the probe <b>302</b> has a head <b>308</b> which has a face <b>310</b> for placement against the skin <b>306</b>, separated from the skin only by the acoustic coupling medium such as a specialized gel. Within the head <b>308</b> and along the face <b>310</b> is a matrix array <b>312</b>. Extending from the matrix array <b>312</b> is a field of view <b>314</b>. The heart <b>316</b> of the patient is partially, here mostly,within the field of view <b>314</b>, and is being imaged via the probe <b>302</b>. Since part of the heart <b>316</b> is detected with a sufficient level of confidence, the clinician has been instructed to pause and has done so promptly. As a result of image segmentation into segments <b>318</b>, the apparatus <b>100</b> determines, via the model, an orientation <b>320</b> that would provide an optimal, or targeted, view of the heart <b>316</b> if the probe <b>302</b>, or some part of the probe such as the matrix array <b>312</b>, were to assume that orientation from an appropriate location <b>318</b>. The model also provides the location <b>318</b>. For simplicity of explanation, a curved arrow <b>321</b> in <figref idrefs="DRAWINGS">FIG. 3</figref> starts at a location <b>322</b> and orientation <b>324</b> of the probe <b>302</b>. It ends at the model-provided location <b>318</b> and model-provided orientation <b>320</b> that are derived from the image segmentation. The curved arrow <b>321</b> represents comparison of the field of view <b>314</b> with the model-provided location and orientation <b>318</b>, <b>320</b>. The comparison involves a coordinate system transformation that would bring the model-provided location and orientation <b>318</b>, <b>320</b> into coincidence with the current location <b>322</b> and current orientation <b>324</b> of the probe <b>302</b>. The transformation has a translational component <b>326</b> and a rotational component <b>328</b>. Visual feedback <b>144</b> in the procedure <b>200</b> is selected based on magnitudes of the components <b>326</b>, <b>328</b>, as for example in steps S<b>248</b>, S<b>249</b> and S<b>264</b> of <figref idrefs="DRAWINGS">FIGS. 2A and 2B</figref>. Another curved arrow <b>330</b> in <figref idrefs="DRAWINGS">FIG. 3</figref> shows the clinician's hand <b>304</b> maneuvering the probe <b>302</b>, based on the feedback <b>144</b>, into an apical view <b>332</b>.</div>
+<div class="description-paragraph" id="p-0074" num="0073">In the depicted example, the heart <b>316</b> is partially outside the current field of view <b>314</b>. Electronic steering into a favorable field of view corresponding to the apical view <b>332</b> still fails to capture imaging content that was out of view prior to the electronic steering. Accordingly, relying on electronic steering in the depicted example to shorten the procedure <b>200</b> might compromise the result, depending upon the impact of losing that particular image content.</div>
+<div class="description-paragraph" id="p-0075" num="0074">If, however, <figref idrefs="DRAWINGS">FIG. 3</figref> were to be redrawn with the heart <b>316</b> completely within the current field of view <b>314</b>, electronic steering proceeds as described above, provided that the apparatus <b>100</b> has an electronic steering capability. Thus, the apical view <b>332</b> is achieved without maneuvering the probe <b>302</b>, that maneuvering being represented by the curved arrow <b>330</b>. Instead, it is achieved by electronic steering. Although the manual maneuvering of the probe <b>203</b> may have been needed earlier in the procedure to achieve detection of part of the heart <b>316</b> (step S<b>228</b>), electronic steering can, once the entire heart is in view, alleviate the need for further manual maneuvering of the probe.</div>
+<div class="description-paragraph" id="p-0076" num="0075">Advantageously, the user is guided throughout a procedure for achieving an apical view of the heart.</div>
+<div class="description-paragraph" id="p-0077" num="0076">As mentioned herein above, detecting that the ribs bordering the current intercostal space are within the field of view is part of the validation that the current acoustic window, placed in finding an optimal acoustic window, is valid. User instructions on how to maneuver the probe around the lungs to view the heart are also mentioned herein above.</div>
+<div class="description-paragraph" id="p-0078" num="0077">Echocardiography is challenging as the heart is surrounded by ribs and lung tissue. Ultrasound can hardly penetrate calcified ribs (typically encountered in the apical view) and lung tissue because of severe acoustic impedance mismatch between them and other soft tissues. In addition, ultrasound absorption in ribs is quite high compared to tissue. Conventionally, optimization of ultrasound image quality is done solely by the user based on real-time-displayed grayscale ultrasound images on the screen. Though experienced users are usually capable of recognizing image degradation and improving image quality accordingly by moving the probe to a better position, less experienced users might acquire compromised images because of inferior hand-eye coordination and less awareness of artifacts. Successful ultrasound scanning strongly relies on training and experience of the user. To help inexperienced or less experienced users acquire meaningful information from the heart using echocardiography, an anatomically intelligent ultrasound system is desired.</div>
+<div class="description-paragraph" id="p-0079" num="0078">Since ultrasound can hardly penetrate a calcified rib, deep echoes of an ultrasound beam hitting a calcified rib are very unlikely to be from tissues under the rib. Rather, they might be picked up by sidelobes. The visual artifact is recognizable by an experience sonographer viewing the (grayscale) sonogram, but can easily be unrecognized by the inexperienced user.</div>
+<div class="description-paragraph" id="p-0080" num="0079">Also, to get good image quality for an inexperienced user, an ultrasound system should be aware of the presence of lung tissue.</div>
+<div class="description-paragraph" id="p-0081" num="0080">One blockage-identification algorithm described below is specialized for detecting lung tissue, and especially rib tissue, blocking the field of view. A second blockage-identification algorithm described below is tailored especially for detecting lung tissue blockage. They are discussed in view of the following drawings.</div>
+<div class="description-paragraph" id="p-0082" num="0081"> <figref idrefs="DRAWINGS">FIGS. 4A and 4B</figref> show examples of schemes for imaging-blockage avoidance that use on-screen guidance images of segments disposed with respect to a field of view of an ultrasonic probe.</div>
+<div class="description-paragraph" id="p-0083" num="0082">Both figures feature a sonogram. The <figref idrefs="DRAWINGS">FIG. 4A</figref> sonogram is an image slice that runs along the length of a patient; whereas, the <figref idrefs="DRAWINGS">FIG. 4B</figref> sonogram is an image slice that runs along the width of a patient.</div>
+<div class="description-paragraph" id="p-0084" num="0083"> <figref idrefs="DRAWINGS">FIG. 4A</figref> relates not only to the first algorithm, but also to an interactive display as part of the visual feedback <b>144</b>.</div>
+<div class="description-paragraph" id="p-0085" num="0084">The matrix array <b>160</b> has a current field of view <b>314</b> that partially includes ribs <b>404</b>, <b>408</b> and partially (and here almost entirely) includes a heart <b>412</b>. The first algorithm calculates blockage boundary lines <b>416</b>, <b>420</b> that correspond to the boundary between good ultrasound beams and ones that are bad due to blockage by the ribs <b>404</b>, <b>408</b>.</div>
+<div class="description-paragraph" id="p-0086" num="0085">Coherence of channel data is used to detect blockage. Each channel delivers its respective radiofrequency data magnitude associated with its respective fixed transducer element <b>170</b> or patch of elements. As ultrasound echoes return, their incident pressures on the elements <b>170</b> are sampled quickly and periodically. The samples are delayed with respect to each other according to the line-of-sight travel time geometry of the field point being evaluated. Here, “coherence” means similarity among data recorded by different channels of an array after applying the above-mentioned receiving focusing delays.</div>
+<div class="description-paragraph" id="p-0087" num="0086">One gauge of coherence is a beamsummed-data-based coherence estimation method, such as the one described in U.S. Patent Publication No. 2009/0141957 to Yen et al., the entire disclosure of which is incorporated herein by reference.</div>
+<div class="description-paragraph" id="p-0088" num="0087">The estimation method can be tailored to detecting rib and lung blockage, and is demonstrated below using two beamformers. Let s<sub>j</sub>(r,θ) denote the (real-valued) channel data at depth r received by the j-th channel after applying the focusing delay, and let C<sub>1 </sub>and C<sub>2 </sub>denote the set of channels used in the first and the second beamformer, respectively. The output of the k-th (k=1, 2) beamformer is b<sub>k </sub>(r,θ), the formula for which is shown in <figref idrefs="DRAWINGS">FIG. 5</figref>. When all the channel data s<sub>j</sub>(r,θ) are identical across channels, b<sub>1</sub>(r,θ) and b<sub>2</sub>(r,θ) will be highly correlated no matter how C<sub>1 </sub>and C<sub>2 </sub>are chosen. On the other hand, when the channel data are mainly contributed by scatterers in sidelobe regions, the correlation between b<sub>1 </sub>and b<sub>2 </sub>can drop significantly if C<sub>1 </sub>and C<sub>2 </sub>are properly chosen. C<sub>1 </sub>and C<sub>2 </sub>can be complementary, interleaving apertures. In short, it is possible to distinguish between on-axis signals and off-axis signals based on correlation between b<sub>1 </sub>and b<sub>2</sub>. The output of the correlator is the correlation coefficient ρ(r,θ) of b<sub>1</sub>(r,θ) and b<sub>2 </sub>(r,θ) defined as listed in <figref idrefs="DRAWINGS">FIG. 5</figref>, where w is a real symmetric weighting function. ρ(r,θ) is then lowpass filtered to get a smoothed correlation map {circumflex over (ρ)}(r,θ) which is used for blockage detection. A flow diagram for the algorithm, i.e., the “first algorithm”, is shown in <figref idrefs="DRAWINGS">FIG. 5</figref>. Sums of s<sub>j</sub>(r,θ) are taken for C<sub>1 </sub>(step S<b>510</b>) and for C<sub>2 </sub>(step S<b>520</b>). They are correlated to calculate the correlation coefficient ρ(r,θ) (step S<b>530</b>) which is low-pass filtered (step S<b>540</b>) to produce the smoothed correlation map {circumflex over (ρ)}(r,θ) used for blockage detection (step S<b>550</b>). The edge lines are then generated for the inverted “V” display (step S<b>560</b>).</div>
+<div class="description-paragraph" id="p-0089" num="0088">In a specific example, the data is acquired at 32 MHz sampling rate in a pulse-inversion mode using a probe having <b>80</b> elements <b>170</b>. Each frame has 44 beams and the beam density is 0.4944 beam/degree. The center frequency is 1.3 and 2.6 MHz on transmit and on receive, respectively. C<sub>1</sub>={20-22, 26-28, 32-34, 38-40, 44-46, 50-52, 56-58} and C<sub>2</sub>={23-25, 29-31, 35-37, 41-43, 47-49, 53-55, 59-61}. The weighting function w used in the correlator is a 51 (axially or in the r direction) by 1 (laterally or in the θ direction) boxcar and the smoothing filter is a 501 by 3 boxcar. Due to the periodic structure of the apertures, sensitivity of the correlation coefficient ρ to off-axis signals varies periodically with the direction of off-axis signals. This periodicity can be alleviated by randomizing sub-aperture sizes while still keeping both apertures complementary.</div>
+<div class="description-paragraph" id="p-0090" num="0089">To verify whether a beam is blocked, a count is made of the number of points with a correlation coefficient ({circumflex over (ρ)}) higher than 0.55 between 72 and 180 mm in depth. If at least 400 points (at 32 MHz sampling rate) in a beam have high coherence, this beam is considered penetrating into tissue. Otherwise it is considered blocked by a rib.</div>
+<div class="description-paragraph" id="p-0091" num="0090">Referring back to <figref idrefs="DRAWINGS">FIG. 4A</figref>, and counting the 80 channels from left to right, perhaps the 20<sup>th </sup>channel has the first beam exhibiting high coherence; whereas, the 19<sup>th </sup>beam does not exhibit high coherence. Thus, the first blockage boundary line <b>416</b> is shown in <figref idrefs="DRAWINGS">FIG. 4A</figref> at the 19<sup>th </sup>beam. Likewise, if the 59<sup>th </sup>channel exhibits high coherence, but the 60<sup>th </sup>channel does not exhibit high coherence, the second blockage boundary line <b>420</b> is placed in coincidence with the 59<sup>th </sup>beam.</div>
+<div class="description-paragraph" id="p-0092" num="0091">The upper bound of the depth range is not critical. 72 mm, much larger than the depth of human ribs in general, can be chosen as the lower bound because high coherence factor values might be present in regions right below a rib due to multiple reflections (or reverberation) and such reflections tend to fade away with depth.</div>
+<div class="description-paragraph" id="p-0093" num="0092">The apertures described do not include channels in both ends of the full aperture. Though apertures can be extended to include those channels, the number of blocked beams might be underestimated if large apertures are used. This is because the correlation coefficient of complementary aperture outputs could still be high if part of the large complementary apertures is not blocked.</div>
+<div class="description-paragraph" id="p-0094" num="0093">Though the embodiment above uses 2D images acquired with a 1D probe, the methodology can be applied to matrix probes and therefore 3D volumetric imaging to guide novice users to perform volumetric acquisitions.</div>
+<div class="description-paragraph" id="p-0095" num="0094"> <figref idrefs="DRAWINGS">FIG. 4A</figref> also depicts an image that can be displayed for interactively guiding the clinician. The image of the heart <b>412</b> can be implemented as the segment(s) defining the heart by virtue of the coarse segmentation (step S<b>244</b>). The heart <b>412</b> is barely but partially outside the field of view <b>314</b>. As the clinician shifts the probe <b>302</b> according to visual feedback <b>144</b> on-screen or in the form a green light <b>180</b> on the probe, the <figref idrefs="DRAWINGS">FIG. 4A</figref> image updates in real time. The inverted “V” can easily be made to fully encompass the desired organ, here a heart. A <figref idrefs="DRAWINGS">FIG. 4A</figref> image, as part of the visual feedback <b>144</b>, may supplement steps S<b>212</b>, S<b>214</b> and S<b>255</b> described above in connection with <figref idrefs="DRAWINGS">FIGS. 2A and 2B</figref>.</div>
+<div class="description-paragraph" id="p-0096" num="0095">To optimize probe positioning, the span of V's can be enlarged through the use of an x-plane display.</div>
+<div class="description-paragraph" id="p-0097" num="0096">Analogous to <figref idrefs="DRAWINGS">FIG. 4A</figref>, <figref idrefs="DRAWINGS">FIG. 4B</figref> relates not only to the second algorithm, but also to an interactive display as part of the visual feedback <b>144</b>.</div>
+<div class="description-paragraph" id="p-0098" num="0097">The matrix array <b>160</b> has a current field of view <b>314</b> that includes a heart <b>424</b> and part of a lung <b>428</b>. The second algorithm calculates a blockage boundary line <b>432</b> that corresponds to the boundary between good ultrasound beams and ones that are bad due to blockage by the lung <b>428</b>.</div>
+<div class="description-paragraph" id="p-0099" num="0098">In the second algorithm, the center frequency of radiofrequency (RF) data acquired in pulse inversion (PI) modes is used as the parameter to distinguish lung tissue from heart tissue.</div>
+<div class="description-paragraph" id="p-0100" num="0099">Sample radiofrequency data with a transmit center frequency of 2.1 MHz is shown in <figref idrefs="DRAWINGS">FIGS. 6A and 6B</figref>. The <figref idrefs="DRAWINGS">FIG. 6A</figref> graph represents the interrogation of lung tissue; whereas, the <figref idrefs="DRAWINGS">FIG. 6B</figref> graph represents the interrogation of heart tissue. Lung and heart tissue look more different in pulse inversion imaging that in conventional imaging. For example, lung tissue responded better to lower frequencies.</div>
+<div class="description-paragraph" id="p-0101" num="0100">The <figref idrefs="DRAWINGS">FIG. 6A</figref> graph resulted from linear response of the lung tissue to self-demodulated signals. With wideband transmission, after nonlinear propagation the summation of the positive and the negative pulse will present a finite signal around 1 MHz, roughly half of the center frequency on transmit, a phenomenon called self-demodulation. Lung tissue responds to this low-frequency signal better than heart tissue. On the other hand, compared to lung tissue, heart tissue tends to favor higher frequency components in a PI mode because its stronger motion results in less perfect cancellation at higher frequencies.</div>
+<div class="description-paragraph" id="p-0102" num="0101">Part of the second algorithm involves estimating the center frequency of the RF data. Let r(n) be a sampled A-line signal and R (n) be its complex envelope. f<sub>c</sub>(n), the local center frequency of r(n), is related to R (n) by</div>
+<div class="description-paragraph" id="p-0103" num="0102"> <maths id="MATH-US-00001" num="00001"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <mi>arg</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <mo>{</mo> <mrow> <mrow> <mi>R</mi> <mo>(</mo> <mrow> <mi>n</mi> <mo>+</mo> <mn>1</mn> </mrow> <mo>)</mo> </mrow> <mo>⁢</mo> <mrow> <msup> <mi>R</mi> <mo>*</mo> </msup> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>n</mi> <mo>)</mo> </mrow> </mrow> </mrow> <mo>}</mo> </mrow> </mrow> <mo>≅</mo> <mfrac> <mrow> <mi>arg</mi> <mo>⁢</mo> <mrow> <mo>{</mo> <mrow> <mrow> <mi>R</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>n</mi> <mo>+</mo> <mn>1</mn> </mrow> <mo>)</mo> </mrow> </mrow> <mo>⁢</mo> <mrow> <msup> <mi>R</mi> <mo>*</mo> </msup> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>n</mi> <mo>-</mo> <mn>1</mn> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> <mo>}</mo> </mrow> </mrow> <mn>2</mn> </mfrac> <mo>≅</mo> <mfrac> <mrow> <mn>2</mn> <mo>⁢</mo> <mi>π</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mrow> <msub> <mi>f</mi> <mi>c</mi> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>n</mi> <mo>)</mo> </mrow> </mrow> </mrow> <msub> <mi>f</mi> <mi>s</mi> </msub> </mfrac> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>1</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where arg{.} denotes phase/argument and A is the sampling rate. Estimators of f<sub>c</sub>(n) can be derived based on (1). An example of an estimator is:
+</div>
+<div class="description-paragraph" id="p-0104" num="0103"> <maths id="MATH-US-00002" num="00002"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <msub> <mover> <mi>f</mi> <mo>^</mo> </mover> <mi>c</mi> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>n</mi> <mo>)</mo> </mrow> </mrow> <mo>≡</mo> <mrow> <mfrac> <mrow> <mi>arg</mi> <mo>⁢</mo> <mrow> <mo>{</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>i</mi> <mo>=</mo> <mrow> <mo>-</mo> <mi>m</mi> </mrow> </mrow> <mrow> <mi>i</mi> <mo>=</mo> <mi>m</mi> </mrow> </munderover> <mo>⁢</mo> <mrow> <mrow> <mi>w</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>i</mi> <mo>)</mo> </mrow> </mrow> <mo>⁢</mo> <mrow> <mi>R</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>n</mi> <mo>+</mo> <mi>i</mi> <mo>+</mo> <mn>1</mn> </mrow> <mo>)</mo> </mrow> </mrow> <mo>⁢</mo> <mrow> <msup> <mi>R</mi> <mo>*</mo> </msup> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>n</mi> <mo>+</mo> <mi>i</mi> <mo>-</mo> <mn>1</mn> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <mo>}</mo> </mrow> </mrow> <mrow> <mn>4</mn> <mo>⁢</mo> <mi>π</mi> </mrow> </mfrac> <mo>⁢</mo> <msub> <mi>f</mi> <mi>s</mi> </msub> </mrow> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>2</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+as the estimator. Averaging based on the window function w(i) reduces variance.
+</div>
+<div class="description-paragraph" id="p-0105" num="0104">In one example, transmitting is at 2.1 MHz in a high resolution mode, the sampling rate is 32 MHz and the beam density is 0.72 beam/degree. One image or frame consists of 64 beams with 2 transmits per beam. The RF echoes in a frame are denoted as {r<sub>p</sub>(n,θ), r<sub>n</sub>(n,θ)}, where the subscripts p and n stand for positive and negative pulse on transmit respectively, and n and θ=θ(k) (k is the beam index) denote time index and angle respectively.</div>
+<div class="description-paragraph" id="p-0106" num="0105"> <figref idrefs="DRAWINGS">FIG. 6C</figref> shows the flow diagram of first version of the second algorithm, where r<sub>s</sub>(n,θ)≡r<sub>p</sub>(n,θ)+r<sub>n</sub>(n,θ), R<sub>f</sub>(n,θ)═r<sub>s</sub>(n,θ)⊗h(n), ⊗ denotes convolution, and h(n) is a 121-tap single-sided complex bandpass filter between 0.95 and 2.05 MHz. The center frequency map {circumflex over (f)}<sub>c</sub>(n,θ) is obtained beam by beam based on equation (2) with a 301-tap Hamming window, and then smoothed by a 301 (axially or in the n direction) by 5 (laterally or in the θ direction) boxcar filter to get {circumflex over (f)}<sub>c,f</sub>(n,θ). The last step is to estimate the boundary angle between heart and lung using the smoothed center frequency map {circumflex over (f)}<sub>c,f</sub>(n,θ). The steps in <figref idrefs="DRAWINGS">FIG. 6C</figref> are summation (step S<b>610</b>), complex temporal filtering (step S<b>620</b>), center frequency estimation (step S<b>630</b>), 2D filtering (step S<b>640</b>) and boundary estimation (step S<b>650</b>).</div>
+<div class="description-paragraph" id="p-0107" num="0106">Estimation of the boundary angle involves multiple thresholding. Starting with the first thresholding relation: For a beam (i.e., give a θ) to qualify as a heart region, the center frequency has to satisfy the following condition:</div>
+<div class="description-paragraph" id="p-0108" num="0107"> <maths id="MATH-US-00003" num="00003"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <mfrac> <mn>1</mn> <mrow> <mn>1</mn> <mo>⁢</mo> <mn>5</mn> <mo>⁢</mo> <mn>0</mn> <mo>⁢</mo> <mn>1</mn> </mrow> </mfrac> <mo>⁢</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>m</mi> <mo>=</mo> <mn>0</mn> </mrow> <mn>1500</mn> </munderover> <mo>⁢</mo> <mrow> <msub> <mover> <mi>f</mi> <mi>^</mi> </mover> <mrow> <mi>c</mi> <mo>,</mo> <mi>f</mi> </mrow> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mrow> <mi>n</mi> <mo>+</mo> <mi>m</mi> </mrow> <mo>,</mo> <mstyle> <mspace height="0.2ex" width="0.2em"> </mspace> </mstyle> <mo>⁢</mo> <mi>θ</mi> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <mo>≥</mo> <mrow> <msub> <mi>f</mi> <mrow> <mi>u</mi> <mo>⁢</mo> <mn>1</mn> </mrow> </msub> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>for</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>all</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>n</mi> </mrow> </mrow> <mo>∈</mo> <mrow> <mrow> <mo>[</mo> <mrow> <mn>1500</mn> <mo>,</mo> <mn>2500</mn> </mrow> <mo>]</mo> </mrow> <mo>.</mo> </mrow> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>3</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+That is, only if the average center frequencies between the 1500th and 3000th points (between 36 mm and 72 mm), between the 1501st and 3001st points, . . . , and between the 2500th and 4000th points (between 60 mm and 96 mm) are all no lower than f<sub>u1</sub>, can a beam be considered to be passing through heart tissue. The collection of the index of qualified beams is denoted as the set A<sub>1</sub>. For example, A<sub>1</sub>={3,4, . . . , 32} (noting that the 64 beams are counted from right to left in <figref idrefs="DRAWINGS">FIG. 4B</figref> and that the first two and last two beams do not qualify because of the spatial smoothing filter) for f<sub>u1</sub>=1.37 MHz. Accordingly, the boundary angle can be estimated as the average angle over beams 32 and 33,θ(k) being an increasing function of k. The blockage boundary line <b>432</b> corresponds to the boundary angle.
+</div>
+<div class="description-paragraph" id="p-0109" num="0108">The lung tissue can never appear on the right side of the heart (from the perspective patient) as long as the probe is correctly positioned, unless the image shown in <figref idrefs="DRAWINGS">FIG. 4B</figref> is, in effect, flipped. We can therefore always estimate the boundary based on the leftmost beam satisfying the condition defined in (3). For example, if A<sub>1</sub>={14,15, . . . , 32}, the boundary angle still could be estimated as the average angle over beams 32 and 33.</div>
+<div class="description-paragraph" id="p-0110" num="0109">Robustness of lung identification can be improved by including additional criteria. The second threshold is used to detect regions with very low center frequency: Given a beam angle θ, if the center frequency satisfies</div>
+<div class="description-paragraph" id="p-0111" num="0110"> <maths id="MATH-US-00004" num="00004"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <mrow> <mfrac> <mn>1</mn> <mn>501</mn> </mfrac> <mo>⁢</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>m</mi> <mo>=</mo> <mn>0</mn> </mrow> <mn>500</mn> </munderover> <mo>⁢</mo> <mrow> <msub> <mover> <mi>f</mi> <mi>^</mi> </mover> <mrow> <mi>c</mi> <mo>,</mo> <mi>f</mi> </mrow> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mrow> <mi>n</mi> <mo>+</mo> <mi>m</mi> </mrow> <mo>,</mo> <mstyle> <mspace height="0.2ex" width="0.2em"> </mspace> </mstyle> <mo>⁢</mo> <mi>θ</mi> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <mo>&lt;</mo> <mrow> <msub> <mi>f</mi> <mn>1</mn> </msub> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>for</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>any</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>n</mi> </mrow> </mrow> <mo>∈</mo> <mrow> <mo>[</mo> <mrow> <mn>1750</mn> <mo>,</mo> <mn>3750</mn> </mrow> <mo>]</mo> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>4</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+this beam can be considered passing through lung tissue. The collection of the index of beams satisfying (4) is denoted as A<sub>2</sub>. A<sub>2</sub>={3,4, . . . , 32} in the case shown in <figref idrefs="DRAWINGS">FIG. 4</figref> for f<sub>1</sub>=1.27 MHz and therefore has no conflict with the corresponding A<sub>1</sub>.
+</div>
+<div class="description-paragraph" id="p-0112" num="0111">The third (and the last) threshold is used to detect regions with very high center frequency: Given a beam angle θ(k), if the center frequency satisfies</div>
+<div class="description-paragraph" id="p-0113" num="0112"> <maths id="MATH-US-00005" num="00005"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <mrow> <mfrac> <mn>1</mn> <mn>2001</mn> </mfrac> <mo>⁢</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>n</mi> <mo>=</mo> <mn>2000</mn> </mrow> <mn>4000</mn> </munderover> <mo>⁢</mo> <mrow> <msub> <mover> <mi>f</mi> <mi>^</mi> </mover> <mrow> <mi>c</mi> <mo>,</mo> <mi>f</mi> </mrow> </msub> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>n</mi> <mo>,</mo> <mrow> <mi>θ</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>k</mi> <mo>+</mo> <mi>m</mi> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> <mo>]</mo> </mrow> </mrow> </mrow> </mrow> <mo>&gt;</mo> <mrow> <msub> <mi>f</mi> <mrow> <mi>u</mi> <mo>⁢</mo> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> <mo>⁢</mo> <mn>2</mn> </mrow> </msub> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>for</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>all</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>m</mi> </mrow> </mrow> <mo>∈</mo> <mrow> <mo>{</mo> <mrow> <mrow> <mo>-</mo> <mn>2</mn> </mrow> <mo>,</mo> <mrow> <mo>-</mo> <mn>1</mn> </mrow> <mo>,</mo> <mn>0</mn> <mo>,</mo> <mn>1</mn> <mo>,</mo> <mn>2</mn> </mrow> <mo>}</mo> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>5</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+this beam is considered to be passing through heart tissue. That is, if 5 consecutive beams present very high center frequency, the central beam has a high chance of passing heart tissue. The collection of the index of beams satisfying (5) is denoted as A<sub>3</sub>.
+</div>
+<div class="description-paragraph" id="p-0114" num="0113">In practice, A<sub>1</sub>, A<sub>2 </sub>and A<sub>3 </sub>might not be consistent with each other. For example, the intersection of A<sub>1 </sub>and A<sub>2 </sub>might be nonempty meaning that some beam could be considered passing both heart and lung tissue. Accordingly, the collections may be prioritized. Specifically A<sub>3 </sub>(the very high frequency condition defined in (5)) is given the highest priority and A<sub>1 </sub>(the high frequency condition defined in (3)) is given the lowest priority. The “adjusted heart tissue set” is defined as
+<br/>
+<i>A</i> <sub>h</sub> <i>≡{k|k∈A</i> <sub>1 </sub>and <i>k&lt;l </i>for any <i>l∈A′</i> <sub>2 </sub>that is larger than max(<i>A</i> <sub>3</sub>)},  (6)
+<br/>
+where max(A<sub>3</sub>) is the maximum element of A<sub>3 </sub>and is defined as −∞ if A<sub>3 </sub>is empty. The following is an equivalent definition:
+<br/>
+<i>A</i> <sub>h</sub>≡{<b>5</b>|<i>k∈A</i> <sub>1 </sub>and <i>k&lt;l </i>for any <i>l∈A′</i> <sub>2</sub>)}  (7)
+<br/>
+where
+<br/>
+<i>A′</i> <sub>2</sub> <i>═{l|l∈A</i> <sub>2 </sub>and <i>l&gt;j </i>for any <i>j∈A</i> <sub>3</sub>}  (8)
+<br/>
+The boundary between heart and lung is estimated based on the largest element of A<sub>h</sub>. For example, if A<sub>1</sub>={5,6, . . . , 50}, A<sub>2</sub>={3,4, 49,50,51} and A<sub>3</sub>={11,12,13}, then A′<sub>2</sub>={49,50,51}, A<sub>h</sub>32 {5,6, . . . , 48}, and the estimated boundary angle {circumflex over (θ)}<sub>b </sub>is the average angle over beams 48 and 49. An empty A<sub>h </sub>indicates lung tissue occupying the whole image. If A<sub>h </sub>is not empty,
+</div>
+<div class="description-paragraph" id="p-0115" num="0114"> <maths id="MATH-US-00006" num="00006"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mrow> <msub> <mover> <mi>θ</mi> <mi>^</mi> </mover> <mi>b</mi> </msub> <mo>≡</mo> <mrow> <mfrac> <mn>1</mn> <mn>2</mn> </mfrac> <mo>⁢</mo> <mrow> <mo>{</mo> <mrow> <mrow> <mi>θ</mi> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>max</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>A</mi> <mi>h</mi> </msub> <mo>)</mo> </mrow> </mrow> <mo>]</mo> </mrow> </mrow> <mo>+</mo> <mrow> <mi>θ</mi> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mrow> <mi>max</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>A</mi> <mi>h</mi> </msub> <mo>)</mo> </mrow> </mrow> <mo>+</mo> <mn>1</mn> </mrow> <mo>]</mo> </mrow> </mrow> </mrow> <mo>}</mo> </mrow> </mrow> </mrow> <mo>=</mo> <mrow> <mrow> <mi>θ</mi> <mo>⁡</mo> <mrow> <mo>[</mo> <mrow> <mi>max</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <msub> <mi>A</mi> <mi>h</mi> </msub> <mo>)</mo> </mrow> </mrow> <mo>]</mo> </mrow> </mrow> <mo>+</mo> <mrow> <mfrac> <mn>1</mn> <mn>2</mn> </mfrac> <mo>⁢</mo> <mi>Δ</mi> <mo>⁢</mo> <mi>θ</mi> </mrow> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>9</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where Δθ=θ(k+1)−θ(k). Because the 2D smoothing filter deteriorates beams on the sides, it is concluded that no lung tissue appears in the image if
+</div>
+<div class="description-paragraph" id="p-0116" num="0115">
+<maths id="MATH-US-00007" num="00007">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mrow>
+<mi>θ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>[</mo>
+<mrow>
+<mi>max</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>A</mi>
+<mi>h</mi>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+<mo>≥</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>beam</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>number</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>half</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>the</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>lateral</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>dimension</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>of</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>the</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+<mo>⁢</mo>
+<mi>D</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>smoothing</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>filter</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mn>64</mn>
+<mo>-</mo>
+<mfrac>
+<mrow>
+<mn>5</mn>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mn>2</mn>
+</mfrac>
+</mrow>
+<mo>=</mo>
+<mn>62.</mn>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0117" num="0116">The role of f<sub>u1 </sub>is much more important than that of f<sub>1</sub>, but occasionally existence of A<sub>2 </sub>contributes positively in determining the boundary. To recap, in this first version of the second algorithm, f<sub>u1</sub>=1.37 MHz, f<sub>1</sub>=1.27 MHz, and f<sub>u2</sub>=∞.</div>
+<div class="description-paragraph" id="p-0118" num="0117">A second version of the second algorithm also pertains to 1D probes and for PI data acquired in high resolution mode. As mentioned above, lung tissue responds to low-frequency signal components well in a linear fashion and motion causes less perfect cancellation at higher frequencies in heart tissue in a PI mode. This implies the possibility of performance improvement by replacing r<sub>s</sub>(n,θ) with a composite signal r<sub>c</sub>(n,θ) in the signal processing chain shown in <figref idrefs="DRAWINGS">FIG. 6C</figref>. For this reason, there is a second version of the second algorithm. <figref idrefs="DRAWINGS">FIG. 7</figref> shows how r<sub>c</sub>(n,θ) is formed, where r<sub>d</sub>(n,θ)≡r<sub>p</sub>(n,θ)−r<sub>n</sub>(n,θ) which is step S<b>710</b>, r<sub>d,1</sub>(n,θ)≡r<sub>d</sub>(n,θ) ⊗ h<sub>1</sub>(n) which is step S<b>720</b>, step S<b>730</b> is identical to step S<b>610</b>, r<sub>s,h</sub>(n,θ)≡r<sub>s</sub>(n,θ) ⊗ h<sub>h</sub>(n) which is step S<b>740</b>, r<sub>c</sub>(n,θ)≡w<sub>d</sub>r<sub>d,1</sub>(n,θ)+w<sub>s</sub>r<sub>s,h</sub>(n,θ) which is step S<b>750</b>, h<sub>1</sub>(n) is a 101-tap real lowpass filter cutting off at 0.8 MHz, and h<sub>u</sub>(n) is a 101-tap real highpass filter cutting off at 1.15 MHz. Echoes from lung tissue favor r<sub>d,1</sub>(n,θ) (because it responds to low-frequency components well) and echoes from heart tissue favor r<sub>s,h</sub>(n,θ) (because of more motion). w<sub>d </sub>and w<sub>s </sub>are weights used to balance the two forces. The signal processing following r<sub>c</sub>(n,θ) remains the same as that following r<sub>s</sub>(n,θ) in <figref idrefs="DRAWINGS">FIG. 6C</figref>. Exemplary parameters are w<sub>d</sub>=1.2, w<sub>s</sub>=1, f<sub>u1</sub>=1.4 MHz, f<sub>1</sub>=1.2 MHz, and f<sub>u2</sub>=1.5 MHz.</div>
+<div class="description-paragraph" id="p-0119" num="0118">A matrix probe version of the second algorithm is based on the second version—composite signals are used for center frequency estimation. RF data can be collected, for example, using penetration imaging mode with PI enabled and a center frequency of 2.2 MHz. Lateral and elevational widths can be maximal.</div>
+<div class="description-paragraph" id="p-0120" num="0119">Each volume has 40 (lateral) by 33 (elevational) A-lines on transmit (with 2 transmit events per A-line due to PI acquisition) and 80 by 66 A-lines on receive sampled at 16 MHz because of the 4× beamformer. The four signals of each transmit direction are summed to get RF echoes {r<sub>p</sub>(n,θ,ϕ), r<sub>n</sub>(n,θ,ϕ)} with 40 θ values and 33 θ values. The lateral beam density is 0.41 beam per degree.</div>
+<div class="description-paragraph" id="p-0121" num="0120"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows the flow diagram of the matrix probe version of the second algorithm, with the temporal sampling rate at 16 MHz. The steps are: subtraction (step S<b>805</b>), low-pass filtering (step S<b>810</b>), summation (step S<b>815</b>), high-pass filtering (step S<b>820</b>), weighted summation (step S<b>825</b>), complex temporal filtering (step S<b>830</b>), center frequency estimation (step S<b>835</b>), 2D filtering (step S<b>840</b>), boundary estimation (step S<b>845</b>), median filtering (step S<b>850</b>) and visualization across planes (step S<b>855</b>). In short,ϕ=ϕ(v), r<sub>d</sub>(n,θ,ϕ)≡r<sub>p</sub>(n,θ,ϕ)−r<sub>n</sub>(n,θ,ϕ), r<sub>s</sub>(n,θ,ϕ)) r<sub>p</sub>(n,θ,ϕ)+r<sub>n</sub>(n, (n,θ,ϕ) r<sub>d</sub>(n,θ,ϕ) ⊗ h<sub>1</sub>(n), r<sub>s,h</sub>(n,θ,ϕ)≡r<sub>s</sub>(n,θ,ϕ) ⊗ h<sub>h</sub>(n), r<sub>c</sub>(n,θ,ϕ)≡w<sub>d</sub>r<sub>d,1</sub>(n,θ,ϕ)+w<sub>s</sub>r<sub>s,h</sub>(n,θ,ϕ), h<sub>1</sub>(n) is a 51-tap real lowpass filter cutting off at 0.8 MHz, h<sub>u</sub>(n) is a 51-tap real highpass filter cutting off at 1.3 MHz, w<sub>d</sub>=2, and w<sub>s</sub>=1. The complex envelope R<sub>f</sub>(n,θ,ϕ)≡r<sub>c</sub>(n,θ,ϕ) ⊗ h(n), where h(n) is a 61-tap single-sided complex bandpass filter between 0.95 and 2.05 MHz. In each elevational plane, the center frequency map {circumflex over (f)}<sub>c</sub>(n,θ,ϕ) is obtained beam by beam based on equation (2) with a 151-tap Hamming window, and then smoothed by a 151 (in the n direction) by 3 (in the θ direction) boxcar filter to get {circumflex over (f)}<sub>c,f</sub>(n,θ,ϕ).</div>
+<div class="description-paragraph" id="p-0122" num="0121">For boundary estimation, the following are defined:</div>
+<div class="description-paragraph" id="p-0123" num="0122"> <maths id="MATH-US-00008" num="00008"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <msub> <mi>A</mi> <mrow> <mn>1</mn> <mo>,</mo> <mi>v</mi> </mrow> </msub> <mo>≡</mo> <mrow> <mrow> <mo>{</mo> <mrow> <mi>k</mi> <mo>|</mo> <mrow> <mrow> <mrow> <mfrac> <mn>1</mn> <mrow> <mn>7</mn> <mo>⁢</mo> <mn>5</mn> <mo>⁢</mo> <mn>1</mn> </mrow> </mfrac> <mo>⁢</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>m</mi> <mo>=</mo> <mn>0</mn> </mrow> <mn>750</mn> </munderover> <mo>⁢</mo> <mrow> <msub> <mover> <mi>f</mi> <mi>^</mi> </mover> <mrow> <mi>c</mi> <mo>,</mo> <mi>f</mi> </mrow> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mrow> <mi>n</mi> <mo>+</mo> <mi>m</mi> </mrow> <mo>,</mo> <mrow> <mi>θ</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>k</mi> <mo>)</mo> </mrow> </mrow> <mo>,</mo> <mrow> <mi>ϕ</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>v</mi> <mo>)</mo> </mrow> </mrow> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <mo>≥</mo> <mrow> <msub> <mi>f</mi> <mrow> <mi>u</mi> <mo>⁢</mo> <mn>1</mn> </mrow> </msub> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>for</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>all</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>n</mi> </mrow> </mrow> <mo>∈</mo> <mrow> <mo>[</mo> <mrow> <mn>750</mn> <mo>,</mo> <mn>1250</mn> </mrow> <mo>]</mo> </mrow> </mrow> </mrow> <mo>}</mo> </mrow> <mo>.</mo> </mrow> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>10</mn> <mo>)</mo> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mrow> <msub> <mi>A</mi> <mrow> <mn>2</mn> <mo>,</mo> <mi>v</mi> </mrow> </msub> <mo>≡</mo> <mrow> <mo>{</mo> <mrow> <mi>k</mi> <mo>|</mo> <mrow> <mrow> <mrow> <mfrac> <mn>1</mn> <mrow> <mn>2</mn> <mo>⁢</mo> <mn>5</mn> <mo>⁢</mo> <mn>1</mn> </mrow> </mfrac> <mo>⁢</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>m</mi> <mo>=</mo> <mn>0</mn> </mrow> <mn>250</mn> </munderover> <mo>⁢</mo> <mrow> <msub> <mover> <mi>f</mi> <mi>^</mi> </mover> <mrow> <mi>c</mi> <mo>,</mo> <mi>f</mi> </mrow> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mrow> <mi>n</mi> <mo>+</mo> <mi>m</mi> </mrow> <mo>,</mo> <mrow> <mi>θ</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>k</mi> <mo>)</mo> </mrow> </mrow> <mo>,</mo> <mrow> <mi>ϕ</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>v</mi> <mo>)</mo> </mrow> </mrow> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <mo>&lt;</mo> <mrow> <msub> <mi>f</mi> <mn>1</mn> </msub> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>for</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>any</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>n</mi> </mrow> </mrow> <mo>∈</mo> <mrow> <mo>[</mo> <mrow> <mn>875</mn> <mo>,</mo> <mn>1875</mn> </mrow> <mo>]</mo> </mrow> </mrow> </mrow> <mo>}</mo> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>11</mn> <mo>)</mo> </mrow> </mtd> </mtr> <mtr> <mtd> <mrow> <mstyle> <mspace height="4.4ex" width="4.4em"> </mspace> </mstyle> <mo>⁢</mo> <mi>and</mi> </mrow> </mtd> <mtd> <mstyle> <mspace height="0.3ex" width="0.3em"> </mspace> </mstyle> </mtd> </mtr> <mtr> <mtd> <mrow> <mrow> <msub> <mi>A</mi> <mrow> <mn>3</mn> <mo>,</mo> <mi>v</mi> </mrow> </msub> <mo>≡</mo> <mrow> <mo>{</mo> <mrow> <mi>k</mi> <mo>|</mo> <mrow> <mrow> <mrow> <mfrac> <mn>1</mn> <mrow> <mn>1</mn> <mo>⁢</mo> <mn>0</mn> <mo>⁢</mo> <mn>0</mn> <mo>⁢</mo> <mn>1</mn> </mrow> </mfrac> <mo>⁢</mo> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>n</mi> <mo>=</mo> <mn>1000</mn> </mrow> <mn>2000</mn> </munderover> <mo>⁢</mo> <mrow> <msub> <mover> <mi>f</mi> <mi>^</mi> </mover> <mrow> <mi>c</mi> <mo>,</mo> <mi>f</mi> </mrow> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>n</mi> <mo>,</mo> <mrow> <mi>θ</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>k</mi> <mo>+</mo> <mi>m</mi> </mrow> <mo>)</mo> </mrow> </mrow> <mo>,</mo> <mrow> <mi>ϕ</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>v</mi> <mo>)</mo> </mrow> </mrow> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <mo>&gt;</mo> <mrow> <msub> <mi>f</mi> <mrow> <mi>u</mi> <mo>⁢</mo> <mn>2</mn> </mrow> </msub> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>for</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>all</mi> <mo>⁢</mo> <mstyle> <mspace height="0.8ex" width="0.8em"> </mspace> </mstyle> <mo>⁢</mo> <mi>m</mi> </mrow> </mrow> <mo>∈</mo> <mrow> <mo>{</mo> <mrow> <mrow> <mo>-</mo> <mn>1</mn> </mrow> <mo>,</mo> <mn>0</mn> <mo>,</mo> <mn>1</mn> </mrow> <mo>}</mo> </mrow> </mrow> </mrow> <mo>}</mo> </mrow> </mrow> <mo>,</mo> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>12</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where f<sub>u1</sub>=1.38 MHz. Equivalently f<sub>1</sub>≡0, f<sub>u2</sub>≡∞, A<sub>2,v </sub>and A<sub>3,v </sub>are empty, and the adjusted heart tissue set A<sub>h,v</sub>=A<sub>1,v</sub>.
+</div>
+<div class="description-paragraph" id="p-0124" num="0123">The boundary angle between heart and lung in the v-th plane is</div>
+<div class="description-paragraph" id="p-0125" num="0124">
+<maths id="MATH-US-00009" num="00009">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>θ</mi>
+<mi>b</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>v</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>≡</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>θ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<mi>Δθ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>if</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>A</mi>
+<mrow>
+<mi>h</mi>
+<mo>,</mo>
+<mi>v</mi>
+</mrow>
+</msub>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>is</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>empty</mi>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mrow>
+<mrow>
+<mi>θ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mn>40</mn>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<mi>Δθ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>if</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>max</mi>
+<mo>(</mo>
+<msub>
+<mi>A</mi>
+<mrow>
+<mi>h</mi>
+<mo>,</mo>
+<mi>v</mi>
+</mrow>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>≥</mo>
+<mrow>
+<mn>40</mn>
+<mo>-</mo>
+<mfrac>
+<mrow>
+<mn>3</mn>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mn>2</mn>
+</mfrac>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mn>39</mn>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>θ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>[</mo>
+<mrow>
+<mi>max</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>A</mi>
+<mrow>
+<mi>h</mi>
+<mo>,</mo>
+<mi>v</mi>
+</mrow>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<mi>Δθ</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>otherwise</mi>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+<mo>.</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>13</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0126" num="0125">A 5-tap median filter (a function of v) in the elevational direction is then applied to {circumflex over (θ)}<sub>b</sub>(v) and the output is denoted as {circumflex over (θ)}<sub>b,f</sub>(v). From the filtered boundary angles {circumflex over (θ)}<sub>b,f</sub>(v), a map indicating heart region can be derived to provide cross-plane visualization. To remove outliers around the boundary between heart and lung which appear occasionally, only the largest connected region is displayed. The clinician can use the <figref idrefs="DRAWINGS">FIG. 4B</figref> display to interactively manipulate the probe <b>130</b> so as to avoid the lung, in step S<b>226</b>.</div>
+<div class="description-paragraph" id="p-0127" num="0126">An apparatus includes an imaging probe and is configured for dynamically arranging presentation of visual feedback for guiding manual adjustment, via the probe, of a location, and orientation, associated with the probe. The arranging is selectively based on comparisons between fields of view of the probe and respective results of segmenting image data acquired via the probe. In an embodiment, the feedback does not include a grayscale depiction of the image data. Coordinate system transformations corresponding to respective comparisons may be computed. The selecting may be based upon and dynamically responsive to content of imaging being dynamically acquired via the probe.</div>
+<div class="description-paragraph" id="p-0128" num="0127">In addition to making diagnostic cardiac examination performable by nurses or other clinicians who may be untrained specifically in sonography, the apparatus <b>100</b> can guide novice sonographers. The apparatus <b>100</b> can feature, for this purpose or this mode, a regular (grayscale) sonogram, along with the visual feedback <b>144</b> described herein above. Alternatively, the novel visual feedback <b>144</b> of the apparatus <b>100</b> can speed up the work flow of trained or experienced sonographers.</div>
+<div class="description-paragraph" id="p-0129" num="0128">While the invention has been illustrated and described in detail in the drawings and foregoing description, such illustration and description are to be considered illustrative or exemplary and not restrictive; the invention is not limited to the disclosed embodiments.</div>
+<div class="description-paragraph" id="p-0130" num="0129">For example, the probe cable <b>140</b> may be omitted in a wireless probe embodiment.</div>
+<div class="description-paragraph" id="p-0131" num="0130">Other variations to the disclosed embodiments can be understood and effected by those skilled in the art in practicing the claimed invention, from a study of the drawings, the disclosure, and the appended claims. In the claims, the word “comprising” does not exclude other elements or steps, and the indefinite article “a” or “an” does not exclude a plurality. Any reference signs in the claims should not be construed as limiting the scope.</div>
+<div class="description-paragraph" id="p-0132" num="0131">A computer program can be stored momentarily, temporarily or for a longer period of time on a suitable computer-readable medium, such as an optical storage medium or a solid-state medium. Such a medium is non-transitory only in the sense of not being a transitory, propagating signal, but includes other forms of computer-readable media such as register memory, processor cache, RAM and other volatile memory.</div>
+<div class="description-paragraph" id="p-0133" num="0132">A single processor or other unit may fulfill the functions of several items recited in the claims. The mere fact that certain measures are recited in mutually different dependent claims does not indicate that a combination of these measures cannot be used to advantage.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">12</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM282245667">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. An apparatus comprising:
+<div class="claim-text">an imaging probe; and</div>
+<div class="claim-text">a user-guidance processor configured for dynamically arranging presentation of visual feedback for guiding manual adjustment, via said probe, of a location and orientation associated with said probe,
+<div class="claim-text">wherein said arranging is based on comparisons between fields of view of said probe and respective results of segmenting image data acquired via said probe,</div>
+<div class="claim-text">wherein said feedback includes an instruction to halt based on an outcome of a comparison between a current location and current orientation of said probe and a location and orientation derived from said segmenting,</div>
+<div class="claim-text">wherein the user-guidance processor is configured to receive a first image obtained by the imaging probe in a first field of view of the imaging probe,</div>
+<div class="claim-text">wherein the user-guidance processor is configured to detect a pause in manual adjustment of the imaging probe, and</div>
+<div class="claim-text">wherein the user-guidance processor is configured to segment the first image during the pause to identify an anatomical segment of an organ within the first image.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein said segmenting is model-based.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein said imaging probe comprises an ultrasound imaging probe.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising a display configured for the presenting and dynamically guiding a user in a procedure for achieving an apical view of a heart.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein at least one of the fields of view is three-dimensional.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a field of view from among said fields of view includes a viewpoint coinciding with said location, said orientation coinciding with a viewing orientation of said field of view.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">a display; and</div>
+<div class="claim-text">a user-operable console,</div>
+<div class="claim-text">said apparatus configured for:
+<div class="claim-text">acquiring said image data via said probe;</div>
+<div class="claim-text">said segmenting;</div>
+<div class="claim-text">displaying said feedback via said display; and,</div>
+<div class="claim-text">portability as a hand-carriable unit.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The apparatus of <claim-ref idref="CLM-00007">claim 7</claim-ref>, further configured for, responsive to detecting that said halting has occurred, performing said segmenting.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein said feedback comprises a progressive indicator of overall progress in acquiring a target view.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>,
+<div class="claim-text">wherein the user-guidance processor is configured to determine an orientation of the anatomical segment in the first field of view, and</div>
+<div class="claim-text">wherein determining the orientation comprises comparing the anatomical segment to a model representative of the organ.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the user-guidance processor is configured to determine a second field of view of said imaging probe based on an orientation of the anatomical segment and the first field of view.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The apparatus of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the second field of view comprises a different orientation of the anatomical segment from the first field of view.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

@@ -1,0 +1,740 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10598819B2 - Systems and methods to build sedimentary attributes 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA379668800">
+<div class="abstract" id="p-0001" num="0000">A method and system for computing and visualizing sedimentary attributes may include receiving, by a processor, paleo-geographic coordinates representing predicted approximate positions of particles of sediment deposited at a time period when a layer was originally formed. The processor may numerically compute or determine a sedimentation rate that varies laterally along the layer. The processor may determine a sedimentary attribute based on the lateral variation of the sedimentation rate along the layer with respect to the paleo-geographic coordinates. A monitor or display may display the sedimentary attribute of the layer in the present-day geological space.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES250088437">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation application of U.S. patent application Ser. No. 15/812,604 filed Nov. 14, 2017 which is a continuation application of U.S. patent application Ser. No. 15/271,389 filed on Sep. 21, 2016 which is a continuation application of U.S. patent application Ser. No. 14/211,744 filed on Mar. 14, 2014 which claims benefit of U.S. Provisional Patent Application No. 61/790,010 filed on Mar. 15, 2013 and U.S. Provisional Patent Application No. 61/829,444 filed on May 31, 2013, all of which are incorporated herein by reference in their entirety.</div>
+<heading id="h-0002">FIELD OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The field of the invention relates to characterizing and modeling stratified terrains in the subsurface.</div>
+<heading id="h-0003">BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0004" num="0003">Erosion and tectonic activity through geological-time may transform an initially uniform stratified terrain composed of a continuous stack of depositional surfaces, called horizons, into a faulted and folded terrain fractured by faults forming discontinuities across the originally continuous horizons. Accordingly, to model the structures at their predicted or simulated original time of deposition from data collected from the current subsurface structures (e.g., to “reverse time”), the model may simulate a reversal of such erosion and tectonic activity.</div>
+<div class="description-paragraph" id="p-0005" num="0004">A particle of sediment observed today at geographical coordinates (x,y) and altitude or vertical component (z) may have been deposited at an original time of deposition or “geological-time” t(x,y,z) at paleo-geographical coordinates u(x,y,z) and v(x,y,z). Depositional coordinates (u,v,t) so defined may be different than the observed (present day's) geographic coordinates (x,y,z). The “GeoChron” model may provide systems and methods to calculate or predict the depositional (past) coordinates u(x,y,z), v(x,y,z) and t(x,y,z) of a particle of sediment in a subsurface structure from its observed (present day) coordinates (x,y,z) in the geological layers. The depositional coordinates (u,v,t) may be displayed to model a simulation of the subsurface structures as they are predicted to have appeared at their original time of deposition.</div>
+<div class="description-paragraph" id="p-0006" num="0005">Depending on the paleo-environment prevailing at the geological time of deposition, particles of sediment may have been deposited according to different depositional styles (such as, for example, on-lap, off-lap, or proportional) which may have impacted the geometry of the layers.</div>
+<div class="description-paragraph" id="p-0007" num="0006">For more than three decades, geologists and geophysicists in the water, mineral (e.g. mining) and energy (e.g. oil and gas) industries have modelled “attributes” to characterize the properties of sedimentary terrains in the subsurface. An attribute may be a function f(x,y,z) which, based on observed data, such as seismic data or well data, may be estimated at each location (x,y,z) or coordinate in the present-day subsurface. The functions may statistically correlate with rock types and properties of the terrains and the functions may be used to identify these properties in a current time or predict these properties at a time of original deposition. These properties may be related to two previously known families of attributes, seismic attributes and geometric attributes:
+</div> <ul> <li id="ul0001-0001" num="0000"> <ul> <li id="ul0002-0001" num="0007">Seismic attributes may be defined based on the shape of an observed seismic signal reflected by geological structures in the subsurface. The observed seismic signal may be recorded by a seismograph when measuring ground movement. Frequently used seismic attributes may include, for example, “instantaneous amplitude,” “instantaneous velocity.” and “instantaneous acceleration.” These attributes may be computed using first and second order derivatives of the observed seismic signal crossing the geologic layers.</li> <li id="ul0002-0002" num="0008">Geometrical attributes may be defined based on the shape of geological horizons or surfaces bounding geological layers and may provide information about the curvatures and distances to faults. Frequently used geometrical attributes may include “Gaussian curvature,” “mean curvature,” and “main curvature.” These attributes may be computed using first and second order derivatives of a parametric representation of the horizons bounding the geologic layers.</li> </ul> </li> </ul>
+<heading id="h-0004">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0008" num="0009">Embodiments of the invention provide a system and method for computing and modeling sedimentary attributes, which describe stratified terrains or layers of a geological subsurface.</div>
+<div class="description-paragraph" id="p-0009" num="0010">Embodiments of the invention provide a new family of attributes that may be referred to as “sedimentary attributes.” Sedimentary attributes may define the properties of the sedimentation process of particles during deposition. Sedimentary attributes may be determined or computed based on lateral variations of a “sedimentation rate.” The sedimentation rate defines the rate at which particles of sediment at their location were deposited. The sedimentation rate is proportional to the thickness of sedimentary layers. For example, the higher the sedimentation rate, the faster particles of sediment were deposited, and the thicker the layer is at that location. Sedimentary attributes may include, for example, sedimentary expansion (e.g. <figref idrefs="DRAWINGS">FIG. 4</figref>), sedimentary potential (e.g. <figref idrefs="DRAWINGS">FIG. 5</figref>), sedimentary acceleration (e.g. <figref idrefs="DRAWINGS">FIG. 6</figref>), sedimentary expansion ratio, sedimentary horizontal divergence, sedimentary horizontal norm. IPG-line curvature, N-line curvature, and normal divergence. Sedimentary attributes may be deduced or computed from lateral variations of a “sedimentation rate,” which is itself proportional to the thickness of geological layers. For example, the faster particles of sediment were deposited in geological-time, the thicker its region of the layer.</div>
+<div class="description-paragraph" id="p-0010" num="0011">In practice, each of the sedimentary attributes may be computed based on a lateral variation in sedimentation rate. For example, sedimentary attributes, such as, sedimentary expansion and sedimentary acceleration, may be computed based on a lateral variation (e.g. first and second derivatives) of the sedimentation rate through a geological layer. However, in the current geological time, layers become folded and/or faulted (e.g. see folded layer <b>302</b> in the left image of <figref idrefs="DRAWINGS">FIG. 3A</figref>) and the “lateral” direction (e.g. <b>318</b> <i>a</i>, tangential to the curvature of the layer or horizons bounding the layer) likewise becomes faulted and/or folded. Therefore, the “horizontal” (x,y) direction in a rectilinear (non-curvilinear) coordinate system (e.g. Cartesian coordinate system) do not reliably conform to the curvature of the layer, but may cross in and out of the layer as it curves along folds or breaks along faults. To reliably follow the lateral direction within a faulted or folded layer, a second curvilinear coordinate system (e.g. u,v,t) may be used, having paleo-geographical axes or “iso-t” surfaces that themselves curve (e.g. see <figref idrefs="DRAWINGS">FIG. 7</figref>). Iso-t surfaces have a constant (“iso”) geological-time (t) and vary in paleo-geographic coordinates (u,v). Iso-t surfaces represent horizons and other layers, which curve tangentially to the folded and/or faulted layers when viewed in the original (non-curvilinear) coordinate system (e.g. curved iso-surface <b>318</b> <i>a </i>in the left image of <figref idrefs="DRAWINGS">FIG. 3A</figref>). Accordingly, a “lateral” direction following a folded and/or faulted horizon may be modeled by iso-t surfaces (e.g. <b>318</b> <i>b</i>) of the curvilinear coordinate system (e.g. <b>310</b>). Therefore, the lateral change in sedimentation rate (V(x,y,z)) may be measured along the iso-surfaces with respect to infinitesimal changes in paleo-geographical coordinate (du and/or dv) of the curvilinear coordinate system (e.g. as dV/du and/or dV/dv).</div>
+<div class="description-paragraph" id="p-0011" num="0012">Sedimentary attributes may also be defined based on a lateral variation in layer thickness. Embodiments of the invention may generate a measure of a thickness Δh of a layer, which due to lateral variations in the sedimentation rate, may vary laterally along the layer in a present day model. Variations or changes in the thickness of the layer may be best measured with respect to paleo-geographic coordinates that vary laterally along a depositional surface (also called by geologists an “horizon”) inside the layer, e.g., with respect to (u,v) paleo-geographic coordinates. As shown for example in <figref idrefs="DRAWINGS">FIG. 7</figref>, paleo-geographic coordinates vary tangentially along the horizon or layer surfaces regardless of deformation or curvature in the layer. In contrast, when layers are curved or faulted, modeling the variation of layer thickness according to a (x,y) geographic coordinates may be less effective since the “lateral” or “horizontal” direction in the x-y plane may vary in depth e.g. within a horizon or even cross through several layers.</div>
+<div class="description-paragraph" id="p-0012" num="0013">As shown, for example in <figref idrefs="DRAWINGS">FIG. 2</figref>, using the uvt-transform, sedimentary attributes may be displayed in either a present-day geological time model (e.g. in xyz-space) or a depositional model (e.g. uvt-space) visualizing the subsurface layer(s) at a geological time when the structure was originally deposited.</div>
+<div class="description-paragraph" id="p-0013" num="0014">A three dimensional (3D) depositional model may be represented by for example functions t(x,y,z), u(x,y,z) and v(x,y,z) such that, for any location (x,y,z) in the subsurface:
+</div> <ul> <li id="ul0003-0001" num="0000"> <ul> <li id="ul0004-0001" num="0015">t(x,y,z) represents the geological-time of original deposition of a point representing a particle of sediment observed today at location (x,y,z);</li> <li id="ul0004-0002" num="0016">u(x,y,z) and v(x,y,z) represent the paleo-geographic coordinates at the geological-time of deposition t(x,y,z) of the point representing the particle of sediment observed today or in the present-day time at location (x,y,z).</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0014" num="0017">Embodiment of the invention may compute the functions u(x,y,z), v(x,y,z) and t(x,y,z) that model a subsurface structure, such as one or more layers, or model attributes that are related to the structure. Note that these functions may be non-unique (e.g. there are multiple transformations from (x,y,z) coordinates to (u,v,t) coordinates), but may be considered equivalent when they represent the same equivalent geometry and deformation of the geological layers transformed to their positions as observed today.</div>
+<div class="description-paragraph" id="p-0015" num="0018">In an embodiment of the invention, a computing system or processor may be used to generate and model sedimentary attributes. The present day coordinates (x,y,z) may be an “input” of the computing system. The present day coordinates (x,y,z) may be transformed into paleo-depositional coordinates u(x,y,z), v(x,y,z) and/or t(x,y,z), and may be used to generate a sedimentary rate V(x,y,z). The sedimentary attributes SA(x,y,z) may be computed based on the lateral variation of the sedimentary rate V(x,y,z) with respect to paleo-depositional coordinates u(x,y,z), and v(x,y,z). The “output” of the computing system may include the sedimentary attributes SA(x,y,z) modelled in the present-day coordinate system (x,y,z) (e.g. as shown in <figref idrefs="DRAWINGS">FIGS. 4-6</figref>) and/or mapped or transformed to the depositional coordinate system, for example, by functions SA(u,v,t)=SA(u(x,y,z), v(x,y,z), t(x,y,z)).</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0016" num="0019">The principles and operation of the system, apparatus, and method according to embodiments of the present invention may be better understood with reference to the drawings, and the following description, it being understood that these drawings are given for illustrative purposes only and are not meant to be limiting.</div>
+<div class="description-paragraph" id="p-0017" num="0020"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a diagram of a computer system, according to some embodiments of the invention;</div>
+<div class="description-paragraph" id="p-0018" num="0021"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a schematic illustration of a transformation, map, parameterization or conversion between a current model in a present-day geological space and a depositional model in a predicted past geological space, according to some embodiments of the invention;</div>
+<div class="description-paragraph" id="p-0019" num="0022"> <figref idrefs="DRAWINGS">FIG. 3A</figref> is a schematic illustration of a vertical cross section of layers used to determine a sedimentation rate in the present-day geological space (left image) and the original depositional geological space (right image), according to embodiments of the invention;</div>
+<div class="description-paragraph" id="p-0020" num="0023"> <figref idrefs="DRAWINGS">FIG. 3B</figref> is a schematic illustration of a vertical cross section of a layer in the present-day geological space used to determine a sedimentation rate based on N-lines or IPG-lines, according to embodiments of the invention;</div>
+<div class="description-paragraph" id="p-0021" num="0024"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a schematic illustration of a model of sedimentary expansion attributes of a horizon, according to embodiments of the invention;</div>
+<div class="description-paragraph" id="p-0022" num="0025"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a schematic illustration of a model of sedimentary potential attributes of a horizon, according to embodiments of the invention;</div>
+<div class="description-paragraph" id="p-0023" num="0026"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a schematic illustration of a model of sedimentary acceleration attributes of a horizon, according to embodiments of the invention;</div>
+<div class="description-paragraph" id="p-0024" num="0027"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a schematic illustration of iso-surfaces of a curvilinear coordinate system, according to embodiments of the invention; and</div>
+<div class="description-paragraph" id="p-0025" num="0028"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a flowchart of a method, according to embodiments of the invention.</div>
+</description-of-drawings>
+<div class="description-paragraph" id="p-0026" num="0029">For simplicity and clarity of illustration, elements shown in the drawings have not necessarily been drawn to scale. For example, the dimensions of some of the elements may be exaggerated relative to other elements for clarity. Further, where considered appropriate, reference numerals may be repeated among the drawings to indicate corresponding or analogous elements throughout the serial views.</div>
+<heading id="h-0006">DETAILED DESCRIPTION OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0027" num="0030">The present description presents a preferred embodiment. The features of the invention are subject to alteration and modification and therefore the present description should not be considered limiting.</div>
+<div class="description-paragraph" id="p-0028" num="0031">Geological layers may include particles of sediment which have been deposited throughout geological time at paleo-geographic locations. Sedimentary attributes may define or be used to determine parameters representing the sedimentation of particles over time. Sedimentary attributes may include, for example, sedimentary expansion (<figref idrefs="DRAWINGS">FIG. 4</figref>), sedimentary potential (<figref idrefs="DRAWINGS">FIG. 5</figref>), sedimentary acceleration (<figref idrefs="DRAWINGS">FIG. 6</figref>), sedimentary expansion ratio sedimentary horizontal divergence, sedimentary horizontal norm, curvature of an N-line (<figref idrefs="DRAWINGS">FIG. 3B</figref>), curvature of an IPG-line (<figref idrefs="DRAWINGS">FIG. 3B</figref>), and normal divergence. Numerical method and computer systems may be used to derive these attributes from a GeoChron model describing the paleo-geographic (Geo) coordinates (u,v) and geological-time (Chron) coordinate (t) of deposition of the particles of sediment observed today in the subsurface. The sedimentary attributes may be determined from seismic data and well data and may be correlated with different characteristics or physical properties (e.g., permeability, porosity, rock type) of the subsurface on a local level, accounting for changes in the properties across the subsurface. From a practical perspective, correlations between sedimentary attributes (e.g. Ricci curvature, sedimentary acceleration) and depositional style (e.g., sedimentation mode or style) may be used to better estimate the variations of physical properties in the subsurface (e.g., variations between horizons, faults, and layers). Geological facies of rock formations may strongly depend on sedimentary attributes including the energy of sedimentary fluxes and, in turn, physical properties of layers may strongly depend on these facies. As a consequence, sedimentary attributes may be linked to the physical properties of the terrains and may be used to guide the modeling of physical properties in the subsurface.</div>
+<div class="description-paragraph" id="p-0029" num="0032">For the sake of clarity and for the purpose of simplifying the presentation of embodiments of the invention, the following preliminary definitions are given, although other definitions may be used:</div>
+<div class="description-paragraph" id="h-0007" num="0000">Geological-Time</div>
+<div class="description-paragraph" id="p-0030" num="0033">A particle of sediment in a geological terrain may be observed at a location in the subsurface. The location of the particle may be mathematically represented or modeled, e.g., by a vector, (x,y,z), in a three-dimensional (3D) space, such as the Cartesian coordinate system (of course, when modeling such particles, the position of many particles may be modeled together for example using a cell). When modeled, a data structure such as a node or cell may represent a subset of particles. The time when the particle of sediment was originally deposited may be referred to as the “geological-time” and may be represented or modeled, e.g., as a geological-time function of the current location of the particle, t(x,y,z). When used herein, a “current,” “observed” or modem day location for a particle (or data structure representing one or more particles) or subsurface feature may mean the location of the item in the present day, relative to geological time. The actual geological-time of the deposition of particles may be difficult to determine and may be replaced, e.g., by any arbitrary monotonic increasing function of the actual geological-time. The monotonic function may be referred to as the “pseudo-geological-time”. Geological-time and pseudo-geological-time are referred to interchangeably herein.</div>
+<div class="description-paragraph" id="p-0031" num="0034">The geological-time function t(x,y,z) may be monotonic. e.g., the gradient of the geological-time never reduces to the null vector and the geological-time function has no local maximum or minimum values.</div>
+<div class="description-paragraph" id="h-0008" num="0000">Level Set Surface</div>
+<div class="description-paragraph" id="p-0032" num="0035">Consider a function f(x,y,z) defined in a 3D space in such a way that its gradient never reduces to the null vector. A level set surface, S(f<sub>0</sub>), may be the set of points where the function f(x,y,z) is equal to a given numerical value, f<sub>0</sub>.</div>
+<div class="description-paragraph" id="p-0033" num="0036">As an example, if the geological-time t(x,y,z) represents a pseudo-geological-time of deposition, then the level set surface H(t<sub>0</sub>) of t(x,y,z) may be a geological horizon.</div>
+<div class="description-paragraph" id="p-0034" num="0037">Various mechanisms are currently used for modeling subsurface geological terrains:</div>
+<div class="description-paragraph" id="h-0009" num="0000">GeoChron Model, G-space and <o>G</o>-space</div>
+<div class="description-paragraph" id="p-0035" num="0038">When a layer of particles was deposited during a geological-time period in the past, the layer typically had continuous geometry during that time period. However, after the passage of time, the layers may become eroded and disrupted by faults, for example, resulting from tectonic motion or other sub-surface movements, which result in uneven and discontinuous layers in the present day subsurface. As compared to the continuous layers geometry of the past, the discontinuous layers of the present are difficult to model. Accordingly, the “GeoChron” model has recently been developed to operate between two 3D spaces (e.g. G space <b>104</b> and <o>G</o> space <b>106</b> in <figref idrefs="DRAWINGS">FIG. 2</figref>). These two 3D spaces or models may be, for example:
+</div> <ul> <li id="ul0005-0001" num="0000"> <ul> <li id="ul0006-0001" num="0039">A 3D space G, called the “Geological Space” or G-space, representing a model of the current subsurface features observed in modern times or today (e.g., current modeled locations of particles of sediment in the terrain). The modeled location of each particle (or of a subset of particles, or of cells estimating the location of numerous particles) may be represented by the coordinates (x,y,z), where (x,y) may describe the today geographical coordinates of the particle (e.g., latitude and longitude) and (z) may describe the today altitude or distance below or above a given reference surface level (e.g., the sea level); and</li> <li id="ul0006-0002" num="0040">A 3D space <o>G</o>, called the “depositional-space” or “parametric-space” or more simply <o>G</o>-space, representing modeled or predicted locations of particles of sediment at the time when the particles were originally deposited in the layer. The modeled location of each particle may be represented by the coordinates (u,v,t) where (t) may be the geological-time of deposition of the particle and (u,v) may be the paleo-geographical coordinates of the particle at geological-time (t).</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0036" num="0041">The GeoChron model defines a transformation between the two 3D spaces G and G. The transformation may be referred to as a “uvt-transformation,” for example, transforming the (x,y,z) coordinated of the G space to the (u,v,t) coordinated of the <o>G</o> space. The GeoChron model applies a forward uvt-transformation to transform the current model (a model of the subsurface features current in time) in G-space to the original deposition model in <o>G</o>-space and applies an inverse or reverse uvt-transformation to transform the original deposition model in <o>G</o>-space to the current model in G-space. Accordingly, the GeoChron model may execute complex computations on the original deposition model in <o>G</o>-space where geological properties are typically uniform and simple to manipulate relative to the discontinuous current model in G-space. Once the original deposition model in <o>G</o>-space is sufficiently accurate, the GeoChron model may use the “reverse uvt-transformation” to transform the model, and its geological properties, back to the current time domain in G-space to generate the present day non-uniform geological properties of the faulted and eroded present day model.</div>
+<div class="description-paragraph" id="p-0037" num="0042">Embodiments of the invention may compute the functions u(x,y,z), v(x,y,z) and t(x,y,z) at each location (x,y,z) observed (e.g. measured or interpolated) today in the present-day subsurface model. From a practical perspective, the functions u(x,y,z), v(x,y,z) and t(x,y,z) may be deduced from seismic data (e.g., a seismic cube) and/or well data (e.g., well markers). The functions u(x,y,z) and v(x,y,z) are curvilinear (e.g. as shown in <figref idrefs="DRAWINGS">FIG. 7</figref>), and may be used, for example, to characterize curvilinear “lateral” surfaces (iso-t surface shown in in <figref idrefs="DRAWINGS">FIG. 7</figref>) to determine variations in a layer's thickness or sedimentation rate along the curvilinear iso-t surface.</div>
+<div class="description-paragraph" id="p-0038" num="0043">Reference is made to <figref idrefs="DRAWINGS">FIG. 1</figref>, which schematically illustrates a system including receiver and computing system in accordance with an embodiment of the present invention. Methods disclosed herein may be performed using a system <b>105</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>. In other embodiments, methods used herein may be performed by different systems, having different components.</div>
+<div class="description-paragraph" id="p-0039" num="0044">System <b>105</b> may include a receiver <b>120</b>, a computing system <b>130</b>, and a monitor or display <b>180</b>. The data mentioned herein, e.g., seismic data and well markers used to form intermediate data and finally to model subsurface regions and sedimentary attributes, may be ascertained by processing data received by receiver <b>120</b> (e.g., a hydrophone or microphone). Intermediate data and other data such as results, models, and visualizations, as well as code, instructions or software, may be stored in memory <b>150</b> or other storage units. The aforementioned processes described herein may be performed by software <b>160</b> (e.g., stored in memory <b>150</b> or other units) being executed by processor <b>140</b> manipulating the data.</div>
+<div class="description-paragraph" id="p-0040" num="0045">Receiver <b>120</b> may accept data representing a geo-chronological model. The model may include a set of points that depict or represent an estimated or predicted state of the subsurface structure at a time period when the subsurface structure was originally formed. The data may be sent to a processor <b>140</b> to numerically compute sedimentary attributes of a subsurface. The sedimentary attributes may be, for example, a function, a vector field or a tensor field.</div>
+<div class="description-paragraph" id="p-0041" num="0046">Computing system <b>130</b> may include, for example, any suitable processing system, computing system, computing device, processing device, computer, processor, or the like, and may be implemented using any suitable combination of hardware and/or software. Computing system <b>130</b> may include for example one or more computer controllers or processor(s) <b>140</b>, memory <b>150</b> and software <b>160</b>. Data <b>155</b> generated by reflected signals, received by receiver <b>120</b>, may be transferred, for example, to computing system <b>130</b>. The data may be stored in the receiver <b>120</b> as for example digital information and transferred to computing system <b>130</b> by uploading, copying or transmitting the digital information. Processor <b>140</b> may communicate with computing system <b>130</b> via wired or wireless command and execution signals.</div>
+<div class="description-paragraph" id="p-0042" num="0047">Memory <b>150</b> may include cache memory, long term memory such as a hard drive, and/or external memory, for example, including random access memory (RAM), read only memory (ROM), dynamic RAM (DRAM), synchronous DRAM (SD-RAM), flash memory, volatile memory, non-volatile memory, cache memory, buffer, short term memory unit, long term memory unit, or other suitable memory units or storage units. Memory <b>150</b> may store instructions (e.g., software <b>160</b>) and data <b>155</b> to execute embodiments of the aforementioned methods, steps and functionality (e.g., in long term memory, such as a hard drive). Data <b>155</b> may include, for example, a vector field describing a set of paleo-geographic points, instructions for processing the collected data to generate a model, or other instructions or data. Memory <b>150</b> may store a geological-time function, a model including a set of paleo-geographic coordinates representing a structure when it was originally deposited in the layer (e.g., in uvt-space), a model representing the corresponding structure in a current or present-day time period (e.g., in xyz-space), a model representing a function of one or more sedimentary attributes in the present-day or depositional space and/or a model of the physical properties (e.g., permeability, porosity, rock type) of the structures derived from the sedimentary attributes. Memory <b>150</b> may store cells, nodes, voxels, etc., associated with the model and the model mesh. Memory <b>150</b> may also store forward and/or reverse uvt-transformations to transform current models in xyz-space to models in uvt-space, and vice versa. Data <b>155</b> may also include intermediate data generated by these processes and data to be visualized, such as data representing graphical models to be displayed to a user. Memory <b>150</b> may store intermediate data. System <b>130</b> may include cache memory which may include data duplicating original values stored elsewhere or computed earlier, where the original data may be relatively more expensive to fetch (e.g., due to longer access time) or to compute, compared to the cost of reading the cache memory. Cache memory may include pages, memory lines, or other suitable structures. Additional or other suitable memory may be used.</div>
+<div class="description-paragraph" id="p-0043" num="0048">Computing system <b>130</b> may include a computing module having machine-executable instructions. The instructions may include, for example, a data processing mechanism (including, for example, embodiments of methods described herein) and a modeling mechanism. These instructions may be used to cause processor <b>140</b> using associated software <b>160</b> modules programmed with the instructions to perform the operations described. Alternatively, the operations may be performed by specific hardware that may contain hardwired logic for performing the operations, or by any combination of programmed computer components and custom hardware components. Processor <b>140</b> may be configured to carry out embodiments of the present invention by, for example, executing instructions or code. One or more processors <b>140</b> may be configured to carry out methods of the invention in different manners, for example by including specialized circuitry.</div>
+<div class="description-paragraph" id="p-0044" num="0049">Embodiments of the invention may include an article such as a computer or processor readable medium, or a computer or processor non-transitory storage medium, such as for example a memory, a disk drive, or a USB flash memory, encoding, including or storing instructions, e.g., computer-executable instructions, which when executed by a processor or controller, carry out methods disclosed herein.</div>
+<div class="description-paragraph" id="p-0045" num="0050">Processor <b>140</b> may perform various methods described herein. For example, processor <b>140</b> may generate a geological time function t(x,y,z) according to techniques known in the art. The geological time function t(x,y,z) may be an arbitrary monotonic increasing function of the actual geological-time.</div>
+<div class="description-paragraph" id="p-0046" num="0051">Processor <b>140</b> may generate paleo-geographic coordinates u(x,y,z) and v(x,y,z) and geological-time t(x,y,z) defining a horizon H*(t<sub>0</sub>) in G-space, which models a “past” or “paleo” state of the subsurface structures at a time when they were originally deposited in the layer. The paleo-geographic coordinates of the past depositional model are generated based on the geometry of the current modeled horizons.</div>
+<div class="description-paragraph" id="p-0047" num="0052">Processor <b>140</b> may generate functions {u(x,y,z), v(x,y,z), t(x,y,z)} between G-space and G-space to transform a current model in G-space of a discontinuous faulted horizon to a single substantially continuous horizon in <o>G</o>-space. The paleo-geographic coordinates {u(x,y,z), v(x,y,z)} may be defined by a system of equations in <o>G</o>-space. Processor <b>140</b> may determine sedimentary attributes of the functions {u(x,y,z), v(x,y,z), t(x,y,z)} or {x(u,v,t), y(u,v,t), z(u,v,t)} e.g. according to a deposition style. These attributes may include functions of sedimentation rate, for example, or other attributes based on sedimentation, such as, sedimentary expansion (<figref idrefs="DRAWINGS">FIG. 4</figref>), sedimentary potential (<figref idrefs="DRAWINGS">FIG. 5</figref>), sedimentary acceleration (<figref idrefs="DRAWINGS">FIG. 6</figref>).</div>
+<div class="description-paragraph" id="p-0048" num="0053">Display <b>180</b> may display data from receiver <b>120</b>, or computing system <b>130</b> or any other suitable systems, devices, or programs, for example, an imaging program or receiver tracking device. Display <b>180</b> may include one or more inputs or outputs for displaying data from multiple data sources or to multiple displays. For example display <b>180</b> may display visualizations of models including sedimentary attributes of subsurface structures and/or their subsurface features, such as faults, horizons and unconformities. Display <b>180</b> may display sedimentary attributes of horizon H(t<sub>0</sub>) in G-space and/or sedimentary attributes of horizon H*(t<sub>0</sub>) in <o>G</o>-space. Display <b>180</b> may display the models in separate pages or windows and a user may select one of the models (e.g., by clicking a ‘G-space’ or ‘<o>G</o>-space’ button with a pointing device such as a mouse or by scrolling between the models). A user may select a display option to show, hide or switch between different sedimentary attributes.</div>
+<div class="description-paragraph" id="p-0049" num="0054">Reference is made to <figref idrefs="DRAWINGS">FIG. 2</figref>, which schematically illustrates a transformation, map or conversion between a current model <b>104</b> and an original depositional model <b>106</b> (separated by dashed line <b>101</b>), according to some embodiments of the invention. Current model <b>104</b> may represent the current modeled locations of subsurface structures including particles of sediment in the terrain (typically at a granularity larger than that representing each particle). Current model <b>104</b> may be a 3D model in a Cartesian (x,y,z)-space, where the location of each particle is represented by the coordinates (x,y,z), where (x,y) may describe the geographical coordinates of the particle (e.g., latitude and longitude) and (z) may describe the altitude or distance below or above a surface level.</div>
+<div class="description-paragraph" id="p-0050" num="0055">Depositional model <b>106</b> may represent estimated or predicted (past) locations of particles of sediment at the time when the particles were originally deposited, for example, in the layer. Depositional model <b>106</b> may be a 3D model in an (u,v,t)-space, where each particle may be represented by the coordinates (u,v,t) where (t) may be the geological-time of deposition of the particle and (u,v) may be the paleo-geographical coordinates of the particle at geological-time (t).</div>
+<div class="description-paragraph" id="p-0051" num="0056">The “forward” or “direct” transformation <b>100</b> may be defined by functions <b>102</b> {u(x,y,z),v(x,y,z),t(x,y,z)}, which convert or transform each point (x,y,z) of current model <b>104</b> to a point {u(x,y,z),v(x,y,z),t(x,y,z)} of depositional model <b>106</b>. The forward transformation <b>100</b> may be represented, for example, as follows:</div>
+<div class="description-paragraph" id="p-0052" num="0057">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mover>
+<mo>→</mo>
+<mi>UVT</mi>
+</mover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<mi>u</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>v</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>t</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>[</mo>
+<mn>1</mn>
+<mo>]</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0053" num="0058">The forward transformation or conversion <b>100</b> transforms each horizon H(t) (e.g., <b>108</b> <i>a </i>or <b>108</b> <i>b</i>) of current subsurface structure <b>108</b>, in current model <b>104</b>, into a level horizontal plane H*(t) (e.g., <b>110</b> <i>a </i>and <b>110</b> <i>b</i>, respectively) of depositional structure <b>110</b> in depositional model <b>106</b>. In depositional model <b>106</b>, horizons <b>110</b> <i>a </i>and <b>110</b> <i>b </i>of structure <b>110</b> are simply the images of the level surfaces of the function t(x,y,z) representing the geological-time at location (x,y,z). That is, since a horizon models a set of particles of sediment that was uniformly deposited in time, the geological-time of each horizon is constant at the time when the particles modeled thereby were originally deposited (e.g., in depositional model <b>106</b>). Therefore, each horizon <b>110</b> <i>a </i>and <b>110</b> <i>b </i>in depositional model <b>106</b> may be planar and uniquely defined by a single geological-time, (t).</div>
+<div class="description-paragraph" id="p-0054" num="0059">Conversely, the “inverse” or “reverse” conversion or transform <b>112</b> may be defined by functions <b>114</b> {x(u,v,t), y(u,v,t), z(u,v,t)}, which transform each point (u,v,t) of the depositional model <b>106</b> to a point {x(u,v,t), y(u,v,t), z(u,v,t)} in current model <b>104</b>. The inverse transformation <b>112</b> may be represented, for example, as follows:</div>
+<div class="description-paragraph" id="p-0055" num="0060">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+<mo>,</mo>
+<mi>t</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mover>
+<mo>→</mo>
+<msup>
+<mi>UVT</mi>
+<mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+</mover>
+<mo>⁢</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mrow>
+<mi>x</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+<mo>,</mo>
+<mi>t</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+<mo>,</mo>
+<mi>t</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>z</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+<mo>,</mo>
+<mi>t</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>}</mo>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>[</mo>
+<mn>2</mn>
+<mo>]</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0056" num="0061">Using the forward transform or conversion <b>100</b>, e.g., defined in equation (1), and the inverse transform <b>112</b>, e.g., defined in equation (2), any geological property may be modeled in one of the two models (current model <b>104</b> or depositional model <b>106</b>) and the result of the property modeled in the one space may be transferred to the other space (depositional model <b>106</b> or current model <b>104</b>, respectively). In practice, a geological property may be typically modeled in the space where modeling the property is the simplest. For example, horizons may be modeled in depositional model <b>106</b> where they have a simple flat planar form. Faults may be modeled first in current model <b>104</b> since they did not exist in the original depositional time, and may then be transformed to depositional space, to model their interaction with the planar horizons in depositional model <b>106</b>.</div>
+<div class="description-paragraph" id="p-0057" num="0062">Embodiments of the invention may manipulate data representations of real-world objects and entities such as underground geological structures, including faults, horizons and other features. Data received by for example a receiver receiving waves generated by an air gun or explosives may be manipulated and stored, e.g., in memory <b>150</b>, and data such as images representing underground structures may be presented to a user, e.g., as a visualization on display <b>180</b> in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="h-0010" num="0000">Horizons, Faults and Unconformities</div>
+<div class="description-paragraph" id="p-0058" num="0063">In stratified layers, horizons, faults and unconformities may be curvilinear (e.g., non-planar) surfaces which may be for example characterized as follows:
+</div> <ul> <li id="ul0007-0001" num="0000"> <ul> <li id="ul0008-0001" num="0064">A horizon, H(t<sub>0</sub>), may be a level surface of the geological time function t(x,y,z) corresponding to a plurality of particles of sediment which were deposited approximately at substantially the same geological-time (t<sub>0</sub>).</li> <li id="ul0008-0002" num="0065">A fault may be a surface of discontinuity of the horizons that may have been induced by a relative displacement of terrains on both sides of such surfaces. In other words, the geological-time t(x,y,z) of deposition of the sediments is discontinuous across each fault. Faults may cut horizons and may also cut other faults.</li> <li id="ul0008-0003" num="0066">An unconformity may be a surface of discontinuity of the horizons that may have been induced by for example an erosion of old terrains replaced by new ones. In other words, similarly to faults, the geological-time function t(x,y,z) of deposition of the sediments is discontinuous across each unconformity. When discussed herein, unconformities are treated as faults: as a consequence, in this patent application, faults may include both real faults and unconformities. Alternately, unconformities may be surfaces bounding a sequence of sedimentary layers and one specific geological-time function t(x,y,z) may be assigned to each such sequence.
+<br/>
+Notation
+</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0059" num="0067">In accordance with the present invention and as used herein, the following notation is defined with the following meanings, unless explicitly stated otherwise:
+</div> <ul> <li id="ul0009-0001" num="0000"> <ul> <li id="ul0010-0001" num="0068">(grad f) is a vector representing the gradient of a scalar function f,</li> <li id="ul0010-0002" num="0069">(a×b) represents the cross product of two vectors (a,b),</li> <li id="ul0010-0003" num="0070">(a·b) represents the dot product (also called the scalar product) of two vectors (a,b) and</li> <li id="ul0010-0004" num="0071">∥a∥ represents the norm, magnitude, or absolute value of a vector (a).
+<br/>
+(Bold notation generally represents multi-dimensional terms, such as, vectors.)
+<br/>
+Paleo-Geographic Coordinates, IPG-lines and N-lines
+</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0060" num="0072">Each particle of sediment observed today at geographical coordinates (x,y) and altitude (z) may have been deposited at paleo-geographical coordinates u(x,y,z), and v(x,y,z) which may differ from the current geographic coordinates (x,y). The GeoChron model may provide equations and algorithms allowing the geological-time function t(x,y,z) to be modeled at any location (x,y,z) in the subsurface.</div>
+<div class="description-paragraph" id="p-0061" num="0073">For a pair of level surfaces U(u<sub>0</sub>) and V(v<sub>0</sub>) that are embedded in the 3D G-space:
+</div> <ul> <li id="ul0011-0001" num="0000"> <ul> <li id="ul0012-0001" num="0074">U(u<sub>0</sub>) may include a plane of points representing particles of sediment which were deposited at substantially the same paleo-geographic coordinate (u=u<sub>0</sub>). In other words, U(u<sub>0</sub>) is a level surface where the function u(x,y,z) is equal to the constant value u<sub>0</sub>;</li> <li id="ul0012-0002" num="0075">V(u<sub>0</sub>) may include a plane of points representing particles of sediment which were deposited at substantially the same paleo-geographic coordinate (v=v<sub>0</sub>). In other words. V(v<sub>0</sub>) is a level surface where the function v(x,y,z) is equal to the constant value v<sub>0</sub>;</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0062" num="0076">The intersection of U(u<sub>0</sub>) and V(v<sub>0</sub>) may be called “Iso-Paleo-Geograhic-Lines” (IPG-lines) which is a line representing particles of sediments which have been deposited at the same paleo-geographic coordinates (u<sub>0</sub>,v<sub>0</sub>). The unit vector T(x,y,z) tangent to the IPG-line passing through location (x,y,z) in the G-space may be generated, for example, according to the following equation:
+<br/>
+<i>T</i>(<i>x,y,z</i>)=(grad<i>u</i>(<i>x,y,z</i>)×grad<i>v</i>(<i>x,y,z</i>))/∥grad<i>u</i>(<i>x,y,z</i>)×grad<i>v</i>(<i>x,y,z</i>)∥  [3]
+</div>
+<div class="description-paragraph" id="p-0063" num="0077">The geometry of the horizons and the IPG-lines may characterize the geometry of layers in the subsurface as observed today. Paleo-geographic coordinates (u,v) may be non-unique and may be rotated and translated to generate equivalent paleo-depositional coordinate systems in <o>G</o>-space, illustrating that u-lines and v-lines may depend on the choice of paleo-geographic coordinates. In contrast, IPG-lines may have an intrinsic geological definition which may not depend on the choice of paleo-geographic coordinates (an IPG-line may be a subset of particles of sediment deposited at the same paleo-location, whatever the system of paleo-geographic coordinates). On the one hand, it may be common to use geometric properties of horizons (e.g., curvatures) as attributes. By definition, a horizon may be a set of particles of sediments which were deposited at the same geological time regardless of the paleo-geographic coordinates or system used. In the oil and gas industry, it may be common practice to compute the curvatures of an horizon and to use them as attributes. On the other hand, an IPG-line is a set of particles of sediment which were deposited at the same paleo-location whatever the system of paleo-geographic coordinates. Thus, it may be possible compute the curvature of such a line and use it as a new attribute.</div>
+<div class="description-paragraph" id="p-0064" num="0078">A curve NL(x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) passing through the point (x<sub>0</sub>,y<sub>0</sub>, z<sub>0</sub>) and constantly orthogonal to the horizons may be referred to as a “normal-line” also called an “N-line”. The unit vector N(x,y,z) tangent to the N-line passing through location (x,y,z) in the G-space may be generated, for example, according to the following equation:
+<br/>
+<i>N</i>(<i>x,y,z</i>)=grad<i>t</i>(<i>x,y,z</i>)/∥grad<i>t</i>(<i>x,y,z</i>)<i>∥</i>  [4]
+</div>
+<div class="description-paragraph" id="p-0065" num="0079">Similar to what was described above for IPG-lines, it may be possible to compute the curvature of N-lines and use them as attributes. IPG-lines generally differ from N-lines, but both may be invariant under any equivalent transformation or parameterization.</div>
+<div class="description-paragraph" id="h-0011" num="0000">Computing Derivatives</div>
+<div class="description-paragraph" id="p-0066" num="0080">A 3D space S, where each point of this space is represented by three coordinates (X,Y,Z), may be defined by the GeoChron model as follows:
+</div> <ul> <li id="ul0013-0001" num="0000"> <ul> <li id="ul0014-0001" num="0081">If (X,Y,Z) is identified with present-day coordinates (x,y,z), then the space S is identical to the G-space (e.g. current model <b>104</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>).</li> <li id="ul0014-0002" num="0082">If (X,Y,Z) is identified with paleo-coordinates (u,v,t), then the space S is identical to the <o>G</o>-space (e.g. depositional model <b>106</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>).</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0067" num="0083">Embodiments of the invention may be used to numerically compute the partial derivatives of any functions F(X,Y,Z) at any location (X,Y,Z) of a 3D space S. For example, assuming that F(X,Y,Z) has been sampled at the nodes (X<sub>i</sub>,Y<sub>j</sub>,Z<sub>k</sub>) of a 3D regular rectilinear grid with hexahedral cells and steps ΔX, ΔY and ΔZ in the (X), (Y) and (Z) directions, a finite difference method or other method may be used to compute the partial derivatives of F(X,Y,Z) as follows:
+<br/>
+<i>dF</i>(<i>X</i> <sub>i</sub> <i>,Y</i> <sub>j</sub> <i>,Z</i> <sub>k</sub>)/<i>dX={F</i>(<i>X</i> <sub>i+1</sub> <i>,Y</i> <sub>j</sub> <i>,Z</i> <sub>k</sub>)−<i>F</i>(<i>X</i> <sub>i−1</sub> <i>,Y</i> <sub>j</sub> <i>,Z</i> <sub>k</sub>)}/{2Δ<i>X}</i>
+<br/>
+<i>dF</i>(<i>X</i> <sub>i</sub> <i>,Y</i> <sub>j</sub> <i>,Z</i> <sub>k</sub>)/<i>dY={F</i>(<i>X</i> <sub>i</sub> <i>,Y</i> <sub>j+1</sub> <i>,Z</i> <sub>k</sub>)−<i>F</i>(<i>X</i> <sub>i</sub> <i>,Y</i> <sub>j−1</sub> <i>,Z</i> <sub>k</sub>)}/{2Δ<i>Y}</i>
+<br/>
+<i>dF</i>(<i>X</i> <sub>i</sub> <i>,Y</i> <sub>j</sub> <i>,Z</i> <sub>k</sub>)/<i>dZ={F</i>(<i>X</i> <sub>i</sub> <i>,Y</i> <sub>j</sub> <i>,Z</i> <sub>k+1</sub>)−<i>F</i>(<i>X</i> <sub>i</sub> <i>,Y</i> <sub>j</sub> <i>,Z</i> <sub>k−1</sub>)}/{2Δ<i>Z}</i>
+</div>
+<div class="description-paragraph" id="p-0068" num="0084">A person of ordinary skill in the art may appreciate that these formulas may straightforwardly be generalized to numerically compute higher order derivatives with respect to X. Y, and Z.</div>
+<div class="description-paragraph" id="p-0069" num="0085">Embodiments of the invention may also numerically compute derivatives of functions sampled at the nodes (also called vertices) of irregular grids such as, for example but not limited to, grids with tetrahedral cells and, more generally, polyhedral cells. After estimating derivatives at sampling locations (X<sub>i</sub>,Y<sub>j</sub>,Z<sub>k</sub>), local interpolations may then be used to numerically estimate these derivatives at any location within each cells.</div>
+<div class="description-paragraph" id="p-0070" num="0086">These classical numerical methods may be used to numerically compute partial derivatives of any order. In particular, but not limited to, for any function F(X,Y,Z), these methods may be used to compute:
+</div> <ul> <li id="ul0015-0001" num="0000"> <ul> <li id="ul0016-0001" num="0087">a gradient denoted “grad F” at each location (X,Y,Z),</li> <li id="ul0016-0002" num="0088">a Laplacian denoted “ΔF” at each location (X,Y,Z),</li> <li id="ul0016-0003" num="0089">a directional derivative dF/ds of each function F(X,Y,Z) with respect to the arc length (s) in a given direction parallel to a unit vector D. Directional derivative dF/ds may be defined by the dot product of the gradient of F(X,Y,Z) by D, for example, as follows:
+<br/>
+<i>dF/ds</i>=grad<i>F</i>(<i>X,Y,Z</i>)·<i>D </i>
+</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0071" num="0090">In the case where W(X,Y,Z) is a vector field, the partial derivatives of the components W<sub>X</sub>(X,Y,Z). W<sub>Y</sub>(X,Y,Z) and W<sub>Z</sub>(X,Y,Z) of W(X,Y,Z) may be numerically computed. In such a case, using these numerical derivation techniques, the divergence {div W(X,Y,Z)} of W(X,Y,Z) may also be computed, for example, as follows at each location (X,Y,Z):
+<br/>
+div <i>W</i>(<i>X,Y,Z</i>)=<i>dW</i> <sub>X</sub> <i>/dX+dW</i> <sub>Y</sub> <i>/dY+dW</i> <sub>Z</sub> <i>/dZ </i>
+</div>
+<div class="description-paragraph" id="p-0072" num="0091">More generally, any scalar, vectorial or tensorial function involving derivatives of W(X,Y,Z) or its components may be computed.</div>
+<div class="description-paragraph" id="h-0012" num="0000">Sedimentary Attributes</div>
+<div class="description-paragraph" id="p-0073" num="0092">Based on the systems and methods described above, the functions u(x,y,z), v(x,y,z) and t(x,y,z) may be computed at any location (x,y,z) observed today in the subsurface. Each of these functions may be non-unique, variations of which may be considered as equivalent when the variations equivalently represent the same geometry and deformation of the geological layers, for example, when transformed to the current model observed today. For example, if u(x,y,z), v(x,y,z) and t(x,y,z) are equivalent to u*(x,y,z), v*(x,y,z) and t*(x,y,z), then:
+</div> <ul> <li id="ul0017-0001" num="0000"> <ul> <li id="ul0018-0001" num="0093">the horizons corresponding to the level set surfaces of the geological-time functions t(x,y,z) and t*(x,y,z) may have the same geometry, such as, thickness or curvature;</li> <li id="ul0018-0002" num="0094">the IPG-lines corresponding to the intersection of the level set surfaces of the paleo-geographic functions u(x,y,z) and v(x,y,z), respectively, may have the same geometry;</li> <li id="ul0018-0003" num="0095">the N-lines orthogonal to the horizons may have the same geometry; and/or</li> <li id="ul0018-0004" num="0096">the strain tensor or deformation calculated or deduced from the functions u(x,y,z), v(x,y,z) and t(x,y,z) may be identical to the strain tensor or deformation calculated or deduced from the functions u*(x,y,z), v*(x,y,z) and t*(x,y,z).</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0074" num="0097">Sedimentary attributes may be represented by a function SA(x,y,z), which is determined, calculated or deduced using one or more of the functions u(x,y,z), v(x,y,z) and t(x,y,z). The function SA(x,y,z) may be further transformed or parameterized and described by the function SA(u,v,t)=SA(x(u,v,t),y(u,v,t),z(u,v,t)). For example, a sedimentary attribute may be based on sedimentation rate, as further explained below. The sedimentary attributes SA(x,y,z) may be derived or represented in G-space (e.g., describing sedimentary attributes of the current subsurface structure) and may be transformed to represent sedimentary attributes SA(u,v,t) in <o>G</o>-space (e.g., describing sedimentary attributes of the subsurface structure at a time of original deposition).</div>
+<div class="description-paragraph" id="p-0075" num="0098">In <figref idrefs="DRAWINGS">FIG. 2</figref>, the (u,v,t) space <b>106</b>, a top horizon <b>110</b> <i>a </i>and a bottom horizon <b>110</b> <i>b </i>may bound a layer in the depositional model. These horizons <b>110</b> <i>a </i>and <b>110</b> <i>b </i>may be parallel horizontal surfaces forming a layer in <o>G</o>-space <b>106</b> and may correspond to folded or faulted horizons <b>108</b> <i>a </i>and <b>108</b> <i>b </i>forming a layer in G-space <b>104</b>. Folded or faulted horizons <b>108</b> <i>a </i>and <b>108</b> <i>b </i>may be parallel bounding a layer of laterally constant thickness or non-parallel bounding a layer of laterally varying thickness. One of these layers <b>302</b> is shown in G-space in <figref idrefs="DRAWINGS">FIG. 3A</figref> that has laterally varying thickness. In some embodiments, sedimentary attributes, such as, derivatives and other functions of sedimentation rate, may be determined based on the laterally variation in the thickness or the associated sedimentary rate of the layers <b>302</b>. These sedimentary attributes may be visualized in present-day model <b>108</b> or past depositional model <b>110</b> or may be used to determine geometric properties of the models.</div>
+<div class="description-paragraph" id="p-0076" num="0099">Reference is made to <figref idrefs="DRAWINGS">FIG. 3A</figref>, which schematically illustrates a layer <b>302</b> in G-space and its image <b>304</b> in <o>G</o>-space used to determine sedimentary attributes, according to embodiments of the invention. <figref idrefs="DRAWINGS">FIGS. 3A and 3B</figref> each show a 2D vertical cross-section of, but represent, a 3D model. Depending on the axes in which the cross-sections are taken, G-space may be represented by a (x,z) and/or (y,z) cross-section and <o>G</o>-space may be represented by a (u,t) and/or (v,t) cross-section.</div>
+<div class="description-paragraph" id="p-0077" num="0100">In <figref idrefs="DRAWINGS">FIG. 3A</figref>, layer <b>302</b> in G-space (e.g., representing a model of the current subsurface features observed in modern times or today) may be transformed to a layer <b>304</b> in <o>G</o>-space (e.g. representing a depositional model). Layer <b>302</b> may have a thickness Δh bounded by a bottom horizon H<sub>t </sub> <b>306</b> and a top horizon H<sub>t+Δt </sub> <b>308</b>, deposited at geological-times t and t+Δt, respectively. The thickness Δh of layer <b>302</b> may be non-constant, varying laterally along layer <b>302</b>. As shown, layer <b>304</b> in <o>G</o>-space has a constant (Δt) along each horizon, e.g. since the particles of each horizon are deposited at substantially the same geological time. In G-space, horizontal motion changes only in the (x,y) <b>314</b> plane, but not in the (z) axis <b>316</b>. However, lateral motion along layer <b>302</b> changes not only in the (x,y) <b>314</b> plane but also along the (z) axis <b>316</b>. Therefore, to determine lateral variations in sedimentation rate (e.g. to generate sedimentary attributes), embodiments of the invention may determine lateral variation in sedimentation rate (or thickness Δh) based on change (e.g. derivatives) of the sedimentation rate with respect to the paleo-geographic coordinates (u,v). The paleo-geographic coordinates vary along a surface <b>318</b> that follows the curvature of horizons bounding layer <b>302</b>. Since layer <b>302</b> is folded, the shape of horizons <b>306</b> and <b>308</b> as well as intermediate surface <b>318</b> <i>a </i>in G-space varies along all dimensions (x,y,z) of the present-day G-space. Since the curvilinear coordinates (u,v) in the G-space follow the curvature of a horizon <b>318</b> <i>a </i>in the layer, it may be easier to determine lateral change or variation in the direction of the curvilinear (u,v) coordinates in <o>G</o>-space, as shown by surface <b>318</b> <i>b</i>. As with horizons <b>306</b> and <b>308</b>, surface <b>318</b> <i>b </i>may be an iso-t surface in which paleo-geographic coordinates (u,v) vary, but the geological-time of deposition (t) remains constant. Therefore, surface <b>318</b> <i>b </i>may follow the curvature of horizons <b>306</b> and <b>308</b>. Thus, the lateral change in sedimentation rate may be measured as a rate of lateral change within a layer, at a constant geological time, e.g., without crossing through different layers deposited at different geological times.</div>
+<div class="description-paragraph" id="p-0078" num="0101">In a demonstrative example, a layer with constant thickness may be modeled to behave similarly to a book with a fixed number of pages bounded by a first page (e.g. representing horizon H<sub>t</sub>, <b>306</b>) and a last page (e.g. representing horizon H<sub>t+Δt </sub> <b>308</b>). Whether the layer is folded or unfolded, its thickness may be the length of a segment orthogonal to H<sub>t </sub> <b>306</b> and H<sub>t+Δt </sub> <b>308</b> and may be equal to the sum of the thicknesses of the pages or layers. In other words, if there is substantially no compaction and the layers can slide on each other without generating gaps (e.g., like the pages of a book bending and sliding against each other without creating gaps) according to a “flexural slip” tectonic style of deformation, the thickness of the layers, Δh, may be invariant throughout geological-time in a curvilinear coordinate system (u,v,t). However, contrary to the pages of a book, the thickness of real geological layers may vary laterally with respect to (u,v,t). For example, layer <b>302</b> in <figref idrefs="DRAWINGS">FIG. 3A</figref> has a non-constant thickness.</div>
+<div class="description-paragraph" id="p-0079" num="0102">When the thickness of layer <b>302</b> Δh becomes infinitely small, the gradient of the geological-time function t(x,y,z) at location (x,y,z) may be a vector of the G-space such that:
+<br/>
+grad<i>t</i>(<i>x,y,z</i>)=(Δ<i>t</i>(<i>x,y,z</i>)/Δ<i>h</i>(<i>x,y,z</i>))·<i>N</i>(<i>x,y,z</i>)  [5]
+<br/>
+where N(x,y,z) <b>312</b> may be the unit normal vector orthogonal to Ht at location (x,y,z) positively oriented in the direction of the younger terrains, e.g. as defined in equation (4). The sedimentation rate may be a scalar function V(x,y,z) at any location (x,y,z) in the geological space as observed today. The sedimentation rate may be equal or proportional to the speed or rate at which sediment is deposited on the Earth's surface throughout geological time. Accordingly, the sedimentation rate is proportional to the layer's thickness, Δh. The sedimentation rate may be defined for example as:
+<br/>
+<i>V</i>(<i>x,y,z</i>)={1/∥grad<i>t</i>(<i>x,y,z</i>)∥}=limit Δ<i>h/Δt </i>when Δ<i>t </i>goes to zero  [6]
+</div>
+<div class="description-paragraph" id="p-0080" num="0103">This function represents an “apparent” or approximate sedimentation rate, and represents a “real” sedimentation rate for example when there is substantially no compaction and if the times of deposition assigned to the horizons are the actual or observed geological-times (e.g. experimentally verified with carbon dating or other techniques).</div>
+<div class="description-paragraph" id="p-0081" num="0104">Embodiments of the invention may account for compaction of layers, which may be a process by which the porosity of a layer of sediment is decreased, or the compression or density of the sediment is increased, for example, as a result of its particles being squeezed together by the weight of overlying layers of sediment or by mechanical means. Layers of sediment that overlie or cover another layer may be layers deposited at a time later than the layers below (e.g., having a smaller z-value in (x,y,z)). A column of sediment h(x,y,z) orthogonal to the horizons observed today at location (x,y,z) in the G-space between two horizons H<sub>t </sub>and H<sub>t+Δt </sub>may have a compacted vertical thickness Δh<sub>C</sub>(x,y,z) at geological-time t of deposition such that:
+<br/>
+Δ<i>h</i>(<i>x,y,z</i>)=(1−<i>C</i>(<i>x,y,z</i>))·Δ<i>h</i> <sub>C</sub>(<i>x,y,z</i>)  [7]
+</div> <ul> <li id="ul0019-0001" num="0000"> <ul> <li id="ul0020-0001" num="0105">with: 0≤C(x,y,z)&lt;1.
+<br/>
+where the compaction function C(x,y,z) may be a compaction coefficient and may e.g. depend on the trajectory of the particles of sediment throughout geological-time and/or the nature of the sediment observed at location (x,y,z). The compaction function C(x,y,z) may vary laterally as different regions of the layer are more or less compacted. Based on equations (6) and (7), a sedimentation rate that takes compaction into account may be defined, for example, as:
+<br/>
+<i>V</i>(<i>x,y,z</i>)={1/∥grad<i>t</i>(<i>x,y,z</i>)∥}/{1−<i>C</i>(<i>x,y,z</i>)}  [8]
+</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0082" num="0106">A relatively high velocity of deposition (e.g., high sedimentation rate) at a point (x,y,z) may indicate a greater thickness of the layer surrounding that point.</div>
+<div class="description-paragraph" id="h-0013" num="0000">Sedimentary Attributes Computed Based on the Lateral Variation in Sedimentation Rate</div>
+<div class="description-paragraph" id="p-0083" num="0107">The sedimentation rate V(x,y,z) may be used to determine or calculate sedimentary attributes that characterize the shape of the layers based on lateral variations of the sedimentation rate (e.g., as shown in <figref idrefs="DRAWINGS">FIG. 7</figref>, the lateral curvilinear directions u and v being tangent to the horizons). For example, throughout geological time, horizons may be impacted and shifted by tectonic forces and, as observed today, are now folded and faulted. From a geo-mechanical perspective, at any location or point (x,y,z) in the current geological G-space, these tectonic transformations may be characterized by strain or relative displacement of the particle (x,y,z). The strain at location (x,y,z) may be defined e.g. by a strain tensor E(x,y,z). The deformations may be modeled by a strain tensor E(x,y,z) and the directions of the potential fractures at that location (x,y,z) may be defined by the Eigen vectors of the strain tensor. The strain tensor may characterize the total deformations of the stack of horizons subjected to tectonic forces. A potential direction of fracture at location (x,y,z), characterized by strain tensor E(x,y,z) may indicate that if a fracture occurs at location (x,y,z), the direction of this fracture should be a function of the eigen vectors of E(x,y,z). In terms of the GeoChron model, at any location (x,y,z) in the G-space, the strain tensor E(x,y,z) may be a function of the paleo-geographic coordinates u(x,y,z) and v(x,y,z) in <o>G</o>-space space. Therefore, the directions of potential fractures E(x,y,z) may be indirectly controlled by the functions u(x,y,z) and v(x,y,z). Strain tensors may measure how far the stacked horizons differ from flat planes and how the horizons moved relatively to each other during tectonic events.</div>
+<div class="description-paragraph" id="p-0084" num="0108">Attributes based on the lateral variation in sedimentation rate may include, for example, sedimentary expansion (<figref idrefs="DRAWINGS">FIG. 4</figref>), sedimentary potential (<figref idrefs="DRAWINGS">FIG. 5</figref>), and sedimentary acceleration (<figref idrefs="DRAWINGS">FIG. 6</figref>), as described below.</div>
+<div class="description-paragraph" id="h-0014" num="0000">Sedimentary Expansion Attribute</div>
+<div class="description-paragraph" id="p-0085" num="0109">The sedimentary expansion attribute may represent or describe variations in the flux or flow of geological materials (e.g., sediment) as they were deposited. Flux may generally describe the flow or movement of physical material through space. Deformations of horizons induced by lateral variations of layers thickness may also be viewed as sedimentary deformations related to variations of the flux of geological materials at depositional time and characterized by the “Ricci curvature tensor” which is a function of the second order derivatives of the sedimentary rate. Contrary to the mechanical strain tensor, the Ricci tensor may quantify how far the parallelism of horizons is impacted by the variations or changes of sedimentary fluxes and may not depend on tectonic forces. The Ricci scalar curvature KR may be the sum of all the eigen values of the Ricci curvature tensor and may be determined or calculated, for example, by partial derivatives of the sedimentation rate with respect to (u) and (v), as shown below.
+<br/>
+<i>KR</i>(<i>x,y,z</i>)=−2{<i>d</i> <sup>2</sup> <i>V</i>(<i>x,y,z</i>)/<i>du</i> <sup>2</sup> <i>+d</i> <sup>2</sup> <i>V</i>(<i>x,y,z</i>)/<i>dv</i> <sup>2</sup> <i>}/V</i>(<i>x,y,z</i>)  [9]
+</div>
+<div class="description-paragraph" id="p-0086" num="0110">As equation (9) shows, this Ricci scalar curvature KR may be defined by variations (derivatives such as first or second order derivatives) in the lateral thickness of the layers in curvilinear directions (u,v) tangent to the horizons (e.g. along iso-t surface <b>700</b> in <figref idrefs="DRAWINGS">FIG. 7</figref>).</div>
+<div class="description-paragraph" id="p-0087" num="0111">Similar to this Ricci scalar curvature KR(x,y,z), a sedimentary expansion rate THETA may be determined to locally characterize or describe the deformation induced by lateral variations of the sedimentation rate.
+<br/>
+THETA(<i>x,y,z</i>)=−<i>KR</i>(<i>x,y,z</i>)/constant  [10]
+<br/>
+where, e.g., constant is 30. The sedimentary expansion may measure a part of the dilatation of the terrains induced by the variations of the flux of geological materials along the horizons. This sedimentary expansion may be independent of the “mechanical dilatation” induced by tectonic forces associated to the “geo-mechanical” strain tensor E(x,y,z) explained above.
+</div>
+<div class="description-paragraph" id="p-0088" num="0112">Reference is made to <figref idrefs="DRAWINGS">FIG. 4</figref>, which schematically illustrates a model of sedimentary expansion attribute THETA(x,y,z) of a horizon, according to embodiments of the invention. Darker areas <b>402</b> in <figref idrefs="DRAWINGS">FIG. 4</figref> may correspond to dilatations in the subsurface and lighter areas <b>404</b> in <figref idrefs="DRAWINGS">FIG. 4</figref> may correspond to contractions in the subsurface. In some embodiments, the sedimentary expansion attribute may be used to indicate the expansion of the thickness in the lateral direction e.g. tangential to the horizon. For example, in the oil and gas industry, that expansion may be correlated with the variation of the rock type and geo-physical properties.</div>
+<div class="description-paragraph" id="h-0015" num="0000">Sedimentary Potential Attribute</div>
+<div class="description-paragraph" id="p-0089" num="0113">Using the sedimentation rate V(x,y,z) and classical derivation rules, the Ricci scalar curvature described by equation (9) may also be equivalently expanded as follows:
+<br/>
+−(½)<i>KR</i>(<i>x,y,z</i>)=<i>d</i> <sup>2 </sup>Log{<i>V</i>(<i>x,y,z</i>)}/<i>du</i> <sup>2</sup> <i>+d</i> <sup>2 </sup>Log{<i>V</i>(<i>x,y,z</i>)}/<i>dv</i> <sup>2</sup>+(<i>d </i>Log{<i>V</i>(<i>x,y,z</i>)}/<i>dv</i>)<sup>2</sup>+(<i>d </i>Log{<i>V</i>(<i>x,y,z</i>)}/<i>dv</i>)<sup>2</sup>  [11]
+</div>
+<div class="description-paragraph" id="p-0090" num="0114">As equation (11) shows, Log{V(x,y,z,)} may be used to determine the Ricci scalar curvature KR(x,y,z). Therefore, Log{V(x,y,z,)} may be used to represent a sedimentary potential S(x,y,z)
+<br/>
+<i>S</i>(<i>x,y,z</i>)=Log{<i>V</i>(<i>x,y,z</i>)}  [12]
+</div>
+<div class="description-paragraph" id="p-0091" num="0115">Substituting Log{V(x,y,z)} with S(x,y,z), the Ricci scalar curvature defined by equation [9] or [11] may be rewritten as:
+<br/>
+−(½)<i>KR</i>(<i>x,y,z</i>)=<i>d</i> <sup>2</sup> <i>S</i>(<i>x,y,z</i>)/<i>du</i> <sup>2</sup> <i>+d</i> <sup>2</sup> <i>S</i>(<i>x,y,z</i>)/<i>dv</i> <sup>2</sup> <i>+{dS</i>(<i>x,y,z</i>)/<i>dv}</i> <sup>2+{</sup> <i>dS</i>(<i>x,y,z</i>)/<i>dv}</i> <sup>2 </sup>
+</div>
+<div class="description-paragraph" id="p-0092" num="0116">A potential may be a scalar function, the gradient of which is used to define a vector field. As shown further below, a sedimentary acceleration A(x,y,z) may be a vector field related to the lateral variation in the sedimentation rate (and further, related to the lateral variation in the thickness of the layers) gradient of the sedimentary potential S(x,y,z). Due to this relationship between S(x,y,z) and A(x,y,z), both S(x,y,z) and A(x,y,a) may charachterize the sedimentation process. In some embodiments, for example, the sedimentary potential attribute may be correlated with rock types at a geological time when the particles were originally deposited.</div>
+<div class="description-paragraph" id="p-0093" num="0117">Reference is made to <figref idrefs="DRAWINGS">FIG. 5</figref>, which schematically illustrates a model of sedimentary potential attribute S(x,y,z) of a horizon, according to embodiments of the invention. Some areas may be related to high potential areas <b>504</b> and other areas may be related to low potential areas <b>502</b>.</div>
+<div class="description-paragraph" id="h-0016" num="0000">Sedimentary Acceleration Attribute</div>
+<div class="description-paragraph" id="p-0094" num="0118">The sedimentary acceleration attribute may be a vector field which is tangent to the horizons and which may have the property of canceling out at locations where the sedimentation rate is constant. The vector field may have a magnitude proportional to the rate of variation in the thickness of the layer and a direction oriented toward the direction of increasing layer thickness. For example, the larger the sedimentary acceleration vector, the faster the layers may thicken in the direction of the vector. The sedimentary acceleration vector field A(x,y,z) may be defined, for example, as the gradient of scalar function S(x,y,z) with respect to the (u,v) iso-t surface:
+<br/>
+<i>A</i>(<i>x,y,z</i>)={<i>dS</i>(<i>x,y,z</i>)/<i>du}·Ru</i>(<i>x,y,z</i>)+{<i>dS</i>(<i>x,y,z</i>)/<i>dv</i>})·<i>Rv</i>(<i>x,y,z</i>)  [13]
+</div>
+<div class="description-paragraph" id="p-0095" num="0119">In this definition, Ru(x,y,z) and Rv(x,y,z) may be vector fields embedded in the G-space tangential to the horizon at location (x,y,z) and defined as follows:
+<br/>
+<i>Ru</i>(<i>x,y,z</i>)=<i>J</i>(<i>x,y,z</i>)·{grad<i>v</i>(<i>x,y,z</i>)×grad<i>t</i>(<i>x,y,z</i>)}
+<br/>
+<i>Rv</i>(<i>x,y,z</i>)=<i>J</i>(<i>x,y,z</i>)·{grad<i>t</i>(<i>x,y,z</i>)×grad<i>u</i>(<i>x,y,z</i>)}
+</div>
+<div class="description-paragraph" id="p-0096" num="0120">The Jacobian function J(x,y,z) associated with the uvt-transform may be defined, for example, as follows:
+<br/>
+<i>J</i>(<i>x,y,z</i>)=1/[{grad<i>u</i>(<i>x,y,z</i>)×grad<i>v</i>(<i>x,y,z</i>)}·grad<i>t</i>(<i>x,y,z</i>)]  [14]
+</div>
+<div class="description-paragraph" id="p-0097" num="0121">Reference is made to <figref idrefs="DRAWINGS">FIG. 6</figref>, which schematically illustrates a model of sedimentary acceleration attribute A(x,y,z) of a horizon, according to embodiments of the invention. As shown, attribute A(x,y,z) is a vector field <b>602</b> tangent to the horizons and oriented in the direction of increasing layer thickness. The magnitude of the vectors in <b>602</b> ∥A(x,y,z)∥ is proportional to the variation of the sedimentation rate V(x,y,z) in the direction of A(x,y,z). Thus, the larger ∥A(x,y,z)∥ is, the faster the layers thicken in direction A(x,y,z).</div>
+<div class="description-paragraph" id="p-0098" num="0122">In some embodiments, the sedimentary acceleration attribute may be used to indicate which direction has the greater increase in thickness and therefore, the direction from where the sediments flowed at time of when the sediments in the layer were originally deposited. For example, in the oil and gas industry, that original direction may show a path followed by organic sediments, which generated the oil or gas. Therefore, these sedimentary attributes can be used by explorers to find oil or gas.</div>
+<div class="description-paragraph" id="h-0017" num="0000">Additional Attributes</div>
+<div class="description-paragraph" id="p-0099" num="0123">Other sedimentary attributes may be derived or determined based on the sedimentation rate or sedimentary acceleration. For example:
+</div> <ul> <li id="ul0021-0001" num="0000"> <ul> <li id="ul0022-0001" num="0124">1. An expansion ratio Ep(x,y,z) may be defined as follows:
+<br/>
+<i>Ep</i>(<i>x,y,z</i>)=<i>J</i>(<i>x,y,z</i>)/<i>V</i>(<i>x,y,z</i>)  [15]
+</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0100" num="0125">The expansion ratio may be based on a cubic dilatation that describes the relationship between volume of a unit of sediment observed today and volume of the unit of sediment at a time that the sediment was originally deposited. The expansion ratio Ep(x,y,z) may be defined as the ratio of an infinitesimal element of volume of sediments dM(x,y,z) observed today and the same infinitesimal element of volume dM<sub>d</sub>(x,y,z) at depositional time.
+<br/>
+<i>Ep</i>(<i>x,y,z</i>)=<i>dM</i>(<i>x,y,z</i>)/<i>dM</i> <sub>d</sub>(<i>x,y,z</i>)
+</div>
+<div class="description-paragraph" id="p-0101" num="0126">If the volume of a unit of sediment observed today is equal to the volume of a unit of sediment at depositional time, then the expansion ratio is equal to one. The ratio of dM(x,y,z)/dM<sub>d</sub>(x,y,z) may be the expansion ratio and may be approximated, for example, as J(x,y,z)/V(x,y,z), where J is the Jacobian function and V is the sedimentation rate.
+</div> <ul> <li id="ul0023-0001" num="0000"> <ul> <li id="ul0024-0001" num="0127">2. A “sedimentary horizontal divergence” HD(x,y,z) of A(x,y,z) may be defined by:</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0102" num="0128">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>HD</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mi>div</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>A</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msup>
+<mi>d</mi>
+<mn>2</mn>
+</msup>
+<mo>⁢</mo>
+<mi>Log</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>V</mi>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>/</mo>
+<msup>
+<mi>du</mi>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msup>
+<mi>d</mi>
+<mn>2</mn>
+</msup>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mrow>
+<mi>Log</mi>
+<mo>⁢</mo>
+<mi>V</mi>
+</mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>/</mo>
+<msup>
+<mi>dv</mi>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mi> </mi>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msup>
+<mi>d</mi>
+<mn>2</mn>
+</msup>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>S</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>/</mo>
+<msup>
+<mi>du</mi>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msup>
+<mi>d</mi>
+<mn>2</mn>
+</msup>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>S</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mi>y</mi>
+<mo>,</mo>
+<mi>z</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>/</mo>
+<msup>
+<mi>dv</mi>
+<mn>2</mn>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</mtd>
+<mtd>
+<mrow>
+<mo>[</mo>
+<mn>16</mn>
+<mo>]</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div> <ul>
+<li id="ul0025-0001" num="0000">
+<ul>
+<li id="ul0026-0001" num="0129">3. A square of the “sedimentary horizontal norm” HN(x,y,z) of A(x,y,z) may be defined by:
+<br/>
+HN<sup>2</sup>(<i>x,y,z</i>)={<i>dS</i>(<i>x,y,z</i>)/<i>du}</i> <sup>2</sup> <i>+{dS</i>(<i>x,y,z</i>)/<i>dv}</i> <sup>2 </sup>
+<ul> <li id="ul0027-0001" num="0130">which may be expanded to:
+<br/>
+HN<sup>2</sup>(<i>x,y,z</i>)={<i>d </i>Log <i>V</i>(<i>x,y,z</i>)/<i>du}</i> <sup>2</sup> <i>+{d </i>Log <i>V</i>(<i>x,y,z</i>)/<i>dv}</i> <sup>2</sup>  [17]
+</li> </ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description-paragraph" id="p-0103" num="0131">Reference is made to <figref idrefs="DRAWINGS">FIG. 3B</figref>, which schematically illustrates a vertical cross section of a layer <b>302</b> in the present-day geological space used to determine a sedimentation rate based on the geometry of N-lines <b>320</b> <i>a </i>and <i>b </i>(or equivalently the geometry of IPG-lines), according to embodiments of the invention. In the following description. N-lines are discussed, although the same discussion relates to IPG-lines.</div>
+<div class="description-paragraph" id="p-0104" num="0132">Sedimentary attributes may be determined based on the curvature of N-lines <b>320</b> <i>a </i>and <i>b</i>, which may be correspond to the lateral variations of sedimentation rate V(x,y,z) along a layer. For example, if the sedimentation rate V(x,y,z) is constant laterally along layer <b>302</b> in a current geological time (G-space), sediment is deposited at the same rate along the layer and the layer will have the same thickness throughout. When layer <b>302</b> is folded or deformed over time, layer <b>302</b> becomes curved, but its thickness remains the same. Accordingly, the curvature of top horizon <b>306</b> approximately matches the curvature of the bottom horizon <b>308</b>, only shifted vertically upwards (i.e. the top and bottom horizons are parallel). Because the top and bottom horizons <b>306</b>, <b>308</b> are approximately parallel. e.g. as shown in the right-side segment of layer <b>302</b> in <figref idrefs="DRAWINGS">FIG. 3B</figref>, normal vectors <b>312</b> <i>a </i>and <b>312</b> <i>b </i>may be oriented substantially or approximately identically in the same direction. Thus, an N-line <b>320</b> <i>a </i>(or IPG-line) connecting those normal vectors <b>312</b> <i>a </i>and <b>312</b> <i>b </i>(or IPG-vectors) may be defined by a straight N-line <b>320</b> <i>a</i>. In one example (not shown), the top and bottom horizons bounding the layer in a current geological time may be parallel flat planes (e.g., parallel to the (x,y) plane). In this example N-lines may be straight lines parallel to the z-axis <b>316</b>. In another example (shown in <figref idrefs="DRAWINGS">FIG. 3B</figref>), the top and bottom horizons <b>306</b>, <b>308</b> of layer <b>302</b> may be parallel, but curved instead of flat. In this example, N-line <b>320</b> <i>a </i>of the top and bottom horizons may be a straight line connecting normal vectors <b>312</b> <i>a </i>and <b>312</b> <i>b </i>of the top and bottom horizons. Unlike the first instance, N-line <b>320</b> <i>a </i>may not be parallel with the z-axis, but may nevertheless be a straight line. In contrast, when the sedimentary rates varies throughout layer <b>302</b> (e.g. as shown in the left-side by the bulging segment of the layer in <figref idrefs="DRAWINGS">FIG. 3B</figref>), the curvature of top and bottom horizons <b>306</b>, <b>308</b> are not parallel, and their corresponding normal vectors <b>312</b> <i>c </i>and <b>312</b> <i>d </i>are oriented in different directions. Accordingly, an N-line <b>320</b> <i>b </i>connecting those N-vectors will be curved. Thus, a curved N-line <b>320</b> <i>b </i>may indicate that horizons <b>306</b>, <b>308</b> bounding layer <b>302</b> are not parallel and that the thickness (and thus sedimentation rate) of layer <b>302</b> varies laterally along the layer (e.g. along surface <b>318</b> <i>a</i>). The curvature of N-line <b>320</b> <i>b </i>may therefore indicate the presence of lateral variations in the sedimentation rate along layer <b>302</b> (whereas a straight N-line having zero-curvature <b>320</b> <i>a </i>may indicate a constant sedimentation rate along layer <b>302</b>). Since the presence of lateral variations of sedimentation rate V(x,y,z) may be described by the curvatures of N-lines <b>320</b> <i>a </i>and <i>b </i>(or similarly IPG-lines or other parameters computed from the curvature of N-lines and IPG-lines), these curvatures may be sedimentary attributes. Sedimentary attributes described by N-line or IPG-line curvatures may be defined, for example, as follows:
+</div> <ul> <li id="ul0028-0001" num="0000"> <ul> <li id="ul0029-0001" num="0133">1. The IPG-line curvature vector field k<sub>ipg</sub>(x,y,z) may be defined as follows where (s) is the arc-length abscissa along the IPG-line passing through the point (x,y,z) and T<sub>ipg</sub>(x,y,z) is the unit vector tangent at this IPG-line at point (x,y,z):
+<br/>
+<i>k</i> <sub>ipg</sub>(<i>x,y,z</i>)=<i>dT</i> <sub>ipg</sub>(<i>x,y,z</i>)/<i>ds</i>  [18]
+        <ul> <li id="ul0030-0001" num="0134">In addition, the following functions may also be sedimentary attributes:
+            <ul> <li id="ul0031-0001" num="0135">a. the module ∥ k<sub>ipg</sub>(x,y,z)∥</li> <li id="ul0031-0002" num="0136">b. the divergence Dk<sub>ipg</sub>(x,y,z)=div{k<sub>ipg</sub>(x,y,z)}</li> </ul>
+</li> </ul>
+</li> <li id="ul0029-0002" num="0137">2. The N-line curvature vector field k<sub>n</sub>(x,y,z) may be defined as follows where (s) is the arc-length abscissa along the N-line passing through the point (x,y,z) and N(x,y,z) is the unit vector tangent at this N-line at point (x,y,z):
+<br/>
+<i>k</i> <sub>n</sub>(<i>x,y,z</i>)=<i>d N</i>(<i>x,y,z</i>)/<i>ds</i>  [19]
+        <ul> <li id="ul0032-0001" num="0138">In addition, one can also consider the following functions as Sedimentary attributes:
+            <ul> <li id="ul0033-0001" num="0139">a. the module ∥k<sub>n</sub>(x,y,z)∥</li> <li id="ul0033-0002" num="0140">b. the divergence Dk<sub>n</sub>(x,y,z)=div{k<sub>n</sub>(x,y,z)}</li> </ul>
+</li> </ul>
+</li> <li id="ul0029-0003" num="0141">3. The normal divergence ND(x,y,z) may be defined as the divergence of the field of unit normal vectors N(x,y,z) in the G-space.</li> </ul> </li> </ul>
+<div class="description-paragraph" id="p-0105" num="0142">Any particle of sediment observed today in the present-day G-space may be equivalently characterized by the three parameters (x,y,z) or the three parameters (u,v,t). As a consequence, using the uvt-transform described in <figref idrefs="DRAWINGS">FIG. 2</figref>, any sedimentary attribute SA(x,y,z) function of (x,y,z) may be also transformed or parameterized as a sedimentary attribute SA(u,v,t)=SA(u(x,y,z), v(x,y,z), t(x,y,z)) function of (u,v,t); conversely the reverse uvt-transformation or parameterization may apply. For example, the sedimentation rate defined by equation (6) or (8) may be uvt-transformed between xyz-space and uvt-space:
+<br/>
+<i>V</i>(<i>u,v,t</i>)=<i>V{u</i>(<i>x,y,z</i>),<i>v</i>(<i>x,y,z</i>),<i>t</i>(<i>x,y,z</i>)}=<i>V</i>(<i>x,y,z</i>)  [20]
+</div>
+<div class="description-paragraph" id="p-0106" num="0143">Whether a scalar, vectorial or tensorial function, a sedimentary attribute SA(x,y,z) may be visualized and displayed, e.g. as shown in <figref idrefs="DRAWINGS">FIGS. 4-6</figref>. Sedimentary attribute SA(x,y,z) may be displayed on a horizon H(t) corresponding to the set of particles of sediments which were approximately deposited at a common geological time (t). Alternately, sedimentary attribute SA(x,y,z) may be displayed on any cross section (iso-surface) of a model (e.g. iso-x, iso-y, iso-z, iso-u, iso-v, iso-t), or any other surface or volume. For example, the cross section may be a vertical cross-section or a horizon surface.</div>
+<div class="description-paragraph" id="p-0107" num="0144">Reference is made to <figref idrefs="DRAWINGS">FIG. 7</figref> illustrating iso-surfaces of a curvilinear coordinate system, according to embodiments of the invention. Embodiments of the invention may map a model of a layer bound or positioned between horizons (e.g., <b>306</b> and <b>308</b> in <figref idrefs="DRAWINGS">FIG. 3A or 108</figref> <i>a </i>and <b>108</b> <i>b </i>in <figref idrefs="DRAWINGS">FIG. 2</figref>) from a non-curvilinear first (x,y,z) coordinate system to a curvilinear second (u,v,t) coordinate system <b>704</b>. The non-curvilinear coordinate system may be rectilinear, for example, and may include axes that are mutually perpendicular, such as in the Cartesian coordinate system. In contrast, the axes of the curvilinear coordinate system are not mutually perpendicular, but curve, as they monotonically increase (e.g., excluding spherical or other periodically repeating coordinates systems). A sedimentation rate may be determined that varies laterally along the layer. One or more sedimentary attributes based on the lateral variation of the sedimentation rate within the layer may be determined by approximating the change in the sedimentation rate along one or more iso-t surfaces <b>700</b> of the curvilinear second coordinate system <b>704</b>. Iso-u <b>706</b>, iso-v <b>702</b> and iso-t <b>700</b> surfaces may be surfaces having a single (iso) value (u), (v), and (t), respectively, and the remaining coordinates vary. For example, iso-t surface <b>700</b> may have a single (t) value, but a range or all (u) and (v) values. Iso-t surface <b>700</b> may define the lateral direction following the curvature of a sedimentary layer along which sedimentary attributes are computed. The sedimentary attributes may be displayed in a model in the curvilinear coordinate system <b>704</b> or non-curvilinear coordinate system (e.g., <b>106</b> in <figref idrefs="DRAWINGS">FIG. 2</figref>).</div>
+<div class="description-paragraph" id="p-0108" num="0145"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a flowchart of method, according to embodiments of the invention.</div>
+<div class="description-paragraph" id="p-0109" num="0146">In operation <b>802</b>, a receiver or processor may receive paleo-geographic coordinate functions representing predicted approximate positions of particles of sediment deposited at a time period when a layer was originally formed. The paleo-geographic coordinate functions may be characterized by u(x,y,z), v(x,y,z) and/or t(x,y,z).</div>
+<div class="description-paragraph" id="p-0110" num="0147">In operation <b>804</b>, a processor (e.g., <b>140</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>) may determine a sedimentation rate that varies laterally along the layer. The sedimentation rate may be a scalar function that is proportional to the speed or rate at which sediment is deposited on the Earth's surface.</div>
+<div class="description-paragraph" id="p-0111" num="0148">In operation <b>806</b>, a processor may determine a sedimentary attribute based on the lateral variation of the sedimentation rate along the layer with respect to paleo-geographic coordinates (e.g. along an iso-t surface). The lateral variation may depend on derivatives of the sedimentation rate with respect to the paleo-geographic coordinates (u) and (v). The sedimentary attributes may include sedimentary acceleration or sedimentary expansion, for example.</div>
+<div class="description-paragraph" id="p-0112" num="0149">In operation <b>808</b>, a display unit (e.g., <b>180</b> of <figref idrefs="DRAWINGS">FIG. 1</figref>) may display a sedimentary attribute of the layer in the present-day geological space or depositional space. Attributes may be transformed back and forth between the two spaces.</div>
+<div class="description-paragraph" id="p-0113" num="0150">Embodiments of the invention may include an article such as a computer or processor readable non-transitory storage medium, such as for example a memory, a disk drive, or a USB flash memory device encoding, including or storing instructions, e.g., computer-executable instructions, which when executed by a processor or controller, cause the processor or controller to carry out methods disclosed herein. Different embodiments are disclosed herein. Features of certain embodiments may be combined with features of other embodiments; thus certain embodiments may be combinations of features of multiple embodiments. The foregoing description of the embodiments of the invention has been presented for the purposes of illustration and description. It is not intended to be exhaustive or to limit the invention to the precise form disclosed. It should be appreciated by persons skilled in the art that many modifications, variations, substitutions, changes, and equivalents are possible in light of the above teaching. It is, therefore, to be understood that the appended claims are intended to cover all such modifications and changes as fall within the true spirit of the invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">16</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM245081469">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method to visualize geological attributes that represent geological properties of particles of one or more geologic horizons, the method comprising:
+<div class="claim-text">in one or more computer processors:
+<div class="claim-text">receiving, based on measured geological data of the particles of the geological horizons in a present-day configuration of the geological horizons in present-day geological coordinates, a geological-time coordinate representing predicted time periods when the particles of the geologic horizons were originally formed, wherein the geological-time coordinate has level sets that are coincident with the geologic horizons;</div>
+<div class="claim-text">determining a vector field tangent to normal-lines of the geologic horizons and parallel to the gradient of the geological-time coordinate;</div>
+<div class="claim-text">determining a vector field of curvature of the normal-lines deduced from the vector field tangent to the normal-lines, wherein the vector field of curvature of the normal-lines corresponds to lateral variations of sedimentation rate along a layer; and</div>
+<div class="claim-text">displaying on the geological horizons or on a cross-section the geological attribute that is the curvature vector field of the normal-lines or a function derived from the vector field of curvature of the normal-lines within the geological horizons with respect to the present-day geological coordinates.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a curvature vector of a normal-line passing through a given point is a function of the derivative of the unit vector tangent to the normal-line defined as the unit vector proportional to the gradient of the geological-time coordinate.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the curvature vector field of the normal-lines passing through a given point is a function of the derivative of the unit vector tangent to the normal-line with respect to an arc-length abscissa along the normal-line passing through the point.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the geological attribute is the function derived from the curvature vector field of the normal-lines, which is the length of the curvature vector field of the normal-lines.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the geological attribute is the function derived from the curvature vector field of the normal-lines, which is the divergence of the curvature vector field of the normal-lines.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. A system to visualize geological attributes that represent geological properties of particles of one or more geologic horizons, the system comprising:
+<div class="claim-text">one or more computer processors configured to:
+<div class="claim-text">receive, based on measured geological data of the particles of the geological horizons in a present-day configuration of the geological horizons in present-day geological coordinates, a geological-time coordinate representing predicted time periods when the particles of the geologic horizons were originally formed, wherein the geological-time coordinate has level sets that are coincident with the geologic horizons;</div>
+<div class="claim-text">determine a vector field tangent to normal-lines of the geologic horizons and parallel to the gradient of the geological-time coordinate;</div>
+<div class="claim-text">determine a vector field of curvature of the normal-lines deduced from the vector field tangent to the normal-lines, wherein the vector field of curvature of the normal-lines corresponds to lateral variations of sedimentation rate along a layer; and</div>
+<div class="claim-text">display on the geological horizons or on one or more cross-sections the geological attribute that is the curvature vector field of the normal-lines or a function derived from the vector field of curvature of the normal-lines within the geological horizons with respect to the present-day geological coordinates.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The system of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the one or more computer processors are configured to determine a curvature vector of a normal-line passing through a given point as a function of the derivative of the unit vector tangent to the normal-line defined as the unit vector proportional to the gradient of the geological-time coordinate.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The system of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the one or more computer processors are configured to determine the curvature vector field of the normal-lines passing through a given point as a function of the derivative of the unit vector tangent to the normal-line with respect to an arc-length abscissa along the normal-line passing through the point.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The system of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the one or more computer processors are configured to derive the function from the curvature vector field of the normal-lines to be the length of the curvature vector field of the normal-lines.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The system of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the one or more computer processors are configured to derive the function from the curvature vector field of the normal-lines to be the divergence of the curvature vector field of the normal-lines.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The system of <claim-ref idref="CLM-00006">claim 6</claim-ref> comprising a display to visualize the curvature vector field of the normal-lines or the function derived from the vector field of curvature of the normal-lines on the geological horizons or cross-sections.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. A non-transitory computer readable storage medium that stores instructions, which when executed by one or more processors, causes the one or more processors to:
+<div class="claim-text">receive, based on measured geological data of the particles of the geological horizons in a present-day configuration of the geological horizons in present-day geological coordinates, a geological-time coordinate representing predicted time periods when the particles of the geologic horizons were originally formed, wherein the geological-time coordinate has level sets that are coincident with the geologic horizons;</div>
+<div class="claim-text">determine a vector field tangent to normal-lines of the geologic horizons and parallel to the gradient of the geological-time coordinate;</div>
+<div class="claim-text">determine a vector field of curvature of the normal-lines deduced from the vector field tangent to the normal-lines, wherein the vector field of curvature of the normal-lines corresponds to lateral variations of sedimentation rate along a layer; and</div>
+<div class="claim-text">display on the geological horizons or on a cross-section the geological attribute that is the curvature vector field of the normal-lines or a function derived from the vector field of curvature of the normal-lines within the geological horizons with respect to the present-day geological coordinates.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The non-transitory computer readable storage medium of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the instructions, when executed by the one or more processors, further cause the processors to determine a curvature vector of a normal-line passing through a given point as a function of the derivative of the unit vector tangent to the normal-line defined as the unit vector proportional to the gradient of the geological-time coordinate.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The non-transitory computer readable storage medium of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the instructions, when executed by the one or more processors, further cause the processors to determine the curvature vector field of the normal-lines passing through a given point as a function of the derivative of the unit vector tangent to the normal-line with respect to an arc-length abscissa along the normal-line passing through the point.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The non-transitory computer readable storage medium of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the instructions, when executed by the one or more processors, further cause the processors to derive the function from the curvature vector field of the normal-lines to be the length of the curvature vector field of the normal-lines.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The non-transitory computer readable storage medium of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the instructions, when executed by the one or more processors, further cause the processors to derive the function from the curvature vector field of the normal-lines to be the divergence of the curvature vector field of the normal-lines.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

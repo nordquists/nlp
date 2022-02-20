@@ -1,0 +1,1699 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US20200029914A1 - Method and Device for Detecting a Neural Response in a Neural Measurement 
+      - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA363050185">
+<div class="abstract" id="p-0001" num="0000">A method for processing a neural measurement obtained in the presence of artifact, in order to detect whether a neural response is present in the neural measurement. A neural measurement is obtained from one or more sense electrodes. The neural measurement is correlated against a filter template, the filter template comprising at least three half cycles of an alternating waveform, amplitude modulated by a window. From an output of the correlating, it is determined whether a neural response is present in the neural measurement.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><ul class="description" lang="EN" load-source="patent-office" mxw-id="PDES237970886">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<li> <para-num num="[0001]"> </para-num> <div class="description-line" id="p-0002" num="0001">This application is a continuation of application Ser. No. 15/037,038 filed May 16, 2016, which is a national stage of Application No. PCT/AU2014/050369, filed Nov. 22, 2014, which application claims the benefit of Australian Provisional Patent Application No. 2013904519 filed Nov. 22, 2013, the disclosures of which are incorporated herein by reference in their entirety.</div>
+</li> <heading id="h-0002">TECHNICAL FIELD</heading>
+<li> <para-num num="[0002]"> </para-num> <div class="description-line" id="p-0003" num="0002">The present invention relates to detection of a neural response, such as a neural response caused by a stimulus. In particular the present invention relates to detection of a compound action potential by using one or more electrodes implanted proximal to the neural pathway to obtain a neural measurement.</div>
+</li> <heading id="h-0003">BACKGROUND OF THE INVENTION</heading>
+<li> <para-num num="[0003]"> </para-num> <div class="description-line" id="p-0004" num="0003">Electrical neuromodulation is used or envisaged for use to treat a variety of disorders including chronic pain, Parkinson's disease, and migraine, and to restore function such as hearing and motor function. A neuromodulation system applies an electrical pulse to neural tissue in order to generate a therapeutic effect. Such a system typically comprises an implanted electrical pulse generator, and a power source such as a battery that may be rechargeable by transcutaneous inductive transfer. An electrode array is connected to the pulse generator, and is positioned close to the neural pathway(s) of interest. An electrical pulse applied to the neural pathway by an electrode causes the depolarisation of neurons, which generates propagating action potentials whether antidromic, orthodromic, or both, to achieve the therapeutic effect.</div>
+</li> <li> <para-num num="[0004]"> </para-num> <div class="description-line" id="p-0005" num="0004">When used to relieve chronic pain for example, the electrical pulse is applied to the dorsal column (DC) of the spinal cord and the electrode array is positioned in the dorsal epidural space. The dorsal column fibres being stimulated in this way inhibit the transmission of pain from that segment in the spinal cord to the brain.</div>
+</li> <li> <para-num num="[0005]"> </para-num> <div class="description-line" id="p-0006" num="0005">In general, the electrical stimulus generated in a neuromodulation system triggers a neural action potential which then has either an inhibitory or excitatory effect. Inhibitory effects can be used to modulate an undesired process such as the transmission of pain, or excitatory effects can be used to cause a desired effect such as the contraction of a muscle or stimulation of the auditory nerve.</div>
+</li> <li> <para-num num="[0006]"> </para-num> <div class="description-line" id="p-0007" num="0006">The action potentials generated among a large number of fibres sum to form a compound action potential (CAP). The CAP is the sum of responses from a large number of single fibre action potentials. When a CAP is electrically recorded, the measurement comprises the result of a large number of different fibres depolarising. The propagation velocity is determined largely by the fibre diameter and for large myelinated fibres as found in the dorsal root entry zone (DREZ) and nearby dorsal column the velocity can be over 60 ms<sup>−1</sup>. The CAP generated from the firing of a group of similar fibres is measured as a positive peak P<sub>1 </sub>in the recorded potential, then a negative peak NI, followed by a second positive peak P<sub>2</sub>. This is caused by the region of activation passing the recording electrode as the action potentials propagate along the individual fibres, producing the typical three-peaked response profile. Depending on stimulus polarity and the sense electrode configuration, the measured profile of some CAPs may be of reversed polarity, with two negative peaks and one positive peak.</div>
+</li> <li> <para-num num="[0007]"> </para-num> <div class="description-line" id="p-0008" num="0007">Approaches proposed for obtaining a neural measurement are described by the present applicant in International Patent Publication No. WO 2012/155183, the content of which is incorporated herein by reference, and also by King (U.S. Pat. No. 5,913,882), Nygard (U.S. Pat. No. 5,758,651) and Daly (US Patent Application No. 2007/0225767), for example.</div>
+</li> <li> <para-num num="[0008]"> </para-num> <div class="description-line" id="p-0009" num="0008">To better understand the effects of neuromodulation and/or other neural stimuli, and for example to provide a stimulator controlled by neural response feedback, it is desirable to accurately detect a CAP resulting from the stimulus. Evoked responses are less difficult to detect when they appear later in time than the artifact, or when the signal-to-noise ratio is sufficiently high. The artifact is often restricted to a time of 1-2 ms after the stimulus and so, provided the neural response is detected after this time window, a response measurement can be more easily obtained. This is the case in surgical monitoring where there are large distances (e.g. more than 12 cm for nerves conducting at 60 ms<sup>−1</sup>) between the stimulating and recording electrodes so that the propagation time from the stimulus site to the recording electrodes exceeds 2 ms.</div>
+</li> <li> <para-num num="[0009]"> </para-num> <div class="description-line" id="p-0010" num="0009">However to characterize the responses from the dorsal columns, high stimulation currents and close proximity between electrodes are required, and therefore in such situations the measurement process must overcome artifact directly. However, this can be a difficult task as an observed CAP signal component in the neural measurement will typically have a maximum amplitude in the range of microvolts. In contrast a stimulus applied to evoke the CAP is typically several volts and results in electrode artifact, which manifests in the neural measurement as a decaying output of several millivolts partly or wholly contemporaneously with the CAP signal, presenting a significant obstacle to isolating or even detecting the much smaller CAP signal of interest.</div>
+</li> <li> <para-num num="[0010]"> </para-num> <div class="description-line" id="p-0011" num="0010">For example, to resolve a 10 uV CAP with 1 uV resolution in the presence of an input 5V stimulus, for example, requires an amplifier with a dynamic range of 134 dB, which is impractical in implant systems. As the neural response can be contemporaneous with the stimulus and/or the stimulus artefact. CAP measurements present a difficult challenge of measurement amplifier design. In practice, many non-ideal aspects of a circuit lead to artefact, and as these mostly have a decaying exponential appearance that can be of positive or negative polarity, their identification and elimination can be laborious.</div>
+</li> <li> <para-num num="[0011]"> </para-num> <div class="description-line" id="p-0012" num="0011">The difficulty of this problem is further exacerbated when attempting to implement CAP detection in an implanted device. Typical implants have a power budget which permits a limited number, for example in the hundreds or low thousands, of processor instructions per stimulus, in order to maintain a desired battery lifetime. Accordingly, if a CAP detector for an implanted device is to be used regularly (e.g. once a second), then the detector should preferably consume only a small fraction of the power budget and thus desirably should require only in the tens of processor instructions in order to complete its task.</div>
+</li> <li> <para-num num="[0012]"> </para-num> <div class="description-line" id="p-0013" num="0012">Any discussion of documents, acts, materials, devices, articles or the like which has been included in the present specification is solely for the purpose of providing a context for the present invention. It is not to be taken as an admission that any or all of these matters form part of the prior art base or were common general knowledge in the field relevant to the present invention as it existed before the priority date of each claim of this application.</div>
+</li> <li> <para-num num="[0013]"> </para-num> <div class="description-line" id="p-0014" num="0013">Throughout this specification the word “comprise”, or variations such as “comprises” or “comprising”, will be understood to imply the inclusion of a stated element, integer or step, or group of elements, integers or steps, but not the exclusion of any other element, integer or step, or group of elements, integers or steps.</div>
+</li> <li> <para-num num="[0014]"> </para-num> <div class="description-line" id="p-0015" num="0014">In this specification, a statement that an element may be “at least one of” a list of options is to be understood that the element may be any one of the listed options, or may be any combination of two or more of the listed options.</div>
+</li> <heading id="h-0004">SUMMARY OF THE INVENTION</heading>
+<li> <para-num num="[0015]"> </para-num> <div class="description-line" id="p-0016" num="0015">According to a first aspect the present invention provides a method for processing a neural measurement obtained in the presence of artifact, in order to detect whether a neural response is present in the neural measurement, the method comprising:</div>
+</li> <li> <para-num num="[0016]"> </para-num> <div class="description-line" id="p-0017" num="0016">obtaining a neural measurement from one or more sense electrodes;</div>
+</li> <li> <para-num num="[0017]"> </para-num> <div class="description-line" id="p-0018" num="0017">correlating the neural measurement against a filter template, the filter template comprising at least three half cycles of an alternating waveform, amplitude modulated by a window; and</div>
+</li> <li> <para-num num="[0018]"> </para-num> <div class="description-line" id="p-0019" num="0018">determining from an output of the correlating whether a neural response is present in the neural measurement.</div>
+</li> <li> <para-num num="[0019]"> </para-num> <div class="description-line" id="p-0020" num="0019">According to a second aspect the present invention provides an implantable device for processing a neural measurement obtained in the presence of artifact, in order to detect whether a neural response is present in the neural measurement, the device comprising:</div>
+</li> <li> <para-num num="[0020]"> </para-num> <div class="description-line" id="p-0021" num="0020">measurement circuitry for obtaining a neural measurement from one or more sense electrodes; and</div>
+</li> <li> <para-num num="[0021]"> </para-num> <div class="description-line" id="p-0022" num="0021">a processor configured to correlate the neural measurement against a filter template, the filter template comprising at least three half cycles of an alternating waveform, amplitude modulated by a window; and the processor further configured to determine from an output of the correlating whether a neural response is present in the neural measurement.</div>
+</li> <li> <para-num num="[0022]"> </para-num> <div class="description-line" id="p-0023" num="0022">The window may comprise a triangular window. The triangular window may be a standard triangular window of length L comprising coefficients w(n) as follows:</div>
+</li> <li> <div class="description-line" id="p-0024" num="0000">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<mi>For</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>L</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>odd</mi>
+<mo></mo>
+<mstyle>
+<mtext>:</mtext>
+</mstyle>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00001-2" num="00001.2">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>w</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>n</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mn>2</mn>
+<mo></mo>
+<mrow>
+<mi>n</mi>
+<mo>/</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>L</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>for</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>1</mn>
+</mrow>
+<mo>≤</mo>
+<mi>n</mi>
+<mo>≤</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>L</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>/</mo>
+<mn>2</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mn>2</mn>
+<mo>-</mo>
+<mrow>
+<mn>2</mn>
+<mo></mo>
+<mrow>
+<mi>n</mi>
+<mo>/</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>L</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>for</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>L</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>/</mo>
+<mn>2</mn>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>≤</mo>
+<mi>n</mi>
+<mo>≤</mo>
+<mi>L</mi>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+<maths id="MATH-US-00001-3" num="00001.3">
+<math overflow="scroll">
+<mrow>
+<mi>For</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>L</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>even</mi>
+<mo></mo>
+<mstyle>
+<mtext>:</mtext>
+</mstyle>
+</mrow>
+</math>
+</maths>
+<maths id="MATH-US-00001-4" num="00001.4">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>w</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>n</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mn>2</mn>
+<mo></mo>
+<mi>n</mi>
+</mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>/</mo>
+<mi>L</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>for</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>1</mn>
+</mrow>
+<mo>≤</mo>
+<mi>n</mi>
+<mo>≤</mo>
+<mrow>
+<mi>L</mi>
+<mo>/</mo>
+<mn>2</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mn>2</mn>
+<mo>-</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mn>2</mn>
+<mo></mo>
+<mi>n</mi>
+</mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>/</mo>
+<mi>L</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>for</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>L</mi>
+<mo>/</mo>
+<mn>2</mn>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>≤</mo>
+<mi>n</mi>
+<mo>≤</mo>
+<mrow>
+<mi>L</mi>
+<mo>.</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0025" num="0000">More preferably, the triangular window is a Bartlett window in which samples <b>1</b> and L are zero, and it is to be appreciated that the phrase triangular window herein is intended to encompass both a standard triangular window and a Bartlett window, as described above, as well as other substantially triangular or tent-shaped window functions. Alternatively, the window may comprise a Bartlett window, a Hanning window, a rectangular window or a Kaiser-Bessel window of suitable beta value.</div>
+</li> <li> <para-num num="[0023]"> </para-num> <div class="description-line" id="p-0026" num="0023">In preferred embodiments of the invention, the filter template comprises four half-cycles of an alternating waveform. Such embodiments recognise that a matched filter, comprising a three-peaked template shaped somewhat like the expected three-peaked CAP response, used to correlate against an obtained neural measurement, can optimise SNR when the noise is white, but that artefact is not white noise and that such three-peaked matched filters may perform less optimally in CAP detection in the presence of artifact.</div>
+</li> <li> <para-num num="[0024]"> </para-num> <div class="description-line" id="p-0027" num="0024">The filter template may comprise four half cycles of a sine wave, modified by being amplitude modulated by a triangular window, thus comprising four alternating peaks. Alternatively the filter template may comprise four half cycles of a cosine wave, modified by having an amplitude fitted within a triangular window, thus comprising five alternating peaks. Inverses of such filter templates, i.e. having opposite polarity, may be employed in some embodiments. The alternating waveform in alternative embodiments may be non-sinusoidal, but is preferably a continuous curve, and may in some embodiments resemble the profile of a neural response albeit comprising four half cycles.</div>
+</li> <li> <para-num num="[0025]"> </para-num> <div class="description-line" id="p-0028" num="0025">The present invention thus provides for selection of a filter template having improved artifact rejection. The present invention recognises that artifact can be reasonably accurately modelled as a sum of two exponentials having distinct time constants, and that because a Bartlett filter template window rejects the first three terms of a Taylor expansion of e, namely the DC, linear, and quadratic terms, such embodiments of the present invention thus facilitate artifact rejection.</div>
+</li> <li> <para-num num="[0026]"> </para-num> <div class="description-line" id="p-0029" num="0026">According to a third aspect the present invention provides a method for processing a neural measurement obtained in the presence of artifact, in order to detect whether a neural response is present in the neural measurement, the method comprising:</div>
+</li> <li> <para-num num="[0027]"> </para-num> <div class="description-line" id="p-0030" num="0027">obtaining a neural measurement from one or more sense electrodes:</div>
+</li> <li> <para-num num="[0028]"> </para-num> <div class="description-line" id="p-0031" num="0028">at a first time offset, correlating the neural measurement against a first filter template to produce a first measure m<sub>1</sub>, the first filter template comprising an alternating waveform of a first phase;</div>
+</li> <li> <para-num num="[0029]"> </para-num> <div class="description-line" id="p-0032" num="0029">at the first time offset, correlating the neural measurement against a second filter template to produce a second measure m<sub>2</sub>, the second filter template comprising an alternating waveform of a second phase 90 degrees offset to the first phase;</div>
+</li> <li> <para-num num="[0030]"> </para-num> <div class="description-line" id="p-0033" num="0030">at a second time offset, being at a non-integer multiple of 180 degrees offset from the first time offset, correlating the neural measurement against the first filter template to produce a third measure m<sub>3</sub>;</div>
+</li> <li> <para-num num="[0031]"> </para-num> <div class="description-line" id="p-0034" num="0031">at the second time offset, correlating the neural measurement against the second filter template to produce a fourth measure m<sub>4</sub>; and</div>
+</li> <li> <para-num num="[0032]"> </para-num> <div class="description-line" id="p-0035" num="0032">processing m<sub>1 </sub>to m<sub>4 </sub>to detect whether a neural response exists in the neural measurement.</div>
+</li> <li> <para-num num="[0033]"> </para-num> <div class="description-line" id="p-0036" num="0033">According to a fourth aspect the present invention provides a device for processing a neural measurement obtained in the presence of artifact, in order to detect whether a neural response is present in the neural measurement, the device comprising:</div>
+</li> <li> <para-num num="[0034]"> </para-num> <div class="description-line" id="p-0037" num="0034">measurement circuitry for obtaining a neural measurement from one or more sense electrodes; and</div>
+</li> <li> <para-num num="[0035]"> </para-num> <div class="description-line" id="p-0038" num="0035">a processor configured to:
+</div> </li> <ul> <li id="ul0001-0001" num="0000"> <ul> <li id="ul0002-0001" num="0036">at a first time offset, correlate the neural measurement against a first filter template to produce a first measure m<sub>1</sub>, the first filter template comprising an alternating waveform of a first phase;</li> <li id="ul0002-0002" num="0037">at the first time offset, correlate the neural measurement against a second filter template to produce a second measure m<sub>2</sub>, the second filter template comprising an alternating waveform of a second phase 90 degrees offset to the first phase;</li> <li id="ul0002-0003" num="0038">at a second time offset, being at a non-integer multiple of 180 degrees offset from the first time offset, correlate the neural measurement against the first filter template to produce a third measure m<sub>3</sub>;</li> <li id="ul0002-0004" num="0039">at the second time offset, correlate the neural measurement against the second filter template to produce a fourth measure m<sub>4</sub>; and</li> <li id="ul0002-0005" num="0040">process m<sub>1 </sub>to m<sub>4 </sub>to detect whether a neural response exists in the neural measurement.</li> </ul> </li> </ul>
+<li> <para-num num="[0041]"> </para-num> <div class="description-line" id="p-0039" num="0041">In some embodiments of the third and fourth aspects the first filter template may be anti-symmetric so as to create an imaginary DFT output, while the second filter template may be symmetric so as to create a real DFT output.</div>
+</li> <li> <para-num num="[0042]"> </para-num> <div class="description-line" id="p-0040" num="0042">In some embodiments of the third and fourth aspects the second time offset is offset by 90 degrees, or 270 degrees, from the first time offset.</div>
+</li> <li> <para-num num="[0043]"> </para-num> <div class="description-line" id="p-0041" num="0043">In some embodiments of the third and fourth aspects the first and/or second filter template may each comprise four half cycles of an alternating waveform, amplitude modulated by a triangular window. For example the first filter template may comprise four half cycles of a sinusoid waveform amplitude modulated by a triangular window, and the second filter template may comprise four half cycles of a cosine waveform amplitude modulated by the triangular window. Alternatively, the alternating waveform of the first and second filter templates in some embodiments of the third and fourth aspects of the invention may be amplitude modulated by a Kaiser Bessel window, for example having β=6.</div>
+</li> <li> <para-num num="[0044]"> </para-num> <div class="description-line" id="p-0042" num="0044">The first though fourth aspects of the present invention are further advantageous when applied in relation to an implanted device, in that performing a correlation of a filter template with a neural measurement typically requires only in the tens of processor instructions, and thus consumes a suitably small fraction of the power budget of a typical implant, as compared for example to a double exponential matched filter approach which would require hundreds of processor instructions. In preferred embodiments of the first though fourth aspects of the present invention only a single point of the correlation is calculated, at a predefined optimal time delay.</div>
+</li> <li> <para-num num="[0045]"> </para-num> <div class="description-line" id="p-0043" num="0045">Some embodiments of the first through fourth aspects of the invention may provide a method for efficiently determining an optimum time delay when a signal to artifact ratio is greater than one, at which a first or single point of the cross-correlation between the neural measurement and the filter template should be produced, the method comprising:
+</div> </li> <ul> <li id="ul0003-0001" num="0000"> <ul> <li id="ul0004-0001" num="0046">at an approximate time delay between the neural response and the filter template, computing real and imaginary parts of the fundamental frequency of the DFT of the neural measurement;</li> <li id="ul0004-0002" num="0047">calculating a phase defined by the real and imaginary parts; relative to the fundamental frequency, calculating the time adjustment needed to change the calculated phase to pi/2; and</li> <li id="ul0004-0003" num="0048">defining the optimum time delay as being the sum of the approximate time delay and the time adjustment.</li> </ul> </li> </ul>
+<li> <para-num num="[0049]"> </para-num> <div class="description-line" id="p-0044" num="0049">Other embodiments of the third and fourth aspects of the invention may provide a method for efficiently determining an optimum time delay at which a first or single point of the cross-correlation between the neural measurement and the filter template should be produced, the method comprising:
+</div> </li> <ul> <li id="ul0005-0001" num="0000"> <ul> <li id="ul0006-0001" num="0050">at the first time offset, correlating the neural measurement against a third filter template to produce a fifth measure m<sub>5</sub>, the third filter template comprising an alternating waveform at double the frequency of the first filter template and of a third phase;</li> <li id="ul0006-0002" num="0051">at the second time offset, correlating the neural measurement against the third filter template to produce a sixth measure m<sub>6</sub>; and</li> <li id="ul0006-0003" num="0052">determining from m<sub>5 </sub>and m<sub>6 </sub>a decay in artefact between the first time offset and the second time offset.</li> </ul> </li> </ul>
+<li> <para-num num="[0053]"> </para-num> <div class="description-line" id="p-0045" num="0053">The optimum time delay may then be used to define the single point at which the cross-correlation between the neural measurement and the filter template should be produced. The optimum time delay may be calculated regularly, for example prior to every attempted detection of a neural response, or occasionally, for example at one second intervals or in response to a detected change in the user's posture.</div>
+</li> <li> <para-num num="[0054]"> </para-num> <div class="description-line" id="p-0046" num="0054">The fundamental frequency may be the frequency of the three phases of the CAP and/or may be the frequency of the four cycles of the filter template.</div>
+</li> <li> <para-num num="[0055]"> </para-num> <div class="description-line" id="p-0047" num="0055">A length of the filter template is preferably selected so that the filter template comprises a number of filter points which, at a sampling rate at which the neural measurement is assessed, is four-thirds of the duration of a typical neural response.</div>
+</li> <li> <para-num num="[0056]"> </para-num> <div class="description-line" id="p-0048" num="0056">In preferred embodiments the measurement is obtained in accordance with the teachings of International Patent Publication No. WO 2012/155183, by the present applicant. In further preferred embodiments the detector output is used in a closed loop feedback circuit to control neuromodulation, for example in conjunction with the techniques of International Patent Publication No. WO 2012/155188, by the present applicant, the content of which is incorporated herein by reference.</div>
+</li> <li> <para-num num="[0057]"> </para-num> <div class="description-line" id="p-0049" num="0057">The present invention thus recognises that the amplitude of an evoked response can be measured by calculating the dot product of a neural measurement and a filter template, provided that the filter template is substantially orthogonal with the artefact and has a dot-product with the response which is close to that of a matched filter matched to the evoked response. The filter template preferably rejects DC, rejects first order signals (signals having a constant slope), and rejects low frequency signals which decay exponentially or similarly, such as artefact. The filter is preferably configured so as to be able to operate upon signals which occurred immediately after a stimulus.</div>
+</li> <li> <para-num num="[0058]"> </para-num> <div class="description-line" id="p-0050" num="0058">While four lobes provides the optimal trade-off between rejection of artifact and noise gain, alternative embodiments of the present invention may usefully employ a filter template comprising greater or fewer lobes. In such embodiments the filter template may comprise one or more basis functions derived from a sinusoidal binomial transform (SBT), for example. In embodiments comprising a three or five lobed filter template the window preferably comprises a flat central portion, as returned by the SBT, rather than a triangular peak for example, in order to better reject DC and ramp components of a Taylor expansion and thus better reject artifact. Some embodiments of the invention may use multiple identical filter template elements, but shifted in time. Even though these are not orthogonal, a successive approximation method creating a compound template may provide better approximation. Additionally or alternatively, some embodiments may use templates that are a sum of templates of different frequencies, templates of different offset and/or templates of different numbers of lobes.</div>
+</li> <description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<li> <para-num num="[0059]"> </para-num> <div class="description-line" id="p-0051" num="0059">An example of the invention will now be described with reference to the accompanying drawings, in which:</div>
+</li> <li> <para-num num="[0060]"> </para-num> <div class="description-line" id="p-0052" num="0060"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates an implantable device suitable for implementing the present invention;</div>
+</li> <li> <para-num num="[0061]"> </para-num> <div class="description-line" id="p-0053" num="0061"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a schematic of a feedback controller to effect stimulus control in response to recruitment:</div>
+</li> <li> <para-num num="[0062]"> </para-num> <div class="description-line" id="p-0054" num="0062"> <figref idrefs="DRAWINGS">FIG. 3<i>a </i> </figref>illustrates a neural response detector in accordance with one embodiment of the invention, and <figref idrefs="DRAWINGS">FIG. 3<i>b </i> </figref>illustrates a modified version of the embodiment of <figref idrefs="DRAWINGS">FIG. 3</figref> <i>a: </i> </div>
+</li> <li> <para-num num="[0063]"> </para-num> <div class="description-line" id="p-0055" num="0063"> <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates the amplitude profile of the filter template used in the detector of <figref idrefs="DRAWINGS">FIG. 3</figref>; and a cosine filter template, and the Bartlett window;</div>
+</li> <li> <para-num num="[0064]"> </para-num> <div class="description-line" id="p-0056" num="0064"> <figref idrefs="DRAWINGS">FIG. 5<i>a </i> </figref>illustrates the ability of the filter template to pass an evoked response, and</div>
+</li> <li> <para-num num="[0065]"> </para-num> <div class="description-line" id="p-0057" num="0065"> <figref idrefs="DRAWINGS">FIG. 5<i>b </i> </figref>illustrates the ability of the filter template to block artefact:</div>
+</li> <li> <para-num num="[0066]"> </para-num> <div class="description-line" id="p-0058" num="0066"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates hardware to compute a complex term of the windowed DFT:</div>
+</li> <li> <para-num num="[0067]"> </para-num> <div class="description-line" id="p-0059" num="0067"> <figref idrefs="DRAWINGS">FIGS. 7<i>a </i>and 7<i>b </i> </figref>illustrate the effect of a clinical fitting procedure of the evoked response detector:</div>
+</li> <li> <para-num num="[0068]"> </para-num> <div class="description-line" id="p-0060" num="0068"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates the dependency of the phase of the DFT terms of an exponential on the time constant of the exponential;</div>
+</li> <li> <para-num num="[0069]"> </para-num> <div class="description-line" id="p-0061" num="0069"> <figref idrefs="DRAWINGS">FIGS. 9<i>a </i>and 9<i>b </i> </figref>illustrate, at respective times, the detector output vector components arising from artefact only, when modelled as two exponentials;</div>
+</li> <li> <para-num num="[0070]"> </para-num> <div class="description-line" id="p-0062" num="0070"> <figref idrefs="DRAWINGS">FIGS. 10<i>a </i>and 10<i>b </i> </figref>illustrate, at respective times, the detector output vector components arising from artefact modelled as two exponentials and from an evoked response;</div>
+</li> <li> <para-num num="[0071]"> </para-num> <div class="description-line" id="p-0063" num="0071"> <figref idrefs="DRAWINGS">FIGS. 11<i>a </i>and 11<i>b </i> </figref>illustrate a four point measurement technique for measuring a CAP:</div>
+</li> <li> <para-num num="[0072]"> </para-num> <div class="description-line" id="p-0064" num="0072"> <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates exponential estimation and subtraction;</div>
+</li> <li> <para-num num="[0073]"> </para-num> <div class="description-line" id="p-0065" num="0073"> <figref idrefs="DRAWINGS">FIG. 13</figref> illustrates a system for 6 point detection for when relative phase between evoked response and sampling window is unknown;</div>
+</li> <li> <para-num num="[0074]"> </para-num> <div class="description-line" id="p-0066" num="0074"> <figref idrefs="DRAWINGS">FIG. 14</figref> illustrates an alternative embodiment for 6-point detection;</div>
+</li> <li> <para-num num="[0075]"> </para-num> <div class="description-line" id="p-0067" num="0075"> <figref idrefs="DRAWINGS">FIGS. 15<i>a </i>and 15<i>b </i> </figref>illustrates generation of filter templates having three, four and five lobes, respectively; and</div>
+</li> <li> <para-num num="[0076]"> </para-num> <div class="description-line" id="p-0068" num="0076"> <figref idrefs="DRAWINGS">FIGS. 16<i>a </i>and 16<i>b </i> </figref>respectively illustrate four and three lobed filter template point values, derived from the approach of <figref idrefs="DRAWINGS">FIG. 15</figref>.</div>
+</li> </description-of-drawings>
+<heading id="h-0006">DESCRIPTION OF THE PREFERRED EMBODIMENTS</heading>
+<li> <para-num num="[0077]"> </para-num> <div class="description-line" id="p-0069" num="0077"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates an implantable device <b>100</b>) suitable for implementing the present invention. Device <b>100</b> comprises an implanted control unit <b>110</b>, which controls application of neural stimuli, and controls a measurement process for obtaining a measurement of a neural response evoked by the stimuli from each of a plurality of electrodes. The control unit <b>110</b> includes a storage memory (or other storage device(s), not shown) for storing a lookup table that contains data defining a therapy map, setting out a relationship between applied stimuli regimes and the desired neural response. Device <b>100</b> further comprises an electrode array <b>120</b> consisting of a three by eight array of electrodes <b>122</b>, each of which may be selectively used as either the stimulus electrode or sense electrode, or both.</div>
+</li> <li> <para-num num="[0078]"> </para-num> <div class="description-line" id="p-0070" num="0078"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a schematic of a feedback controller implemented by the control unit <b>110</b>, based on recruitment. An important component of such feedback control is a recruitment estimator <b>210</b>, which is tasked with the difficult operation of, in a simple form, detecting whether a neural response is present in a neural measurement output by the spinal cord potential (SCP) amplifier, or in a more complex form determining an amplitude of any such neural response.</div>
+</li> <li> <para-num num="[0079]"> </para-num> <div class="description-line" id="p-0071" num="0079">The evoked CAP measurements in this embodiment are made by use of the neural response measurement techniques set out in International Patent Publication No. WO2012/155183.</div>
+</li> <li> <para-num num="[0080]"> </para-num> <div class="description-line" id="p-0072" num="0080"> <figref idrefs="DRAWINGS">FIG. 3<i>a </i> </figref>illustrates a neural response detector <b>300</b> in accordance with one embodiment of the invention. A digitised sampled form of the neural measurement obtained by the SCP amplifier is taken as the input <b>302</b>. A filter template <b>304</b> is created at <b>306</b> by modulating a sine wave <b>308</b> with a Bartlett window <b>310</b>. In alternative embodiments the template is likely to be predefined in this manner and simply retrieved from a memory or the like within control unit <b>110</b>. A dot product of a suitable window of the neural measurement <b>302</b> and the filter template <b>304</b> is calculated at <b>312</b>, <b>314</b>, to produce the detector output <b>316</b>, which is a single value scalar. The detector <b>300</b> may be modified as shown in <figref idrefs="DRAWINGS">FIG. 3<i>b </i> </figref>by the addition of a gain term “a” for example to allow the correlator to produce approximately the same result as a peak-to-peak ECAP detector for comparison.</div>
+</li> <li> <para-num num="[0081]"> </para-num> <div class="description-line" id="p-0073" num="0081"> <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates the amplitude profile of the filter template <b>304</b> used in the detector <b>300</b> of <figref idrefs="DRAWINGS">FIG. 3</figref>. <figref idrefs="DRAWINGS">FIG. 4</figref> further illustrates the Bartlett window <b>310</b> used to amplitude modulate the sine wave <b>308</b>. To assist in the following discussion, <figref idrefs="DRAWINGS">FIG. 4</figref> also shows an additional filter template <b>402</b>, comprising a cosine wave amplitude modulated by the Bartlett window <b>310</b>. It is noted on the x-axis of <figref idrefs="DRAWINGS">FIG. 4</figref> that the filter templates <b>304</b> and <b>402</b> each comprise a sufficient number of points such that at the sampling rate used the filter templates each cover a time period of almost 2 ms, which is four-thirds of the duration of an expected neural response in this embodiment.</div>
+</li> <li> <para-num num="[0082]"> </para-num> <div class="description-line" id="p-0074" num="0082"> <figref idrefs="DRAWINGS">FIG. 5<i>a </i> </figref>illustrates an evoked response <b>502</b> in the absence of artefact, the four-lobe filter template <b>304</b>, and the sliding dot product or cross correlation thereof, <b>504</b>. Again, it is noted that the response <b>502</b> comprises three lobes, whereas the filter template <b>304</b> comprises four lobes and is four-thirds the expected length of the response <b>502</b>. As can be seen in the sliding dot product <b>504</b>, the evoked response <b>502</b> is substantially passed to the output of the detector <b>300</b> by the filter template <b>304</b>. In contrast <figref idrefs="DRAWINGS">FIG. 5<i>b </i> </figref>illustrates the correlation <b>508</b> of the four lobe filter template <b>304</b> with pure artefact <b>506</b>, illustrating that artefact is substantially blocked or heavily attenuated by the filter template <b>304</b> and thus not passed to the output of the detector <b>300</b>). In this embodiment, the performance of the four-lobe filter template <b>304</b> at passing an expected neural response is within 2 dB of that of a matched filter, but with significantly improved artifact rejection.</div>
+</li> <li> <para-num num="[0083]"> </para-num> <div class="description-line" id="p-0075" num="0083">It is noted that when sampling at 10 kHz, for example, 20 samples will be obtained in a 2 ms window, so that to determine the entire cross correlation will require 400 multiply/add operations. Accordingly, rather than calculating the entire cross-correlation between a measured neural response and the filter template, the present embodiment further provides for calculation of only a single point of the correlation as the output <b>316</b> of detector <b>300</b>, as a single point requires only 20 samples when sampling a 2 ms window at 10 kHz. Noting that the arrival time of the neural response, or its position within the neural measurement <b>302</b>, is not known a priori, it is necessary to determine an optimal time delay or offset between the neural measurement and the template filter, at which the single point of the correlation should then be calculated. The aim is to calculate the single point at the peak of the curve <b>504</b>, and no other. To this end, the present embodiment efficiently determines the optimal time delay, by noting the following.</div>
+</li> <li> <para-num num="[0084]"> </para-num> <div class="description-line" id="p-0076" num="0084">The DFT is defined by:</div>
+</li> <li> <div class="description-line" id="p-0077" num="0000">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msub>
+<mi>X</mi>
+<mi>k</mi>
+</msub>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>n</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo></mo>
+<mrow>
+<msub>
+<mi>x</mi>
+<mi>n</mi>
+</msub>
+<mo>·</mo>
+<msup>
+<mi>e</mi>
+<mfrac>
+<mrow>
+<mrow>
+<mo>-</mo>
+<mi>i</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>2</mn>
+<mo></mo>
+<mi>π</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>kn</mi>
+</mrow>
+<mi>M</mi>
+</mfrac>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0085]"> </para-num> <div class="description-line" id="p-0078" num="0085">In equation (1), and in the rest of this document, frequency-domain signals are represented by capital letters, and time-domain signals using lower-case. When using the DFT for spectral analysis, it is usual to multiply the data by a window W(n) so this becomes:</div>
+</li> <li> <div class="description-line" id="p-0079" num="0000">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mi>k</mi>
+<mi>′</mi>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>n</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo></mo>
+<mrow>
+<msub>
+<mi>x</mi>
+<mi>n</mi>
+</msub>
+<mo>·</mo>
+<mrow>
+<mi>W</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>n</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>·</mo>
+<msup>
+<mi>e</mi>
+<mfrac>
+<mrow>
+<mrow>
+<mo>-</mo>
+<mi>i</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>2</mn>
+<mo></mo>
+<mi>π</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>kn</mi>
+</mrow>
+<mi>M</mi>
+</mfrac>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>2</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0086]"> </para-num> <div class="description-line" id="p-0080" num="0086">This can be expressed in traditional magnitude and phase terms where the magnitude of the windowed DFT term is</div>
+</li> <li> <div class="description-line" id="p-0081" num="0000"> <br/>|<i>X</i> <sub>k</sub>′|=√{square root over (<i>Re</i>(<i>X</i> <sub>k</sub>′)<sup>2</sup> <i>+Im</i>(<i>X</i> <sub>k</sub>′)<sup>2</sup>)}  (3)
+</div>
+</li> <li> <div class="description-line" id="p-0082" num="0000">and the phase of the windowed DFT term is</div>
+</li> <li> <div class="description-line" id="p-0083" num="0000">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>Φ</mi>
+<mi>k</mi>
+<mi>′</mi>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<msup>
+<mi>tan</mi>
+<mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<mi>Re</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msubsup>
+<mi>V</mi>
+<mi>k</mi>
+<mi>′</mi>
+</msubsup>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mrow>
+<mi>Im</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<msubsup>
+<mi>V</mi>
+<mi>k</mi>
+<mi>′</mi>
+</msubsup>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mfrac>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>4</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0087]"> </para-num> <div class="description-line" id="p-0084" num="0087">The hardware <b>600</b> used to compute one term of X<sub>k</sub>′ is illustrated in <figref idrefs="DRAWINGS">FIG. 6</figref>. Notably, the sine template <b>304</b> and cosine template <b>402</b> shown in <figref idrefs="DRAWINGS">FIG. 4</figref> are used in the circuit <b>600</b>. Comparing this arrangement to the previous equation, for which the third term is:</div>
+</li> <li> <div class="description-line" id="p-0085" num="0000">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mn>2</mn>
+<mi>′</mi>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>n</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo></mo>
+<mrow>
+<msub>
+<mi>x</mi>
+<mi>n</mi>
+</msub>
+<mo>·</mo>
+<mrow>
+<mi>W</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>n</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>·</mo>
+<msup>
+<mi>e</mi>
+<mfrac>
+<mrow>
+<mrow>
+<mo>-</mo>
+<mi>i</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>4</mn>
+<mo></mo>
+<mi>π</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>n</mi>
+</mrow>
+<mi>N</mi>
+</mfrac>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>5</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0086" num="0000">it is noted that detector <b>300</b> using the filter template <b>304</b> (<figref idrefs="DRAWINGS">FIG. 3</figref>) computes the imaginary part of the third term of the windowed DFT. Thus, references to the output of the detector <b>300</b> are to be understood as being the imaginary part of the third term of the windowed DFT, and this is important to an understanding of the following further refinements of the invention.</div>
+</li> <li> <para-num num="[0088]"> </para-num> <div class="description-line" id="p-0087" num="0088">This also provides insight into what happens as the time delay is adjusted during a clinical fitting procedure, as shown in <figref idrefs="DRAWINGS">FIG. 7</figref>. While <figref idrefs="DRAWINGS">FIG. 7<i>b </i> </figref>shows a triangular window and a single lobed response, this is for simplicity of representation and is intended to represent the four lobed filter template <b>304</b> and the three lobed response <b>502</b>, respectively. Exploring different time delay adjustments by sliding the offset or delay in the time domain (<figref idrefs="DRAWINGS">FIG. 7<i>b</i> </figref>), rotates the coordinate system of the measurement (<figref idrefs="DRAWINGS">FIG. 7<i>a</i> </figref>). When the evoked response phase aligns with the imaginary axis of <figref idrefs="DRAWINGS">FIG. 7<i>a</i> </figref>, the output of the detector <b>300</b> is at its maximum. This also presents a computationally efficient solution to the problem when at this phase; when the correlator output is maximum, the real part of the spectral component is zero, so its calculation can be avoided as depicted in <figref idrefs="DRAWINGS">FIG. 3</figref>, saving processor cycles. The output of the detector <b>300</b> is the projection of the (complex) evoked response onto the imaginary axis.</div>
+</li> <li> <para-num num="[0089]"> </para-num> <div class="description-line" id="p-0088" num="0089">When considering the entire cross correlation as the evoked response slides across the window (<figref idrefs="DRAWINGS">FIG. 7<i>b</i> </figref>), the evoked response vector in <figref idrefs="DRAWINGS">FIG. 7<i>a </i> </figref>rotates a full 360 degrees around the origin at least twice, and thus changes relatively quickly. However as shown at the bottom of <figref idrefs="DRAWINGS">FIG. 7<i>b</i> </figref>, the amplitude of the convolution of the evoked response and the window changes relatively slowly. Accordingly, the present embodiment recognises that a swift technique to align the evoked response with the imaginary axis and thus find the peak in the correlator output is to:
+</div> </li> <ul> <li id="ul0007-0001" num="0000"> <ul> <li id="ul0008-0001" num="0090">1. Roughly align the window and the signal S(t);</li> <li id="ul0008-0002" num="0091">2. Calculate the imaginary (sin) and real (cosine) terms:
+        <ul> <li id="ul0009-0001" num="0092">a. I=S(t)·W(t)·sin(1 KHz·2πt), and</li> <li id="ul0009-0002" num="0093">b. Q=S(t)·W(t)·cos(1 KHz·2πt);</li> </ul>
+</li> <li id="ul0008-0003" num="0094">3. Find the angle to the y-axis using a tan(Q/I);</li> <li id="ul0008-0004" num="0095">4. As the template has fixed known frequency, calculate the time shift needed to set the sin term to its maximum;</li> <li id="ul0008-0005" num="0096">5. Calculate the imaginary (sin) and real (cosine) terms for the new delay. The cosine term should be much smaller than the sin term confirming that the method worked.</li> </ul> </li> </ul>
+<li> <para-num num="[0097]"> </para-num> <div class="description-line" id="p-0089" num="0097">Such embodiments may be particularly advantageous as compared to a clinical process requiring exploration of the varying delays in order to find a peak</div>
+</li> <li> <para-num num="[0098]"> </para-num> <div class="description-line" id="p-0090" num="0098">The present embodiment further incorporates the third and fourth aspects of the invention, and recognises that the artifact <b>506</b> can be well modelled as being a sum of two exponentials, of differing time constant. Each exponential component has a voltage and a time value, leading to</div>
+</li> <li> <div class="description-line" id="p-0091" num="0000">
+<maths id="MATH-US-00006" num="00006">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>a</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>v</mi>
+<mn>1</mn>
+</msub>
+<mo></mo>
+<mrow>
+<mi>exp</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<mo>-</mo>
+<mi>t</mi>
+</mrow>
+<msub>
+<mi>τ</mi>
+<mn>1</mn>
+</msub>
+</mfrac>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>v</mi>
+<mn>2</mn>
+</msub>
+<mo></mo>
+<mrow>
+<mi>exp</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<mo>-</mo>
+<mi>t</mi>
+</mrow>
+<msub>
+<mi>τ</mi>
+<mn>2</mn>
+</msub>
+</mfrac>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>6</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0092" num="0000">where υ<sub>i </sub>and τ<sub>i </sub>are constants for each component.</div>
+</li> <li> <para-num num="[0099]"> </para-num> <div class="description-line" id="p-0093" num="0099">If</div>
+</li> <li> <div class="description-line" id="p-0094" num="0000"> <br/> <i>e</i>(<i>t</i>)=ν exp(−<i>t</i>/τ)  (7)
+</div>
+</li> <li> <div class="description-line" id="p-0095" num="0000">then we can consider its windowed DFT E<sub>k</sub>′, for which each term will have a magnitude and phase, and the term E<sub>2</sub>′ can be calculated with the complex correlator <b>600</b> of <figref idrefs="DRAWINGS">FIG. 6</figref>.</div>
+</li> <li> <para-num num="[0100]"> </para-num> <div class="description-line" id="p-0096" num="0100">If we take some signal e<sup>−T/τ</sup> and shift the point in the signal at which the correlation is performed by some arbitrary time T, since</div>
+</li> <li> <div class="description-line" id="p-0097" num="0000">
+<br/>
+<i>e</i>
+<sup>−(t+T)/τ</sup>
+<i>=e</i>
+<sup>−t/τ</sup>
+<i>e</i>
+<sup>−T/τ</sup>
+</div>
+</li> <li> <div class="description-line" id="p-0098" num="0000"> <br/> <i>e</i> <sup>−(t+T)/τ</sup> <i>=c·e</i> <sup>−t/τ</sup>  (8)
+</div>
+</li> <li> <div class="description-line" id="p-0099" num="0000">where c is some constant.</div>
+</li> <li> <para-num num="[0101]"> </para-num> <div class="description-line" id="p-0100" num="0101">Thus, the phase of the DFT terms of a single exponential depend on the time constant of the exponential, as shown in <figref idrefs="DRAWINGS">FIG. 8</figref> for the filter template <b>304</b>. However, the present embodiment recognises that the phase of each DFT term is unchanged by time delay.</div>
+</li> <li> <para-num num="[0102]"> </para-num> <div class="description-line" id="p-0101" num="0102"> <figref idrefs="DRAWINGS">FIG. 9</figref> illustrates the filter output vector components arising from artefact only, when modelled as two exponentials. At a first time, shown in <figref idrefs="DRAWINGS">FIG. 9<i>a</i> </figref>, A<sub>2 </sub>and B<sub>2 </sub>are the two artifact phase vectors. These can be added using vector addition to produce the total artefact <b>902</b>. The detector <b>300</b> will thus produce an output <b>904</b> which is the imaginary part of this vector; the projection of <b>902</b> onto the y-axis. As time passes, the lengths of the two vectors reduce exponentially, but at different rates as the time constants are different, B<b>2</b> decaying rapidly and A<b>2</b> decaying slowly. However, the phases remain unchanged as per equation (8), resulting in the situation shown in <figref idrefs="DRAWINGS">FIG. 9<i>b</i> </figref>. The total artefact vector is now <b>912</b>, which due to the different relative contributions from each exponential component is of slightly changed phase to <b>902</b>. The detector <b>300</b> will thus produce an output <b>914</b>.</div>
+</li> <li> <para-num num="[0103]"> </para-num> <div class="description-line" id="p-0102" num="0103"> <figref idrefs="DRAWINGS">FIGS. 10<i>a </i>and 10<i>b </i> </figref>illustrate, at respective times, the detector output vector components arising from artefact modelled as two exponentials and from an evoked response. At a first time t, shown in <figref idrefs="DRAWINGS">FIG. 10<i>a</i> </figref>, V<sub>1 </sub>and V<sub>2 </sub>are the two artifact phase vectors, and CAP is the evoked response vector. These can be added using vector addition to produce the total artefact <b>1002</b>. The detector <b>300</b> will thus produce an output <b>1004</b> which is the imaginary part of this vector; the projection of <b>1002</b> onto the y-axis. At a later time t+dt, the lengths of the two artefact vectors have reduced exponentially, at different rates as the time constants are different, with V<sub>2 </sub>decaying rapidly and V<sub>1 </sub>decaying slowly. However, the phases remain unchanged as per equation (8), as shown in <figref idrefs="DRAWINGS">FIG. 10<i>b</i> </figref>. In contrast, the amplitude of the evoked response vector CAP changes relatively slowly as discussed in relation to <figref idrefs="DRAWINGS">FIG. 7<i>b</i> </figref>, but undergoes a change in phase as discussed in relation to <figref idrefs="DRAWINGS">FIG. 7<i>a</i> </figref>. Thus, as shown in <figref idrefs="DRAWINGS">FIG. 10<i>b</i> </figref>, the CAP vector rotates without undergoing a significant amplitude change. Thus, at one moment (<figref idrefs="DRAWINGS">FIG. 10<i>a</i> </figref>) the CAP vector can be orthogonal to V<sub>2</sub>, and at a later time (<figref idrefs="DRAWINGS">FIG. 10<i>b</i> </figref>) can be aligned with V<sub>2</sub>.</div>
+</li> <li> <para-num num="[0104]"> </para-num> <div class="description-line" id="p-0103" num="0104">When modelling the artefact as a sum of two exponential terms, it has been determined from measurements of actual artefact that the time constant τ<sub>1 </sub>of the first (slow) exponential term is typically in the range 300 μs to 30 ms, more typically 500 μs to 3 ms and most commonly about 1 ms, and that the time constant τ<sub>2 </sub>of the second (fast) exponential term is typically in the range 60-500 μs, more typically 100-300 μs, and most commonly about 150 μs.</div>
+</li> <li> <para-num num="[0105]"> </para-num> <div class="description-line" id="p-0104" num="0105">The method of this embodiment, utilising the third and fourth aspects of the invention, relies on making two complex measurements of the evoked response, at points in time separated by one quarter of a cycle, as shown in <figref idrefs="DRAWINGS">FIG. 11<i>a</i> </figref>. The timing of the measurements is optimised in the manner described above in relation to <figref idrefs="DRAWINGS">FIG. 7</figref>, so that the first measurement (m<b>1</b> and m<b>2</b>) has a purely imaginary evoked response contribution (i.e. the evoked response aligns with the sin correlator <b>304</b>), and the second measurement (m<b>3</b> and m<b>4</b>) is purely real (i.e. aligns with the cosine <b>402</b>). This leads to four measurements, m<b>1</b> to m<b>4</b>. There are four unknowns—the magnitude of the artifact, the magnitude of the evoked response, the phase of the artifact and the time constant of the fast exponential. The slow exponential component of the artifact is well rejected by the filter template <b>304</b> and thus can be omitted. It is known that the artifact contribution to the sin and cos correlators has a fixed ratio. Using simple algebra the unknowns can be eliminated. Therefore any CAP present in the neural measurement can be calculated as being:</div>
+</li> <li> <div class="description-line" id="p-0105" num="0000">
+<maths id="MATH-US-00007" num="00007">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>CAP</mi>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>m</mi>
+<mn>4</mn>
+</msub>
+<mo>-</mo>
+<mrow>
+<mi>k</mi>
+<mo>·</mo>
+<msub>
+<mi>m</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>9</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>Where</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>k</mi>
+</mrow>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>4</mn>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>1</mn>
+</mrow>
+<mo>±</mo>
+<msqrt>
+<mrow>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>4</mn>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<mrow>
+<mrow>
+<mn>4</mn>
+<mo>·</mo>
+<mi>m</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mrow>
+<mn>2</mn>
+<mo>·</mo>
+<mi>m</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>3</mn>
+</mrow>
+</mrow>
+</msqrt>
+</mrow>
+</mrow>
+<mrow>
+<mrow>
+<mn>2</mn>
+<mo>·</mo>
+<mi>m</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>2</mn>
+</mrow>
+</mfrac>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>10</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0106]"> </para-num> <div class="description-line" id="p-0106" num="0106"> <figref idrefs="DRAWINGS">FIG. 11<i>b </i> </figref>illustrates the locations of these four measurements m<b>1</b> to m<b>4</b> on the real and imaginary detector outputs.</div>
+</li> <li> <para-num num="[0107]"> </para-num> <div class="description-line" id="p-0107" num="0107">Knowing k also allows the evaluation of τ, and of the fast artifact exponential:</div>
+</li> <li> <div class="description-line" id="p-0108" num="0000">
+<maths id="MATH-US-00008" num="00008">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>τ</mi>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mo>-</mo>
+<mi>T</mi>
+</mrow>
+<mrow>
+<mi>ln</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>k</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mfrac>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>11</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0108]"> </para-num> <div class="description-line" id="p-0109" num="0108">To find the voltage of the fast exponential term for the artifact, one can further calculate the DFT of the exponential which is what would be expected from the detectors for an exponential input of that time constant, normalized to 1.0:</div>
+</li> <li> <div class="description-line" id="p-0110" num="0000">
+<maths id="MATH-US-00009" num="00009">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>X</mi>
+<mn>2</mn>
+<mi>′</mi>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>n</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo></mo>
+<mrow>
+<msup>
+<mi>e</mi>
+<mfrac>
+<mrow>
+<mo>-</mo>
+<mi>t</mi>
+</mrow>
+<mi>τ</mi>
+</mfrac>
+</msup>
+<mo>·</mo>
+<mrow>
+<mi>W</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>n</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>·</mo>
+<msup>
+<mi>e</mi>
+<mfrac>
+<mrow>
+<mrow>
+<mo>-</mo>
+<mi>i</mi>
+</mrow>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>4</mn>
+<mo></mo>
+<mi>π</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>n</mi>
+</mrow>
+<mi>N</mi>
+</mfrac>
+</msup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>12</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0109]"> </para-num> <div class="description-line" id="p-0111" num="0109">Then, an estimation of the fast artifact term is:</div>
+</li> <li> <div class="description-line" id="p-0112" num="0000">
+<maths id="MATH-US-00010" num="00010">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>A</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mfrac>
+<msup>
+<mi>e</mi>
+<mfrac>
+<mrow>
+<mo>-</mo>
+<mi>t</mi>
+</mrow>
+<mi>τ</mi>
+</mfrac>
+</msup>
+<msubsup>
+<mi>X</mi>
+<mn>2</mn>
+<mi>′</mi>
+</msubsup>
+</mfrac>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>13</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0110]"> </para-num> <div class="description-line" id="p-0113" num="0110">Having calculated the above, it is possible to improve the SAR of the signal by subtracting the estimated exponential, as shown in <figref idrefs="DRAWINGS">FIG. 12</figref>.</div>
+</li> <li> <para-num num="[0111]"> </para-num> <div class="description-line" id="p-0114" num="0111">A difficulty in implementing this algorithm with measured data is that it measures two signals at once, namely the evoked response and the fast exponential, and each forms a noise source for the other. Usually, the phase of the evoked response is not known exactly, and this introduces errors into <figref idrefs="DRAWINGS">FIG. 11<i>b</i> </figref>. When the evoked response is larger than the exponential, and the phase of the evoked response is not known, the exponential estimation algorithm does not always find a solution, so the present embodiment further provides a second estimation method for these circumstances. This further estimation method recognises that the above algorithms can be extended by adding an additional correlation, to allow the phase of the evoked response to be calculated instead of being used as an input.</div>
+</li> <li> <para-num num="[0112]"> </para-num> <div class="description-line" id="p-0115" num="0112">When the relative phase (θ) of the evoked response to the sampling window is unknown, the proposal of <figref idrefs="DRAWINGS">FIG. 11</figref> has 5 unknowns and 4 measurements, so the unknowns cannot be found. By adding two more DFT points this can be overcome, as shown in <figref idrefs="DRAWINGS">FIG. 13</figref>. These additional points (m<b>5</b> and m<b>6</b>) are evaluated at a frequency equal to half the fundamental of the evoked response—to which the evoked response is orthogonal. Therefore these two additional points allow k to be evaluated:</div>
+</li> <li> <div class="description-line" id="p-0116" num="0000">
+<maths id="MATH-US-00011" num="00011">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>k</mi>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>6</mn>
+</mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>5</mn>
+</mrow>
+</mfrac>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>14</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0113]"> </para-num> <div class="description-line" id="p-0117" num="0113">In turn, the five terms a,b,k,θ and c can be found. For some phase θ between the measurement window and the evoked response:</div>
+</li> <li> <div class="description-line" id="p-0118" num="0000">
+<maths id="MATH-US-00012" num="00012">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>1</mn>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>a</mi>
+<mo>+</mo>
+<mrow>
+<mi>c</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>sin</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>θ</mi>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo></mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>2</mn>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>b</mi>
+<mo>+</mo>
+<mrow>
+<mi>c</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>cos</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>θ</mi>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo></mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>3</mn>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>ak</mi>
+<mo>+</mo>
+<mrow>
+<mi>c</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>cos</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>θ</mi>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo></mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>4</mn>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>bk</mi>
+<mo>+</mo>
+<mrow>
+<mi>c</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>sin</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo></mo>
+<mi>θ</mi>
+</mrow>
+</mrow>
+</mrow>
+<mo></mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo></mo>
+<mrow>
+<mi>so</mi>
+<mo></mo>
+<mstyle>
+<mtext>:</mtext>
+</mstyle>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>15</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi>a</mi>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>1</mn>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>4</mn>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>k</mi>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>2</mn>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>3</mn>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mrow>
+<mn>1</mn>
+<mo>-</mo>
+<msup>
+<mi>k</mi>
+<mn>2</mn>
+</msup>
+</mrow>
+</mfrac>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>16</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi>b</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>2</mn>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>3</mn>
+</mrow>
+<mo>+</mo>
+<mi>ak</mi>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>17</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi>c</mi>
+<mo>=</mo>
+<msqrt>
+<mrow>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>1</mn>
+</mrow>
+<mo>-</mo>
+<mi>a</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>2</mn>
+</mrow>
+<mo>-</mo>
+<mi>b</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</msqrt>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>18</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi>θ</mi>
+<mo>=</mo>
+<mrow>
+<msup>
+<mi>sin</mi>
+<mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo></mo>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<mrow>
+<mi>m</mi>
+<mo></mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo></mo>
+<mn>1</mn>
+</mrow>
+<mo>-</mo>
+<mi>a</mi>
+</mrow>
+<mi>c</mi>
+</mfrac>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>19</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0114]"> </para-num> <div class="description-line" id="p-0119" num="0114">The phase will change slowly, so once θ is known, it is possible to adjust the delay of the sampling window, and then revert to the four point algorithm of <figref idrefs="DRAWINGS">FIG. 11</figref>.</div>
+</li> <li> <para-num num="[0115]"> </para-num> <div class="description-line" id="p-0120" num="0115">When considering implementation of the six point technique of <figref idrefs="DRAWINGS">FIG. 13</figref>, it is noted that in some embodiments an FFT will compute this faster than a DFT, especially if the FFT is factored to use the smallest number of multiply operations. A good choice of DFT length might be 16, factored as (F<sub>2 </sub>∘F<sub>2</sub>)∘(F<sub>2</sub>∘F<sub>2</sub>). For this factorization the twiddle factors between the F<sub>2 </sub>operations are trivial, and so the only complex multiply required is in the middle.</div>
+</li> <li> <para-num num="[0116]"> </para-num> <div class="description-line" id="p-0121" num="0116"> <figref idrefs="DRAWINGS">FIG. 14</figref> illustrates an alternative embodiment utilising six measurement points.</div>
+</li> <li> <para-num num="[0117]"> </para-num> <div class="description-line" id="p-0122" num="0117">It is further noted that running the calculation after the evoked response is finished allows the slow exponential to be measured.</div>
+</li> <li> <para-num num="[0118]"> </para-num> <div class="description-line" id="p-0123" num="0118">The evoked response in the spine (having three phases) takes approximately 1 ms. In embodiments employing a sample rate of 30 KHz or a simple interval of 33 us, the evoked response will take around 30 samples. Consequently in such embodiments the filter template having four phases will comprise approximately 40 tap values, or data points. In alternative embodiments, using an alternative sampling rate or measuring a faster or slower CAP, the length of the filter may comprise correspondingly greater or fewer filter taps.</div>
+</li> <li> <para-num num="[0119]"> </para-num> <div class="description-line" id="p-0124" num="0119">While the preceding embodiments have been described in relation to a filter template which comprises four half cycles, alternative embodiments of the present invention may nevertheless usefully employ a filter template comprising greater or fewer lobes. The present invention thus recognises that the ideal number if lobes is four. This is in contrast to a two lobe filter, which will have equal first and second lobes and will thus put more emphasis on the early parts of the signal where the signal-to-artifact is worse. Further, a filter with an odd number of lobes does not tend to have good artifact rejection properties. Moreover, if one were to use a six-lobe filter, or higher even-number lobed filter, the window becomes too wide relative to the 3-lobed neural response, and at least half the correlation time would just be looking at noise. Since most of the problematic artifact is in the first two lobes, a 6 lobe filter will tend not to provide better artifact rejection than the four-lobe filter. Four lobes thus provides the optimal trade-off between rejection of artifact and noise gain.</div>
+</li> <li> <para-num num="[0120]"> </para-num> <div class="description-line" id="p-0125" num="0120">Nevertheless, alternative embodiments of the present invention may usefully employ a filter template comprising greater or fewer lobes. We now describe the mathematical properties of templates of other embodiments of the invention. The term “template” is used to refer to a filter used via correlation to detect an ECAP. A template may be comprised of one or more wavelets or basis functions, or may be derived by some other method, and is configured to preferentially pass an ECAP but preferentially block or be orthogonal to artifact. <figref idrefs="DRAWINGS">FIG. 15<i>a </i> </figref>illustrates sinusoidal binomial vectors in accordance with further embodiments of the invention. <figref idrefs="DRAWINGS">FIG. 15<i>b </i> </figref>shows the generation of three-lobe, four-lobe and five-lobe templates. A notable property of the SBT is that its basis functions of the same length are orthogonal. It is to be appreciated that the method used to generate the templates of <figref idrefs="DRAWINGS">FIG. 15</figref> up to five-lobes can be extended to a greater number of lobes. It is further noted that the window is not triangular for three or five lobed filter templates, but has a flat central portion in both cases, and in the case of five lobes the window having a piecewise linear rise and fall. Thus, the three lobed filter template window proposed by the present embodiments is not triangular but is a flat topped window, which has been found to significantly improve artefact rejection as compared to a triangular window of a three lobed filter template.</div>
+</li> <li> <para-num num="[0121]"> </para-num> <div class="description-line" id="p-0126" num="0121">That is, an important property of the sinusoidal binomial transform (SBT) is its ability to reject polynomial signals. If an SBT template of order n is used, it will reject all the terms of the Taylor series up to order n.</div>
+</li> <li> <para-num num="[0122]"> </para-num> <div class="description-line" id="p-0127" num="0122"> <figref idrefs="DRAWINGS">FIG. 16<i>a </i> </figref>illustrates the point values of a four lobed, 32 point filter template generated in accordance with the teachings of <figref idrefs="DRAWINGS">FIG. 15</figref>. <figref idrefs="DRAWINGS">FIG. 16<i>b </i> </figref>illustrates the point values of a three lobed, 33 point filter template generated in accordance with the teachings of <figref idrefs="DRAWINGS">FIG. 15</figref> and in particular having a flat topped window.</div>
+</li> <li> <para-num num="[0123]"> </para-num> <div class="description-line" id="p-0128" num="0123">It is further to be appreciated that cosine templates of 3, 5 or more lobes can be similarly generated, noting the <figref idrefs="DRAWINGS">FIG. 4</figref> example for a four half cycles cosine template <b>402</b>.</div>
+</li> <li> <para-num num="[0124]"> </para-num> <div class="description-line" id="p-0129" num="0124">The preceding embodiments further describe a filter template built using a triangular window. The triangular window is superior to the Bartlett, Hanning, rectangular and the Kaiser-Bessel for a variety of beta values. The performance of the four-lobe triangular template can be within 2 dB of a matched filter for optimised offset. Nevertheless, alternative embodiments may utilise windows other than the triangular window to useful effect, and such embodiments are thus within the scope of the present invention.</div>
+</li> <li> <para-num num="[0125]"> </para-num> <div class="description-line" id="p-0130" num="0125">Moreover, while the described embodiments use a single term of the SBT for response detection, the present invention further recognises that there are possible extensions to this method. Therefore, some embodiments of the invention may use multiple identical templates, but shifted in time. Even though these are not orthogonal, a successive approximation method creating a compound template may provide better approximation. Additionally or alternatively, some embodiments may use templates that are a sum of templates of different frequencies, templates of different offset and/or templates of different numbers of lobes.</div>
+</li> <li> <para-num num="[0126]"> </para-num> <div class="description-line" id="p-0131" num="0126">A benefit of some embodiments of the present invention is that in some embodiments the detector produces an output based on a single neural measurement, without requiring multiple neural measurements to produce a detector output. Such embodiments may thus provide a swift response time of a feedback control loop utilising the detector output.</div>
+</li> <li> <para-num num="[0127]"> </para-num> <div class="description-line" id="p-0132" num="0127">It will be appreciated by persons skilled in the art that numerous variations and/or modifications may be made to the invention as shown in the specific embodiments without departing from the spirit or scope of the invention as broadly described. The present embodiments are, therefore, to be considered in all respects as illustrative and not restrictive</div>
+</li> </ul>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">12</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM232610394">
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text"> <b>1</b>. A method for processing a neural measurement obtained in the presence of artifact, in order to detect whether a neural response is present in the neural measurement, the method comprising:
+<div class="claim-text">obtaining a neural measurement from one or more sense electrodes;</div> <div class="claim-text">at a first time offset, correlating the neural measurement against a first filter template to produce a first measure m<sub>1</sub>, the first filter template comprising an alternating waveform of a first phase;</div> <div class="claim-text">at the first time offset, correlating the neural measurement against a second filter template to produce a second measure m<sub>2</sub>, the second filter template comprising an alternating waveform of a second phase 90 degrees offset to the first phase;</div> <div class="claim-text">at a second time offset, being at a non-integer multiple of 180 degrees offset from the first time offset, correlating the neural measurement against the first filter template to produce a third measure m<sub>3</sub>;</div> <div class="claim-text">at the second time offset, correlating the neural measurement against the second filter template to produce a fourth measure m<sub>4</sub>; and</div> <div class="claim-text">processing m<sub>1 </sub>to m<sub>4 </sub>to detect whether a neural response exists in the neural measurement.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text"> <b>2</b>. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the first filter template is anti-symmetric so as to create an imaginary DFT output, while the second filter template is symmetric so as to create a real DFT output.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text"> <b>3</b>. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the second time offset is offset by 90 degrees or 270 degrees out of phase from the first time offset.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text"> <b>4</b>. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the first filter template comprises four half cycles of a first alternating waveform and the second filter template comprises four half cycles of a second alternating waveform 90 degrees out of phase with the first alternating waveform.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text"> <b>5</b>. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein the first and second filter template are amplitude modulated by a triangular window.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text"> <b>6</b>. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref> wherein only a single point of the correlation is calculated.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text"> <b>7</b>. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref> wherein the single point of the correlation is calculated at a predefined optimal time delay.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text"> <b>8</b>. The method of <claim-ref idref="CLM-00007">claim 7</claim-ref>, further comprising determining the optimum time delay when a signal to artifact ratio is greater than one, at which a first or single point of the cross-correlation between the neural measurement and the filter template should be produced, by:
+<div class="claim-text">at an approximate time delay between the neural response and the filter template, computing real and imaginary parts of the fundamental frequency of the DFT of the neural measurement;</div> <div class="claim-text">calculating a phase defined by the real and imaginary parts;</div> <div class="claim-text">relative to a fundamental frequency of the template, calculating the time adjustment needed to change the calculated phase to π/2; and</div> <div class="claim-text">defining the optimum time delay as being the sum of the approximate time delay and the time adjustment.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text"> <b>9</b>. The method of <claim-ref idref="CLM-00007">claim 7</claim-ref> further comprising determining the optimum time delay by:
+<div class="claim-text">at the first time offset, correlating the neural measurement against a third filter template to produce a fifth measure m<sub>5</sub>, the third filter template comprising an alternating waveform at double the frequency of the first filter template and of a third phase;</div>
+<div class="claim-text">at the second time offset, correlating the neural measurement against the third filter template to produce a sixth measure m<sub>6</sub>; and</div>
+<div class="claim-text">determining from m<sub>5 </sub>and m<sub>6 </sub>a decay in artefact between the first time offset and the second time offset.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text"> <b>10</b>. The method of <claim-ref idref="CLM-00007">claim 7</claim-ref> wherein the optimum time delay is recalculated prior to every attempted detection of a neural response.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text"> <b>11</b>. The method of <claim-ref idref="CLM-00007">claim 7</claim-ref> wherein the optimum time delay is recalculated in response to a detected change in the user's posture.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text"> <b>12</b>. A device for processing a neural measurement obtained in the presence of artifact, in order to detect whether a neural response is present in the neural measurement, the device comprising:
+<div class="claim-text">measurement circuitry for obtaining a neural measurement from one or more sense electrodes; and</div> <div class="claim-text">a processor configured to:
+<div class="claim-text">at a first time offset, correlate the neural measurement against a first filter template to produce a first measure m<sub>1</sub>, the first filter template comprising an alternating waveform of a first phase;</div>
+<div class="claim-text">at the first time offset, correlate the neural measurement against a second filter template to produce a second measure m<sub>2</sub>, the second filter template comprising an alternating waveform of a second phase 90 degrees offset to the first phase;</div>
+<div class="claim-text">at a second time offset, being at a non-integer multiple of 180 degrees offset from the first time offset, correlate the neural measurement against the first filter template to produce a third measure m<sub>3</sub>;</div>
+<div class="claim-text">at the second time offset, correlate the neural measurement against the second filter template to produce a fourth measure m<sub>4</sub>; and</div>
+<div class="claim-text">process m<sub>1 </sub>to m<sub>4 </sub>to detect whether a neural response exists in the neural measurement.</div>
+</div> </div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

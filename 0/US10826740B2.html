@@ -1,0 +1,352 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10826740B2 - Channel probing signal for a broadband communication system 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA420413993">
+<div class="abstract" id="p-0001" num="0000">In a broadband wireless communication system, a spread spectrum signal is intentionally overlapped with an OFDM signal, in a time domain, a frequency domain, or both. The OFDM signal, which inherently has a high spectral efficiency, is used for carrying broadband data or control information. The spread spectrum signal, which is designed to have a high spread gain for overcoming severe interference, is used for facilitating system functions such as initial random access, channel probing, or short messaging. Methods and techniques are devised to ensure that the mutual interference between the overlapped signals is minimized to have insignificant impact on either signal and that both signals are detectable with expected performance by a receiver.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES278515659">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATION(S)</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of U.S. patent application Ser. No. 15/953,950, filed Apr. 16, 2018, which is continuation of U.S. patent application Ser. No. 14/321,615, filed Jul. 1, 2014, which issued on Apr. 17, 2018 as U.S. Pat. No. 9,948,488, which is a continuation application of U.S. patent application Ser. No. 13/861,942, filed Apr. 12, 2013, which issued on Jul. 1, 2014 as U.S. Pat. No. 8,767,522, which is a continuation application of U.S. patent application Ser. No. 13/347,644, filed Jan. 10, 2012, which issued on Apr. 23, 2013 as U.S. Pat. No. 8,428,009, which is a continuation application of U.S. patent application Ser. No. 12/975,226, filed Dec. 21, 2010, which issued on Jan. 10, 2012 as U.S. Pat. No. 8,094,611, all of which are incorporated herein by reference. U.S. patent application Ser. No. 12/975,226 is a continuation application of U.S. patent application Ser. No. 10/583,229, filed Aug. 27, 2008, which issued on Jan. 4, 2011 as U.S. Pat. No. 7,864,725, which is the National Stage Application of International Application No. PCT/US2005/003518, filed Jan. 27, 2005, which claims the benefit of U.S. Provisional Patent Application No. 60/540,586, filed on Jan. 30, 2004, and of U.S. Provisional Patent Application No. 60/540,032, filed on Jan. 29, 2004.</div>
+<heading id="h-0002">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0003" num="0002">A direct Sequence Spread Spectrum (DSSS) system is inherently capable of supporting multi-cell and multi-user access applications through the use of orthogonal spreading codes. The initial access of the physical channel and frequency planning are relatively easier because of interference averaging in a DSSS system. It has been widely used in some existing wireless networks. However, a DSSS system using orthogonal spreading codes, may suffer severely from the loss of orthogonally in a broadband environment due to multi-path propagation effects, which results in low spectral efficiency.</div>
+<div class="description-paragraph" id="p-0004" num="0003">In broadband wireless communications, Multi-Carrier (MC) technology is drawing more and more attention because of its capability. An MC system such as an Orthogonal Frequency Division Multiplexing (OFDM) system is capable of supporting broadband applications with higher spectral efficiency. An MC system mitigates the adverse effects of multi-path propagation in wireless environments by using cyclic prefixes to extend the signal period as the data is multiplexed on orthogonal sub-carriers. In effect, it converts a frequency selective channel into a number of parallel flat fading channels which can be easily equalized with simple one-tap equalizers. The modulator and the demodulator can be executed efficiently via the fast Fourier transform (FFT) with much lower cost. However, MC systems are vulnerable while operating in multi-user and multi-cell environments.</div>
+<description-of-drawings>
+<heading id="h-0003">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0005" num="0004"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates a basic structure of a multi-carrier signal in the frequency domain, made up of subcarriers.</div>
+<div class="description-paragraph" id="p-0006" num="0005"> <figref idrefs="DRAWINGS">FIG. 2</figref> illustrates a radio resource being divided into small units in both frequency and time domains.</div>
+<div class="description-paragraph" id="p-0007" num="0006"> <figref idrefs="DRAWINGS">FIG. 3</figref> illustrates a frame structure of an exemplary OFDM system.</div>
+<div class="description-paragraph" id="p-0008" num="0007"> <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates three examples of a subframe structure in the exemplary OFDM system.</div>
+<div class="description-paragraph" id="p-0009" num="0008"> <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates slot structure of the OFDM system and the overlay system.</div>
+<div class="description-paragraph" id="p-0010" num="0009"> <figref idrefs="DRAWINGS">FIG. 6</figref> is an illustration of MC signals overlaid with DSSS signals in the frequency domain where the power level of the DSSS signal is much lower than that of the MC signal.</div>
+<div class="description-paragraph" id="p-0011" num="0010"> <figref idrefs="DRAWINGS">FIG. 7</figref> is same as <figref idrefs="DRAWINGS">FIG. 6</figref> wherein not all MC subchannels are occupied.</div>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates a transmitter structure of MC and DSSS overlay system.</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 9</figref> illustrates a receiver structure of MC and DSSS overlay system.</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIG. 10</figref> illustrates examples of communications between a base station and multiple mobile stations transmitting DSSS and MC signals.</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 11</figref> illustrates a mobile station sending DSSS signals to its current serving base station, or other base stations.</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates using interference cancellation technique to cancel interfering DSSS signal in a composite signal to obtain a clearer MC signal.</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 13</figref> illustrates a DSSS signal and a MC signal fully overlaid or partially overlaid at MC symbol or slot boundary in time domain.</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 14</figref> illustrates a DSSS signal with a high Peak to Average Ratio in frequency domain causing strong interference to certain MC subcarriers.</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 15</figref> illustrates using spectrum nulls in DSSS signal to protect an MC control subchannel.</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 16</figref> illustrates spectrum control for DSSS signal using simple sub-sampling method.</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 17</figref> illustrates examples of communications between a base station and multiple mobile stations transmitting both DSSS and MC signals.</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 18</figref> illustrates a typical channel response in the time and frequency domains. By estimating the peaks of a channel response in the time domain, the channel profile in the frequency domain can be obtained.</div>
+</description-of-drawings>
+<heading id="h-0004">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0023" num="0022">A broadband wireless communication system where both the Multi-Carrier (MC) and direct Sequence Spread Spectrum (DSSS) signals are intentionally overlaid together in both time and frequency domains is described. The system takes advantage of both MC and DSSS techniques to mitigate their weaknesses. The MC signal is used to carry broadband data signal for its high spectral efficiency, while the DSSS signal is used for special purpose processing, such as initial random access, channel probing, and short messaging, in which signal properties such as simplicity, self synchronization, and performance under severe interference are of concern. In the embodiments of this invention both the MC and the DSSS signals are distinguishable in normal operations and the interference between the overlaid signals is insufficient to degrade the expected performance of either signal.</div>
+<div class="description-paragraph" id="p-0024" num="0023">Unlike a typical CDMA system where the signals are designed to be orthogonal in the code domain or an OFDM system where the signals are designed to be orthogonal in frequency domain, the embodiments of this invention overlay the MC signal, which is transmitted without or with very low spreading, and the DSSS signal, which is transmitted at a power level lower than that of the MC signal.</div>
+<div class="description-paragraph" id="p-0025" num="0024">In accordance with aspects of certain embodiments of this invention, the MC signal is modulated on subcarriers in the frequency domain while the DSSS signal is modulated by the information bits or symbols in the time domain. In some cases the information bits modulating the DSSS sequence are always one.</div>
+<div class="description-paragraph" id="p-0026" num="0025">This invention further provides apparatus and means to implement the mentioned processes and methods in a broadband wireless multi-access and/or multi-cell network, using advanced techniques such as transmit power control, spreading signal design, and iterative cancellation.</div>
+<div class="description-paragraph" id="p-0027" num="0026">The mentioned MC system can be of any special format such as OFDM or Multi-Carrier Code Division Multiple Access (MC-CDMA). The presented methods and apparatus can be applied to downlink, uplink, or both, where the duplexing technique can be either Time Division Duplexing (TDD) or Frequency Division Duplexing (FDD).</div>
+<div class="description-paragraph" id="p-0028" num="0027">Various embodiments of the invention are described to provide specific details for thorough understanding and enablement; however, the aspects of the invention may be practiced without such details. In some instances, well-known structures and functions have not been shown or described in detail to avoid unnecessarily obscuring the essential matters.</div>
+<div class="description-paragraph" id="p-0029" num="0028">Unless the context clearly requires otherwise, throughout the description and the claims, the words “comprise,” “comprising,” and the like are to be construed in an inclusive sense as opposed to an exclusive or exhaustive sense; that is to say, in the sense of “including, but not limited to.” Words using the singular or plural number also include the plural or singular number respectively. Additionally, the words “herein,” “above,” “below” and words of similar import, when used in this application, shall refer to this application as a whole and not to any particular portions of this application. When the claims use the word “or” in reference to a list of two or more items, that word covers all of the following interpretations of the word: any of the items in the list, all of the items in the list and any combination of the items in the list.</div>
+<heading id="h-0005">Multi-Carrier Communication System</heading>
+<div class="description-paragraph" id="p-0030" num="0029">The physical media resource (e.g., radio or cable) in a multi-carrier communication system can be divided in both the frequency and time domains. This canonical division provides a high flexibility and fine granularity for resource sharing.</div>
+<div class="description-paragraph" id="p-0031" num="0030">The basic structure of a multi-carrier signal in the frequency domain is made up of subcarriers. Within a particular spectral band or channel, there are a fixed number of subcarriers. There are three types of subcarriers:</div>
+<div class="description-paragraph" id="h-0006" num="0000">1. Data subcarriers, which contain information data;</div>
+<div class="description-paragraph" id="h-0007" num="0000">2. Pilot subcarriers, whose phases and amplitudes are predetermined and made known to all receivers and which are employed for assisting system functions such as estimation of system parameters; and</div>
+<div class="description-paragraph" id="h-0008" num="0000">3. Silent subcarriers, which have no energy and are used for guard bands and DC carrier.</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates a basic structure of a multi-carrier signal in the frequency domain, made up of subcarriers. The data subcarriers can be arranged into groups called subchannels to support scalability and multiple-access. The carriers forming one subchannel are not necessarily adjacent to each other. As depicted in <figref idrefs="DRAWINGS">FIG. 1</figref>, each user may use part or all of the subchannels.</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 2</figref> illustrates a radio resource being divided into small units in both frequency (subchannels) and time domains (time slots). The basic structure of an MC signal in the time domain is made up of time slots to support multiple-access.</div>
+<heading id="h-0009">An Exemplary MC System</heading>
+<div class="description-paragraph" id="p-0034" num="0033">An OFDM system is used in the system as a special case of an MC system. The system parameters for the uplink under consideration are listed in Table 1. <figref idrefs="DRAWINGS">FIG. 3</figref> illustrates a frame structure of a suitable OFDM system. In this system, a 20 ms frame <b>310</b> is divided into four 5 ms subframes <b>312</b>. One subframe <b>312</b> consists of six time slots <b>314</b> and two special periods <b>316</b>, which serve transition time from downlink to uplink and vise versa. The six time slots in one subframe can be configured as either uplink or downlink slots symmetrically or asymmetrically.</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates three examples of a subframe structure in an OFDM system: one symmetric configuration <b>412</b> and two asymmetric configurations <b>414</b>, each with differing number of uplink (UL) and downlink (DL) slots. <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates a slot structure of an OFDM system and an overlay system. One 800 μs time slot <b>510</b> is comprised of 8 OFDM symbols <b>512</b>, which are overlaid by DSSS signals <b>514</b> in the time domain. Two guard periods GP1 and GP2 are allocated for the DSSS signal <b>514</b>.</div>
+<div class="description-paragraph" id="p-0036" num="0035">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Uplink system parameters</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Data Rate</td>
+<td class="description-td">2, 4, 8, 16, 24 Mbps</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Modulation</td>
+<td class="description-td">QPSK, 16-QAM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Coding rate</td>
+<td class="description-td">1/8, 1/4, 1/2, 3/4</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">IFFT/FFT size</td>
+<td class="description-td">1024</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">OFDM symbol duration</td>
+<td class="description-td">100 us</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Guard interval</td>
+<td class="description-td">11.11 us</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Subcarrier spacing</td>
+<td class="description-td">9.765625 kHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">System sampling rate (fs)</td>
+<td class="description-td">11.52 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Channel spacing</td>
+<td class="description-td">10 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<heading id="h-0010">Detailed Description of a MC and DSSS Overlay System</heading>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates the overlay of the MC and DSSS signals, where the DSSS signal overlaps with the MC signal in the time domain. The overlaid signal can be aligned at the boundary of MC slot or MC symbol when they are synchronized (for example, DSSS signal # k in <figref idrefs="DRAWINGS">FIG. 5</figref>). It can also be not aligned when they are not synchronized (for example, DSSS signal # j in <figref idrefs="DRAWINGS">FIG. 5</figref>). In one embodiment, the DSSS signal is placed at the period of cyclic prefix of the OFDM symbol.</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 6</figref> is an illustration of MC signals overlaid with DSSS signals in the frequency domain where the power level of the DSSS signal is much lower than that of the MC signal. The subcarriers in a subchannel are not necessarily adjacent to each other in the frequency domain. <figref idrefs="DRAWINGS">FIG. 7</figref> is similar to <figref idrefs="DRAWINGS">FIG. 6</figref> wherein not all MC subchannels are occupied. It illustrates a scenario where some MC subchannels are not energized.</div>
+<div class="description-paragraph" id="p-0039" num="0038">In another embodiment, the MC signal is modulated on subcarriers in the frequency domain while the DSSS signal is modulated in either the time domain or the frequency domain. In one embodiment the modulation symbol on the DSSS sequence is one and the sequence is unmodulated.</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates a transmitter structure <b>800</b> of an MC and DSSS overlay system, wherein the MC signal and DSSS signal are added together prior to Digital to Analog (D/A) conversion <b>830</b>. In <figref idrefs="DRAWINGS">FIG. 8</figref>, the top branch <b>810</b> is an OFDM transmitter and the bottom branch <b>820</b> is the spread spectrum transmitter. In the MC transmitter, the S/P buffer converts the sequential inputs into parallel outputs, which are in turn inputted to the inverse discrete Fourier transform (IDFT). The outputs from the IDFT are the time domain signals, which are converted from parallel to sequential signals after a cyclic prefix is added. Adding the prefix can also be performed after the P/S conversion. In the spread spectrum transmitter, the DSSS sequence is modulated by the information bits or symbols and the modulated signals will undergo pulse-shaping filtering so that the signal spectrum meets specified criteria.</div>
+<div class="description-paragraph" id="p-0041" num="0040">A digital attenuator (G1) is used for the DSSS signal to adjust its transmitted signal level relative to the MC signal. The two signals are overlaid in the digital domain before converting to a composite analog signal. A second analog variable gain (G2) is used subsequent to the D/A converter <b>830</b> to further control the power level of the transmitted signal. When the MC signal is not present, both G1 and G2 will be applied to the DSSS signal to provide sufficient transmission dynamic range. G2 can be realized in multiple circuit stages.</div>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 9</figref> illustrates a receiver structure <b>900</b> of an MC and DSSS overlay system. A composite signal is processed by a MC receiver <b>910</b> and DSSS receiver <b>920</b>. At the receiver side, after automatic gain control (AGC), an Analog-to-Digital (ND) converter <b>930</b> converts the received analog signal to digital signal. The MC receiver basically performs a reverse process of the MC transmitter. The MC synchronization circuit carries out the synchronization in both time and frequency for the receiver to function properly. The outputs of the P/S are information bits or symbols. To detect whether a DSSS signal is present, the signal is despread with a matched filter or a correlator, using the access sequence, to check if the correlation peak exceeds a predefined threshold. The information from the DSSS receiver <b>920</b> will then be used to decode the mobile station's signature in the case of initial random access; to derive the channel information in the case of channel probing; or to decode the information bit in the case of short messaging.</div>
+<div class="description-paragraph" id="p-0043" num="0042">In one embodiment a rake receiver is used in the DSSS receiver <b>920</b> to improve its performance in a multi-path environment. In another embodiment, the MC signal is processed as if no DSSS signal is present. In yet another embodiment, advanced interference cancellation techniques can be applied to the composite signal to cancel the DSSS signal from the composite signal thus maintaining almost the same MC performance.</div>
+<div class="description-paragraph" id="p-0044" num="0043">The transmitted composite signal for user i can be represented by:
+<br/>
+<i>s</i> <sub>i</sub>(<i>t</i>)=<i>G</i> <sub>i,2</sub>*[<i>G</i> <sub>i,1</sub> <i>*s</i> <sub>i,SS</sub>(<i>t</i>)+<i>b</i> <sub>i</sub> <i>*s</i> <sub>i,MC</sub>(<i>t</i>)]  (1)
+<br/>
+where bi is 0 when there is no MC signal and is 1 when an MC signal is present. Similarly, G<sub>i,1 </sub>is 0 when there is no DSSS signal and varies depending on the power setting of the DSSS signal relative to the MC signal when a DSSS signal is present. G<sub>i,2 </sub>is used to control the total transmission power for user i. The received signal can be represented by:
+</div>
+<div class="description-paragraph" id="p-0045" num="0044"> <maths id="MATH-US-00001" num="00001"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mi>r</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>t</mi> <mo>)</mo> </mrow> </mrow> <mo>=</mo> <mrow> <mrow> <munderover> <mo>∑</mo> <mrow> <mi>i</mi> <mo>=</mo> <mn>1</mn> </mrow> <mi>M</mi> </munderover> <mo>⁢</mo> <mrow> <msub> <mi>s</mi> <mi>i</mi> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>t</mi> <mo>)</mo> </mrow> </mrow> </mrow> <mo>+</mo> <mi>N</mi> <mo>+</mo> <mi>I</mi> </mrow> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>2</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where M is the total number of mobile station actively communicating with the current base station, N is the Gaussian noise, and I is the total interference from all the mobile stations in current and other base stations.
+</div>
+<div class="description-paragraph" id="p-0046" num="0045">Denoting the received power of the MC signal as P<sub>MC </sub>and the received power of the DSSS signal as P<sub>SS</sub>, the signal to interference and noise ratio (SINR) for the MC signal is:
+<br/>
+SINR<sub>MC</sub> <i>=P</i> <sub>MC</sub>/(<i>N+I</i>)  (3)
+<br/>
+when the DSSS signal is not present; and is
+<br/>
+SINR′<sub>MC</sub> <i>=P</i> <sub>MC</sub>/(<i>N+I+P</i> <sub>SS</sub>)  (4)
+<br/>
+when the DSSS signal is present. The system is designed such that the SINR′<sub>MC </sub>meets the SINR requirement for the MC signal and its performance is not compromised in spite of interference from the overlaid DSSS signal.
+</div>
+<div class="description-paragraph" id="p-0047" num="0046">In one embodiment, the DSSS signal is power controlled such that P<sub>SS </sub>is well below the noise level, N.</div>
+<div class="description-paragraph" id="p-0048" num="0047">On the other hand, the SINR for the DSSS signal is
+<br/>
+SINR<sub>SS</sub> <i>=P</i> <sub>SS</sub>/(<i>N+I+P</i> <sub>MC</sub>)  (5)
+</div>
+<div class="description-paragraph" id="p-0049" num="0048">Denoting the spreading factor for the DSSS signal as K<sub>SF</sub>, the effective SINR for one symbol after despreading is:
+<br/>
+SINR′<sub>SS</sub> <i>=P</i> <sub>SS</sub> <i>*K</i> <sub>SF</sub>/(<i>N+I+P</i> <sub>MC</sub>)  (6)
+</div>
+<div class="description-paragraph" id="p-0050" num="0049">SINR′<sub>SS </sub>must be high enough to meet the performance requirement when detecting or decoding the information conveyed in the DSSS signal. In one embodiment, K<sub>SF </sub>is chosen to be 1000, so that the DSSS signal is boosted with 30 dB spreading gain after despreading.</div>
+<div class="description-paragraph" id="p-0051" num="0050"> <figref idrefs="DRAWINGS">FIG. 11</figref> illustrates a mobile station <b>1110</b> sending DSSS signals to its current serving base station or other base stations. The latter case is especially helpful in hand-off processes. In this Figure, a mobile station MS<sub>k </sub>is communicating with a BS<sub>i </sub>using an MC signal while transmitting a DSSS signal to BS<sub>k</sub>.</div>
+<heading id="h-0011">Power Control</heading>
+<div class="description-paragraph" id="p-0052" num="0051">As discussed above, one design issue is to minimize the power of the DSSS signal to reduce its interference with the MC data signal. In one embodiment, the initial power setting of a mobile station, T<sub>MS_tx </sub>(in dBm), is set based on path loss, L<sub>path </sub>(in dB), and the desired received power level at the base station, P<sub>BS_rx_des </sub>(in dBm),
+<br/>
+<i>T</i> <sub>MS_tx</sub> <i>=P</i> <sub>BS_rx_des</sub> <i>+L</i> <sub>path</sub> <i>−C</i> <sub>1</sub> <i>−C</i> <sub>2</sub>  (7)
+</div>
+<div class="description-paragraph" id="p-0053" num="0052">C<sub>1 </sub>(in dB) is set to a proper value so that the SINR of the MC as specified in equation (4) meets its requirement. C<sub>2 </sub>(in dB) is an adjustment to compensate for the power control inaccuracy. Open loop power control inaccuracy is mainly caused by a discrepancy between an estimated path loss by the mobile station and the actual path loss.</div>
+<div class="description-paragraph" id="p-0054" num="0053">In one embodiment, C<sub>1 </sub>is set to 9 dB for MC using QPSK modulation with ½ error control coding or 15 dB for MC using 16QAM modulation with ½ error control coding. C<sub>2 </sub>is set to 10 dB or 2 dB depending on whether the mobile station is under open loop power control or closed loop power control. Power control for the DSSS signal also eases the spectrum mask requirement for the DSSS signal because the DSSS signal level is much lower than that of the MC signal.</div>
+<div class="description-paragraph" id="p-0055" num="0054">With total power offset of C<sub>1</sub>+C<sub>2 </sub>subtracted from an initial transmission power of the DSSS signal, the spreading factor of the DSSS signal needs to be set high enough (e.g., 512 (27 dB) or higher) so that the DSSS signal can be detected in normal conditions. This requires a sufficient number of bits of the A/D converter at the base station, for example, 12 bits.</div>
+<div class="description-paragraph" id="p-0056" num="0055">In one embodiment, the D/A converter at the mobile station uses 12 bits, among which 8 bits are targeted for the MC signal (assuming 3 bits are reserved for MC peak to average consideration). Thus, there are enough bits left for the DSSS signal even with significant attenuation relative to the MC signal.</div>
+<heading id="h-0012">Canceling the Interference of DSSS Signal to the MC Signal</heading>
+<div class="description-paragraph" id="p-0057" num="0056">In one embodiment, the base station employs interference cancellation techniques to cancel the DSSS interference to the MC signal. <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates a system for using an interference cancellation technique to cancel an interfering DSSS signal in a composite signal to obtain a clearer MC signal. First, a DSSS signal is detected by the DSSS receiver <b>1220</b>; then it is subtracted (decision directed) from the total received signal to obtain a cleaner MC data signal in the MC receiver <b>1210</b>, as illustrated in <figref idrefs="DRAWINGS">FIG. 12</figref>. In another embodiment, multiple step iterative cancellation can be applied to further improve the effectiveness of the interference cancellation. The MC receiver basically performs a reverse process of the MC transmitter mentioned above. The MC synchronization circuit carries out the synchronization in both time and frequency for the receiver to function properly. The outputs of the P/S are information bits or symbols.</div>
+<heading id="h-0013">DSSS Signal Design</heading>
+<div class="description-paragraph" id="p-0058" num="0057">DSSS sequences are chosen to have good autocorrelation and cross-correlation properties (i.e., with high peak to sidelobe ratio). In one embodiment, pulse-shaping is applied to restrict the spectrum mask of DSSS signals and to reduce impacts on the MC signals in the frequency domain. For example, the transmitter pulse-shaping filter applied to the DSSS signal can be a root-raised cosine (RRC) with roll-off factor α in the frequency domain. The impulse response of the chip impulse filter RC<sub>0</sub>(t) is</div>
+<div class="description-paragraph" id="p-0059" num="0058"> <maths id="MATH-US-00002" num="00002"> <math overflow="scroll"> <mtable> <mtr> <mtd> <mrow> <mrow> <mi>R</mi> <mo>⁢</mo> <mrow> <msub> <mi>C</mi> <mn>0</mn> </msub> <mo>⁡</mo> <mrow> <mo>(</mo> <mi>t</mi> <mo>)</mo> </mrow> </mrow> </mrow> <mo>=</mo> <mfrac> <mrow> <mrow> <mi>sin</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>π</mi> <mo>⁢</mo> <mfrac> <mi>t</mi> <msub> <mi>T</mi> <mi>C</mi> </msub> </mfrac> <mo>⁢</mo> <mrow> <mo>(</mo> <mrow> <mn>1</mn> <mo>-</mo> <mi>α</mi> </mrow> <mo>)</mo> </mrow> </mrow> <mo>)</mo> </mrow> </mrow> <mo>+</mo> <mrow> <mn>4</mn> <mo>⁢</mo> <mi>α</mi> <mo>⁢</mo> <mfrac> <mi>t</mi> <msub> <mi>T</mi> <mi>C</mi> </msub> </mfrac> <mo>⁢</mo> <mrow> <mi>cos</mi> <mo>⁡</mo> <mrow> <mo>(</mo> <mrow> <mi>π</mi> <mo>⁢</mo> <mfrac> <mi>t</mi> <msub> <mi>T</mi> <mi>C</mi> </msub> </mfrac> <mo>⁢</mo> <mrow> <mo>(</mo> <mrow> <mn>1</mn> <mo>+</mo> <mi>α</mi> </mrow> <mo>)</mo> </mrow> </mrow> <mo>)</mo> </mrow> </mrow> </mrow> </mrow> <mrow> <mi>π</mi> <mo>⁢</mo> <mfrac> <mi>t</mi> <msub> <mi>T</mi> <mi>C</mi> </msub> </mfrac> <mo>⁢</mo> <mrow> <mo>(</mo> <mrow> <mn>1</mn> <mo>-</mo> <msup> <mrow> <mo>(</mo> <mrow> <mn>4</mn> <mo>⁢</mo> <mi>α</mi> <mo>⁢</mo> <mfrac> <mi>t</mi> <msub> <mi>T</mi> <mi>C</mi> </msub> </mfrac> </mrow> <mo>)</mo> </mrow> <mn>2</mn> </msup> </mrow> <mo>)</mo> </mrow> </mrow> </mfrac> </mrow> </mtd> <mtd> <mrow> <mo>(</mo> <mn>8</mn> <mo>)</mo> </mrow> </mtd> </mtr> </mtable> </math> </maths> <br/>
+where T<sub>c </sub>is the chip duration.
+</div>
+<div class="description-paragraph" id="p-0060" num="0059"> <figref idrefs="DRAWINGS">FIG. 13</figref> illustrates a DSSS signal and a MC signal fully overlaid or partially overlaid with an MC symbol or slot boundary in the time domain. The DSSS and the MC signals may be aligned at the symbol (or slot) boundary when they are synchronized, or partially overlapped in the time domain when they are not synchronized, as shown in <figref idrefs="DRAWINGS">FIG. 13</figref>, where a DSSS signal # m <b>1302</b> fully overlaps with a MC symbol (or slot) <b>1304</b> in time domain, while a DSSS signal # n <b>1306</b> overlaps with the MC symbol (or slot) only partially.</div>
+<div class="description-paragraph" id="p-0061" num="0060"> <figref idrefs="DRAWINGS">FIG. 14</figref> illustrates a DSSS signal with a high Peak to Average Ratio in the frequency domain causing strong interference to certain MC subcarriers. The sequence used to spread the DSSS signal has to be designed to avoid cases where the DSSS signal may have a high Peak to Average ratio (PAR) in the frequency domain and its spikes may cause severe interference with some MC subcarriers, as illustrated in <figref idrefs="DRAWINGS">FIG. 14</figref>. In one embodiment, the DSSS sequence is designed so that, in partial or in full, it has low PAR in the frequency domain using signal processing techniques, such as a PAR reduction algorithm. Either binary or non binary sequences can be used.</div>
+<div class="description-paragraph" id="p-0062" num="0061">In another embodiment, Golay complementary sequences, Reed-Muller codes, or the codes designed with similar construction methods may be used to control the PAR of DSSS sequences in the frequency domain, thereby limiting the interference of DSSS signals to MC signals, which are demodulated in the frequency domain. In one embodiment, guard periods are added to the DSSS signal which overlaps with one MC symbol, as shown by DSSS signal # p <b>1308</b> in <figref idrefs="DRAWINGS">FIG. 13</figref>. The guard periods ensure that a well-designed DSSS sequence (with low PAR in frequency domain) causes little interference with the MC subcarriers even when there is time misalignment in a DSSS signal relative to the OFDM symbol period.</div>
+<div class="description-paragraph" id="p-0063" num="0062">Within MC subcarriers, the control subcarriers are more important than the data subcarriers and may need to have a better protection in the overlay system.</div>
+<div class="description-paragraph" id="p-0064" num="0063"> <figref idrefs="DRAWINGS">FIG. 15</figref> illustrates using spectrum nulls in the DSSS signal <b>1502</b> to protect an MC control subchannel. In one embodiment, the DSSS sequence is designed to have spectrum nulls at MC control subchannels to avoid excess interference with the uplink MC control signals <b>1504</b>, as illustrated in <figref idrefs="DRAWINGS">FIG. 15</figref>. One such scheme is to use sub-sampling such that the chip rate of the DSSS signal is ½ or ⅔ of the system sampling rate, which means the DSSS spectrum will only occupy the center portion with a width of 5.76 MHz or 7.68 MHz out of the 10 MHz available spectrum <b>1506</b>, as shown in <figref idrefs="DRAWINGS">FIG. 16</figref>. Its interference with the MC sub-carriers over the rest of the spectrum will be much lower where the MC subchannels, carrying control information or using higher modulation subcarriers (such as 16QAM), are placed.</div>
+<heading id="h-0014">Initial Random Access Using the Overlay Scheme</heading>
+<div class="description-paragraph" id="p-0065" num="0064"> <figref idrefs="DRAWINGS">FIG. 10</figref> illustrates a DSSS signal used as initial random access by the mobile station MS<sub>j </sub> <b>1004</b>, in an overlay system. In the mean time, MS<sub>l </sub>and MS<sub>k </sub>are transmitting MC signals to the base station BS<sub>i </sub> <b>1002</b>. In one embodiment of the invention, the DSSS signal is used for initial random access and the MC signal is used by multiple mobile stations to transmit high rate data and related control information, as illustrated in <figref idrefs="DRAWINGS">FIG. 10</figref>. In this arrangement the mobile station MS<sub>j </sub>is transmitting its initial access DSSS signal simultaneously with the MC signals from other mobile stations (in this case, MS<sub>I </sub>and MS<sub>K</sub>) to the base station BS<sub>i</sub>.</div>
+<div class="description-paragraph" id="p-0066" num="0065">In the initial random access of a multi-carrier multiple access system, a mobile station cannot transmit directly onto the control subchannel because its transmission time and power have not been aligned with other mobile stations. When this mobile station powers up or wakes up from a sleep mode, it first listens to a base station broadcasting channel and finds an available random access DSSS channel. It then sends an initial random access signal over the DSSS channel with a certain signature code or sequence that is designated to the corresponding base station and is broadcasted to all the mobile stations by each base station.</div>
+<div class="description-paragraph" id="p-0067" num="0066">The initial access DSSS signal arrives at the base station together with MC signals from other mobile stations, each carrying data and control information. The initial power level of the DSSS signal is based on the open power loop control settings. A sufficient guard period is reserved in the DSSS signal to account for initial time alignment uncertainty, as shown in <figref idrefs="DRAWINGS">FIG. 5</figref>.</div>
+<div class="description-paragraph" id="p-0068" num="0067">If the base station successfully detects the DSSS signal, it sends the acknowledgement (ACK) carrying information such as a signature or other unique mobile station identifier and power and time adjustments of the mobile on the downlink control channel in the next available timeslot. The mobile station whose transmission signature matches that of the acknowledgement then moves to the designated uplink MC control channel using the assigned time and power values and further completes the message transmission.</div>
+<div class="description-paragraph" id="p-0069" num="0068">If no feedback is received at the mobile station after a pre-defined number of slots, it assumes that the access slot was not detected by the base station, and will ramp up the transmission power of the DSSS signal by one step and re-transmit it, until it reaches the maximum allowable transmit signal power or the maximum retry times. In one embodiment, the power ramping step of the mobile station is set to be 1 dB or 2 dB which is configured by the base station on the downlink broadcasting channel. The maximum allowable transmit signal power and the retry times are also controlled by the base station depending on the uplink modulation/coding scheme and available access channels. During the initial random access, the DSSS signal can also be used for channel probing and short messaging.</div>
+<heading id="h-0015">Channel Probing Using DSSS in the Overlay System</heading>
+<div class="description-paragraph" id="p-0070" num="0069">In one embodiment of the invention, the DSSS signal is used to assist estimation of channel characteristics. In this case, the mobile station is already synchronized in time and frequency with the base station, and its transmission of the MC signal is under closed-loop power control with the base station.</div>
+<div class="description-paragraph" id="p-0071" num="0070"> <figref idrefs="DRAWINGS">FIG. 17</figref> illustrates examples of communications between a base station <b>1702</b> and multiple mobile stations <b>1704</b> transmitting both DSSS and MC signals. DSSS signal is used for channel probing or to carry short messages. In this case, MS<sub>j </sub> <b>1704</b> is transmitting both an MC signal and a DSSS signal to the base station BS<sub>i </sub> <b>1702</b>. It is also under closed loop power control with the base station BS<sub>i </sub> <b>1702</b>. In <figref idrefs="DRAWINGS">FIG. 17</figref>, the mobile station MS<sub>j </sub> <b>1704</b> is transmitting its DSSS signal simultaneously with its own MC signal. Other mobile stations (in this case, MS<sub>I </sub> <b>1704</b> and MS<sub>K </sub> <b>1704</b>) are transmitting either MC or DSSS signals to the base station BS<sub>i </sub> <b>1702</b>.</div>
+<div class="description-paragraph" id="p-0072" num="0071"> <figref idrefs="DRAWINGS">FIG. 18</figref> illustrates a typical channel response in the time domain <b>1802</b> and the frequency domain <b>1804</b>. By estimating the peaks of a channel response in the time domain <b>1802</b>, the channel profile in the frequency domain <b>1804</b> can be obtained. A typical channel response in the time domain and frequency domain for a broadband wireless system is shown in <figref idrefs="DRAWINGS">FIG. 18</figref>. Using a matched filter in the DSSS receiver at the base station, the peaks of a channel response in time can be detected.</div>
+<div class="description-paragraph" id="p-0073" num="0072">When closed loop power control is used, the initial power settings will be much more accurate than by using open loop power control alone. Thus, the margin reserved for power control inaccuracy can be reduced to a much smaller value. Furthermore, a bigger spreading factor can be used since no data information needs to be conveyed in the DSSS signal. This leaves a dynamic range large enough for detecting multi-path peaks from the output of the match filter or correlator, thereby generating a better channel profile. When and how often a mobile station should send the DSSS signal for channel probing is configurable by the network or the mobile station.</div>
+<div class="description-paragraph" id="p-0074" num="0073">In one embodiment, the base station dictates the mobile station to transmit the channel probing DSSS when it needs an update of the mobile station's channel characteristics. In another embodiment, the base station polls the mobile station during its silent period and gets an update of the mobile station's information such as transmission timing and power from the probing DSSS signal. In yet another embodiment, the channel profile information is used by the base station to determine the proper modulation/coding and pilot pattern. In yet another embodiment, the channel profile information is used for advanced antenna techniques such as beamforming. In one embodiment, channel probing with the DSSS signaling is performed without close loop power control or time synchronization.</div>
+<heading id="h-0016">Short Message Using DSSS in the Overlay System</heading>
+<div class="description-paragraph" id="p-0075" num="0074">In one embodiment of the invention, the DSSS signal is used to carry short messages. In this case, the mobile station is already synchronized in time and frequency with the base station, and its transmission of a MC signal is also under closed-loop power control with the base station. As shown in <figref idrefs="DRAWINGS">FIG. 17</figref>, the mobile station MS<sub>j </sub>is transmitting its DSSS signal carrying a short message simultaneously with its own MC signal. Other mobile stations (in this case, MS<sub>I </sub>and MS<sub>K</sub>) are transmitting either the MC signal or DSSS signal to the base station BS<sub>i</sub>. In this case, the short message carried by the DSSS signal has a much lower data rate compared with that of the MC signal. In another embodiment, short messaging using the DSSS signaling is performed without close loop power control or time synchronization.</div>
+<div class="description-paragraph" id="p-0076" num="0075">The above detailed description of the embodiments of the invention is not intended to be exhaustive or to limit the invention to the precise form disclosed above or to the particular field of usage mentioned in this disclosure. While specific embodiments of, and examples for, the invention are described above for illustrative purposes, various equivalent modifications are possible within the scope of the invention, as those skilled in the relevant art will recognize. Also, the teachings of the invention provided herein can be applied to other systems, not necessarily the system described above. The elements and acts of the various embodiments described above can be combined to provide further embodiments.</div>
+<div class="description-paragraph" id="p-0077" num="0076">All of the above patents and applications and other references, including any that may be listed in accompanying filing papers, are incorporated herein by reference. Aspects of the invention can be modified, if necessary, to employ the systems, functions, and concepts of the various references described above to provide yet further embodiments of the invention.</div>
+<div class="description-paragraph" id="p-0078" num="0077">Changes can be made to the invention in light of the above “Detailed Description.” While the above description details certain embodiments of the invention and describes the best mode contemplated, no matter how detailed the above appears in text, the invention can be practiced in many ways. Therefore, implementation details may vary considerably while still being encompassed by the invention disclosed herein. As noted above, particular terminology used when describing certain features or aspects of the invention should not be taken to imply that the terminology is being redefined herein to be restricted to any specific characteristics, features, or aspects of the invention with which that terminology is associated.</div>
+<div class="description-paragraph" id="p-0079" num="0078">In general, the terms used in the following claims should not be construed to limit the invention to the specific embodiments disclosed in the specification, unless the above Detailed Description section explicitly defines such terms. Accordingly, the actual scope of the invention encompasses not only the disclosed embodiments, but also all equivalent ways of practicing or implementing the invention under the claims.</div>
+<div class="description-paragraph" id="p-0080" num="0079">While certain aspects of the invention are presented below in certain claim forms, the inventors contemplate the various aspects of the invention in any number of claim forms. Accordingly, the inventors reserve the right to add additional claims after filing the application to pursue such additional claim forms for other aspects of the invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">30</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM274070518">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A base station comprising:
+<div class="claim-text">a receiver configured to:
+<div class="claim-text">receive, from a mobile station, a first uplink signal within a frequency band, wherein the first uplink signal is an orthogonal frequency division multiplexing (OFDM) signal and utilizes a frame format comprising a plurality of timeslots, each timeslot comprising a plurality of OFDM symbols;</div>
+<div class="claim-text">receive, from the mobile station, a random access signal followed by a guard period in only a portion of the frequency band, wherein the random access signal includes a sequence associated with the base station, wherein a time duration of a combination of the random access signal and the guard period is greater than a time duration of at least one of the plurality of OFDM symbols; and</div>
+</div>
+<div class="claim-text">a transmitter configured to transmit, to the mobile station in response to the received random access signal, a response message.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The base station of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the response message identifies the sequence associated with the base station in the random access signal; and
+<div class="claim-text">the receiver is configured to receive, from the mobile station, a second uplink signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The base station of <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the response message includes power adjustment information and wherein the receiver is configured to receive the second uplink signal according to the power adjustment information.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The base station of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the portion of the frequency band used to receive the random access signal does not include control channels.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The base station of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the response message includes a mobile station identifier assigned to the mobile station.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The base station of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the time duration of the combination of the random access signal and the guard period is greater than a time duration of at least two of the plurality of OFDM symbols.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The base station of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the frequency band includes an outer portion and a center portion, wherein the portion of the frequency band for the random access signal is in the center portion and uplink control signals are received in the outer portion.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The base station of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the random access signal is a spread spectrum signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The base station of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein:
+<div class="claim-text">the transmitter is further configured to transmit broadcast information to the mobile station, the broadcast information indicating sequences associated with the base station, wherein the sequence of the random access signal is one of the indicated sequences.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The base station of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the receiver includes an OFDM receiver processing circuit comprising: a serial to parallel converter, a fast Fourier transform (FFT) circuit, and a parallel to serial converter; and
+<div class="claim-text">the OFDM receiver processing circuit is configured to recover data from the first uplink signal.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. A method performed by a base station, the method comprising:
+<div class="claim-text">receiving, from a mobile station, a first uplink signal within a frequency band, wherein the first uplink signal is an orthogonal frequency division multiplexing (OFDM) signal and utilizes a frame format comprising a plurality of timeslots, each timeslot comprising a plurality of OFDM symbols;</div>
+<div class="claim-text">receiving, from the mobile station, a random access signal followed by a guard period in only a portion of the frequency band, wherein the random access signal includes a sequence associated with the base station, wherein a time duration of a combination of the random access signal and the guard period is greater than a time duration of at least one of the plurality of OFDM symbols; and</div>
+<div class="claim-text">transmitting, to the mobile station in response to the received random access signal, a response message.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The method <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the response message identifies the sequence associated with the base station in the random access signal, further comprising:
+<div class="claim-text">receiving, from the mobile station, a second uplink signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The method of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the response message includes power adjustment information and wherein the second uplink signal is received according to the power adjustment information.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the portion of the frequency band used to receive the random access signal does not include control channels.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the response message includes a mobile station identifier assigned to the mobile station.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the time duration of the combination of the random access signal and the guard period is greater than a time duration of at least two of the plurality of OFDM symbols.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the frequency band includes an outer portion and a center portion, wherein the portion of the frequency band for the random access signal is in the center portion and uplink control signals are received in the outer portion.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the random access signal is a spread spectrum signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising:
+<div class="claim-text">transmitting broadcast information to the mobile station, the broadcast information indicating sequences associated with the base station, wherein the sequence of the random access signal is one of the indicated sequences.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The method of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the first uplink signal is provided to an OFDM receiver processing circuit to recover data from the first uplink signal, wherein the OFDM receiver processing circuit comprises: a serial to parallel converter, a fast Fourier transform (FFT) circuit, and a parallel to serial converter.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. A base station configured to receive a frequency band, the base station comprising:
+<div class="claim-text">an analog to digital converter configured to convert an analog signal, derived from at least a portion of the received frequency band, to a digital signal, wherein the analog signal includes an random access signal, and wherein:
+<div class="claim-text">the random access signal is followed by a guard period and occupies only a portion of the frequency band,</div>
+<div class="claim-text">the time duration of a combination of the random access signal and the guard period is greater than a time duration of at least one orthogonal frequency division multiplexing (OFDM) symbol, and</div>
+<div class="claim-text">the random access signal includes a sequence associated with the base station;</div>
+</div>
+<div class="claim-text">a first receiver processing circuit configured to recover data from a first uplink signal, wherein the first uplink signal is within the frequency band and is an OFDM signal and utilizes a frame format comprising a plurality of timeslots, each timeslot comprising a plurality of OFDM symbols; and</div>
+<div class="claim-text">a second receiver processing circuit configured to detect the sequence of the random access signal from the digital signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein:
+<div class="claim-text">the second receiver processing circuit comprises a correlator to detect the sequence from the digital signal.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, further comprising a transmitter circuit configured to transmit power adjustment information to a mobile station to adjust a transmission power level of the mobile station based on a receive power level of the random access signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the portion of the frequency band used to receive the random access signal does not include control channels.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00025" num="00025">
+<div class="claim-text">25. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, further comprising a transmitter circuit configured to transmit a mobile station identifier assigned to a mobile station in response to the random access signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00026" num="00026">
+<div class="claim-text">26. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the time duration of the combination of the random access signal and the guard period is greater than a time duration of at least two of the plurality of OFDM symbols.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00027" num="00027">
+<div class="claim-text">27. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the frequency band includes an outer portion and a center portion, wherein the portion of the frequency band for the random access signal is in the center portion and uplink control signals are received in the outer portion.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00028" num="00028">
+<div class="claim-text">28. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the random access signal is a spread spectrum signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00029" num="00029">
+<div class="claim-text">29. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein a transmitter circuit is configured to transmit broadcast information, the broadcast information indicating sequences associated with the base station, wherein the sequence of the random access signal is one of the indicated sequences.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00030" num="00030">
+<div class="claim-text">30. The base station of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the first receiver processing circuit comprises:
+<div class="claim-text">a serial to parallel conversion circuit and a cyclic prefix removal circuit configured to convert the digital signal to a plurality of parallel signals and remove a cyclic prefix;</div>
+<div class="claim-text">a fast Fourier transform (FFT) circuit configured to perform an FFT on the cyclic prefix removed parallel signals; and</div>
+<div class="claim-text">a parallel to serial converter circuit, operatively coupled to the FFT circuit, to convert parallel signals to a serial signal.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

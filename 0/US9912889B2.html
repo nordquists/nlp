@@ -1,0 +1,444 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US9912889B2 - Image pickup apparatus and its control method 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA220204625">
+<div class="abstract" id="p-0001" num="0000">There is provided an image pickup apparatus that has a mixture readout mode configured to mix and read outputs of a plurality of pixels in an image sensor (<b>107</b>), when pixels to be mixed are image pickup pixels, they are mixed. When the pixels to be mixed contain a focus detection pixel, a signal of the image pickup pixel is not mixed with a signal of the focus detection pixel.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES128403935">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of application Ser. No. 12/995,938, filed Dec. 2, 2010, which is a national stage application of International Application No. PCT/JP2009/003149, filed Jul. 7, 2009, whose benefit is claimed and which claims the benefit of Japanese Patent Application No. 2008-179905, filed Jul. 10, 2008, whose benefit is also claimed, the entire disclosure of which is hereby incorporated by reference.</div>
+<heading id="h-0002">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present invention relates to an image pickup apparatus and its control method.</div>
+<heading id="h-0003">BACKGROUND ART</heading>
+<div class="description-paragraph" id="p-0004" num="0003">It is known to perform a phase difference focus detection or autofocus (“AF”) by including a focus detection pixel in image pickup pixels in an image sensor. For example, PTL 1, PTL 2, and PTL 3.</div>
+<div class="description-paragraph" id="p-0005" num="0004">In an electronic viewfinder mode or a motion image pickup mode, the frame rate is more important than the image quality.</div>
+<div class="description-paragraph" id="p-0006" num="0005">PTL 4 proposes an image pickup apparatus that arranges no focus detection pixel in the image sensor, and can provide an output by switching a skip readout mode (or a thinning-out readout mode) and a mixture readout mode. Since the mixture readout mode mixes signals of a plurality of pixels and uses the resultant signal, the mixture readout mode can restrain moire that would otherwise occur when an object has a high spatial frequency. The skip readout mode skips signals of some of all pixels, and thus can restrain generations of smears that would otherwise occur due to the high brightness.</div>
+<heading id="h-0004">CITATION LIST</heading>
+<heading id="h-0005">Patent Literature</heading>
+<div class="description-paragraph" id="h-0006" num="0000">[PTL 1]</div>
+<div class="description-paragraph" id="h-0007" num="0000">Japanese Patent Laid-Open No. 2000-156823</div>
+<div class="description-paragraph" id="h-0008" num="0000">[PTL 2]</div>
+<div class="description-paragraph" id="h-0009" num="0000">Japanese Patent Laid-Open No. 2000-292686</div>
+<div class="description-paragraph" id="h-0010" num="0000">[PTL 3]</div>
+<div class="description-paragraph" id="h-0011" num="0000">Japanese Patent Laid-Open No. 2001-305415</div>
+<div class="description-paragraph" id="h-0012" num="0000">[PTL 4]</div>
+<div class="description-paragraph" id="h-0013" num="0000">Japanese Patent Laid-Open No. 2003-189183</div>
+<heading id="h-0014">SUMMARY OF INVENTION</heading>
+<heading id="h-0015">Technical Problem</heading>
+<div class="description-paragraph" id="p-0007" num="0006">It is conventionally impossible for an image pickup apparatus that provides a phase difference AF using an image sensor, to provide the focus detection while a degradation of the image quality is restrained, when an electronic viewfinder mode or a motion image pickup mode is set to this image pickup apparatus. For example, when the skip readout mode is set, PTL 1 cannot provide the phase difference AF because the focus detection pixel is skipped. PTL 2 and PTL 3 are silent about the skip readout. Since PTL 4 includes no focus detection pixels in the image sensor, it cannot provide the phase difference AF using the image sensor. If the mixture readout mode of PTL 4 is simply applied to PTL 1, a focus detection pixel is mixed with an image pickup pixel, and the focus detection pixel disappears. As a result, the focus detection precision deteriorates or the phase difference AF itself becomes unavailable.</div>
+<div class="description-paragraph" id="p-0008" num="0007">The present invention provides an image pickup apparatus and its control method, which can properly read functional pixels, such as an image pickup pixel and a focus detection pixel, when image signals are read out after they are mixed or skipped.</div>
+<heading id="h-0016">Solution to Problem</heading>
+<div class="description-paragraph" id="p-0009" num="0008">An image pickup apparatus according to one aspect of the present invention includes an image sensor that includes a plurality of image pickup pixels and a plurality of pairs of pupil-divided focus detection pixels, and a controller configured to control reading of a pixel signal from the image sensor, wherein the controller controls the reading such that in mixing and reading pixel signals from a plurality of pixels, the pixel signals from a pair of pupil-divided focus detection pixels cannot be mixed with the pixel signals from the image pickup pixels.</div>
+<heading id="h-0017">Advantageous Effects of Invention</heading>
+<div class="description-paragraph" id="p-0010" num="0009">The present invention can provide an image pickup apparatus and its control method, which can properly read pixel outputs from both an image pickup pixel and a focus detection pixel.</div>
+<description-of-drawings>
+<heading id="h-0018">BRIEF DESCRIPTION OF DRAWINGS</heading>
+<div class="description-paragraph" id="p-0011" num="0010"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram of a camera (example 1).</div>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram of an image sensor shown in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIGS. 3A and 3B</figref> are views for explaining a structure of an image pickup pixel and a focus detection pixel used for the image sensor shown in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIGS. 4A and 4B</figref> are views for explaining a structure of an image pickup pixel and a focus detection pixel used for the image sensor shown in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIGS. 5A and 5B</figref> are views for explaining a structure of an image pickup pixel and a focus detection pixel used for the image sensor shown in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a plan view showing an illustrative arrangement of pixels of the image sensor shown in <figref idrefs="DRAWINGS">FIG. 1</figref>.</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a view for explaining whole screen readout in the image sensor (example 1).</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a view for explaining skip readout in the image sensor (example 1).</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a view for explaining mixture readout in the image sensor (example 1).</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a view for explaining first mixture readout (example 2).</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a view for explaining second mixture readout (example 2).</div>
+</description-of-drawings>
+<heading id="h-0019">DESCRIPTION OF EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0022" num="0021">Exemplary examples of the present invention will hereinafter be described with reference to the accompanying drawings.</div>
+<heading id="h-0020">Example 1</heading>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a block diagram of a digital camera (image pickup apparatus) <b>100</b> (example 1).</div>
+<div class="description-paragraph" id="p-0024" num="0023">In <figref idrefs="DRAWINGS">FIG. 1</figref>, reference numeral <b>101</b> denotes a first lens unit located at the top of an image pickup optical system, and held movable in an optical axis direction. Reference numeral <b>102</b> denotes a stop/shutter, which adjusts a light quantity at the image pickup time when its aperture diameter is adjusted, and serves as an exposure time adjustment shutter at the still image pickup time. Reference numeral <b>103</b> denotes a second lens unit. The stop/shutter <b>102</b> and the second lens unit <b>103</b> integrally move in the optical axis direction, and provide a magnification variation (zooming) in association with a movement of the first lens unit <b>101</b>. Reference numeral <b>105</b> denotes a third lens unit including a focus lens, which moves in the optical axis direction for focusing. Reference numeral <b>106</b> denotes an optical low-pass filter <b>106</b>, which is an optical element configured to mitigate a false color or moire of a taken image. Reference numeral <b>107</b> denotes an image sensor composed of a CMOS sensor and peripheral circuits. The image sensor <b>107</b> uses a two-dimensional single-substrate color sensor in which a primary color mosaic filter of a Bayer arrangement is formed as an on-chip arrangement on light-receiving pixels having m pixels in a lateral direction and n pixel in a longitudinal direction. The image sensor <b>107</b> includes a plurality of image pickup pixels and a plurality of focus detection pixels.</div>
+<div class="description-paragraph" id="p-0025" num="0024">Reference numeral <b>111</b> denotes a zoom actuator configured to rotate a cam cylinder (not shown) and to drive the first lens unit <b>101</b> to the third lens unit <b>103</b> in the optical axis direction for magnification variations. Reference numeral <b>112</b> denotes a stop/shutter actuator, which controls an aperture diameter of stop/shutter <b>102</b> for image pickup light quantity, and controls the exposure time at the still image pickup time. Reference numeral <b>114</b> denotes a focus actuator configured to drive the third lens unit <b>105</b> in the optical axis direction for focusing. Reference numeral <b>115</b> denotes an electronic flash configured to illuminate an object at the image pickup time. Reference numeral <b>116</b> denotes an AF auxiliary light projection part configured to project a mask image having a predetermined opening pattern onto the field through a light projection lens, and to improve the focus detection ability to a dark object or a low contrast object.</div>
+<div class="description-paragraph" id="p-0026" num="0025">Reference numeral <b>121</b> denotes a CPU, which is a controller that governs a variety of controls of the camera body. The CPU <b>121</b> possesses a calculating part, a ROM, a RAM, an A/D converter, a D/A converter, and a communication interface circuit, etc., drives a variety of circuits in the camera in accordance with a program stored in the ROM, and executes a series of operations such as the AF, image pickup, image processing, and recording. The reference numeral <b>122</b> denotes an electronic flash controller, which controls turning on and off of the electronic flash <b>115</b> in synchronization with the image pickup operation. Reference numeral <b>123</b> denotes an auxiliary light driver, which controls turning on and off of the AF auxiliary light projection part <b>116</b> in synchronization with the focus detection operation. Reference numeral <b>124</b> denotes an image sensor driver, which controls the image pickup operation of the image sensor <b>107</b>, provides an analog-to-digital conversion to the obtained image signal, and sends the resultant signal to the CPU <b>121</b>. Reference numeral <b>125</b> is an image processor, which provides a gamma conversion, a color interpolation, and another process, such as a JPEG compression, to an image obtained by the image sensor <b>107</b>.</div>
+<div class="description-paragraph" id="p-0027" num="0026">Reference numeral <b>126</b> denotes a focus driver, which controls driving of the focus actuator <b>114</b> on the basis of a focus detection result under control by the CPU <b>121</b>, and drives the third lens unit <b>105</b> in the optical axis direction for focusing. Reference numeral <b>128</b> denotes a stop/shutter driver, which controls driving of the stop/shutter actuator <b>112</b>, and controls an aperture of the stop/shutter <b>102</b>. Reference numeral <b>129</b> denotes a zoom driver configured to drive the zoom actuator <b>111</b> in accordance with a photographer's zoom operation.</div>
+<div class="description-paragraph" id="p-0028" num="0027">Reference numeral <b>131</b> denotes a display, such as an LCD, configured to display information on an image pickup mode, a preview image before image pickup, an image for review after image pickup, and a focus state indicating image at the focus detection time, etc. of the digital camera <b>100</b>. Reference numeral <b>132</b> denotes operation switches, such as a power switch, a release (image pickup trigger) switch, a zoom operation switch, and a mode selection switch. The mode selection switch serves as a mode setting part configured to set a still image pickup mode, a motion image pickup mode, and an electronic viewfinder mode. It can set a skip readout mode or a mixture readout mode (or a first mixture readout mode or a second mixture readout mode), which will be described later, in the motion image pickup mode or the electronic viewfinder mode. Reference numeral <b>133</b> denotes a detachable flash memory configured to record a captured image.</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram of the image sensor <b>107</b>, and shows a minimum structure necessary for an explanation of the following readout operation, omitting a pixel reset signal, etc.</div>
+<div class="description-paragraph" id="p-0030" num="0029">In <figref idrefs="DRAWINGS">FIG. 2</figref>, reference numeral <b>201</b> denotes a photoelectric conversion part, which may be distinguished by “PD<sub>mn</sub>” where m (=0, 1, . . . m−1) is an address in an X direction and n (=0, 1, . . . n−1) is an address in a Y direction. The photoelectric conversion part <b>201</b> has a photodiode, a pixel amplifier, and a resetting switch, etc. The image sensor <b>107</b> two-dimensionally arranges m×n photoelectric conversion parts <b>201</b>. For convenience, only upper left photoelectric conversion parts PD<sub>00</sub>-PD<sub>03 </sub>are labeled. R, G, and B added to the photoelectric conversion parts <b>201</b> indicate color filters, and the color filters are arranged to form the Bayer arrangement.</div>
+<div class="description-paragraph" id="p-0031" num="0030">Reference numeral <b>202</b> denotes a switch that selects an output of the photoelectric conversion part <b>201</b>, and is selected every line by a vertical scanner <b>210</b>. Reference numeral <b>203</b> denotes a constant current generator that becomes a load to a pixel amplifier (not shown) of the photoelectric conversion part <b>201</b>, and is arranged in each vertical output line. Reference numeral <b>204</b> denotes a line memory configured to temporarily memorize an output of the photoelectric conversion part <b>201</b>. The line memory <b>204</b> stores the outputs of the photoelectric conversion parts <b>201</b> for one line selected by the vertical scanner <b>210</b>. Usually, the line memory <b>204</b> uses a capacitor.</div>
+<div class="description-paragraph" id="p-0032" num="0031">Reference numeral <b>205</b> denotes a mixture unit configured to mix signals of a plurality of pixels in the horizontal direction. The mixture unit <b>205</b> is used to mix the signals of the pixels in the horizontal direction in the following mixture readout, and controlled by two control signals to be input to an ADD terminal and an AF terminal. The control signal supplied to the ADD terminal is a signal that selects one of the mixture and the non-mixture, or selects the non-mixture when the control signal at L level is input and the mixture when the control signal at H level is input. The AF terminal is an input terminal used to selectively read the focus detection pixels (focus detection pixel group) included in the image sensor <b>107</b> with no mixture. The example 1 does not use the AF terminal, and a detailed description will be given later in the example 2. The mixture unit <b>205</b> functions as a selector configured to select a signal of an output pixel, similar to the horizontal scanner <b>208</b>.</div>
+<div class="description-paragraph" id="p-0033" num="0032">Reference numeral <b>206</b> denotes a switch that sequentially outputs the outputs of the photoelectric conversion parts <b>201</b> stored in the line memory <b>204</b> to the horizontal output line HOL. The horizontal scanner <b>208</b> sequentially scans H<sub>0 </sub>to H<sub>m-1 </sub>switches <b>206</b>, and reads the outputs of the photoelectric conversion parts for one line. Reference numeral <b>207</b> denotes a switch connected to the horizontal output line HOL, configured to reset the horizontal output line HOL to potential VHRST, and controlled by a signal HRST.</div>
+<div class="description-paragraph" id="p-0034" num="0033">The horizontal scanner <b>208</b> sequentially scans the outputs of the photoelectric conversion parts <b>201</b> memorized in the line memory <b>204</b>, and outputs them to the horizontal output line HOL. The horizontal scanner <b>208</b> can also serve as a selector configured to select a necessary pixel through the control of the CPU <b>121</b>. A PHST terminal is a data input terminal of the horizontal scanner <b>208</b>. A PH<b>1</b> terminal and a PH<b>2</b> terminal are shift clock input terminals, and H-level data input to the PHST terminal is set to the PH<b>1</b> terminal and latched by the PH<b>2</b> terminal. When shift clocks are input to the PH<b>1</b> terminal and the PH<b>2</b> terminal, the signals input to the PHST terminal are sequentially shifted so as to drive the horizontal scanner <b>208</b> and the H<sub>0 </sub>to H<sub>m-1 </sub>switches <b>206</b> are sequentially turned on. A SKIP terminal is a control input terminal configured to allow setting of the horizontal scanner <b>208</b> at the following skip readout or mixture readout time. When the SKIP terminal is set to the H level, a pixel output of the horizontal scanner <b>208</b> can be skipped and read out in the horizontal direction by skipping scans of the horizontal scanner <b>208</b> at a predetermined interval, such as H<b>2</b>, H<b>5</b>, H<b>8</b>, . . . . The readout is provided with a different skip period by setting the AF terminal in combination with the SKIP terminal. A detailed description of the readout operation will be given later.</div>
+<div class="description-paragraph" id="p-0035" num="0034">Reference numeral <b>209</b> denotes a buffer amplifier for an image signal sequentially output from the horizontal output line HOL. Reference numeral <b>210</b> denotes a vertical scanner configured to select the switch <b>202</b> of the photoelectric conversion part <b>201</b> by sequentially scanning and outputting V<sub>0 </sub>to V<sub>n-1</sub>. Similar to the horizontal scanner <b>208</b>, a control signal is controlled with a data input terminal PVST (not shown), shift clock input terminals PV<b>1</b> and PV<b>2</b> (not shown), and a SKIP terminal (not shown) for setting of the skip readout. Since its operation is similar to the horizontal scanner <b>208</b>, a detailed description thereof will be omitted. For simplification, a description of a mixture function in the vertical direction will be omitted.</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIGS. 3 and 4</figref> are views for explaining structures of the image pickup pixels and the focus detection pixels. This example provides a plurality of focus detection pixels each of which receives the light that passes part of an area of the exit pupil in the image pickup optical system. This example adopts a Bayer arrangement in which two pixels each with a G (green) spectral sensitivity are diagonally arranged and two other pixels of R (red) and B (blue) spectral sensitivities are diagonally arranged in four (2 columns×2 rows) pixels. Hereinafter, X denotes the column and Y denotes the row and 2 columns×2 rows is expressed as 2×2. The following focus detection pixels are dispersed in the Bayer arrangement.</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows an arrangement and a structure of the image pickup pixels. <figref idrefs="DRAWINGS">FIG. 3A</figref> is a plan view of 2×2 image pickup pixels. It is well known that in the Bayer arrangement, a pair of G pixels is arranged in the diagonal direction and the R and B pixels are arranged in the other two pixels, and the 2×2 structure is repetitively arranged. <figref idrefs="DRAWINGS">FIG. 3B</figref> is a sectional view taken along a line A-A in <figref idrefs="DRAWINGS">FIG. 3A</figref>. ML denotes an on-chip micro lens arranged on the foremost side of each pixel. CF<sub>R </sub>denotes a color filter of R (red). CF<sub>G </sub>denotes a color filter of G (green). PD (Photo Diode) schematically shows the photoelectric conversion part <b>201</b> of the CMOS sensor. CL (Contact Layer) denotes a wiring layer used to form signal lines that transmit a variety of signals in the CMOS sensor. TL (Taking Lens) schematically shows an image pickup optical system.</div>
+<div class="description-paragraph" id="p-0038" num="0037">The on-chip micro lens ML and the photoelectric conversion part PD for the image pickup pixel are configured to take a light beam that has passed the image pickup optical system TL as effectively as possible. The EP (Exit Pupil) of the image pickup optical system TL and the photoelectric conversion part PD have a conjugate relationship with each other via the on-chip micro lens ML and an effective area of the photoelectric conversion part PD is designed to be large. While the incident light beam of the R pixel is illustrated in <figref idrefs="DRAWINGS">FIG. 3B</figref>, the G pixel and B (blue) pixel have the same structure. Hence, the exit pupil EP corresponding to each of the RGB image pickup pixels have a large aperture, efficiently takes the light beam from the object, and improves a S/N ratio of the image signal. Thus, each of the plurality of image pickup pixels receives the light that passes the whole area of the exit pupil EP, and generates an image of the object.</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows an arrangement and a structure of the focus detection pixels used to divide the pupil in the horizontal (or lateral) direction of the image pickup optical system TL. The “horizontal direction,” as used herein, is a direction orthogonal to the optical axis and parallel to a straight line that extends in the horizontal direction, when the image pickup apparatus is postured so that the optical axis of the image pickup optical system TL and the long side of the image pickup area can be parallel to the ground surface. <figref idrefs="DRAWINGS">FIG. 4A</figref> is a plane view of the 2×2 pixels containing the focus detection pixel. In obtaining an image signal for recording or enjoying, the G pixel is used to obtain a principal gradient of the brightness information. Since the human image recognition characteristic is sensitive to the brightness information, the image deterioration is likely to be recognized for lack of the G pixel. On the other hand, the R pixel or the B pixel is a pixel used to obtain color (difference) information, and the human vision characteristic is insensitive to the color information. Thus, even when there is a slight loss of the pixel used to obtain the color information, the image degradation is less likely to be recognized. Accordingly, this example maintains the G pixels for the image pickup pixels in the 2×2 pixels, and replaces the R pixel and the B pixel with the focus detection pixels. These focus detection pixels are illustrated as S<sub>HA </sub>and S<sub>HB </sub>in <figref idrefs="DRAWINGS">FIG. 4A</figref>.</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIG. 4B</figref> is a sectional view taken along a line A-A in <figref idrefs="DRAWINGS">FIG. 4A</figref>. The micro lens ML and the photoelectric conversion part PD have the same structures as those of the image pickup pixel shown in <figref idrefs="DRAWINGS">FIG. 3B</figref>. This example does not use a signal of the focus detection pixel to generate an image, and arranges a transparent (white) film CF<sub>W </sub>instead of a color filter for a color separation. In addition, in order to divide the pupil in the image sensor <b>107</b>, the opening part of the wiring layer CL is biased in one direction with respect to the centerline of the micro lens ML. More specifically, the opening part OP<sub>HA </sub>of the pixel S<sub>HA </sub>biases to the right, and receives the light beam that has passed the left exit pupil EP<sub>HA </sub>of the image pickup optical system TL. The opening part OP<sub>HA </sub>of the pixel S<sub>HB </sub>biases to the right, and receives the light beam that has passed the right exit pupil EP<sub>HB </sub>of the image pickup optical system TL. The pixels S<sub>HA </sub>are regularly arranged in the horizontal direction, and an object image obtained by these pixels will be referred to as an A image. The pixels S<sub>HB </sub>are also regularly arranged in the horizontal direction, and an object image obtained by these pixels will be referred to a B image. By detecting relative positions of the A image and the B image, the defocus amount of the object image can be detected. In the pixels S<sub>HA </sub>and S<sub>HB</sub>, a focus of the object having a brightness distribution in the horizontal direction of the mage pickup area, such as a vertical line, can be detected, but a focus of a horizontal line having a brightness distribution in the vertical direction cannot be detected. Accordingly, this example configures pixels to divide the pupil in the vertical direction (longitudinal direction) of the image pickup optical system so as to provide the focus detection of the latter.</div>
+<div class="description-paragraph" id="p-0041" num="0040"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows an arrangement and a structure of the focus detection pixels used to divide the pupil in the vertical (or longitudinal) direction of the image pickup optical system TL. The “vertical direction,” as used herein, means a direction orthogonal to the optical axis and parallel to a straight line that extends in the vertical direction, when the image pickup apparatus is postured so that the optical axis of the image pickup optical system TL and the long side of the image pickup area can be parallel to the ground surface. <figref idrefs="DRAWINGS">FIG. 5A</figref> is a plane view of the 2×2 pixels containing the focus detection pixels. Similar to <figref idrefs="DRAWINGS">FIG. 4A</figref>, the G pixels remain to be image pickup pixels, and the R pixel and the B pixel are replaced with the focus detection pixels. These focus detection pixels are expressed by S<sub>VC </sub>and S<sub>VD </sub>in <figref idrefs="DRAWINGS">FIG. 5A</figref>.</div>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 5B</figref> is a sectional view taken along a line A-A in <figref idrefs="DRAWINGS">FIG. 5A</figref>. While the pixels in <figref idrefs="DRAWINGS">FIG. 4B</figref> are configured to divide the pupil in the lateral direction, the pixels in <figref idrefs="DRAWINGS">FIG. 5B</figref> are configured to divide the pupil in the longitudinal direction but another pixel structure is similar. The opening part OP<sub>VC </sub>of the pixel S<sub>VC </sub>biases to the lower side, and receives the light beam that has passed the upper exit pupil EP<sub>VC </sub>of the image pickup optical system TL. Similarly, the opening part OP<sub>VD </sub>of the pixel S<sub>VD </sub>biases to the upper side, and receives the light beam that has passed the lower exit pupil EP<sub>VC </sub>of the image pickup optical system TL. The pixels S<sub>VC </sub>are regularly arranged in the vertical direction, and an object image obtained by these pixels will be referred to as a C image. The pixels S<sub>VD </sub>are also regularly arranged in the vertical direction, and an object image obtained by these pixels will be referred to a D image. By detecting relative positions of the C image and the D image, a defocus amount of the object image having a brightness distribution in the vertical direction can be detected.</div>
+<div class="description-paragraph" id="p-0043" num="0042"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a view for explaining one illustrative pixel arrangement in the image sensor <b>107</b>. This example fundamentally uses the 2×2 Bayer arrangement, and employs a 12×6 pixel pattern as a basic unit, to which a pair of focus detection pixels S<sub>HA </sub>and S<sub>HB </sub>is arranged. The 12×6 pixel pattern is one illustrative application of the present invention, and the present invention is not limited to this basic unit of the pixel pattern. <figref idrefs="DRAWINGS">FIG. 6</figref> arranges the S<sub>HA </sub>pixel as a base pixel for the focus detection in the phase difference AF to an address (0, 10), and the S<sub>HB </sub>pixel as a reference pixel for the phase difference AF to an address (3, 9). The focus detection of the phase difference detection method needs two focus detection pixels, such as a base pixel and a reference pixel. The 12×6 pixel pattern is repetitively arranged in the m×n pixels on the overall surface of the image sensor <b>107</b>, and this example separates a pair of the base pixel and the reference pixel for the 12×6 pixel pattern. This example thus arranges the minimum number of focus detection pixels for the 12×6 pixel pattern, and can provide a high distribution density of the image pickup pixels, preventing the degradation of the image quality.</div>
+<div class="description-paragraph" id="p-0044" num="0043">Table 1 shows settings of the readout modes of the image sensor <b>107</b> according to the example 1. The image sensor <b>107</b> of the example 1 has a whole screen readout mode, a skip readout mode, and a mixture readout mode. The whole screen readout mode is used to read signals from all pixels contained in the image sensor <b>107</b> for the still image pickup. The skip readout mode is configured to skip part of image pickup pixels and to read signals from the remaining image pickup pixels. The mixture readout mode of this example is configured to mix and read the signals from a plurality of image pickup pixels. The skip readout mode and the mixture readout mode are used in the situation where the frame rate is more important than the image quality as in the motion image pickup mode or the electronic viewfinder mode.</div>
+<div class="description-paragraph" id="p-0045" num="0044">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="2" nameend="2" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">SETTING</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">AF </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">TERMINALS</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">SKIP </td>
+<td class="description-td">ADD </td>
+<td class="description-td">OF MIXTURE</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">TERMINAL</td>
+<td class="description-td">TERMINAL</td>
+<td class="description-td">UNIT 205</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">OF</td>
+<td class="description-td">OF</td>
+<td class="description-td">AND </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">HORIZONTAL </td>
+<td class="description-td">MIXTURE </td>
+<td class="description-td">HORIZONTAL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">SCANNER 208</td>
+<td class="description-td">UNIT 205</td>
+<td class="description-td">SCANNER 208</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">WHOLE SCREEN</td>
+<td class="description-td">L</td>
+<td class="description-td">L</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">READOUT MODE</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">SKIP READOUT </td>
+<td class="description-td">H</td>
+<td class="description-td">L</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">MODE</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">MIXTURE </td>
+<td class="description-td">H</td>
+<td class="description-td">H</td>
+<td class="description-td">—</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">READOUT MODE</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0046" num="0045">Three types of readout modes shown in Table 1 are set by the signal supplied to the SKIP terminal and the ADD terminal from the image sensor driver <b>124</b> controlled by the CPU <b>121</b>. In other words, the settings shown in Table 1 are performed by the CPU <b>121</b> based on information stored in a memory (not shown) or a ROM installed in the CPU <b>121</b>.</div>
+<div class="description-paragraph" id="p-0047" num="0046"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a view for explaining the whole screen readout, and schematically shows two lines, i.e., V<b>0</b> and V<b>1</b> lines initially read in the arrangement shown in <figref idrefs="DRAWINGS">FIG. 6</figref>. The arrangement on the upper stage corresponds to a pixel part, and the lower stage corresponds to a readout pixel. Initially, the vertical scanner <b>210</b> selects the V<b>0</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel outputs of the V<b>0</b> line to the line memory <b>204</b>. Next, the data input to the PHST terminal is sequentially scanned with transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to drive the horizontal scanner <b>208</b>, and the H<sub>0 </sub>to H<sub>11 </sub>switches <b>206</b> are sequentially turned on so as to output the pixel signal to the outside via the buffer amplifier <b>209</b>. In the meanwhile, PHST is used to sequentially turn on the H<sub>0 </sub>to H<sub>m-1 </sub>switches.</div>
+<div class="description-paragraph" id="p-0048" num="0047">When reading of the V<b>0</b> line ends, the vertical scanner <b>210</b> is driven to select the V<b>1</b> line, and to transfer the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel outputs of the V<b>1</b> line to the line memory <b>204</b>. Next, the data of the PHST terminal is driven with the transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to operate the horizontal scanner <b>208</b>, to sequentially turn on the H<b>0</b> to H<sub>m-1 </sub>switches <b>206</b>, and to output the pixel signal to the outside via the buffer amplifier <b>209</b>.</div>
+<div class="description-paragraph" id="p-0049" num="0048">Next, similarly, the vertical and horizontal scanners are driven and all pixel signals of the image sensor are read out.</div>
+<div class="description-paragraph" id="p-0050" num="0049"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a view for explaining the skip readout, and schematically shows two lines, i.e., V<b>0</b> and V<b>3</b> lines initially read in the arrangement shown in <figref idrefs="DRAWINGS">FIG. 6</figref>. The arrangement on the upper stage corresponds to a pixel part, and the lower stage corresponds to the readout pixel.</div>
+<div class="description-paragraph" id="p-0051" num="0050">Initially, in order to perform the skip readout, the SKIP terminal is set to the H level and the ADD terminal is set to the L level in advance to the readout. Next, the vertical scanner <b>210</b> selects the V<b>0</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel output of the V<b>0</b> line to the line memory <b>204</b>. Thereafter, the data input to the PHST terminal is sequentially scanned with transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to drive the horizontal scanner <b>208</b>. The horizontal scanner <b>208</b> scans the switch <b>206</b> in order of H<b>2</b>, H<b>5</b>, H<b>8</b>, H<b>10</b>, H<b>11</b>, . . . , due to the setting of the SKIP terminal, and skips the pixel signals and outputs the resultant signal to the outside via the buffer amplifier <b>209</b>.</div>
+<div class="description-paragraph" id="p-0052" num="0051">When reading of the V<b>0</b> line ends, the vertical scanner <b>210</b> interlaces, selects the V<b>3</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel output of the V<b>3</b> line to the line memory <b>204</b>. Thereafter, the data input to the PHST terminal is sequentially scanned with the transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal to drive the horizontal scanner <b>208</b>. At this time, the horizontal scanner <b>208</b> scans the switches <b>206</b> in order of H<b>2</b>, H<b>5</b>, H<b>8</b>, H<b>9</b>, H<b>11</b>, . . . , by the setting of the SKIP terminal. The pixel signals are skipped and the resultant signal is output to the outside via the buffer amplifier <b>209</b>.</div>
+<div class="description-paragraph" id="p-0053" num="0052">Next, similarly, while the horizontal and vertical scanners interlace, all m×n screens of the image sensor <b>107</b> are skipped and read. The skip readout is used when a higher frame rate is required, for example, for the motion image or the electronic viewfinder.</div>
+<div class="description-paragraph" id="p-0054" num="0053">This example reads H<b>10</b> for the V<b>0</b> line and H<b>9</b> for the V<b>3</b> line, and can provide a phase difference AF at the skip readout time. H<b>9</b> of V<b>3</b> and H<b>10</b> of V<b>0</b> form a diagonal relationship shown in <figref idrefs="DRAWINGS">FIGS. 4 and 5</figref> due to the interlacing and can provide the phase difference AF. Thereafter, the CPU <b>121</b> performs the phase difference AF for the output of the focus detection pixels, calculates a defocus amount, and controls the focus driver <b>126</b> such that the third lens unit <b>105</b> can be moved to the in-focus position. On the other hand, PTL 1 has a problem in that a focus detection pixel is skipped in the skip readout and the sampling characteristic and the focus detection characteristic deteriorate or the phase difference AF itself fails. This example solves this problem. If no phase difference AF is needed for the skip readout, H<b>10</b> does not have to be read out of V<b>0</b> and H<b>9</b> does not have to be read out of V<b>3</b>.</div>
+<div class="description-paragraph" id="p-0055" num="0054"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a view for explaining the mixture readout, and schematically shows two lines, i.e., V<b>0</b> and V<b>3</b> lines initially read in the arrangement shown in <figref idrefs="DRAWINGS">FIG. 6</figref>. The arrangement of the upper stage corresponds to the pixel part and the lower stage corresponds to the output of the readout pixel.</div>
+<div class="description-paragraph" id="p-0056" num="0055">Initially, in order to perform the mixture readout, both the SKIP terminal and the ADD terminal are set to the H level in advance to the readout. Next, the vertical scanner <b>210</b> selects the V<b>0</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel output of the V<b>0</b> line to the line memory <b>204</b>. At this time, due to the setting of the ADD terminal, the mixture unit <b>205</b> mixes the signals from a plurality of pixels, although when the number of pixels to be mixed is just one, no mixture is made. Basically, a unit of three pixels of the same color is mixed. As shown in <figref idrefs="DRAWINGS">FIG. 9</figref>, when all mixture objects are the image pickup pixels, three pixels are mixed; when a focus detection pixel is contained in the three pixels, the image pickup pixels are selectively mixed or only the image pickup pixels are mixed. In <figref idrefs="DRAWINGS">FIGS. 9</figref>, H<b>6</b> and H<b>8</b> are image pickup pixels in H<b>6</b>, H<b>8</b>, and H<b>10</b> and thus are mixed with each other. The focus detection pixel S<sub>HA </sub>of H<b>10</b> is not mixed. In addition, the image pickup pixel of H<b>9</b> is mixed with the image pickup pixels of H<b>11</b> and H<b>13</b> (not shown). Thereafter, the data input to the PHST terminal is sequentially scanned with the transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to drive the horizontal scanner <b>208</b>. At this time, the horizontal scanner <b>208</b> scans the switches <b>206</b> in order of H<b>2</b>, H<b>5</b>, H<b>8</b>, H<b>10</b>, H<b>11</b>, . . . , due to the setting of the SKIP terminal. In addition, it mixes the pixel signals and outputs the resultant signal to the outside via the buffer amplifier <b>209</b>, and the signal of the focus detection pixel S<sub>HA </sub>is output singularly.</div>
+<div class="description-paragraph" id="p-0057" num="0056">When reading of the V<b>0</b> line ends, the vertical scanner <b>210</b> interlaces, selects the V<b>3</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel output of the V<b>3</b> line to the line memory <b>204</b>. At this time, due to the setting of the ADD terminal, the mixture unit <b>205</b> mixes the pixels. Basically, a unit of three pixels of the same color is mixed. As shown in <figref idrefs="DRAWINGS">FIG. 9</figref>, when all mixture objects are the image pickup pixels, all of these pixels are mixed; when a focus detection pixel is contained in the three pixels, the image pickup pixels are selectively mixed or only the image pickup pixels are mixed. In <figref idrefs="DRAWINGS">FIG. 9</figref>, only H<b>11</b> and H<b>13</b> are image pickup pixels among H<b>9</b>, H<b>11</b>, and H<b>13</b> (not shown), and thus mixed with each other. The focus detection pixel S<sub>HB </sub>of H<b>9</b> is not mixed. Thereafter, the data input to the PHST terminal is sequentially scanned with the transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to drive the horizontal scanner <b>208</b>. At this time, the horizontal scanner <b>208</b> scans the switches <b>206</b> in order of H<b>2</b>, H<b>5</b>, H<b>8</b>, H<b>9</b>, H<b>11</b>, . . . , due to the setting of the SKIP terminal. In addition, it mixes the pixel signals and outputs the resultant signal to the outside via the buffer amplifier <b>209</b>. The signal of the focus detection pixel S<sub>HB </sub>is output singularly.</div>
+<div class="description-paragraph" id="p-0058" num="0057">Next, similarly, while the horizontal and vertical scanners interlace, the mixture readout of the image sensor <b>107</b> is made. Like the skip readout, the mixture readout is used when a higher frame rate is required, for example, for the motion image or the electronic viewfinder. In addition, the mixture readout can restrain moire that would otherwise occur when the spatial frequency of the object is high, and provides better image quality than the skip reading. The image quality improves as the number of reading pixels increases; when the pixels to be mixed contains a focus detection pixel, the center of gravity position of the mixed pixel slightly shifts, but since the focus detection pixel is arranged in the pixel having color information, this shift is not so conspicuous. The image quality improves when the remaining image pickup pixels except for the focus detection pixels are mixed and used for the image signal rather than when the focus detection pixel is supplemented.</div>
+<div class="description-paragraph" id="p-0059" num="0058">This example reads H<b>10</b> for the V<b>0</b> line and H<b>9</b> for the V<b>3</b> line, and can provide a phase difference AF at the mixture readout time. H<b>9</b> of V<b>3</b> and H<b>10</b> of V<b>0</b> form a diagonal relationship shown in <figref idrefs="DRAWINGS">FIGS. 4 and 5</figref> due to the interlacing and can provide the phase difference AF. Thereafter, the CPU <b>121</b> performs the phase difference AF for the output of the focus detection pixels, calculates a defocus amount, and controls the focus driver <b>126</b> such that the third lens unit <b>105</b> can be moved to the in-focus position. On the other hand, when PTL 4 is simply applied to PTL 1, the focus detection pixels are mixed with the image pickup pixels and the sampling characteristic and the focus detection characteristic deteriorate or the phase difference AF itself becomes unavailable. This example solves this problem.</div>
+<div class="description-paragraph" id="p-0060" num="0059">As discussed above, this example uses the image sensor having a pixel structure in which some pixels having color information are replaced with the pixels configured to provide the phase difference AF, to read both the image pickup pixels and the focus detection pixels without deteriorating the image quality even in the motion image and electronic viewfinder mode.</div>
+<heading id="h-0021">Example 2</heading>
+<div class="description-paragraph" id="p-0061" num="0060">Table 2 shows settings of the readout modes of the image sensor <b>107</b> according to an example 2. The image sensor <b>107</b> of the example 2 has a whole screen readout mode similar to that of the example 1, and a skip readout mode similar to that of the example 1. The image sensor <b>107</b> of the example 2 has first and second mixture readout mode used to mix and read a plurality of pixels, differently from similar to that of the example 1. The whole screen readout mode is used for the still image pickup, and the skip readout mode and the first and second mixture readout modes are used in the situation where a frame rate is more important than the image quality as in the motion image pickup mode or the electronic viewfinder mode. The first mixture readout mode is a mixture readout mode that does not provide the phase difference AF using the image sensor <b>107</b>. The second mixture readout is a mixture readout that provides the phase difference AF using the image sensor <b>107</b>.</div>
+<div class="description-paragraph" id="p-0062" num="0061">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="2" nameend="2" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">SETTING</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">AF </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">TERMINALS</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">SKIP </td>
+<td class="description-td">ADD </td>
+<td class="description-td">OF MIXTURE</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">TERMINAL</td>
+<td class="description-td">TERMINAL</td>
+<td class="description-td">UNIT 205</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">OF</td>
+<td class="description-td">OF</td>
+<td class="description-td">AND </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">HORIZONTAL </td>
+<td class="description-td">MIXTURE </td>
+<td class="description-td">HORIZONTAL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">SCANNER 208</td>
+<td class="description-td">UNIT 205</td>
+<td class="description-td">SCANNER 208</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">WHOLE SCREEN</td>
+<td class="description-td">L</td>
+<td class="description-td">L</td>
+<td class="description-td">L</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">READOUT MODE</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">SKIP READOUT </td>
+<td class="description-td">H</td>
+<td class="description-td">L</td>
+<td class="description-td">L</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">MODE</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">FIRST MIXTURE</td>
+<td class="description-td">H</td>
+<td class="description-td">H</td>
+<td class="description-td">L</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">READOUT MODE</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">SECOND MIXTURE</td>
+<td class="description-td">H</td>
+<td class="description-td">H</td>
+<td class="description-td">H</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">READOUT MODE</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0063" num="0062">Four types of readout modes shown in Table 2 are set by the signal supplied to the SKIP terminal, the ADD terminal, and the AF terminal from the image sensor driver <b>124</b> controlled by the CPU <b>121</b>. In other words, the setting shown in Table 2 is performed by the CPU <b>121</b> based on information stored in a memory (not shown) inside or outside of the CPU <b>121</b>.</div>
+<div class="description-paragraph" id="p-0064" num="0063">The whole screen readout and the skip readout are similar to those of the example 1, and a description thereof will be omitted.</div>
+<div class="description-paragraph" id="p-0065" num="0064"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a view for explaining the first mixture readout, and schematically shows two lines, i.e., V<b>0</b> and V<b>3</b> lines initially read in the arrangement shown in <figref idrefs="DRAWINGS">FIG. 6</figref>. The arrangement on the upper stage corresponds to the pixel part, and the lower stage corresponds to the readout pixel.</div>
+<div class="description-paragraph" id="p-0066" num="0065">Initially, in order to perform the mixture readout, the SKIP terminal and the ADD terminal are set to the H level and the AF terminal is set to the L level in advance to the readout. Next, the vertical scanner <b>210</b> selects the V<b>0</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel output of the V<b>0</b> line to the line memory <b>204</b>. At this time, due to the settings of the ADD terminal and the AF terminal, the mixture unit <b>205</b> mixes the pixels. Basically, a unit of three pixels of the same color is mixed. As shown in <figref idrefs="DRAWINGS">FIG. 10</figref>, when all mixture objects are the image pickup pixels, three pixels are mixed; when a focus detection pixel is contained in the three pixels, the image pickup pixels are selectively mixed or only the image pickup pixels are mixed. In <figref idrefs="DRAWINGS">FIGS. 10</figref>, H<b>6</b> and H<b>8</b> are image pickup pixels in H<b>6</b>, H<b>8</b>, and H<b>10</b>, and thus mixed with each other. The focus detection pixel S<sub>HA </sub>of H<b>10</b> is not mixed. In addition, the pixel signal of H<b>9</b> is mixed with the pixel signals of H<b>11</b> and H<b>13</b> (not shown). Thereafter, the data input to the PHST terminal is sequentially scanned with the transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to drive the horizontal scanner <b>208</b>. At this time, the horizontal scanner <b>208</b> scans the switches <b>206</b> in order of H<b>2</b>, H<b>5</b>, H<b>8</b>, H<b>11</b>, . . . , due to the settings of the SKIP terminal and the ADD terminal, and outputs only the mixed image pickup pixels to the outside via the buffer amplifier <b>209</b>.</div>
+<div class="description-paragraph" id="p-0067" num="0066">When reading of the V<b>0</b> line ends, the vertical scanner <b>210</b> interlaces, selects the V<b>3</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel output of the V<b>3</b> line to the line memory <b>204</b> due to the setting of the SKIP terminal. At this time, due to the settings of the ADD terminal and the AF terminal, the mixture unit <b>205</b> mixes the pixels. Basically, a unit of three pixels of the same color is mixed. As shown in <figref idrefs="DRAWINGS">FIG. 10</figref>, when all mixture objects are the image pickup pixels, all pixels are mixed; when a focus detection pixel is contained in the three pixels, the image pickup pixels are selectively mixed or only the image pickup pixels are mixed. In <figref idrefs="DRAWINGS">FIGS. 10</figref>, H<b>11</b> and H<b>13</b> are image pickup pixels among H<b>9</b>, H<b>11</b>, and H<b>13</b> (not shown), and thus mixed with each other. The focus detection pixel S<sub>HB </sub>of H<b>9</b> is not mixed. Thereafter, the data input to the PHST terminal is sequentially scanned with the transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to drive the horizontal scanner <b>208</b>. At this time, the horizontal scanner <b>208</b> scans the switches <b>206</b> in order of H<b>2</b>, H<b>5</b>, H<b>8</b>, H<b>11</b>, . . . , due to the settings of the SKIP terminal and the ADD terminal, and outputs only the mixed output of the image pickup pixels to the outside via the buffer amplifier <b>209</b>.</div>
+<div class="description-paragraph" id="p-0068" num="0067">Next, similarly, while the horizontal and vertical scanners interlace, the mixture readout of the image sensor <b>107</b> is made. The number of readout pixels is the same as that of the skip readout when no focus detection pixels are read. In other words, since a focus detection pixel that is not used to take an image is not read in a frame that does not require the focus detection, a horizontal scanning time period can be shortened and the frame rate can be effectively improved.</div>
+<div class="description-paragraph" id="p-0069" num="0068">The first mixture readout mode is different from PTL 1 to which the mixture readout mode described in PTL 4 is simply applied, in that the first mixture readout mode excludes the focus detection pixel from the readout. Thereby, the first mixture readout mode can maintain a high image quality.</div>
+<div class="description-paragraph" id="p-0070" num="0069"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a view for explaining the second mixture readout, and schematically shows two lines, i.e., V<b>0</b> and V<b>3</b> lines initially read in the arrangement shown in <figref idrefs="DRAWINGS">FIG. 6</figref>. The arrangement of the upper stage corresponds to the pixel part and the lower stage corresponds to the output of the readout pixel.</div>
+<div class="description-paragraph" id="p-0071" num="0070">Initially, in order to perform the mixture readout, each of the SKIP terminal, the ADD terminal, and the AF terminal is set to the H level in advance to the readout. Next, the vertical scanner <b>210</b> selects the V<b>0</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel output of the V<b>0</b> line to the line memory <b>204</b>. At this time, due to the settings of the ADD terminal and the AF terminal, the mixture unit <b>205</b> mixes the pixels. Basically, a unit of three pixels of the same color is mixed. As shown in <figref idrefs="DRAWINGS">FIG. 11</figref>, when all mixture objects are the image pickup pixels, three pixels are mixed; when a focus detection pixel is contained in the three pixels, the image pickup pixels are not mixed. Since H<b>6</b> and H<b>8</b> are image pickup pixels in H<b>6</b>, H<b>8</b>, and H<b>10</b> and H<b>10</b> is the focus detection pixel S<sub>HA </sub>in <figref idrefs="DRAWINGS">FIG. 11</figref>, no mixture is made. Thereafter, the data input to the PHST terminal is sequentially scanned with the transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to drive the horizontal scanner <b>208</b>. At this time, the horizontal scanner <b>208</b> scans the switches <b>206</b> in order of H<b>2</b>, H<b>5</b>, H<b>10</b>, H<b>11</b>, . . . , due to the settings of the SKIP terminal and the AF terminal. When all the pixels to be mixed are image pickup pixels, the output of the mixed image pickup pixels is output to the outside via the buffer amplifier <b>209</b>. When the pixels to be mixed contain a focus detection pixel, only the focus detection pixel is output to the outside via the buffer amplifier <b>209</b>.</div>
+<div class="description-paragraph" id="p-0072" num="0071">When reading of the V<b>0</b> line ends, the vertical scanner <b>210</b> interlaces, selects the V<b>3</b> line, and transfers the H<sub>0 </sub>to H<sub>m-1 </sub>pixel signals as the pixel output of the V<b>3</b> line to the line memory <b>204</b>. At this time, due to the settings of the ADD terminal and the AF terminal, the mixture unit <b>205</b> mixes the pixels. Basically, a unit of three pixels of the same color is mixed. As shown in <figref idrefs="DRAWINGS">FIG. 11</figref>, when all mixture objects are the image pickup pixels, all pixels are mixed; when a focus detection pixel is contained in the three pixels, no mixture is made. In <figref idrefs="DRAWINGS">FIG. 11</figref>, H<b>9</b> is a focus detection pixel S<sub>HB </sub>among H<b>9</b>, H<b>11</b>, and H<b>13</b> (not shown), and thus these three pixels are not mixed with each other. Thereafter, the data input to the PHST terminal is sequentially scanned with the transfer pulses of the PH<b>1</b> terminal and the PH<b>2</b> terminal so as to drive the horizontal scanner <b>208</b>. At this time, the horizontal scanner <b>208</b> scans the switches <b>206</b> in order of H<b>2</b>, H<b>5</b>, H<b>8</b>, H<b>9</b>, . . . , due to the settings of the SKIP terminal and the AF terminal. When all the pixels to be mixed are image pickup pixels, the output of the mixed image pickup pixels is output to the outside via the buffer amplifier <b>209</b>. When the pixels to be mixed contain a focus detection pixel, only the focus detection pixel is output to the outside via the buffer amplifier <b>209</b>. The number of readout pixels is the same as that of the skip readout when no focus detection pixels are read.</div>
+<div class="description-paragraph" id="p-0073" num="0072">Next, similarly, while the horizontal and vertical scanners interlace, the mixture readout of the image sensor <b>107</b> is made. In order to maintain the image quality, the focus detection pixel needs to be corrected as a defective pixel. In other words, the CPU <b>121</b> supplements the image pickup pixel corresponding to the focus detection pixel in the second mixture readout mode. Therefore, the second mixture readout has slightly inferior image quality to the first mixture readout, but has an advantage in that the reading velocity improves as in the example 1 shown in <figref idrefs="DRAWINGS">FIG. 9</figref> because the number of readout pixels does not increase.</div>
+<div class="description-paragraph" id="p-0074" num="0073">This example reads H<b>10</b> for the V<b>0</b> line and H<b>9</b> for the V<b>3</b> line, and can provide a phase difference AF at the second mixture readout time. H<b>9</b> of V<b>3</b> and H<b>10</b> of V<b>0</b> forma diagonal relationship shown in <figref idrefs="DRAWINGS">FIGS. 4 and 5</figref> due to the interlacing and can provide the phase difference AF. Thereafter, the CPU <b>121</b> performs the phase difference AF for the output of the focus detection pixels, calculates a defocus amount, and controls the focus driver <b>126</b> such that the third lens unit <b>105</b> can be moved to the in-focus position. On the other hand, when PTL 4 is simply applied to PTL 1, the focus detection pixels are mixed with the image pickup pixels and the sampling characteristic and the focus detection characteristic deteriorate or the phase difference AF itself becomes unavailable. This example solves this problem.</div>
+<div class="description-paragraph" id="p-0075" num="0074">This example selects one of the first mixture readout and the second mixture readout for each frame, and thus can read both the image pickup pixel and the focus detection pixel without degrading the image quality even in the motion image and electronic viewfinder mode.</div>
+<div class="description-paragraph" id="p-0076" num="0075">The skip readout of the image sensor <b>107</b> in the examples 1 and 2 is not limited to ⅓ skip.</div>
+<div class="description-paragraph" id="p-0077" num="0076">The image pickup apparatus of the present invention is applicable to a cam coder (video camera) for motion image pickup, a variety of types of inspection cameras, surveillance cameras, endoscope cameras, and cameras for robots as well as electronic still cameras.</div>
+<div class="description-paragraph" id="p-0078" num="0077">This application claims the benefit of Japanese Patent Application No. 2008-179905, filed on Jul. 10, 2008, which is hereby incorporated by reference herein in its entirety.</div>
+<heading id="h-0022">INDUSTRIAL APPLICABILITY</heading>
+<div class="description-paragraph" id="p-0079" num="0078">An image pickup apparatus can apply to imaging of an object.</div>
+<heading id="h-0023">REFERENCE SIGNS LIST</heading>
+<div class="description-paragraph" id="p-0080" num="0000">
+</div> <ul>
+<li id="ul0001-0001" num="0079"> <b>100</b> digital camera (image pickup apparatus)</li>
+<li id="ul0001-0002" num="0080"> <b>105</b> third lens unit including a focus lens</li>
+<li id="ul0001-0003" num="0081"> <b>107</b> image sensor</li>
+<li id="ul0001-0004" num="0082"> <b>121</b> CPU (controller)</li>
+<li id="ul0001-0005" num="0083"> <b>205</b> mixture unit</li>
+<li id="ul0001-0006" num="0084"> <b>208</b> horizontal scanner</li>
+<li id="ul0001-0007" num="0085"> <b>210</b> vertical scanner</li>
+</ul>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">18</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM122386265">
+<claim-statement>The invention claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. An image pickup apparatus comprising:
+<div class="claim-text">an image sensor that includes a plurality of first pixels and a plurality of second pixels;</div>
+<div class="claim-text">a focus state detector that detects a focus state according to a pair image based on pixel signals from the plurality of second pixels;</div>
+<div class="claim-text">a display that displays an image based on pixel signals from the plurality of first pixels; and</div>
+<div class="claim-text">a controller configured to control output of signal mixed with the pixel signals in a predetermined row from the image sensor,</div>
+<div class="claim-text">wherein the controller controls the output in a frame such that, in mixing and output signal mode, the signals from the predetermined row of the plurality of first pixels are mixed and are output by a scanning circuit, a signal from a second pixel which is included in the predetermined row is not mixed with the plurality of first pixels and second pixels which are included in the predetermined row and is output by the scanning circuit,</div>
+<div class="claim-text">wherein the focus state detector detects the focus state according to the pair image based on the pixel signals from the plurality of second pixels without mixing in the frame, and</div>
+<div class="claim-text">wherein the display displays the image based on mixed pixel signals from the plurality of first pixels in the frame.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The image pickup apparatus according to <claim-ref idref="CLM-00001">claim 1</claim-ref>,
+<div class="claim-text">wherein when the controller does not provide a phase difference focus detection using the image sensor, the controller controls the output such that the second pixels are not read out and the signal from the predetermined row of the plurality of first pixels are mixed with each other and read out, and</div>
+<div class="claim-text">wherein when the controller provides the phase difference focus detection using the image sensor, the controller controls the output such that the signal from the plurality of first pixels are not mixed with the signal from the second pixels.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The image pickup apparatus according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the second pixel is covered partially with a portion for transmitting signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The image pickup apparatus according to <claim-ref idref="CLM-00001">claim 1</claim-ref>,
+<div class="claim-text">wherein the controller supplements a signal of the second pixel by using signal from the first pixel corresponding to the second pixel.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The image pickup apparatus according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the controller controls the output such that, in mixing and outputting signals from the plurality of first pixels, the signals from a pair of the second pixels are not mixed with the signal from the first pixels.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The image pickup apparatus according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the controller controls the output such that the signals from the plurality of first pixels are mixed with each other and read out.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The image pickup apparatus according to <claim-ref idref="CLM-00001">claim 1</claim-ref>,
+<div class="claim-text">wherein the controller controls the output such that, in a first mode, the signal from a group of the plurality of first pixels are mixed and the signal from the plurality of second pixels are not mixed, and</div>
+<div class="claim-text">wherein the controller controls the output such that, in a second mode, the signals from a group of the plurality of first pixels are not mixed and the signals from the plurality of second pixels are not mixed.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The image pickup apparatus according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the second pixel is covered partially with a portion for transmitting signal.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. An image pickup apparatus comprising:
+<div class="claim-text">an image sensor that includes a plurality of first pixels and a plurality of second pixels;</div>
+<div class="claim-text">a focus state detector that detects a focus state according to a pair image based on pixel signals from the plurality of second pixels;</div>
+<div class="claim-text">a display that displays an image based on pixel signals from the plurality of first pixel; and</div>
+<div class="claim-text">a controller configured to control output of signal mixed with the pixel signals in a predetermined row from the image sensor,</div>
+<div class="claim-text">wherein the controller controls the output in a frame such that, in mixing and output signal mode, the signals from the predetermined row of the plurality of first pixels are mixed and are output via a mixture portion, a signal from a second pixel which is included in the predetermined row is not mixed with the plurality of first pixels and second pixels which are included in the predetermined row and is output via the mixture portion,</div>
+<div class="claim-text">wherein the focus state detector detects the focus state according to the pair image based on the pixel signals from the plurality of second pixels without mixing in the frame, and</div>
+<div class="claim-text">wherein the display displays the image based on mixed pixel signals from the plurality of first pixels in the frame.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The image pickup apparatus according to <claim-ref idref="CLM-00009">claim 9</claim-ref>,
+<div class="claim-text">wherein when the controller does not provide a phase difference focus detection using the image sensor, the controller controls the output such that the second pixels are not output and the signals from the predetermined row of the plurality of first pixels are mixed with each other and read out, and</div>
+<div class="claim-text">wherein when the controller provides the phase difference focus detection using the image sensor, the controller controls the output such that the signals from the plurality of first pixels are not mixed with the signal from the second pixels.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The image pickup apparatus according to <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the second pixel is covered partially with a portion for transmitting signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The image pickup apparatus according to <claim-ref idref="CLM-00009">claim 9</claim-ref>,
+<div class="claim-text">wherein the controller supplements a signal of the second pixel by using signal from the first pixel corresponding to the second pixel.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The image pickup apparatus according to <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein the controller controls output such that, in mixing and output signal from the plurality of first pixels, the signals from a pair of the second pixels are not mixed with the signal from the first pixels.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The image pickup apparatus according to <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein the controller controls the output such that the signals from the plurality of first pixels are mixed with each other and output.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The image pickup apparatus according to <claim-ref idref="CLM-00009">claim 9</claim-ref>,
+<div class="claim-text">wherein the controller controls the output such that, in a first mode, the signals from a group of the plurality of first pixels are mixed and the signals from the plurality of second pixels are not mixed, and</div>
+<div class="claim-text">wherein the controller controls the output such that, in a second mode, the signals from a group of the plurality of first pixels are not mixed and the signals from the plurality of second pixels are not mixed.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The image pickup apparatus according to <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein the second pixel is covered partially with a portion for transmitting signal.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. A control method of an image pickup apparatus including an image sensor that includes a plurality of first pixels and a plurality of second pixels, detecting a focus state according to a pair image based on pixel signals from the plurality of second pixels, and displaying an image based on pixel signals from the plurality of first pixels, said control method comprising controlling output in a frame such that, in mixture readout of pixel signals, the signals from a predetermined row of the plurality of first pixels are mixed and are output by a scanning circuit, and a signal from a second pixel which is included in the predetermined row is not mixed with the plurality of first pixels and second pixels which are included in the predetermined row and is output by the scanning circuit, wherein the focus state is detected according to the pair image based on the pixel signals from the plurality of second pixels without mixing in the frame, and the image is displayed based on mixed pixel signals from the plurality of the first pixels in the frame.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. A control method of an image pickup apparatus including an image sensor that includes a plurality of first pixels and a plurality of second pixels, detecting a focus state according to a pair image based on pixel signals from the plurality of second pixels, and displaying an image based on pixel signals from the plurality of first pixels, said control method comprising controlling output in a frame such that, in mixture output of pixel signals, the signals from a predetermined row of the plurality of first pixels are mixed and are output via a mixture portion, and a signal from a second pixel which is included in the predetermined row is not mixed with the plurality of first pixels and second pixels which are included in the predetermined row and is output via the mixture portion, wherein the focus state is detected according to the pair image based on the pixel signals from the plurality of second pixels without mixing in the frame, and the image is displayed based on mixed pixel signals from the plurality of the first pixels in the frame.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

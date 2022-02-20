@@ -1,0 +1,1011 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US11108534B2 - Method and device for service time division multiplexing 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA462851763" source="national office">
+<div class="abstract">A method and device for transmitting a service are disclosed. A terminal device receives position information of specific radio frames in a time unit, and position information of a specific subframe in each of the specific radio frames in the time unit from a base station. Every 2m radio frames in the time unit include one specific radio frame, the position information of the specific radio frames in the time unit comprises a value of a period of the specific radio frames in the time unit, and a length of the period is 2m radio frames, where m is a nonnegative integer. The terminal device receives the service carried in the specific subframe in one or more of the specific radio frames from the base station in accordance with the position information of the specific radio frames and the position information of the specific subframe.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES300884626">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of U.S. patent application Ser. No. 16/198,772, filed on Nov. 22, 2018, which is a continuation of U.S. patent application Ser. No. 15/410,774, filed on Jan. 20, 2017, now U.S. Pat. No. 10,148,406. U.S. patent application Ser. No. 15/410,774 is a continuation of U.S. patent application Ser. No. 14/480,579, filed on Sep. 8, 2014, now U.S. Pat. No. 9,554,382. U.S. patent application Ser. No. 14/480,579 is a continuation of U.S. patent application Ser. No. 13/404,956, filed on Feb. 24, 2012, now U.S. Pat. No. 8,837,455. U.S. patent application Ser. No. 13/404,956 is a continuation of U.S. patent application Ser. No. 12/538,357, filed on Aug. 10, 2009, now U.S. Pat. No. 8,149,814. U.S. patent application Ser. No. 12/538,357 is a continuation of International Patent Application No. PCT/CN2008/070291, filed on Feb. 5, 2008. The International Patent Application claims priority to Chinese Patent Application No. 200710084514.X, filed on Feb. 12, 2007. All of the afore-mentioned patent applications are hereby incorporated by reference in their entireties.</div>
+<heading id="h-0002">TECHNICAL FIELD</heading>
+<div class="description-paragraph" id="p-0003" num="0002">Embodiments of the present application relates to the communication technical field, in particular to a method and device for service time division multiplexing.</div>
+<heading id="h-0003">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0004" num="0003">The third generation partnership projects (3GPP) initiated a long term evolution (LTE) of the 3rd generation (3G) in 2005, and better support for increasing service requirements of operators and users is provided through evolved universal terrestrial radio access (E-UTRA) and an evolved universal terrestrial radio access network (E-UTRAN).</div>
+<div class="description-paragraph" id="p-0005" num="0004">In an LTE system, downlink communication services can be divided into two categories, a unicast service and a multimedia broadcast multicast service (MBMS). The unicast service refers to a point-to-point service in which one data source sends data to one user equipment, and the MBMS refers to a point-to-multipoint service in which one data source sends data to multiple user equipment. The introduction of the MBMS is to realize resource sharing on a network. The network, which includes a core network and a radio access network, serves maximum multimedia user equipment having the same requirements by using minimum resources. In the radio access network, the MBMS can realize the multicast and broadcast of messages with plain text at a low rate, and realize the multicast and broadcast of multimedia services at a higher rate on a common transport channel and a common radio bearer.</div>
+<div class="description-paragraph" id="p-0006" num="0005">For the MBMS, the specification 25.814 of the 3GPP supports two cell transmission modes, one is a multi-cell transmission mode, in which multiple cells simultaneously send the MBMS with the same frequency resource, and the other is a single-cell transmission mode, in which a single cell sends the MBMS without considering the transmission of other cells.</div>
+<div class="description-paragraph" id="p-0007" num="0006">Data transmission modes of the MBMS include two modes, one is a mixed carrier (MC) mode, in which the MBMS and the unicast service share the same carrier to transmit data, and the other is a dedicated carrier (DC) mode, in which the MBMS itself uses one carrier to transmit data. In the case of the MC mode, it is decided at a 3GPP meeting that the MBMS and the unicast service are in time division multiplexing, and the two services are subframe-level time division multiplexing, i.e., each service occupies at least one subframe. If a base station does not send a signaling to inform the usage of each subframe, unicast service user equipment and MBMS user equipment will attempt to read their own service information through all the transmission time, thus wasting electric energy of the user equipment. If one bit of information is set for each subframe to indicate the usage, for example, one bit has two states, 0 and 1, corresponding to the two services respectively, then the required information amount is very large.</div>
+<div class="description-paragraph" id="p-0008" num="0007">In addition, an orthogonal frequency division multiplexing (OFDM) technology is employed in the downlink of LTE. The OFDM technology divides a given channel into multiple orthogonal subchannels in a frequency domain, and allows subcarrier spectra to be partially overlapped. As long as mutual orthogonality is met among the subcarriers, data signals can be obtained. In the operation of an OFDM system, symbols are firstly subject to serial/parallel conversion to form multiple low-rate sub-data streams. Each data stream occupies one subcarrier, the mapping from the sub-data streams to the subcarriers can be achieved through an inverse discrete Fourier transform (IDFT) or an inverse fast Fourier transform (IFFT). A cyclic prefix (CP) as a guard interval is applied, which greatly reduces or even eliminates inter-symbol interference, and ensures orthogonality among various channels, thus greatly reducing inter-channel interference.</div>
+<div class="description-paragraph" id="p-0009" num="0008">In the subframe which sends the unicast service or a single-cell transmission MBMS, the length of the CP only needs to meet the requirements of the serving cell. In the subframe of a multi-cell transmission MBMS, however, signal needs to pass through a longer transmission path, in which case a longer CP is required to overcome inter-symbol interference, and user equipment can successfully demodulate a subframe only after knowing the length of the CP of the subframe.</div>
+<div class="description-paragraph" id="p-0010" num="0009">To sum up, the base station in the prior art cannot effectively inform the transmission time of various services and the length of the CP of each subframe in the case of time division multiplexing for multiple services.</div>
+<heading id="h-0004">SUMMARY</heading>
+<div class="description-paragraph" id="p-0011" num="0010">Various embodiments of the present invention provide various objects including a method and device for service time division multiplexing, a method and a device for transmitting service, and a base station. The problem that a base station cannot effectively inform the transmission time of various services and the length of the CP of each subframe in the case of time division multiplexing for multiple services is effectively overcome.</div>
+<div class="description-paragraph" id="p-0012" num="0011">A method for service time division multiplexing provided by embodiments of the invention includes: selecting a part or all of radio frames in one time unit as specific radio frames; and selecting a part or all of subframes in the specific radio frames as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0013" num="0012">The specific service may be a multimedia broadcast multicast service (MBMS), or a unicast service, or one or more than one kinds of services transmitted in broadcast or multicast mode.</div>
+<div class="description-paragraph" id="p-0014" num="0013">A method for transmitting service provided by embodiments of the invention includes: dividing one time unit into at least one Type 1 subunit and selecting a part or all of Type 1 subunits as specific Type 1 subunits; dividing each Type n subunit into at least one Type n+1 subunit, where 1≤n≤N, and n and N are natural numbers; selecting a part or all of Type n+1 subunits in specific Type n subunits as specific Type n+1 subunits, the specific Type N subunits being used for sending a specific service; sending the service according to the above time division multiplexing mode; and sending position information of the N types of specific subunits.</div>
+<div class="description-paragraph" id="p-0015" num="0014">A method for transmitting service provided by embodiments of the invention includes: selecting a part or all of the radio frames in one time unit as specific radio frames; selecting a part or all of subframes in the specific radio frames as specific subframes for sending a specific service; sending the service according to the above time division multiplexing mode; and sending position information of the specific radio frames and/or position information of the specific subframes.</div>
+<div class="description-paragraph" id="p-0016" num="0015">The time unit may include several radio frames, each of which contains R subframes that can be allocated to the specific service, where R is a natural number.</div>
+<div class="description-paragraph" id="p-0017" num="0016">A device for service time division multiplexing provided by embodiments of the invention includes: a radio frame selection unit, configured to select a part or all of radio frames in one time unit as specific radio frames; and a subframe selection unit, configured to select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0018" num="0017">A device for transmitting service provided by embodiments of the invention includes: a time division multiplexing unit, configured to select a part or all of radio frames in one time unit as specific radio frames; and select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service; and a transmission unit, configured to send the service according to a time division multiplexing mode determined by the above time division multiplexing unit and send position information of the specific radio frames and/or position information of the specific subframes.</div>
+<div class="description-paragraph" id="p-0019" num="0018">A base station provided by embodiments of the invention includes: a device for transmitting service, configured to select a part or all of radio frames in one time unit as specific radio frames, select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service, send the service according to the above time division multiplexing mode, and send position information of the specific radio frames and/or position information of the specific subframes.</div>
+<div class="description-paragraph" id="p-0020" num="0019">The embodiments of the present invention provide a service time division multiplexing mode. In a technical proposal, a part or all of radio frames in one time unit are selected as specific radio frames, and a part or all of the subframes in the specific radio frames are selected as specific subframes for sending a specific service. The specific service may be a multimedia broadcast multicast service, a unicast service, or one or more than one kinds of services transmitted in the multimedia broadcast multicast mode. Furthermore, in the technical proposal, services are sent according to the time division multiplexing mode, the position information of the specific radio frames and/or the position information of the specific subframes are also sent, the time unit includes several radio frames, and the radio frames includes one or more subframes that may be allocated to the specific service. It is achieved that when the base station sends multiple services to user equipment through the time division multiplexing mode, the user equipment for various services can accurately obtain the transmission time of the services required by the user equipment itself, thus obtaining service data required by the user equipment itself, thereby saving electric energy of the user equipment. Meanwhile, the present invention realizes that the user equipment can accurately know the length of the CP of each subframe by sending length information of the CPs of the specific subframes in the time unit, thus exactly demodulating the subframes.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a flow diagram of a method for service time division multiplexing of the present invention;</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a flow diagram of a method for transmitting service of the present invention;</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a flow diagram of an embodiment of a method for transmitting service of the present invention;</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a schematic diagram of a multiplexing mode of specific subframes and nonspecific subframes in an embodiment of a method for transmitting service of the present invention;</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a schematic diagram of transmission delay between information and service data in an embodiment of a method for transmitting service of the present invention;</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a flow diagram of a method for transmitting service according to an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a flow diagram of a method for transmitting service according to an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 8</figref> is a flow diagram of a method for transmitting service according to an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 9</figref> is a flow diagram of a method for transmitting service according to an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a simplified block diagram of a device for service time division multiplexing according to an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 11</figref>-A is a simplified block diagram of a device for transmitting service according to an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 11</figref>-B is a simplified block diagram of a device for transmitting service according to an embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 12</figref>-A is a simplified block diagram of a transmission unit in an embodiment of a device for transmitting service of the present invention;</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 12</figref>-B is a simplified block diagram of a transmission unit in an embodiment a device for transmitting service of the present invention; and</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a simplified block diagram of a base station according to an embodiment of the present invention.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION OF EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0036" num="0035">In the case of multi-service time division multiplexing, in order to allow user equipment to know that a subframe is used by which service, embodiments of the present invention provide a service time division multiplexing method and device, as well as a method and a device for transmitting service.</div>
+<div class="description-paragraph" id="p-0037" num="0036">One time unit is divided into at least one Type 1 subunit, and a part or all of the Type 1 subunits are selected as specific Type 1 subunits. Each of Type n subunits is divided into at least one Type n+1 subunits, where 1≤n≤N, and n and N are natural numbers. A part or all of the Type n+1 subunits in the specific Type n subunits are selected as specific Type n+1 subunits, and the Type N subunits are used for sending a specific service. The service is sent according to the above time division multiplexing mode. Position information of N kinds of the specific Type n subunits is sent. In the embodiments of the present invention, the service is multiplexed in the way of dividing one time unit into N layers by dividing one time unit into Type 1 subunits, dividing each of the Type 1 subunits into Type 2 subunits, and dividing each of the Type 2 subunits into Type 3 sub-time units and so on.</div>
+<div class="description-paragraph" id="p-0038" num="0037">Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, in an embodiment, one time unit is divided into two layers. A method for service time division multiplexing includes the following steps:</div>
+<div class="description-paragraph" id="p-0039" num="0038">In step S<b>101</b>, a part or all of radio frames in one time unit are selected as specific radio frames.</div>
+<div class="description-paragraph" id="p-0040" num="0039">The size of the time unit can be changed, which means that the number of the radio frames included in the time unit may be changed.</div>
+<div class="description-paragraph" id="p-0041" num="0040">In step S<b>102</b>, a part or all of subframes in the specific radio frames are selected as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0042" num="0041">The specific service is a multimedia broadcast multicast service, or a unicast service, or one or more than one services transmitted in broadcast or multicast mode. Particularly, when the specific service is the multimedia broadcast multicast service or the unicast service, the present invention is to solve the problems in the prior art.</div>
+<div class="description-paragraph" id="p-0043" num="0042">The allocation of the specific radio frames in the time unit can be predefined according to characteristics of the specific service. For example, both of base stations and user equipment pre-store a mapping table or mapping rules. Therefore, when the number of the specific radio frames in the time unit is given, the base stations and the user equipment can know which radio frames are specific radio frames by looking up the mapping table or by calculating according to the mapping rules. For example, the mapping rule may be that the specific radio frames are evenly allocated. In this way, specific positions of the radio frames can be determined if the number or the interval of the radio frames is determined, thus simplifying multiplexing design. The mode, such as explicit signaling, may be employed rather than employing the predetermined mode.</div>
+<div class="description-paragraph" id="p-0044" num="0043">In order to further simplify the multiplexing design, the allocation of the specific subframes may be the same for every specific radio frame. In this way, specific positions of all specific subframes in the time unit can be determined only by determining the positions of specific subframes in one specific radio frame. The allocation of the specific subframes may not be necessarily the same.</div>
+<div class="description-paragraph" id="p-0045" num="0044">Further, the allocation of the specific subframes in the radio frame that the specific subframes belong to may be predefined without need of notification. For example, both of the base stations and the user equipment prestore the mapping table or the mapping rules. When number of the specific subframes in one specific radio frame is given, the base stations and the user equipment can obtain which subframes are specific subframes by looking up the mapping table or by calculating according to the mapping rules. For example, the specific subframes may be evenly allocated, or allocated at an approximately equal interval in the radio frame that the specific subframes belong to.</div>
+<div class="description-paragraph" id="p-0046" num="0045">The specific positions of the specific subframes can be determined only by determining the number or the interval of the specific subframes in one specific radio frame. The even allocation and the approximate even allocation are hereinafter referred to as the even allocation. The mode such as explicit signaling rather than the predetermined mode, may be employed.</div>
+<div class="description-paragraph" id="p-0047" num="0046">Referring to <figref idrefs="DRAWINGS">FIG. 2</figref>, a method for transmitting service of the present invention includes the following steps:</div>
+<div class="description-paragraph" id="p-0048" num="0047">In step S<b>201</b>, a part or all of radio frames in one time unit are selected as specific radio frames.</div>
+<div class="description-paragraph" id="p-0049" num="0048">The time unit includes several radio frames, each of the radio frames contains R subframes that may be allocated to the specific service, and R is a natural number.</div>
+<div class="description-paragraph" id="p-0050" num="0049">In step S<b>202</b>, a part or all of subframes in the specific radio frames are selected as specific subframes for sending the specific service.</div>
+<div class="description-paragraph" id="p-0051" num="0050">The specific service may be a multimedia broadcast multicast service, or a unicast service, or one or more than one kinds of services transmitted in broadcast or multicast mode. Particularly, when the specific service is the multimedia broadcast multicast service or the unicast service, the present invention is to solve the problems of the prior art.</div>
+<div class="description-paragraph" id="p-0052" num="0051">The allocation of the specific radio frames in the time unit can be predefined according to the characteristics of the specific service. For example, both of base stations and user equipment pre-store a mapping table or mapping rules, therefore, when number of the specific radio frames in the time unit is given, the base stations and the user equipment can obtain which radio frames are specific radio frames by looking up the mapping table or by calculating according to the mapping rules. For example, the mapping rules may be that the specific radio frames are evenly allocated. In this way, specific positions of the radio frames can be determined if the number or the interval of the radio frames is determined, thus achieving the purpose of simplifying multiplexing design. The mode, such as explicit signaling rather than the predetermined mode, may be employed.</div>
+<div class="description-paragraph" id="p-0053" num="0052">In order to further simplify the multiplexing design, the allocation specific subframes may be the same for every specific radio frame. In this way, specific positions of all specific subframes in the time unit can be determined only by determining the positions of specific subframes in one specific radio frames.</div>
+<div class="description-paragraph" id="p-0054" num="0053">Further, the allocation of the specific subframes in the radio frame that the specific subframes belong to may be predefined without need of notification. For example, both of the base stations and the user equipment prestore the mapping table or the mapping rules. When number of the specific subframes in one specific radio frame is given, the base stations and the user equipment can obtain which subframes are specific subframes by looking up the mapping table or by calculating according to the mapping rules. For example, the specific subframes may be evenly allocated, or allocated at an approximately equal interval in the radio frame that the specific subframes belong to. The specific positions of the specific subframes can be determined only by determining the number or the interval of the specific subframes in one specific radio frame. The even allocation and the approximate even allocation are hereinafter referred to as the even allocation. The mode, such as explicit signaling rather than the predetermined mode, may be employed.</div>
+<div class="description-paragraph" id="p-0055" num="0054">In step S<b>203</b>, the service is sent according to the above time division multiplexing mode.</div>
+<div class="description-paragraph" id="p-0056" num="0055">In step S<b>204</b>, the position information of the specific radio frames and/or the position information of the specific subframes are sent.</div>
+<div class="description-paragraph" id="p-0057" num="0056">Preferably, the position information of the specific radio frames is the number or the interval of the specific radio frames in the time unit.</div>
+<div class="description-paragraph" id="p-0058" num="0057">Preferably, the position information of the specific subframes is the number or the interval of the specific subframes in each of the specific radio frames.</div>
+<div class="description-paragraph" id="p-0059" num="0058">Preferably, the position information of the specific radio frames and/or the position information of the specific subframes are transmitted on broadcast channels.</div>
+<div class="description-paragraph" id="p-0060" num="0059">The position information of the specific radio frames is hereinafter referred to as first information, and the position information of the specific subframes is hereinafter referred to as second information.</div>
+<div class="description-paragraph" id="p-0061" num="0060">The broadcast channels include a main broadcast channel, a secondary broadcast channel and a dynamic broadcast channel. The first information is transmitted on any one of the three broadcast channels, and the second information is transmitted on any one of the three broadcast channels.</div>
+<div class="description-paragraph" id="p-0062" num="0061">Preferably, the second information is transmitted on the main broadcast channel, and the first information is transmitted on the secondary broadcast channel or the dynamic broadcast channel.</div>
+<div class="description-paragraph" id="p-0063" num="0062">The broadcast channels are transport channels, the three transport channels are mapped to one or more physical channels for transmission. For example, the main broadcast channel is mapped to a physical main broadcast channel, the dynamic broadcast channel is mapped to a physical shared data channel, and the secondary broadcast channel is mapped to a physical secondary broadcast channel or the physical shared data channel.</div>
+<div class="description-paragraph" id="p-0064" num="0063">Preferably, the method for transmitting service further includes sending length information of CPs of the specific subframes in the time unit.</div>
+<div class="description-paragraph" id="p-0065" num="0064">Preferably, the length information of the CPs is transmitted on the broadcast channel.</div>
+<div class="description-paragraph" id="p-0066" num="0065">Taking MBMS, which is the specific service, and unicast service time division multiplexing as an example, if the service in all MBMS subframes (specific subframes sending the MBMS) is transmitted in multiple cells, then all the MBMS subframes use long CPs. If the MBMS transmitted in a single cell is sent in unicast subframes, then the first information and the second information are also used for informing the length of the CPs, that is, all MBMS subframes use the long CPs, and all unicast subframes use short CPs.</div>
+<div class="description-paragraph" id="p-0067" num="0066">If the service in the MBMS subframes is possibly transmitted in multiple cells, and is also possibly transmitted in a single cell, then it is supposed that the service in all the MBMS subframes is transmitted in multiple cells or transmitted in a single cell in the time unit, then the method for transmitting service further includes sending the length information of the CPs of the specific subframes in the time unit, and the length information is hereinafter referred to as third information. That is, a user can obtain the length of the CP of each subframe in the entire time unit only by increasing one bit of signaling to inform the MBMS subframes of using the long CP or the short CP. For example, the one bit of signaling is set as 0, which represents the long CP, and the one bit of signaling is set as 1, which represents the short CP, vice versa, the one bit of signaling is set as 1, which represents the long CP, and the one bit of information is set as 0, which represents the short CP.</div>
+<heading id="h-0007">Embodiment 1</heading>
+<div class="description-paragraph" id="p-0068" num="0067">Referring to <figref idrefs="DRAWINGS">FIG. 3</figref>, a method for transmitting service of the present invention includes the following steps:</div>
+<div class="description-paragraph" id="p-0069" num="0068">In step S<b>301</b>, a part or all of radio frames in one time unit are selected as specific radio frames.</div>
+<div class="description-paragraph" id="p-0070" num="0069">In step S<b>302</b>, a part or all of subframes in the specific radio frames are selected as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0071" num="0070">In step S<b>303</b>, the service is sent according to the above time division multiplexing mode.</div>
+<div class="description-paragraph" id="p-0072" num="0071">In step S<b>304</b>, position information of the specific radio frames is sent by sending the value of a signaling m, and 0≤m≤M.</div>
+<div class="description-paragraph" id="p-0073" num="0072">S successive radio frames form one time unit, where S=2<sup>M</sup>, and the value of M may be 10 or other numerical values.</div>
+<div class="description-paragraph" id="p-0074" num="0073">The specific radio frames are evenly allocated, and 2<sup>m </sup>is used to represent the number of the specific radio frames in the time unit or represent the interval of various specific radio frames. If 2<sup>m </sup>is used to represent the number of the specific radio frames in the time unit, then the interval of various specific radio frames is 2<sup>M-m</sup>, vice versa, if 2<sup>m </sup>is used to represent the interval of various specific radio frames, then the number of the specific radio frames in the time unit is 2<sup>M-m</sup>, where 0≤m≤M.</div>
+<div class="description-paragraph" id="p-0075" num="0074">In step S<b>305</b>, the position information of the specific subframes is sent by sending the value of a signaling Np, where 0≤Np≤R and Np represents the number of the specific subframes in the specific radio frame.</div>
+<div class="description-paragraph" id="p-0076" num="0075">Specific subframe does not exist in the entire time unit when Np=0, in this case, the value of m is not required to be indicated.</div>
+<div class="description-paragraph" id="p-0077" num="0076">R represents that the radio frame includes R subframes that may be allocated to the specific service. One radio frame occupies 10 ms. When all subframes can be allocated to the specific service, the value of R is temporarily determined as 10 in LTE system. When some subframes cannot be used for sending the specific service, for example, when the subframes in which a synchronization channel (SCH) is located can only be used for the unicast subframes, the value of R is the number of other subframes in one radio frame. For example, when two subframes in one radio frame have the SCH, the value of R is 8.</div>
+<div class="description-paragraph" id="p-0078" num="0077">In the present embodiment, the allocation of the specific subframes is the same for every specific radio frame.</div>
+<div class="description-paragraph" id="p-0079" num="0078">It is described how to determine which subframes in one specific radio frame are the specific subframes after knowing the value of Np by taking approximate even allocation of the specific subframes in the specific radio frame that the specific subframes belong to as an example:</div>
+<div class="description-paragraph" id="p-0080" num="0079">A simple way is as follows:</div>
+<div class="description-paragraph" id="p-0081" num="0080">Subframes with serial number of r are specific subframes, and the value of r is calculated by using the following formulas:</div>
+<div class="description-paragraph" id="p-0082" num="0081">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mrow>
+<mrow>
+<mi>s</mi>
+<mo>=</mo>
+<mrow>
+<mo>⌈</mo>
+<mfrac>
+<mrow>
+<mn>1</mn>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>⁢</mo>
+<mi>p</mi>
+</mrow>
+</mfrac>
+<mo>⌉</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mi>r</mi>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>r</mi>
+<mn>0</mn>
+</msub>
+<mo>+</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>i</mi>
+<mo>·</mo>
+<mi>s</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>10</mn>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mo>⌊</mo>
+<mfrac>
+<mrow>
+<mi>i</mi>
+<mo>·</mo>
+<mi>s</mi>
+</mrow>
+<mrow>
+<mn>1</mn>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+</mfrac>
+<mo>⌋</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mi>i</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mo>,</mo>
+<mn>1</mn>
+<mo>,</mo>
+<mi>…</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>,</mo>
+<mrow>
+<mi>Np</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0083" num="0082">In the formula, r<sub>0 </sub>is the position of a first specific subframe in the specific radio frame, and is expressed by the serial number of the subframe. Generally, r<sub>0</sub>=0 can be adopted.</div>
+<div class="description-paragraph" id="p-0084" num="0083">When the value of R is not the number of all subframes in one radio frame, after knowing the value of Np, the positions of the specific subframes can be also determined by the above method, but the serial number of the subframes in the formula is the serial number of other subframes.</div>
+<div class="description-paragraph" id="p-0085" num="0084"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a schematic diagram of a multiplexing mode of specific subframes and nonspecific subframes in the present embodiment. For example, a notification m=2 represents the interval of specific radio frames is 4 radio frames, and a first radio frame of the time unit includes specific subframes. A notification Np=4 represents the specific radio frame has 4 specific subframes which are evenly allocated, and the first subframe is a specific subframe, that is, r<sub>0</sub>=0.</div>
+<div class="description-paragraph" id="p-0086" num="0085">The information sent in the step S<b>304</b> is the first information, the information sent in the step S<b>305</b> is the second information, and the first information and the second information are transmitted on broadcast channels.</div>
+<div class="description-paragraph" id="p-0087" num="0086">The broadcast channels include a main broadcast channel, a secondary broadcast channel and a dynamic broadcast channel. The first information is transmitted on any one of the three broadcast channels, and the second information is transmitted on any one of the three broadcast channels.</div>
+<div class="description-paragraph" id="p-0088" num="0087">Preferably, when the first information and/or the second information is transmitted on the secondary broadcast channel, the secondary broadcast channel needs to be predefined to be placed on subframe of the long CP, or placed on the subframe of the short CP.</div>
+<div class="description-paragraph" id="p-0089" num="0088">Preferably, when the first information and/or the second information is transmitted on the dynamic broadcast channel, the dynamic broadcast channel is determined to be placed on the subframe of the long CP, or placed on the subframe of the short CP.</div>
+<div class="description-paragraph" id="p-0090" num="0089">When the first information and the second information are transmitted on the main broadcast channel, as bit number accommodated in the main broadcast channel is limited and it is generally acknowledged as 40-50 bits, all of the position information cannot be put on one main broadcast channel, then the information is split into multiple parts, each part is transmitted on one main broadcast channel. One main broadcast channel appears once in each radio frame. Therefore, the position information requires time transmission of multiple radio frames, and this time is an information transmission cycle T. <figref idrefs="DRAWINGS">FIG. 5</figref> is a schematic diagram of transmission delay between position information and service data in the present embodiment. The signaling is repeatedly sent in one time unit. In a first transmission cycle of one time unit, the position of specific subframes is informed by the signaling of the last transmission cycle of the previous time unit, therefore, signaling content has a leading time T corresponding to the position of the specific subframes indicated by the signaling content.</div>
+<div class="description-paragraph" id="p-0091" num="0090">As value range of m is 0≤m≤M, and the value range of Np is 0≤Np≤R, the bit number needed to transmit the position information is log<sub>2 </sub>(M+1)+log<sub>2 </sub>(R+1).</div>
+<div class="description-paragraph" id="p-0092" num="0091">The user equipment determines the positions of the specific radio frames in the time unit according to the value of m, i.e. the number or the interval of the specific radio frames. The user equipment determines the positions of the specific subframes according to the value of Np, i.e. the number or the interval of the specific subframes. The user equipment then reads the specific service on the subframes which transmit the specific service, and reads other services on the subframes which transmit other services.</div>
+<heading id="h-0008">Embodiment 2</heading>
+<div class="description-paragraph" id="p-0093" num="0092">Referring to <figref idrefs="DRAWINGS">FIG. 6</figref>, a method for transmitting service of the present invention includes the following steps:</div>
+<div class="description-paragraph" id="p-0094" num="0093">In step S<b>601</b>, a part or all of radio frames in one time unit are selected as specific radio frames.</div>
+<div class="description-paragraph" id="p-0095" num="0094">In step S<b>602</b>, a part or all of subframes in the specific radio frames are selected as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0096" num="0095">In step S<b>603</b>, the service is sent according to the above time division multiplexing mode.</div>
+<div class="description-paragraph" id="p-0097" num="0096">In step S<b>604</b>, position information of the specific radio frames is sent by sending the value of a signaling m, where 0≤m≤M+1, and m=M+1 represents that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0098" num="0097">S successive radio frames form one time unit, S=2<sup>M</sup>, and the value of M may be 10 or other numerical values.</div>
+<div class="description-paragraph" id="p-0099" num="0098">The specific radio frames are evenly spaced, and 2<sup>m </sup>is used to represent the number of the specific radio frames in the time unit or represent the interval of various specific radio frames. If 2<sup>m </sup>is used to represent the number of the specific radio frames in the time unit, then the interval of various specific radio frames is 2<sup>M-m</sup>, vice versa, if 2<sup>m </sup>is used to represent the interval of various specific radio frames, then the number of the specific radio frames in the time unit is 2<sup>M-m</sup>, where 0≤m≤M+1. m=M+1 represents that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0100" num="0099">In step S<b>605</b>, the position information of the specific subframes is sent by sending the value of a signaling Np, where 1≤Np≤R, and Np represents the number of specific subframes in the specific radio frame; and R represents that the radio frame contains R subframes that may be allocated to the specific service.</div>
+<div class="description-paragraph" id="p-0101" num="0100">When m=M+1, the value of Np is not required to be indicated.</div>
+<div class="description-paragraph" id="p-0102" num="0101">In the present embodiment, the allocation of the specific subframes is the same for every specific radio frame.</div>
+<div class="description-paragraph" id="p-0103" num="0102">After knowing the value of Np, the method for determining the position of the specific subframes is the same as that of the embodiment one.</div>
+<div class="description-paragraph" id="p-0104" num="0103">The information sent in the step S<b>604</b> is the first information, the information sent in the step S<b>605</b> is the second information, and the first information and the second information are transmitted on the broadcast channels. The specific transmission mode is the same as that of the embodiment one.</div>
+<div class="description-paragraph" id="p-0105" num="0104">As value range of m is 0≤m≤M+1, and the value range of Np is 1≤Np≤R, the total bit number for transmitting the position information is ┌log<sub>2</sub>(M+2)+log<sub>2</sub>R┐.</div>
+<heading id="h-0009">Embodiment 3</heading>
+<div class="description-paragraph" id="p-0106" num="0105">The method for transmitting service of the present invention includes the following steps:</div>
+<div class="description-paragraph" id="p-0107" num="0106">In step S<b>701</b>, a part or all of radio frames in one time unit are selected as specific radio frames.</div>
+<div class="description-paragraph" id="p-0108" num="0107">In step S<b>702</b>, a part or all of subframes in the specific radio frames are selected as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0109" num="0108">In step S<b>703</b>, the service is sent according to the above time division multiplexing mode.</div>
+<div class="description-paragraph" id="p-0110" num="0109">In step S<b>704</b>, the position information of the specific radio frames and the position information of the specific subframes are sent by sending the value of a joint signaling A.</div>
+<div class="description-paragraph" id="p-0111" num="0110">S successive radio frames form one time unit, where S=2<sup>M</sup>. 2<sup>m </sup>represents the number of the specific radio frames in the time unit, or represents the interval of the specific radio frames. Np represents the number of the specific subframes in the specific radio frame. R represents that the radio frame contains R subframes that may be allocated to the specific service.</div>
+<div class="description-paragraph" id="p-0112" num="0111">In order to further save signaling, the position of the specific subframes can be indicated by adopting a joint signaling indication method, that is, values of m and Np are sent by sending the signaling A. The specific methods are as follows:</div>
+<div class="description-paragraph" id="p-0113" num="0112">If 0≤m≤M, 0≤Np≤R, and R≤M+1, then</div>
+<div class="description-paragraph" id="p-0114" num="0113">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>A</mi>
+<mo>=</mo>
+<mrow>
+<mo>{</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mn>0</mn>
+<mo>,</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>Np</mi>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>M</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>N</mi>
+<mo>⁢</mo>
+<mi>p</mi>
+</mrow>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>,</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mo>&lt;</mo>
+<mi>Np</mi>
+<mo>≤</mo>
+<mi>R</mi>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</mrow>
+</mrow>
+<mo>;</mo>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0115" num="0114">In the formula, Np=0 represents that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0116" num="0115">If 0≤m≤M, 0≤Np≤R, and M+1≤R, then</div>
+<div class="description-paragraph" id="p-0117" num="0116">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>A</mi>
+<mo>=</mo>
+<mrow>
+<mo>{</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mn>0</mn>
+<mo>,</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>Np</mi>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>Rm</mi>
+<mo>+</mo>
+<mi>Np</mi>
+</mrow>
+<mo>,</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mo>&lt;</mo>
+<mi>Np</mi>
+<mo>≤</mo>
+<mi>R</mi>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</mrow>
+</mrow>
+<mo>;</mo>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>2</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0118" num="0117">In the formula, Np=0 represents that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0119" num="0118">If 0≤m≤M+1, 1≤Np≤R, and R≤M+1, then</div>
+<div class="description-paragraph" id="p-0120" num="0119">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>A</mi>
+<mo>=</mo>
+<mrow>
+<mo>{</mo>
+<mrow>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mn>0</mn>
+<mo>,</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mrow>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+</mrow>
+<mo>⁢</mo>
+<mi>m</mi>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>M</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>M</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>N</mi>
+<mo>⁢</mo>
+<mrow>
+<mi>p</mi>
+<mo>-</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mo>+</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>,</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mrow>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+</mrow>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mo>≤</mo>
+<mi>m</mi>
+<mo>&lt;</mo>
+<mrow>
+<mi>M</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+<mo>;</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>3</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0121" num="0120">In the formula, m=M+1 represents that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0122" num="0121">If 0≤m≤M+1, 1≤Np≤R, and M+1≤R, then</div>
+<div class="description-paragraph" id="p-0123" num="0122">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>A</mi>
+<mo>=</mo>
+<mrow>
+<mo>{</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mn>0</mn>
+<mo>,</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>m</mi>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>M</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mrow>
+<mi>R</mi>
+<mo>⁢</mo>
+<mi>m</mi>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>N</mi>
+<mo>⁢</mo>
+<mi>p</mi>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>0</mn>
+</mrow>
+<mo>≤</mo>
+<mi>m</mi>
+<mo>&lt;</mo>
+<mrow>
+<mi>M</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</mrow>
+</mrow>
+<mo>;</mo>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>4</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0124" num="0123">In the formula, m=M+1 represents that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0125" num="0124">In the case of R=M+1, any one of the above expression methods can be used.</div>
+<div class="description-paragraph" id="p-0126" num="0125">It is described how to determine the value of m and Np after knowing the value of the signaling A:</div>
+<div class="description-paragraph" id="p-0127" num="0126">It is supposed that two integer variables X and Y are given, where a<sub>1</sub>≤X≤a<sub>2</sub>, b<sub>1</sub>≤Y≤b<sub>2 </sub>and a<sub>2</sub>−a<sub>1</sub>≤b<sub>2</sub>−b<sub>1</sub>.</div>
+<div class="description-paragraph" id="p-0128" num="0127">A function A is obtained from the following formula:
+<br/>
+<i>A</i>=(<i>b</i>2−<i>b</i>1+1)(<i>X−a</i>1)+(<i>Y−b</i>1+1)  (5)
+</div>
+<div class="description-paragraph" id="p-0129" num="0128">Values of X and Y can be solved through the following formulas if the value of A is given:</div>
+<div class="description-paragraph" id="p-0130" num="0129">
+<maths id="MATH-US-00006" num="00006">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>X</mi>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>a</mi>
+<mn>1</mn>
+</msub>
+<mo>+</mo>
+<mrow>
+<mo>⌊</mo>
+<mfrac>
+<mi>A</mi>
+<mrow>
+<msub>
+<mi>b</mi>
+<mn>2</mn>
+</msub>
+<mo>-</mo>
+<msub>
+<mi>b</mi>
+<mn>1</mn>
+</msub>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mfrac>
+<mo>⌋</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>6</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mi>Y</mi>
+<mo>=</mo>
+<mrow>
+<mi>A</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.2ex" width="0.2em"> </mspace>
+</mstyle>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>b</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+<mo>-</mo>
+<mrow>
+<mi>b</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>7</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0131" num="0130">When the encoding of the signaling A uses the formula (1) or (3), Np=X, m=Y, and the values of Np and m can be obtained through the formulas (6) and (7).</div>
+<div class="description-paragraph" id="p-0132" num="0131">When the encoding of the signaling A uses the formula (2) or (4), m=X, Np=Y, and the values of Np and m can be obtained through the formulas (6) and (7);</div>
+<div class="description-paragraph" id="p-0133" num="0132">It can be seen that when the sent signaling is A, bit number needed to transmit the position information is ┌log<sub>2</sub>[(M+1)R+1]┐ which is possibly less than information amount ┌log<sub>2</sub>(M+1)+log<sub>2</sub>(R+1)┐ or for ┌log<sub>2</sub>(M+2)+log<sub>2</sub>R┐ respectively sending the signaling m and Np.</div>
+<div class="description-paragraph" id="p-0134" num="0133">For example, when R=10, and M=8, 9, 10, 11, 16, 17, etc., 1 bit can be easily saved by the joint signaling. For example, when M=1 and 0≤A≤121, A can be expressed by 7 bits while m and Np are respectively expressed by 4 bits. Therefore, 1 bit of information can be saved by adopting the joint signaling.</div>
+<div class="description-paragraph" id="p-0135" num="0134">In the present embodiment, the specific radio frames are evenly allocated.</div>
+<div class="description-paragraph" id="p-0136" num="0135">In the present embodiment, the allocation of the specific subframes is the same for every specific radio frame.</div>
+<div class="description-paragraph" id="p-0137" num="0136">After knowing the value of Np, the method for determining the position of the specific subframes is the same as that of the embodiment one.</div>
+<div class="description-paragraph" id="p-0138" num="0137">The information sent by the signaling A includes the first information and the second information which are transmitted on the broadcast channels. The specific transmission mode is exactly the same as that of the embodiment one.</div>
+<heading id="h-0010">Embodiment 4</heading>
+<div class="description-paragraph" id="p-0139" num="0138">Referring to <figref idrefs="DRAWINGS">FIG. 8</figref>, a method for transmitting service of the present invention includes the following steps:</div>
+<div class="description-paragraph" id="p-0140" num="0139">In step S<b>801</b>, a part or all of radio frames in one time unit are selected as specific radio frames.</div>
+<div class="description-paragraph" id="p-0141" num="0140">In step S<b>802</b>, a part or all of subframes in the specific radio frames are selected as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0142" num="0141">In step S<b>803</b>, the service is sent according to the above time division multiplexing mode.</div>
+<div class="description-paragraph" id="p-0143" num="0142">In step S<b>804</b>, the position information of the specific radio frames is sent by sending the value of a signaling m, where 0≤m≤M+1, and m=M+1 represents that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0144" num="0143">S successive radio frames form one time unit, S=2<sup>M</sup>, and the value of M may be 10 or other numerical values.</div>
+<div class="description-paragraph" id="p-0145" num="0144">The specific radio frames are evenly spaced, and 2<sup>m </sup>is used to represent the number of the specific radio frames in the time unit or represent the interval of various specific radio frames. If 2<sup>m </sup>is used to represent the number of the specific radio frames in the time unit, then the interval of various specific radio frames is 2<sup>M-m</sup>, vice versa, if 2<sup>m </sup>is used to represent the interval of various specific radio frames, then the number of the specific radio frames in the time unit is 2<sup>M-m</sup>, where 0≤m≤M+1, and m=M+1 represents that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0146" num="0145">In step S<b>805</b>, the position information of the specific subframes is sent by sending the value of a signaling Np, where 0≤Np≤R, and Np represents the number of the specific subframes in the specific radio frame in which the signaling is located; and R represents that the radio frame contains R subframes that may be allocated to the specific service.</div>
+<div class="description-paragraph" id="p-0147" num="0146">In the present embodiment, the allocation of the specific subframes is the same for every specific radio frame.</div>
+<div class="description-paragraph" id="p-0148" num="0147">The information sent in the step S<b>804</b> is the first information, the information sent in the step S<b>805</b> is the second information, and the first information and the second information are transmitted on the broadcast channels. The specific transmission mode is the same as that of the embodiment one.</div>
+<div class="description-paragraph" id="p-0149" num="0148">Preferably, the second information is transmitted on the main broadcast channel, and the first information is transmitted on the secondary broadcast channel or the dynamic broadcast channel.</div>
+<div class="description-paragraph" id="p-0150" num="0149">The following paragraphs describe an example that the first information is transmitted on the secondary broadcast channel and the second information is transmitted on the broadcast channel.</div>
+<div class="description-paragraph" id="p-0151" num="0150">The user equipment receives the main broadcast channel firstly to obtain the value of Np, thus knowing the length of the CP of each subframe in the radio frame in which the main broadcast channel is located. If the current radio frame includes the secondary broadcast channel, then the user equipment can solve the value of m, otherwise, the user equipment successively receives and checks the main broadcast channel until the secondary broadcast channel is found, and the value of m is solved.</div>
+<div class="description-paragraph" id="p-0152" num="0151">When Np≠0, the user equipment may obtain the position information of the specific subframes in the time unit by combining the value of m. When Np=0, m=M+1 indicates that the time unit has no specific subframe, and thus the user equipment also obtains the information of the service that each subframe in the time unit is used for. When Np=0, if m≠M+1, the user equipment may obtain the position of the radio frame of Np≠0 according to the value of m, and reads the value of Np on the main broadcast channel in such radio frame, thus obtaining the position information of the specific subframes in the time unit.</div>
+<div class="description-paragraph" id="p-0153" num="0152">It should be noted that Np may indicate the number of the specific subframes in any one designated radio frame. For example, Np can indicates the number of the specific subframes in the first or several radio frame next to the radio frame in which Np is located.</div>
+<div class="description-paragraph" id="p-0154" num="0153">The user equipment may obtain the number of the specific subframes in the designated radio frame after receiving the value of Np. Then the user equipment may obtain the length of the CP of each subframe in the radio frame. Then, the procedures such as obtaining the value of m, checking whether Np is zero value, etc. by the user equipment are exactly the same as that of the above method. Finally, the user equipment may obtain nonzero values of Np and m, and thus obtain the position of the specific subframes in the time unit.</div>
+<div class="description-paragraph" id="p-0155" num="0154">Preferably, the length information of the CP are transmitted together with the value of Np on the same channel.</div>
+<heading id="h-0011">Embodiment 5</heading>
+<div class="description-paragraph" id="p-0156" num="0155">Referring to <figref idrefs="DRAWINGS">FIG. 9</figref>, the method for transmitting service includes the following steps:</div>
+<div class="description-paragraph" id="p-0157" num="0156">In step S<b>901</b>, a part or all of radio frames in one time unit are selected as specific radio frames.</div>
+<div class="description-paragraph" id="p-0158" num="0157">In step S<b>902</b>, a part or all of subframes in the specific radio frames are selected as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0159" num="0158">In step S<b>903</b>, the service is sent according to the above time division multiplexing mode.</div>
+<div class="description-paragraph" id="p-0160" num="0159">In step S<b>904</b>, the position information of the specific radio frames is sent by sending the value of a signaling F. When the number of the specific radio frames in the time unit is more, the time unit is divided into several sub-time units. F represents the position information of the specific radio frames in the sub-time units. And, the position information of the specific radio frames in several sub-time units is the same. When the number of the specific radio frames in the time unit is less, F represents the position information of the specific radio frames in the time unit.</div>
+<div class="description-paragraph" id="p-0161" num="0160">The present invention may be embodied in many different forms as follows, but should not be construed as limited to the embodiments set forth herein.</div>
+<div class="description-paragraph" id="p-0162" num="0161">S successive radio frames form one time unit, where S=2<sup>M </sup>and the value of M may be 10 or other numerical values. The time unit is divided into 2<sup>M-M</sup> <sup> <sub2>0 </sub2> </sup>sub-time units, and each sub-time unit consists of 2<sup>M</sup> <sup> <sub2>0 </sub2> </sup>successive radio frames, and M0 is a positive integer smaller than M.</div>
+<div class="description-paragraph" id="p-0163" num="0162">In step S<b>904</b>.<b>1</b> (not shown), when the number of the specific radio frames in the time unit is more than or equal to 2<sup>M-M</sup> <sup> <sub2>0</sub2> </sup>, F represents the position information of the specific radio frames in the sub-time unit.</div>
+<div class="description-paragraph" id="p-0164" num="0163">For example, F may represent a bitmap Fq of the radio frames in the sub-time unit, Fq consists of 2<sup>M</sup> <sup> <sub2>0 </sub2> </sup>bits, each bit corresponds to one radio frame, and represents whether the corresponding radio frame is allocated to the specific service or not with two states which are 0 and 1.</div>
+<div class="description-paragraph" id="p-0165" num="0164">Another example is that F may represent the number Fp of the radio frames in the sub-time unit, and 0&lt;Fp≤2<sup>M</sup> <sup> <sub2>0</sub2> </sup>. The specific radio frames in a same sub-time unit are allocated according to a preset rule, for example, successive allocation or even allocation. If Fp specific radio frames are of approximate even allocation in the sub-time unit that the specific radio frames belong to, the method for determining the position of the radio frames is similar to the method for determining the specific subframes after knowing the value of Np in the embodiment one. If Fp specific radio frames are consecutively allocated in the sub-time unit that the specific radio frames belong to, then the positions of the specific radio frames can be determined according to a starting position f<sub>0 </sub>of the successive Fp specific radio frames and the value of Fp. The starting position f<sub>0 </sub>may be appointed or informed by signaling, particularly, f<sub>0 </sub>may be appointed as 0.</div>
+<div class="description-paragraph" id="p-0166" num="0165">In step S<b>904</b>.<b>2</b> (not shown), when the number of the specific radio frames in the time unit is less than 2<sup>M-M</sup> <sup> <sub2>0</sub2> </sup>, F represents the position information of the specific radio frames in the time unit.</div>
+<div class="description-paragraph" id="p-0167" num="0166">Example 1, F can represent a bitmap Gq of the sub-time units in the time unit, Gq consists of e bits, each bit corresponds to one sub-time unit, and represents whether the corresponding sub-time unit includes one specific radio frame or not with the two states which are 0 and 1. The positions of the specific radio frames are identical in various sub-time units that the specific radio frames respectively belong to, and the positions can be appointed or informed by the signaling.</div>
+<div class="description-paragraph" id="p-0168" num="0167">Example 2, F can represent the number Gp of the specific radio frames in the time unit, 0≤Gp&lt;2<sup>M-M</sup> <sup> <sub2>0 </sub2> </sup>2<sup>M-M</sup> <sup> <sub2>0</sub2> </sup>, and the allocation rules of the specific radio frames can be appointed or informed by the signaling. The following paragraphs provide three examples of appointed allocation rules.</div>
+<div class="description-paragraph" id="p-0169" num="0168">(1). When Gp specific radio frames are appointed to be consecutively allocated in the time unit, the positions of the specific radio frames can be determined according to a starting position g<sub>0 </sub>of the successive Gp specific radio frames and the value of Gp. The starting position g<sub>0 </sub>can be appointed or informed by the signaling, particularly, g<sub>0 </sub>may be appointed as 0.</div>
+<div class="description-paragraph" id="p-0170" num="0169">(2). When Gp specific radio frames are appointed to be allocated in Gp successive sub-time units of the time unit, the positions of the sub-time units including the specific radio frames can be determined according to a starting position g′<sub>0 </sub>of the Gp successive sub-time units and the value of Gp. The starting position g′<sub>0 </sub>can be appointed or informed by the signaling, particularly, g′<sub>0 </sub>may be appointed as 0. The positions of the specific radio frames are identical in various sub-time units that the specific radio frames respectively belong to. The position can be appointed or informed by the signaling. Particularly, the position may be a first radio frame in the sub-time unit.</div>
+<div class="description-paragraph" id="p-0171" num="0170">Example 3, F represents the number 2<sup>m </sup>of the specific radio frames in the time unit, and in the time unit, the specific radio frames are evenly allocated or consecutively allocated. Or F represents the interval 2<sup>m </sup>of the specific radio frames in the time unit, and the specific radio frames are evenly allocated.</div>
+<div class="description-paragraph" id="p-0172" num="0171">If 2<sup>m </sup>is used to represent the number of the specific radio frames in the time unit, where 0≤m≤M−M<sub>0 </sub>or 0≤m≤M−M<sub>0</sub>, and m=M−M<sub>0 </sub>is used to indicate that the entire time unit has no specific subframe, when the specific radio frames are evenly allocated, the interval is 2<sup>M-m</sup>; vice versa, if 2<sup>m </sup>is used to represent the interval of various specific radio frames, then the number of the specific radio frames in the time unit is 2<sup>M-m</sup>, where M<sub>0</sub>≤m≤M or M<sub>0</sub>≤m≤M, and m=M<sub>0 </sub>is used to represent that the entire time unit has no specific subframe.</div>
+<div class="description-paragraph" id="p-0173" num="0172">In step S<b>905</b>, the position information of the specific subframes is sent by sending the value of a signaling Np or the value of Nq, where Np represents the number of the specific subframes in the specific radio frame and 0≤Np≤R; R represents that the radio frame contains R subframes that may be allocated to the specific service; and Nq is a bitmap of the subframes in the specific radio frame. Specifically, Nq consists of R bits, each bit corresponds to one allocable subframe, and represents that whether the corresponding subframe is allocated to the specific service or not with two states which are 0 and 1.</div>
+<div class="description-paragraph" id="p-0174" num="0173">In the present embodiment, the allocation of the specific subframes is the same for every specific radio frame.</div>
+<div class="description-paragraph" id="p-0175" num="0174">After knowing the value of Np, if Np specific subframes are allocated at approximate equal interval in the specific radio frame that the specific subframes belong to, the method for determining positions of the specific subframes is exactly the same as that of the embodiment one. If Np specific subframes are consecutively allocated in the specific radio frame that the specific subframes belong to, then the positions of the specific subframes can be determined according to a starting position r<sub>0 </sub>of successive Np subframes and the value of Np, and the starting position r<sub>0 </sub>can be appointed or informed by the signaling, particularly, r<sub>0 </sub>may be appointed as 0.</div>
+<div class="description-paragraph" id="p-0176" num="0175">The information sent in the step S<b>904</b> is the first information, the information sent in the step S<b>905</b> is the second information, and the first information and the second information are transmitted on the broadcast channels. The specific transmission mode is the same as that of the embodiment one.</div>
+<div class="description-paragraph" id="p-0177" num="0176">As value range of m is 0≤m≤M+1, and the value range of Np is 1≤Np≤R, the total bit number for transmitting the position information is ┌log<sub>2</sub>(M+2)+log<sub>2</sub>R┐.</div>
+<div class="description-paragraph" id="p-0178" num="0177">The embodiment six is a multilayer embodiment, and specifically is as follows: when the number of the specific Type N′ subunits in the time unit is more than or equals a threshold, the value of no is determined, where 1≤N′≤N, 1≤n<sub>0</sub>≤N, n<sub>0 </sub>has at least one value, which represents that all of the Type no subunits in the specific Type n<sub>0</sub>−1 subunit are the specific Type no subunits, and the position information of the specific Type no subunits is not sent any more. When the number of the specific Type N′ subunits in the time unit is less than a threshold, the value of n<sub>0</sub>′ is determined, where 1≤n<sub>0</sub>′≤N, n<sub>0</sub>′ has at least one value, which represents that the Type n<sub>0</sub>′−1 subunit are directly divided into at least one Type n<sub>0</sub>′+1 subunit, and the position information of the specific Type n<sub>0</sub>′ subunits is not sent any more. The Type 0 subunit is the time unit, and the sizes of the Type n subunits do not change with the preceding operations.</div>
+<div class="description-paragraph" id="p-0179" num="0178">For example, the time unit is divided into 2<sup>M-M</sup> <sup> <sub2>0 </sub2> </sup>Type 1 subunits, both M and M<sub>0 </sub>are nonnegative integers, and M<sub>0</sub>≤M. Each Type 1 subunit is divided into 2<sup>M</sup> <sup> <sub2>0 </sub2> </sup>Type 2 subunits, the Type 2 subunits are the radio frames, and Type 3 subunits are the subframes. Each Type 2 subunit is divided into at least one Type 3 subunit. In addition, the position information of the specific Type n subunits is sent by sending the value of the signaling F, where n=1 or n=2. When the number of the specific Type 2 subunits in the time unit is more than or equals 2<sup>M-M</sup> <sup> <sub2>0</sub2> </sup>, n<sub>0</sub>=1, and F represents bitmap and/or number and/or interval of the specific Type 2 subunits in each Type 1 subunit. When the number of the specific Type 2 subunits in the time unit is less than 2<sup>M-M</sup> <sup> <sub2>0</sub2> </sup>, n<sub>0</sub>′=2, and F represents bitmap and/or number and/or interval of the specific Type 2 subunits in the time unit. The position information of the Type 3 subunits is sent by sending the value of the signaling G, where G represents bitmap and/or number and/or interval of the specific Type 3 subunits in the specific Type 2 subunit that the specific Type 3 subunits belong to.</div>
+<div class="description-paragraph" id="p-0180" num="0179">The present invention further provides a device corresponding to the service time division multiplexing method, a device corresponding to the method for transmitting service and a base station.</div>
+<div class="description-paragraph" id="p-0181" num="0180">The service time division multiplexing device of the present invention includes a radio frame selection unit and a subframe selection unit.</div>
+<div class="description-paragraph" id="p-0182" num="0181">The radio frame selection unit is configured to select a part or all of radio frames in one time unit as specific radio frames.</div>
+<div class="description-paragraph" id="p-0183" num="0182">The subframe selection unit is configured to select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0184" num="0183">The device for transmitting service of the present invention includes a time division multiplexing unit and a transmission unit.</div>
+<div class="description-paragraph" id="p-0185" num="0184">The time division multiplexing unit is configured to select a part or all of radio frames in one time unit as specific radio frames; and select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0186" num="0185">The transmission unit is configured to transmit the service according to a time division multiplexing mode determined by the time above division multiplexing unit and send position information of the specific radio frames and/or position information of the specific subframes.</div>
+<div class="description-paragraph" id="p-0187" num="0186">The base station of the present invention includes a service transmission device.</div>
+<div class="description-paragraph" id="p-0188" num="0187">The service transmission device is configured to select a part or all of radio frames in one time unit as specific radio frames, select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service, send the service according to the above time division multiplexing mode, and send position information of the specific radio frames and/or position information of the specific sub frames.</div>
+<div class="description-paragraph" id="p-0189" num="0188">The following paragraphs provide several embodiments of the devices of the present invention.</div>
+<heading id="h-0012">Embodiment 7</heading>
+<div class="description-paragraph" id="p-0190" num="0189">Referring to <figref idrefs="DRAWINGS">FIG. 10</figref>, the service time division multiplexing device <b>91</b> according to one embodiment of the present invention includes a radio frame selection unit <b>911</b> and a subframe selection unit <b>912</b>.</div>
+<div class="description-paragraph" id="p-0191" num="0190">The radio frame selection unit <b>911</b> is configured to select a part or all of radio frames in one time unit as specific radio frames.</div>
+<div class="description-paragraph" id="p-0192" num="0191">The subframe selection unit <b>912</b> is configured to select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0193" num="0192">The specific service is a multimedia broadcast multicast service, or a unicast service, or one or more than one kinds of services transmitted in broadcast or multicast mode.</div>
+<heading id="h-0013">Embodiment 8</heading>
+<div class="description-paragraph" id="p-0194" num="0193">Referring to <figref idrefs="DRAWINGS">FIG. 11</figref>-A, the device for transmitting service <b>101</b> according to one embodiment of the present invention includes a time division multiplexing unit <b>1011</b> and a transmission unit <b>1012</b>.</div>
+<div class="description-paragraph" id="p-0195" num="0194">The time division multiplexing unit <b>1011</b> is configured to select a part or all of radio frames in one time unit as specific radio frames and select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service.</div>
+<div class="description-paragraph" id="p-0196" num="0195">The specific service is a multimedia broadcast multicast service, or a unicast service, or one or more than one kinds of services transmitted in broadcast or multicast mode.</div>
+<div class="description-paragraph" id="p-0197" num="0196">The transmission unit <b>1012</b> is configured to transmit the service according to a time division multiplexing mode determined by the above time division multiplexing unit <b>1011</b> and send position information of the specific radio frames and/or position information of the specific subframes.</div>
+<div class="description-paragraph" id="p-0198" num="0197">Preferably, referring to <figref idrefs="DRAWINGS">FIG. 11</figref>-B, the device for transmitting service <b>101</b> according to one embodiment of the present invention further includes a position information generation unit <b>1013</b>.</div>
+<div class="description-paragraph" id="p-0199" num="0198">The position information generation unit <b>1013</b> is configured to generate the position information of the specific radio frames and/or the position information of the specific subframes according to the specific radio frames and the specific subframes selected by the time division multiplexing unit <b>1011</b>.</div>
+<div class="description-paragraph" id="p-0200" num="0199">Preferably, referring to <figref idrefs="DRAWINGS">FIG. 12</figref>-A, the transmission unit <b>1012</b> may include a service transmission unit <b>10121</b> and a position information transmission unit <b>10122</b>.</div>
+<div class="description-paragraph" id="p-0201" num="0200">The service transmission unit <b>10121</b> is configured to transmit the service according to the time division multiplexing mode determined by the above time division multiplexing unit <b>1011</b>.</div>
+<div class="description-paragraph" id="p-0202" num="0201">The position information transmission unit <b>10122</b> is configured to transmit the position information of the specific radio frames and/or the position information of the specific subframes.</div>
+<div class="description-paragraph" id="p-0203" num="0202">Preferably, Referring to <figref idrefs="DRAWINGS">FIG. 12</figref>-B, the transmission unit <b>1012</b> may further include a prefix length transmission unit <b>10123</b>.</div>
+<div class="description-paragraph" id="p-0204" num="0203">The prefix length transmission unit <b>10123</b> is configured to transmit information which indicates length of CPs of the specific subframes in the time unit.</div>
+<heading id="h-0014">Embodiment 9</heading>
+<div class="description-paragraph" id="p-0205" num="0204">Referring to <figref idrefs="DRAWINGS">FIG. 13</figref>, the base station <b>121</b> according to one embodiment of the present invention includes a device for transmitting service <b>1211</b>.</div>
+<div class="description-paragraph" id="p-0206" num="0205">The device for transmitting service <b>1211</b> includes a time division multiplexing unit <b>12111</b> and a transmission unit <b>12112</b>.</div>
+<div class="description-paragraph" id="p-0207" num="0206">The device for transmitting service <b>1211</b> is configured to select a part or all of radio frames in one time unit as specific radio frames; select a part or all of subframes in the specific radio frames as specific subframes for sending a specific service; send the service according to the above time division multiplexing mode; and send position information of the specific radio frames and/or position information of the specific subframes.</div>
+<div class="description-paragraph" id="p-0208" num="0207">The specific service is a multimedia broadcast multicast service, or a unicast service, or one or more than one kinds of services transmitted in broadcast or multicast mode.</div>
+<div class="description-paragraph" id="p-0209" num="0208">The time division multiplexing unit <b>12111</b> is configured to select a part or all of radio frames in one time unit as the specific radio frames and select a part or all of subframes in the specific radio frames as the specific subframes for sending the specific service.</div>
+<div class="description-paragraph" id="p-0210" num="0209">The transmission unit <b>12112</b> is configured to transmit the service according to the time division multiplexing mode determined by the above time division multiplexing unit <b>12111</b> and send the position information of the specific radio frames and/or the position information of the specific subframes.</div>
+<div class="description-paragraph" id="p-0211" num="0210">To sum up, the present invention provides a service time division multiplexing method and a service time division multiplexing device as well as a method and a device for transmitting service. Particularly, the present invention provides an MBMS and unicast service time division multiplexing method and a device thereof, as well as a method and a device for sending the MBMS and the unicast service, which prevents a unicast service user and an MBMS user from reading own service information in the transmission time of the other side, and saves electric energy for the user equipment. The method for informing the length of the CP of the subframe provided by the present invention ensures that the user equipment can exactly demodulate the subframes. The information transmission path, the information timing mode and the information source encoding mode provided by the present invention ensure that the user equipment can accurately obtain the transmission time of required service data and read the corresponding service data when the service data are sent in the case that the base station employs the MBMS and unicast service time division multiplexing mode, thus saving resources.</div>
+<div class="description-paragraph" id="p-0212" num="0211">The specific service referred in the present invention includes a service with specific content or a service transmitted through a specific transmission mode, and also includes the service with the specific content and transmitted through the specific transmission mode.</div>
+<div class="description-paragraph" id="p-0213" num="0212">The service transmitted through specific mode includes multiple types, for example, a service transmitted through a multimedia broadcast multicast mode, or a service transmitted through a unicast mode. The specific mode can also refer to an antenna configuration mode, a time frequency resource occupancy mode, a code resource occupancy mode, a space frequency occupancy mode, etc. The specific mode can also refer to a destination equipment of the service, for example, one or more than one kind of services transmitted to a certain specific user or a specific user group.</div>
+<div class="description-paragraph" id="p-0214" num="0213">The service with the specific content includes any one or more than one kinds of multimedia broadcast multicast services, for example, streaming media services, data sharing services, etc. The service with the specific content can also include any one or more than one kinds of unicast services.</div>
+<div class="description-paragraph" id="p-0215" num="0214">The service with the specific content and transmitted through a certain specific transmission mode can be inferred from the explanation of the specific mode and the specific content, for example, a voice service transmitted through the unicast mode.</div>
+<div class="description-paragraph" id="p-0216" num="0215">Finally, it should be noted that the above embodiments are merely provided for describing the technical solutions of the present invention, but not intended to limit the present invention. It should be understood by those of ordinary skill in the art that although the present invention has been described in detail with reference to the foregoing embodiments, modifications can be made to the technical solutions described in the foregoing embodiments, or equivalent replacements can be made to some technical features in the technical solutions, as long as such modifications or replacements do not cause the essence of corresponding technical solutions to depart from the scope of the present invention.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM297087028">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A communication method, comprising:
+<div class="claim-text">sending, by a communication apparatus, subframe configuration information to a terminal device, wherein the subframe configuration information comprises position information of specific radio frames in a time unit, and position information of one or more specific subframes in each of the specific radio frames in the time unit, wherein the time unit comprises 2<sup>M </sup>radio frames, and the specific radio frames are two or more of the 2<sup>M </sup>radio frames comprised in the time unit, where M is a nonnegative integer; and</div>
+<div class="claim-text">sending, by the communication apparatus, service data in the one or more specific subframes.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method according <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the position information of the specific radio frames in the time unit is represented by an interval between two specific radio frames in the time unit, wherein the interval is 2<sup>m</sup>, and 0≤m≤M.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the specific radio frames are evenly distributed in the time unit, and every 2<sup>m </sup>radio frames in the time unit include one specific radio frame, wherein the position information of the specific radio frames in the time unit is represented by a period of the specific radio frames in the time unit, and a length of the period is 2<sup>m </sup>radio frames, where m is an integer and 0≤m≤M.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the service data carried in the one or more specific subframes belongs to one of the following services:
+<div class="claim-text">a multimedia broadcast multicast service,</div>
+<div class="claim-text">a unicast service, or</div>
+<div class="claim-text">any service transmitted in a broadcast or multicast mode.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein positions of the one or more specific subframes in a specific radio frame are the same for every specific radio frame.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the position information of specific radio frames in the time unit and the position information of one or more specific subframes in each of the specific radio frames are sent through a physical shared data channel.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the communication apparatus is a network device in a wireless communication system.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. A communication apparatus, comprising:
+<div class="claim-text">a processor, and a non-transitory computer readable storage medium storing instructions for execution by the processor,</div>
+</div>
+<div class="claim-text">wherein the instructions, when executed by the processor, cause the communication apparatus to:
+<div class="claim-text">send subframe configuration information to a terminal device, wherein the subframe configuration information comprises position information of specific radio frames in a time unit, and position information of one or more specific subframes in each of the specific radio frames in the time unit, wherein the time unit comprises 2<sup>M </sup>radio frames, and the specific radio frames are two or more of the 2<sup>M </sup>radio frames comprised in the time unit, where M is a nonnegative integer; and</div>
+<div class="claim-text">send service data in the one or more specific subframes.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The communication apparatus according <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the position information of the specific radio frames in the time unit is represented by an interval between two specific radio frames in the time unit, wherein the interval is 2<sup>m</sup>, and 0≤m≤M.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The communication apparatus according to <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the specific radio frames are evenly distributed in the time unit, and every 2<sup>m </sup>radio frames in the time unit include one specific radio frame, wherein the position information of the specific radio frames in the time unit is represented by a period of the specific radio frames in the time unit, and a length of the period is 2<sup>m </sup>radio frames, where m is an integer and 0≤m≤M.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The communication apparatus according to <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the service data carried in the one or more specific subframes belongs to one of the following services:
+<div class="claim-text">a multimedia broadcast multicast service,</div>
+<div class="claim-text">a unicast service, or</div>
+<div class="claim-text">any service transmitted in a broadcast or multicast mode.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The communication apparatus according to <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein positions of the one or more specific subframes in a specific radio frame are the same for every specific radio frame.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The communication apparatus according to <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the position information of specific radio frames in the time unit and the position information of the one or more specific subframes in each of the specific radio frames are sent through a physical shared data channel.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The communication apparatus according to <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the communication apparatus is a network device or a component of the network device.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. A non-transitory computer-readable medium storing program instructions, wherein when executed by one or more processors of an apparatus, the instructions cause the apparatus to carry out a process that comprises:
+<div class="claim-text">sending subframe configuration information to a terminal device, wherein the subframe configuration information comprises position information of specific radio frames in a time unit, and position information of one or more specific subframes in each of the specific radio frames in the time unit, wherein the time unit comprises 2<sup>M </sup>radio frames, and the specific radio frames are two or more of the 2<sup>M </sup>radio frames comprised in the time unit, where M is a nonnegative integer; and</div>
+<div class="claim-text">sending service data in the one or more specific subframes.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The non-transitory computer-readable medium according <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the position information of the specific radio frames in the time unit is represented by an interval between two specific radio frames in the time unit, wherein the interval is 2<sup>m</sup>, and 0≤m≤M.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The non-transitory computer-readable medium according <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the specific radio frames are evenly distributed in the time unit, and every 2<sup>m </sup>radio frames in the time unit include one specific radio frame, wherein the position information of the specific radio frames in the time unit is represented by a period of the specific radio frames in the time unit, and a length of the period is 2<sup>m </sup>radio frames, where m is an integer and 0≤m≤M.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The non-transitory computer-readable medium according <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the service data carried in the one or more specific subframes belongs to one of the following services:
+<div class="claim-text">a multimedia broadcast multicast service,</div>
+<div class="claim-text">a unicast service, or</div>
+<div class="claim-text">any service transmitted in a broadcast or multicast mode.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The non-transitory computer-readable medium according <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein positions of the one or more specific subframes in a specific radio frame are the same for every specific radio frame.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The non-transitory computer-readable medium according <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the position information of specific radio frames in the time unit and the position information of one or more specific subframes in each of the specific radio frames are sent through a physical shared data channel.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

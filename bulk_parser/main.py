@@ -20,7 +20,7 @@ CURRENT_DIRECTORY = '.'
 
 
 
-DOWNLOAD_LINKS_FILE = ['links_2018.txt','links_2019.txt','links_2020.txt']
+DOWNLOAD_LINKS_FILE = ['links_2016.txt','links_2017.txt','links_2021.txt']
 
 file_name = DOWNLOAD_LINKS_FILE[int(sys.argv[1])]
 

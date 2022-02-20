@@ -1,0 +1,1036 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10523982B2 - Multimedia adaptation based on video orientation 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA355509519">
+<div class="abstract" id="p-0001" num="0000">Technology for a mobile terminal (MT) operable to provide an orientation-aware processing capability is disclosed. The MT can determine video orientation capability information for the MT. The MT can process the video orientation capability information for transmission to a server via a packet switched streaming service (PSS) device capability exchange signaling between the MT and the server. The MT can access segments from the server via the PSS based on an orientation of the MT and the video orientation capability information for the MT.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES233008709">
+<heading id="h-0001">RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of U.S. patent application Ser. No. 14/125,595, filed Dec. 12, 2013 which is a 371 nationalization of PCT/US2013/067048 filed Oct. 28, 2013, which claims the benefit of U.S. Provisional Patent Application Ser. No. 61/719,241, filed Oct. 26, 2012, and U.S. Provisional Patent Application Ser. No. 61/753,914, filed Jan. 17, 2013, all of which are hereby incorporated by reference in their entirety for all purposes</div>
+<heading id="h-0002">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0003" num="0002">Wireless mobile communication technology uses various standards and protocols to transmit data between a node (e.g., a transmission station) and a wireless device (e.g., a mobile device). Some wireless devices communicate using orthogonal frequency-division multiple access (OFDMA) in a downlink (DL) transmission and single carrier frequency division multiple access (SC-FDMA) in an uplink (UL) transmission. Standards and protocols that use orthogonal frequency-division multiplexing (OFDM) for signal transmission include the third generation partnership project (3GPP) long term evolution (LTE), the Institute of Electrical and Electronics Engineers (IEEE) 802.16 standard (e.g., 802.16e, 802.16m), which is commonly known to industry groups as WiMAX (Worldwide interoperability for Microwave Access), and the IEEE 802.11 standard, which is commonly known to industry groups as WiFi.</div>
+<div class="description-paragraph" id="p-0004" num="0003">In 3GPP radio access network (RAN) LTE systems, the node can be a combination of Evolved Universal Terrestrial Radio Access Network (E-UTRAN) Node Bs (also commonly denoted as evolved Node Bs, enhanced Node Bs, eNodeBs, or eNBs) and Radio Network Controllers (RNCs), which communicates with the wireless device, known as a user equipment (UE). The downlink (DL) transmission can be a communication from the node (e.g., eNodeB) to the wireless device (e.g., UE), and the uplink (UL) transmission can be a communication from the wireless device to the node.</div>
+<div class="description-paragraph" id="p-0005" num="0004">The wireless device can be used receive multimedia delivery of Internet video using various protocols, such as hypertext transfer protocol (HTTP) streaming. A protocol to provide HTTP-based delivery of video streaming can include dynamic adaptive streaming over HTTP (DASH).</div>
+<description-of-drawings>
+<heading id="h-0003">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0006" num="0005">Features and advantages of the disclosure will be apparent from the detailed description which follows, taken in conjunction with the accompanying drawings, which together illustrate, by way of example, features of the disclosure; and, wherein:</div>
+<div class="description-paragraph" id="p-0007" num="0006"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates a diagram of functional components in a packet switched streaming service (PSS) capability exchange in accordance with an example;</div>
+<div class="description-paragraph" id="p-0008" num="0007"> <figref idrefs="DRAWINGS">FIG. 2</figref> illustrates an example device capability profile for a packet switched streaming service (PSS) and an integrated multimedia subsystem (IMS) based PSS and multimedia broadcast and multicast service (MBMS) (IMS_PSS_MBMS) services in accordance with an example;</div>
+<div class="description-paragraph" id="p-0009" num="0008"> <figref idrefs="DRAWINGS">FIG. 3</figref> illustrates an example dynamic adaptive streaming over hypertext transfer protocol (HTTP) based (DASH-based) streaming with adaptation for video orientation in accordance with an example;</div>
+<div class="description-paragraph" id="p-0010" num="0009"> <figref idrefs="DRAWINGS">FIG. 4</figref> illustrates an example real-time streaming protocol-based (RTSP-based) streaming with adaptation for video orientation in accordance with an example;</div>
+<div class="description-paragraph" id="p-0011" num="0010"> <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates an example service discovery with subscribe and notify for an integrated multimedia subsystem (IMS) based packet switched streaming service (PSS) and multimedia broadcast and multicast service (MBMS) (abbreviated as IMS_PSS_MBMS) service in accordance with an example;</div>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates an example server-client interaction using orientation-aware multimedia adaptation based on reception of content with embedded video orientation information in accordance with an example;</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIG. 7</figref> illustrates an example of embedding video orientation information in a third generation partnership project (3GPP) file format (3GP) file using an instantiation of the International Organization for Standardization-base (ISO-base) media file format (ISO-BMFF) in accordance with an example;</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates an example server-client interaction using device orientation-aware multimedia adaptation based on reception of content with embedded video orientation information in accordance with an example;</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 9</figref> illustrates an International Organization for Standardization (ISO) file format box structure hierarchy in accordance with an example;</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 10</figref> depicts a flow chart of a method for multimedia adaptation at a server based on device orientation of a mobile terminal (MT) in accordance with an example;</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 11</figref> depicts functionality of computer circuitry of a server operable for multimedia adaptation based on video orientation in accordance with an example;</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates a diagram of a server, a node, and a user equipment (UE) in accordance with an example; and</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 13</figref> illustrates a diagram of a wireless device (e.g., UE) in accordance with an example.</div>
+</description-of-drawings>
+<div class="description-paragraph" id="p-0020" num="0019">Reference will now be made to the exemplary embodiments illustrated, and specific language will be used herein to describe the same. It will nevertheless be understood that no limitation of the scope of the invention is thereby intended.</div>
+<heading id="h-0004">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0021" num="0020">Before the present invention is disclosed and described, it is to be understood that this invention is not limited to the particular structures, process steps, or materials disclosed herein, but is extended to equivalents thereof as would be recognized by those ordinarily skilled in the relevant arts. It should also be understood that terminology employed herein is used for the purpose of describing particular examples only and is not intended to be limiting. The same reference numerals in different drawings represent the same element. Numbers provided in flow charts and processes are provided for clarity in illustrating steps and operations and do not necessarily indicate a particular order or sequence.</div>
+<div class="description-paragraph" id="h-0005" num="0000">Example Embodiments</div>
+<div class="description-paragraph" id="p-0022" num="0021">An initial overview of technology embodiments is provided below and then specific technology embodiments are described in further detail later. This initial summary is intended to aid readers in understanding the technology more quickly but is not intended to identify key features or essential features of the technology nor is it intended to limit the scope of the claimed subject matter.</div>
+<div class="description-paragraph" id="p-0023" num="0022">The growth of multimedia services, including streaming and conversational services, is one of the drivers of the evolution to new mobile broadband technologies and standards. With a high consumer demand for multimedia services coupled with developments in media compression and wireless network infrastructures, enhancing the multimedia service capabilities of cellular and mobile broadband systems is desirable, where the multimedia service capabilities can be used to deliver a high quality of experience (QoE) to the consumers ensuring ubiquitous access to video content and services from any location, at any time, with any device and technology. Supporting various mobile devices and providing media handling procedures and session management protocols optimized for various device classes and capabilities can be used to enable delivery of multimedia content with high QoE in a ubiquitous fashion.</div>
+<div class="description-paragraph" id="p-0024" num="0023">With the introduction of orientation sensors in mobile devices used in real-time video communication, the display content can be rotated to be aligned with the device orientation. In example, the orientation sensor can detect the device orientation by measuring the gravity field. Other types of orientation sensors may also be used. The device orientation can then be used in applications to adjust device functions according to orientation. For instance, the device can rotate the user interface or video orientation to either a portrait or landscape mode based on device orientation.</div>
+<div class="description-paragraph" id="p-0025" num="0024">Because some client devices contain an orientation sensor, the content or service provider may provide different encoded versions of the content optimized for different device orientations or the content/service provider may capture or transcode the content during content capture (e.g., on-the-fly) in order to deliver an optimized experience. Signaling from the user equipment (UE) to the network of the orientation sensor capabilities and/or the current device orientation can provide opportunities to adapt the content on the network side to deliver a high quality client experience. Multimedia adaptation based device and/or video orientation adaptation can apply to both two-dimensional (2D) and three-dimensional (3D) video applications. For a 2D video example, portrait or landscape video views and/or different viewing angles may be adapted based on device orientation. For a 3D video example, the different viewing angles and depth information may be adapted based on device orientation.</div>
+<div class="description-paragraph" id="p-0026" num="0025">Capability exchange signaling can be an important functionality in third generation partnership project's (3GPP's) packet switched streaming service (PSS) (as described in 3GPP technical specification (TS) 26.234 V11.1.0 (2012-09)), dynamic adaptive streaming over HTTP (DASH) (as described in 3GPP technical specification (TS) 26.247 V11.0.0 (2012-09)), and integrated multimedia subsystem (IMS) based PSS and multimedia broadcast and multicast service (MBMS) (abbreviated as IMS_PSS_MBMS, as described in 3GPP technical specification (TS) 26.237 V11.0.0 (2012-06)). Capability exchange enables PSS, DASH, and IMS_PSS_MBMS servers to provide a wide range of devices with content suitable for the particular device in question. To facilitate server-side content negotiation for streaming, the PSS or IMS_PSS_MBMS server may have access to a description of the specific capabilities of the mobile terminal (MT) via a device capability description. The device capability description can contain a number of attributes. For DASH, the attributes of device capability signaling can include the following parameters: A pre-decoder buffer size, an initial buffering period, a decoder capability, display properties (e.g., screen size, resolution, or bit depth), a streaming method (e.g., real-time streaming protocol (RTSP) or HTTP) adaptation support, QoE support, extended real-time transport protocol (RTP) control protocol (RTCP) reporting support, and fast content switching support, as well as supported RTP profiles and session description protocol (SDP) attributes. During the set-up of a streaming session, a server can use the description to provide the mobile terminal with a correct type of multimedia content. The servers can use information about the capabilities of the mobile terminal to determine which stream to provision to the connecting terminal. For instance, the server can compare the requirements on the mobile terminal for multiple available variants of a stream with the actual capabilities of the connecting terminal to determine a best-suited stream for that particular mobile terminal. Capability exchange also allows for delivery an optimized session description protocol (SDP) file to a client terminal (e.g., mobile terminal) for a PSS or IMS_PSS_MBMS session or an optimized media presentation description (MPD) metadata file to the client terminal for a DASH session.</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 1</figref> illustrates can example of how capability exchange can be performed for PSS services. In a simplest illustration, the mobile terminal <b>110</b> (or client device or client terminal) can informs the PSS server <b>130</b> about the MT's identity so that the PSS server can retrieve a device capability profile from a device profile server <b>120</b>, which can store the device capability profile <b>122</b> for the mobile terminal. The MT can send a HTTP and/or RTSP request to the PSS server <b>170</b>. The HTTP and/or RTSP request can include a uniform resource locator (URL) descriptor (URLdesc) and/or a profile difference (profileDiff) header. The PSS server can send a HTTP request to the device profile server for a device capability profile for the MT <b>160</b>. The device profile server can send a HTTP response to the PSS server with device capability profile for the MT <b>162</b>. The PSS server can match or copy the device capability profile <b>132</b>. The PSS server can send HTTP and/or RTSP replies <b>172</b> and multimedia content <b>174</b> to the MT based on the device capability profile for the MT. In an example, a terminal manufacturer or a software vendor can maintain a device profile server to provide device capability profiles for the manufacturer or vendor's products. In another example, an operator can manage a device profile server for the operator's subscribers, which can allow the subscriber to make user specific updates to the subscribers profiles. The device profile server can provide device capability profiles to the PSS server on request. In certain scenarios, the mobile terminal may supplement the identity signaling with extra attributes or overrides for attributes already defined in the MT's device capability profile, which can be referred to as Profdiff (ProfDiff or profileDiff). The Profdiff can temporarily allow for adjusting the attributes of the device capability profile. In an example, such a temporary adjustment may be triggered by user preferences (e.g., if the user for a particular session likes to receive mono sound even though the mobile terminal is capable of stereo).</div>
+<div class="description-paragraph" id="p-0028" num="0027">A user agent profile (UAProf) specification can provide protocols for capturing capability and preference information for wireless devices. This capability and preference information can be used by content providers to produce content in an appropriate format for the specific device. The UAProf can be related to the composite capabilities/preference profiles (CC/PP) specification created by the World Wide Web (WWW) consortium. A device capability profile can be a resource description framework (RDF) document that follows the structure of an CC/PP framework and an CC/PP application UAProf Attributes can be used to specify device capabilities and preferences. A set of attribute names, permissible values, and semantics can constitute a CC/PP vocabulary, which can be defined by an RDF schema. For PSS and IMS_PSS_MBMS services, the UAProf vocabulary can be reused and an additional service-specific vocabulary can be defined. <figref idrefs="DRAWINGS">FIG. 2</figref> provides an example device capability profile for the PSS and IMS_PSS_MBMS services, which can define various CC/PP components (ccpp:component), such as TerminalHardware, PSSCommon, Streaming, ThreeGPFileFormat (3GP), or PssSmil.</div>
+<div class="description-paragraph" id="p-0029" num="0028">The technology (e.g., servers, client devices or terminal, mobile terminals, methods, computer circuitry, and systems) as described herein can provide multimedia adaptation based on the device capability exchange signaling of orientation sensor capabilities of the mobile terminal or client device.</div>
+<div class="description-paragraph" id="p-0030" num="0029">In an example, at least two-step of a process can be performed. For instance, the client device can signal to the server about whether the client device has an orientation sensor and what video orientation (e.g., page orientation) states the client device supports (e.g., portrait, landscape, or seascape) (see <b>280</b> of <figref idrefs="DRAWINGS">FIGS. 6 and 8</figref>). Video orientation can be a new set of device capability attributes for the PSS vocabulary, which can be applicable to IMS_PSS_MBMS and DASH sessions. The device capability attributes on the device orientation capabilities of the client device (e.g., UE) can include a list of device orientation positions that provides an indication of video display device orientation modes, video capture device orientation modes, video display device orientation angles, video capture device orientation angles, a boolean-valued indicator having values indicating whether the UE is responsive to changes in orientation, default device orientation for rendering and display, default device orientation for capture, number of equally-spaced angular granularity levels in a 90 degree interval at which the orientation sensor is configured to detect orientation changes during both video capture and display, number of cameras associated with the UE, or horizontal mirroring support. In addition, the client device may also signal the current device orientation via ProfDiff signaling by temporarily overriding the default device orientation attribute, which can be another attribute added to the device capability exchange signaling vocabulary.</div>
+<div class="description-paragraph" id="p-0031" num="0030">In another step, the server can consider the orientation sensor support signal from the client device and provide different encoded versions of the content in formats best suited for the different possible device orientations (see <b>284</b> and <b>286</b> of <figref idrefs="DRAWINGS">FIG. 6</figref>; or <b>294</b> and <b>286</b> of <figref idrefs="DRAWINGS">FIG. 8</figref>). At the session management level, access to the device orientation information and/or orientation capabilities of the client can also allow the server to deliver an optimized session description protocol (SDP) for RTSP/RTP streaming in a PSS or IMS_PSS_MBMS session or an optimized media presentation description (MPD) for dynamic adaptive streaming over HTTP (DASH) in a DASH session. Moreover, if the server also controls the capture processes for the content production and/or preparation, the server can instruct a camera unit (e.g., another client device) to capture and compress multiple copies of the same content best suited for the different possible device orientations (see <b>282</b> of <figref idrefs="DRAWINGS">FIGS. 6 and 8</figref>). The server may also dynamically perform transcoding and/or format conversions on-the-fly in order to best match the content to the orientation capabilities of the client device.</div>
+<div class="description-paragraph" id="p-0032" num="0031">The technology described herein can be applied for both 2D and 3D video applications. Different streaming paradigms (e.g., PSS, DASH, and IMS_PSS_MBMS), can use different multimedia adaptation methods and processes, which is explained in greater detail below.</div>
+<div class="description-paragraph" id="p-0033" num="0032">A service can use a pull-based streaming process or a push-based streaming process. DASH provides an example of pull-based streaming. For a DASH session, a HTTP server <b>230</b> provides the content optimized for different device orientations to a DASH client <b>220</b>, as illustrated in <figref idrefs="DRAWINGS">FIG. 3</figref>. The HTTP server may use the device capability exchange signaling from the DASH client describing the various supported device orientation states <b>240</b>. The device capability signaling from the DASH client may also include a default device orientation attribute, indicating the device orientation in the absence of any further signaling from the DASH client. The set of device orientations and corresponding content information can be signaled to the DASH client in the media presentation description (MPD) metadata file <b>242</b> with different encoded content for different device orientations, which server-client interaction is depicted in <figref idrefs="DRAWINGS">FIG. 3</figref>. The DASH client player can then track the current device orientation and request the corresponding versions of the content optimized for the current device orientation. Moreover, when retrieving an MPD with HTTP, the DASH client may include device orientation information in a GET request, including any temporary adjustments to the device orientation based on ProfDiff (e.g., current device orientation may be different from the default device orientation). Using this DASH device capability exchange signaling process, the HTTP server can deliver an optimized MPD to the DASH client (e.g., UE).</div>
+<div class="description-paragraph" id="p-0034" num="0033">The PSS services based on the real-time streaming protocol (RTSP) and the IMS_PSS_MBMS service based on the session initiation protocol (SIP) provide examples of push-based streaming. For the PSS or IMS_PSS_MBMS service, the server <b>232</b> can receive the current device orientation information <b>244</b> from the client <b>222</b> and adapt the content based on device orientation, as illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref>. For instance, the server can select a most suited content version among stored content versions or dynamically transcodes the content based on the current device orientation and stream the content to the client <b>246</b>, which server-client interaction is depicted in <figref idrefs="DRAWINGS">FIG. 4</figref>. The session-related metadata carried in the session description protocol (SDP) may carry the device orientation information for the streamed content.</div>
+<div class="description-paragraph" id="p-0035" num="0034">In the PSS service, the client can send the device orientation information in a RTSP DESCRIBE message to the server. The RTSP DESCRIBE message may also include a default device orientation attribute, indicating the device orientation in the absence of any further signaling from the client. If the current device orientation is different from the default device orientation, this difference may be signaled as a temporary adjustment based on ProfDiff signaling. In an example, PSS content servers supporting capability exchange can also receive device orientation information from the client in the HTTP and RTSP requests.</div>
+<div class="description-paragraph" id="p-0036" num="0035">In the IMS_PSS_MBMS service, the client (e.g., UE <b>250</b>) can send device orientation information in a SIP SUBSCRIBE message <b>260</b> to an Internet protocol (IP) multimedia (IM) core network (CN) subsystem (IM CN subsystem) <b>252</b> during service discovery, as illustrated in <figref idrefs="DRAWINGS">FIG. 5</figref>, which can then forward the SIP SUBSCRIBE message <b>262</b> to a service discovery function (SDF) <b>254</b>. The SIP SUBSCRIBE message can also include a default device orientation attribute, indicating the device orientation in the absence of any further signaling from the client. The SDF can determine proper service discovery information (e.g., according to the UE capabilities or the user's profile (e.g., personalized service discovery)). The SDF can acknowledge the SIP SUBSCRIBE message to the IM CN subsystem via a SIP 200 OK message <b>264</b>, and the IM CN subsystem can forward the SIP 200 OK message <b>266</b> to the UE.</div>
+<div class="description-paragraph" id="p-0037" num="0036">The SDF <b>254</b> can generate and/or provide the service attachment information and/or provide personalized service discovery. The IM CN subsystem <b>252</b> can support, user registration and authentication, mobility and roaming, control of multimedia sessions, quality of service (QoS) control, policy control, charging, and interworking with circuit switched systems.</div>
+<div class="description-paragraph" id="p-0038" num="0037">The SDF <b>254</b> can send a SIP NOTIFY message <b>268</b> to the UE <b>250</b> with service discovery information to the IM CN subsystem <b>252</b>, which relays the SIP NOTIFY message <b>270</b> back to the UE. The UE can acknowledge the SIP NOTIFY message to the IM CN subsystem via a SIP 200 OK message <b>272</b>, and the IM CN subsystem can forward the SIP 200 OK message <b>274</b> to the SDF. In an example, using the SDF and IM CN subsystem framework can enable optimized service discovery utilizing the device orientation information in PSS and MBMS user services. Later in an IMS session, the UE may also use SIP signaling to indicate updates including any temporary adjustments to the device orientation based on ProfDiff (e.g., if the current device orientation is different from the default device orientation), which can be performed by refreshing a subscription through further SIP SUBSCRIBE messages. The SIP SUBSCRIBE messages can include information on the updates to the device orientation information.</div>
+<div class="description-paragraph" id="p-0039" num="0038">New attributes can be added in PSS vocabulary device capability exchange signaling. For instance, attributes “Orientation” and “DefaultOrientation” (or attributes with similar functionality) can be included in the PSSCommon component of the PSS base vocabulary in TS 26.234. The attributes can have a name, definitions, an associated component, a type, legal values (or valid options), and a resolution rule.</div>
+<div class="description-paragraph" id="p-0040" num="0039">In an example, a context for “Orientation” and “DefaultOrientation” can be define as follows:</div>
+<div class="description-paragraph" id="p-0041" num="0040">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Attribute name:</td>
+<td class="description-td">Orientation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">List of different device orientation </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">states supported by the client.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type:</td>
+<td class="description-td">Literal (Bag)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Legal values:</td>
+<td class="description-td">″Portrait″, ″Landscape″, ″Seascape″ and so forth.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Append</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;Orientation&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:Bag&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:li&gt;Portrait&lt;/rdf:li&gt;&lt;rdf:li&gt;Landscape&lt;/rdf:li&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:li&gt;Seascape&lt;/rdf:li&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;/rdf:Bag&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;/Orientation&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute name:</td>
+<td class="description-td">DefaultOrientation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">Default device orientation to be taken </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">as reference for content production/selection.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type:</td>
+<td class="description-td">Literal</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Legal values:</td>
+<td class="description-td">″Portrait″, ″Landscape″, ″Seascape″ and so forth.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Locked</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;DefaultOrientation&gt;Landscape</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;/DefaultOrientation&gt;</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0042" num="0041">In another example, identifying potential differences in terms of device orientation-awareness during capture and rendering and/or display can also be efined for the PSSCommon component of the PSS vocabulary. Two attributes can include the list of different device orientation modes supported by the client for capturing and display (e.g., “OrientationModesCapture” and “OrientationModesDisplay”), and two attributes can include the list of the default device orientation for capturing and display (if the orientation sensor is disabled or not present) (e.g., “DefaultOrientationCapture” and “DefaultOrientationDisplay”). A possible syntax for such attributes can be as follows:</div>
+<div class="description-paragraph" id="p-0043" num="0042">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Attribute name:</td>
+<td class="description-td">OrientationModesCapture</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">List of different device orientation </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">modes supported by the client for </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">capturing.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type:</td>
+<td class="description-td">Literal (Bag)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Legal values:</td>
+<td class="description-td">″Portrait″, ″Landscape″, ″Seascape″</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Append</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;OrientationModesCapture&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:Bag&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:li&gt;Portrait&lt;/rdf:li&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:li&gt;Landscape&lt;/rdf:li&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;/rdf:Bag&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;/OrientationModesCapture&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute name:</td>
+<td class="description-td">OrientationModesDisplay</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">List of different device orientation </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">modes supported by the client for </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">rendering and display.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type:</td>
+<td class="description-td">Literal (Bag)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Legal values:</td>
+<td class="description-td">″Portrait″, ″Landscape″,″Seascape″</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Append</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;OrientationModesDisplay&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:Bag&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:li&gt;Portrait&lt;/rdf:li&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;rdf:li&gt;Landscape&lt;/rdf:li&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;/rdf:Bag&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;/OrientationModesDisplay&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute name:</td>
+<td class="description-td">DefaultOrientationCapture</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">Default device orientation </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">for capturing based on the installation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">of the camera sensor (if orientation </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">sensor is disabled or not present).</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type:</td>
+<td class="description-td">Literal</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Legal values:</td>
+<td class="description-td">″Portrait″, ″Landscape″, ″Seascape″.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Locked</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;DefaultOrientationCapture&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Landscape&lt;/DefaultOrientationCapture&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute name:</td>
+<td class="description-td">DefaultOrientationDisplay</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">Default device orientation for rendering </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">and display (if orientation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">sensor is disabled or not present)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type:</td>
+<td class="description-td">Literal</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Legal values:</td>
+<td class="description-td">″Portrait″, ″Landscape″, ″Seascape″.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Locked</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;DefaultOrientationDisplay&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Landscape&lt;/DefaultOrientationDisplay&gt;</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0044" num="0043">In another configuration, a set of orientation modes may also include further modes that enable rotation of images with angles smaller than 90 degrees based on the orientation changes of the device. When the angles are smaller than 90 degrees, the “OrientationModesCapture” and “OrientationModesDisplay” attributes defined above (or attributes with similar functionality) may also include additional legal values on the orientation modes that realize such rotations of images in a more granular fashion.</div>
+<div class="description-paragraph" id="p-0045" num="0044">In another example, two additional attributes (e.g., “OrientationAngularGranularityCapture” and “OrientationAngularGranularityDisplay”) may be used to characterize the capabilities of the device sensor and orientation awareness of the device with respect to the angular granularity by which the device sensor can detect orientation changes during capture or rendering/display. For example, two such attributes may be defined as follows:</div>
+<div class="description-paragraph" id="p-0046" num="0045">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Attribute name:</td>
+<td class="description-td">OrientationAngularGranularityCapture</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">Number of equally-spaced angular </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">granularity levels in a 90 degree interval </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">at which the device sensor can detect </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">orientation changes during capture</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Type:</td>
+<td class="description-td">Number</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Legal values:</td>
+<td class="description-td">Integer values between 1 and 8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Locked</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;OrientationAngularGranularityCapture&gt;2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">&lt;/OrientationAngularGranularityCapture&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Attribute name:</td>
+<td class="description-td">OrientationAngularGranularityDisplay</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">Number of equally-spaced angular </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">granularity levels in a 90 degree interval </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">at which the device sensor can detect </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">orientation changes during rendering and </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">display</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Type:</td>
+<td class="description-td">Number</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Legal values:</td>
+<td class="description-td">Integer values between 1 and 8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Locked</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;OrientationAngularGranularityDisplay&gt;2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">&lt;/OrientationAngularGranularityDisplay&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0047" num="0046">In the examples above for “OrientationAngularGranularityCapture” and “OrientationAngularGranularityDisplay”, the highest possible angular granularity for detection of orientation changes was assumed to be 11.25 degrees, and hence the attribute value was limited to integer values between 1 and 8. In other examples, higher levels of granularity may be enabled by more advanced orientation sensor capabilities, so the attribute can use higher integer values.</div>
+<div class="description-paragraph" id="p-0048" num="0047">In another configuration, a single attribute (e.g., “OrientationAngularGranularityDisplay”) may be used to characterize the orientation awareness of the device with respect to the angular granularity at which the device sensor can detect orientation changes so the attribute can be valid for both capture and rendering/display. In such a setting, the additional attribute may be defined as follows:</div>
+<div class="description-paragraph" id="p-0049" num="0048">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Attribute name:</td>
+<td class="description-td">OrientationAngularGranularityDisplay</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">Number of equally-spaced angular </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">granularity levels in a 90 degree interval </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">at which the device sensor can detect </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">orientation changes during both capture </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">and rendering/display</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type:</td>
+<td class="description-td">Number</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Legal values:</td>
+<td class="description-td">Integer values between 1 and 8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Locked</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;OrientationAngularGranularity&gt;8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">&lt;/OrientationAngularGranularity&gt;</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0050" num="0049">In another example, another attribute (e.g, “NumOfCameras”) may be defined to identify the number of capture cameras on the client device (e.g., mobile terminal). A value of more than one can indicate that the client device has both a front-facing and a back-facing camera, which can be beneficial for orientation-aware adaptations. For the example illustrated by “NumOfCameras” attribute, the maximum number of cameras is assumed as four. Other examples and numbers of cameras may also be possible.</div>
+<div class="description-paragraph" id="p-0051" num="0050">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Attribute name:</td>
+<td class="description-td">NumOfCameras</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">Number of cameras on the device</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Type:</td>
+<td class="description-td">Number</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Legal values:</td>
+<td class="description-td">Integer values between 1 and 4</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Locked</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;NumOfCameras&gt;2&lt;/NumOfCameras&gt;</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0052" num="0051">In another configuration, another attribute (e.g., “HorizontalMirroringSupport”) may be defined to indicate whether the device supports horizontal mirroring (e.g., horizontal flipping of image after rotation). This additional attribute can allow some devices to capture a horizontally-mirrored image due to sensor configuration. For instance, based on the capability exchange signaling for horizontal mirroring, when the server determines that a receiving client device supports horizontal mirroring, the server can determine that the receiving client device has mirroring and can compensate for horizontal mirroring. An example of a horizontal mirroring attribute can be as follows:</div>
+<div class="description-paragraph" id="p-0053" num="0052">
+<tables id="TABLE-US-00006" num="00006">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Attribute name:</td>
+<td class="description-td">HorizontalMirroringSupport</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Attribute definition:</td>
+<td class="description-td">If the device is orientation-aware, </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">this attribute indicates whether it</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">also supports horizontal mirroring, </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">i.e., flipping of image after rotation </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">based on sensor configuration.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Component:</td>
+<td class="description-td">PssCommon</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Type:</td>
+<td class="description-td">Literal</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Legal values:</td>
+<td class="description-td">“Yes”, “No”</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Resolution rule:</td>
+<td class="description-td">Locked</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">EXAMPLE:</td>
+<td class="description-td">&lt;HorizontalMirroringSupport&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">No&lt;/HorizontalMirroringSupport&gt;</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0054" num="0053">The technology described provides streaming or download of content with oriented video components. Device orientation-aware multimedia adaptations provide streaming or download of previously captured and uploaded content with oriented video components. For example, as part of a PSS download or MBMS download application, the server may push captured content with oriented video components to the client in a non-real time fashion for later playback. Or as part of a DASH-based streaming service, an HTTP server may deliver user-generated content (UGC) to DASH clients that may contain oriented video components. For a RTP-based streaming of UGC content may be delivered from PSS servers. In these contexts, the server may receive information on the video orientation capabilities supported by the client device and determine an optimal delivery strategy (e.g., select the most suited content version among various stored content versions and/or dynamically transcode the content) based on the video orientation capabilities of the terminal and deliver the optimally chosen content to the client.</div>
+<div class="description-paragraph" id="p-0055" num="0054">For example, if the server determines that the content was captured by an orientation-aware terminal (e.g., through the inspection of the 3GP-based content file), while the receiving client device is not orientation-aware (e.g., known based on PSS device capability signaling mechanisms), the server may process (e.g., apply transcoding to) the content to correct and avoid misalignment problems during later rendering and display. If the receiving client device is orientation-aware, then the server may not have to correct the misalignment, but instead can choose to send the content “as is” along with video orientation information embedded in the content (e.g., in an RTP extension header for RTP streaming or inside a 3GP file for HTTP streaming and DASH) so that the receiving client device can correct the misalignment.</div>
+<div class="description-paragraph" id="p-0056" num="0055"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates an example server-client interaction realizing orientation-aware media delivery based on reception of content with embedded video orientation information. For example, a capturing client <b>224</b> can capture video orientation information with the capture and upload the content (e.g., 3GP file) with embedded video orientation information <b>282</b> to the server <b>232</b>. In another example, a rendering client <b>226</b> can signal a device profile to the server with video orientation capability information <b>280</b>. The server can perform orientation-processing to correct potential misalignment at the rendering client <b>284</b>, as previously described. The server can then deliver adapted content to the rendering client as part of a streaming or download service <b>286</b>.</div>
+<div class="description-paragraph" id="p-0057" num="0056">The technology described herein can also embed video orientation information into the captured content, such as a 3GP file. Embedding video orientation information in a 3GP file (as described in 3GPP technical specification (TS) 26.244 V11.1.0 (2012-09); e.g., mp4 file <b>314</b> in a moving picture experts group-4 (MPEG-4) file format <b>312</b>) as an instantiation of an International Organization for Standardization (ISO) Base Media File Format (BMFF) <b>310</b> for later use by servers as part of streaming and download applications can be beneficial, as illustrated in <figref idrefs="DRAWINGS">FIG. 7</figref>. The inclusion of such video orientation information in the 3GP file can better enable the server to perform orientation-aware multimedia adaptation for optimizing content delivery to devices (e.g., correcting the video to avoid misalignment problems prior to sending to an orientation-unaware device). The embedded video orientation information can be provided in device orientation capability attributes in the PSS vocabulary and device capability signaling framework. The content file (e.g., mp4 file <b>314</b>) can include an initialization segment, such as a “moov” box <b>316</b>, and media data (mdat <b>318</b>). The moov box can include initial object descriptor (IOD) <b>320</b>, a Binary Format for Scene (BIFS) trak <b>322</b>, an object descriptor (OD) trak, a video trak <b>326</b>, and an audio trak <b>328</b>. The embedded video orientation information <b>330</b> can be included in the video trak (or track). The mdat can include Interleaved, time-ordered, BIFS, OD, video, and audio access units (AC).</div>
+<div class="description-paragraph" id="p-0058" num="0057"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates an example server-client interaction realizing orientation-aware media delivery based on reception of content with embedded video orientation information. For example, a capturing client <b>224</b> can capture video orientation information with the capture and upload the content (e.g., 3GP file) with embedded video orientation information <b>282</b> to the server <b>232</b>. In another example, a rendering client <b>226</b> can signal a device profile to the server with video orientation capability information <b>280</b>. Server performs orientation-aware content adaptation, selection, transcoding and/or format conversations to correct potential misalignment and optimize content delivery with respect to (w.r.t.) the orientation capabilities of the rendering client <b>294</b>, as previously described. The server can then deliver adapted content to the rendering client as part of a streaming or download service <b>286</b>.</div>
+<div class="description-paragraph" id="p-0059" num="0058">Accordingly, in an example, the inclusion of video orientation information can be logged within a 3GP file format as a continuous recording of a series of orientation values of the images captured. A box can be defined in the ISO base media file format (ISO-BMFF) or the 3GPP file format for timed video orientation information. For instance, the video track or the RTP hint track of the 3GPP file format (3GP) may be used to embed the orientation information. For content formatted based on DASH, the video orientation information may be carried within a file-level ISO-BMFF box, such as in initialization segment (e.g., in a “moov” box for ISO-BMFF) or in media segments (e.g., in a ‘moof’ box for ISO-BMFF), as illustrated in <figref idrefs="DRAWINGS">FIG. 7</figref>. In another example, the timed metadata track of the ISO-BMFF may be chosen as the track to contain the video orientation information. For instance, a new box can be created specifically for video orientation that extends MetaDataSampleEntry with a description of the video orientation parameters. Other boxes within the sample description box <b>350</b> in the ISO file format box structure hierarchy, as shown in <figref idrefs="DRAWINGS">FIG. 9</figref>, may also be used to contain the video orientation information, which can include MP4VisualSampleEntry, AVCSampleEntry, or HintSampleEntry. The ISO file format box structure hierarchy can include a movie box <b>340</b>, a track box <b>342</b>, a media box <b>344</b>, a media information box <b>346</b>, a sample table box <b>348</b>, and the sample description box, where higher order boxes are listed first.</div>
+<div class="description-paragraph" id="p-0060" num="0059">In another configuration, the video orientation information may support 90 degrees granularity, the flip-bit (e.g., for horizontal flip) as also supported by GSM (global system for communications, originally groupe special mobile) association's (GSMA's) rich communication services (RCS) 5.1 profile, and the camera-bit (to signal front-versus-back-facing camera) as in RCS 5.1. For example, the video orientation information (e.g., set of orientations of the captured images) may be carried as a byte formatted as follows (consistent with the adopted format in 3GPP technical specification (TS) 26.114 V11.5.0 (2012-09)):</div>
+<div class="description-paragraph" id="p-0061" num="0060">
+<tables id="TABLE-US-00007" num="00007">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="9" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="9" nameend="9" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Bit#</td>
+<td class="description-td">7(MSB)</td>
+<td class="description-td">6</td>
+<td class="description-td">5</td>
+<td class="description-td">4</td>
+<td class="description-td">3</td>
+<td class="description-td">2</td>
+<td class="description-td">1</td>
+<td class="description-td">0(LSB)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="9" nameend="9" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Definition</td>
+<td class="description-td">R</td>
+<td class="description-td">R</td>
+<td class="description-td">R</td>
+<td class="description-td">R</td>
+<td class="description-td">C</td>
+<td class="description-td">F</td>
+<td class="description-td">R1</td>
+<td class="description-td">R0</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="9" nameend="9" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0062" num="0061">With the following definitions: R=Reserved, where the reserved bits can be set to zero and can be reserved for future use. C=Camera, which indicates the direction of the camera used for the video stream (e.g., 0 can indicate a front-facing camera, facing the user, and if camera direction is unknown then zero can be is used; 1 can indicate a back-facing camera, facing away from the user). F=Flip, which indicates a horizontal (left-right flip) mirror operation on the video as sent on the link (e.g., 0 can indicate no flip operation, and 1 can indicate a horizontal flip operation). R<b>1</b>, R<b>0</b>=Rotation, which indicates the rotation of the video as transmitted on the link, as shown in Table 1 for rotation signaling. An orientation-aware receiver can rotate the video to compensate that rotation (e.g., a 90° counter clockwise rotation can be compensated by the receiver (e.g., rendering client device) with a 90° clockwise rotation prior to displaying). Alternatively, the video may be rotated by a server prior to transmission to an orientation-unaware client receiver (e.g., rendering client device). In another example, other definitions may be used.</div>
+<div class="description-paragraph" id="p-0063" num="0062">
+<tables id="TABLE-US-00008" num="00008">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="4" nameend="4" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Rotation of the video as sent on</td>
+<td class="description-td">Rotation on the receiver</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">R1</td>
+<td class="description-td">R0</td>
+<td class="description-td">the link</td>
+<td class="description-td">before display</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">0</td>
+<td class="description-td">0</td>
+<td class="description-td">0° rotation</td>
+<td class="description-td">None</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">90° Counter Clockwise (CCW)</td>
+<td class="description-td">90° CW rotation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">rotation or 270° Clockwise (CW)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">rotation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">0</td>
+<td class="description-td">180° CCW rotation or 180° CW</td>
+<td class="description-td">180° CW rotation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">rotation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">1</td>
+<td class="description-td">270° CCW rotation or 90° CW</td>
+<td class="description-td">90° CCW rotation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">rotation</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0064" num="0063">Another example provides a method <b>500</b> for multimedia adaptation at a server based on device orientation of a mobile terminal (MT), as shown in the flow chart in <figref idrefs="DRAWINGS">FIG. 10</figref>. The method may be executed as instructions on a machine or computer circuitry, where the instructions are included on at least one computer readable medium or one non-transitory machine readable storage medium. The method includes the operation of receiving a video orientation capability of the mobile terminal (MT) at the server, as in block <b>510</b>. The next operation of the method can be orientation-aware processing of multimedia content to correct misalignment at the MT based on a device's video orientation capability, as in block <b>520</b>.</div>
+<div class="description-paragraph" id="p-0065" num="0064">In an example, the method can further include: instructing the MT to capture video as a continuous recording of a series of video orientation values of the captured images; and instructing the MT to embed timed video orientation information in a third generation partnership project (3GPP) file format (3GP) file or an instantiation of an International Organization for Standardization (ISO) base media file format (ISO-BMFF) file. The video orientation information can be embedded in: a video track or real-time transport protocol (RTP) hint track of the 3GP file; a file-level ISO-BMFF box, wherein the file-level ISO-BMFF box is a ‘moov’ box initialization segment or a ‘moof’ box media segment; a timed metadata track of the ISO-BMFF; or a SampleEntry with video orientation parameters within the sample description box in an ISO file format box structure. The video orientation information can include rotation bits to support 90 degrees of granularity, a flip bit for horizontal flip, or a camera bit to indicate a front or back camera direction in a global system for mobile communications (GSM) association (GSMA) rich communication services (RCS) 5.1 profile. In another example, the operation of instructing the MT to capture video can further include: instructing the MT to capture and compress multiple copies or orientations of the captured video.</div>
+<div class="description-paragraph" id="p-0066" num="0065">In another configuration, the operation of orientation-aware processing can further include: selecting a content version of captured content from multiple stored content versions based on the device's video orientation capability, or dynamically transcoding or converting captured content based on the device's video orientation capability; and pushing the captured content with oriented video components in a packet switched streaming service (PSS) real-time transport protocol (RTP) streaming, a PSS download, or a multimedia broadcast and multicast service (MBMS) download, or dynamically delivering the captured content with oriented video components in a hypertext transfer protocol (HTTP) stream, a dynamic adaptive streaming over HTTP (DASH) stream, a real-time transport protocol (RTP) stream, or a real time streaming protocol (RTSP) indicating the presence of video orientation information in a session description protocol (SDP) file and indicating the corresponding video orientation information in a RTP extension header for the RTP stream.</div>
+<div class="description-paragraph" id="p-0067" num="0066">Another example provides functionality <b>600</b> of computer circuitry of a server operable for multimedia adaptation based on video orientation, as shown in the flow chart in <figref idrefs="DRAWINGS">FIG. 11</figref>. The functionality may be implemented as a method or the functionality may be executed as instructions on a machine, where the instructions are included on at least one computer readable medium or one non-transitory machine readable storage medium. The computer circuitry can be configured to receive a device capability from a client device, wherein the device capability includes video orientation capability, as in block <b>610</b>. The computer circuitry can be further configured to perform video orientation-aware multimedia adaptation based on the device's video orientation capability, as in block <b>620</b>.</div>
+<div class="description-paragraph" id="p-0068" num="0067">In an example, the computer circuitry can be further configured to override a client device's default video orientation capability information when an updated video orientation capability is received from the client device via a profile difference (Profdiff) signaling. In another example, the computer circuitry configured to perform video orientation-aware multimedia adaptation can be further configured to perform orientation-aware content adaptation, orientation-aware content selection, orientation-aware transcoding, or orientation-aware format conversion to correct video orientation misalignment and ensure content playback at the client device with a correct video orientation.</div>
+<div class="description-paragraph" id="p-0069" num="0068">In another configuration, the computer circuitry can be further configured to deliver orientation-aware adapted content to the client device via a streaming service or a download service based on the client device's video orientation capability. The orientation-aware adapted content can include a media presentation description (MPD) metadata file with different encoded content according to the client device's video orientation capability for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH). The orientation-aware adapted content can include a session description protocol (SDP) file indicating the presence of oriented video components in a corresponding RTP stream and an RTP header extension indicating a current video orientation information for a real-time transport protocol (RTP) stream.</div>
+<div class="description-paragraph" id="p-0070" num="0069">In another example, the computer circuitry configured to perform video orientation-aware multimedia adaptation can be further configured to dynamically transcode or convert multimedia content of the a hypertext transfer protocol (HTTP) stream, dynamic adaptive streaming over HTTP (DASH), or real-time transport protocol (RTP) stream to a different video orientation when the device capability for the client device does not include orientation-aware processing capabilities. Or, the computer circuitry configured to perform video orientation-aware multimedia adaptation can be further configured to embed video orientation indication information in a media presentation description (MPD) metadata file or a session description protocol (SDP) file when device orientation capability for the client device indicates video orientation-aware processing capabilities so the client device can activate a video orientation processing engine on the client device and obtain the video orientation indication information in an in-band media stream. Or, the computer circuitry configured to perform video orientation-aware multimedia adaptation can be further configured to embed video orientation information in an instantiation of an International Organization for Standardization (ISO) base media file format (ISO-BMFF) file or a real-time transport protocol (RTP) extension header when device orientation capability for the client device indicates video orientation-aware processing capabilities so the client device can modify the display orientation of the multimedia content.</div>
+<div class="description-paragraph" id="p-0071" num="0070">In another configuration, the computer circuitry configured to receive the device capability can be further configured to receive a video orientation attribute via a packet switched streaming service (PSS) device capability exchange signaling. The video orientation attribute can be a PSS common component that includes: an Orientation attribute selected from a list of different video orientation modes supported by the client device, a DefaultOrientation attribute that provides a default video orientation to be taken as reference for a content production or selection, an OrientationModesCapture attribute selected from a list of different video orientation modes supported by the client device for a capturing, an OrientationModesDisplay attribute selected from a list of different video orientation modes supported by the client device for a rendering and a display, a DefaultOrientationCapture attribute that provides a default video orientation for capturing based on the installation of the camera sensor if an orientation sensor is disabled or not present, a DefaultOrientationDisplay attribute that provides a default video orientation for rendering and display if the orientation sensor is disabled or not present, an OrientationAngularGranularityCapture attribute selected from a number of equally-spaced angular granularity levels in a 90 degree interval at which a device sensor can detect video orientation changes during the capture, an OrientationAngularGranularityDisplay attribute selected from a number of equally-spaced angular granularity levels in the 90 degree interval at which the device sensor can detect video orientation changes during the rendering and the display or both the capture and the rendering and display, a NumOfCameras attribute selected from a number of cameras on a device, or a HorizontalMirroringSupport attribute to indicate whether the device supports horizontal mirroring when the device is orientation-aware.</div>
+<div class="description-paragraph" id="p-0072" num="0071">In another example, the computer circuitry can be further configured to instruct the client device to capture and compress video segments for different device orientations; and instruct the client device to embed video orientation information in a third generation partnership project (3GPP) file format (3GP) file or an instantiation of an International Organization for Standardization (ISO) base media file format (ISO-BMFF) file. The video orientation information can be embedded in: a video track or real-time transport protocol (RTP) hint track of the 3GP file; a file-level ISO-BMFF box, wherein the file-level ISO-BMFF box is a ‘moov’ box initialization segment or a ‘moof’ box media segment; a timed metadata track of the ISO-BMFF; or a SampleEntry with video orientation parameters within the sample description box in an ISO file format box structure.</div>
+<div class="description-paragraph" id="p-0073" num="0072">In another configuration, the server can include a third generation partnership project (3GPP) long term evolution (LTE) packet switched streaming service (PSS) server, a dynamic adaptive streaming over hypertext transfer protocol (HTTP) (DASH) server, or an integrated multimedia subsystem (IMS) based PSS and multimedia broadcast and multicast service (MBMS) (IMS_PSS_MBMS) server.</div>
+<div class="description-paragraph" id="p-0074" num="0073"> <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates an example client device for providing orientation-aware processing capability <b>720</b>, a node <b>710</b>, and a server <b>730</b>. The server can be configured for multimedia adaptation on device orientation of a mobile terminal (MT), as described in <b>500</b> of <figref idrefs="DRAWINGS">FIG. 10</figref>. In another configuration, the server can be operable for multimedia adaptation based on video orientation, as described in <b>600</b> of <figref idrefs="DRAWINGS">FIG. 11</figref>. The node <b>710</b> can include a base station (BS), a Node B (NB), an evolved Node B (eNB), a baseband unit (BBU), a remote radio head (RRH), a remote radio equipment (RRE), a remote radio unit (RRU), or a central processing module (CPM).</div>
+<div class="description-paragraph" id="p-0075" num="0074">Referring back to <figref idrefs="DRAWINGS">FIG. 12</figref>, the client device <b>720</b> can include a processor <b>722</b>, a transceiver <b>724</b>, and an orientation sensor <b>726</b>. The processor can be configured for determining a video orientation capability. The transceiver can be configured to transmit video orientation capability information to the server.</div>
+<div class="description-paragraph" id="p-0076" num="0075">In an example, a client device's current video orientation capability information can override a default video orientation capability information via profile difference (Profdiff) signaling. The processor <b>722</b> can be configured to: capture video with a specified video orientation for a specified media segment based on a device orientation; and embed video orientation information for the captured video in a third generation partnership project (3GPP) file format (3GP) file as an instantiation of an International Organization for Standardization (ISO) base media file format (ISO-BMFF) file. The video orientation information can be embedded in: a video track or real-time transport protocol (RTP) hint track of the 3GP file; a file-level ISO-BMFF box, wherein the file-level ISO-BMFF box is a ‘moov’ box initialization segment or a ‘moof’ box media segment; a timed metadata track of the ISO-BMFF; or a SampleEntry with video orientation parameters within the sample description box in an ISO file format box structure. In another example, the video orientation information can include rotation bits to support 90 degrees of granularity, a flip bit for horizontal flip, or a camera bit to indicate a front or back camera direction in a global system for mobile communications (GSM) association (GSMA) rich communication services (RCS) 5.1 profile. The transceiver <b>722</b> can be further configured to upload the 3GP file for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH).</div>
+<div class="description-paragraph" id="p-0077" num="0076">In another configuration, the transceiver <b>722</b> can be further configured to transmit a video orientation attribute via a packet switched streaming service (PSS) device capability exchange signaling. The video orientation attribute can be a PSS common component that includes: an Orientation attribute selected from a list of different video orientation states supported by the client, a DefaultOrientation attribute that provides a default video orientation to be taken as reference for a content production or selection, an OrientationModesCapture attribute selected from a list of different video orientation modes supported by the client for a capturing, an OrientationModesDisplay attribute selected from a list of different video orientation modes supported by the client for a rendering and a display, a DefaultOrientationCapture attribute that provides a default video orientation for capturing based on the installation of the camera sensor if an orientation sensor is disabled or not present, a DefaultOrientationDisplay attribute that provides a default video orientation for rendering and display if the orientation sensor is disabled or not present, an OrientationAngularGranularityCapture attribute selected from a number of equally-spaced angular granularity levels in a 90 degree interval at which a device sensor can detect video orientation changes during the capture, an OrientationAngularGranularityDisplay attribute selected from a number of equally-spaced angular granularity levels in the 90 degree interval at which the device sensor can detect video orientation changes during the rendering and the display or both the capture and the rendering and display, a NumOfCameras attribute selected from a number of cameras on a device, or a HorizontalMirroringSupport attribute to indicate whether the device supports horizontal mirroring when the device is orientation-aware.</div>
+<div class="description-paragraph" id="p-0078" num="0077">In another example, the video orientation capability information can be provided in a third generation partnership project (3GPP) long term evolution (LTE) packet switched streaming service (PSS) session, a dynamic adaptive streaming over hypertext transfer protocol (HTTP) (DASH) session, or an integrated multimedia subsystem (IMS) based PSS and multimedia broadcast and multicast service (MBMS) (IMS_PSS_MBMS) session. In another configuration, the client device can include an orientation sensor <b>726</b> to determine an orientation of the client device.</div>
+<div class="description-paragraph" id="p-0079" num="0078">In another example, the transceiver <b>724</b> can be further configured to receive a real-time transport protocol (RTP) extension header for a RTP stream, or receive a third generation partnership project (3GPP) file format (3GP) file for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH). The processor <b>722</b> can be further configured to: parse a media presentation description (MPD) metadata file to identify a presence of video orientation information in the 3GP file or parse the 3GP file for embedded video orientation information, determine an orientation correction term based on the parsed video orientation information and a current orientation of the client device, and correct a rendering orientation of the HTTP stream or DASH for misalignment based on the determined orientation correction term. Or, the processor can be further configured to: parse a session description protocol (SDP) file to identify a presence of video orientation information in the RTP stream or parse a RTP extension header for the RTP stream for the embedded video orientation information, determine the orientation correction term based on the parsed video orientation information and the current orientation of the client device, and correct a rendering orientation of the RTP stream for misalignment based on the determined orientation correction term. Correcting the rendering orientation can compensate for rotation or flip of the orientation.</div>
+<div class="description-paragraph" id="p-0080" num="0079"> <figref idrefs="DRAWINGS">FIG. 13</figref> provides an example illustration of the client device, such as a mobile terminal (MT), a mobile node, a user equipment (UE), a mobile station (MS), a mobile wireless device, a mobile communication device, a tablet, a handset, or other type of wireless device. The wireless device can include one or more antennas configured to communicate with a node, macro node, low power node (LPN), or, transmission station, such as a base station (BS), an evolved Node B (eNB), a baseband unit (BBU), a remote radio head (RRH), a remote radio equipment (RRE), a relay station (RS), a radio equipment (RE), a remote radio unit (RRU), a central processing module (CPM), or other type of wireless wide area network (WWAN) access point. The wireless device can be configured to communicate using at least one wireless communication standard including 3GPP LTE, WiMAX, High Speed Packet Access (HSPA), Bluetooth, and WiFi. The wireless device can communicate using separate antennas for each wireless communication standard or shared antennas for multiple wireless communication standards. The wireless device can communicate in a wireless local area network (WLAN), a wireless personal area network (WPAN), and/or a WWAN.</div>
+<div class="description-paragraph" id="p-0081" num="0080"> <figref idrefs="DRAWINGS">FIG. 13</figref> also provides an illustration of a microphone and one or more speakers that can be used for audio input and output from the wireless device. The display screen may be a liquid crystal display (LCD) screen, or other type of display screen such as an organic light emitting diode (OLED) display. The display screen can be configured as a touch screen. The touch screen may use capacitive, resistive, or another type of touch screen technology. An application processor and a graphics processor can be coupled to internal memory to provide processing and display capabilities. A non-volatile memory port can also be used to provide data input/output options to a user. The non-volatile memory port may also be used to expand the memory capabilities of the wireless device. A keyboard may be integrated with the wireless device or wirelessly connected to the wireless device to provide additional user input. A virtual keyboard may also be provided using the touch screen.</div>
+<div class="description-paragraph" id="p-0082" num="0081">Various techniques, or certain aspects or portions thereof, may take the form of program code (i.e., instructions) embodied in tangible media, such as floppy diskettes, compact disc-read-only memory (CD-ROMs), hard drives, non-transitory computer readable storage medium, or any other machine-readable storage medium wherein, when the program code is loaded into and executed by a machine, such as a computer, the machine becomes an apparatus for practicing the various techniques. Circuitry can include hardware, firmware, program code, executable code, computer instructions, and/or software. A non-transitory computer readable storage medium can be a computer readable storage medium that does not include signal. In the case of program code execution on programmable computers, the computing device may include a processor, a storage medium readable by the processor (including volatile and non-volatile memory and/or storage elements), at least one input device, and at least one output device. The volatile and non-volatile memory and/or storage elements may be a random-access memory (RAM), erasable programmable read only memory (EPROM), flash drive, optical drive, magnetic hard drive, solid state drive, or other medium for storing electronic data. The node and wireless device may also include a transceiver module (i.e., transceiver), a counter module (i.e., counter), a processing module (i.e., processor), and/or a clock module (i.e., clock) or timer module (i.e., timer). One or more programs that may implement or utilize the various techniques described herein may use an application programming interface (API), reusable controls, and the like. Such programs may be implemented in a high level procedural or object oriented programming language to communicate with a computer system. However, the program(s) may be implemented in assembly or machine language, if desired. In any case, the language may be a compiled or interpreted language, and combined with hardware implementations.</div>
+<div class="description-paragraph" id="p-0083" num="0082">It should be understood that many of the functional units described in this specification have been labeled as modules, in order to more particularly emphasize their implementation independence. For example, a module may be implemented as a hardware circuit comprising custom very-large-scale integration (VLSI) circuits or gate arrays, off-the-shelf semiconductors such as logic chips, transistors, or other discrete components. A module may also be implemented in programmable hardware devices such as field programmable gate arrays, programmable array logic, programmable logic devices or the like.</div>
+<div class="description-paragraph" id="p-0084" num="0083">Modules may also be implemented in software for execution by various types of processors. An identified module of executable code may, for instance, comprise one or more physical or logical blocks of computer instructions, which may, for instance, be organized as an object, procedure, or function. Nevertheless, the executables of an identified module need not be physically located together, but may comprise disparate instructions stored in different locations which, when joined logically together, comprise the module and achieve the stated purpose for the module.</div>
+<div class="description-paragraph" id="p-0085" num="0084">Indeed, a module of executable code may be a single instruction, or many instructions, and may even be distributed over several different code segments, among different programs, and across several memory devices. Similarly, operational data may be identified and illustrated herein within modules, and may be embodied in any suitable form and organized within any suitable type of data structure. The operational data may be collected as a single data set, or may be distributed over different locations including over different storage devices, and may exist, at least partially, merely as electronic signals on a system or network. The modules may be passive or active, including agents operable to perform desired functions.</div>
+<div class="description-paragraph" id="p-0086" num="0085">Reference throughout this specification to “an example” or “exemplary” means that a particular feature, structure, or characteristic described in connection with the example is included in at least one embodiment of the present invention. Thus, appearances of the phrases “in an example” or the word “exemplary” in various places throughout this specification are not necessarily all referring to the same embodiment.</div>
+<div class="description-paragraph" id="p-0087" num="0086">As used herein, a plurality of items, structural elements, compositional elements, and/or materials may be presented in a common list for convenience. However, these lists should be construed as though each member of the list is individually identified as a separate and unique member. Thus, no individual member of such list should be construed as a de facto equivalent of any other member of the same list solely based on their presentation in a common group without indications to the contrary. In addition, various embodiments and example of the present invention may be referred to herein along with alternatives for the various components thereof. It is understood that such embodiments, examples, and alternatives are not to be construed as defacto equivalents of one another, but are to be considered as separate and autonomous representations of the present invention.</div>
+<div class="description-paragraph" id="p-0088" num="0087">Furthermore, the described features, structures, or characteristics may be combined in any suitable manner in one or more embodiments. In the following description, numerous specific details are provided, such as examples of layouts, distances, network examples, etc., to provide a thorough understanding of embodiments of the invention. One skilled in the relevant art will recognize, however, that the invention can be practiced without one or more of the specific details, or with other methods, components, layouts, etc. In other instances, well-known structures, materials, or operations are not shown or described in detail to avoid obscuring aspects of the invention.</div>
+<div class="description-paragraph" id="p-0089" num="0088">While the forgoing examples are illustrative of the principles of the present invention in one or more particular applications, it will be apparent to those of ordinary skill in the art that numerous modifications in form, usage and details of implementation can be made without the exercise of inventive faculty, and without departing from the principles and concepts of the invention. Accordingly, it is not intended that the invention be limited, except as by the claims set forth below.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">28</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM227558807">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. An apparatus of a mobile terminal (MT) operable to provide an orientation-aware processing capability, the apparatus comprising one or more processors and memory configured to:
+<div class="claim-text">determine, at the MT, video orientation capability information for the MT;</div>
+<div class="claim-text">parse a media presentation description (MPD) metadata file to identify a presence of video orientation information in a third generation partnership (3GP) file or parse the 3GP file for the video orientation information;</div>
+<div class="claim-text">process, at the MT, the video orientation capability information for transmission to a server via a packet switched streaming service (PSS) device capability exchange signaling between the MT and the server; and</div>
+<div class="claim-text">access, at the MT, segments from the server via the PSS based on an orientation of the MT and the video orientation capability information for the MT.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The apparatus of a <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising a transceiver configured to:
+<div class="claim-text">transmit the video orientation capability information to the server; and</div>
+<div class="claim-text">receive the segments from the server.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the one or more processors and memory are further configured to:
+<div class="claim-text">determine an orientation correction term based on the video orientation information and a current orientation of the MT; and</div>
+<div class="claim-text">correct a rendering orientation of a real-time transport protocol (RTP) stream for misalignment based on the orientation correction term.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the one or more processors and memory are further configured to embed video orientation information for a captured video with a specified video orientation for a specified media segment in a third generation partnership project (3GPP) file format (3GP) file as an instantiation of an International Organization for Standardization (ISO) base media file format (ISO-BMFF) file.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The apparatus of <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein the video orientation information is embedded in:
+<div class="claim-text">a video track or real-time transport protocol (RTP) hint track of the 3GP file;</div>
+<div class="claim-text">a file-level ISO-BMFF box, wherein the file-level ISO-BMFF box is a ‘moov’ box initialization segment or a ‘moof’ box media segment;</div>
+<div class="claim-text">a timed metadata track of the ISO-BMFF; or</div>
+<div class="claim-text">a SampleEntry with video orientation parameters within a sample description box in an ISO file format box structure.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The apparatus of <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein the one or more processors and memory are further configured to prepare the 3GP file to upload for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the one or more processors and memory are further configured to process a video orientation attribute for transmission via the PSS device capability exchange signaling, wherein the video orientation attribute is a PSS common component that includes:
+<div class="claim-text">an Orientation attribute selected from a list of different video orientation states supported by a client,</div>
+<div class="claim-text">a DefaultOrientation attribute that provides a default video orientation to be taken as reference for a content production or selection,</div>
+<div class="claim-text">an OrientationModesCapture attribute selected from a list of different video orientation modes supported by the client for a capturing,</div>
+<div class="claim-text">an OrientationModesDisplay attribute selected from a list of different video orientation modes supported by the client for a rendering and a display,</div>
+<div class="claim-text">a DefaultOrientationCapture attribute that provides a default video orientation for capturing based on an installation of a camera sensor if an orientation sensor is disabled or not present,</div>
+<div class="claim-text">a DefaultOrientationDisplay attribute that provides a default video orientation for rendering and display if the orientation sensor is disabled or not present,</div>
+<div class="claim-text">an OrientationAngularGranularityCapture attribute selected from a number of equally-spaced angular granularity levels in a 90 degree interval at which a device sensor can detect video orientation changes during the capture,</div>
+<div class="claim-text">an OrientationAngularGranularityDisplay attribute selected from a number of equally-spaced angular granularity levels in the 90 degree interval at which the device sensor can detect video orientation changes during the rendering and the display or both the capture and the rendering and display,</div>
+<div class="claim-text">a NumOfCameras attribute selected from a number of cameras on a device, or</div>
+<div class="claim-text">a HorizontalMirroringSupport attribute to indicate whether the device supports horizontal mirroring when the device is orientation-aware.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the one or more processors and memory are further configured to provide the video orientation capability information in a third generation partnership project (3GPP) long term evolution (LTE) packet switched streaming service (PSS) session, a dynamic adaptive streaming over hypertext transfer protocol (HTTP) (DASH) session, or an integrated multimedia subsystem (IMS) based PSS and multimedia broadcast and multicast service (MBMS) (IMS_PSS_MBMS) session.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising an orientation sensor operable to determine the orientation of the MT.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the one or more processors and memory are further configured to:
+<div class="claim-text">process a real-time transport protocol (RTP) extension header received for a RTP stream, or a third generation partnership project (3GPP) file format (3GP) file received for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH);</div>
+<div class="claim-text">parse a media presentation description (MPD) metadata file to identify a presence of video orientation information in the 3GP file or parse the 3GP file for the video orientation information;</div>
+<div class="claim-text">determine an orientation correction term based on the video orientation information and the orientation of the MT; and</div>
+<div class="claim-text">correct a rendering orientation of the HTTP stream or DASH for misalignment based on the orientation correction term,</div>
+<div class="claim-text">wherein correcting the rendering orientation compensates for rotation or flip of the orientation of the MT.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the one or more processors and memory are further configured to:
+<div class="claim-text">process a real-time transport protocol (RTP) extension header received for a RTP stream, or a third generation partnership project (3GPP) file format (3GP) file received for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH);</div>
+<div class="claim-text">parse a session description protocol (SDP) file to identify a presence of video orientation information in the RTP stream or parse a RTP extension header for the RTP stream for the video orientation information;</div>
+<div class="claim-text">determine an orientation correction term based on the video orientation information and the orientation of the MT; and</div>
+<div class="claim-text">correct a rendering orientation of the RTP stream for misalignment based on the orientation correction term,</div>
+<div class="claim-text">wherein correcting the rendering orientation compensates for rotation or flip of the orientation of the MT.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the one or more processors and memory are further configured to capture video with a specified video orientation for a specified media segment based on the orientation of the MT.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the video orientation capability information for the MT overrides a default video orientation capability information via profile difference (Profdiff) signaling.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The apparatus of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the MT includes a client device, a user equipment (UE), or a mobile station (MS); and the MT includes an antenna, a camera, a touch sensitive display screen, a speaker, a microphone, a graphics processor, an application processor, an internal memory, or a non-volatile memory port.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. An apparatus of a server operable to process an orientation-aware capability received from a mobile terminal (MT), the apparatus comprising one or more processors and memory configured to:
+<div class="claim-text">process, at the server, video orientation capability information received from the MT via a packet switched streaming service (PS S) device capability exchange signaling between the server and the MT, wherein the video orientation capability information is for the MT; and</div>
+<div class="claim-text">process, at the server, segments for transmission to the MT via the PSS based on an orientation of the MT and the video orientation capability information received from the MT; and</div>
+<div class="claim-text">process a media presentation description (MPD) metadata file for transmission to the MT to enable the MT to parse the MPD metadata file to identify a presence of video orientation information in a third generation partnership (3GP) file or parse the 3GP file for the video orientation information.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The apparatus of a <claim-ref idref="CLM-00015">claim 15</claim-ref>, further comprising a transceiver configured to:
+<div class="claim-text">receive the video orientation capability information from the MT; and</div>
+<div class="claim-text">transmit the segments to the MT.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The apparatus of a <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the one or more processors and memory are configured to process a video orientation attribute received from the MT via the PSS device capability exchange signaling.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. At least one non-transitory machine readable storage medium having instructions embodied thereon for providing an orientation-aware processing capability from a mobile terminal (MT), the instructions when executed by one or more processors cause the MT to perform the following:
+<div class="claim-text">determining, at the MT, video orientation capability information for the MT;</div>
+<div class="claim-text">parsing a media presentation description (MPD) metadata file to identify a presence of video orientation information in a third generation partnership (3GP) file or parse the 3GP file for the video orientation information;</div>
+<div class="claim-text">processing, at the MT, the video orientation capability information for transmission to a server via a packet switched streaming service (PSS) device capability exchange signaling between the MT and the server; and</div>
+<div class="claim-text">accessing, at the MT, segments from the server via the PSS based on an orientation of the MT and the video orientation capability information for the MT.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, further comprising instructions which when executed perform the following:
+<div class="claim-text">determining an orientation correction term based on the video orientation information and the orientation of the MT; and</div>
+<div class="claim-text">correcting a rendering orientation of a real-time transport protocol (RTP) stream for misalignment based on the orientation correction term.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, further comprising instructions which when executed perform the following: embedding video orientation information for a captured video with a specified video orientation for a specified media segment in a third generation partnership project (3GPP) file format (3GP) file as an instantiation of an International Organization for Standardization (ISO) base media file format (ISO-BMFF) file.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00020">claim 20</claim-ref>, wherein the video orientation information is embedded in:
+<div class="claim-text">a video track or real-time transport protocol (RTP) hint track of the 3GP file;</div>
+<div class="claim-text">a file-level ISO-BMFF box, wherein the file-level ISO-BMFF box is a ‘moov’ box initialization segment or a ‘moof’ box media segment;</div>
+<div class="claim-text">a timed metadata track of the ISO-BMFF; or</div>
+<div class="claim-text">a SampleEntry with video orientation parameters within a sample description box in an ISO file format box structure.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, further comprising instructions which when executed perform the following: preparing the 3GP file to upload for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, further comprising instructions which when executed perform the following: processing a video orientation attribute for transmission via the PSS device capability exchange signaling, wherein the video orientation attribute is a PSS common component that includes:
+<div class="claim-text">an Orientation attribute selected from a list of different video orientation states supported by a client,</div>
+<div class="claim-text">a DefaultOrientation attribute that provides a default video orientation to be taken as reference for a content production or selection,</div>
+<div class="claim-text">an OrientationModesCapture attribute selected from a list of different video orientation modes supported by the client for a capturing,</div>
+<div class="claim-text">an OrientationModesDisplay attribute selected from a list of different video orientation modes supported by the client for a rendering and a display,</div>
+<div class="claim-text">a DefaultOrientationCapture attribute that provides a default video orientation for capturing based on an installation of a camera sensor if an orientation sensor is disabled or not present,</div>
+<div class="claim-text">a DefaultOrientationDisplay attribute that provides a default video orientation for rendering and display if the orientation sensor is disabled or not present,</div>
+<div class="claim-text">an OrientationAngularGranularityCapture attribute selected from a number of equally-spaced angular granularity levels in a 90 degree interval at which a device sensor can detect video orientation changes during the capture,</div>
+<div class="claim-text">an OrientationAngularGranularityDisplay attribute selected from a number of equally-spaced angular granularity levels in the 90 degree interval at which the device sensor can detect video orientation changes during the rendering and the display or both the capture and the rendering and display,</div>
+<div class="claim-text">a NumOfCameras attribute selected from a number of cameras on a device, or</div>
+<div class="claim-text">a HorizontalMirroringSupport attribute to indicate whether the device supports horizontal mirroring when the device is orientation-aware.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, further comprising instructions which when executed perform the following: providing the video orientation capability information in a third generation partnership project (3GPP) long term evolution (LTE) packet switched streaming service (PSS) session, a dynamic adaptive streaming over hypertext transfer protocol (HTTP) (DASH) session, or an integrated multimedia subsystem (IMS) based PSS and multimedia broadcast and multicast service (MBMS) (IMS_PSS_MBMS) session.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00025" num="00025">
+<div class="claim-text">25. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, further comprising instructions which when executed perform the following:
+<div class="claim-text">processing a real-time transport protocol (RTP) extension header received for a RTP stream, or a third generation partnership project (3GPP) file format (3GP) file received for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH);</div>
+<div class="claim-text">parsing a media presentation description (MPD) metadata file to identify a presence of video orientation information in the 3GP file or parse the 3GP file for the video orientation information;</div>
+<div class="claim-text">determining an orientation correction term based on the video orientation information and the orientation of the MT; and</div>
+<div class="claim-text">correcting a rendering orientation of the HTTP stream or DASH for misalignment based on the orientation correction term,</div>
+<div class="claim-text">wherein correcting the rendering orientation compensates for rotation or flip of the orientation of the MT.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00026" num="00026">
+<div class="claim-text">26. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00019">claim 19</claim-ref>, further comprising instructions which when executed perform the following:
+<div class="claim-text">processing a real-time transport protocol (RTP) extension header received for a RTP stream, or a third generation partnership project (3GPP) file format (3GP) file received for a hypertext transfer protocol (HTTP) stream or dynamic adaptive streaming over HTTP (DASH);</div>
+<div class="claim-text">parsing a session description protocol (SDP) file to identify a presence of video orientation information in the RTP stream or parse a RTP extension header for the RTP stream for the video orientation information;</div>
+<div class="claim-text">determining an orientation correction term based on the video orientation information and the orientation of the MT; and</div>
+<div class="claim-text">correcting a rendering orientation of the RTP stream for misalignment based on the orientation correction term,</div>
+<div class="claim-text">wherein correcting the rendering orientation compensates for rotation or flip of the orientation of the MT.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00027" num="00027">
+<div class="claim-text">27. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, further comprising instructions which when executed perform the following: capturing video with a specified video orientation for a specified media segment based on the orientation of the MT.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00028" num="00028">
+<div class="claim-text">28. The at least one non-transitory machine readable storage medium of <claim-ref idref="CLM-00018">claim 18</claim-ref>, wherein the video orientation capability information for the MT overrides a default video orientation capability information via profile difference (Profdiff) signaling.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

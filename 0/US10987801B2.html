@@ -1,0 +1,741 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10987801B2 - Kinetic and dimensional optimization for a tendon-driven gripper 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA444048921">
+<div class="abstract" id="p-0001" num="0000">A tendon-driven robotic gripper is disclosed for performing fingertip and enveloping grasps. One embodiment comprises two fingers, each with two links, and is actuated using a single active tendon. During unobstructed closing, the distal links remain parallel, creating exact fingertip grasps. Conversely, if the proximal links are stopped by contact with an object, the distal links start flexing, creating a stable enveloping grasp. The route of the active tendon and the parameters of the springs providing passive extension forces are optimized in order to achieve this behavior. An additional passive tendon is disclosed that may be used as a constraint preventing the gripper from entering undesirable parts of the joint workspace. A method for optimizing the dimensions of the links in order to achieve enveloping grasps of a large range of objects is disclosed and applied to a set of common household objects.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES290886427">
+<heading id="h-0001">CROSS-REFERENCE TO OTHER APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This is a continuation of U.S. patent application Ser. No. 16/414,299, filed on May 16, 2019, which is a continuation of U.S. patent application Ser. No. 16/059,206, filed on Aug. 9, 2018 now abandoned, which is a continuation of U.S. patent application Ser. No. 15/827,197, filed on Nov. 30, 2017 now abandoned, which is a continuation of U.S. patent application Ser. No. 15/497,518, filed on Apr. 26, 2017 now abandoned, which is a continuation of U.S. patent application Ser. No. 15/069,794, filed on Mar. 14, 2016 now abandoned, which is a continuation of U.S. patent application Ser. No. 14/618,629, filed on Feb. 10, 2015 now U.S. Pat. No. 9,314,932, which is a continuation of U.S. patent application Ser. No. 14/456,450, filed Aug. 11, 2014, now U.S. Pat. No. 8,979,152, which is a continuation of U.S. patent application Ser. No. 14/050,075, filed Oct. 9, 2013, now U.S. Pat. No. 8,833,827, which claims priority to U.S. Provisional Application No. 61/711,729, filed on Oct. 9, 2012.</div>
+<heading id="h-0002">BACKGROUND</heading>
+<heading id="h-0003">Technical Field</heading>
+<div class="description-paragraph" id="p-0003" num="0002">The present disclosure relates generally to object manipulation devices, systems, and techniques, and more particularly to gripper configurations that may be utilized with robots and other mobility and/or actuation platforms.</div>
+<heading id="h-0004">Description of the Related Art</heading>
+<div class="description-paragraph" id="p-0004" num="0003">End-effectors for robots operating in unstructured environments are typically designed to satisfy multiple criteria. They must be versatile and capable, enabling manipulation of a wide range of objects and in many scenarios. At the same time, low complexity and cost can be key enablers for wide availability, a desirable feature both for research and development, and subsequent refinement into a product.</div>
+<heading id="h-0005">BRIEF SUMMARY</heading>
+<div class="description-paragraph" id="p-0005" num="0004">The various end-effector designs described herein employ a low-complexity approach. With the understanding that a gripper populating this part of the design space will inevitably lack a number of advanced capabilities, the described features can enable a wide range of tasks and handle many target objects.</div>
+<div class="description-paragraph" id="p-0006" num="0005">The present disclosure focuses on stable grasping, and not in-hand manipulation such as changing the object's pose in hand or activating additional object degrees of freedom (e.g., pushing a button, pulling a trigger). The embodiments described herein achieve two types of grasps, which are particularly useful for performing numerous tasks. The first one, illustrated in <figref idrefs="DRAWINGS">FIGS. 1A-1C</figref>, is fingertip grasps, which is highly suitable for small objects, or for cases where fingers <b>102</b> <i>a</i>, <b>102</b> <i>b </i>(collectively <b>102</b>) of a hand, gripper or end effector <b>104</b> cannot reach around an object <b>106</b> <i>a </i>(e.g., because of the surface the object is resting on). The second type, illustrated in <figref idrefs="DRAWINGS">FIGS. 1D-1F</figref>, is that of enveloping grasps, where fingers <b>102</b> of the hand, gripper or end effector <b>104</b> create contacts around the circumference of an object <b>106</b> <i>b</i>. These grasps are well suited for resisting a wide range of external disturbances, unlike fingertip grasps, which are easily affected by torques applied around the axis of contact.</div>
+<div class="description-paragraph" id="p-0007" num="0006">In one implementation, the hardware starting point consists of two fingers <b>102</b> <i>a</i>, <b>102</b> <i>b</i>, each with two joints <b>108</b> <i>a</i>, <b>108</b> <i>b </i>(collectively <b>108</b>), <b>110</b> <i>a</i>, <b>110</b> <i>b </i>(collectively <b>110</b>) and links <b>112</b> <i>a</i>, <b>112</b> <i>b </i>(collectively <b>112</b>), <b>114</b> <i>a</i>, <b>114</b> <i>b </i>(collectively <b>114</b>). Using at least two revolute joints per finger <b>102</b> is motivated by the goal of achieving exact fingertip grasps, where the distal links <b>114</b> <i>a</i>, <b>114</b> <i>b </i>are perfectly parallel with respect to one another, throughout the range of motion of the fingers <b>102</b>. Actuation is performed through a single motor (not shown in <figref idrefs="DRAWINGS">FIGS. 1A-1F</figref>) connected to all joints <b>108</b>, <b>110</b> via a tendon (not shown in <figref idrefs="DRAWINGS">FIGS. 1A-1F</figref>), providing flexion forces. Extension is entirely passive, achieved with joint springs (not shown in <figref idrefs="DRAWINGS">FIGS. 1A-1F</figref>) and passive elastic tendons (not shown in <figref idrefs="DRAWINGS">FIGS. 1A-1F</figref>).</div>
+<div class="description-paragraph" id="p-0008" num="0007">With a single motor driving four joints <b>108</b> <i>a</i>, <b>110</b> <i>a</i>, <b>108</b> <i>b</i>, <b>110</b> <i>b</i>, the hand (e.g. end effector) is underactuated. The choice between the type of grasp being performed (fingertip or enveloping) is not made actively, by controlling the actuators. Rather, type of grasp being performed happens passively through object contact, as the hand, gripper or end effector <b>104</b> mechanically adapts to the shape of the object <b>106</b> <i>a</i>, <b>106</b> <i>b</i>. When the hand, gripper or end effector <b>104</b> is closing unobstructed, the distal links <b>114</b> <i>a</i>, <b>114</b> <i>b </i>stay parallel with respect to one another in a fingertip grasp configuration. If the proximal links <b>112</b> <i>a</i>, <b>112</b> <i>b </i>are stopped by contact with an object (e.g., object <b>106</b> <i>b </i>as best illustrated in <figref idrefs="DRAWINGS">FIG. 1E</figref>, the distal links <b>114</b> <i>a</i>, <b>114</b> <i>b </i>flex in, completing an enveloping grasp, as best illustrated in <figref idrefs="DRAWINGS">FIG. 1F</figref>). Furthermore, the ratio of torques applied at each joint <b>108</b>, <b>110</b> cannot be changed at run-time, as the joints <b>108</b>, <b>110</b> are not independently actuated, and must be optimized at design-time for stable grasps in as many cases as possible.</div>
+<div class="description-paragraph" id="p-0009" num="0008">Passive transition between fingertip and enveloping grasps can also be seen in the MARS hand [<b>1</b>], which later evolved into the SARAH family of hands [<b>2</b>], both of which use four-bar linkages for actuation. The use of tendons in the embodiments presented herein comprise a more compact implementation that avoids protruding knuckles or joints, at the cost of reduced finger contact areas. Passively adaptive, optimized underactuated designs also include the Harvard Hand [<b>3</b>], [<b>4</b>] and the breakaway transmission mechanism [<b>5</b>] used in the Barrett hand (Barrett Technologies, Cambridge, Mass.). Both of these designs may be utilized to perform enveloping grasps, but are not optimized for exact fingertip grasps. A detailed and encompassing optimization study for underactuated hands, focusing mainly on four-bar linkages but with applications to other transmission mechanisms as well, can be found in [<b>6</b>].</div>
+<div class="description-paragraph" id="p-0010" num="0009">An important body of work has also focused on the force generation capabilities of redundant or tendon-driven mechanisms in the context of studying the human hand [<b>7</b>], [<b>8</b>], [<b>9</b>], [<b>10</b>]. A number of studies have focused on highly underactuated anthropomorphic hand models [<b>11</b>], [<b>12</b>], [<b>13</b>]; the latter also makes use of the principles of passive adaptation. Finally, force generation has been studied extensively in the context of fully-actuated robotic hands, and a number of useful tools have been proposed; see [<b>14</b>], [<b>15</b>], [<b>16</b>], [<b>17</b>] and references therein for details.</div>
+<div class="description-paragraph" id="p-0011" num="0010">This disclosure describes highly-capable single-actuator, two-finger grippers designed for both fingertip and enveloping grasps. This disclosure also presents a method for optimizing a route of the active and passive tendons, as well as the stiffness and pretensioning of the extensor springs, for achieving the desired behavior. At least one implementation employs an additional passive tendon as a constraint that prevents the hand, gripper or end effector from entering undesirable parts of the joint workspace. Also described is a method for optimizing absolute and relative dimensions of the links for achieving enveloping grasps of a desired family of objects, and apply the method to a large set of common household objects. Finally, we demonstrate a prototype hand, gripper, or end effector implementing the results of these optimizations.</div>
+<description-of-drawings>
+<heading id="h-0006">BRIEF DESCRIPTION OF THE SEVERAL VIEWS OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0012" num="0011"> <figref idrefs="DRAWINGS">FIGS. 1A-1C</figref> are successive views of a mechanical hand, gripper or end effector having a pair of opposed fingers which approach and grasp an object to be grasped in a fingertips grasp, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0013" num="0012"> <figref idrefs="DRAWINGS">FIGS. 1D-1F</figref> are successive views of a mechanical hand, gripper or end effector having a pair of opposed fingers which approach and grasp an object to be grasped in an enveloping grasp, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0014" num="0013"> <figref idrefs="DRAWINGS">FIG. 2A</figref> a schematic view of a finger of a mechanical hand, gripper or end effector having a pair of opposed fingers each with a proximate and a distal link, successively moving to approach and grasp an object to be grasped, where the object to be grasp does not obstruct the proximate link, so results in a fingertips grasp, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 2B</figref> a schematic view of the finger of a mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 2A</figref>, successively moving to approach and grasp an object to be grasped, where the object to be grasp obstructs the proximate link, so passively results in an enveloping grasp, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 3A</figref> is a schematic view of a finger and palm of a mechanical hand, gripper or end effector having a pair of opposed fingers each with a proximate and a distal link, showing a passive tendon or string directly physically coupling a palm link with the distal link, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 3B</figref> is a schematic view of a finger and palm of a mechanical hand, gripper or end effector having a pair of opposed fingers each with a proximate and a distal link, showing a passive tendon physically coupling a palm link with the distal link via a pair of mandrels at a pair of joints between the links, as well as a length adjusting mechanism operable to adjust a length of the passive tendon, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a schematic view of a mechanical hand, gripper or end effector having a pair of opposed fingers (only a portion of a right side finger is shown), showing a actuatable flexor tendon coupled to a motor and a passive extensor tendon physically coupled to a spring, and joint springs (only one illustrated) located at joints between the links, as well as a tensioning mechanism operable to adjust a tension in the passive extensor tendon, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 5A</figref> is a graph of link angles θ<sub>1 </sub>and θ<sub>1 </sub>for fingertip and enveloping poses in a joint pose space, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 5B</figref> is a graph of joint torque ration constraints for a fingertip pose, according to one illustrated embodiment, showing constraints for parallel closing, grasping and opening regimes.</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 5C</figref> is a graph of joint torque ration constraints for an enveloping pose, according to one illustrated embodiment, showing constraints for parallel closing, grasping and opening regimes.</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a graph showing angles α and β are used to define a distance metric from the vector τ<sub>r </sub>to the cone defined by τ<sup>0 </sup>and τ<sup>1</sup>, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 7A</figref> is a schematic view of a pair of opposed fingers and palm of a mechanical hand, gripper or end effector, of the fingers having respective proximate and a distal links, illustrating a successful enveloping grasping of an object, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 7B</figref> is a schematic view of the pair of opposed fingers and palm of the mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 7A</figref>, illustrating an equivalent of a fingertip grasping of an object which is oversized for the mechanical hand, gripper or end effector, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 7C</figref> is a schematic view of the pair of opposed fingers and palm of the mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 7A</figref>, illustrating fingertips colliding when attempting to grasp of an object which is undersized for the mechanical hand, gripper or end effector, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 8A</figref> is a schematic view of the pair of opposed fingers and palm of the mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 7A</figref> and an object to be grasped having an elliptical object profile, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 8B</figref> is a graph showing dimensions of a space of common household objects with elliptical object profiles.</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 8C</figref> is a schematic view of the pair of opposed fingers and palm of the mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 7A</figref> and an object to be grasped having a rectangular object elliptical profile, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 8D</figref> is a graph showing dimensions of a space of common household objects with rectangular object profiles.</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 9A</figref> is a graph showing dimensions of a space of objects with elliptical object profiles which a mechanical hand, gripper or end effector optimized per dimensions of Table I can successfully grasp in an enveloping grasp.</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 9B</figref> is a graph showing dimensions of a space of objects with rectangular object profiles which a mechanical hand, gripper or end effector optimized per dimensions of Table I can successfully grasp in an enveloping grasp.</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 9C</figref> is a graph showing dimensions of a space of objects with elliptical object profiles which a mechanical hand, gripper or end effector not optimized per dimensions of Table I can successfully grasp in an enveloping grasp, for comparison with that of <figref idrefs="DRAWINGS">FIG. 9A</figref>.</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 9D</figref> is a graph showing dimensions of a space of objects with rectangular object profiles which a mechanical hand, gripper or end effector not optimized per dimensions of Table I can successfully grasp in an enveloping grasp, for comparison with that of <figref idrefs="DRAWINGS">FIG. 9B</figref>.</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a schematic view of a portion of one finger and palm of a mechanical hand, gripper or end effector having a pair of opposed fingers each with a proximate and a distal link, showing an actuatable flexor tendon physically coupling a palm link, proximate link, and distal link via a set of routing points, and a passive tendon physically coupling the palm link with the distal link via a pair of mandrels at a pair of joints between the links, illustrating various parameters to be optimized per Table II, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a schematic view of a model of a mechanical hand, gripper or end effector having a pair of opposed fingers (only one shown), each with a proximate and a distal link, and showing an actuatable flexor tendon, extensor tendon, and passive tendon physically coupling a palm link, proximate link, and distal link, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIGS. 12A-12L</figref> are various views of a mechanical hand, gripper or end effector having a pair of opposed fingers grasping a variety of objects in a variety of orientations via fingertip and enveloping grasps, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 13A</figref> is a top plan view of a kinematic assembly including a palm and a pair of opposed finger, each with a proximate and a distal link, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 13B</figref> is a bottom isometric view of the kinematic assembly of <figref idrefs="DRAWINGS">FIG. 13A</figref>, showing a recess, channeled or grooved coupling features, and a circumferential coupling recess, which allow detachable coupling of the kinematic assembly to a motor pack, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIG. 13C</figref> is a top isometric view of a drive pack including an electric motor, motor controller board, gear train or transmission, and screw member, for driving the kinematic assembly of <figref idrefs="DRAWINGS">FIG. 13A</figref> when coupled thereto, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIG. 13D</figref> is a side isometric view of the drive pack of <figref idrefs="DRAWINGS">FIG. 13C</figref>.</div>
+<div class="description-paragraph" id="p-0041" num="0040"> <figref idrefs="DRAWINGS">FIG. 13E</figref> is a bottom isometric view of the drive pack of <figref idrefs="DRAWINGS">FIG. 13C</figref>, showing coupling structure to detachably couple the kinematic assembly to the drive pack without electrical couplings or contacts, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 14A</figref> is a schematic view of a conventional mechanical hand, gripper or end effector having a pair of opposed fingers and located at an end of a robotic arm attempting to grasp an object from a flat surface where the robotic arm has positioned the finger a bit too high, causing the fingers to miss the object to be grasped.</div>
+<div class="description-paragraph" id="p-0043" num="0042"> <figref idrefs="DRAWINGS">FIG. 14B</figref> is a schematic view of the conventional mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 14A</figref> where the robotic arm has positioned the finger a bit too low, causing the fingers to collide with the surface.</div>
+<div class="description-paragraph" id="p-0044" num="0043"> <figref idrefs="DRAWINGS">FIG. 15A</figref> is a schematic view of an underactuated mechanical hand, gripper or end effector according to the teachings herein, where a pair of opposed fingers of a kinematic assembly located at an end of a robotic arm approach an object to be grasped which sits on a flat surface from a position that would be too close for a conventional mechanical hand, gripper or end effector.</div>
+<div class="description-paragraph" id="p-0045" num="0044"> <figref idrefs="DRAWINGS">FIGS. 15B-15D</figref> are schematic views of the underactuated mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 15A</figref> at successive times, where in response to collision of fingertips of the opposed fingers with the flat surface, the kinematic assembly adapts by passively rotating the distal finger elements to grasp the object.</div>
+<div class="description-paragraph" id="p-0046" num="0045"> <figref idrefs="DRAWINGS">FIG. 15E</figref> is a schematic view of the underactuated mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 15A</figref>, where in response to an upward motion of the kinematic assembly away from the surface, the distal finger elements passively rotate downward while the proximal finger elements passively rotate inward toward the object, according to at least one illustrated embodiment.</div>
+<div class="description-paragraph" id="p-0047" num="0046"> <figref idrefs="DRAWINGS">FIGS. 15F-15H</figref> are schematic views of the underactuated mechanical hand, gripper or end effector of <figref idrefs="DRAWINGS">FIG. 15E</figref> at successive times, where the kinematic assembly adapts by passively rotating the distal finger elements to grasp the object.</div>
+<div class="description-paragraph" id="p-0048" num="0047"> <figref idrefs="DRAWINGS">FIGS. 16A-16D</figref> are schematic views of a pair of wedged distal finger elements of opposed fingers approaching and grasping an object from a flat surface at successive times, where the wedged distal finger elements have a wedged geometry on an respective outer/distal aspects and a flat geometry on a respective gripping surface, according to at least one illustrated embodiment.</div>
+</description-of-drawings>
+<heading id="h-0007">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="h-0008" num="0000">II. Operation and Constraints</div>
+<div class="description-paragraph" id="p-0049" num="0048">One implementation uses a hand, gripper, or end effector model <b>204</b> shown in <figref idrefs="DRAWINGS">FIGS. 2A and 2B</figref>, in which the fingers <b>202</b> <i>a</i>, <b>202</b> <i>b </i>(collectively <b>202</b>) are symmetrical. In particular, <figref idrefs="DRAWINGS">FIG. 2A</figref> shows one finger <b>204</b> of a hand, gripper, or end effector at three successive positions along a range of motion represented by arrow <b>205</b>, approaching and contacting a relatively small object <b>206</b> <i>a </i>in a fingertip grasp. In particular, <figref idrefs="DRAWINGS">FIG. 2B</figref> shows the one finger <b>204</b> at three successive positions along a range of motion represented by arrow <b>205</b>, approaching and contacting a relatively large object <b>206</b> <i>b </i>in an enveloping grasp. This disclosure focuses on the behaviors of a single finger <b>202</b> for ease of explanation, even though the various gripping described herein employs two fingers. The variables θ<sub>1 </sub>and θ<sub>2 </sub>denote the proximal and distal joint angles of the proximal and distal joints <b>208</b>, <b>210</b>, respectively. A single actuated tendon (e.g., flexor tendon <b>416</b> <figref idrefs="DRAWINGS">FIG. 4</figref>) flexes the joints <b>208</b>, <b>210</b>, with extensor tendons (e.g., <b>418</b>, <figref idrefs="DRAWINGS">FIG. 4</figref>) and passive springs (e.g., linear spring <b>430</b>, joint spring <b>432</b> <figref idrefs="DRAWINGS">FIG. 4</figref>) providing extension torques.</div>
+<div class="description-paragraph" id="p-0050" num="0049">The desired behavior of the gripper <b>204</b> can be summarized through the following four constraints.</div>
+<div class="description-paragraph" id="p-0051" num="0050">1) As the gripper <b>204</b> is closing unobstructed, distal links <b>214</b> must remain parallel along the range of motion <b>205</b>, as illustrated in <figref idrefs="DRAWINGS">FIG. 2A</figref>. This means that as the proximal joint <b>208</b> flexes, the corresponding distal joint <b>210</b> extends to compensate (i.e., θ<sub>1</sub>+θ<sub>2</sub>=90 degrees throughout free motion).</div>
+<div class="description-paragraph" id="p-0052" num="0051">2) If a fingertip grasp has been established, contact forces between the gripper <b>204</b> and an object <b>206</b> <i>a </i>must create a stable grasp. In particular, contact forces on the fingertips <b>222</b> should not hyperextend the distal joint <b>210</b> (i.e., θ<sub>1</sub>+θ<sub>2</sub>=90 degrees must hold in the presence of fingertip contact forces).</div>
+<div class="description-paragraph" id="p-0053" num="0052">3) If proximal joints <b>208</b> are stopped due to contact with an object <b>206</b> <i>b</i>, the distal joint <b>210</b> must start flexing, as illustrated in <figref idrefs="DRAWINGS">FIG. 2B</figref>, in order to contact the object <b>206</b> <i>b </i>(i.e., θ<sub>1</sub>+θ<sub>2</sub>&gt;90 degrees).</div>
+<div class="description-paragraph" id="p-0054" num="0053">4) Once an enveloping grasp (<figref idrefs="DRAWINGS">FIG. 2B</figref>) has been completed, object contact forces and joint torques created by the actuated tendon (e.g., flexor tendon <b>416</b> <figref idrefs="DRAWINGS">FIG. 4</figref>) must be in equilibrium and create a stable grasp.</div>
+<div class="description-paragraph" id="p-0055" num="0054">We note that, for all constraints above, θ<sub>1</sub>+θ<sub>2 </sub>is greater than or equal to 90 degrees is a necessary, but not sufficient condition. This constraint can be enforced with an additional unactuated tendon. The most straightforward implementation is the passive tendon <b>317</b> <i>a </i>shown in <figref idrefs="DRAWINGS">FIG. 3A</figref>, with the additional passive tendon (e.g., string) <b>317</b> <i>a </i>connecting a palm <b>324</b> directly to the distal joint <b>210</b>. The mechanism essentially acts as a four-bar linkage, preventing the case where θ<sub>1</sub>+θ<sub>2</sub>&lt;90 degrees throughout the range of motion <b>205</b> of the gripper <b>204</b>. However, the mechanism allows configurations where θ<sub>1</sub>+θ<sub>2</sub>&gt;90 degrees, as the passive tendon <b>317</b> <i>a </i>(e.g., string), that completes the four-bar linkage, simply loses tension and goes slack.</div>
+<div class="description-paragraph" id="p-0056" num="0055">In practice, this constraint is implemented with a passive tendon <b>317</b> <i>b </i>constrained to wrap around a number of mandrels <b>326</b> <i>a</i>, <b>326</b> <i>b </i>(collectively <b>326</b>) of equal radii around both joints <b>208</b>, <b>210</b>, as shown in <figref idrefs="DRAWINGS">FIG. 3B</figref>. This has the advantage of allowing better control of the tendon route inside the fingers <b>204</b>. That is, as long as the passive tendon <b>317</b> <i>b </i>wraps around both joint mandrels <b>326</b>, the rest of the route can be changed as needed in order to avoid collision with other design elements. This implementation can also scale to future gripper versions with more links per finger <b>204</b>, e.g., a single passive tendon <b>317</b> <i>b </i>can traverse multiple joints enforcing similar constraints.</div>
+<div class="description-paragraph" id="p-0057" num="0056">In both implementations, small variations in the length of the passive tendon <b>317</b> (e.g., string that enforces the constraint can lead to noticeable deviations in distal link <b>214</b> poses. The second variant above allows use of a simple mechanism housed in the distal link <b>214</b>. The passive tendon <b>317</b> <i>b </i>terminates inside a small piece <b>328</b> that sits on a screw <b>330</b>, as shown in <figref idrefs="DRAWINGS">FIG. 3B</figref>. Turning the screw <b>330</b> allows fine adjustments in the length of the passive tendon <b>317</b> <i>b. </i> </div>
+<div class="description-paragraph" id="h-0009" num="0000">III. Optimization of Kinetic Behavior</div>
+<div class="description-paragraph" id="p-0058" num="0057">The hardware constraint described in the previous section contributes significantly to achieving the desired behavior, but does not suffice by itself. In particular, it does not ensure that constraint 1) is met (i.e., distal links <b>114</b> <i>a</i>, <b>114</b> <i>b </i>(<figref idrefs="DRAWINGS">FIGS. 1A-1C</figref>) remain parallel to one another throughout unobstructed closing). It also does not contribute in any way to constraint 4) (i.e., stable contact forces during enveloping grasps, e.g., <figref idrefs="DRAWINGS">FIG. 1D</figref>). In one implementation, in order to meet all the constraints in the list, and ensure the complete desired behavior, a number of parameters in the design are optimized. In particular, parameters pertaining to both the active flexor tendon <b>416</b> (<figref idrefs="DRAWINGS">FIG. 4</figref>) and the passive, spring-based extension mechanism (e.g., extensor tendon <b>418</b>, spring <b>420</b>, mandrels <b>418</b> of <figref idrefs="DRAWINGS">FIG. 4</figref>) are optimized. In this context, the term “kinetic” is used to refer to the effect of net joint torques on both the motion of the fingers <b>204</b> and the forces transmitted to an object <b>206</b> <i>a</i>, <b>206</b> <i>b </i>(<figref idrefs="DRAWINGS">FIGS. 2A, 2B</figref>) through contacts.</div>
+<div class="description-paragraph" id="h-0010" num="0000">A. Optimized Design Parameters</div>
+<div class="description-paragraph" id="p-0059" num="0058">As illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref>, a complete gripper mechanism <b>404</b> (only a portion illustrated) contains three main components that determine its behavior, namely: 1) flexor tendon <b>416</b>, 2) joint spring <b>432</b>, and 3) extensor tendon <b>418</b>. The effect of each of these main components is determined by a number of parameters, detailed in the following list and illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref>.</div>
+<div class="description-paragraph" id="p-0060" num="0059">1) Flexor Tendon <b>416</b> </div>
+<div class="description-paragraph" id="p-0061" num="0060">In this implementation, the flexor tendon <b>416</b> is the only component connected to a motor <b>434</b>, and is the only major component that can be actively controlled at runtime. In use, the common tendon-pulley model (as in [<b>18</b>]) made be employed. The common tendon-pulley model assumes that the flexor tendon <b>416</b> travels through a number of routing points <b>436</b> <i>a</i>, <b>436</b> <i>b</i>, <b>436</b> <i>c </i>(three illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref>, collectively <b>436</b>) that the flexor tendon <b>416</b> can slide through, but that force a path of the flexor tendon <b>416</b> to change direction. As a result of this change in direction, the routing points <b>436</b> are the locations where the flexor tendon <b>416</b> applies force to the links <b>412</b>, <b>414</b> of the finger <b>402</b>. The parameters which can be optimized are: locations of routing points <b>436</b>, radii of joint mandrels <b>426</b> <i>a</i>, <b>426</b> <i>b </i>radii, spring stiffness and tension of joint springs <b>432</b>.</div>
+<div class="description-paragraph" id="p-0062" num="0061">The locations of the routing point <b>436</b>, relative to the joints <b>408</b>, <b>410</b>, determine the joint torques applied by the flexor tendon <b>416</b>.</div>
+<div class="description-paragraph" id="p-0063" num="0062">As previously explained, the flexor tendon <b>416</b> can also wrap around joint mandrels <b>426</b> <i>a</i>, <b>426</b> <i>b</i>. As long as the flexor tendon <b>416</b> is touching a mandrel <b>426</b>, its moment arm around that joint mandrel <b>426</b> is constant and equal to the radius of the joint mandrel <b>426</b>. It is possible for the flexor tendon <b>416</b> to detach from the joint mandrel <b>426</b> during operation, in which case the moment arm is determined by the routing points <b>436</b> <i>c </i>proximal and distal <b>436</b> <i>a</i>, <b>436</b> <i>b </i>to that joint mandrel <b>426</b>.</div>
+<div class="description-paragraph" id="p-0064" num="0063">Each joint <b>408</b>, <b>410</b> contains an off-the-shelf torsional spring <b>432</b> (only one shown in <figref idrefs="DRAWINGS">FIG. 4</figref> and illustrated on the opposite finger for sake of clarity of illustration). The spring stiffness may be optimized for the application. For example, changes in spring stiffness may be made in discrete steps, constrained by availability in manufacturers' catalogs.</div>
+<div class="description-paragraph" id="p-0065" num="0064">Additionally, the springs <b>432</b> can be pre-tensioned to exert some level of torque even in the gripper's <b>404</b> fully extended pose. The amount of pretensioning can be changed by varying a location of the spring leg supports inside the proximate and distal links <b>412</b>, <b>414</b>, and palm link <b>324</b> (which constitutes a link), and by choosing springs <b>432</b> with various leg angles at rest.</div>
+<div class="description-paragraph" id="p-0066" num="0065">In addition to joint springs <b>432</b>, extension torques are provided by a passive tendon <b>418</b>. The extensor tendon <b>418</b> runs along an extension side of the joint <b>408</b>, <b>410</b>, hence is interchangeably referred to as extensor tendon <b>418</b> herein, and is connected to a linear spring <b>430</b>. Compared to joint springs <b>432</b>, the extensor tendon <b>418</b> has two main advantages. First, a change in length of the extensor tendon <b>418</b> is determined by the relationship between the two joints <b>408</b>, <b>410</b>, as flexion at one joint <b>408</b>/<b>410</b> can be offset by extension of the other joint <b>410</b>/<b>408</b>. Second, the moment arms around the joints <b>408</b>, <b>410</b> can be finely controlled through the radii of the joint mandrels <b>426</b> <i>a</i>, <b>426</b> <i>b</i>, respectively. The linear spring stiffness parameter may be optimized. For example, changes may be made in discrete steps, constrained by off-the-shelf availability.</div>
+<div class="description-paragraph" id="p-0067" num="0066">A pre-tensioning level in the linear spring <b>430</b> may be optimized. The pre-tensioning level is determined by a length of the extensor tendon <b>418</b>, and thus a length of the linear spring <b>430</b>) in the fully extended pose of the gripper <b>404</b>. A pretensioning mechanism allows this parameter to be adjusted after the gripper <b>404</b> has been constructed.</div>
+<div class="description-paragraph" id="p-0068" num="0067">The radii of the joint mandrels <b>426</b> may be optimized. Similarly to the flexor tendon <b>416</b>, the joint mandrel radii determine the constant moment arm of the extensor tendon <b>416</b> around each joint <b>408</b>, <b>410</b>. Note that, unlike the flexor tendon <b>416</b>, the geometry of the gripper <b>404</b> constrains the extensor tendon <b>418</b> to always wrap around the mandrels <b>426</b>, and additional routing points do not affect its behavior.</div>
+<div class="description-paragraph" id="p-0069" num="0068">The above parameters are used to compute the resulting joint torque applied at both joints <b>408</b>, <b>410</b> of the finger <b>402</b> via Equation 1 (below), as a function of the joint angles θ<sub>1</sub>, θ<sub>2 </sub>and the actuation force f applied to the active tendon.
+<br/>
+<i>T</i> <sub>r</sub>=[<i>T</i> <sub>1</sub> <i>,T</i> <sub>2</sub>]<sup>T</sup>  Equation 1
+<br/>
+Essentially, the joint torque sums the effect of the active flexor tendon <b>416</b> and passive extensor tendon <b>418</b>, as well as joint springs <b>432</b>, as per Equation 2 (below), where Ja and Jp are the Jacobians of the routing points <b>436</b> of the active flexor and passive extensor tendons <b>416</b>, <b>418</b>, respectively, kl and Δ<sub>l </sub>are the stiffness and elongation of the linear spring <b>430</b> attached to the extensor tendon, Kj is a diagonal matrix comprising the stiffness coefficients of the joint springs <b>432</b>, and Δθ is the vector of joint displacements relative to the rest pose of joint springs <b>432</b>.
+<br/>
+<i>T</i> <sub>r</sub>(<i>f</i>,θ)=<i>J</i> <sub>a</sub> <i>f</i> <sub>a</sub> <i>+J</i> <sub>p</sub> <i>k</i> <sub>l</sub> <i>Δl+K</i> <sub>j</sub>Δθ  Equation 2
+<br/>
+B. Joint Torque Ratios and Constraints
+</div>
+<div class="description-paragraph" id="p-0070" num="0069">For a given gripper pose and tendon force, a factor in determining the direction of infinitesimal joint motion or the stability of forces applied to the object is the ratio of individual joint torques T<sub>1 </sub>and T<sub>2</sub>,</div>
+<div class="description-paragraph" id="p-0071" num="0070">rather than their absolute values. As such, all constraints will be on the normalized value of T<sub>r </sub>denoted by {circumflex over (T)}<sub>r</sub>.</div>
+<div class="description-paragraph" id="p-0072" num="0071">The latter (T-hat-r) essentially defines a direction in joint torque space; thus will express constraints in terms of this direction. The behavior of the gripper is checked at a number of discrete points throughout its workspace. In particular, two sets of poses are created by taking equidistant samples from the workspace, as illustrated in <figref idrefs="DRAWINGS">FIG. 5A</figref>. This includes fingertip poses (illustrated by line with black dots or dark circles) and enveloping poses (illustrated by line with white dots or undarken circles).</div>
+<div class="description-paragraph" id="p-0073" num="0072">The fingertip poses comprise a set of poses where the distal links (e.g., <b>114</b> <i>a</i>, <b>114</b> <i>b </i>of <figref idrefs="DRAWINGS">FIGS. 1A-1C</figref>) are parallel (θ<sub>1</sub>+θ<sub>2</sub>=90 degrees). It is noted that the effect of the hardware constraint prevents the distal joint <b>110</b> <i>a</i>, <b>110</b> <i>b </i>from hyperextending (cross-hatched region in <figref idrefs="DRAWINGS">FIG. 5A</figref>), for instance due to the additional tendon constraint from Sec. II.</div>
+<div class="description-paragraph" id="p-0074" num="0073">The enveloping poses comprise a set of poses where the distal joint <b>110</b> <i>a</i>, <b>110</b> <i>b </i>is flexed for an enveloping grasp (θ<sub>1</sub>+θ<sub>2</sub>/2=90 degrees).</div>
+<div class="description-paragraph" id="p-0075" num="0074">In experimental implementation, the sets contain 11 and 7 poses respectively; which appears to provide a sufficient sampling resolution to ensure desired behavior throughout the joint workspace.</div>
+<div class="description-paragraph" id="p-0076" num="0075">The active tendon force may be defined or grouped into four levels of active tendon force: a) parallel closing force fclose, b) enveloping force fenvel, c) grasping force finf, and d) opening force, which are each explained in turn below.</div>
+<div class="description-paragraph" id="p-0077" num="0076">The parallel closing force fclose is the active force that closes the gripper while maintaining parallel distal links <b>114</b> <i>a</i>, <b>114</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>). In this regime, the proximal joint <b>108</b> <i>a</i>, <b>108</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) must flex, but the distal joint <b>110</b> <i>a</i>, <b>110</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) must extend to compensate.</div>
+<div class="description-paragraph" id="p-0078" num="0077">The enveloping force fenvel is the active force applied once the proximal links <b>112</b> <i>a</i>, <b>112</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) are stopped due to object contact and that flexes the distal joints <b>114</b> <i>a</i>, <b>114</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) creating an enveloping grasp.</div>
+<div class="description-paragraph" id="p-0079" num="0078">The grasping force finf is the force applied once an object <b>106</b> <i>a</i>, <b>106</b> <i>b </i>has been grasped, in order to hold the object <b>106</b> <i>a</i>, <b>106</b> <i>b </i>stably. The grasping force finf can be arbitrarily large, constrained only by the power of the motor <b>434</b> (<figref idrefs="DRAWINGS">FIG. 4</figref>) and the links' structural rigidity. Of the grasping force finf is considered to be large enough so that the effects of the spring-based forces in the system are negligible, thus Equation 2 may be simplified as Equation 3, below, by ignoring the other term.
+<br/>
+<i>T</i> <sub>r</sub>(<i>f</i> <sub>inf</sub>,θ)=<i>J</i> <sub>a</sub> <i>f</i> <sub>inf</sub>:  Equation 3
+</div>
+<div class="description-paragraph" id="p-0080" num="0079">The opening force is the force for extending the gripper, f=0.</div>
+<div class="description-paragraph" id="p-0081" num="0080">For every combination of gripper pose and tendon force, the resultant joint torque T<sub>r</sub>(f,θ) can be computed, as in Eq. (1). We also define a normalized joint torque eq, resulting from potential contacts with the object, as per Equation 4, below
+<br/>
+<i>T</i> <sub>eq</sub>(θ)=<i>J</i> <sub>c</sub> <i>c</i>(2)  Equation (4)
+<br/>
+ In Equation 4, Jc is the Jacobian of contact locations on the gripper, and c is the vector of contact forces. For fingertip poses, a single contact located in the center of the distal link is assumed. For enveloping poses, an additional contact located at the center of the proximal link is assumed. All contact force magnitudes are normalized to 1.
+</div>
+<div class="description-paragraph" id="p-0082" num="0081">It is now possible to compute an overall measure of whether a particular set of design parameters creates the desired behavior. For each pose in the fingertip and enveloping sets, the torque ratio constraints explained below, and illustrated in <figref idrefs="DRAWINGS">FIG. 6</figref>, are defined. In <figref idrefs="DRAWINGS">FIG. 6</figref>, angles α and β are used to define a distance metric from the vector τ<sub>r </sub>to the cone defined by τ<sup>0 </sup>and τ<sup>1</sup>.</div>
+<div class="description-paragraph" id="p-0083" num="0082">For each pose in fingertip poses (<figref idrefs="DRAWINGS">FIG. 5B</figref>), for the parallel closing regime: the gripper <b>104</b> (<figref idrefs="DRAWINGS">FIG. 1</figref>) must stay in the mode where the distal links <b>114</b> <i>a</i>, <b>114</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) are parallel. Thus, the proximal joint <b>108</b> <i>a</i>, <b>108</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) must flex, but the distal joint <b>110</b> <i>a</i>, <b>110</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) must extend to compensate. This is achieved if fclose is strong enough to overcome spring forces at the proximal joint <b>108</b> <i>a</i>, <b>108</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>), but not at the distal joint <b>110</b> <i>a</i>, <b>110</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>), as illustrated by the cone in the lower right quadrant.</div>
+<div class="description-paragraph" id="p-0084" num="0083">Also for each pose in fingertip poses, for the enveloping and grasping regimes: tendon force must overcome the spring forces and flex the distal joint <b>110</b> <i>a</i>, <b>110</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) as well. However, the ratio of distal to proximal torques must not exceed the level that can be supported by contact with the object, as illustrated by the cone in the upper right quadrant. If τ2 it too large relative to τ1, the distal joint will flex and, as in [<b>6</b>], the finger will “eject” from the object. The reverse effect is not an issue as the distal joint <b>110</b> <i>a</i>, <b>110</b> <i>b </i>(<figref idrefs="DRAWINGS">FIG. 1</figref>) cannot hyperextend due to hardware constraints.</div>
+<div class="description-paragraph" id="p-0085" num="0084">Further for each pose in fingertip poses, for the opening regime: with no active force applied, the gripper must return to the extended pose, as illustrated by the cone in the lower left quadrant.</div>
+<div class="description-paragraph" id="p-0086" num="0085">For each pose in enveloping poses (<figref idrefs="DRAWINGS">FIG. 5C</figref>), for the parallel closing regime: the finger must return to a pose where the distal links are parallel, as illustrated by the cone extending across portins of the lower left and lower right quadrants.</div>
+<div class="description-paragraph" id="p-0087" num="0086">Also for each pose in enveloping poses, for the grasping regime: applied joint torques must be as close as possible to τ<sub>eq</sub>, the level that can be supported by object contacts as illustrated the line extending from the origin into the upper right quadrant. In order to have a stable grasp for frictionless contacts, τ<sub>r </sub>and τ<sub>eq </sub>must overlap perfectly. However, in real life, there is always some amount of friction that can be supported at the contact, creating stable grasps even if τ<sub>r </sub>and τ<sub>eq </sub>do not overlap perfectly. By trying to bring τ<sub>r </sub>as close as possible to τ<sub>eq</sub>, we attempt to maximize the set of stable grasps, even for low levels of friction.</div>
+<div class="description-paragraph" id="p-0088" num="0087">Further for each pose in enveloping poses, for the opening regime: the gripper must return to the fully extended pose, as illustrated by the cone in the lower left quadrant, which partially overlaps with the cone that extends across the lower left and lower right quadrants in <figref idrefs="DRAWINGS">FIG. 5C</figref>.</div>
+<div class="description-paragraph" id="h-0011" num="0000">C. Error Metrics and Optimization Function</div>
+<div class="description-paragraph" id="p-0089" num="0088">To translate the list of constraints above into a function that can be optimized, first error metrics that quantify whether a given constraint is violated must be defined. For the constraint that requires T-hat-r to be as close as possible to τ<sub>eq</sub>, the error metric given by Equation 5, below, is minimized.</div>
+<div class="description-paragraph" id="p-0090" num="0089">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>DIST</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>τ</mi>
+<mi>r</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>τ</mi>
+<mi>eq</mi>
+</msub>
+<mo>,</mo>
+<mi>ω</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<msup>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<mn>1</mn>
+<mo>-</mo>
+<mrow>
+<msub>
+<mover>
+<mi>τ</mi>
+<mo>^</mo>
+</mover>
+<mi>r</mi>
+</msub>
+<mo>·</mo>
+<msub>
+<mi>τ</mi>
+<mi>eq</mi>
+</msub>
+</mrow>
+</mrow>
+<mi>ω</mi>
+</mfrac>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>5</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0091" num="0090">In Equation 5, w is a scaling parameter that allows us to determine how quickly the error grows away from the constraint.</div>
+<div class="description-paragraph" id="p-0092" num="0091">The second type of constraint requires τ<sub>r </sub>to be inside a cone, defined for example by τ<sup>a </sup>and τ<sup>b</sup>. For satisfying this type of constraint, we attempt to minimize the error metric, as provided in Equation 6, below.</div>
+<div class="description-paragraph" id="p-0093" num="0092">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>CNDIST</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>τ</mi>
+<mi>r</mi>
+</msub>
+<mo>,</mo>
+<msup>
+<mi>τ</mi>
+<mi>a</mi>
+</msup>
+<mo>,</mo>
+<msup>
+<mi>τ</mi>
+<mi>b</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<msup>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<mn>1</mn>
+<mo>-</mo>
+<mrow>
+<msub>
+<mover>
+<mi>τ</mi>
+<mo>^</mo>
+</mover>
+<mi>r</mi>
+</msub>
+<mo>·</mo>
+<mrow>
+<mo>(</mo>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mrow>
+<mn>1</mn>
+<mo>-</mo>
+<mrow>
+<msup>
+<mover>
+<mi>τ</mi>
+<mo>^</mo>
+</mover>
+<mi>a</mi>
+</msup>
+<mo>·</mo>
+<mrow>
+<mo>(</mo>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mfrac>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>6</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0094" num="0093">This is equivalent to the formulation given in Equation 7, below.</div>
+<div class="description-paragraph" id="p-0095" num="0094">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>CNDIST</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>τ</mi>
+<mi>r</mi>
+</msub>
+<mo>,</mo>
+<msup>
+<mi>τ</mi>
+<mi>a</mi>
+</msup>
+<mo>,</mo>
+<msup>
+<mi>τ</mi>
+<mi>b</mi>
+</msup>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<msup>
+<mrow>
+<mo>(</mo>
+<mfrac>
+<mrow>
+<mn>1</mn>
+<mo>-</mo>
+<mrow>
+<mi>cos</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>α</mi>
+</mrow>
+</mrow>
+<mrow>
+<mn>1</mn>
+<mo>-</mo>
+<mrow>
+<mi>cos</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>β</mi>
+</mrow>
+</mrow>
+</mfrac>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>7</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0096" num="0095">With α and β defined as shown in <figref idrefs="DRAWINGS">FIG. 6</figref>.</div>
+<div class="description-paragraph" id="p-0097" num="0096">The overall measure is then computed by summing the values of the error metrics for violations of each constraint. The exact formulation, implementing the constraints described in the previous subsection and illustrated in <figref idrefs="DRAWINGS">FIGS. 5A-5C</figref>, is shown in Alg. 1, below. The optimization goal is to find the set of parameters that minimize the resulting value of S.</div>
+<div class="description-paragraph" id="p-0098" num="0097"> <tables id="TABLE-US-00001" num="00001"> <patent-tables colsep="0" frame="none" rowsep="0"> <table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%"> <thead> <tr class="description-tr"> <td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td> </tr> <tr class="description-tr"> <td class="description-td">Alg. 1</td> </tr> <tr class="description-tr"> <td class="description-td">Algorithm 1 Computation of optimization function</td> </tr> <tr class="description-tr"> <td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td> </tr> </thead> <tbody><tr class="description-tr"> <td class="description-td"> </td> </tr> </tbody></table> <table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%"> <tbody><tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 1:</td> <td class="description-td">S = 0</td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 2:</td> <td class="description-td">for all θ<sub>i </sub>in fingertip_poses do</td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 3:</td> <td class="description-td"> S  <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png"><img alt="Figure US10987801-20210427-P00001" class="patent-full-image" file="US10987801-20210427-P00001.TIF" he="3.56mm" height="14" id="CUSTOM-CHARACTER-00001" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png" wi="2.12mm" width="8"/></a></div>   CNDIST [τ<sub>r </sub>(f<sub>close</sub>,θ<sub>i</sub>), (0,−1)<sup>T</sup>, (1,−0.5)<sup>T</sup>]<sup>2</sup> </td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 4:</td> <td class="description-td"> S  <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png"><img alt="Figure US10987801-20210427-P00001" class="patent-full-image" file="US10987801-20210427-P00001.TIF" he="3.56mm" height="14" id="CUSTOM-CHARACTER-00002" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png" wi="2.12mm" width="8"/></a></div>   CNDIST [τ<sub>r </sub>(f<sub>envel</sub>,θ<sub>i</sub>), (1,0)<sup>T</sup>, τ<sub>eq</sub>(θ<sub>i</sub>)]<sup>2</sup> </td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 5:</td> <td class="description-td"> S  <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png"><img alt="Figure US10987801-20210427-P00001" class="patent-full-image" file="US10987801-20210427-P00001.TIF" he="3.56mm" height="14" id="CUSTOM-CHARACTER-00003" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png" wi="2.12mm" width="8"/></a></div>   CNDIST [τ<sub>r </sub>(f<sub>inf</sub>,θ<sub>i</sub>), (1,0)<sup>T</sup>, τ<sub>eq</sub>(θ<sub>i</sub>)]<sup>2</sup> </td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 6:</td> <td class="description-td"> S  <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png"><img alt="Figure US10987801-20210427-P00001" class="patent-full-image" file="US10987801-20210427-P00001.TIF" he="3.56mm" height="14" id="CUSTOM-CHARACTER-00004" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png" wi="2.12mm" width="8"/></a></div>   CNDIST [τ<sub>r </sub>(0,θ<sub>i</sub>), (−1,0)<sup>T</sup>, (−0.4,−1)<sup>T</sup>]<sup>2</sup> </td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 7:</td> <td class="description-td">end for</td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 8:</td> <td class="description-td">for all θ<sub>i </sub>in enveloping_poses do</td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td"> 9:</td> <td class="description-td"> S  <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png"><img alt="Figure US10987801-20210427-P00001" class="patent-full-image" file="US10987801-20210427-P00001.TIF" he="3.56mm" height="14" id="CUSTOM-CHARACTER-00005" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png" wi="2.12mm" width="8"/></a></div>   CNDIST [τ<sub>r </sub>(f<sub>close</sub>,θ<sub>i</sub>), (−1,−1)<sup>T</sup>, (0.8,−1)<sup>T</sup>]</td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td">10:</td> <td class="description-td"> S  <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png"><img alt="Figure US10987801-20210427-P00001" class="patent-full-image" file="US10987801-20210427-P00001.TIF" he="3.56mm" height="14" id="CUSTOM-CHARACTER-00006" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png" wi="2.12mm" width="8"/></a></div>   CNDIST [τ<sub>r </sub>(f<sub>inf</sub>,θ<sub>i</sub>), τ<sub>eq</sub>(θ<sub>i</sub>), 1.0e<sup>−3</sup>]<sup>2</sup> </td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td">11:</td> <td class="description-td"> S  <div class="patent-image small-patent-image"><a href="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png"><img alt="Figure US10987801-20210427-P00001" class="patent-full-image" file="US10987801-20210427-P00001.TIF" he="3.56mm" height="14" id="CUSTOM-CHARACTER-00007" img-content="character" img-format="tif" inline="no" orientation="portrait" src="https://patentimages.storage.googleapis.com/9c/3b/e2/fd2db67bd2a031/US10987801-20210427-P00001.png" wi="2.12mm" width="8"/></a></div>   CNDIST [τ<sub>r </sub>(0,θ<sub>i</sub>), (−1,0)<sup>T</sup>, (0 −1)<sup>T</sup>]<sup>2</sup> </td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td">12:</td> <td class="description-td">end for</td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td">13:</td> <td class="description-td">return {square root over (S)}</td> </tr> <tr class="description-tr"> <td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td> </tr> </tbody></table> </patent-tables> </tables> <br/>
+D. Optimization Method
+</div>
+<div class="description-paragraph" id="p-0099" num="0098">Optimization was performed using a combination of random search and gradient descent with numerical gradient computation. At each step, a random set of parameters may be chosen and the corresponding value of S is computed. If S is below a given threshold, a gradient descent loop is run, where a step is taken in the direction of the numerically computed gradient until S stops improving. The resulting parameter set is then saved into a database. The overall algorithm can be allowed to run for an arbitrarily chosen amount of time, after which point the configuration with the lowest value of S found so far can be used.</div>
+<div class="description-paragraph" id="p-0100" num="0099">In practice, for a parameter space of dimensionality <b>16</b>, it was found that one computation of the function S takes approximately 19 ms, while computation of the numerical gradient takes approximately 0.6 s. A rigorous analysis of the time required for the best solution to stop improving was not performed; however empirically, it was found that after approximately 60 CPU hours of computation (8 to 10 hours on a single multi-core commodity desktop) no significant improvements can be obtained.</div>
+<div class="description-paragraph" id="p-0101" num="0100">In future work, different optimization algorithms may be tried, suited for large dimensional parameter spaces and highly non-linear optimized functions, such as simulated annealing. Other possible approaches could include casting the optimization function to a formulation that allows efficient computation of the global optimum, such as a Linear or Quadratic Program, as in [<b>19</b>].</div>
+<div class="description-paragraph" id="h-0012" num="0000">IV. Optimization of Link Dimensions</div>
+<div class="description-paragraph" id="p-0102" num="0101">Based on the kinetic optimization described so far, the subject gripper can execute both fingertip and enveloping grasps. The main reason for pursuing these capabilities is to increase the versatility of the gripper; however, in order to maximize their benefit focus should also be directed on the range of objects on which such grasps can be executed.</div>
+<div class="description-paragraph" id="p-0103" num="0102">Fingertip grasps are relatively straightforward in terms of graspable object dimensions: the widest object that can grasped must fit between the fingers in the fully extended pose; the thinnest one can be arbitrarily thin (e.g. a sheet of paper). However, enveloping grasps are more difficult to execute. <figref idrefs="DRAWINGS">FIGS. 7A-7B</figref> illustrate potential successful and unsuccessful enveloping grasps based on the dimensions of the grasped object. The determining factors for the range of objects <b>706</b> <i>a</i>, <b>706</b> <i>b</i>, <b>706</b> <i>c </i>(collectively <b>706</b>) that the gripper can geometrically envelop are the lengths and thicknesses of the links <b>712</b> <i>a</i>, <b>712</b> <i>b</i>, <b>714</b> <i>a</i>, <b>714</b> <i>b</i>, <b>724</b>. We propose a second type of optimization, aiming to maximize this range.</div>
+<div class="description-paragraph" id="p-0104" num="0103">The space of possible objects may be parameterized by dividing the 2D profiles <b>838</b> <i>a</i>, <b>838</b> <i>b </i>(collectively <b>838</b>) illustrated in <figref idrefs="DRAWINGS">FIGS. 8A and 8C</figref> of the objects <b>706</b> into two categories: rectangular and elliptical. For each category, the object profile <b>838</b> is defined by its width and height.</div>
+<div class="description-paragraph" id="p-0105" num="0104">The parts of the object space that are most important for a gripper to cover will be application-specific. For a gripper intended for versatile manipulation in human settings, a set (n=62) of objects common in households and offices was measured, such as glasses, mugs, bottles, cans, pens, cellphones, various product boxes, staples, condiment packs, computer mice, etc. An illustration of the elliptic object space <b>840</b> <i>a </i>and 2D rectangular object space <b>840</b> <i>b </i>is shown in <figref idrefs="DRAWINGS">FIGS. 8B and 8D</figref>, respectively, populated by the objects that were measured. Notably, spaces are symmetrical as objects can be approached from either direction.</div>
+<div class="description-paragraph" id="h-0013" num="0000">A. Optimization Function</div>
+<div class="description-paragraph" id="p-0106" num="0105">We optimized 6 parameters that affect the space of objects the gripper can geometrically enclose: length and thickness of the palm, proximal and distal links. For each set of parameters, the optimization function was defined as the number of discrete samples in the object space interest region that the gripper failed to enclose. Each object was approached by the gripper along a direction aligned with its height axis, and centered along the object's width. An enveloping grasp was defined as successful if the following conditions were met.</div>
+<div class="description-paragraph" id="p-0107" num="0106">1) Contact is established on all four links of the gripper.</div>
+<div class="description-paragraph" id="p-0108" num="0107">2) θ<sub>1 </sub>greater than or equal to 45 degrees: as the gripper is underactuated, the proximal joints stop flexing only when contact with an object prevents further motion; only at that point do the distal joints start flexing. The exact angle where that happens depends on the friction coefficient between the proximal link and the object. We chose a value of 45 degrees, which corresponds to a friction coefficient of 1.</div>
+<div class="description-paragraph" id="p-0109" num="0108">3) θ<sub>1</sub>+θ<sub>2 </sub>greater than or equal to 110 degrees: this condition distinguishes an enveloping grasp from a fingertip grasp (<figref idrefs="DRAWINGS">FIG. 7B</figref>).</div>
+<div class="description-paragraph" id="p-0110" num="0109">4) The opposing fingertips do not collide as they are flexing to complete the enveloping grasp (<figref idrefs="DRAWINGS">FIG. 7C</figref>).</div>
+<div class="description-paragraph" id="p-0111" num="0110">Based on the distribution of measured objects, the following object space regions of interest were empirically defined.</div>
+<div class="description-paragraph" id="p-0112" num="0111">A) Since circular objects are more predominant than non-circular elliptical ones, attention was focused on circular objects with diameters between 40 mm and 90 mm, sampled every 10 mm. Objects with diameters between 50 mm and 60 mm were given double weight (69 discrete samples in total).</div>
+<div class="description-paragraph" id="p-0113" num="0112">B) Rectangular objects with width and height between 40 mm and 100 mm, independently sampled at every 10 mm (49 samples in total).</div>
+<div class="description-paragraph" id="p-0114" num="0113">It is important to note that this type of object space sampling is far from complete. It does not explicitly address objects with irregular shapes, or objects approached by the gripper along a direction that is offset from the center and not aligned with a major object axis. In practice, explicitly optimizing for this particular subset of object shapes, and relying on the gripper's passive mechanical adaptation to handle deviations from it, has been found to work well in a wide range of situations, as illustrated in the next section.</div>
+<div class="description-paragraph" id="p-0115" num="0114">It is also noted that the space of enveloping grasps is always complemented by the space of fingertip grasps, which is significantly less constrained. This is the reason for choosing to focus enveloping grasps on the relatively large objects in the set, with an assumption that fingertip grasps are well suited for small objects.</div>
+<div class="description-paragraph" id="h-0014" num="0000">B. Optimization Results</div>
+<div class="description-paragraph" id="p-0116" num="0115">The same optimization method described in Sec. III-D is used, with the parameters and function described in the previous subsection. For this function, a single evaluation took approximately 0.25 s, and computation of the numerical gradient took approximately 3 s. Complete optimization times similar to the ones in Sec. III-D were allowed.</div>
+<div class="description-paragraph" id="p-0117" num="0116">The best parameter values we found are shown in Table I.</div>
+<div class="description-paragraph" id="p-0118" num="0117">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE I</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Dimensions for Optimized Gripper.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Palm</td>
+<td class="description-td">Prox. link</td>
+<td class="description-td">Dist. link</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Length (mm)</td>
+<td class="description-td">35</td>
+<td class="description-td">65</td>
+<td class="description-td">53</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Thickness (mm) </td>
+<td class="description-td">9</td>
+<td class="description-td">8</td>
+<td class="description-td">7</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0119" num="0118">The corresponding ranges <b>942</b> <i>a</i>, <b>942</b> <i>b </i>of objects that the gripper can envelop are shown in <figref idrefs="DRAWINGS">FIGS. 9A, 9B</figref> for elliptical and rectangular objects, respectively. For comparison, <figref idrefs="DRAWINGS">FIGS. 9C, 9D</figref> show the corresponding ranges <b>944</b> <i>a</i>, <b>944</b> <i>b </i>of objects that an unoptimized gripper can envelope for elliptical and rectangular objects, respectively, with all link lengths equal to 50 mm and thicknesses equal to 8 mm.</div>
+<div class="description-paragraph" id="p-0120" num="0119">Notably, the optimization method produces improved coverage of the object space, allowing for enveloping grasps of a wide range of objects. However, many common objects still cannot be enveloped; for those, this particular model must rely on fingertip grasps. In the future, we plan to study additional methods for improving the range of objects that can be envelop; these can include overlapping fingers, interlocking distal links, or multiple fingers offset from each other in the plane perpendicular to the closing direction, as in [<b>4</b>].</div>
+<div class="description-paragraph" id="h-0015" num="0000">V. Prototype and Demonstration</div>
+<div class="description-paragraph" id="p-0121" num="0120">In order to build a gripper <b>1004</b> (<figref idrefs="DRAWINGS">FIG. 10</figref>) with the desired characteristics, first the optimization presented in the previous section was run, resulting in the set of desired link dimensions. Then, based on these results, the kinetic optimization presented in Sec. III was run, computing the parameters of the actuation mechanism. Using the notation in <figref idrefs="DRAWINGS">FIG. 10</figref>, the parameters used for the kinetic optimization are set out immediately below.</div>
+<div class="description-paragraph" id="p-0122" num="0121">1) t<sub>0</sub>, t<sub>1</sub>, t<sub>2</sub>, t<sub>3</sub>: location of tendon routing points relative to link coordinate systems (mm). The palm coordinate system (used for t0) is located at the proximal joint <b>1008</b>; the proximal link's <b>1012</b> coordinate system (used for t1 and t2) is located at the distal joint <b>1010</b>, and the distal link's <b>1014</b> coordinate system (used for t3) is located at the fingertip. In each case, x is parallel with the bottom of the corresponding link <b>1012</b>, <b>1014</b>, <b>1034</b> and pointing away from the palm <b>1034</b>, and z is the joint's <b>1008</b>, <b>1010</b> axis of rotation, with positive rotation around z corresponding to flexion.</div>
+<div class="description-paragraph" id="p-0123" num="0122">2) k1,2, Δθ<sub>1</sub>,2: stiffness (Nmm/rad) and pre tensioning (rad) of joint torsional springs (not shown in <figref idrefs="DRAWINGS">FIG. 10</figref>).</div>
+<div class="description-paragraph" id="p-0124" num="0123">3) k1 and Δ<sub>1</sub>: stiffness (N/mm) and pre-tensioning (mm) of linear spring <b>1030</b> attached to extensor tendon <b>1018</b>.</div>
+<div class="description-paragraph" id="p-0125" num="0124">4) r1, r2: radii (mm) of joint mandrels <b>1026</b> <i>a</i>, <b>1026</b> <i>b </i>for proximal <b>1008</b> and distal joint <b>1010</b>.</div>
+<div class="description-paragraph" id="p-0126" num="0125">The best configuration found is presented in Table II.</div>
+<div class="description-paragraph" id="p-0127" num="0126">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE II</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Parameter Values for Optimized Gripper.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="17" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">param.</td>
+<td class="description-td">t<sub>0x</sub> </td>
+<td class="description-td">t<sub>0y</sub> </td>
+<td class="description-td">t<sub>1x</sub> </td>
+<td class="description-td">t<sub>1y</sub> </td>
+<td class="description-td">t<sub>2x</sub> </td>
+<td class="description-td">t<sub>2y</sub> </td>
+<td class="description-td">t<sub>3x</sub> </td>
+<td class="description-td">t<sub>3y</sub> </td>
+<td class="description-td">k<sub>1</sub> </td>
+<td class="description-td">Δ<sub>θ1</sub> </td>
+<td class="description-td">k<sub>2</sub> </td>
+<td class="description-td">Δ<sub>θ2</sub> </td>
+<td class="description-td">k<sub>l</sub> </td>
+<td class="description-td">Δ<sub>θl</sub> </td>
+<td class="description-td">r<sub>1</sub> </td>
+<td class="description-td">r<sub>2</sub> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="17" nameend="17" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">value</td>
+<td class="description-td">−25.0</td>
+<td class="description-td">6.0</td>
+<td class="description-td">−45.0</td>
+<td class="description-td">3.6</td>
+<td class="description-td">−7.6</td>
+<td class="description-td">0.9</td>
+<td class="description-td">−42.0</td>
+<td class="description-td">−5.0</td>
+<td class="description-td">9.9</td>
+<td class="description-td">4.5</td>
+<td class="description-td">4.5</td>
+<td class="description-td">4.3</td>
+<td class="description-td">0.24</td>
+<td class="description-td">12.0</td>
+<td class="description-td">2.4</td>
+<td class="description-td">3.2</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="17" nameend="17" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0128" num="0127">The value of the dimensionless optimization function S, computed using Alg. 1, above, for this configuration is 3.47. This value represented the norm of the error metrics computed over a set of 18 poses (11 fingertip grasps and 7 enveloping grasps), according to multiple constraints for each pose. As such, it is difficult to attach intuitive insights to any particular value. It is however noted that each individual error metric was defined so that a value below 1.0 indicates qualitatively acceptable behavior; as such, we take a norm of 3.47 over 64 total constraints to be acceptable, a result that was indeed confirmed in practice, as shown below.</div>
+<div class="description-paragraph" id="p-0129" num="0128">Based on these results, the model shown in <figref idrefs="DRAWINGS">FIG. 11</figref> was designed, and then used to construct a prototype gripper <b>1104</b>. The links <b>1112</b> <i>a</i>, <b>1114</b> <i>a</i>, <b>1134</b> were 3D-printed on a ProJet HD 3000 rapid prototyping machine. The prototype gripper <b>1104</b> used off-the-shelf torsional <b>1132</b> and linear springs <b>1130</b>, as well as ball bearings for the joints <b>1108</b>, <b>1110</b>. The tendons <b>1116</b>, <b>1117</b>, <b>1118</b> were made from Spectra lines, commonly used for fishing or kiting, a model rated to 200 lbs. force. A number of the routing points <b>1136</b> are called out in <figref idrefs="DRAWINGS">FIG. 11</figref>, as are the flexor tendon <b>1116</b>, passive tendon, and extensor tendon <b>1118</b>. The fingers <b>1102</b> <i>a </i>(only one shown) were padded with off-the-shelf rubber pads. The total cost of parts for the gripper <b>1104</b> (excluding the motor) was approximately $70.</div>
+<div class="description-paragraph" id="p-0130" num="0129">The prototype gripper <b>1104</b> exhibited all the desired characteristics. In particular, the prototype gripper <b>1104</b> was used to demonstrate both fingertip grasps, on objects ranging in size from the maximum finger span to a sheet of paper, and enveloping grasps, on objects with dimensions as predicted by our dimensional optimization. In addition, the prototype gripper <b>1104</b> was suitable for grasping objects of irregular shapes, and using off-center approach directions. A number of examples of the gripper <b>1104</b> grasping objects <b>1206</b> are shown in <figref idrefs="DRAWINGS">FIGS. 12A-12L</figref>. The closing sequence for both a fingertip and enveloping grasp can be seen in <figref idrefs="DRAWINGS">FIGS. 1A-1F</figref>.</div>
+<div class="description-paragraph" id="h-0016" num="0000">VI. Discussion and Conclusions</div>
+<div class="description-paragraph" id="p-0131" num="0130">This disclosure introduces two types of optimization and analysis for a two-finger, single-actuator gripper. A first goal was for the gripper to achieve stable fingertip grasps, with the distal links in perfect opposition, as long as the fingers close unobstructed. In case the proximal links are stopped by contact with the object, the distal links must flex, creating stable enveloping grasps. A second goal was to extend the range of objects that the gripper can kinematically enclose. As shown herein, these goals can be achieved by a combination of optimized links dimensions and actuation parameters.</div>
+<div class="description-paragraph" id="p-0132" num="0131">A prototype gripper <b>1104</b> has been constructed according the results of these optimizations, and the approached described herein validated. The resulting end-effector can perform fingertip and enveloping grasps for a wide range of objects, exhibits the desired transition between these modes, and passively adapts to the shape of the object while maintaining stable grasps.</div>
+<div class="description-paragraph" id="p-0133" num="0132">While noting the capabilities of a gripper designed using this approach, it is important to also highlight its limitations. This end-effector is meant to explore what is possible with a relatively low-complexity design, and very affordable hardware (and, in particular, a single actuator). An understanding of the trade-offs involved can help put the design to the best use, by matching it with suitable applications, and inform the design of more complex versions, for cases where improved performance is necessary.</div>
+<div class="description-paragraph" id="p-0134" num="0133">A single actuated tendon provides flexion forces for both proximal and distal joints, meaning that a combination of flexion at the proximal joint and extension at the distal joint leads to no net change in tendon length. As such, external forces acting on the grasped object that induce this combination of joint motions are not resisted by the motor, but only by friction between the object and the rubber fingerpads. Transition from fingertip to enveloping grasps happens passively, with no active sensing or grasp planning, but does require a level of friction between the grasped object and the robot's proximal links, reducing the range of objects that can be enclosed. The two fingers are in permanent opposition, enabling fingertip grasps of very small objects but leading to collision between the distal links when trying to envelop them.</div>
+<div class="description-paragraph" id="p-0135" num="0134">Referring to <figref idrefs="DRAWINGS">FIGS. 13A-13E</figref>, a gripper system may comprise a kinematic assembly <b>1304</b> that is removably coupleable to an adaptation module or “motor pack” <b>1350</b>. Referring to <figref idrefs="DRAWINGS">FIG. 13A</figref>, in one embodiment a kinematic assembly <b>1304</b> may comprise two finger assemblies <b>1302</b> <i>a</i>, <b>1302</b> <i>b</i>, each comprising a distal finger element <b>1314</b> <i>a</i>, <b>1314</b> <i>b </i>movably coupled to a proximal finger element <b>1312</b> <i>a</i>, <b>1312</b> <i>b </i>with a distal joint <b>1310</b> <i>a</i>, <b>1310</b> <i>b</i>. The proximal finger elements <b>1312</b> <i>a</i>, <b>1312</b> <i>b </i>are movably coupled, via proximal joints <b>1308</b> <i>a</i>, <b>1308</b> <i>b </i>to a proximal assembly <b>1324</b>.</div>
+<div class="description-paragraph" id="p-0136" num="0135">The proximal assembly <b>1324</b> may be removably coupled to the motor pack <b>1350</b>(<figref idrefs="DRAWINGS">FIG. 13C-E</figref>) in a manner such that the proximal assembly <b>1324</b> may receive a motion actuation transferring element, such as a motion actuation piston fitting <b>1352</b>(<figref idrefs="DRAWINGS">FIG. 13C</figref>), to cause the kinematic assembly <b>1304</b> to move in accordance with movement of a motor <b>1354</b> in the motor pack <b>1350</b>.</div>
+<div class="description-paragraph" id="p-0137" num="0136">Referring to <figref idrefs="DRAWINGS">FIG. 13B</figref>, the proximal end of one embodiment of a proximal assembly <b>1324</b> is shown in orthogonal view to illustrate that a recess <b>1356</b> may be defined therethrough to accommodate coupling with the motor pack <b>1350</b>. The recess may comprise one or more channeled or grooved coupling features <b>1358</b>, along with a circumferential coupling recess <b>1360</b>. The channeled or grooved coupling features <b>1358</b> and circumferential coupling recess <b>1360</b> allow an actuation piston fitting <b>1352</b>, such as that depicted in <figref idrefs="DRAWINGS">FIG. 13C</figref>, to be removably coupled into such recesses <b>1360</b> and/or grooves <b>1358</b>, and to pass a tension motion actuation to the flexor tendons of the kinematic assembly <b>1304</b>, as described above. In other words, the kinematic assembly <b>1304</b> is removably coupleable from the motor pack <b>1350</b> by virtue of such a coupling configuration, wherein one or more motion actuations may be passed across the interface which also serves to couple the two assemblies to each other.</div>
+<div class="description-paragraph" id="p-0138" num="0137">Referring to <figref idrefs="DRAWINGS">FIG. 13C</figref>, the depicted embodiment, the removable coupling is accomplished by inserting the coupling features <b>1362</b> of the actuation piston fitting <b>1352</b> through the channels <b>1356</b> of the proximal assembly <b>1324</b> until they reach the circumferential coupling recess <b>1360</b>. The kinematic assembly <b>1304</b> is then twisted relative to the motor pack <b>1350</b> to place the coupling features <b>1362</b> within the circumferential coupling recess <b>1360</b>. Such provides a stable coupling for applying tensile loads across the interface between the kinematic assembly <b>1304</b> and the motor pack <b>1350</b>, to ultimately controllably tension the tendons within the kinematic assembly <b>1304</b> and cause grasping of the kinematic assembly <b>1304</b> as per the above description. An engagement ring <b>1366</b> provides counterloading to tensile loads passed through the actuation piston fitting <b>1352</b> as the engagement ring <b>1366</b> is interfaced with the proximal assembly <b>1324</b> of the kinematic assembly <b>1304</b>.</div>
+<div class="description-paragraph" id="p-0139" num="0138">Also shown in <figref idrefs="DRAWINGS">FIG. 13C</figref> are an electric motor <b>1354</b> and a motor controller board <b>1368</b>. The electric motor <b>1354</b> and the motor controller board <b>1368</b> are configured to controllably cause the actuation piston fitting <b>1352</b> to insert (extend) or retract.</div>
+<div class="description-paragraph" id="p-0140" num="0139">Referring to <figref idrefs="DRAWINGS">FIG. 13D</figref>, a side orthogonal view of a motor pack <b>1350</b> is shown featuring a transparent outer housing to facilitate a limited view of a threaded member or screw member <b>1370</b> that is coupled to an output shaft of the motor <b>1354</b> by a gear train or transmission assembly <b>1372</b> such that rotation of the electric motor <b>1354</b> causes rotation of the screw member <b>1370</b>. Rotation of the screw member <b>1370</b> causes the actuation piston fitting <b>1352</b> to insert (extend) or retract relative to the engagement ring <b>1366</b>, causing insertion or retraction of one or more tensile element or tendons of a kinematic assembly <b>1304</b> when a kinematic assembly <b>1304</b> is removably coupled to the motor pack <b>1350</b>. A proximal coupling interface <b>1374</b> is configured to be removably coupled to a structural member such as a robotic wrist or other portion of a robotic arm.</div>
+<div class="description-paragraph" id="p-0141" num="0140"> <figref idrefs="DRAWINGS">FIG. 13E</figref> illustrates a bottom orthogonal view of a motor pack <b>1350</b> with aspects of a proximal coupling interface <b>1374</b> depicted. In the depicted embodiment, a series of perimetric coupling elements <b>1378</b> forming an outer threaded surface <b>1380</b> as well as an inner threaded surface <b>1382</b> may be movably engaged by a coupling ring intended to be loosened or tightened relative to the outer threads <b>1380</b> manually (i.e., using an operator's hand. The coupling ring may be configured to create a radially-constraining “hoop stress” that maintains, and also allows adjustability of, an overall diameter of the assembly of perimetric coupling elements <b>1378</b> so that the inner threaded surface <b>1382</b> may be screwed onto a fitting on a substrate member (i.e., such as a robotic arm) with a desired diameter of the assembly of perimetric coupling elements <b>1378</b>. To lock down the motor pack <b>1350</b> relative to the substrate member, the coupling member may be further rotated to cause a clamping level of hoop stress against the interfaced substrate member, for secure coupling of the motor pack <b>1350</b> to the substrate member. The assembly of perimetric coupling elements <b>1378</b> may comprise a material such as a metal or polymer. The assembly of perimetric coupling elements <b>1378</b> may be configured such that it is intended to be a mechanical failure and decoupling point for the kinematic assembly—motor pack—substrate member assembly in the event that a substantial collision is encountered at the kinematic assembly <b>1304</b>. In other words, should a collision with a foreign object cause a load to the gripper/motor pack/substrate system that exceeds a certain design threshold, the system may be configured such that the proximal coupling interface <b>1374</b> breaks loose from the substrate by small micromotions at one or more of the assembly of perimetric coupling elements <b>1378</b> which allow for a release of the substrate from the assembly of perimetric coupling elements <b>1378</b>.</div>
+<div class="description-paragraph" id="p-0142" num="0141">The removable interface described above in relation to <figref idrefs="DRAWINGS">FIGS. 13A-13E</figref> facilitates design of a kinematic assembly <b>1304</b> which has no motors or electronics. This allows the kinematic assemblies <b>1304</b> to be easily removed, cleaned or sterilized without motor or electronic damage. This allows kinematic assembly <b>1304</b> to be easily replaced—or traded in a “tool change” type of configuration for another tool, such as another size of kinematic assembly, another tool, such as a pipetting device or syringe, or another kinematic assembly <b>1304</b>. Other kinematic assemblies <b>1304</b> may, for example, have 1, or 3, or more fingers as opposed to two as in the depicted embodiment. Such configurations may feature motor packs with two more motors, as well as removable couplings that facilitate passage of two or more insertion/retraction motion actuations, for example.</div>
+<div class="description-paragraph" id="p-0143" num="0142">In one embodiment, a robot or robotic arm may carry or have available a tool compartment or “holster” into which a kinematic assembly <b>1304</b> may be inserted, such as in a closed grasp configuration for geometric efficiency, after which the robot may rotate the substrate member (or rotate and/or insert/retract, depending upon the particular release configuration. The configuration depicted in <figref idrefs="DRAWINGS">FIGS. 13A-13E</figref> requires insertion and turning for coupling, and turning and retraction for decoupling), thereby rotating the motor pack <b>1350</b> and decoupling the motor pack <b>1350</b> from the kinematic assembly <b>1304</b>. Importantly, the coupling and decoupling action described herein is a tool-less exchange (i.e., does not require tools such as wrenches and the like—only requires specific combined motions, such as insertion/rotation along certain axes). Also importantly, since the aforementioned kinematic assembly <b>1303</b> embodiment has no motors or electronics, not only may it be cleaned or cheaply replaced, but also it may be decoupled in an uncomplicated manner—without electronic leads or contacts to disconnect.</div>
+<div class="description-paragraph" id="p-0144" num="0143">Referring to <figref idrefs="DRAWINGS">FIGS. 14A-14B</figref>, one of the challenges with a conventional coupling of a gripper or kinematic assembly <b>1404</b> to a robotic arm <b>1480</b> is in picking up a small object <b>1406</b>, such as a pen, from a substantially flat surface <b>1482</b>, such as a tabletop. As shown in <figref idrefs="DRAWINGS">FIG. 14A</figref>, if the robotic arm <b>1480</b> places the gripper <b>1404</b> a bit too high relative to the object (e.g., pen) <b>1406</b>, the gripper <b>1402</b> misses the object <b>1406</b> to be grasped. As shown in <figref idrefs="DRAWINGS">FIG. 14B</figref>, if the robotic arm <b>1480</b> places the gripper <b>1406</b> a bit too low relative to the object (e.g., pen) <b>1046</b>, the gripper <b>1402</b> collides with the flat surface (e.g., tabletop) <b>1482</b>, and conventionally is unable to pick up the object (e.g., pen) <b>1406</b> from there without further adjustment.</div>
+<div class="description-paragraph" id="p-0145" num="0144">Referring to <figref idrefs="DRAWINGS">FIGS. 15A-15H</figref>, with the subject underactuated gripper design configurations, a kinematic assembly <b>1504</b> may be advanced by a robotic arm <b>1580</b> toward a small object <b>1506</b>, such as a pen, from a substantially flat surface <b>1582</b>, such as a tabletop, with an elevation relative to the object <b>1506</b> that typically would be too close, and still successfully grasp and pick up the object (e.g., pen) <b>1506</b>.</div>
+<div class="description-paragraph" id="p-0146" num="0145">Referring to <figref idrefs="DRAWINGS">FIG. 15A</figref>, a kinematic assembly <b>1504</b> is being advanced toward an object (e.g., pen) <b>1506</b> in a configuration that conventionally would be too close for fingertip grasping.</div>
+<div class="description-paragraph" id="p-0147" num="0146">As shown in <figref idrefs="DRAWINGS">FIG. 15B</figref>, the fingertips <b>1584</b> <i>a</i>, <b>1584</b> <i>b </i>of the kinematic assembly <b>1504</b> collide with the tabletop <b>1582</b>. However, rather than become mechanically overconstrained, the passive adaptation of the kinematic assembly <b>1504</b> to the environment, which is based upon tendon routing/geometry and general kinematics described herein, allows the kinematic assembly <b>1504</b> to adapt and rotate the distal finger elements <b>1514</b> <i>a</i>, <b>1514</b> <i>b </i>inward toward the object (e.g., pen) <b>1506</b> to be grasped.</div>
+<div class="description-paragraph" id="p-0148" num="0147"> <figref idrefs="DRAWINGS">FIG. 15B</figref> shows these distal finger elements <b>1514</b> <i>a</i>, <b>1514</b> <i>b </i>starting to rotate inward toward the object (e.g., pen) <b>1506</b>. <figref idrefs="DRAWINGS">FIGS. 15C and 15D</figref> each show further inward rotation of the distal finger elements <b>1514</b> <i>a</i>, <b>1514</b> <i>b </i>until the object (e.g., pen) <b>1506</b> is grasped between the distal ends of the fingertips <b>1584</b> <i>a</i>, <b>1584</b> <i>b. </i> </div>
+<div class="description-paragraph" id="p-0149" num="0148">In one embodiment, the kinematic assembly may be configured to allow for the robot or operator to command a pick up of the object <b>1506</b> straight away from this grasping configuration. In another embodiment, with an upward motion of the kinematic assembly <b>1504</b> away from the surface (e.g., tabletop) <b>1582</b>, the distal finger elements <b>1514</b> <i>a</i>, <b>1514</b> <i>b </i>are allowed to rotate downward while the proximal finger elements <b>1512</b> <i>a</i>, <b>1512</b> <i>b </i>rotate inward toward the object (e.g., pen) to be grasped, as shown in <figref idrefs="DRAWINGS">FIG. 15E</figref>. With further upward motion of the kinematic assembly <b>1504</b> away from the surface (e.g., tabletop) <b>1582</b>, as shown in <figref idrefs="DRAWINGS">FIGS. 15F and 15G</figref>, the object (e.g., pen) <b>1506</b> becomes grasped in a conventional fingertip grasp, after which the object <b>1506</b> may securely be lifted away from the surface <b>1582</b>, as shown in <figref idrefs="DRAWINGS">FIG. 15H</figref>.</div>
+<div class="description-paragraph" id="p-0150" num="0149"> <figref idrefs="DRAWINGS">FIGS. 16A-16D</figref> show wedged distal finger elements <b>1614</b> <i>a</i>, <b>1614</b> <i>b</i>, having a wedged geometry on their outer/distal aspects <b>1686</b> <i>a</i>, <b>1686</b> <i>b</i>, but having a flat geometry on their gripping surfaces <b>1688</b> <i>a</i>, <b>1688</b> <i>b</i>. Such may be used as in the distal finger elements <b>1514</b> <i>a</i>, <b>1514</b> <i>b </i>described above. This may assist in grasping scenarios such as the configuration described above in reference to <figref idrefs="DRAWINGS">FIGS. 15A-15H</figref>. As shown in <figref idrefs="DRAWINGS">FIGS. 16A-16D</figref>, the wedged/recessed outer geometry <b>1686</b> <i>a</i>, <b>1686</b> <i>b </i>allows for relatively easy scooping of the object (e.g., pen) <b>1506</b>, rotation of the kinematic assembly members relative to each other, and lifting away from the surface (e.g., tabletop) <b>1582</b>.</div>
+<div class="description-paragraph" id="p-0151" num="0150">Future designs can improve performance in multiple ways. For example, distal links on opposite fingers that overlap with each other instead of colliding when performing enveloping grasps can enable the enclosing of smaller objects. Also for example, inclusion of an additional link for each finger, as in the MARS [1] or SARAH [2] hands, could improve the ability to adapt to various grasped object shapes. As a further example, independent actuation for the proximal and distal joints can increase the stability of grasps; combined with tactile sensing, this approach can enable enveloping grasps of a wider range of objects. The features will play an important role on the way to versatile end-effectors, widely available for operation in unstructured environments.
+</div> <ul> <li id="ul0001-0001" num="0151">[1] C. Gosselin, T. Laliberte, and T. Degoulange, “Underactuated robotic hand,” in Video Proc. of the IEEE Intl. Conf. on Robotics and Automation, 1998.</li> <li id="ul0001-0002" num="0152">[2] T. Laliberte, L. Birglen, and C. M. Gosselin, “Underactuation in robotic grasping hands,” Machine Intelligence &amp; Robotic Control, vol. 4, no. 3, pp. 1-11, 2002.</li> <li id="ul0001-0003" num="0153">[3] A. Dollar and R. Howe, “Joint coupling design of underactuated grippers,” in Mechanisms and Robotics Conf., 2006.</li> <li id="ul0001-0004" num="0154">[4] A. Dollar and R. Howe, “Simple, robust autonomous grasping in unstructured environments,” in IEEE Intl. Conf. on Robotics and Automation, 2007, pp. 4693-4700.</li> <li id="ul0001-0005" num="0155">[5] N. Ulrich, R. Paul, and R. Bajcsy, “A medium-complexity compliant end effector,” in IEEE Intl. Conf. on Robotics and Automation, 1988.</li> <li id="ul0001-0006" num="0156">[6] L. Birglen, T. Laliberte, and C. Gosselin, Underactuated Robotic Hands. Springer Tracts in Advanced Robotics, 2008.</li> <li id="ul0001-0007" num="0157">[7] R. Kurtz and V. Hayward, “Dexterity measure for tendon actuated parallel mechanisms,” in IEEE Intl. Conf. on Advanced Robotics, 1991.</li> <li id="ul0001-0008" num="0158">[8] A. Bicchi and D. Prattichizzo, “Analysis and optimization of tendinous actuation for biomorphically designed robotic systems,” Robotica, vol. 18, pp. 23-31, 2000.</li> <li id="ul0001-0009" num="0159">[9] N. Pollard and R. Gilbert, “Tendon arrangement and muscle force requirements for humanlike force capabilities in a robotic finger,” IEEE Intl. Conf. on Robotics and Automation, pp. 3755-3762, 2002.</li> <li id="ul0001-0010" num="0160">[10] J. Fu and N. Pollard, “On the importance of asymmetries in grasp quality metrics for tendon driven hands,” in IEEE-RAS Intl. Conf. on Intelligent Robots and Systems, 2006.</li> <li id="ul0001-0011" num="0161">[11] C. Gosselin, F. Pelletier, and T. Laliberte, “An anthropomorphic underactuated robotic hand with 15 Dofs and a single actuator,” IEEE Intl. Conf. on Robotics and Automation, 2008.</li> <li id="ul0001-0012" num="0162">[12] C. Brown and H. Asada, “Inter-finger coordination and postural synergies in robot hands via mechanical implementation of principal components analysis,” in IEEE-RAS Intl. Conf. on Intelligent Robots and Systems, 2007.</li> <li id="ul0001-0013" num="0163">[13] M. C. Carrozza, G. Cappiello, S. Micera, B. B. Edin, L. Beccai, and C. Cipriani, “Design of a cybernetic hand for perception and action,” Biol. Cybern., vol. 95, no. 6, pp. 629-644, 2006.</li> <li id="ul0001-0014" num="0164">[14] M. Mason and K. Salisbury, Robot hands and the mechanics of manipulation. MIT Press, 1985.</li> <li id="ul0001-0015" num="0165">[15] M. Buss, H. Hashimoto, and J. Moore, “Dextrous hand grasping force optimization,” IEEE Trans. on Robotics and Automation, vol. 12, pp. 406-418, 1996.</li> <li id="ul0001-0016" num="0166">[16] L.-W. Tsai, Robot Analysis. John Wiley &amp; Sons, 1999.</li> <li id="ul0001-0017" num="0167">[17] L. Han, J. Trinkle, and Z. Li, “Grasp analysis as linear matrix inequality problems,” IEEE Trans. on Robotics and Automation, vol. 16, pp. 663-674, 2000.</li> <li id="ul0001-0018" num="0168">[18] S. Kwak, L. Blankevoort, and G. Ateshian, “A mathematical formulation for 3D quasi-static multibody models of diarthroidal joints,” Comp. Meth. in Biomech. and Biomed. Eng., vol. 3, pp. 41-64, 2000.</li> <li id="ul0001-0019" num="0169">[19] M. Ciocarlie and P. Allen, “A constrained optimization framework for compliant underactuated grasping,” Mech. Sciences, vol. 2, no. 1, 2011.</li> </ul>
+<div class="description-paragraph" id="p-0152" num="0170">Various exemplary embodiments of the invention are described herein. Reference is made to these examples in a non-limiting sense. They are provided to illustrate more broadly applicable aspects of the invention. Various changes may be made to the invention described and equivalents may be substituted without departing from the true spirit and scope of the invention. In addition, many modifications may be made to adapt a particular situation, material, composition of matter, process, process act(s) or step(s) to the objective(s), spirit or scope of the present invention. Further, as will be appreciated by those with skill in the art that each of the individual variations described and illustrated herein has discrete components and features which may be readily separated from or combined with the features of any of the other several embodiments without departing from the scope or spirit of the present inventions. All such modifications are intended to be within the scope of claims associated with this disclosure.</div>
+<div class="description-paragraph" id="p-0153" num="0171">U.S. provisional patent application Ser. No. 61/711,729 filed Oct. 9, 2012, U.S. application Ser. No. 14/050,075, filed Oct. 10, 2013, and U.S. application Ser. No. 14/456,450, filed Aug. 11, 2014, are incorporated herein by reference in their entirety.</div>
+<div class="description-paragraph" id="p-0154" num="0172">Any of the devices described for carrying out the subject diagnostic or interventional procedures may be provided in packaged combination for use in executing such interventions. These supply “kits” may further include instructions for use and be packaged in containers as commonly employed for such purposes.</div>
+<div class="description-paragraph" id="p-0155" num="0173">The invention includes methods that may be performed using the subject devices. The methods may comprise the act of providing such a suitable device. Such provision may be performed by the end user. In other words, the “providing” act merely requires the end user obtain, access, approach, position, set-up, activate, power-up or otherwise act to provide the requisite device in the subject method. Methods recited herein may be carried out in any order of the recited events which is logically possible, as well as in the recited order of events.</div>
+<div class="description-paragraph" id="p-0156" num="0174">Exemplary aspects of the invention, together with details regarding material selection and manufacture have been set forth above. As for other details of the present invention, these may be appreciated in connection with the above-referenced patents and publications as well as generally known or appreciated by those with skill in the art. The same may hold true with respect to method-based aspects of the invention in terms of additional acts as commonly or logically employed.</div>
+<div class="description-paragraph" id="p-0157" num="0175">In addition, though the invention has been described in reference to several examples optionally incorporating various features, the invention is not to be limited to that which is described or indicated as contemplated with respect to each variation of the invention. Various changes may be made to the invention described and equivalents (whether recited herein or not included for the sake of some brevity) may be substituted without departing from the true spirit and scope of the invention. In addition, where a range of values is provided, it is understood that every intervening value, between the upper and lower limit of that range and any other stated or intervening value in that stated range, is encompassed within the invention.</div>
+<div class="description-paragraph" id="p-0158" num="0176">Also, it is contemplated that any optional feature of the inventive variations described may be set forth and claimed independently, or in combination with any one or more of the features described herein. Reference to a singular item, includes the possibility that there are plural of the same items present. More specifically, as used herein and in claims associated hereto, the singular forms “a,” “an,” “said,” and “the” include plural referents unless the specifically stated otherwise. In other words, use of the articles allow for “at least one” of the subject item in the description above as well as claims associated with this disclosure. It is further noted that such claims may be drafted to exclude any optional element. As such, this statement is intended to serve as antecedent basis for use of such exclusive terminology as “solely,” “only” and the like in connection with the recitation of claim elements, or use of a “negative” limitation.</div>
+<div class="description-paragraph" id="p-0159" num="0177">Without the use of such exclusive terminology, the term “comprising” in claims associated with this disclosure shall allow for the inclusion of any additional element—irrespective of whether a given number of elements are enumerated in such claims, or the addition of a feature could be regarded as transforming the nature of an element set forth in such claims. Except as specifically defined herein, all technical and scientific terms used herein are to be given as broad a commonly understood meaning as possible while maintaining claim validity.</div>
+<div class="description-paragraph" id="p-0160" num="0178">The breadth of the present invention is not to be limited to the examples provided and/or the subject specification, but rather only by the scope of claim language associated with this disclosure.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">35</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM287033044">
+<claim-statement>The invention claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A robotic system, comprising: a motor pack, the motor pack comprising:
+<div class="claim-text">housing;</div>
+<div class="claim-text">an electric motor housed by the housing;</div>
+<div class="claim-text">an actuation piston fitting;</div>
+<div class="claim-text">an engagement ring on the housing around the actuation piston fitting; and</div>
+<div class="claim-text">a transmission assembly that drivingly couples the electric motor to the piston fitting to cause the actuation piston fitting to alternatively insert and retract; and</div>
+<div class="claim-text">a tool-less coupling mechanism where at least a first kinematic assembly is detachably coupleable to the motor pack to be driven thereby without any wires or electrical contacts or tools with the engagement ring interfacing with a proximal assembly of the kinematic assembly to provide counter loading of tensile loads passed through the actuation piston fitting.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The robotic system of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising: at least the first kinetic assembly, the first kinematic assembly comprising:
+<div class="claim-text">at least one pair of opposed fingers.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The robotic system of <claim-ref idref="CLM-00002">claim 2</claim-ref>, further comprising:
+<div class="claim-text">a palm;</div>
+<div class="claim-text">a first finger comprising a first proximal finger element pivotally coupled to the palm at a first proximal joint and a first distal finger element pivotally coupled to the first proximal finger element at a first distal joint;</div>
+<div class="claim-text">a second finger comprising a second proximal finger element pivotally coupled to the palm at a second proximal joint and a second distal finger element pivotally coupled to the second proximal finger element at a second distal joint;</div>
+<div class="claim-text">a first extensor element physically coupled to bias the first finger into a spaced apart configuration;</div>
+<div class="claim-text">a second extensor element physically coupled to bias the second finger into a spaced apart configuration;</div>
+<div class="claim-text">a first flexor element physically coupled to actuate the first finger into a closed configuration in response to an application of an actuation force to the first flexor element; and</div>
+<div class="claim-text">a second flexor element physically coupled to actuates the second finger into a closed configuration in response to an application of an actuation force to the second flexor element;</div>
+<div class="claim-text">wherein the first distal finger element has a first gripping surface, the second distal finger element has a second gripping surface, and the first and the second distal finger elements are constrained such that, in response to application of the actuation forces to the first and the second flexor elements, the first and the second gripping surfaces remain parallel to one another along an entire range of movement when the first and the second proximal finger elements are not in contact with an object to be grasped, and the first and the second distal finger elements passively rotate toward one another when at least one of the first or the second proximal finger element is in contact with the object to be grasped.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The robotic system of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein the first extensor element comprises a first proximal torsional spring at the first proximal joint and a first distal torsional spring at the first distal joint, and the second extensor element comprises a second proximal torsional spring at the second proximal joint and a second distal torsional spring at the second distal joint.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The robotic system of <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein one or more of the torsional springs are pre-tensioned.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The robotic system of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein the first extensor element comprises a first extensor tendon and wherein the second extensor element comprises a second extensor tendon.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The robotic system of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the first extensor element further comprises a first proximal torsional spring at the first proximal joint and a first distal torsional spring at the first distal joint, and the second extensor element further comprises a second proximal torsional spring at the second proximal joint and a second distal torsional spring at the second distal joint.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The robotic system of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the first extensor tendon is coupled to a first linear spring and wherein the second extensor tendon is connected to a second linear spring.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The robotic system of <claim-ref idref="CLM-00003">claim 3</claim-ref>, further comprising:
+<div class="claim-text">a first passive tendon coupled to the palm and coupled to the first distal finger element to prevent hyperextension of the first distal joint; and</div>
+<div class="claim-text">a second passive tendon coupled to the palm and coupled to the second distal finger element to prevent hyperextension of the second distal joint.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The robotic system of <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein the first kinematic assembly further comprises:
+<div class="claim-text">a first proximal finger element, wherein the first proximal finger element is pivotally coupled to the palm at a first proximal joint;</div>
+<div class="claim-text">a first distal finger element, wherein the first distal finger element is pivotally coupled to the first proximal finger element at a first distal joint;</div>
+<div class="claim-text">a second proximal finger element, wherein the second proximal finger element is pivotally coupled to the palm at a second proximal joint;</div>
+<div class="claim-text">a second distal finger element, wherein the second distal finger element is pivotally coupled to the second proximal finger element at a second distal joint;</div>
+<div class="claim-text">a first passive tendon coupled to the palm and coupled to the first distal finger element, wherein the first passive tendon prevents hyperextension of the first distal joint;</div>
+<div class="claim-text">a second passive tendon coupled to the palm and coupled to the second distal finger element, wherein the second passive tendon prevents hyperextension of the second distal joint;</div>
+<div class="claim-text">a first active tendon coupled to the first distal finger element; and</div>
+<div class="claim-text">a second active tendon coupled to the second distal finger element.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The robotic system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein application of an actuation force to the first and second active tendons closes the end effector.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The robotic system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein
+<div class="claim-text">the palm, the first proximal finger element, the first distal finger element, and the first passive tendon form a four-bar linkage; and</div>
+<div class="claim-text">the palm, the second proximal finger element, the second distal finger element, and the second passive tendon form a second four-bar linkage.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The robotic system of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the palm, the first proximal finger element, the first distal finger element, and the first passive tendon act as a first four-bar linkage to prevent hyperextension of the first distal joint when the first passive tendon carries tension, and the second passive tendon act as a second four-bar linkage to prevent hyperextension of the second distal joint when the second passive tendon carries tension.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The robotic system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein an amount of a rotation of the first proximal finger element with respect to the palm is represented by a variable α and an amount of a rotation of the first distal finger element with respect to the first proximal finger element is represented by a variable β and the first passive tendon prevents a condition where α+β&lt;90° throughout a range of motion of the end effector.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The robotic system of <claim-ref idref="CLM-00014">claim 14</claim-ref>, wherein the first passive tendon allows a condition where α+β&gt;90°.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The robotic system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the first passive tendon is constrained to wrap around a first proximal mandrel at the first proximal joint and around a first distal mandrel at the first distal joint.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The robotic system of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein a radius of the first proximal mandrel is equal to a radius of the first distal mandrel.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The robotic system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein the first passive tendon terminates at a screw housed in the first distal finger portion, and a length of the passive tendon is finely adjustable in response to a rotation of the screw.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The robotic system of <claim-ref idref="CLM-00010">claim 10</claim-ref>, wherein an amount of a rotation of the first proximal finger element with respect to the palm is represented by a variable a and an amount of a rotation of the first distal finger element with respect to the first proximal finger element is represented by a variable β and the first passive tendon and a first extensor element constrain the end effector to maintain a condition where α+β=90° as the end effector closes unobstructed.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The robotic system of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein in response to the first and the second proximal joints being stopped due to contact with an object, the first distal joint flexes such that α+β&gt;90°.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00021" num="00021">
+<div class="claim-text">21. The robotic system of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">a first kinematic assembly including a first finger assembly, a second finger assembly, a proximal assembly having a recess including a plurality of grooved coupling features, a first flexor tendon coupled to the first finger assembly to actuate the first finger assembly to move with respect to the proximal assembly, and a second flexor tendon coupled to the second finger assembly to actuate the second finger assembly to move with respect to the proximal assembly;</div>
+<div class="claim-text">wherein the motor pack includes the actuation piston fitting for engaging with the plurality of grooved coupling features, an engagement ring for interfacing with the proximal assembly, and the electric motor for actuating the piston fitting to move with respect to the engagement ring;</div>
+<div class="claim-text">wherein when the actuation piston fitting is engaged with the plurality of grooved coupling features, the engagement ring is interfaced with the proximal assembly, and the piston fitting is actuated by the motor to move with respect to the engagement ring, the piston fitting causes the first flexor tendon to actuate the first finger assembly to move with respect to the proximal assembly and the piston fitting causes the second flexor tendon to actuate the second finger assembly to move with respect to the proximal assembly.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00022" num="00022">
+<div class="claim-text">22. The robotic system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the first finger assembly is pivotally coupled to the proximal assembly and the second finger assembly is pivotally coupled to the proximal assembly.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00023" num="00023">
+<div class="claim-text">23. The robotic system of <claim-ref idref="CLM-00022">claim 22</claim-ref>, further comprising:
+<div class="claim-text">a threaded member that couples the transmission assembly to the actuation piston fitting, where rotation of the threaded member in response to rotation of a drive shaft of the motor causes the actuation piston fitting to insert and retract.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00024" num="00024">
+<div class="claim-text">24. The robotic system of <claim-ref idref="CLM-00022">claim 22</claim-ref>, further comprising:
+<div class="claim-text">a proximal interface toolessly removably coupleable to a structural member of a portion of a robotic arm.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00025" num="00025">
+<div class="claim-text">25. The robotic system of <claim-ref idref="CLM-00024">claim 24</claim-ref> wherein the proximal interface comprises a recess including an assembly of a plurality of perimetric coupling elements which form an outer threaded surface and an inner threaded surface, and the structural member of the portion of the robotic arm is detachably coupleable to the motor pack via an insertion and a rotation of the motor pack relative to the structural member of the portion of the robotic arm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00026" num="00026">
+<div class="claim-text">26. The robotic system of <claim-ref idref="CLM-00025">claim 25</claim-ref> wherein the perimetric coupling elements comprise a material selected from a metal or a polymer.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00027" num="00027">
+<div class="claim-text">27. The robotic system of <claim-ref idref="CLM-00025">claim 25</claim-ref> wherein the outer threaded surface and the inner threaded surface are movably engageable by a coupling ring that is selectively manually loosenable or tightenable without assistance of a tool.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00028" num="00028">
+<div class="claim-text">28. The robotic system of <claim-ref idref="CLM-00027">claim 27</claim-ref> wherein the coupling ring is configured to create a radially-constraining hoop stress that adjustably maintains an overall diameter of the assembly of perimetric coupling elements so that the inner threaded surface is fittable to the portion of the robotic arm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00029" num="00029">
+<div class="claim-text">29. The robotic system of <claim-ref idref="CLM-00025">claim 25</claim-ref> wherein the assembly of perimetric coupling elements provide a mechanical failure decoupling point for the motor pack and coupled kinematic assembly from the structural member of the portion of the robotic arm.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00030" num="00030">
+<div class="claim-text">30. The robotic system of <claim-ref idref="CLM-00025">claim 25</claim-ref> wherein the proximal coupling interface breaks loose from the structural member of the portion of the robotic arm via small micromotions at one or more of the assembly of perimetric coupling elements when subjected to forces above a threshold.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00031" num="00031">
+<div class="claim-text">31. The robotic system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein when the actuation piston fitting is engaged with the plurality of grooved coupling features and the engagement ring is interfaced with the proximal assembly, the kinematic assembly is removably coupled to the motor pack.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00032" num="00032">
+<div class="claim-text">32. The robotic system of <claim-ref idref="CLM-00021">claim 21</claim-ref>, wherein the kinematic assembly has no motor and no electronics.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00033" num="00033">
+<div class="claim-text">33. The robotic system of <claim-ref idref="CLM-00032">claim 32</claim-ref>, wherein the first kinematic assembly further comprises:
+<div class="claim-text">means that mechanically constrain respective gripping surfaces of the distal first finger link and the distal second finger link to remain in parallel with one another along a range of movement in a fingertip grip configuration in an absence of contact by either the proximal first finger link or the proximal second finger link with an object to be grasped, and in response to contact by either or both of the proximal first finger link or the proximal second finger link with the object to be grasped, passively rotate the distal first finger link and the distal second finger link toward one another in an enveloping grasp configuration.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00034" num="00034">
+<div class="claim-text">34. The robotic system of <claim-ref idref="CLM-00033">claim 33</claim-ref> wherein the first kinematic assembly includes a proximal assembly having a recess to accommodate coupling with the motor pack, the recess having therein a number of channeled or grooved coupling features and a circumferential coupling recess which accommodates a number of coupling features of the actuation piston fitting of the motor pack to pass a tension motion actuation to the flexor tendons of the first kinematic assembly.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00035" num="00035">
+<div class="claim-text">35. The robotic system of <claim-ref idref="CLM-00034">claim 34</claim-ref> wherein the motor pack further comprises an engagement ring that interfaces with the proximal assembly of the kinematic assembly and thereby provides counter loading to tensile loads passed through the actuation piston fitting.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

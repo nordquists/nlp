@@ -1,0 +1,644 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10235659B2 - Instant availability of electronically transferred funds 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA288935686">
+<div class="abstract" id="p-0001" num="0000">A system and method for making proceeds of a transaction available to a user before the transaction is completed is provided. The system may be part of an on-line system or traditional merchant configured to facilitate payments or fund transfers from users. In example embodiments, a request from a first entity to conduct a transaction involving a first value is received. Funds of the transaction are caused to be released prior to the transaction clearing a financial institution. Based on the transaction being rejected by the financial institution, at least a portion of the first value is charged against a credit source.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES187089598">
+<heading id="h-0001">RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a continuation of U.S. application Ser. No. 14/323,606, filed Jul. 3, 2014, which is a continuation of U.S. application Ser. No. 13/546,938, filed Jul. 11, 2012, now U.S. Pat. No. 8,775,306, issued on Jul. 8, 2014, which is a continuation of U.S. application Ser. No. 13/267,717, filed Oct. 6, 2011, now U.S. Pat. No. 8,738,526, issued on May 27, 2014, which is a continuation of U.S. application Ser. No. 10/228,200, filed Aug. 26, 2002, now U.S. Pat. No. 8,050,997 on Nov. 1, 2011, which is a continuation-in-part of U.S. application Ser. No. 09/938,224, filed on Aug. 23, 2001, now U.S. Pat. No. 7,191,151, issued on Mar. 13, 2007, and claims priority to U.S. Provisional Application Ser. No. 60/316,638, filed on Aug. 31, 2001, all of which applications are incorporated in their entirety herein by reference.</div>
+<heading id="h-0002">BACKGROUND</heading>
+<div class="description-paragraph" id="p-0003" num="0002">This invention relates to the fields of computer systems and data communications. A system and method are provided for facilitating instant availability of funds from an ACH (Automated Clearing House) transaction before the transaction clears. More particularly, a method is provided for determining a risk associated with making the funds instantly available.</div>
+<div class="description-paragraph" id="p-0004" num="0003">Among existing methods of making purchases (e.g., consumer purchases of goods or services) and transferring funds from one person or entity to another, ACH transactions have been used relatively sparingly. One reason for their lack of popularity is their relatively languid pace of settlement or completion. This can be frustrating or unacceptable when a party to the purchase or transfer (e.g., a business) requires rapid receipt of the funds. For example, a merchant is understandably reluctant to deliver goods or services until payment is in hand or assured. ACH transactions are not typically settled, however, until at least one business day after they are initiated, and may be rejected or returned for a relatively lengthy period of time, even after settlement.</div>
+<div class="description-paragraph" id="p-0005" num="0004">Thus, the period of time that elapses between the initiation of an ACH transaction and clear availability of the transaction funds tends to make such transactions unattractive when timely consummation is desired. Credit cards, debit cards, ATM (Automated Teller Machine) cards and other means of obtaining instantly available funds are much more compatible with the need for instant gratification and thus tend to be more popular in typical consumer purchases or fund transfers.</div>
+<div class="description-paragraph" id="p-0006" num="0005">The delay encountered with ACH transactions is inherent in the way they are handled. An ACH transaction, or ACH entry, is initiated by an originator (e.g., a company or organization) on behalf of, and with the authorization of, a receiver (e.g., a customer). Thus, “originator” and “receiver” refer to the entities that initiate and receive an ACH entry, respectively. The ACH entry may be either a credit or a debit to the receiver's account.</div>
+<div class="description-paragraph" id="p-0007" num="0006">An originator submits an ACH entry to an originating depository financial institution (ODFI). The ODFI forwards the ACH entry to an ACH operator (e.g., a Federal Reserve Bank) for settlement. The ACH entry is then sent to the respective receiving depository financial institution (RDFI) where it is posted to the appropriate depositor's (receiver's) account. Although ACH transactions are generally conducted electronically, they are typically batch-processed instead of being handled one at a time.</div>
+<div class="description-paragraph" id="p-0008" num="0007">In an ACH credit entry, an originator initiates a transfer to move funds into a receiver's account. For example, the receiver may be the recipient of ACH credit funds in the form of direct deposit (e.g., his or her salary). In this case, the originator is an employer and the receiver is the employee. Or, a consumer may act as an originator and authorize monthly payments (e.g., for a utility, Internet access, loan payment) to a creditor receiver.</div>
+<div class="description-paragraph" id="p-0009" num="0008">For an ACH debit entry, funds flow in the opposite direction as they do for an ACH credit entry. In particular, funds are collected from a receiver's account and transferred to an originator. Thus, when a consumer preauthorizes a debit, the originator is the company or other entity authorized to collect the debt and the consumer is considered the receiver even though the funds are being taken from his/her account.</div>
+<div class="description-paragraph" id="p-0010" num="0009">During the settlement or clearing process, a depository financial institution or ACH operator may “reject” an ACH entry because it is formatted incorrectly or is otherwise unacceptable. Accepted ACH entries are settled on the assumption that the funds are available and will be transferred as specified. Settlement of an ACH entry generally occurs on the business day following its initiation.</div>
+<div class="description-paragraph" id="p-0011" num="0010">However, even after settlement, an RDFI may “return” an ACH debit entry due to insufficient funds in the receiver's account or for some other reason (e.g., a stop payment request, the account was closed). Also, a receiver may reject an ACH entry (e.g., because the entry was not authorized). Thus, settlement of an ACH debit does not guarantee that the receiver has sufficient funds to cover the entry or that the receiver will not repudiate the transaction. If the originator, or the ODFI processing an ACH entry for the originator, releases the funds of the entry too soon, and the RDFI later “returns” the entry because the receiver has insufficient funds or for some other reason, the originator or ODFI may be at risk of losing those funds. There is thus a risk that a receiver may take advantage of the return process to defraud the originator or ODFI.</div>
+<div class="description-paragraph" id="p-0012" num="0011">If the risk of return or rejection of an ACH entry could be predicted with some accuracy, an originator would be better able to determine whether to offer an ACH transaction as a method of payment or a source of funds. However, determining what factors are or may be significant to determining such risk can be problematic. More particularly, risk factors that are relevant may differ depending upon the circumstances, and can be combined in many ways. Some combinations may be more accurate than others.</div>
+<div class="description-paragraph" id="p-0013" num="0012">Although ACH transactions may be riskier or slower for a merchant than credit cards and instruments such as debit cards and ATM cards, they are generally less expensive than these alternative methods of payment. For each credit card transaction accepted by a merchant, the merchant may have to pay a fixed fee plus a percentage of the value of the transaction. For an ATM card, a merchant may have to pay a fixed fee similar in magnitude to that assessed in a credit card transaction. However, the cost to a merchant of an ACH transaction may be on the order of just a few cents. If ACH transactions could be employed for more consumer transactions, merchants' costs would be decreased, and these savings could be passed on to consumers.</div>
+<div class="description-paragraph" id="p-0014" num="0013">Therefore, what is needed is a method of making the proceeds of an ACH transaction available without the delay that is normally incurred while waiting for the transaction to close. There is also a need for a system and method for determining a level of risk associated with making the proceeds available before the transaction closes.</div>
+<description-of-drawings>
+<heading id="h-0003">DESCRIPTION OF THE FIGURES</heading>
+<div class="description-paragraph" id="p-0015" num="0014"> <figref idrefs="DRAWINGS">FIG. 1A</figref> is a block diagram depicting one environment in which ACH debit funds may be made available before the ACH debit entry is cleared through an Automated Clearing House (ACH) process, in accordance with an embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 1B</figref> is a block diagram of the facilitator of <figref idrefs="DRAWINGS">FIG. 1A</figref>, according to one embodiment of the invention.</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a flowchart illustrating one method of making funds from an ACH debit available before the debit entry clears, in accordance with an embodiment of the invention.</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a flowchart illustrating one method of determining a risk of making funds from an ACH debit available before the debit entry clears, in accordance with an embodiment of the invention.</div>
+</description-of-drawings>
+<heading id="h-0004">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0019" num="0018">The following description is presented to enable any person skilled in the art to make and use the invention, and is provided in the context of particular applications of the invention and their requirements. Various modifications to the disclosed embodiments will be readily apparent to those skilled in the art and the general principles defined herein may be applied to other embodiments and applications without departing from the spirit and scope of the present invention. Thus, the present invention is not intended to be limited to the embodiments shown, but is to be accorded the widest scope consistent with the principles and features disclosed herein.</div>
+<div class="description-paragraph" id="p-0020" num="0019">The program environment in which a present embodiment of the invention is executed may incorporate a general-purpose computer or a special purpose device such as a hand-held computer. Details of such devices (e.g., processor, memory, data storage, display) may be omitted for the sake of clarity.</div>
+<div class="description-paragraph" id="p-0021" num="0020">It should also be understood that the techniques of the present invention might be implemented using a variety of technologies. For example, the methods described herein may be implemented in software executing on a computer system, or implemented in hardware utilizing either a combination of microprocessors or other specially designed application specific integrated circuits, programmable logic devices, or various combinations thereof. In particular, the methods described herein may be implemented by a series of computer-executable instructions residing on a storage medium such as a carrier wave, disk drive, or computer-readable medium. Exemplary forms of carrier waves may take the form of electrical, electromagnetic or optical signals conveying digital data streams along a local network or a publicly accessible network such as the Internet.</div>
+<div class="description-paragraph" id="p-0022" num="0021">In one embodiment of the invention, a system and method are provided for making funds of a receiver (e.g., system user or consumer) available without the delay normally incurred in the processing of an ACH (Automated Clearinghouse) transaction to obtain the funds.</div>
+<div class="description-paragraph" id="p-0023" num="0022">In another embodiment of the invention, a risk associated with a requested ACH entry is calculated to determine whether or not to make the proceeds of the ACH entry immediately available. In this embodiment, a receiver desires to make a purchase or transfer funds, and wishes to obtain all or some of the necessary funds through an ACH debit. The system considers details of the desired ACH entry, the purchase or transfer, and other factors, and then generates a risk score. The system may consider the success, failure and/or other details of past ACH entries and previous purchases or transfers requested by the receiver. The system may also consider whether the receiver's identity or financial account(s) have been verified, a level of trust in the receiver's apparent identity and/or various other factors.</div>
+<div class="description-paragraph" id="p-0024" num="0023">Depending on the risk score, the system may make the proceeds of the ACH entry immediately available to the receiver (i.e., before the entry clears). Or, the risk score may indicate that the ACH entry proceeds should not be made immediately available, in which case the system may postpone availability until the ACH entry settles, or may allow a different type of transaction to obtain the desired funds (e.g., an electronic check, a charge to a credit card or debit card).</div>
+<div class="description-paragraph" id="p-0025" num="0024">In one embodiment of the invention, the system receives a request from a receiver to conduct a transaction involving a first value. The transaction may involve the payment or transfer of funds to another entity (e.g., a merchant, another system user) or the receiver's own account with the system. The system may authorize the first value against a credit source associated with the receiver (e.g., a credit card, a credit line). The system may later place a hold against the credit source for the first value, in order to hold that amount for the system to charge, if necessary. The system then initiates an ACH debit, in the amount of the first value, to retrieve it from an account the receiver has with a financial institution (e.g., bank, credit union, mutual fund, brokerage, savings and loan). If the ACH debit is rejected, returned or repudiated, all or a portion of the first value may be charged against the credit source.</div>
+<div class="description-paragraph" id="p-0026" num="0025">When a receiver requests the execution of a value transfer, payment via ACH may be the default method of paying for the transfer; other options may, however, be selectable (e.g., credit card, debit card, credit line, electronic check). In addition, if the user has verified one or more financial accounts (or other accounts from which ACH funds may be drawn) and/or credit sources, the user may be prompted to select from the accounts and/or credit sources for the transfer.</div>
+<div class="description-paragraph" id="p-0027" num="0026">In another embodiment of the invention, instead of initiating an authorization and/or a hold against a credit source before initiating the ACH debit process, the system may charge the value to the credit source. Then, if the ACH debit settles without incident, the credit source may be credited with the amount received via the debit (e.g., which may be all or just a portion of the amount requested).</div>
+<div class="description-paragraph" id="p-0028" num="0027">In one embodiment of the invention, a system and methods are provided for making available the proceeds of an ACH (Automated Clearing House) transaction or entry—particularly an ACH debit—without waiting for the entry to pass through the entire ACH clearing or settlement process. Thus, funds from a financial institution account (e.g., bank, credit union, savings and loan, mutual fund, brokerage) may be retrieved through the ACH process and made available for a requester without the normal delay. For example, a user or consumer may choose to pay for a transaction (e.g., a purchase of a good or service, a transfer of funds to another person or entity, a transfer of funds into the user's account) with funds from his or her banking institution.</div>
+<div class="description-paragraph" id="p-0029" num="0028">In the terms of the ACH process, the consumer or user may be considered the receiver, while the system acts as the originator of an ACH entry to send funds to or retrieve funds from a financial account of the receiver. The originator may initiate an ACH entry through an ODFI (Originating Depository Financial Institution), and the institution holding the receiver's funds that are targeted by the ACH entry is considered the RDFI (Receiving Depository Financial Institution).</div>
+<div class="description-paragraph" id="p-0030" num="0029">In a typical ACH debit process, funds requested by an ODFI from an RDFI may be received within a few business days after the debit is initiated. Or, the ODFI may be notified that the debit failed or was rejected (e.g., because insufficient funds are available to complete the transaction). Even if the funds are received within a few days, however, they may be retracted by the RDFI if it determines that the receiver's account has insufficient funds. Thus, until a sufficient period of time passes for the RDFI to check for available funds (e.g., several business days), the ODFI risks making the funds available to or for the originator and not recouping them from the RDFI.</div>
+<div class="description-paragraph" id="p-0031" num="0030">In an embodiment of the invention, the receiver indicates a desire to perform a value transfer. The value transfer may involve a transfer of funds to a merchant, the user's own account with the system, another user of the system or some other entity (e.g., for a good or service). Based on various factors, the system then calculates an ACH risk score indicating a perceived risk involved with releasing the funds before they are retrieved from a financial account of the user via an ACH entry. The various factors may include details of the ACH entry or value transfer, the receiver's past history of value transfers, ACH entries and/or other transactions, a level of confidence in the receiver (e.g., regarding his/her financial data, identity, trustworthiness, honesty or other trait), and so on.</div>
+<div class="description-paragraph" id="p-0032" num="0031">Based on the calculated ACH risk score, the system may or may not allow the receiver to obtain funds for the value transfer via an ACH entry and may or may not make the funds instantly available (e.g., before the ACH entry clears or settles).</div>
+<div class="description-paragraph" id="p-0033" num="0032">In another embodiment of the invention, the funds of an ACH entry are authorized, held or allocated against an available credit source of a receiver (e.g., credit card, credit line, debit card) and may be released or made available immediately thereafter as long as the authorization operation is successful. If the ACH entry is rejected or returned, then the funds may be charged to the credit source. If the ACH entry is successful, the authorization or hold may be removed.</div>
+<div class="description-paragraph" id="p-0034" num="0033">In one alternative method of the invention, funds may be charged against a receiver's credit source at the time an ACH entry is initiated and, if the ACH transaction is successful, the funds may then be credited back to the credit source.</div>
+<div class="description-paragraph" id="p-0035" num="0034">Thus, in embodiments of the invention described herein, funds from a user or consumer's bank account may be available to the user or other entity without the normal delay inherent in an ACH entry. ACH transactions can therefore be made as convenient to the user as a credit card or other instrument. In addition, a merchant or other institution accepting the user's payment or value transfer via ACH transaction may benefit from the lower costs normally assessed such transactions.</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 1A</figref> depicts an environment in which a receiver (e.g., a system user) may immediately receive the use of funds requested via an ACH debit when the ACH entry is initiated, but before it is completed, according to one embodiment of the invention. The funds may be desired for various types of transactions, such as making a purchase, transferring funds from one user account to another account, to another entity, etc.</div>
+<div class="description-paragraph" id="p-0037" num="0036">Illustratively, the user may choose to use, or accept a default selection to use, funds from his or her bank account or other account that allows funds to be transferred or withdrawn via an ACH entry. In addition, if the user has verified multiple bank accounts (or other accounts from which ACH funds may be drawn) and/or multiple credit sources, the user may be prompted to select from the multiple accounts and/or credit sources.</div>
+<div class="description-paragraph" id="p-0038" num="0037">In <figref idrefs="DRAWINGS">FIG. 1A</figref>, financial institutions <b>110</b>, <b>130</b> are banks, savings and loans, credit unions, mutual funds, investment companies or other entities capable of conducting ACH transactions. Thus, institution <b>110</b> is configured as an ODFI to initiate ACH entries (e.g., on behalf of facilitator/originator <b>112</b>), while institution <b>130</b> is configured as an RDFI to receive ACH entries (e.g., on behalf of user/receiver <b>132</b>). ACH entries are processed and settled through ACH operator <b>120</b>, which may comprise any number of operators—such as separate originating and receiving operators. Thus, ODFI <b>110</b> may initiate ACH credit <b>140</b> to send funds (e.g., from an originator account at institution <b>110</b>) to RDFI <b>130</b> and/or initiate ACH debit <b>150</b> to receive funds from a receiver account at institution <b>130</b>.</div>
+<div class="description-paragraph" id="p-0039" num="0038">In this embodiment of the system, facilitator <b>112</b> uses the services of institution <b>110</b> to perform ACH transactions and/or other transactions (e.g., credit card, debit card, ATM card). Facilitator <b>112</b> may be a retail or wholesale merchant or other business, may operate on-line via public network <b>150</b> (e.g., the Internet), via telephone, in a traditional “brick and mortar” venue, etc.</div>
+<div class="description-paragraph" id="p-0040" num="0039">In one particular embodiment of the invention, facilitator <b>112</b> is an on-line company, organization or other entity that enables users to transfer value (e.g., money) to and/or from another entity (e.g., a business, a financial instrument, another user). The value may be employed by user <b>132</b> to purchase a good or service, make an investment, pay a debt, play a game, make a gift, or for virtually any other purpose.</div>
+<div class="description-paragraph" id="p-0041" num="0040">U.S. patent application Ser. No. 09/560,215, entitled “System and Method for Electronically Exchanging Value Among Distributed Users” and filed Apr. 28, 2000, which issued Aug. 8, 2006 as U.S. Pat. No. 7,089,208, describes a system and method for facilitating the electronic exchange of value between users and is hereby incorporated in its entirety.</div>
+<div class="description-paragraph" id="p-0042" num="0041">In the embodiment of the invention depicted in <figref idrefs="DRAWINGS">FIG. 1A</figref>, user <b>132</b> has an account with financial institution <b>130</b> (e.g., a checking or other account compatible with ACH transactions). User <b>132</b> may interact with facilitator <b>112</b> directly or through network <b>150</b> with a desktop, notebook, handheld or other type of computing or communication device, via wired or wireless technology.</div>
+<div class="description-paragraph" id="p-0043" num="0042">Before initiating an ACH transaction on behalf of user <b>132</b>, facilitator <b>112</b> may require verification of the user's account with financial institution <b>130</b> and/or the availability of some form of credit. The credit source may be a credit card or a credit line granted by facilitator <b>112</b>, institution <b>130</b> or some other entity, or may be a debit card, ATM card or some other type of credit now known or hereafter developed.</div>
+<div class="description-paragraph" id="p-0044" num="0043">In one method of the invention, facilitator <b>112</b> receives a request from user <b>132</b> to pay some amount of value to a specified entity (e.g., a merchant, another user). Facilitator <b>112</b> may require the user to register before allowing such action, and may verify that the user has an account with institution <b>130</b> and a valid source of credit, that the user can be reached at a particular electronic mail address, physical address, telephone number, etc. Facilitator <b>112</b> may grant a user an internal line of credit based on a credit check, verification of the user's personal data, etc.</div>
+<div class="description-paragraph" id="p-0045" num="0044">To permit or enable a particular transaction or transaction detail (e.g., a desired source of funding, instant availability of the proceeds of an ACH debit), facilitator <b>112</b> may calculate a risk score pertaining to the requesting user and/or a requested ACH transaction. In calculating the risk score, the facilitator may consider the user's transaction and ACH history (e.g., details of the transactions and ACH entries, whether they were successful or unsuccessful), whether the user's financial data (e.g., bank account(s), credit card(s), mailing address) have been verified, the amount and/or purpose of the current transaction, the identity of another party to the transaction, etc.</div>
+<div class="description-paragraph" id="p-0046" num="0045">After the user's account with institution <b>130</b> and credit source are verified, facilitator <b>112</b> may attempt to authorize or hold the requested amount of value against the user's credit source. This may be done through financial institution <b>110</b> or some other party. If this action fails, the user's requested transaction may be rejected. If this action succeeds, however, the funds may be released as requested and the ACH process may be initiated to retrieve the funds from the user's account at institution <b>130</b>. If the ACH process succeeds, then the authorization or hold placed on the user's credit source may be removed or allowed to expire. If the ACH process fails, then the funds may be charged against the user's credit source.</div>
+<div class="description-paragraph" id="p-0047" num="0046">In one embodiment of the invention, the risk score calculated by the system may determine whether an authorize or hold is placed on the user's credit source and/or whether the proceeds of the ACH entry are immediately provided to the user.</div>
+<div class="description-paragraph" id="p-0048" num="0047"> <figref idrefs="DRAWINGS">FIG. 1B</figref> is a block diagram depicting one embodiment of facilitator <b>112</b> (of <figref idrefs="DRAWINGS">FIG. 1A</figref>) for accepting an ACH debit as a source for a payment or transfer of funds before debit is cleared through the ACH process.</div>
+<div class="description-paragraph" id="p-0049" num="0048">In the embodiment of <figref idrefs="DRAWINGS">FIG. 1B</figref>, facilitator <b>112</b> includes processor <b>160</b>, which is configured to coordinate various tasks involved in receiving a value transfer request, determining a risk score, initiating an ACH debit (or credit) entry, ensuring credit availability, performing the transfer, etc. Processor <b>160</b> may include, execute or operate any of the various modules depicted in <figref idrefs="DRAWINGS">FIG. 1B</figref>. Additionally, facilitator <b>112</b> may include multiple processors and each processor may control any of the modules. Yet further, the modules may be distributed across one or more computer systems that cooperate to function as facilitator <b>112</b>.</div>
+<div class="description-paragraph" id="p-0050" num="0049">Illustratively, request module <b>162</b> receives a value transfer request from a user and may elicit any information that is needed or not already possessed by the facilitator (e.g., ABA (American Bankers Association) number, routing number, credit source). ACH module <b>164</b> is configured to initiate an ACH process (e.g., debit or credit) under the direction of processor <b>160</b> (e.g., after a user's credit availability has been verified). ACH module <b>164</b> may thus interact with institution <b>110</b> (of <figref idrefs="DRAWINGS">FIG. 1A</figref>) or another entity involved in the ACH process. Transfer module <b>166</b> is configured to perform the requested value transfer after credit availability has been verified and may also interact with institution <b>110</b>.</div>
+<div class="description-paragraph" id="p-0051" num="0050">In the embodiment of the invention illustrated in <figref idrefs="DRAWINGS">FIG. 1B</figref>, credit module <b>168</b> is configured to identify or verify a user's credit source or a detail of the credit source, and/or perform any or all of the necessary actions to ensure that funds transferred at the request of the user are available, held and/or charged to the credit source if needed. Thus, the credit module may perform an authorization, a hold and/or a charge action against the credit source.</div>
+<div class="description-paragraph" id="p-0052" num="0051">Risk calculator <b>172</b> is configured to determine a risk score associated with a user regarding the value transfer and/or the user's desired method of funding the transfer (e.g., ACH, credit card). Illustrative methods of determining a risk score and factors that may be considered during the calculation are described in a following section.</div>
+<div class="description-paragraph" id="p-0053" num="0052">Credit module <b>168</b> and/or risk calculator <b>172</b> may interact with an internal or external entity configured to provide a measure of the credit-worthiness, trustworthiness of the user. The measure may reflect whether a user's credit card has been reported lost or stolen, whether a credit card number is valid, whether a user's specified address matches an address of a credit card, and so on. In one embodiment of the invention, the third party performs analytical modeling regarding the user or user data, and provides a standard or proprietary rating.</div>
+<div class="description-paragraph" id="p-0054" num="0053">Credit module <b>168</b>, risk calculator <b>172</b> and/or processor <b>160</b> may access database <b>170</b> to retrieve and/or store various information concerning a user (e.g., bank account number, credit card number, electronic mail address, past transaction history) or another party to the user's desired value transfer.</div>
+<div class="description-paragraph" id="h-0005" num="0000">Instant Availability of ACH Funds</div>
+<div class="description-paragraph" id="p-0055" num="0054"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a flowchart demonstrating, in further detail, one method of employing a system such as that of <figref idrefs="DRAWINGS">FIG. 1A</figref> to make funds from a user's bank account (or similar source) available before an ACH debit to that account clears, according to one embodiment of the invention.</div>
+<div class="description-paragraph" id="p-0056" num="0055">In this embodiment, one entity (e.g., user, consumer) wishes to transfer or pay some amount of value, from his or her account with a bank or other institution, to another entity, using a payment/transfer system such as facilitator <b>112</b> of <figref idrefs="DRAWINGS">FIG. 1A</figref>. The user may already be known to and have an account with the system, or may register and initiate the following procedure at the time the payment or transfer is desired. Similarly, the entity to receive the value may already have an account with, or otherwise be known to, the system, or may be registered in conjunction with the transfer of the value.</div>
+<div class="description-paragraph" id="p-0057" num="0056">In the illustrated embodiment of the invention, the user initiating the transfer of value may be considered the receiver of an ACH entry, while the payment/transfer system is the originator.</div>
+<div class="description-paragraph" id="p-0058" num="0057">In state <b>200</b>, the payment/transfer system verifies the user's bank account that an ACH transaction will target. The system may, for example, elicit the necessary ABA (American Bankers Association) routing number and account number from the user (which the user may retrieve from a paper check associated with the bank account). Existence of the account may then be verified by any practical means (e.g., electronic query, telephone call to the bank, reference to a third party verification service). If the user's bank account cannot be verified, or does not appear to be associated with this user, the system will not attempt to draw upon it and a different bank account may be identified and verified in order for the user to use the system.</div>
+<div class="description-paragraph" id="p-0059" num="0058">In state <b>202</b>, the system identifies and/or verifies a credit source available to the user, or may establish one for the user. Thus, the credit source may be internal to the system (e.g., the system may offer lines of credit to some or all users) or external (e.g., a credit card, charge card, other line of credit). Illustratively, the user may provide the details of a credit card (e.g., name, number, expiration date) and the system may query an electronic service (e.g., offered by the credit source or a third party) to ensure that the card has not been reported as lost or stolen or otherwise invalidated. Further, for an external credit source, the system may verify that the source has available credit by performing an authorization for a small amount (e.g., one dollar). If the authorization fails, then the user may not be allowed to make a payment or transfer with this credit source.</div>
+<div class="description-paragraph" id="p-0060" num="0059">If the system is configured to grant an internal line of credit to a user, the system may perform additional verifications of the user's personal data (e.g., physical address, employer, telephone number), may perform a credit check, may determine if the user has had any previous transfers/payments through the system rejected, etc.</div>
+<div class="description-paragraph" id="p-0061" num="0060">In state <b>204</b>, which is optional, additional verification of the user's bank account and/or credit source may be performed, depending on what was done in states <b>200</b>-<b>202</b>. For example, to verify the user's control of the bank account, the system may make a deposit to the account and require the user to identify the amount and/or date of the deposit. Presumably, the user must have access to the account to obtain this information. And, if not already done, the system may perform an authorization against the credit source to test it.</div>
+<div class="description-paragraph" id="p-0062" num="0061">In state <b>206</b> the system receives a request from the user to make a payment or transfer to another entity (e.g., a merchant, a service provider, another user, a government agency). The request may be received directly from the user (e.g., the user may submit the request through a web site associated with the system), from a merchant that is being visited by the user and which has a suitable agreement with the system, etc. Thus, the request may be received on-line, or may be received in person, telephonically, via electronic or regular mail, or in some other way.</div>
+<div class="description-paragraph" id="p-0063" num="0062">Various pieces of information may be included in the request or may be elicited by the system. Such information may include an identity of the recipient and an amount to be transferred, and will indicate that the user wishes to make the payment/transfer using a (verified) bank account (e.g., through an ACH entry).</div>
+<div class="description-paragraph" id="p-0064" num="0063">Illustratively, the recipient may be another user of the system, or otherwise known to the system, in which case the recipient may be identified with a name, user name, account name or number, electronic mail address, telephone number, social security number or other unique form of identification.</div>
+<div class="description-paragraph" id="p-0065" num="0064">In one embodiment of the invention, the originating user may employ this process to transfer funds from the bank account into his or her account with the system. The user may select a “pay by bank account,” “electronic debit,” or similarly worded option from a list identifying acceptable methods of payment, or the system may mark this option as a default, in which case the user may accept it or choose another option. Illustratively, other options for funding a payment or transfer of value may include credit card, regular ACH (e.g., without immediate release of the funds), debit card, ATM card, electronic check, etc.</div>
+<div class="description-paragraph" id="p-0066" num="0065">In state <b>208</b> the specified funds are authorized against a (verified) credit source of the user. Illustratively, if the credit source is a credit card, this involves an established procedure in which the system verifies with the credit card issuer or institution that the user's account has sufficient available or unused credit to cover the amount of the payment/transfer. In this embodiment of the invention, the authorization provides a reliable source of funds for the user's value transfer, in the event the ACH entry is rejected, returned or repudiated.</div>
+<div class="description-paragraph" id="p-0067" num="0066">In state <b>210</b> the system determines whether the authorization was successful. If so, the illustrated procedure continues at state <b>214</b>. Otherwise, in state <b>212</b> the user's transaction is rejected and the process ends. The user may, however, retry the transfer using different details (e.g., a different bank: account or credit source, a different amount).</div>
+<div class="description-paragraph" id="p-0068" num="0067">In state <b>214</b>, the system places a hold on the user's credit source, in the amount of the payment/transfer. Illustratively, for a credit card this action involves an established procedure in which the credit card institution is directed or requested to reserve the specified amount of credit from being used or charged by other entities. Thus, by holding the funds with the credit source, the system can ensure that the funds will be available if the ACH transaction fails. Depending on how long a hold normally lasts (e.g., which may be determined by the credit issuer), a hold and/or an authorize may be renewed or repeated if the hold or authorize expires before the ACH process is completed.</div>
+<div class="description-paragraph" id="p-0069" num="0068">In state <b>216</b> the system initiates the ACH transaction. Illustratively, the system may be allied with a bank or other financial institution (e.g., an ODFI) that has access to an ACH system, in which case the bank is directed to initiate an ACH entry and is provided necessary information (e.g., the user's ABA and routing numbers, amount). Alternatively, the system itself may have direct access to the ACH process.</div>
+<div class="description-paragraph" id="p-0070" num="0069">In state <b>218</b> the system releases or pays the desired funds as requested (e.g., to the user's account, a merchant, another user). Illustratively, the system may limit the amount of money or other value that a user may pay/transfer in one ACH transaction or from one account. Such a limit may be applicable to new users and may be raised as the user exhibits a trustworthy pattern of system usage.</div>
+<div class="description-paragraph" id="p-0071" num="0070">In state <b>220</b>, the system determines whether the ACH entry is rejected or returned. Return of an ACH debit (e.g., because of insufficient funds in the receiver's account) may take a variable amount of time, but if not received within a threshold period (e.g., several days), the system may assume that the transaction succeeded. If the transaction is a success, the system may use the received funds to replace those released to/for the user. Further, the system may cancel the hold that was placed on the user's credit source or, alternatively, may just allow it to expire. If the ACH entry has not failed (e.g., been returned or rejected), then after the funds are received and applied, the illustrated procedure ends. Otherwise, if the ACH entry failed, the procedure continues at state <b>222</b>.</div>
+<div class="description-paragraph" id="p-0072" num="0071">In state <b>222</b>, the user's credit source is charged the amount that failed to clear through the ACH process. Thus, if the entire transaction failed, the full amount of the payment/transfer may be charged. Otherwise, if a portion of the funds is received, the remaining funds may be charged. The procedure then ends.</div>
+<div class="description-paragraph" id="p-0073" num="0072">In one embodiment of the invention, the user may be given a bonus or rebate. For example, because of the reduced costs that may be incurred by the system for funding a value transfer via an ACH entry, as compared to the costs incurred for a regular credit card transaction, some of the savings may be returned to the user.</div>
+<div class="description-paragraph" id="p-0074" num="0073">One alternative embodiment of the invention may be implemented for other types of electronic fund transfers or transactions (besides ACH debits or credits), such as point-of-sale transfers, automated teller machine transfers, direct deposits or withdrawals of funds, transfers initiated by telephone, wire transfers, transfers resulting from debit card transactions, etc.</div>
+<div class="description-paragraph" id="h-0006" num="0000">Calculating a Risk Score</div>
+<div class="description-paragraph" id="p-0075" num="0074">In one embodiment of the invention, a method of calculating a risk associated with a user's desired value transfer, or method of funding a transfer, is provided. Illustratively, the risk may be used to determine whether funds for the transfer may be made available to the user before they are irreversibly received from a source (e.g., an account at an external bank or other financial institution). This embodiment may be implemented by a payment/transfer system, as described in a previous section (e.g., facilitator <b>112</b> of <figref idrefs="DRAWINGS">FIG. 1A</figref>).</div>
+<div class="description-paragraph" id="p-0076" num="0075">In one implementation of this embodiment, an ACH risk score is calculated to reflect a level of risk involved in making proceeds of an ACH entry immediately available to a user, before the entry clears or the ACH entry becomes irreversible. This type of ACH entry may be considered an “instant ACH” entry. In other implementations, a risk score may be calculated specifically for electronic checks and/or “normal” ACH entries (i.e., non-instant ACH entries).</div>
+<div class="description-paragraph" id="p-0077" num="0076">In this embodiment of the invention, a risk score may indicate whether a user's value transfer should be allowed or denied, or whether the system should approve or reject a desired source of funds for a value transfer, a user's continued use of the system, instant availability of the funds, etc. For example, if considered too risky, a user may be required to fund a value transfer from a verified credit source rather than through an ACH entry.</div>
+<div class="description-paragraph" id="p-0078" num="0077">Or, a risk score may cause the system to allow or require a user to alter one or more details of a value transfer (e.g.; amount, source of funds for the transfer, require a “normal” ACH entry rather than an “instant” ACH entry). Also, depending on a user's risk score and/or other factors (e.g., amount of a transfer), a hold or authorization against a credit source user may or may not be performed when an instant ACH entry is initiated.</div>
+<div class="description-paragraph" id="p-0079" num="0078">In an embodiment of the invention, a risk score is calculated based on a user's history of ACH entries, details of a requested value transfer (e.g., amount, recipient, purpose), and/or other factors. The considered factors are predictive, or may be predictive, of the success of an ACH entry initiated to retrieve funds from the user's targeted bank account.</div>
+<div class="description-paragraph" id="p-0080" num="0079">Some of the factors that may be considered include the number of outstanding (e.g., not completed) value transfers or ACH entries a user has and the total amount involved in the outstanding transfers, which may be tracked on a per-source (e.g., bank account, credit source) basis. An “outstanding” ACH entry may be an entry that has not yet been submitted to the ACH system (e.g., to an ODFI) or that is in process within the ACH system.</div>
+<div class="description-paragraph" id="p-0081" num="0080">The factors may also include the number or ratio of ACH entries and/or electronic checks for the user that have been rejected, returned or that successfully completed, the total amount of funds involved in the outstanding ACH entries, the length of time that the user has been affiliated with the system, and so on.</div>
+<div class="description-paragraph" id="p-0082" num="0081">Some factors may lead the system to deny an instant ACH entry without even calculating or considering a risk score. For example, a user may be limited to a maximum number of outstanding ACH entries, or a maximum amount of value among all outstanding ACH entries. Also, an instant ACH entry may only be offered or allowed for users having positive (or non-negative) balances in their system accounts.</div>
+<div class="description-paragraph" id="p-0083" num="0082">In one embodiment of the invention, factors considered when calculating an ACH risk score include one or more of the variables listed in TABLE 1. In this embodiment, the risk of providing immediate availability of funds requested via an ACH entry is inversely proportional to the ACH risk score. Thus, the higher the risk score, the lower the perceived risk associated with granting a user's instant ACH request. TABLE 1 identifies several variables, describes them and indicates their impact on an ACH risk score.</div>
+<div class="description-paragraph" id="p-0084" num="0083">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Variable</td>
+<td class="description-td">Description</td>
+<td class="description-td">Impact on Risk Score</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Amount_Ratio</td>
+<td class="description-td">Ratio of the amount of the</td>
+<td class="description-td">As Amount_Ratio ↑, risk score ↓</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">requested ACH entry to the</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">average amount of previously</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">requested ACH entries</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">ACH_Attempts</td>
+<td class="description-td">Number of ACH entries</td>
+<td class="description-td">As ACH_Attempts ↑,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">previously attempted</td>
+<td class="description-td">risk score ↑</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">ACH_Completed</td>
+<td class="description-td">Number previous ACH</td>
+<td class="description-td">As ACH_Completed ↑,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">entries completed for the user</td>
+<td class="description-td">risk score ↑</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">(e.g., cleared and failed)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">ACH_Outstanding</td>
+<td class="description-td">Number of ACH entries</td>
+<td class="description-td">As ACH_Outstanding ↑,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">outstanding for the user</td>
+<td class="description-td">risk score ↓</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Credit_History</td>
+<td class="description-td">Indication of whether the user</td>
+<td class="description-td">If none, risk score ↓</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">has ever completed a credit</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">card transaction</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Payments_Received</td>
+<td class="description-td">Number of payment transfers</td>
+<td class="description-td">As Payments_Received</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">received through the system</td>
+<td class="description-td">↑, risk score ↓</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Payments_Sent</td>
+<td class="description-td">Number of payment transfers</td>
+<td class="description-td">As Payments_Sent ↑,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">sent through the system</td>
+<td class="description-td">risk score ↑</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reject_Ratio</td>
+<td class="description-td">Ratio of the user's failed ACH</td>
+<td class="description-td">As Reject_Ratio ↑, risk</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">entries to all ACH entries</td>
+<td class="description-td">score ↓</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Trust_Level</td>
+<td class="description-td">A measure of trust in the</td>
+<td class="description-td">As Trust_Level ↑, risk</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">user's indicated identity</td>
+<td class="description-td">score ↑</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">User_Life</td>
+<td class="description-td">Duration of the user's</td>
+<td class="description-td">As User_Life ↑, risk score ↑</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">relationship with the system</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0085" num="0084">Other variables, beyond those listed in TABLE 1, may also be considered in other embodiments of the invention. For example, the type of ACH transaction (e.g., instant, nonnal, electronic check) may be considered. Another detail that may be considered when calculating an ACH risk score is the requesting user's primary credit source (e.g., debit card, credit card, credit line offered by the system). For example, a debit card may be considered more risky than other sources (and therefore lower an ACH risk score). Illustratively, a debit card may be associated with the same bank account or financial account on which a user requests an ACH entry. By the time the ACH entry is processed, the user may have used the debit card to remove funds from the bank account. In addition, if an ACH entry fails, it is likely that a charge against a debit card tied to the same account will also fail.</div>
+<div class="description-paragraph" id="p-0086" num="0085">Other factors that may be considered include whether and how often an authorization or hold against a user's credit source has failed, the reasons why credit card or ACH transactions for the user have failed or been rejected, etc.</div>
+<div class="description-paragraph" id="p-0087" num="0086">In one embodiment of the invention, a user may request a series of automatic ACH entries on a periodic or regular basis (e.g., monthly, weekly). Details of the entries (e.g., recipient, amount, external account to be used) may be the same each time, or may differ. Illustratively, a risk score may be calculated before each ACH entry or one score may be used to enable or authorize multiple entries.</div>
+<div class="description-paragraph" id="p-0088" num="0087">An equation for calculating a risk score may include any number of terms. The terms may be modified by different coefficients or variables, or a different equation may be used, depending on the circumstances under which the risk score is being calculated or the reason for calculating the risk score (e.g., instant ACH entry vs. normal ACH entry, type of entity receiving the value transfer).</div>
+<div class="description-paragraph" id="p-0089" num="0088">In one embodiment of the invention, any or all of the conditions or values listed in TABLE 2 and/or variables listed in TABLE 1 may be used to generate or calculate an ACH risk score equation. In this embodiment, monetary amounts may be expressed in cents (or comparable units for non-U.S. currency).</div>
+<div class="description-paragraph" id="p-0090" num="0089">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Condition</td>
+<td class="description-td">Definition</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">cleared_count</td>
+<td class="description-td">Number of ACH entries initiated by the</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">user that have successfully cleared.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">cleared_sum</td>
+<td class="description-td">Sum of user's successful cleared ACH</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">entries.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">distinct_receipts</td>
+<td class="description-td">Number of different users from whom</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the user has received value transfers</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">distinct_payments</td>
+<td class="description-td">Number of different users to whom the</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">user has made value transfers</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">failed_count</td>
+<td class="description-td">Number of ACH entries initiated by the</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">user that have failed.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">failed-sum</td>
+<td class="description-td">The total sum of the user's failed ACH</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">entries.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">first_charged</td>
+<td class="description-td">Indicates how long ago the user first</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">charged something to a primary credit</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">card. If 0, user has never made a charge</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">to the credit card.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">funding_amount</td>
+<td class="description-td">Monetary amount of the requested ACH</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">entry.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">max_cleared</td>
+<td class="description-td">The amount of the largest ACH entry</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">successfully initiated by the user.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">out-amount</td>
+<td class="description-td">The total amount of the user's</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">outstanding ACH entries.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">out_count</td>
+<td class="description-td">The total number of outstanding ACH</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">entries for the user.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">recipient_type</td>
+<td class="description-td">The type or category of the recipient of</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">the value transfer (e.g., type of merchant,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">type of business). The assigned type may</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">indicate the recipient's type of business,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">a level of risk associated with the</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">recipient or recipient's business, etc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">recipient_life</td>
+<td class="description-td">Indicates how long ago the recipient's</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">account with the system was created.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">user_type</td>
+<td class="description-td">The category or type of the user (e.g.,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">personal, business).</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0091" num="0090">In different risk score equations, a value of a condition in TABLE 2 or a variable of TABLE 1 (or some other condition or variable) may be used by itself as a term, may be used to derive a term, or may be used to derive a variable or coefficient within a term. A risk score equation may have any number of terms, and may be tuned over time to suit the type of transaction for which an ACH entry is requested (e.g., value transfers with particular types of merchants, value transfers by particular types of users).</div>
+<div class="description-paragraph" id="p-0092" num="0091">In an embodiment of the invention, one of the following equations may be used to calculate an ACH risk score. These equations may be modified to include additional or fewer terms without exceeding the scope of the invention. Some terms may be taken directly from the conditions of TABLE 2; derivation of other terms is described below.
+<br/>
+SCORE=In_funding+first_charged1+user_type1+out_amount1+out_count1+out_count2+out_count3  (1)
+<br/>
+SCORE=In_funding+out_count1+first_charged1+first_charged2+user_type1+recipient_life1+recipient_type1+distinct_rcv1+distinct_rcv2+out_amount1   (2)
+<br/>
+SCORE=In_funding+funding_ratio1+first_charged1+first_charged2+first_charged3+out_amount1+failed_cnt_ratio+out_count1+out_count2+cleared_sum1+cleared_sum2+failed_sum1+failed_sum2   (3)
+<br/>
+SCORE=In_funding+funding_ratio1+funding_ratio2+first_charged1+first_charged2+first_charged3+user_type1+recipient_life1+distinct_pay1+distinct_pay2+failed_count+failed_sum1+failed_sum2   (4)
+</div>
+<div class="description-paragraph" id="p-0093" num="0092">As described previously, equations (1)-(4) may be used in different circumstances. For example, equations (1) and (2) may be used when calculating an ACH risk score for a user's first transaction with the system, while equations (3) and (4) may be used for subsequent transactions. In particular, a user has no transaction history to rely upon during his or her first transaction, and so the ACH risk score equation may depend upon fewer factors. In contrast, equations (3) and (4) can consider the number, magnitude and success or failure of the user's previous transactions.</div>
+<div class="description-paragraph" id="p-0094" num="0093">Similarly, equations (1) and (3) may be suitable for use with one particular type of value transfer (e.g., transfers to a merchant in one type of business), while equations (2) and (4) may be appropriate for a different type of value transfer (e.g., transfers to merchants engaged in a different type of business).</div>
+<div class="description-paragraph" id="p-0095" num="0094">Derivation of the terms of the illustrated equations is now described, staring with calculations of some intermediate and common values for use in one or more equations. The value Y<sub>i </sub>indicates a threshold value for calculating or determining a term's value (various conditions from TABLE 2 are used in the derivations). Different thresholds may be used for the same term in different equations or for application of the same equation under different circumstances (e.g., different user requesting the transfer, different recipient or type of recipient).</div>
+<div class="description-paragraph" id="p-0096" num="0095">Common Terms and Intermediate Values:</div>
+<div class="description-paragraph" id="p-0097" num="0096">In_funding=ln(funding_amount); {ln=natural log}</div>
+<div class="description-paragraph" id="p-0098" num="0097">failed_sum_ratio=failed_sum/(cleared_sum+failed_sum);</div>
+<div class="description-paragraph" id="p-0099" num="0098">If max_cleared=0 then funding_ratio=0, else funding_ratio=(funding_amount/max_cleared);</div>
+<div class="description-paragraph" id="p-0100" num="0099">If user_type is “personal” then user_type1=1, else user_type1=0; Equation (1) terms:</div>
+<div class="description-paragraph" id="p-0101" num="0100">If first_charged&gt;Y<sub>1 </sub>then first_charged1=1, else first_charged1=0;</div>
+<div class="description-paragraph" id="p-0102" num="0101">If out_amount≤0 then out_amount1=0, else out_amount1=ln(out_amount);</div>
+<div class="description-paragraph" id="p-0103" num="0102">If Y<sub>2</sub>≤out_count≤Y<sub>3 </sub>then out_count1=1, else out_count1=0;</div>
+<div class="description-paragraph" id="p-0104" num="0103">If Y<sub>4</sub>≤out_count≤Y<sub>5 </sub>then out_count2=1, else out_count2=0;</div>
+<div class="description-paragraph" id="p-0105" num="0104">If out_count≥Y<sub>6 </sub>then out_count3=1, else out_count3=0; Equation (2) terms:</div>
+<div class="description-paragraph" id="p-0106" num="0105">If first_charged≤0 then first_charged1=1, else first_charged1=0;</div>
+<div class="description-paragraph" id="p-0107" num="0106">If 0&lt;first_charged≤Y<sub>7 </sub>then first_charged2=1, else first_charged2=0;</div>
+<div class="description-paragraph" id="p-0108" num="0107">If recipient_type is “low risk” then recipient_type1=1, else recipient_type1=0;</div>
+<div class="description-paragraph" id="p-0109" num="0108">If out_amount&gt;Y<sub>8 </sub>then out_amount1=1, else out_amount1=0;</div>
+<div class="description-paragraph" id="p-0110" num="0109">If out_count&gt;Y<sub>9 </sub>then out_count1=1, else out<sub>— </sub>count1=0;</div>
+<div class="description-paragraph" id="p-0111" num="0110">If recipient_life≤Y<sub>10 </sub>then recipient_life1=1, else recipient_life1=0;</div>
+<div class="description-paragraph" id="p-0112" num="0111">If Y<sub>11</sub>&lt;distinct_receipts≤Y<sub>12 </sub>then distinct_rcv1=1, else distinct_rcv1=0;</div>
+<div class="description-paragraph" id="p-0113" num="0112">If distinct_receipts&gt;Y<sub>13 </sub>then dist_rcv2=1, else distinct_rcv2=0; Equation (3) terms:</div>
+<div class="description-paragraph" id="p-0114" num="0113">If first_charged≤Y<sub>14 </sub>then first_charged1=1, else first_charged1=0;</div>
+<div class="description-paragraph" id="p-0115" num="0114">If Y<sub>15</sub>&lt;first_charged≤Y<sub>16 </sub>then first_charged2=1, else first_charged2=0;</div>
+<div class="description-paragraph" id="p-0116" num="0115">If first_charged&gt;Y<sub>17 </sub>then first_charged3=1, else first_charged3=0;</div>
+<div class="description-paragraph" id="p-0117" num="0116">If out_amount≤0 then out_amount1=0, else out_amount1=ln(out_amount);</div>
+<div class="description-paragraph" id="p-0118" num="0117">If out_count≤Y<sub>18 </sub>then out_count1=1, else out_count1=0;</div>
+<div class="description-paragraph" id="p-0119" num="0118">If out_count&gt;Y<sub>19 </sub>then out_count2=1, else out_count2=0;</div>
+<div class="description-paragraph" id="p-0120" num="0119">failed cnt_ratio=failed_count/(cleared_count+failed_count);</div>
+<div class="description-paragraph" id="p-0121" num="0120">if cleared_sum≤Y<sub>20 </sub>then cleared_sum1=1, else cleared_sum1=0;</div>
+<div class="description-paragraph" id="p-0122" num="0121">if cleared_sum&gt;Y<sub>21 </sub>then cleared_sum2=1, else cleared_sum2=0;</div>
+<div class="description-paragraph" id="p-0123" num="0122">If failed_sum_ratio≤0 then failed_sum1=1, else failed_sum1=0;</div>
+<div class="description-paragraph" id="p-0124" num="0123">If failed_sum ratio&gt;Y<sub>22 </sub>then failed_sum2=1, else failed_sum2=0;</div>
+<div class="description-paragraph" id="p-0125" num="0124">If funding_ratio&gt;Y<sub>23 </sub>then funding_ratio1=1, else funding_ratio1=0; Equation (4) terms:</div>
+<div class="description-paragraph" id="p-0126" num="0125">If first_charged≤0 then first_charged1=1, else first_charged1=0;</div>
+<div class="description-paragraph" id="p-0127" num="0126">If 0&lt;first_charged≤Y<sub>24 </sub>then first_charged2=1, else first_charged2=0;</div>
+<div class="description-paragraph" id="p-0128" num="0127">If first_charged≥Y<sub>25 </sub>then first_charged3=1, else first_charged3=0;</div>
+<div class="description-paragraph" id="p-0129" num="0128">If recipient_life≤Y<sub>26 </sub>then recipient_life1=1, else recipient_life1=0;</div>
+<div class="description-paragraph" id="p-0130" num="0129">If distinct_payments≤Y<sub>27 </sub>then distinct_pay1=1, else distinct_pay1=0;</div>
+<div class="description-paragraph" id="p-0131" num="0130">If Y<sub>28</sub>≤distinct_payments≤Y<sub>29 </sub>then distinct_pay2=1, else distinct_pay2=0;</div>
+<div class="description-paragraph" id="p-0132" num="0131">If failed_sum_ratio≤0 then failed_sum1=1, else failed_sum1=0;</div>
+<div class="description-paragraph" id="p-0133" num="0132">If failed_sum_ratio≤Y<sub>30 </sub>then failed_sum2=1, else failed_sum2=0;</div>
+<div class="description-paragraph" id="p-0134" num="0133">If Y<sub>31</sub>&lt;funding_ratio≤Y<sub>32 </sub>then funding_ratio1=1, else funding_ratio1=0;</div>
+<div class="description-paragraph" id="p-0135" num="0134">If funding_ratio&gt;Y<sub>33 </sub>then funding_ratio2=1, else funding_ratio2=0;</div>
+<div class="description-paragraph" id="p-0136" num="0135">Each term of equations (1) through (4) is ultimately derived from conditions such as those defined in TABLE 2 and/or TABLE 1. Thus, first_charged1, first_charged2 and similar terms are based on the condition first_charged, distinct_pay1 and distinct_pay2 are derived from distinct_payments, and so on.</div>
+<div class="description-paragraph" id="p-0137" num="0136">Any or all of the terms of a risk score equation may be modified by coefficients that may take on any value—positive, negative or zero. The use of coefficients allows an equation to be tuned as desired for a particular system, operating environment, different circumstances regarding the requested value transfer (e.g., type of merchant, type of requesting user) or other factor(s). Thus, if a particular term is meaningless in a certain circumstance, its coefficient could be set to zero.</div>
+<div class="description-paragraph" id="p-0138" num="0137">Yet further, instead of applying different equations for different scenarios or circumstances, a single, monolithic equation could be applied. Thus, the terms of equations (1) through (4) above could be combined to yield a single equation to apply every time. Terms of such a monolithic equation could be configured to drop out (i.e., equal 0) when they are not needed for a particular circumstance. For example, when a term drawn from equation (4) is calculated, it (or a coefficient assigned to the term) could be set to zero if the present transaction is the user's first.</div>
+<div class="description-paragraph" id="p-0139" num="0138"> <figref idrefs="DRAWINGS">FIG. 3</figref> depicts an illustrative method of generating and using a risk score to determine whether to perform an instant ACH entry, wherein making proceeds of the ACH entry are made available to a user without waiting for settlement of the entry. In the illustrated embodiment of the invention, the higher the ACH risk score calculated for a user's desired ACH entry, the more likely it is the system will accept it.</div>
+<div class="description-paragraph" id="p-0140" num="0139">In state <b>302</b>, a value transfer request is received from a user. One or more details of the request also be received (e.g., amount, recipient username or identity). The value transfer may be to another user or entity, or may be intended to transfer funds into the user's system account.</div>
+<div class="description-paragraph" id="p-0141" num="0140">In response to the request, in state <b>304</b> the system retrieves a profile of the requesting user, which may include a history of past value transfers, ACH entries and/or other transactions involving the user. The system may also load or retrieve various cut-off or threshold values.</div>
+<div class="description-paragraph" id="p-0142" num="0141">For example, the system may determine how many instant ACH entries a user (or this particular user) is permitted to have outstanding at one time (e.g., forty), the total amount (e.g., dollar value) the user may have in outstanding instant ACH entries (e.g., $3,000), a minimum risk score the user must have before he or she will be allowed to initiate an instant ACH entry (e.g., fifty) or other operation (e.g., electronic check, normal ACH entry), a threshold value above which the amount of the user's requested ACH entry may be authorized or held against a credit card or other source (e.g., $25) (as described in a previous section), etc. However, in one implementation of this embodiment, funds that a user requests via an instant ACH entry are never held or authorized against his or her credit source.</div>
+<div class="description-paragraph" id="p-0143" num="0142">If the user already has the maximum number, or amount, of instant ACH entries outstanding, the user may automatically be prohibited from submitting an instant ACH entry. Conversely, if the amount the user desires to retrieve via the ACH entry is less than a threshold, the system may accept and process the ACH entry without even calculating a risk score, or may accept the entry even if the user has reached a maximum number or amount of outstanding instant entries.</div>
+<div class="description-paragraph" id="p-0144" num="0143">In state <b>306</b>, an ACH risk score is calculated based on some or all of the variables and/or other factors discussed above. Illustratively, different equations or algorithms may be applied to calculate a risk score in different circumstances or variables or coefficients of an equation may be altered depending on the circumstances. For example, if the user has never before attempted an ACH entry through the system, or has never attempted an instant ACH entry, then one equation may be used or one value may be assigned to a variable or coefficient within an equation. If the user has previously attempted an ACH entry or, more specifically, an instant ACH entry, then a different equation or value may be applied.</div>
+<div class="description-paragraph" id="p-0145" num="0144">Yet another equation may be applied if the user is requesting an instant ACH entry to deposit funds into an account with the system (e.g., rather than to transfer funds to another user). Also, the equation (or form of equation) that is used may depend on the merchant (or other recipient of the transfer), the type of goods or services offered by the merchant, the purpose of the transfer, and so on.</div>
+<div class="description-paragraph" id="p-0146" num="0145">In state <b>308</b>, the calculated risk score is compared to a first threshold that will determine whether the user will be permitted to fund any or all of the value transfer via an instant ACH transfer. The calculated risk score may also be compared to one or more thresholds associated with other funding sources (e.g., electronic check, normal ACH, credit card, debit card), any or all of which may be higher or lower than the first threshold.</div>
+<div class="description-paragraph" id="p-0147" num="0146">For example, in one implementation of the illustrated embodiment, a threshold for allowing an instant ACH entry for the user is fifty. A threshold for allowing an electronic check or normal ACH entry, however, may be lower (e.g., five).</div>
+<div class="description-paragraph" id="p-0148" num="0147">Thus, depending on the calculated risk score, a user may be offered various (or no) options for funding his/her requested value transfer. In particular, if the risk score is below a minimum threshold, the user may not be advanced any funds until they are received and held at the system without restriction.</div>
+<div class="description-paragraph" id="p-0149" num="0148">In one embodiment of the invention, if the risk score exceeds the first threshold, then an instant ACH entry becomes the default method of funding the value transfer. If the risk score is less than the first threshold, a different source may be marked as a default choice (e.g., credit card, electronic check). The user may be allowed to change from the default choice to a different option.</div>
+<div class="description-paragraph" id="p-0150" num="0149">If the risk score exceeds the threshold associated with an instant ACH entry, the method proceeds to state <b>314</b>.</div>
+<div class="description-paragraph" id="p-0151" num="0150">Otherwise, in state <b>310</b> the system disallows an instant ACH entry as an option for funding the desired value transfer. However, the user may be permitted to fund the transfer from the balance of an account maintained on the system, through a credit card transaction, an ACH entry to a different external account, or some other source or method.</div>
+<div class="description-paragraph" id="p-0152" num="0151">In state <b>312</b>, the user's profile or transaction history is updated to indicate that an ACH entry was disallowed. The reason for the denial, the risk score and/or values of relevant risk factors may be stored as well. After state <b>312</b>, the procedure may end, or the user may be permitted to reconfigure the value transfer or a detail thereof (e.g., amount of transfer, desired source or method of funding the transfer).</div>
+<div class="description-paragraph" id="p-0153" num="0152">In state <b>314</b>, the instant ACH entry is initiated and proceeds (i.e., funds) of the instant ACH entry are released to the user (e.g., placed in his or her system account) or transferred as requested (e.g., to another user). In other embodiments of the invention, a different type of ACH entry may be initiated, such as a normal ACH entry or an electronic check, depending on the user's request, the calculated risk score, and/or other factors.</div>
+<div class="description-paragraph" id="p-0154" num="0153">In one implementation of the illustrated embodiment of the invention, funds for the user's value transfer may first be withdrawn from the user's account with the system. In this implementation, only if the user's account balance is less than the amount of the value transfer is an ACH entry initiated to retrieve the difference from the specified external account. In another implementation of this embodiment, the full amount of the value transfer may be retrieved via an ACH entry, some of which may then be used to replenish the user's account with the system.</div>
+<div class="description-paragraph" id="p-0155" num="0154">In another embodiment of the invention, an authorize or hold may be placed against a credit source associated with the user. This may be done to help ensure recovery of the amount released to the user.</div>
+<div class="description-paragraph" id="p-0156" num="0155">In state <b>316</b>, the user's profile and/or transaction history are updated. In particular, the user's history may be updated to increase the number and total value of (instant) ACH entries outstanding. The risk score and/or any or all of the factors considered in calculating the risk score may be saved.</div>
+<div class="description-paragraph" id="p-0157" num="0156">In state <b>318</b>, the system determines whether the instant ACH entry fails. The entry may be rejected by a clearinghouse or other ACH entry processor, may be returned by the receiving bank or institution, may be repudiated by the user, etc. Thus, failure of the entry may be detected quickly or may not occur until some period of time after the entry was initiated.</div>
+<div class="description-paragraph" id="p-0158" num="0157">Illustratively, the user's transaction history is updated to indicate the failure, and the reason for the failure may be saved. For example, the ACH entry may fail because of insufficient funds in the user's bank account, because the bank account was closed or is frozen, because payment was stopped, because the entry contained an error (e.g., wrong or invalid bank account number), etc.</div>
+<div class="description-paragraph" id="p-0159" num="0158">If the entry fails, the method continues to state <b>320</b>. Otherwise, the procedure ends (and the user's profile is updated to indicate the success of the entry).</div>
+<div class="description-paragraph" id="p-0160" num="0159">In state <b>320</b>, the user's profile and/or transaction history are updated to indicate the ACH entry failure. Also, the number and total value of the user's outstanding (instant) ACH entries may be decreased appropriately.</div>
+<div class="description-paragraph" id="p-0161" num="0160">Also in state <b>320</b>, the user's account with the system, or ability to use the system, may be curtailed or terminated. This action may depend upon the reason for failure of the ACH entry. For example, if the entry is returned as unauthorized, or the user repudiated the ACH entry, closed her bank account, stopped payment or took similar action before the entry cleared, then the user may be suspected of fraud and her use of the system may be restricted accordingly.</div>
+<div class="description-paragraph" id="p-0162" num="0161">In state <b>322</b>, if the value transfer has not yet cleared or settled, then the system may reverse or stop the transfer. If, however, the transfer has been completed, the system may attempt to retrieve the value, or at least the portion of the value funded by the instant ACH entry.</div>
+<div class="description-paragraph" id="p-0163" num="0162">Depending on the type of ACH entry failure, the system may re-try the entry. For example, if the failure was due to insufficient funds or uncollected funds, the entry may succeed on a subsequent attempt.</div>
+<div class="description-paragraph" id="p-0164" num="0163">Or, the system may decrement the user's account with the system or charge a credit source (e.g., credit card, debit card, credit line) associated with the user. If an authorization was previously made against the credit source, either that authorization or a new one may be used for the charge. The illustrated procedure then ends.</div>
+<div class="description-paragraph" id="p-0165" num="0164">The foregoing descriptions of embodiments of the invention have been presented for purposes of illustration and description only. They are not intended to be exhaustive or to limit the invention to the forms disclosed. Accordingly, the above disclosure is not intended to limit the invention; the scope of the invention is defined by the appended claims.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM180874774">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method comprising:
+<div class="claim-text">receiving, by one or more hardware processors from a user device of a user, a request for an amount associated with a transaction of an Automated Clearing House (ACH) process, wherein the ACH process comprises a time delay for the transaction to clear the ACH process, and wherein the request for the amount comprises information associated with the user;</div>
+<div class="claim-text">comparing, by the one or more hardware processors, the information from the request against a stored user profile associated with the user;</div>
+<div class="claim-text">determining, by the one or more hardware processors, a likelihood of trust representing a trustworthiness of an indicated identity of the user based on the comparing;</div>
+<div class="claim-text">identifying, by the one or more hardware processors, a credit source of the user;</div>
+<div class="claim-text">based on the determined likelihood of trust, charging, by the one or more hardware processors, at least a first portion of the requested amount against the credit source of the user; and</div>
+<div class="claim-text">in response to the charging, making, by the one or more hardware processors, the requested amount associated with the transaction available before the transaction clears the ACH process.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising, based at least on the requested amount of the transaction being greater than a predetermined amount, initiating a hold against a credit source from providing a second portion of the requested amount.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising determining a first risk score associated with the requested amount based at least on the likelihood of trust and an amount by which the requested amount exceeds a transfer threshold, wherein the first risk score indicates a risk with releasing the requested amount before the transaction clears the ACH process.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, further comprising determining the first portion of the requested amount to be charged against the credit source based on the first risk score.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein the first risk score is determined based at least on a number of transactions in association with the user profile, and wherein making the requested amount available is further based on the number of transactions compared to a maximum number of transactions.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00005">claim 5</claim-ref>, wherein the user profile indicates a rejection ratio representing a number of unsuccessful transactions over a number of transactions previously requested.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the request for the amount comprises a request to alter the amount, a request for a source of the amount, or a request for a change to the transaction.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">receiving, from the user device, a second request for a second amount associated with a second transaction of the ACH process;</div>
+<div class="claim-text">charging a second portion of the second amount against the credit source of the user; and</div>
+<div class="claim-text">in response to charging the second portion of the second amount against the credit source, making the requested second amount associated with the second transaction available before the second transaction clears the ACH process.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the request is associated with a purchase of an item for the user.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">receiving an indication that the transaction clears the ACH process; and</div>
+<div class="claim-text">in response to receiving the indication, crediting the first portion of the requested amount to the credit source.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the request for the amount further comprises a transaction certificate associated with the request for the amount, wherein the likelihood of trust is determined further based on a comparison between the transaction certificate and transaction data from a third party.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. A system comprising:
+<div class="claim-text">a non-transitory memory; and</div>
+<div class="claim-text">one or more hardware processors coupled to the non-transitory memory and configured to read instructions from the non-transitory memory to cause the system to perform operations comprising:
+<div class="claim-text">receiving, from a user device of a user, a request for an amount associated with a transaction of an Automated Clearing House (ACH) process, wherein the ACH process comprises a time delay for the transaction to clear the ACH process, and wherein the request for the amount comprises information associated with the user;</div>
+<div class="claim-text">comparing the information against a stored user profile associated with the user;</div>
+<div class="claim-text">determining, a likelihood of trust representing a trustworthiness of an indicated identity of the user based on the comparing;</div>
+<div class="claim-text">based on the determined likelihood of trust, placing a hold against a credit source of the user from providing a first portion of the requested amount; and</div>
+<div class="claim-text">in response to placing the hold against the credit source of the user from providing the first portion of the requested amount, making the requested amount associated with the transaction available before the transaction clears the ACH process.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The system of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the operations further comprise determining a first risk score associated with the requested amount based at least on the likelihood of trust and an amount by which the requested amount exceeds a transfer threshold, wherein the first risk score indicates a risk with releasing the requested amount before the transaction clears the ACH process.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The system of <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein the operations further comprise determining the first portion of the requested amount for placing a hold against the credit source based on the first risk score.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The system of <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein the first risk score is determined based at least on a number of transactions in association with the user profile, and wherein making the requested amount available is further based on the number of transactions compared to a maximum number of transactions.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The system of <claim-ref idref="CLM-00015">claim 15</claim-ref>, wherein the user profile indicates a rejection ratio representing a number of unsuccessful transactions over a number of transactions previously requested.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The system of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the request is associated with a transfer of funds from the user to a second user.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The system of <claim-ref idref="CLM-00012">claim 12</claim-ref>, wherein the operations further comprise:
+<div class="claim-text">receiving an indication that the transaction clears the ACH process; and</div>
+<div class="claim-text">in response to receiving the indication, releasing the hold against the credit source of the user.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. A non-transitory machine readable medium having stored thereon machine-readable instructions executable to cause a machine to perform operations comprising:
+<div class="claim-text">receiving, from a user device of a user, a request for an amount associated with a transaction of an Automated Clearing House (ACH) process, wherein the ACH process comprises a time delay for the transaction to clear the ACH process, and wherein the request for the amount comprises information associated with the user;</div>
+<div class="claim-text">comparing the information against a stored user profile associated with the user;</div>
+<div class="claim-text">determining, a likelihood of trust representing a veracity of an indicated identity of the user based on the comparing;</div>
+<div class="claim-text">based on the determined likelihood of trust, charging at least a first portion of the requested amount against a credit source of the user; and</div>
+<div class="claim-text">in response to charging the first portion of the requested amount against the credit source, making the requested amount associated with the transaction available before the transaction clears the ACH process.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The non-transitory machine readable medium of <claim-ref idref="CLM-00019">claim 19</claim-ref>, wherein the operations further comprise:
+<div class="claim-text">determining a first risk score associated with the requested amount based at least on the likelihood of trust and an amount by which the requested amount exceeds a transfer threshold, wherein the first risk score indicates a risk with releasing the requested amount before the transaction clears the ACH process; and</div>
+<div class="claim-text">determining the first portion of the requested amount to be charged against the credit source based on the first risk score.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

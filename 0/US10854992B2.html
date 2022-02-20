@@ -1,0 +1,1796 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10854992B2 - Radar device 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="patent-office" mxw-id="PA424154000">
+<div class="abstract" id="p-0001" num="0000">A radar transmitter transmits a radar signal through a transmitting array antenna at a predetermined transmission period, and a radar receiver receives a reflected wave signal which is the radar signal reflected by a target through a receiving array antenna. A transmitting array antenna and a receiving array antenna each include multiple subarray elements, the subarray elements in the transmitting array antenna and the receiving array antenna are linearly arranged in a first direction, each subarray element includes multiple antenna elements, the subarray element has a dimension larger than a predetermined antenna element spacing in the first direction, and an absolute value of a difference between a subarray element spacing of the transmitting array antenna and a subarray element spacing of the receiving array antenna is equal to the predetermined antenna element spacing.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES280789202">
+<heading id="h-0001">BACKGROUND</heading>
+<heading id="h-0002">Technical Field</heading>
+<div class="description-paragraph" id="p-0002" num="0001">The present disclosure relates to a radar device.</div>
+<heading id="h-0003">Description of the Related Art</heading>
+<div class="description-paragraph" id="p-0003" num="0002">Recent studies have been made on a radar device using a radar transmission signal of a short wavelength including microwave or milliwave with which a high resolution is achieved. Development is required on a radar device (wide-angle radar device) that detects objects (targets) including a pedestrian as well as a vehicle in a wide-angle range in order to improve outdoor safety.</div>
+<div class="description-paragraph" id="p-0004" num="0003">A known example of such a radar device is a pulse radar device that repeatedly emits pulsed waves. A wide-angle pulse radar that detects a vehicle and a pedestrian in a wide-angle range receives a mixture of multiple reflected waves from a target (for example, a vehicle) at a short distance and a target (for example, a pedestrian) at a long distance. This requires (1) a radar transmitter to have a configuration to transmit pulsed waves or pulse-modulated waves having an auto-correlation characteristic (hereinafter, referred to as a low range sidelobe characteristic) that achieves low range sidelobes, and (2) a radar receiver to have a configuration with a wide reception dynamic range.</div>
+<div class="description-paragraph" id="p-0005" num="0004">Examples of the configuration of the wide-angle radar device include the following two configurations.</div>
+<div class="description-paragraph" id="p-0006" num="0005">The first configuration transmits pulsed waves or modulated waves as radar waves by mechanical or electrical scanning using a directional beam of a narrow angle (beam width of a few degrees), and receives reflected waves using a narrow-angle directional beam. With this configuration, the scanning needs to be performed a large number of times to obtain a high resolution, which leads to a degradation in the performance of following a fast moving target.</div>
+<div class="description-paragraph" id="p-0007" num="0006">The second configuration uses a method (direction of arrival (DOA) estimation) of receiving reflected waves through an array antenna including multiple antennas (antenna elements), and estimating the arrival angle of the reflected waves using a signal processing algorithm based on a reception phase difference corresponding to an antenna spacing. This configuration allows the radar receiver to estimate the arrival angle even when a frequency of scanning of a transmission beam on the radar transmitter is reduced, thereby achieving a shortened scanning time and an improved following performance as compared to the first configuration. Examples of DOA estimation methods include a Fourier transform based on matrix calculation, a Capon method and a linear prediction (LP) method based on inverse matrix calculation, and a multiple signal classification (MUSIC) and an estimation of signal parameters via rotational invariance techniques (ESPRIT) based on eigenvalue calculation.</div>
+<div class="description-paragraph" id="p-0008" num="0007">Disclosed is a radar device (also referred to as a MIMO radar) that includes multiple antennas (array antennas) on the radar transmitter as well as the radar receiver and performs beam scanning by signal processing using transmitting and receiving array antennas (see Jian Li, Stoica, Petre, “MIMO Radar with Colocated Antennas,” Signal Processing Magazine, IEEE Vol. 24, Issue: 5, pp. 106-114, 2007, for example).</div>
+<div class="description-paragraph" id="p-0009" num="0008">In order to achieve a high directional gain of an array antenna, antenna elements (hereinafter, referred to as array elements) included in the array antenna are each formed of a subarray antenna including multiple antenna elements in some cases.</div>
+<div class="description-paragraph" id="p-0010" num="0009">As for the element spacing of the array antenna, it is difficult to arrange the array elements at spacings smaller than the size of the array element. However, the dimension of the array element having a subarray antenna configuration is large, and accordingly a large spacing is needed between subarray antennas, which may generate a grating lobe on a directivity pattern of the array antenna.</div>
+<heading id="h-0004">BRIEF SUMMARY</heading>
+<div class="description-paragraph" id="p-0011" num="0010">One non-limiting and exemplary embodiment of the present disclosure provides a radar device that can prevent generation of an unnecessary grating lobe and achieve a desired directivity pattern even when arranged in the subarray antenna configuration.</div>
+<div class="description-paragraph" id="p-0012" num="0011">In one general aspect of the present disclosure, the techniques disclosed here feature a radar device including: radar transmission circuitry which, in operation, transmits a radar signal through a transmitting array antenna at a predetermined transmission period; and radar reception circuitry which, in operation, receives a reflected wave signal which is the radar signal reflected by an object through a receiving array antenna. The transmitting array antenna and the receiving array antenna each include multiple subarray elements. The subarray elements are linearly arranged in a first direction in each of the transmitting array antenna and the receiving array antenna. Each subarray element includes multiple antenna elements. A dimension of each subarray element in the first direction is larger than a predetermined antenna element spacing. An absolute value of a difference between a subarray element spacing of the transmitting array antenna and a subarray element spacing of the receiving array antenna is equal to the predetermined antenna element spacing.</div>
+<div class="description-paragraph" id="p-0013" num="0012">One aspect of the present disclosure can prevent generation of an unnecessary grating lobe and achieve a desired directivity pattern even in a subarray antenna configuration.</div>
+<div class="description-paragraph" id="p-0014" num="0013">It should be noted that general or specific embodiments may be implemented as a system, a method, an integrated circuit, a computer program, a storage medium, or any selective combination thereof.</div>
+<div class="description-paragraph" id="p-0015" num="0014">Additional benefits and advantages of the disclosed embodiments will become apparent from the specification and drawings. The benefits and/or advantages may be individually obtained by the various embodiments and features of the specification and drawings, which need not all be provided in order to obtain one or more of such benefits and/or advantages.</div>
+<description-of-drawings>
+<heading id="h-0005">BRIEF DESCRIPTION OF THE SEVERAL VIEWS OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0016" num="0015"> <figref idrefs="DRAWINGS">FIG. 1A</figref> illustrates an exemplary configuration of a subarray element;</div>
+<div class="description-paragraph" id="p-0017" num="0016"> <figref idrefs="DRAWINGS">FIG. 1B</figref> illustrates an exemplary configuration of an array antenna including the subarray elements;</div>
+<div class="description-paragraph" id="p-0018" num="0017"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram of the configuration of a radar device according to an embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0019" num="0018"> <figref idrefs="DRAWINGS">FIG. 3</figref> illustrates an exemplary radar transmission signal according to the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a block diagram of another configuration of a radar transmission signal generator according to the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 5</figref> illustrates an example of a transmission timing and a measurement range of the radar transmission signal according to the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates antenna arrangements of a transmitting array, a receiving array, and a virtual receiving array according to the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 7</figref> illustrates a directivity pattern according to the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates antenna arrangements of a transmitting array, a receiving array, and a virtual receiving array according to Variation 1 of the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 9A</figref> illustrates a directivity pattern in the horizontal direction according to Variation 1 of the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 9B</figref> illustrates a directivity pattern in the vertical direction according to Variation 1 of the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 10</figref> illustrates antenna arrangements of a transmitting array, a receiving array, and a virtual receiving array according to Variation 2 of the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 11A</figref> illustrates a directivity pattern in the horizontal direction according to Variation 2 of the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 11B</figref> illustrates a directivity pattern in the vertical direction according to Variation 2 of the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates antenna arrangements of a transmitting array, a receiving array, and a virtual receiving array according to Variation 3 of the embodiment of the present disclosure;</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 13A</figref> illustrates a directivity pattern in the horizontal direction according to Variation 3 of the embodiment of the present disclosure; and</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 13B</figref> illustrates a directivity pattern in the vertical direction according to Variation 3 of the embodiment of the present disclosure.</div>
+</description-of-drawings>
+<heading id="h-0006">DETAILED DESCRIPTION</heading>
+<div class="description-paragraph" id="p-0033" num="0032">[Underlying Knowledge Forming Basis of the Present Disclosure]</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 1A</figref> illustrates an exemplary subarray configuration (hereinafter, also referred to as a subarray element) including an antenna element. The subarray element illustrated in <figref idrefs="DRAWINGS">FIG. 1A</figref> includes four antenna elements in a 2×2 matrix. In the example illustrated in <figref idrefs="DRAWINGS">FIG. 1A</figref>, the subarray element has a dimension of 0.8 wavelength in both the horizontal and vertical directions.</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 1B</figref> illustrates an exemplary array antenna including a linear arrangement of the four subarray elements illustrated in <figref idrefs="DRAWINGS">FIG. 1A</figref>. Since each subarray element has a dimension of 0.8 wavelength (refer to <figref idrefs="DRAWINGS">FIG. 1A</figref>) as illustrated in <figref idrefs="DRAWINGS">FIG. 1B</figref>, a spacing between the subarray elements needs to be about 1 wavelength or larger.</div>
+<div class="description-paragraph" id="p-0036" num="0035">For example, an array element spacing (predetermined element spacing) for preventing generation of a grating lobe in a range of ±90° of a main lobe is 0.5 wavelength. In the array antenna illustrated in <figref idrefs="DRAWINGS">FIG. 1B</figref>, the subarray elements have an element spacing of about 1 wavelength or larger, and thus it is difficult to obtain a predetermined element spacing. This results in generation of a grating lobe in the range of ±90° of the main lobe.</div>
+<div class="description-paragraph" id="p-0037" num="0036">As described above, when the dimension of the subarray element is 0.5 wavelength or larger, it may be difficult to set the element spacing of the array antenna to be 0.5 wavelength. Thus, an unnecessary grating lobe occurs in the range of ±90° of the main lobe, which generates a virtual image at angle determination, thereby leading to a false detection.</div>
+<div class="description-paragraph" id="p-0038" num="0037">Published Japanese Translation of PCT International Application No. 2011-526370 (hereinafter, referred to as Patent Document 1) discloses an array antenna configuration including a subarray element having a width d equal to 1 wavelength approximately. In Patent Document 1, transmitting antennas Tx0 and Tx1 has an element spacing of 6 wavelengths, and receiving antennas RX0, RX1, RX2, and RX3 has an element spacing of 1.5 wavelengths ±(λ/8) (where X represents 1 wavelength). With the array antenna configuration disclosed in Patent Document 1, time-divisional transmission of a radar transmission signal is performed through the transmitting antennas Tx0 and Tx1, and a reception signal for the radar transmission signal transmitted from each of the transmitting antennas Tx0 and Tx1 is acquired through the receiving antennas RX0, RX1, RX2, and RX3.</div>
+<div class="description-paragraph" id="p-0039" num="0038">With this configuration, a phase difference due to the difference of the positions of the transmitting antennas is superimposed on the reception signal acquired by a receiving array antenna. This achieves a virtually increased opening length of the receiving antennas. Hereinafter, a virtual receiving array antenna having an increased effective opening length due to antenna element arrangements of transmitting and receiving array antennas is referred to as a “virtual receiving array.”</div>
+<div class="description-paragraph" id="p-0040" num="0039">In Patent Document 1, however, the receiving array antennas have an element spacing of 1.5 wavelengths ±λ/8, which leads to generation of a grating lobe in a direction shifted from a main beam direction by 40° approximately.</div>
+<div class="description-paragraph" id="p-0041" num="0040">An aspect according to the present disclosure prevents generation of an unnecessary grating lobe and achieves a desired directivity pattern even when array elements having a subarray configuration are arranged.</div>
+<div class="description-paragraph" id="p-0042" num="0041">Hereinafter, embodiments according to the aspect of the present disclosure are described in detail with reference to the accompanying drawings. An identical reference numeral is given to any identical component common to the embodiments, and description thereof is omitted to avoid duplication.</div>
+<div class="description-paragraph" id="h-0007" num="0000">[Radar Device Configuration]</div>
+<div class="description-paragraph" id="p-0043" num="0042"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a block diagram of the configuration of a radar device <b>10</b> according to the present embodiment.</div>
+<div class="description-paragraph" id="p-0044" num="0043">The radar device <b>10</b> includes a radar transmitter <b>100</b>, a radar receiver <b>200</b>, and a reference signal generator <b>300</b>.</div>
+<div class="description-paragraph" id="p-0045" num="0044">The radar transmitter <b>100</b> generates a radar signal (radar transmission signal) of a high frequency based on a reference signal received from the reference signal generator <b>300</b>. Then, the radar transmitter <b>100</b> transmits the radar transmission signal at a predetermined transmission period through a transmitting array antenna that includes multiple transmitting antennas <b>106</b>-<b>1</b> to <b>106</b>-Nt.</div>
+<div class="description-paragraph" id="p-0046" num="0045">The radar receiver <b>200</b> receives a reflected wave signal which is the radar transmission signal reflected by a target (not illustrated) through a receiving array antenna that includes multiple receiving antennas <b>202</b>-<b>1</b> to <b>202</b>-Na. The radar receiver <b>200</b> processes the reflected wave signal received through the antennas <b>202</b> based on the reference signal received from the reference signal generator <b>300</b> so as to perform, for example, an existence detection and a direction estimation of the target. The target is an object to be detected by the radar device <b>10</b>, and examples thereof include a vehicle and a person.</div>
+<div class="description-paragraph" id="p-0047" num="0046">The reference signal generator <b>300</b> is connected to the radar transmitter <b>100</b> and the radar receiver <b>200</b>. The reference signal generator <b>300</b> supplies the common reference signal to both of the radar transmitter <b>100</b> and the radar receiver <b>200</b> to synchronize processing of the radar transmitter <b>100</b> and the radar receiver <b>200</b>.</div>
+<div class="description-paragraph" id="h-0008" num="0000">[Configuration of Radar Transmitter <b>100</b>]</div>
+<div class="description-paragraph" id="p-0048" num="0047">The radar transmitter <b>100</b> includes radar transmission signal generators <b>101</b>-<b>1</b> to <b>101</b>-Nt, transmission radio units <b>105</b>-<b>1</b> to <b>105</b>-Nt, and the transmitting antennas <b>106</b>-<b>1</b> to <b>106</b>-Nt. Thus, the radar transmitter <b>100</b> includes Nt transmitting antennas <b>106</b>, and each transmitting antenna <b>106</b> is connected to the corresponding radar transmission signal generator <b>101</b> and the corresponding transmission radio unit <b>105</b>.</div>
+<div class="description-paragraph" id="p-0049" num="0048">The radar transmission signal generator <b>101</b> generates a timing clock obtained by multiplying the reference signal received from the reference signal generator <b>300</b> by a predetermined value, and generates the radar transmission signal based on the generated timing clock. Then, the radar transmission signal generator <b>101</b> repeatedly outputs the radar transmission signal at a predetermined radar transmission period (Tr). The radar transmission signal is expressed in r<sub>z</sub>(k, M)=I<sub>z</sub>(k, M)+jQ<sub>z</sub>(k, M). In this expression, z represents an index corresponding to each transmitting antenna <b>106</b>, and is z=1, Nt, and j represents the imaginary unit, k represents a discrete time, and M represents an ordinal number of the radar transmission period.</div>
+<div class="description-paragraph" id="p-0050" num="0049">Each radar transmission signal generator <b>101</b> includes a code generator <b>102</b>, a modulator <b>103</b>, and a low pass filter (LPF) <b>104</b>. The following describes components of the radar transmission signal generator <b>101</b>-<i>z </i>corresponding to the z-th (z=1, Nt) transmitting antenna <b>106</b>.</div>
+<div class="description-paragraph" id="p-0051" num="0050">Specifically, the code generator <b>102</b> generates codes a(z)<sub>n </sub>(n=1, L) (pulse codes) in a code sequence of a code length L at each radar transmission period Tr. Codes having low correlation or no correlation therebetween are used as the codes a(z)<sub>n </sub>(z=1, . . . Nt) generated by each of the code generators <b>102</b>-<b>1</b> to <b>102</b>-Nt. Examples of the code sequence include a Walsh-Hadamard code, an M-sequence code, and a Gold code.</div>
+<div class="description-paragraph" id="p-0052" num="0051">The modulator <b>103</b> provides the codes a(z)<sub>n </sub>received from the code generator <b>102</b> with a pulse modulation (amplitude modulation, amplitude shift keying (ASK), and pulse shift keying) or a phase modulation (phase shift keying), and outputs a modulated signal to the LPF <b>104</b>.</div>
+<div class="description-paragraph" id="p-0053" num="0052">The LPF <b>104</b> outputs a signal component of the modulated signal received from the modulator <b>103</b>, which is not higher than a predetermined threshold band, as a baseband radar transmission signal to the transmission radio unit <b>105</b>.</div>
+<div class="description-paragraph" id="p-0054" num="0053">The z-th (z=1, Nt) transmission radio unit <b>105</b> performs a frequency conversion on the baseband radar transmission signal output from the z-th radar transmission signal generator <b>101</b>, generates a radar transmission signal in a carrier frequency (radio frequency or RF) band, amplifies this radar transmission signal through a transmission amplifier to have a predetermined transmission electric power P [dB], and outputs the amplified radar transmission signal to the z-th transmitting antenna <b>106</b>.</div>
+<div class="description-paragraph" id="p-0055" num="0054">The z-th (z=1, Nt) transmitting antenna <b>106</b> emits the radar transmission signal output from the z-th transmission radio unit <b>105</b> into space.</div>
+<div class="description-paragraph" id="p-0056" num="0055"> <figref idrefs="DRAWINGS">FIG. 3</figref> illustrates the radar transmission signal transmitted from the Nt transmitting antennas <b>106</b> of the radar transmitter <b>100</b>. A code transmission slot Tw includes a pulse code sequence of the code length L. In each radar transmission period Tr, the pulse code sequence is transmitted in the code transmission slot Tw, and no signal is transmitted in the remaining slot (T−Tw). A pulse modulation using No samples is performed per one pulse code (a(z)<sub>n</sub>), and thus Nr (=No×L) sample signals are included in each code transmission slot Tw. In other words, the modulator <b>103</b> employs a sampling rate of (No×L)/Tw. The slot (Tr−Tw) with no signal includes Nu samples.</div>
+<div class="description-paragraph" id="p-0057" num="0056">The radar transmitter <b>100</b> includes, in place of the radar transmission signal generator <b>101</b>, a radar transmission signal generator <b>101</b> <i>a </i>illustrated in <figref idrefs="DRAWINGS">FIG. 4</figref>. The radar transmission signal generator <b>101</b> <i>a </i>does not include the code generator <b>102</b>, the modulator <b>103</b>, or the LPF <b>104</b>, which are illustrated in <figref idrefs="DRAWINGS">FIG. 2</figref>, but includes a code storage <b>111</b> and a DA converter <b>112</b> instead. The code storage <b>111</b> previously stores a code sequence generated by the code generator <b>102</b> (<figref idrefs="DRAWINGS">FIG. 2</figref>), and cyclically and sequentially reads out the stored code sequence. The DA converter <b>112</b> converts a code sequence (digital signal) output from the code storage <b>111</b> into an analog signal.</div>
+<div class="description-paragraph" id="h-0009" num="0000">[Configuration of Radar Receiver <b>200</b>]</div>
+<div class="description-paragraph" id="p-0058" num="0057">In <figref idrefs="DRAWINGS">FIG. 2</figref>, the radar receiver <b>200</b> includes Na receiving antennas <b>202</b>, constituting an array antenna. The radar receiver <b>200</b> also includes Na antenna system processors <b>201</b>-<b>1</b> to <b>201</b>-Na and a direction estimator <b>214</b>.</div>
+<div class="description-paragraph" id="p-0059" num="0058">Each receiving antenna <b>202</b> receives the reflected wave signal which is the radar transmission signal reflected by the target (object), and outputs the reflected wave signal thus received as a reception signal to the corresponding antenna system processor <b>201</b>.</div>
+<div class="description-paragraph" id="p-0060" num="0059">Each antenna system processor <b>201</b> includes a reception radio unit <b>203</b> and a signal processor <b>207</b>.</div>
+<div class="description-paragraph" id="p-0061" num="0060">The reception radio unit <b>203</b> includes an amplifier <b>204</b>, a frequency converter <b>205</b>, and an quadrature detector <b>206</b>. The reception radio unit <b>203</b> generates a timing clock obtained by multiplying the reference signal received from the reference signal generator <b>300</b> by a predetermined value, and operates based on this generated timing clock. Specifically, the amplifier <b>204</b> amplifies the reception signal received from the receiving antenna <b>202</b> to a predetermined level, and the frequency converter <b>205</b> performs a frequency conversion of a high frequency band of the reception signal into a baseband. Then, the quadrature detector <b>206</b> converts this reception signal in the baseband into a reception signal in a baseband including an I signal and a Q signal.</div>
+<div class="description-paragraph" id="p-0062" num="0061">The signal processor <b>207</b> includes AD converters <b>208</b> and <b>209</b> and separators <b>210</b>-<b>1</b> to <b>210</b>-Nt.</div>
+<div class="description-paragraph" id="p-0063" num="0062">The AD converter <b>208</b> receives the I signal from the quadrature detector <b>206</b>, and the AD converter <b>209</b> receives the Q signal from the quadrature detector <b>206</b>. The AD converter <b>208</b> performs discrete time sampling on a baseband signal including the I signal so as to convert the I signal into digital data. The AD converter <b>209</b> performs discrete time sampling on a baseband signal including the Q signal so as to convert the Q signal into digital data.</div>
+<div class="description-paragraph" id="p-0064" num="0063">The samplings performed by the AD converters <b>208</b> and <b>209</b> include Ns discrete samplings in a duration Tp (=Tw/L) of one sub pulse in the radar transmission signal. In other words, Ns oversamplings are performed per one sub pulse.</div>
+<div class="description-paragraph" id="p-0065" num="0064">The following description uses an I signal I<sub>r</sub>(k, M) and a Q signal Q<sub>r</sub>(k, M) to express a baseband reception signal as the output from the AD converters <b>208</b> and <b>209</b> at the discrete time k in the M-th radar transmission period Tr[M], as a complex signal x(k, M)=I<sub>r</sub>(k, m)+jQ<sub>r</sub>(k, M). In the following, the discrete time k is defined with reference to a timing (k=1) at which the radar transmission period (Tr) starts, and the signal processor <b>207</b> periodically operates until k=(Nr+Nu)Ns/No, which is a last sample point before the radar transmission period Tr ends. Namely, the discrete time k has a value of k=1, . . . , (Nr+Nu)Ns/No, where j is the imaginary unit.</div>
+<div class="description-paragraph" id="p-0066" num="0065">The signal processor <b>207</b> includes the Nt separators <b>210</b> whose number is equal to the number of systems as the number of the transmitting antennas <b>106</b>. Each separator <b>210</b> includes a correlation calculator <b>211</b>, an adder <b>212</b>, and a Doppler frequency analyzer <b>213</b>. The configuration of the z-th (z=1, . . . , Nt) separator <b>210</b> is described below.</div>
+<div class="description-paragraph" id="p-0067" num="0066">The correlation calculator <b>211</b> calculates a correlation between the discrete sample value x(k, M) and the pulse codes a(z)<sub>n</sub>, (where z=1, Nt, and n=1, . . . , L) of the code length L transmitted through the radar transmitter <b>100</b>. The discrete sample value x(k, M) includes the discrete sample values I<sub>r</sub>(k, M) and Q<sub>r</sub>(k, M) received from the AD converters <b>208</b> and <b>209</b> at each radar transmission period Tr. For example, the correlation calculator <b>211</b> calculates a sliding correlation between the discrete sample value x(k, M) and the pulse codes a(z)<sub>n</sub>. For example, a correlation calculated value AC<sub>(z)</sub>(k, M) for the sliding correlation at the discrete time k in the M-th radar transmission period Tr[M] is calculated based on an expression below.</div>
+<div class="description-paragraph" id="p-0068" num="0067">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>A</mi>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mrow>
+<mo>(</mo>
+<mi>z</mi>
+<mo>)</mo>
+</mrow>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>M</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>n</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>L</mi>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mi>x</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mi>k</mi>
+<mo>+</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>s</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>n</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+<mi>M</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<msubsup>
+<mrow>
+<mi>a</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>z</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mi>n</mi>
+<mo>*</mo>
+</msubsup>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0069" num="0068">In the above expression, an asterisk (*) represents a complex conjugate operator.</div>
+<div class="description-paragraph" id="p-0070" num="0069">The correlation calculator <b>211</b> calculates the correlation over a duration of k=1, . . . , (Nr+Nu)Ns/No in accordance with, for example, Expression (1).</div>
+<div class="description-paragraph" id="p-0071" num="0070">The correlation calculator <b>211</b> is not limited to the correlation calculation for k=1, . . . , (Nr+Nu)Ns/No, and may limit a measurement range (that is, the range of k) depending on the range of existence of the target as a measurement target of the radar device <b>10</b>. This allows the radar device <b>10</b> to achieve a reduction in the calculation amount of the correlation calculator <b>211</b>. For example, the correlation calculator <b>211</b> may limit the measurement range to k=Ns(L+1), . . . , (Nr+Nu)Ns/No−NsL. In this case, as illustrated in <figref idrefs="DRAWINGS">FIG. 5</figref>, the radar device <b>10</b> does not perform measurement in the time slot corresponding to the code transmission slot Tw.</div>
+<div class="description-paragraph" id="p-0072" num="0071">Thus, in the radar device <b>10</b>, the correlation calculator <b>211</b> does not perform processing in a duration (at least a duration less than τ1) in which the radar transmission signal going directly into the radar receiver <b>200</b>, which achieves a measurement free from the influence of this phenomenon. When the measurement range (range of k) of the correlation calculation is limited, the measurement range (range of k) of processing at the adder <b>212</b>, the Doppler frequency analyzer <b>213</b>, and the direction estimator <b>214</b> to be described later may be limited as well. This achieves a reduced processing amount at each component and thus a reduced electric power consumption at the radar receiver <b>200</b>.</div>
+<div class="description-paragraph" id="p-0073" num="0072">At each discrete time k in the M-th radar transmission period Tr, the adder <b>212</b> performs an addition (coherent integration) of the correlation calculated value AC<sub>(z)</sub>(k, M) received from the correlation calculator <b>211</b> over a duration (Tr×Np) that is a predetermined number (Np) of the radar transmission periods Tr. This addition (coherent integration) processing involving the number Np of additions over the duration (Tr×Np) is performed by an expression below.</div>
+<div class="description-paragraph" id="p-0074" num="0073">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>CI</mi>
+<mrow>
+<mo>(</mo>
+<mi>z</mi>
+<mo>)</mo>
+</mrow>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>m</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>g</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<msub>
+<mi>N</mi>
+<mi>p</mi>
+</msub>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mi>A</mi>
+<mo>⁢</mo>
+<mrow>
+<msub>
+<mi>C</mi>
+<mrow>
+<mo>(</mo>
+<mi>z</mi>
+<mo>)</mo>
+</mrow>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>p</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>m</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mi>g</mi>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>2</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0075" num="0074">In this expression, CI<sub>(z)</sub>(k, m) represents the sum (hereinafter, also referred to as the correlation sum) of the correlation calculated values, where Np is an integer equal to or larger than one, and m is an integer equal to or larger than one as an ordinal number of the number of additions in units of the number Np of additions at the adder <b>212</b>. The value z is z=1, . . . , Nt.</div>
+<div class="description-paragraph" id="p-0076" num="0075">The adder <b>212</b> performs Np additions in units of the output from the correlation calculator <b>211</b> obtained per the radar transmission period Tr. Specifically, the adder <b>212</b> calculates the correlation value CI<sub>(z)</sub>(k, m) as the sum of the correlation calculated values AC<sub>(z)</sub>(k, Np(m−1)+1) to AC<sub>(z)</sub>(k, Np×m) for each discrete time k. Thus, the adder <b>212</b> can achieve an improved SNR of the reflected wave signal through the Np additions of the correlation calculated value in a range in which the reflected wave signals from the target have a high correlation. This then achieves an improved measurement performance related to estimation of an arrival distance of the target.</div>
+<div class="description-paragraph" id="p-0077" num="0076">In order to obtain an ideal addition gain, a condition for having a phase component of each correlation calculated value within a certain range needs to be satisfied in an addition time period for the number Np of additions of the correlation calculated value. Thus, the number Np of additions is preferably set based on an expected maximum moving speed of the target as a measurement target. This is because a larger expected maximum speed of the target results in a larger amount of change of a Doppler frequency included in a reflected wave from the target, and thus a shorter time duration in which a high correlation is obtained. In this case, the number Np of additions is small, which leads to a small gain improvement effect of the addition by the adder <b>212</b>.</div>
+<div class="description-paragraph" id="p-0078" num="0077">The Doppler frequency analyzer <b>213</b> performs the coherent integration for the same discrete time k in units of CI<sub>(z)</sub>(k, Nc(w−1)+1) to CI<sub>(z)</sub>(k, Nc×w) as Nc outputs obtained at each discrete time k from the adder <b>212</b>. For example, the Doppler frequency analyzer <b>213</b> corrects a phase variation ϕ(fs)=2πfs(Tr×Np)Δϕ in accordance with 2Nf different Doppler frequencies fsΔϕ as expressed in an expression below, and then performs the coherent integration.</div>
+<div class="description-paragraph" id="p-0079" num="0078">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msubsup>
+<mi>FT_Cl</mi>
+<mrow>
+<mo>(</mo>
+<mi>z</mi>
+<mo>)</mo>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>⁢</mo>
+<mi>a</mi>
+<mo>⁢</mo>
+<mi>n</mi>
+<mo>⁢</mo>
+<mi>t</mi>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<msub>
+<mi>f</mi>
+<mi>s</mi>
+</msub>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>q</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>c</mi>
+</msub>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>CI</mi>
+<mrow>
+<mo>(</mo>
+<mi>z</mi>
+<mo>)</mo>
+</mrow>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>c</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>w</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mi>q</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mi>exp</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<mo>-</mo>
+<mi>j</mi>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>ϕ</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>f</mi>
+<mi>s</mi>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mi>q</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>q</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>c</mi>
+</msub>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>CI</mi>
+<mrow>
+<mo>(</mo>
+<mi>z</mi>
+<mo>)</mo>
+</mrow>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>c</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>w</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>+</mo>
+<mi>q</mi>
+<mo>+</mo>
+<mn>1</mn>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mi>exp</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mrow>
+<mo>-</mo>
+<mi>j</mi>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>π</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>f</mi>
+<mi>s</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>T</mi>
+<mi>r</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>p</mi>
+</msub>
+<mo>⁢</mo>
+<mi>q</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>Δϕ</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>3</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0080" num="0079">In this expression, FT_CI<sub>(z)</sub> <sup>Nant</sup>(k, fs, w) represents the w-th output of the Doppler frequency analyzer <b>213</b>, and represents a result of the coherent integration of the Doppler frequency fsΔϕ by the Nant-th antenna system processor <b>201</b> at the discrete time k. Also in the expression, Nant=1 to Na, fs=−Nf+1, . . . , 0, . . . , Nf, k=1, . . . , (Nr+Nu)Ns/No, w is an integer equal to or larger than one, and Δϕ represents a phase rotation unit.</div>
+<div class="description-paragraph" id="p-0081" num="0080">Accordingly, each antenna system processor <b>201</b> obtains FT_CI<sub>(z)</sub> <sup>Nant</sup>(k, −Nf+1, w), . . . , FT_CI<sub>(z)</sub> <sup>Nant</sup>(k, Nf−1, w) as the result of the coherent integration in accordance with 2Nf Doppler frequency components at the discrete time k, for each duration (Tr×Np Nc) of a plurality, Np×Nc, of the radar transmission periods Tr. In the expression, j is the imaginary unit, and the value z is z=1, . . . , Nt.</div>
+<div class="description-paragraph" id="p-0082" num="0081">For Δϕ=1/Nc, the above-described processing of the Doppler frequency analyzer <b>213</b> is equivalent to discrete Fourier transform (DFT) processing of the outputs from the adder <b>212</b> with a sampling interval Tm=(Tr×Np) and a sampling frequency fm=1/Tm.</div>
+<div class="description-paragraph" id="p-0083" num="0082">Setting Nf to a power of two allows application of fast Fourier transform (FFT) processing at the Doppler frequency analyzer <b>213</b>, thereby achieving a large reduction in the calculation amount. For Nf&gt;Nc, the FFT processing can also be applied in a region in which q&gt;Nc holds by performing zero filling processing that sets CI<sub>z</sub>(k, Nc(w−1)+q)=0, and thus the calculation amount can be largely reduced accordingly.</div>
+<div class="description-paragraph" id="p-0084" num="0083">The Doppler frequency analyzer <b>213</b> may perform, in place of the FFT processing, processing of sequentially calculating the product sum calculation expressed in Expression (3) above. Specifically, the Doppler frequency analyzer <b>213</b> may generate a coefficient exp[−j2πf<sub>s</sub>T<sub>r</sub>N<sub>p</sub>qΔϕ] for fs=−Nf+1, . . . , 0, Nf−1 for CI<sub>(z)</sub>(k, Nc(w−1)+q+1) as the Nc outputs obtained from the adder <b>212</b> at each discrete time k, and sequentially perform the product sum calculation processing. Here, q=0 to Nc−1.</div>
+<div class="description-paragraph" id="p-0085" num="0084">In the following, a virtual receiving array correlation vector h(k, fs, w) in expressions below represents a set of the w-th outputs FT_CI<sub>(z)</sub> <sup>1</sup>(k, fs, w), FT_CI<sub>(z)</sub> <sup>2</sup>(k, fs, w), . . . , FT_CI<sub>(z)</sub> <sup>Na</sup>(k, fs, w) obtained through the same processing on the Na respective antenna system processors <b>201</b>. The virtual receiving array correlation vector h(k, fs, w) includes Nt×Na elements as the product of the number of transmitting antennas, Nt, and the number of receiving antennas, Na. The virtual receiving array correlation vector h(k, fs, w) is used to later describe the processing of performing a direction estimation of the reflected wave signal from the target based on a phase difference between the receiving antennas <b>202</b>. Here, z=1, . . . , Nt, and b=1, . . . , Na.</div>
+<div class="description-paragraph" id="p-0086" num="0085">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>h</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+<mn>1</mn>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mn>2</mn>
+<mo>)</mo>
+</mrow>
+<mn>1</mn>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mi>Nt</mi>
+<mo>)</mo>
+</mrow>
+<mn>1</mn>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mn>2</mn>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mi>Nt</mi>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+</mrow>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mn>1</mn>
+<mo>)</mo>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>⁢</mo>
+<mi>a</mi>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mn>2</mn>
+<mo>)</mo>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>⁢</mo>
+<mi>a</mi>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mi>Nt</mi>
+<mo>)</mo>
+</mrow>
+<mrow>
+<mi>N</mi>
+<mo>⁢</mo>
+<mi>a</mi>
+</mrow>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>h</mi>
+<mn>1</mn>
+</msup>
+<mo>(</mo>
+<mi>k</mi>
+<mo>,</mo>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+<mo>,</mo>
+<mi>w</mi>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>h</mi>
+<mn>2</mn>
+</msup>
+<mo>(</mo>
+<mi>k</mi>
+<mo>,</mo>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+<mo>,</mo>
+<mi>w</mi>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>h</mi>
+<mi>Na</mi>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+</mrow>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>4</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msup>
+<mi>h</mi>
+<mi>b</mi>
+</msup>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mi>l</mi>
+<mo>)</mo>
+</mrow>
+<mi>b</mi>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+</mrow>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mn>2</mn>
+<mo>)</mo>
+</mrow>
+<mi>b</mi>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+</mrow>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>FT_CI</mi>
+<mrow>
+<mo>(</mo>
+<mi>N</mi>
+<mo>⁢</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+<mi>b</mi>
+</msubsup>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+</mrow>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>5</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0087" num="0086">In the above, the processing at each component of the signal processor <b>207</b> has been described.</div>
+<div class="description-paragraph" id="p-0088" num="0087">The direction estimator <b>214</b> calculates, for the virtual receiving array correlation vector h(k, fs, w) of the w-th Doppler frequency analyzer <b>213</b> output from the antenna system processors <b>201</b>-<b>1</b> to <b>201</b>-Na, a virtual receiving array correlation vector h_after_cal(k, fs, w) obtained by correcting a phase deviation and an amplitude deviation between the antenna system processors <b>201</b> using an array correction value h_cal<sub>[y]</sub>. The virtual receiving array correlation vector h_after_cal(k, fs, w) is given by an expression below. Here, y=1, . . . , (Nt×Na).</div>
+<div class="description-paragraph" id="p-0089" num="0088">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mrow>
+<msub>
+<mi>h</mi>
+<mrow>
+<mrow>
+<mi>_</mi>
+<mo>⁢</mo>
+<mi>after</mi>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mi>_</mi>
+<mo>⁢</mo>
+<mi>cal</mi>
+</mrow>
+</mrow>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>CAh</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mi>fs</mi>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mtext>
+</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mi>CA</mi>
+<mo>=</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mi>h_cal</mi>
+<mrow>
+<mo>[</mo>
+<mn>1</mn>
+<mo>]</mo>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mi>…</mi>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<msub>
+<mi>h_cal</mi>
+<mrow>
+<mo>[</mo>
+<mn>2</mn>
+<mo>]</mo>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<mi>⋱</mi>
+</mtd>
+<mtd>
+<mi>…</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+<mtd>
+<mi>⋱</mi>
+</mtd>
+<mtd>
+<mi>⋱</mi>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mi>…</mi>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<msub>
+<mi>h_cal</mi>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>Nt</mi>
+<mo>×</mo>
+<mi>Na</mi>
+</mrow>
+<mo>]</mo>
+</mrow>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>6</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0090" num="0089">Then, using the virtual receiving array correlation vector h_after_cal(k, fs, w), the direction estimator <b>214</b> performs direction estimation processing of the horizontal direction and the vertical direction based on a phase difference of the reflected wave signals between the receiving antennas <b>202</b>. The direction estimator <b>214</b> calculates a space profile by treating an azimuth direction θ and an elevation direction ϕ in a direction estimation evaluating function value P (θ, φ, k, fs, w) as variables in a predetermined angle range, extracts a predetermined number of local maximum peaks of the calculated space profile in descending order, and sets the azimuth and elevation directions of each local maximum peak as arrival direction estimation values.</div>
+<div class="description-paragraph" id="p-0091" num="0090">Different kinds of the evaluating function value P(θ, φ, k, fs, w) are provided by different arrival direction estimation algorithms. For example, an estimation method using an array antenna disclosed in Cadzow, J. A., “Direction-of-arrival estimation using signal subspace modeling,” Aerospace and Electronic Systems, IEEE Transactions on Volume: 28, Issue: 1, pp. 64-79, Publication Year: 1992.</div>
+<div class="description-paragraph" id="p-0092" num="0091">For example, a beamformer method can be expressed in an expression below. Alternatively, the Capon and MUSIC methods are applicable as well.
+<br/>
+<i>P</i>(θ<sub>u</sub> <i>, ϕ, k, fs, w</i>)=|α(θ<sub>u</sub>, ϕ<sub>v</sub>)<sup>H</sup> <i>h</i> <sub>_after_cal</sub>(<i>k, fs, w</i>)|<sup>2</sup>  (7)
+</div>
+<div class="description-paragraph" id="p-0093" num="0092">In this expression, a superscript H is the Hermite transposition operator, and a(θ<sub>u</sub>, φ<sub>v</sub>) represents the directional vector of the virtual receiving array for arrival wave in an azimuth direction θ<sub>n </sub>and an elevation direction φ<sub>v</sub>.</div>
+<div class="description-paragraph" id="p-0094" num="0093">As described above, the direction estimator <b>214</b> outputs the w-th calculated arrival direction estimation value, the discrete time k, the Doppler frequency fsΔϕ, and the angle θ<sub>u</sub>, as a radar positioning result.</div>
+<div class="description-paragraph" id="p-0095" num="0094">The directional vector a(θ<sub>u</sub>, φ<sub>v</sub>) is a (Nt×Na) column vector including an element as a complex response of the virtual receiving array when a reflected wave of the radar transmission signal arrives in the azimuth direction θ<sub>u</sub>; and the elevation direction φ<sub>v</sub>. The complex response a(θ<sub>u</sub>, φ<sub>v</sub>) of the virtual receiving array represents a phase difference geometric-optically calculated depending on an element spacing between antennas.</div>
+<div class="description-paragraph" id="p-0096" num="0095">θ<sub>u </sub>takes values separated by a predetermined azimuth spacing β<sub>1 </sub>in an azimuth range in which the arrival direction estimation is to be performed. For example, θ<sub>u </sub>is set as described below.
+<br/>
+θ<sub>u</sub>=θmin+<i>uβ</i> <sub>1 </sub>where <i>u=</i>0, . . . , <i>NU </i>
+<br/>
+<i>NU</i>=floor[(θmax−θmin)β<sub>1</sub>]+1
+</div>
+<div class="description-paragraph" id="p-0097" num="0096">In this expression, floor(x) is a function that returns a largest integer value not larger than a real number x.</div>
+<div class="description-paragraph" id="p-0098" num="0097">φ<sub>v </sub>takes values separated by a predetermined elevation spacing β<sub>2 </sub>in an elevation angle range in which the arrival direction estimation is to be performed. For example, φ<sub>v </sub>is set as described below.
+<br/>
+φ<sub>v</sub>=φmin+<i>+vβ</i> <sub>2 </sub>where <i>v=</i>0, . . . , <i>NV </i>
+<br/>
+<i>NV</i>=floor[(φmax−φmin)/β<sub>2</sub>]+1
+</div>
+<div class="description-paragraph" id="p-0099" num="0098">The present embodiment assumes that the directional vector of the virtual receiving array is previously calculated based on a virtual receiving array arrangement VA #1, . . . , VA #(Nt×Na) described later. Each element of the directional vector of the virtual receiving array indicates a phase difference geometric-optically calculated at the element spacing between antennas in the order of the virtual receiving array arrangement VA #1, . . . , VA #(Nt×Na) to be described later.</div>
+<div class="description-paragraph" id="p-0100" num="0099">The time information k described above may be converted into distance information for outputting. An expression below may be used to convert the time information k into distance information R(k). Here, Tw represents the code transmission slot, L represents the pulse code length, and C<sub>0 </sub>represents the speed of light.</div>
+<div class="description-paragraph" id="p-0101" num="0100">
+<maths id="MATH-US-00006" num="00006">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>R</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mi>k</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>k</mi>
+<mo>⁢</mo>
+<mfrac>
+<mrow>
+<msub>
+<mi>T</mi>
+<mi>w</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>C</mi>
+<mn>0</mn>
+</msub>
+</mrow>
+<mrow>
+<mn>2</mn>
+<mo>⁢</mo>
+<mi>L</mi>
+</mrow>
+</mfrac>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>8</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0102" num="0101">The Doppler frequency information (fsΔϕ) may be converted into a relative speed component for outputting. An expression below may be used to convert the Doppler frequency fsΔϕ into a relative speed component vd(fs). Here, λ represents the wavelength of the RF signal output from the transmission radio unit <b>107</b> at a carrier frequency.</div>
+<div class="description-paragraph" id="p-0103" num="0102">
+<maths id="MATH-US-00007" num="00007">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>v</mi>
+<mi>d</mi>
+</msub>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>f</mi>
+<mi>s</mi>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mfrac>
+<mi>λ</mi>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<msub>
+<mi>f</mi>
+<mi>s</mi>
+</msub>
+<mo>⁢</mo>
+<mi>Δ</mi>
+<mo>⁢</mo>
+<mi>θ</mi>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>9</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0104" num="0103">[Antenna Arrangement in Radar Device <b>10</b>]</div>
+<div class="description-paragraph" id="p-0105" num="0104">Description will be made of an arrangement of the Nt transmitting antennas <b>106</b> and the Na receiving antennas <b>202</b> in the radar device <b>10</b> having the configuration described above.</div>
+<div class="description-paragraph" id="p-0106" num="0105"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates the antenna arrangement of a transmitting array including Nt=2 transmitting antennas <b>106</b> (Tx #1 and Tx #2), the antenna arrangement of a receiving array including Na=3 receiving antennas <b>202</b> (Rx #1, Rx #2, and Rx #3), and the antenna arrangement of a virtual receiving array (including Nt×Na=6 elements) configured in accordance with these transmitting and receiving array antennas.</div>
+<div class="description-paragraph" id="p-0107" num="0106">Each of the transmitting antennas <b>106</b> and the receiving antennas <b>202</b> is a subarray element including two antenna elements.</div>
+<div class="description-paragraph" id="p-0108" num="0107">D<sub>subarray </sub>represents the dimension (width) of the subarray element, and De represents a predetermined antenna element spacing with which no grating lobe is generated in a radar detection angle range. In <figref idrefs="DRAWINGS">FIG. 6</figref>, the dimension D<sub>subarray </sub>of the subarray element is larger than the predetermined antenna element spacing De (D<sub>subarray</sub>&gt;De). The predetermined antenna element spacing De is set to be equal to or larger than 0.5 wavelength and equal to or smaller than 0.75 wavelength.</div>
+<div class="description-paragraph" id="p-0109" num="0108">Dt represents the subarray element spacing of the transmitting array antenna, and Dr represents the subarray element spacing of the receiving array antenna. For example, in <figref idrefs="DRAWINGS">FIG. 6</figref>, the subarray element spacing Dt of the transmitting array antenna is 1.5λ (1.5 wavelength), and the subarray element spacing Dr of the receiving array antenna is 1λ (1 wavelength). Thus, the subarray element spacings Dt and Dr are equal to or larger than 1 wavelength (λ) approximately.</div>
+<div class="description-paragraph" id="p-0110" num="0109">In the present embodiment, the dimension D<sub>subarray </sub>of the subarray element is larger than the predetermined antenna element spacing De with which no grating lobe is generated in the radar detection angle range (D<sub>subarray</sub>&gt;De). In this case, the transmitting array and the receiving array are arranged such that the subarray element spacing Dt of the transmitting array antenna and the subarray element spacing Dr of the receiving array antenna satisfy a relation expressed in an expression below.
+<br/>
+|<i>Dt−Dr|=De</i>  (10)
+</div>
+<div class="description-paragraph" id="p-0111" num="0110">In other words, the absolute value of the difference between the subarray element spacing Dt of the transmitting array antenna and the subarray element spacing Dr of the receiving array antenna is equal to the predetermined antenna element spacing De.</div>
+<div class="description-paragraph" id="p-0112" num="0111"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates an example case in which De is λ/2, the subarray element spacing Dt of the transmitting array antenna is 1.5λ, and the subarray element spacing Dr of the receiving array antenna is λ.</div>
+<div class="description-paragraph" id="p-0113" num="0112">In this case, as illustrated in <figref idrefs="DRAWINGS">FIG. 6</figref>, the element spacing in a central part (other than edges) of the virtual receiving array is equal to the predetermined antenna element spacing De (=|Dt−Dr|=λ/2). In other words, the virtual receiving array has an array arrangement with which no grating lobe is generated in the radar detection angle range.</div>
+<div class="description-paragraph" id="p-0114" num="0113"> <figref idrefs="DRAWINGS">FIG. 7</figref> illustrates a directivity pattern (Fourier beam pattern with the main beam at the direction of 0°) in the transmitting and receiving array antenna arrangements (with De=0.5λ, Dt=1.5λ, and Dr=λ) illustrated in <figref idrefs="DRAWINGS">FIG. 6</figref>. As illustrated in <figref idrefs="DRAWINGS">FIG. 7</figref>, no grating lobe is generated in an angle range of ±90° of the main beam direction.</div>
+<div class="description-paragraph" id="p-0115" num="0114">As described above, in the present embodiment, the transmitting antennas <b>106</b> and the receiving antennas <b>202</b> are arranged such that the difference (absolute value) between the element spacing of the transmitting array antenna including the transmitting antennas <b>106</b> and the element spacing of the receiving array antenna including the receiving antennas <b>202</b> is equal to the predetermined element spacing with which no grating lobe is generated.</div>
+<div class="description-paragraph" id="p-0116" num="0115">In this manner, the element spacing of the virtual receiving array configured in accordance with the arrangement relation between the transmitting antennas <b>106</b> and the receiving antennas <b>202</b> can be set to the predetermined element spacing with which no grating lobe is generated. This can prevent generation of a false detection due to any grating lobe when the direction estimation processing is performed at the direction estimator <b>214</b>.</div>
+<div class="description-paragraph" id="p-0117" num="0116">Thus, the present embodiment can prevent generation of an unnecessary grating lobe, thereby achieving a desired directivity pattern, even when array elements having a subarray configuration are arranged.</div>
+<div class="description-paragraph" id="p-0118" num="0117"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates an exemplary configuration in which each array antenna has a linear arrangement in the horizontal direction so as to perform the arrival direction estimation in the horizontal direction. However, in the present embodiment, even when the array antenna has a linear arrangement in the vertical direction, the virtual receiving array having the predetermined element spacing with which no grating lobe is generated can be arranged in the vertical direction as well so as to perform the arrival direction estimation in the vertical direction.</div>
+<div class="description-paragraph" id="h-0010" num="0000">[Variation 1]</div>
+<div class="description-paragraph" id="p-0119" num="0118">Variation 1 describes an example in which the arrival direction estimation is performed in both of the horizontal and vertical directions.</div>
+<div class="description-paragraph" id="p-0120" num="0119">Transmitting array elements and receiving array elements are two-dimensionally arranged in the vertical and horizontal directions.</div>
+<div class="description-paragraph" id="p-0121" num="0120"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates the antenna arrangement of a transmitting array including Nt=6 transmitting antennas <b>106</b> (Tx #1 to Tx #6), the antenna arrangement of a receiving array including Na=3 receiving antennas <b>202</b> (Rx #1, Rx #2, and Rx #3), and the antenna arrangement of a virtual receiving array (including Nt×Na=18 elements) configured in accordance with these transmitting and receiving array antennas.</div>
+<div class="description-paragraph" id="p-0122" num="0121">In <figref idrefs="DRAWINGS">FIG. 8</figref>, the transmitting array has a two-dimensional arrangement of two subarray elements in the horizontal direction and three subarray elements in the vertical direction.</div>
+<div class="description-paragraph" id="p-0123" num="0122">In <figref idrefs="DRAWINGS">FIG. 8</figref>, the horizontal dimension of each subarray element is equal to D<sub>subarray</sub>, and the vertical dimension is equal to or smaller than De. In other words, the horizontal dimension of each antenna element is larger than the predetermined antenna element spacing De and the vertical dimension is equal to or smaller than the predetermined antenna element spacing De.</div>
+<div class="description-paragraph" id="p-0124" num="0123"> <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates an example in which the predetermined antenna element spacing De is λ/2, the subarray element spacing Dt of the transmitting array antenna in the horizontal direction is 1.5λ, and the element spacing of the transmitting array antenna in the vertical direction is De. The subarray element spacing Dr of the receiving array antenna in the horizontal direction is λ.</div>
+<div class="description-paragraph" id="p-0125" num="0124">In this case, as illustrated in <figref idrefs="DRAWINGS">FIG. 8</figref>, the absolute value of the difference between the subarray element spacing Dt of the transmitting array antenna and the subarray element spacing Dr of the receiving array antenna is equal to the predetermined antenna element spacing De in the horizontal direction. As illustrated in <figref idrefs="DRAWINGS">FIG. 8</figref>, the element spacing of the transmitting array antenna is equal to the predetermined antenna element spacing De in the vertical direction.</div>
+<div class="description-paragraph" id="p-0126" num="0125">Accordingly, as illustrated in <figref idrefs="DRAWINGS">FIG. 8</figref>, the element spacing of the central part (other than edges) of the virtual receiving array is equal to the predetermined antenna element spacing De (=|Dt−Dr|=λ/2) in the horizontal direction.</div>
+<div class="description-paragraph" id="p-0127" num="0126">As illustrated in <figref idrefs="DRAWINGS">FIG. 8</figref>, the element spacing of the virtual receiving array is equal to the predetermined antenna element spacing De in the vertical direction like the element spacing of the transmitting array in the vertical direction.</div>
+<div class="description-paragraph" id="p-0128" num="0127">In other words, the virtual receiving array has an array arrangement with which no grating lobe is generated in the radar detection angle range both in the horizontal and vertical directions.</div>
+<div class="description-paragraph" id="p-0129" num="0128">As expressed in an expression below, for the arrival direction estimation in the horizontal and vertical directions, the direction estimator <b>214</b> calculates the direction estimation evaluating function value P(θ<sub>u</sub>, φ<sub>v</sub>, k, fs, w) by treating the azimuth direction θ<sub>u </sub>and the elevation direction φ<sub>v </sub>as variables, and sets the azimuth and elevation directions at which the maximum value of the direction estimation evaluating function value is obtained, as an arrival direction estimation value DOA(k,fs,w).</div>
+<div class="description-paragraph" id="p-0130" num="0129">
+<maths id="MATH-US-00008" num="00008">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>D</mi>
+<mo>⁢</mo>
+<mi>O</mi>
+<mo>⁢</mo>
+<mrow>
+<mi>A</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+</mrow>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mi>arg</mi>
+<mo>⁢</mo>
+<mrow>
+<munder>
+<mi>max</mi>
+<mrow>
+<msub>
+<mi>θ</mi>
+<mi>u</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>v</mi>
+</msub>
+</mrow>
+</munder>
+<mo>⁢</mo>
+<mrow>
+<mi>P</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>θ</mi>
+<mi>u</mi>
+</msub>
+<mo>,</mo>
+<msub>
+<mi>ϕ</mi>
+<mi>v</mi>
+</msub>
+<mo>,</mo>
+<mi>k</mi>
+<mo>,</mo>
+<mrow>
+<mi>f</mi>
+<mo>⁢</mo>
+<mi>s</mi>
+</mrow>
+<mo>,</mo>
+<mi>w</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>(</mo>
+<mn>11</mn>
+<mo>)</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0131" num="0130">In this expression, u=1, . . . , NU. The arg max P(x) is an operator that outputs a domain value at which the function value P(x) is at maximum.</div>
+<div class="description-paragraph" id="p-0132" num="0131">Different kinds of the evaluating function value P(θ<sub>u</sub>, φ<sub>v</sub>, k, fs, w) are provided by different arrival direction estimation algorithms. For example, an estimation method using an array antenna disclosed in Cadzow described above may be used. For example, the beamformer method can be expressed in an expression below. Alternatively, the Capon and MUSIC methods are applicable as well.
+<br/>
+<i>P</i>(θ<sub>u</sub>, ϕ<sub>v</sub> <i>, k, fs, w</i>)=α(θ<sub>u</sub>, ϕ<sub>v</sub>)<sup>H</sup> <i>H</i> <sub>_after_cal</sub>(<i>k, fs, w</i>)α(θ<sub>u</sub>, ϕ<sub>v</sub>)  (12)
+</div>
+<div class="description-paragraph" id="p-0133" num="0132">In this expression, a superscript H is the Hermite transposition operator, and a(θ<sub>u</sub>, φ<sub>v</sub>) represents the directional vector for arrival wave in the azimuth direction θ<sub>u </sub>and the elevation direction φ<sub>v</sub>.</div>
+<div class="description-paragraph" id="p-0134" num="0133"> <figref idrefs="DRAWINGS">FIGS. 9A and 9B</figref> illustrate directivity patterns (Fourier beam patterns with the main beam at the direction of 0°) of the transmitting and receiving array antenna arrangements (with De=0.5λ, Dt=1.5λ, and Dr=1λ) illustrated in <figref idrefs="DRAWINGS">FIG. 8</figref> in the horizontal and vertical directions, respectively.</div>
+<div class="description-paragraph" id="p-0135" num="0134">As illustrated in <figref idrefs="DRAWINGS">FIG. 9A</figref>, no grating lobe is generated in the angle range of ±90° of the main beam direction in the horizontal direction. In addition, as illustrated in <figref idrefs="DRAWINGS">FIG. 9B</figref>, a beam pattern in which no grating lobe is generated is formed in the vertical direction.</div>
+<div class="description-paragraph" id="p-0136" num="0135">Use of such arrangements of the transmitting and receiving array antennas can prevent generation of a false detection due to any grating lobe in both of the horizontal and vertical directions when the direction estimation processing is performed at the direction estimator <b>214</b>.</div>
+<div class="description-paragraph" id="p-0137" num="0136">Thus, Variation 1 can prevent generation of an unnecessary grating lobe, thereby achieving a desired directivity pattern, even when array elements having a subarray configuration are two-dimensionally arranged.</div>
+<div class="description-paragraph" id="p-0138" num="0137">Although <figref idrefs="DRAWINGS">FIG. 8</figref> illustrates the case in which the dimension of the subarray element in the horizontal direction is D<sub>subarray </sub>(&gt;De), Variation 1 is also applicable when the dimension of the subarray element in the vertical direction is D<sub>subarray </sub>(&gt;De). In this case, the transmitting array may be arranged in the vertical direction such that the difference (absolute value) between the element spacing of the transmitting array antenna and the element spacing of the receiving array antenna is equal to the predetermined element spacing with which no grating lobe is generated.</div>
+<div class="description-paragraph" id="p-0139" num="0138">[Variation 2]</div>
+<div class="description-paragraph" id="p-0140" num="0139">Variation 2 describes another example in which the arrival direction estimation is performed in both of the horizontal and vertical directions.</div>
+<div class="description-paragraph" id="p-0141" num="0140">Specifically, when the transmitting array antenna has an element spacing equal to Dt (&gt;De) in the horizontal direction and an element spacing equal to the predetermined antenna element spacing De in the vertical direction, in the transmitting array antenna, arrays adjacent to each other in the vertical direction, each array having two subarray elements linearly arranged in the horizontal direction, are shifted from each other in the horizontal direction by the predetermined antenna element spacing De.</div>
+<div class="description-paragraph" id="p-0142" num="0141"> <figref idrefs="DRAWINGS">FIG. 10</figref> illustrates the antenna arrangement of a transmitting array including Nt=6 transmitting antennas <b>106</b> (Tx #1 to Tx #6), the antenna arrangement of a receiving array including Na=3 receiving antennas <b>202</b> (Rx #1, Rx #2, and Rx #3), and the antenna arrangement of a virtual receiving array (including Nt×Na=18 elements) configured in accordance with these transmitting and receiving array antennas.</div>
+<div class="description-paragraph" id="p-0143" num="0142">In <figref idrefs="DRAWINGS">FIG. 10</figref>, the transmitting array has a two-dimensional arrangement of two subarray elements in the horizontal direction and three subarray elements in the vertical direction.</div>
+<div class="description-paragraph" id="p-0144" num="0143">In <figref idrefs="DRAWINGS">FIG. 10</figref>, the dimension of the subarray element in the horizontal direction is equal to D<sub>subarray</sub>, and the dimension of the subarray element in the vertical direction is equal to or smaller than De. In other words, the dimension of each antenna element is larger than the predetermined antenna element spacing De in the horizontal direction and equal to or smaller than the predetermined antenna element spacing De in the vertical direction.</div>
+<div class="description-paragraph" id="p-0145" num="0144">In <figref idrefs="DRAWINGS">FIG. 10</figref>, similarly to <figref idrefs="DRAWINGS">FIG. 8</figref>, the predetermined antenna element spacing De is λ/2, the subarray element spacing Dt of the transmitting array antenna in the horizontal direction is 1.5λ, and the element spacing of the transmitting array antenna in the vertical direction is De. The subarray element spacing Dr of the receiving array antenna in the horizontal direction is λ.</div>
+<div class="description-paragraph" id="p-0146" num="0145">Similarly to Variation 1 (<figref idrefs="DRAWINGS">FIG. 8</figref>), as illustrated in <figref idrefs="DRAWINGS">FIG. 10</figref>, the absolute value of the difference between the subarray element spacing Dt of the transmitting array antenna and the subarray element spacing Dr of the receiving array antenna is equal to the predetermined antenna element spacing De in the horizontal direction. As illustrated in <figref idrefs="DRAWINGS">FIG. 10</figref>, the element spacing of the transmitting array antenna is equal to the predetermined antenna element spacing De in the vertical direction.</div>
+<div class="description-paragraph" id="p-0147" num="0146">In <figref idrefs="DRAWINGS">FIG. 10</figref>, the transmitting antennas <b>106</b> disposed away from each other by the antenna element spacing De in the vertical direction of the transmitting array antenna (the transmitting antennas <b>106</b> adjacent to each other in the vertical direction) are shifted from each other in the horizontal direction by the antenna element spacing De. In other words, in the transmitting array antenna, the arrays adjacent to each other in the vertical direction, each array having two subarray elements linearly arranged in the horizontal direction, are shifted from each other in the horizontal direction by the predetermined element spacing.</div>
+<div class="description-paragraph" id="p-0148" num="0147">For example, in <figref idrefs="DRAWINGS">FIG. 10</figref>, the array (in other words, a subarray element array) of the transmitting antennas Tx #1 and Tx #2 and the array of the transmitting antennas Tx #3 and Tx #4 adjacent to the array of the transmitting antennas Tx #1 and Tx #2 in the vertical direction are shifted from each other by the antenna element spacing De. Similarly, the array of the transmitting antennas Tx #3 and Tx #4 and the array of the transmitting antennas Tx #5 and Tx #6 adjacent to the array of the transmitting antennas Tx #3 and Tx #4 in the vertical direction are shifted from each other in the horizontal direction by the antenna element spacing De.</div>
+<div class="description-paragraph" id="p-0149" num="0148">In <figref idrefs="DRAWINGS">FIG. 10</figref>, the element spacing of the central part (other than edges) of the virtual receiving array is equal to the predetermined antenna element spacing De (=|Dt−Dr|=λ/2) in the horizontal direction. As illustrated in <figref idrefs="DRAWINGS">FIG. 10</figref>, similarly to the element spacing of the transmitting array in the vertical direction, the element spacing of the virtual receiving array is equal to the predetermined antenna element spacing De in the vertical direction. In other words, the virtual receiving array has an array arrangement with which no grating lobe is generated in the radar detection angle range.</div>
+<div class="description-paragraph" id="p-0150" num="0149">As illustrated in <figref idrefs="DRAWINGS">FIG. 10</figref>, the array of array elements in the central part (second row) of the virtual receiving array in the vertical direction is shifted from the other arrays of array elements (first and third rows) by De in the horizontal direction. Accordingly, in <figref idrefs="DRAWINGS">FIG. 10</figref>, the antenna elements are arranged on a two-dimensional plane on which the virtual receiving array is arranged, at a narrower spacing than that of Variation 1 (<figref idrefs="DRAWINGS">FIG. 8</figref>). This allows the virtual receiving array to achieve a reduced sidelobe level.</div>
+<div class="description-paragraph" id="p-0151" num="0150"> <figref idrefs="DRAWINGS">FIGS. 11A and 11B</figref> illustrate directivity patterns (Fourier beam patterns with the main beam at the direction of 0°) of the transmitting and receiving array antenna arrangements (with De=0.5λ, Dt=1.5λ, and Dr=λ) illustrated in <figref idrefs="DRAWINGS">FIG. 10</figref> in the horizontal and vertical directions, respectively.</div>
+<div class="description-paragraph" id="p-0152" num="0151">As illustrated in <figref idrefs="DRAWINGS">FIG. 11A</figref>, no grating lobe is generated in the angle range of ±90° of the main beam direction in the horizontal direction. In addition, as illustrated in <figref idrefs="DRAWINGS">FIG. 11B</figref>, a beam pattern in which no grating lobe is generated is formed in the vertical direction.</div>
+<div class="description-paragraph" id="p-0153" num="0152">Moreover, as illustrated in <figref idrefs="DRAWINGS">FIG. 11A</figref>, the directivity pattern in the horizontal direction has reduced sidelobe levels as compared to those of Variation 1 (<figref idrefs="DRAWINGS">FIG. 9A</figref>).</div>
+<div class="description-paragraph" id="p-0154" num="0153">Use of such arrangements of the transmitting and receiving array antennas can prevent generation of a false detection due to a grating lobe and a sidelobe in both of the horizontal and vertical directions when the direction estimation processing is performed at the direction estimator <b>214</b>.</div>
+<div class="description-paragraph" id="p-0155" num="0154">Thus, Variation 2 can prevent generation of an unnecessary grating lobe and achieve a reduced sidelobe level, thereby achieving a desired directivity pattern, even when array elements having a subarray configuration are two-dimensionally arranged.</div>
+<div class="description-paragraph" id="p-0156" num="0155">[Variation 3]</div>
+<div class="description-paragraph" id="p-0157" num="0156">Variation 3 describes another example in which the arrival direction estimation is performed in both of the horizontal and vertical directions.</div>
+<div class="description-paragraph" id="p-0158" num="0157">Specifically, in the transmitting array antenna, arrays adjacent to each other in the vertical direction, each array having subarray elements linearly arranged in the horizontal direction, are arranged in the vertical direction at a spacing equal to the product of the predetermined antenna element spacing De and a constant α, and the arrays adjacent to each other in the vertical direction, each array having two subarray elements linearly arranged in the horizontal direction, are shifted from each other in the horizontal direction by a spacing equal to the product of the predetermined antenna element spacing De and a constant β.</div>
+<div class="description-paragraph" id="p-0159" num="0158"> <figref idrefs="DRAWINGS">FIG. 12</figref> illustrates the antenna arrangement of a transmitting array including Nt=6 transmitting antennas <b>106</b> (Tx #1 to Tx #6), the antenna arrangement of a receiving array including Na=3 receiving antennas <b>202</b> (Rx #1, Rx #2, and Rx #3), and the antenna arrangement of a virtual receiving array (including Nt×Na=18 elements) configured in accordance with these transmitting and receiving array antennas.</div>
+<div class="description-paragraph" id="p-0160" num="0159">In <figref idrefs="DRAWINGS">FIG. 12</figref>, the transmitting array has a two-dimensional arrangement of two subarray elements in the horizontal direction and three subarray elements in the vertical direction.</div>
+<div class="description-paragraph" id="p-0161" num="0160">In <figref idrefs="DRAWINGS">FIG. 12</figref>, the dimension of the subarray element in the horizontal direction is equal to D<sub>subarray</sub>, and the dimension of the subarray element in the vertical direction is equal to or smaller than De. In other words, the dimension of each antenna element is larger than the predetermined antenna element spacing De in the horizontal direction and equal to or smaller than the predetermined antenna element spacing De in the vertical direction.</div>
+<div class="description-paragraph" id="p-0162" num="0161">In <figref idrefs="DRAWINGS">FIG. 12</figref>, similarly to <figref idrefs="DRAWINGS">FIG. 8</figref>, the predetermined antenna element spacing De is λ/2, the subarray element spacing Dt of the transmitting array antenna in the horizontal direction is 1.5λ, and the subarray element spacing Dr of the receiving array antenna in the horizontal direction is λ. The subarray element spacing Dr of the receiving array antenna in the horizontal direction is λ.</div>
+<div class="description-paragraph" id="p-0163" num="0162">Similarly to Variations 1 and 2 (<figref idrefs="DRAWINGS">FIGS. 8 and 10</figref>), as illustrated in <figref idrefs="DRAWINGS">FIG. 12</figref>, the absolute value of the difference between the subarray element spacing Dt of the transmitting array antenna and the subarray element spacing Dr of the receiving array antenna is equal to the predetermined antenna element spacing De in the horizontal direction.</div>
+<div class="description-paragraph" id="p-0164" num="0163">As illustrated in <figref idrefs="DRAWINGS">FIG. 12</figref>, the element spacing of the transmitting array antenna in the vertical direction is a spacing αDe as the product of the predetermined antenna element spacing De and the constant α.</div>
+<div class="description-paragraph" id="p-0165" num="0164">In <figref idrefs="DRAWINGS">FIG. 12</figref>, the transmitting antennas <b>106</b> disposed away from each other by the element spacing αDe in the vertical direction of the transmitting array antenna (the transmitting antennas <b>106</b> adjacent to each other in the vertical direction) are shifted from each other in the horizontal direction by a spacing βDe as the product of the predetermined antenna element spacing De and the constant β. In other words, in the transmitting array antenna, the arrays adjacent to each other in the vertical direction, each array having the two subarray elements linearly arranged in the horizontal direction, are shifted from each other in the horizontal direction by a spacing β times larger than the predetermined element spacing.</div>
+<div class="description-paragraph" id="p-0166" num="0165">For example, in <figref idrefs="DRAWINGS">FIG. 12</figref>, the array of the transmitting antennas Tx #1 and Tx #2 and the array of the transmitting antennas Tx #3 and Tx #4 adjacent to the array of the transmitting antennas Tx #1 and Tx #2 in the vertical direction are shifted from each other by the spacing βDe. Similarly, the array of the transmitting antennas Tx #3 and Tx #4 and the array of the transmitting antennas Tx #5 and Tx #6 adjacent to the array of the transmitting antennas Tx #3 and Tx #4 in the vertical direction are shifted from each other in the horizontal direction by the spacing βDe.</div>
+<div class="description-paragraph" id="p-0167" num="0166">For example, α=(3)<sup>0.5</sup>/2=0.866, and β=0.5.</div>
+<div class="description-paragraph" id="p-0168" num="0167">In <figref idrefs="DRAWINGS">FIG. 12</figref>, the element spacing of the central part (other than edges) of the virtual receiving array is equal to the predetermined antenna element spacing De (=|Dt−Dr|=λ/2) in the horizontal direction.</div>
+<div class="description-paragraph" id="p-0169" num="0168">As illustrated in <figref idrefs="DRAWINGS">FIG. 12</figref>, similarly to the element spacing of the transmitting array in the vertical direction, the element spacing of the virtual receiving array in the vertical direction is αDe (=(3)<sup>0.5</sup>De).</div>
+<div class="description-paragraph" id="p-0170" num="0169">In other words, the virtual receiving array has an array arrangement with which no grating lobe is generated in the radar detection angle range.</div>
+<div class="description-paragraph" id="p-0171" num="0170">As illustrated in <figref idrefs="DRAWINGS">FIG. 12</figref>, the array of array elements in the central part (second row) of the virtual receiving array in the vertical direction is shifted from the other arrays of array elements (first and third rows) by βDe (=0.5De) in the horizontal direction.</div>
+<div class="description-paragraph" id="p-0172" num="0171">Accordingly, in <figref idrefs="DRAWINGS">FIG. 12</figref>, similarly to Variation 2 (<figref idrefs="DRAWINGS">FIG. 10</figref>), antenna elements are arranged on the two-dimensional plane on which the virtual receiving array is arranged, at a narrower spacing than that of Variation 1 (<figref idrefs="DRAWINGS">FIG. 8</figref>). This allows the virtual receiving array to achieve a reduced sidelobe level.</div>
+<div class="description-paragraph" id="p-0173" num="0172">As illustrated in <figref idrefs="DRAWINGS">FIG. 12</figref>, each distance between three antenna elements in the central part of the virtual receiving array adjacent to each other on the two-dimensional plane on which the virtual receiving array is arranged is the predetermined antenna element spacing De. In other words, straight lines connecting three array elements adjacent to each other on the two-dimensional plane on which the virtual receiving array is arranged form an equilateral triangle having all three sides equal to the antenna element spacing De. This equilateral triangle lattice arrangement provides a high grating lobe preventing performance as compared to that provided by a rectangular lattice arrangement for the same opening length. Thus, Variation 3 can further prevent generation of a grating lobe and achieve a further reduced sidelobe level as compared to Variation 2.</div>
+<div class="description-paragraph" id="p-0174" num="0173">To do so, the constants α and β need to be set such that three array elements adjacent to each other in two dimensions of the vertical and horizontal directions are arranged at the predetermined antenna element spacing De (in an equilateral triangle having all three sides equal to De).</div>
+<div class="description-paragraph" id="p-0175" num="0174"> <figref idrefs="DRAWINGS">FIGS. 13A and 13B</figref> illustrate directivity patterns (Fourier beam patterns with the main beam at the direction of 0° of the transmitting and receiving array antenna arrangements (with De=0.5λ, Dt=1.5λ, Dr=1λ, α=(3)<sup>05</sup>/2, and β=0.5) illustrated in <figref idrefs="DRAWINGS">FIG. 12</figref> in the horizontal and vertical directions, respectively.</div>
+<div class="description-paragraph" id="p-0176" num="0175">As illustrated in <figref idrefs="DRAWINGS">FIG. 13A</figref>, no grating lobe is generated in the angle range of ±90° of the main beam direction in the horizontal direction. In addition, as illustrated in <figref idrefs="DRAWINGS">FIG. 13B</figref>, a beam pattern in which no grating lobe is generated is formed in the vertical direction, too.</div>
+<div class="description-paragraph" id="p-0177" num="0176">Moreover, as illustrated in <figref idrefs="DRAWINGS">FIG. 13A</figref>, the directivity pattern in the horizontal direction has reduced sidelobe levels as compared to those of Variation 1 (<figref idrefs="DRAWINGS">FIG. 9A</figref>).</div>
+<div class="description-paragraph" id="p-0178" num="0177"> <figref idrefs="DRAWINGS">FIG. 13A</figref> also shows that sidelobe levels appearing in the direction closest to the main lobe (the direction of ±30° in <figref idrefs="DRAWINGS">FIG. 13A</figref>) in the directivity pattern of the horizontal direction are reduced in comparison with Variation 2 (<figref idrefs="DRAWINGS">FIG. 11A</figref>).</div>
+<div class="description-paragraph" id="p-0179" num="0178">Use of such arrangements of the transmitting and receiving array antennas can prevent generation of a false detection due to a grating lobe and a sidelobe in both of the horizontal and vertical directions when the direction estimation processing is performed at the direction estimator <b>214</b>.</div>
+<div class="description-paragraph" id="p-0180" num="0179">Thus, Variation 3 can prevent generation of an unnecessary grating lobe and achieve a reduced sidelobe level even when array elements having a subarray configuration are two-dimensionally arranged, thereby achieving a desired directivity pattern.</div>
+<div class="description-paragraph" id="p-0181" num="0180">The above has described the embodiment according to an aspect of the present disclosure.</div>
+<div class="description-paragraph" id="p-0182" num="0181">The operations according to the embodiments and variations may be performed in combination as appropriate.</div>
+<div class="description-paragraph" id="p-0183" num="0182">The embodiment above describes the example in which the number Nt of the transmitting antennas <b>106</b> is two or three, and the number Na of the receiving antennas <b>202</b> is three. However, the number Nt of the transmitting antennas <b>106</b> and the number Na of the receiving antennas <b>202</b> are not limited to these numbers.</div>
+<div class="description-paragraph" id="p-0184" num="0183">Although the embodiment above describes the case in which the transmitting antennas <b>106</b> and the receiving antennas <b>202</b> are each a subarray element including two antenna elements, the transmitting antennas <b>106</b> and the receiving antennas <b>202</b> may each include three antenna elements or more.</div>
+<div class="description-paragraph" id="p-0185" num="0184">Variations 1 to 3 of the embodiment above each describe the case in which the transmitting array antenna has a two-dimensional arrangement in the horizontal and vertical directions, and the receiving array antenna has a one-dimensional arrangement in the horizontal direction. However, in the present disclosure, the receiving array antenna may have a two-dimensional arrangement, and the transmitting array antenna may have a one-dimensional arrangement. In this case, the above-described arrangement of subarray elements in the transmitting array antenna may be applied to the arrangement of subarray elements in the receiving array antenna.</div>
+<div class="description-paragraph" id="p-0186" num="0185">The embodiment above describe the case in which the dimension of each antenna element is larger than the predetermined antenna element spacing De in the horizontal direction and equal to or smaller than the predetermined antenna element spacing De in the vertical direction. However, the vertical dimension of the antenna element may be larger than the predetermined antenna element spacing De and the horizontal dimension may be equal to or smaller than the predetermined antenna element spacing De. In this case, the above-described arrangements of subarray elements in the transmitting and receiving array antennas may be exchanged between the horizontal direction and the vertical direction.</div>
+<div class="description-paragraph" id="p-0187" num="0186">Although the embodiments describes a case of using a coded pulse radar, the present disclosure is also applicable to a radar type such as a chirp pulse radar using frequency-modulated pulsed waves.</div>
+<div class="description-paragraph" id="p-0188" num="0187">In the radar device <b>10</b> illustrated in <figref idrefs="DRAWINGS">FIG. 2</figref>, the radar transmitter <b>100</b> and the radar receiver <b>200</b> may be individually arranged at physically separated locations.</div>
+<div class="description-paragraph" id="p-0189" num="0188">The above description is made on the radar device having a configuration in which the radar transmitter sends out different transmission signals provided with code division multiplexing through multiple transmitting antennas, and then the radar receiver separates the transmission signals to perform reception processing thereon. However, the configuration of the radar device is not limited thereto, and may be such that the radar transmitter sends out different transmission signals provided with frequency division multiplexing through multiple transmitting antennas, and then the radar receiver separates the transmission signals to perform reception processing thereon. Alternatively, the radar device may have a configuration in which the radar transmitter sends out different transmission signals provided with time division multiplexing through multiple transmitting antennas, and then the radar receiver performs reception processing on the transmission signals. These configurations provide the same effect as that of the embodiment above.</div>
+<div class="description-paragraph" id="p-0190" num="0189">The radar device <b>10</b> includes, although not illustrated, a central processing unit (CPU), a storage medium such as a read only memory (ROM) storing a control program, and, and a working memory such as a random access memory (RAM). With this configuration, the function of each component described above is achieved through execution of the control program by the CPU. The hardware configuration of the radar device <b>10</b> is, however, not limited thereto. For example, each functional component of the radar device <b>10</b> may be achieved as an integrated circuit (IC). The functional components may be provided as individual chips, or part or all thereof may be included in a single chip.</div>
+<div class="description-paragraph" id="p-0191" num="0190">&lt;Summary of the Present Disclosure&gt;</div>
+<div class="description-paragraph" id="p-0192" num="0191">A radar device according to the present disclosure includes: radar transmission circuitry which, in operation, transmits a radar signal through a transmitting array antenna at a predetermined transmission period; and radar reception circuitry which, in operation, receives a reflected wave signal which is the radar signal reflected by an object through a receiving array antenna. The transmitting array antenna and the receiving array antenna each include multiple subarray elements. The subarray elements are linearly arranged in a first direction in each of the transmitting array antenna and the receiving array antenna. Each subarray element includes multiple antenna elements. A dimension of each subarray element in the first direction is larger than a predetermined antenna element spacing. An absolute value of a difference between a subarray element spacing of the transmitting array antenna and a subarray element spacing of the receiving array antenna is equal to the predetermined antenna element spacing.</div>
+<div class="description-paragraph" id="p-0193" num="0192">In the radar device according to the present disclosure, the predetermined antenna element spacing is equal to or larger than 0.5 wavelength and equal to or smaller than 0.75 wavelength.</div>
+<div class="description-paragraph" id="p-0194" num="0193">In the radar device according to the present disclosure, the subarray elements in one of the transmitting array antenna and the receiving array antenna are further arranged in a second direction orthogonal to the first direction. The dimension of each subarray element in the first direction is larger than the predetermined antenna element spacing, the absolute value of the difference between the subarray element spacing of the transmitting array antenna in the first direction and the subarray element spacing of the receiving array antenna in the first direction is equal to the predetermined antenna element spacing, the dimension of the subarray element in the second direction is not larger than the predetermined antenna element spacing, and the subarray elements are arranged in the second direction at the predetermined antenna element spacing.</div>
+<div class="description-paragraph" id="p-0195" num="0194">In the radar device according to the present disclosure, the subarray elements arranged in the second direction are shifted from each other in the first direction by the predetermined antenna element spacing.</div>
+<div class="description-paragraph" id="p-0196" num="0195">In the radar device according to the present disclosure, the subarray elements in one of the transmitting array antenna and the receiving array antenna are further arranged in the second direction orthogonal to the first direction. The dimension of each subarray element in the first direction is larger than the predetermined antenna element spacing, the absolute value of the difference between the subarray element spacing of the transmitting array antenna in the first direction and the subarray element spacing of the receiving array antenna in the first direction is equal to the predetermined antenna element spacing in the first direction, the subarray elements are arranged in the second direction at a spacing ((√3)/2) times larger than the predetermined antenna element spacing, and the subarray elements adjacent to each other in the second direction are shifted from each other in the first direction by a spacing (½) times larger than the predetermined antenna element spacing.</div>
+<div class="description-paragraph" id="p-0197" num="0196">While the various embodiments (variations) have been described above with reference to the drawings, it is to be understood that the present disclosure is not limited to the disclosed exemplary embodiments. It is clear that the skilled person in the art could think of various modifications or corrections within the scope of the claims, which are understood to belong to the technical range of the present disclosure. The components described in the embodiments (variations) may be optionally combined without departing from the spirit of the disclosure.</div>
+<div class="description-paragraph" id="p-0198" num="0197">The present disclosure has an exemplary configuration using hardware in the embodiments described above, but is achievable with software in combination with hardware.</div>
+<div class="description-paragraph" id="p-0199" num="0198">Each functional block used in the description of the embodiments is typically achieved as an LSI, which is an integrated circuit. The integrated circuit may control the functional block used in the description of the embodiments, and include an input and an output. These integrated circuits may be provided as individual chips, or part or all thereof may be included in a single chip. The LSI may be called an IC, system LSI, super LSI, or ultra LSI depending on its density of integration.</div>
+<div class="description-paragraph" id="p-0200" num="0199">A method of the integration is not limited to LSI, but may be achieved using a dedicated circuit or a general-purpose processor. The integration may be achieved using a field programmable gate array (FPGA), which is programmable after LSI manufacturing, or a reconfigurable processor, in which connection or setting of circuit cells inside the LSI is reconfigurable.</div>
+<div class="description-paragraph" id="p-0201" num="0200">Moreover, any novel integration technology provided to replace LSI by the progress of the semiconductor technology or any technology deriving therefrom may be used for integration of a functional block. A possible replacement is, for example, an application of biotechnology.</div>
+<div class="description-paragraph" id="p-0202" num="0201">The present disclosure provides a preferable radar device that performs detection in a wide-angle range.</div>
+<div class="description-paragraph" id="p-0203" num="0202">The various embodiments described above can be combined to provide further embodiments. All of the U.S. patents, U.S. patent application publications, U.S. patent applications, foreign patents, foreign patent applications and non-patent publications referred to in this specification and/or listed in the Application Data Sheet are incorporated herein by reference, in their entirety. Aspects of the embodiments can be modified, if necessary to employ concepts of the various patents, applications and publications to provide yet further embodiments.</div>
+<div class="description-paragraph" id="p-0204" num="0203">These and other changes can be made to the embodiments in light of the above-detailed description. In general, in the following claims, the terms used should not be construed to limit the claims to the specific embodiments disclosed in the specification and the claims, but should be construed to include all possible embodiments along with the full scope of equivalents to which such claims are entitled. Accordingly, the claims are not limited by the disclosure.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM276395164">
+<claim-statement>The invention claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A radar device comprising:
+<div class="claim-text">a transmitting array antenna;</div>
+<div class="claim-text">a receiving array antenna;</div>
+<div class="claim-text">a radar transmission circuitry which, in operation, transmits radar signals through the transmitting array antenna; and</div>
+<div class="claim-text">a radar reception circuitry which, in operation, receives reflected wave signals through the receiving array antenna, wherein the reflected wave signals are the radar signals reflected by an object,</div>
+<div class="claim-text">wherein,
+<div class="claim-text">the transmitting array antenna includes a plurality of transmitting antennas,</div>
+<div class="claim-text">the receiving array antenna includes a plurality of receiving antennas,</div>
+<div class="claim-text">the plurality of transmitting antennas are arranged in a grid having a first direction and a second direction orthogonal to each other,</div>
+<div class="claim-text">the plurality of receiving antennas are linearly arranged in the first direction,</div>
+<div class="claim-text">a receiving antenna pitch of the plurality of receiving antennas in the first direction is different from a first transmitting antenna pitch of the plurality of transmitting antennas in the first direction,</div>
+<div class="claim-text">an absolute value of a difference between the first transmitting antenna pitch of the transmitting array antenna in the first direction and the receiving antenna pitch of the receiving array antenna in the first direction is not smaller than 0.5 wavelength and not larger than 0.75 wavelength, and</div>
+<div class="claim-text">an antenna dimension of each of the plurality of transmitting antennas in the second direction is shorter than a second transmitting antenna pitch of the plurality of transmitting antennas in the second direction.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The radar device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein
+<div class="claim-text">the plurality of transmitting antennas and the plurality of receiving antennas form a virtual receiving array antenna including a plurality of virtual receiving antennas,</div>
+<div class="claim-text">the virtual receiving array antenna has a plurality of virtual receiving antenna pitches, and</div>
+<div class="claim-text">one of the plurality of virtual receiving antenna pitches of the virtual receiving array antenna in the first direction is not smaller than 0.5 wavelength and not larger than 0.75 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The radar device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein
+<div class="claim-text">the absolute value of the difference between the first transmitting antenna pitch of the plurality of transmitting antennas in the first direction and the receiving antenna pitch of the plurality of receiving antennas in the first direction is 0.5 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The radar device according to <claim-ref idref="CLM-00003">claim 3</claim-ref>, wherein
+<div class="claim-text">the plurality of transmitting antennas and the plurality of receiving antennas form a virtual receiving array antenna including a plurality of virtual receiving antennas,</div>
+<div class="claim-text">the virtual receiving array antenna has a plurality of virtual receiving antenna pitches, and</div>
+<div class="claim-text">one of the plurality of virtual receiving antenna pitches of the virtual receiving array antenna in the first direction is 0.5 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The radar device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein
+<div class="claim-text">each of the plurality of transmitting antennas includes a plurality of transmitting antenna elements, and</div>
+<div class="claim-text">each of the plurality of receiving antennas includes a plurality of receiving antenna elements.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The radar device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein
+<div class="claim-text">the first transmitting antenna pitch of the plurality of transmitting antennas in the first direction is larger than 1 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The radar device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein
+<div class="claim-text">the receiving antenna pitch of the plurality of receiving antennas in the first direction is equal to or larger than 1 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The radar device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein
+<div class="claim-text">the wavelength is defined by a frequency of the radar signals.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The radar device according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein
+<div class="claim-text">the second transmitting antenna pitch of the plurality of transmitting antennas in the second direction is not smaller than 0.5 wavelength and not larger than 0.75 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. A radar signal processing method comprising:
+<div class="claim-text">generating radar signals;</div>
+<div class="claim-text">transmitting the radar signals through a transmitting array antenna;</div>
+<div class="claim-text">receiving reflected wave signals through a receiving array antenna, wherein the reflected wave signals are the radar signals reflected by an object;</div>
+<div class="claim-text">processing the reflected wave signals to output a position information of the object,</div>
+<div class="claim-text">wherein,
+<div class="claim-text">the transmitting array antenna includes a plurality of transmitting antennas,</div>
+<div class="claim-text">the receiving array antenna includes a plurality of receiving antennas,</div>
+<div class="claim-text">the plurality of transmitting antennas are arranged in a grid having a first direction and a second direction orthogonal to each other,</div>
+<div class="claim-text">the plurality of receiving antennas are linearly arranged in the first direction,</div>
+<div class="claim-text">a receiving antenna pitch of the plurality of receiving antennas in the first direction is different from a first transmitting antenna pitch of the plurality of transmitting antennas in the first direction, and</div>
+<div class="claim-text">an absolute value of a difference between the first transmitting antenna pitch of the transmitting array antenna in the first direction and the receiving antenna pitch of the receiving array antenna in the first direction is not smaller than 0.5 wavelength and not larger than 0.75 wavelength,</div>
+<div class="claim-text">an antenna dimension of each of the plurality of transmitting antennas in the second direction is shorter than a second transmitting antenna pitch of the plurality of transmitting antennas in the second direction.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. A radar device comprising:
+<div class="claim-text">a first array antenna;</div>
+<div class="claim-text">a second array antenna;</div>
+<div class="claim-text">a radar transmission circuitry which, in operation, transmits radar signals through one of the first array antenna and the second array antenna; and</div>
+<div class="claim-text">a radar reception circuitry which, in operation, receives reflected wave signals through another of the first array antenna and the second array antenna, wherein the reflected wave signals are the radar signals reflected by an object,</div>
+<div class="claim-text">wherein,
+<div class="claim-text">the first array antenna includes a plurality of first antennas,</div>
+<div class="claim-text">the second array antenna includes a plurality of second antennas,</div>
+<div class="claim-text">the first antennas are arranged in a grid having a first direction and a second direction orthogonal to each other,</div>
+<div class="claim-text">the plurality of second antennas are linearly arranged in the first direction,</div>
+<div class="claim-text">a second antenna pitch of the plurality of second antennas in the first direction is different from a first antenna pitch of the plurality of first antennas in the first direction, and</div>
+<div class="claim-text">an absolute value of a difference between the first antenna pitch of the plurality of first antennas in the first direction and the second antenna pitch of the plurality of second antennas in the first direction is not smaller than 0.5 wavelength and not larger than 0.75 wavelength,</div>
+<div class="claim-text">an antenna dimension of each of the plurality of first antennas in the second direction is shorter than a third antenna pitch of the plurality of first antennas in the second direction.</div>
+</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The radar device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein
+<div class="claim-text">the plurality of first antennas and the plurality of second antennas form a virtual receiving array antenna including a plurality of virtual receiving antennas,</div>
+<div class="claim-text">the virtual receiving array antenna has a plurality of virtual receiving antenna pitches, and</div>
+<div class="claim-text">one of the virtual receiving antenna pitches of the virtual receiving array antenna in the first direction is not smaller than 0.5 wavelength and not larger than 0.75 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The radar device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein
+<div class="claim-text">the absolute value of the difference between the first antenna pitch of the plurality of first antennas in the first direction and the second antenna pitch of the plurality of second antennas in the first direction is 0.5 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The radar device according to <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein
+<div class="claim-text">the plurality of first antennas and the plurality of second antennas form a virtual receiving array antenna including a plurality of virtual receiving antennas,</div>
+<div class="claim-text">the virtual receiving array antenna has a plurality of virtual receiving antenna pitches, and</div>
+<div class="claim-text">one of the virtual receiving antenna pitches of the virtual receiving array antenna in the first direction is 0.5 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The radar device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein
+<div class="claim-text">each of the plurality of first antennas includes a plurality of first antenna elements, and</div>
+<div class="claim-text">each of the plurality of second antennas includes a plurality of second antenna elements.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. The radar device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein
+<div class="claim-text">the first antenna pitch of the plurality of first antennas in the first direction is larger than 1 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The radar device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein
+<div class="claim-text">the second antenna pitch of the plurality of second antennas in the first direction is equal to or larger than 1 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The radar device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein
+<div class="claim-text">the wavelength is defined by a frequency of the radar signals.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The radar device according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein
+<div class="claim-text">the third antenna pitch of the plurality of first antennas in the second direction is not smaller than 0.5 wavelength and not larger than 0.75 wavelength.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. A radar signal processing method comprising:
+<div class="claim-text">generating radar signals;</div>
+<div class="claim-text">transmitting the radar signals through one of a first array antenna and a second array antenna;</div>
+<div class="claim-text">receiving reflected wave signals through another of the first array antenna and the second array antenna, wherein the reflected wave signals are the radar signals reflected by an object; and</div>
+<div class="claim-text">processing the reflected wave signals to output a position information of the object,</div>
+<div class="claim-text">wherein,
+<div class="claim-text">the first array antenna includes a plurality of first antennas,</div>
+<div class="claim-text">the second array antenna includes a plurality of second antennas,</div>
+<div class="claim-text">the plurality of first antennas are arranged in a grid having a first direction and a second direction orthogonal to each other,</div>
+<div class="claim-text">the plurality of second antennas are linearly arranged in the first direction,</div>
+<div class="claim-text">a second antenna pitch of the plurality of second antennas in the first direction is different from a first antenna pitch of the plurality of first antennas in the first direction, and</div>
+<div class="claim-text">an absolute value of a difference between the first antenna pitch of the plurality of first antennas in the first direction and the second antenna pitch of the plurality of second antennas in the first direction is not smaller than 0.5 wavelength and not larger than 0.75 wavelength,</div>
+<div class="claim-text">an antenna dimension of each of the plurality of first antennas in the second direction is shorter than a third antenna pitch of the plurality of first antennas in the second direction.</div>
+</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

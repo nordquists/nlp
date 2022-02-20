@@ -1,0 +1,2571 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US20210254044A1 - Method for capturing and encoding nucleic acid from a plurality of single cells 
+      - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA460814739" source="national office">
+<div class="abstract">This invention relates to methods for capturing and encoding nucleic acid from a plurality of single cells. A plurality of solid supports is randomly placed into a plurality of compartments, such that the average number of solid supports per compartment, λ1, is less than 1, wherein each solid support carries (a) a unique identification sequence and (b) a capture moiety. A plurality of single cells is randomly placing into the plurality of compartments, such that the average number of cells per compartment, λ2, is less than 1. These random placement steps may be performed in any order. Nucleic acid is then released from each single cell and captured via the capture moiety, such that nucleic acid from each single cell is tagged with a unique identification sequence.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><ul class="description" lang="EN" load-source="patent-office" mxw-id="PDES300109269">
+<heading id="h-0001">CROSS REFERENCE TO RELATED APPLICATIONS</heading>
+<li> <para-num num="[0001]"> </para-num> <div class="description-line" id="p-0002" num="0001">This application is a continuation of U.S. application Ser. No. 15/025,874, filed on Mar. 29, 2016, which is a US National Phase of PCT Application No. PCT/EP2014/070824, filed on Sep. 29, 2014, which claims priority to GB Application No. 1317301.8, filed on Sep. 30, 2013, all of which are incorporated herein by reference in their entireties for all purposes.</div>
+</li> <heading id="h-0002">SEQUENCE LISTING</heading>
+<li> <para-num num="[0002]"> </para-num> <div class="description-line" id="p-0003" num="0002">The instant application contains a Sequence Listing which has been submitted electronically in ASCII format and is hereby incorporated by reference in its entirety. Said ASCII copy, created on Apr. 13, 2021, is named FLUDP024C1US_SL.txt and is 5,149 bytes in size.</div>
+</li> <heading id="h-0003">FIELD</heading>
+<li> <para-num num="[0003]"> </para-num> <div class="description-line" id="p-0004" num="0003">The present invention relates to a method for capturing and encoding nucleic acid from a plurality of single cells. This generates a library of encoded nucleic acids from single cells, which can then be sequenced.</div>
+</li> <heading id="h-0004">BACKGROUND</heading>
+<li> <para-num num="[0004]"> </para-num> <div class="description-line" id="p-0005" num="0004">The current level of understanding of cell types, their origin, evolution and diversity is very poor, despite progress in some specific cases<sup>1</sup>. There is no general agreement on the number of cell types in a mammalian body. For example, a recent survey found that 411 human cell types have been given names in the literature<sup>2</sup>, but this number is far too low to be complete. For example, more than 60 cell types were identified in the retina, a well characterised tissue, and it seems likely that many new types of cells could be discovered if other tissues were as carefully scrutinised.</div>
+</li> <li> <para-num num="[0005]"> </para-num> <div class="description-line" id="p-0006" num="0005">There is no agreement on what defines a cell type, and finding such a definition is an important goal of large-scale single-cell transcriptome analysis. There is also no agreed definitive list of named cell types. There is no agreement within two orders of magnitude on the number of distinct cell types present in the human body, and some scientists question whether the concept of cell type even makes sense.</div>
+</li> <li> <para-num num="[0006]"> </para-num> <div class="description-line" id="p-0007" num="0006">As a starting point, cell types can be provisionally identified as cells whose global transcriptional states are similar. Just how similar, and just which parts of the transcriptome are relevant, will be crucial questions for the future. But this provisional concept of cell type leads to an unbiased method of cell type discovery (see <figref idrefs="DRAWINGS">FIG. 1</figref>): a large, unbiased sample of cells is collected from each tissue of interest, transcriptomes are generated for each and computational methods are used to find sets of similar cells. A sample of cells is taken from the tissue of interest, with the aim of obtaining a representative sample of the types of cells present in the tissue. Each cell is profiled using single-cell RNA-sequencing, and the resulting expression profiles are clustered. The result is a map of ‘cell space’, where similar cells are grouped close to each other. In practice it will be necessary to collect and analyse thousands of cells in each tissue, or millions of cells, to make a comprehensive cell space map of whole organism.</div>
+</li> <li> <para-num num="[0007]"> </para-num> <div class="description-line" id="p-0008" num="0007">Established clustering and dimension-reduction methods, such as principal component analysis, K-means and hierarchical clustering, and affinity propagation are useful starting points. For example, Topological Data Analysis (e.g. using the Iris software package) may be used. This can reveal structures in cell maps that cannot be discovered by, for example, principal component analysis.</div>
+</li> <li> <para-num num="[0008]"> </para-num> <div class="description-line" id="p-0009" num="0008">Hundreds or thousands of single-cell transcriptomes are already being analysed. However, despite advances in single-molecule sequencing<sup>3-5</sup>, it is not currently possible to sequence RNA directly from single cells. Thus, RNA needs to be converted to cDNA and amplified, and this must be achieved with minimal losses and without introducing too much quantitative bias. The ultimate goal of quantitative single-cell transcriptome analysis must be to count every RNA molecule in the cell exactly, resulting in zero technical error. The present inventors (in collaboration with Jussi Taipale) and others have demonstrated that this is possible by using unique labels for molecules<sup>6-10</sup>. After amplification and deep sequencing, each original molecule can be identified. As long as the sample is sequenced deeply enough, so that each molecular label is observed at least once, differences in amplification efficiency do not matter. The use of unique molecular labels is a key advance that will enable more quantitative analysis of single cell transcriptomes.</div>
+</li> <li> <para-num num="[0009]"> </para-num> <div class="description-line" id="p-0010" num="0009">Another source of error is losses, which can be severe. The detection limit of published protocols is 5 to 10 molecules of mRNA, indicating that 80-90% of mRNA was lost. These losses are especially disturbing in small cells, such as stem cells, where the mRNA content is low to begin with.</div>
+</li> <li> <para-num num="[0010]"> </para-num> <div class="description-line" id="p-0011" num="0010">The earliest single-cell transcriptomes were generated by in vitro transcription (IVT11), and recently IVT was used to produce libraries for Illumina sequencing, in a method called CEL-seq<sup>12</sup>. The chief advantage of IVT is the linear amplification, which should in theory be less biased than exponential amplification methods such as PCR. A disadvantage is that the resulting library is biased towards the 3′ end of genes, and this bias can be difficult to control. In contrast, PCR-based protocols are capable of amplifying full-length cDNA.</div>
+</li> <li> <para-num num="[0011]"> </para-num> <div class="description-line" id="p-0012" num="0011">The second approach is to add a homopolymer tail to the first-strand cDNA, which allows the cDNA strand to be amplified by PCR. An early example used dGTP-tailing followed by PCR<sup>13</sup>. Subsequently, this protocol was optimized<sup>14 </sup>and adapted for sequencing<sup>15</sup>. Like IVT, homopolymer tailing is biased towards the 3′ end.</div>
+</li> <li> <para-num num="[0012]"> </para-num> <div class="description-line" id="p-0013" num="0012">The third approach uses ‘template switching’: reverse transcriptases of the MMLV family tend to add a short tail of (preferentially) cytosines to the end of the first-strand cDNA. If a helper oligonucleotide, carrying a short GGG motif, is included in the reaction, it will anneal to the cytosine motif and reverse transcriptase will switch template and copy the helper oligo sequence<sup>16</sup>. The result is that an arbitrary sequence can be introduced at the 5′ end (by tailing the reverse transcription primer) and at the 3′ end (by template switching) of the cDNA, allowing subsequent amplification by PCR. Two alternative approaches have been published for processing the full-length cDNA: STRT17, which isolates and sequences the 5′ end, corresponding to the transcription start site (TSS); and SMART-seq18, which fragments the cDNA and generates reads covering the full length of each transcript.</div>
+</li> <li> <para-num num="[0013]"> </para-num> <div class="description-line" id="p-0014" num="0013">The present invention aims to develop a method with the necessary scale to approach a million single-cell transcriptomes. The method involves capturing single cell transcriptomes and encoding these transcriptomes with cell-specific barcodes.</div>
+</li> <heading id="h-0005">SUMMARY</heading>
+<li> <para-num num="[0014]"> </para-num> <div class="description-line" id="p-0015" num="0014">The present inventors have developed a method for the quantitative analysis of single cell transcriptomes. This allows the transcriptomes of tens and thousands of single cells to be captured efficiently in a short time scale, enabling large-scale, unbiased cell-type discovery. The present inventors believe that cell types are characterised by distinct patterns of gene expression, which are ultimately generated by distinct patterns of transcription factor activity. The method of the invention disclosed herein will help to settle the question of cell types, as it will make it possible to perform large-scale unbiased cell-type discovery using single-cell transcriptomics.</div>
+</li> <li> <para-num num="[0015]"> </para-num> <div class="description-line" id="p-0016" num="0015">In a first aspect, the invention provides a method for capturing and encoding nucleic acid from a plurality of single cells, wherein the method comprises:
+</div> </li> <ul> <li id="ul0001-0001" num="0000"> <ul> <li id="ul0002-0001" num="0016">(i) randomly placing a plurality of solid supports into a plurality of compartments, such that the average number of solid supports per compartment, λ<sub>1</sub>, is less than 1, wherein each solid support carries (a) a unique identification sequence and (b) a capture moiety;</li> <li id="ul0002-0002" num="0017">(ii) randomly placing a plurality of single cells into the plurality of compartments, such that the average number of cells per compartment, λ<sub>2</sub>, is less than 1;</li> <li id="ul0002-0003" num="0018">(iii) releasing nucleic acid from each single cell; and</li> <li id="ul0002-0004" num="0019">(iv) capturing the nucleic acid from each single cell via the capture moiety, such that nucleic acid from each single cell is tagged with a unique identification sequence,</li> <li id="ul0002-0005" num="0020">wherein steps (i) and (ii) may be performed in any order.</li> </ul> </li> </ul>
+<li> <para-num num="[0021]"> </para-num> <div class="description-line" id="p-0017" num="0021">Preferably, the average number of solid supports per compartment, λ<sub>1</sub>, and the average number of single cells per compartment, λ<sub>2</sub>, are selected such that 2/(1+λ<sub>1</sub>)(2+λ<sub>2</sub>)≥90%, ≥95%, ≥96%, ≥97%, ≥98% or ≥99%.</div>
+</li> <li> <para-num num="[0022]"> </para-num> <div class="description-line" id="p-0018" num="0022">The plurality of solid supports comprising (a) a unique identification sequence and (b) a capture moiety are preferably generated prior to step (ii) by emulsion PCR or split-and-pool combinatorial synthesis.</div>
+</li> <li> <para-num num="[0023]"> </para-num> <div class="description-line" id="p-0019" num="0023">The plurality of compartments may, for example, be wells of a microwell array, or be droplets formed by an emulsifying or droplet microfluidics apparatus.</div>
+</li> <li> <para-num num="[0024]"> </para-num> <div class="description-line" id="p-0020" num="0024">The volume of each compartment is preferably such that only a single solid support can fit into each compartment.</div>
+</li> <li> <para-num num="[0025]"> </para-num> <div class="description-line" id="p-0021" num="0025">The solid support is preferably a microbead.</div>
+</li> <li> <para-num num="[0026]"> </para-num> <div class="description-line" id="p-0022" num="0026">The unique identification sequence is preferably an oligonucleotide.</div>
+</li> <li> <para-num num="[0027]"> </para-num> <div class="description-line" id="p-0023" num="0027">The capture moiety is preferably a nucleic acid complementary to cellular nucleic acid.</div>
+</li> <li> <para-num num="[0028]"> </para-num> <div class="description-line" id="p-0024" num="0028">When both the unique identification sequence and the capture moiety are nucleic acid sequences, they may both be part of the same oligonucleotide.</div>
+</li> <li> <para-num num="[0029]"> </para-num> <div class="description-line" id="p-0025" num="0029">Each solid support may carry a plurality of different capture moieties. When the unique identification sequence and the capture moiety are both nucleic acid sequences and are part of the same oligonucleotide, the solid support may carry a plurality of oligonucleotides, each comprising a unique identification sequence and a different capture moiety.</div>
+</li> <li> <para-num num="[0030]"> </para-num> <div class="description-line" id="p-0026" num="0030">The nucleic acid to be captured and encoded is preferably RNA, such as messenger RNA (mRNA), ribosomal RNA (rRNA), transfer RNA (tRNA), non-coding RNAs (ncRNAs), mitochondrial RNA; nuclear or mitochondrial DNA; or microbial or viral RNA or DNA.</div>
+</li> <li> <para-num num="[0031]"> </para-num> <div class="description-line" id="p-0027" num="0031">After step (iv), the method may optionally include the step of synthesising cDNA from the captured nucleic acid. cDNA may be further processed using any of a variety of well-known methods, to prepare for analysis by DNA sequencing. This may include selecting particular target sequences using targeted enrichment methods based on hybridization, ligation and/or PCR. It may also include steps such as synthesizing a second strand cDNA, amplification, fragmentation, adapter ligation and/or size selection.</div>
+</li> <li> <para-num num="[0032]"> </para-num> <div class="description-line" id="p-0028" num="0032">These and other aspects of the invention are described in further detail below.</div>
+</li> <description-of-drawings>
+<heading id="h-0006">BRIEF DESCRIPTION OF DRAWINGS</heading>
+<li> <para-num num="[0033]"> </para-num> <div class="description-line" id="p-0029" num="0033"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a schematic of cell type discovery by unbiased sampling and transcriptome profiling of single cells. (a) An unbiased sample of single cells is obtained. (b) Single cell expression profiles are generated. (c) Cell types are identified by clustering.</div>
+</li> <li> <para-num num="[0034]"> </para-num> <div class="description-line" id="p-0030" num="0034"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a schematic showing transcriptome capture and encoding.</div>
+</li> <li> <para-num num="[0035]"> </para-num> <div class="description-line" id="p-0031" num="0035"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows a microfluidic device. The inset (which is an actual micrograph of the junction) illustrates how the inputs do not mix prior to the junction, due to laminar flow, and how droplets are formed with half their contents from each input liquid.</div>
+</li> <li> <para-num num="[0036]"> </para-num> <div class="description-line" id="p-0032" num="0036"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a schematic showing the split-and-pool combinatorial synthesis strategy for making encoded beads.</div>
+</li> <li> <para-num num="[0037]"> </para-num> <div class="description-line" id="p-0033" num="0037"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a schematic showing the emulsion PCR synthesis strategy for making encoded beads.</div>
+</li> <li> <para-num num="[0038]"> </para-num> <div class="description-line" id="p-0034" num="0038"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates a design for building a library of encoded beads using split-and-pool analysis.</div>
+</li> <li> <para-num num="[0039]"> </para-num> <div class="description-line" id="p-0035" num="0039"> <figref idrefs="DRAWINGS">FIG. 7</figref> shows an example strategy for using encoded beads to analyze RNA in single cells. Encoded beads carry oligonucleotide primers having a bead-specific identifying sequence (“CellID”) and a target-specific capture sequence (“Tsp1”). The target-specific primer directs first-strand synthesis of a complementary DNA (cDNA), shown as a dashed line. Subsequently, a reverse primer (“Tsp2”) directs synthesis of a second strand, resulting in a product suitable for sequencing. The final product includes adapter sequences (P1, P2A and P2B), an insert (middle, wide line) and an identifying sequence (CellID).</div>
+</li> <li> <para-num num="[0040]"> </para-num> <div class="description-line" id="p-0036" num="0040"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows how the probability of obtaining a high proportion of single cells on single beads depends on the bead and cell concentrations in terms of the average number of beads or cells per droplet.</div>
+</li> <li> <para-num num="[0041]"> </para-num> <div class="description-line" id="p-0037" num="0041"> <figref idrefs="DRAWINGS">FIG. 9</figref> shows a cell map of the dorsal root ganglion.</div>
+</li> <li> <para-num num="[0042]"> </para-num> <div class="description-line" id="p-0038" num="0042"> <figref idrefs="DRAWINGS">FIG. 10A</figref> shows an example strategy for cDNA synthesis on encoded beads, and <figref idrefs="DRAWINGS">FIGS. 10B to 10D</figref> show the results of cDNA synthesis using this strategy (BioAnalyzer electrophoresis plots).</div>
+</li> <li> <para-num num="[0043]"> </para-num> <div class="description-line" id="p-0039" num="0043"> <figref idrefs="DRAWINGS">FIGS. 11A to 11D</figref> show the results of bioinformatics analyses of barcodes generated by split-and-pool. <figref idrefs="DRAWINGS">FIG. 11A</figref> shows the proportion of complete (3 modules) and incomplete (2 or less modules) barcodes. <figref idrefs="DRAWINGS">FIG. 11B</figref> shows the read distribution on ranked barcodes (filled area), and its first derivative (line). The minimum of the derivative around 3256 barcodes indicates the estimated number of correctly barcoded beads, and coincided with the estimated number of beads input (<b>3200</b>). <figref idrefs="DRAWINGS">FIG. 11C</figref> shows the cumulative number of beads assigned to ranked barcodes. <figref idrefs="DRAWINGS">FIG. 11D</figref> shows the read density as a histogram on the 3256 beads.</div>
+</li> <li> <para-num num="[0044]"> </para-num> <div class="description-line" id="p-0040" num="0044"> <figref idrefs="DRAWINGS">FIGS. 12A to 12D</figref> show scatterplots of randomly selected pairs of barcodes (i.e. beads). Each dot shows the number of reads mapped to a particular human gene.</div>
+</li> <li> <para-num num="[0045]"> </para-num> <div class="description-line" id="p-0041" num="0045"> <figref idrefs="DRAWINGS">FIGS. 13A to 13D</figref> show the design and operation of a custom PDMS microwell array. <figref idrefs="DRAWINGS">FIG. 13A</figref> shows the well geometry designed to fit a single cell and single 20 μm polystyrene bead snugly. <figref idrefs="DRAWINGS">FIG. 13B</figref> shows cells (translucent) and beads (opaque) in wells, before and after lysis. The arrowhead points to a cell that disappears after lysis. <figref idrefs="DRAWINGS">FIG. 13C</figref> shows a holder for three microwell arrays. <figref idrefs="DRAWINGS">FIG. 13D</figref> shows cDNA synthesized from single cells captured on single beads in the microwell array format.</div>
+</li> </description-of-drawings>
+<heading id="h-0007">DETAILED DESCRIPTION</heading>
+<li> <para-num num="[0046]"> </para-num> <div class="description-line" id="p-0042" num="0046">The present invention relates to a method for capturing and encoding nucleic acid from a plurality of single cells.</div>
+</li> <li> <para-num num="[0047]"> </para-num> <div class="description-line" id="p-0043" num="0047">This method allows quantitative analysis of tens of thousands of single cells in a short time frame.</div>
+</li> <li> <para-num num="[0048]"> </para-num> <div class="description-line" id="p-0044" num="0048">The method is suitable for capturing and encoding any cellular nucleic acid, including RNA (e.g. mRNA, rRNA, tRNA, ncRNAs, mitochondrial RNA); nuclear/chromosomal or mitochondrial DNA; microbial or viral RNA or DNA.</div>
+</li> <li> <para-num num="[0049]"> </para-num> <div class="description-line" id="p-0045" num="0049">Nucleic acid can be captured and encoded from any cell type. These cells may be any size. The size of the compartments used for capture may be adjusted to suit the target cell type. For example, bacterial cells could be analyzed in smaller compartments than mammalian cells, which are generally larger. In one embodiment, nucleic acids are captured from mammalian cells of 8-20 μm diameter encapsulated in droplets of 60-80 μm diameter.</div>
+</li> <li> <para-num num="[0050]"> </para-num> <div class="description-line" id="p-0046" num="0050">The method is able to process thousands or millions of cells in parallel. Therefore, the plurality of single cells may be at least 10, at least 50, at least 100, at least 500, at least 1000, at least 2000, at least 3000, at least 4000, at least 5000, at least 6000, at least 7000, at least 8000, at least 9000, at least 10,000, at least 20,000, at least 30,000, at least 40,000, at least 50,000, at least 60,000, at least 70,000, at least 80,000, at least 90,000, at least 100,000, at least 200,000, at least 300,000, at least 400,000, at least 500,000, at least 600,000, at least 700,000, at least 800,000, at least 900,000, at least 1,000,000, at least 2,000,000, at least 3,000,000, at least 4,000,000, at least 5,000,000, at least 6,000,000, at least 7,000,000, at least 8,000,000, at least 9,000,000, at least 10,000,000, at least 20,000,000, at least 30,000,000, at least 40,000,000, at least 50,000,000, at least 60,000,000, at least 70,000,000, at least 80,000,000, at least 90,000,000 or at least 100,000,000 cells.</div>
+</li> <li> <para-num num="[0051]"> </para-num> <div class="description-line" id="p-0047" num="0051">The method includes the step of randomly placing the plurality of single cells into a plurality of compartments such that the average number of cells per compartment, λ<sub>2</sub>, is less than 1. This means that each compartment is unlikely to contain more than a single cell. Preferably, λ<sub>2 </sub>is less than 0.9, less than 0.8, less than 0.7, less than 0.6, less than 0.5, less than 0.4, less than 0.3 or less than 0.2.</div>
+</li> <li> <para-num num="[0052]"> </para-num> <div class="description-line" id="p-0048" num="0052">The single cells are typically provided as a suspension of dissociated single cells. This provides an unbiased sample of single cells dissociated from each tissue. The cells are preferably isolated rapidly to prevent transcriptional changes during cell preparation.</div>
+</li> <li> <para-num num="[0053]"> </para-num> <div class="description-line" id="p-0049" num="0053">Typically, the cells are contained in a volume of 1-1000 μl isotonic buffer. Depending on the cell type, it may be desirable to add nutrients, growth factors or other such components to the buffer.</div>
+</li> <li> <para-num num="[0054]"> </para-num> <div class="description-line" id="p-0050" num="0054">The volume of each compartment should be greater than the volume of the largest single cell to be captured. Preferably, the diameter of each compartment is from about 1 μm to about 1 mm. Therefore, the preferred diameter of each compartment will depend on the nature of the target cells. For example, when the single cells are bacterial cells, the diameter of each compartment is preferably 1-10 μm. When the single cells are typical mammalian cells, the diameter of each compartment is preferably 10-100 μm. When the single cells are large mammalian cells (such as early embryos or Purkinje cells), plant cells or protists, the diameter of each compartment is preferably 100-1000 μm.</div>
+</li> <li> <para-num num="[0055]"> </para-num> <div class="description-line" id="p-0051" num="0055">The plurality of compartments may, for example, be wells on a microwell array. A suspension of single cells may be pipetted onto the microwell array and the cells allowed to settle into the microwells. The number of cells is adjusted so that there is a low probability of having more than one cell per well, i.e. the average number of cells per compartment is less than one. This means that each well is unlikely to contain more than a single cell. Therefore, some wells will be empty. The cells may settle into the wells by gravity flow, or may be forced by centrifugation. The microfluidic chip may comprise a glass bottom layer suitable for microscope imaging, a silicon layer having etched microwells and/or a plastic enclosure or lid having an inlet and an outlet to allow easy addition and removal of reagents on the microwell array. The thickness of each layer is arbitrary and may be adjusted to fit manufacturing or imaging constraints. The enclosure or lid is not required, but may be eliminated or replaced with a jig or other contraption intended to facilitate liquid flow across the microwell array. Likewise, the bottom layer need not be transparent if the intended application does not require imaging of the captured cells. The well diameters may vary across the full range of cell sizes, from about 1 μm to about 1 mm.</div>
+</li> <li> <para-num num="[0056]"> </para-num> <div class="description-line" id="p-0052" num="0056">In another embodiment, the plurality of compartments may be droplets formed by an emulsifying or droplet microfluidics apparatus. In this embodiment, an aqueous input is used to make droplets using an oil carrier in a droplet microfluidic chip. This means that the number of cells that are processed can be easily adjusted by providing a larger or smaller volume of input cells. A means for controlling flow in a droplet microfluidic device is typically required, which may for example be based on a controlled pressure pump or a syringe pump.</div>
+</li> <li> <para-num num="[0057]"> </para-num> <div class="description-line" id="p-0053" num="0057">The method also includes the step of randomly placing the plurality of solid supports into a plurality of compartments such that the average number of solid supports per compartment, λ<sub>1</sub>, is less than 1. This means that each compartment is unlikely to contain more than a single solid support. Preferably, λ<sub>1 </sub>is less than 0.9, less than 0.8, less than 0.7, less than 0.6, less than 0.5, less than 0.4, less than 0.3 or less than 0.2.</div>
+</li> <li> <para-num num="[0058]"> </para-num> <div class="description-line" id="p-0054" num="0058">As disclosed above, the plurality of compartments may, for example, be wells on a microwell array. In this embodiment, a solution containing a plurality of solid supports is typically flowed over the microwell array. Due to the geometry of the wells (width and aspect ratio), cells do not escape from the wells. The plurality of solid supports are typically added at a density designed to place at most one solid support per well. Solid supports are allowed to settle in the microwells, and will reside above cells in those wells that contain single cells, thereby trapping the cells. The diameter of the solid supports is typically adjusted to prevent passage of cells between the solid support and the well wall. Optionally, the well depth may be adjusted to prevent loading more than one solid support per well; this can allow very high occupancy of the wells without risk of doublets, i.e. two solid supports in a single well.</div>
+</li> <li> <para-num num="[0059]"> </para-num> <div class="description-line" id="p-0055" num="0059">Also as described above, in another embodiment, the plurality of compartments may be droplets formed by an emulsifying or droplet microfluidics apparatus. In this embodiment, an aqueous input containing a plurality of solid supports is used to make droplets using an oil carrier in a droplet microfluidic chip. This means that the number of solid supports can be easily adjusted by providing a larger or smaller volume of input solid supports. A means for controlling flow in a droplet microfluidic device is typically required, which may for example be based on a controlled pressure pump or a syringe pump.</div>
+</li> <li> <para-num num="[0060]"> </para-num> <div class="description-line" id="p-0056" num="0060">Each solid support carries (a) a unique identification sequence and (b) a capture moiety. Each unique identification sequence is different for each compartment, such that each compartment carries a unique identification motif. The unique identification sequence provides a cell-specific identifying sequence, or barcode, and is preferably an oligonucleotide. In this embodiment, i.e. when the unique identification sequence is an oligonucleotide, the oligonucleotide is also known as an “encoding primer”. This enables the targeted nucleic acid from a single cell to be encoded, or tagged, with a unique identifying sequence. The identifying sequence may be varied within a set of encoding primers such that each compartment carries a unique identifying motif. This motif need not be a single sequence, but can comprise a family of sequences, for example by the use of degenerate or unspecified bases, provided each individual sequence in the family of sequences can be uniquely identified with a single encoding primer species. The oligonucleotide may include natural nucleotides, such as DNA or RNA nucleotides, as well as modified nucleotides and other modifying moieties such as dyes, functional groups (e.g. amines or biotin) or spacers. The unique identification sequence may also include one or more sample barcodes, primer annealing motifs, spacers and/or cleavable moieties.</div>
+</li> <li> <para-num num="[0061]"> </para-num> <div class="description-line" id="p-0057" num="0061">The encoding primers may be designed to include the necessary adapter sequences for sequencing, e.g. Illumina or Complete Genomics sequencing. Upon reverse transcription and circularisation, a cDNA product is formed which is ready to sequence on either platform without amplification. The method of the invention is likely to be able to capture nucleic acid (e.g. cDNA) from approximately 10,000 cells, or more, generating approximately 3 billion encoded nucleic acid molecules (e.g. encoded cDNA molecules). This is enough to fill a whole Illumina flowcell (given 50% loss), or a single lane on Complete Genomics. Since the whole process takes place on solid supports (e.g. beads), the final product can be released directly into a suitable sequencing buffer without losses and will already be single-stranded.</div>
+</li> <li> <para-num num="[0062]"> </para-num> <div class="description-line" id="p-0058" num="0062">The capture moiety can be any reactive or affinity reagent that allows the identifying sequence of the unique identifying sequence to become physically linked to the target nucleic acid. The capture moiety is preferably a nucleic acid complementary to the desired target nucleic acid population (i.e. cellular nucleic acid). Suitable capture moiety nucleic acid sequences include oligo-dT (to capture polyadenylated mRNA), random hexamers (or longer random motifs; to capture total RNA) or gene-specific sequences. Each solid support may carry a collection of capture moiety nucleic acid sequences (for example, multiple gene-specific sequences). Capture moiety nucleic acid sequences can contain modified nucleotides such as locked nucleic acids (LNA) to improve capture efficiency. When both the unique identification sequence and the capture moiety are nucleic acids, they may both be part of the same oligonucleotide or encoding primer. For example, the encoding primer may be a polynucleotide comprising an identifying sequence and a capture moiety designed to capture a desired nucleic acid fraction. In this embodiment, the encoding primer may, for example, include an oligo-dT sequence, a random primer, one or more gene-specific primers or an affinity reagent.</div>
+</li> <li> <para-num num="[0063]"> </para-num> <div class="description-line" id="p-0059" num="0063">Alternatively, the capture moiety may be an affinity reagent, for example an antibody. In this approach, the capture moiety may bind a moiety attached to the target nucleic acid, such as a bound protein or a modified nucleotide. Upon binding, the target nucleic acid becomes linked with the unique identification sequence (e.g. the encoding primer), but not covalently. A covalent bond can be optionally formed using a subsequent enzymatic step, for example a DNA or RNA ligation, which will preferentially join nucleic acids that are held in close proximity.</div>
+</li> <li> <para-num num="[0064]"> </para-num> <div class="description-line" id="p-0060" num="0064">Each solid support may carry a plurality of different capture moieties. Each different capture moiety may recognise a different target in each single cell. This means that the method of the invention may be used to analyse multiple targets in each single cell. This is known as multiplex targeting. Preferably, the unique identification sequence and the capture moiety are both nucleic acid sequences and are part of the same oligonucleotide or encoding primer. In this case, the encoding primer is also known as a “target-specific encoding primer”. The solid support may carry a plurality of oligonucleotides or target-specific encoding primers, each comprising a unique identification sequence and a different capture moiety. Preferably, the solid support is a microbead carrying a plurality of different target-specific encoding primers, each comprising a different capture moiety and unique identification sequence. This means that the method of the invention can be used to capture multiple distinct target nucleic acids from each single cell.</div>
+</li> <li> <para-num num="[0065]"> </para-num> <div class="description-line" id="p-0061" num="0065">The plurality of solid supports are preferably microbeads. Such microbeads are well known in the art and are commonly used for purification of nucleic acids or proteins, and for performing enzymatic or chemical reaction on an immobilized substrate. Microbeads are typically made of a polymer such as polystyrene and can be paramagnetic to allow simple repeated purification using magnetic immobilization of the beads. The bead surface can be modified to obtain desired physico-chemical properties such as hydrophilicity, and to make the surface reactive to a target molecule.</div>
+</li> <li> <para-num num="[0066]"> </para-num> <div class="description-line" id="p-0062" num="0066">In one embodiment, the unique identification sequence is immobilised on a microbead. When the unique identification sequence is an oligonucleotide, it may be referred to as an encoding primer and the microbead may be referred to as an “encoding bead”. A plurality of encoding beads may be generated, each bead carrying a unique encoding primer.</div>
+</li> <li> <para-num num="[0067]"> </para-num> <div class="description-line" id="p-0063" num="0067">The size of microbeads affects the surface area and thereby the number of encoding primers that can be placed on each bead. For example, it is estimated that 20 μm streptavidin-coated polystyrene beads can carry about 100 million encoding primers, of which about 10 million can simultaneously capture target RNA without steric hindrance. This is more than sufficient for capturing the mRNA of typical mammalian cells (0.1-1 million molecules) and is almost sufficient for capturing total RNA from single mammalian cells (3-30 million molecules). However, by scaling bead size and thus surface area, any desired binding capacity can be obtained. Since surface scales with the square of the diameter, a 40 μm bead would bind up to 400 million encoding primers.</div>
+</li> <li> <para-num num="[0068]"> </para-num> <div class="description-line" id="p-0064" num="0068">Typically, it is desirable to produce a large number of microbeads carrying distinct encoding primers. It is trivial to produce hundreds, thousands or tens of thousands of distinct encoding primers simply by individual oligonucleotide synthesis, either directly on the beads, or separately followed by bead immobilisation. Distinct sequences are used and immobilised on distinct populations of microbeads. Beads are then pooled, resulting in a population of beads carrying a large number of bead-specific encoding primers.</div>
+</li> <li> <para-num num="[0069]"> </para-num> <div class="description-line" id="p-0065" num="0069">However, if the desired number of distinct encoding primers required exceeds manufacturing capacity (or the cost becomes prohibitive), microbeads can instead be produced by compartmentalized PCR, for example emulsion PCR, droplet PCR or picotiter-plate PCR. In this approach, beads are mixed with encoding primers and compartmentalised PCR is performed in such a way that typically a single encoding primer oligonucleotide is amplified onto each bead. If the input Encoding Primer contains a degenerate sequence of, say, 20 nucleotides, there will be the possibility of producing more than one trillion distinct encoded microbeads.</div>
+</li> <li> <para-num num="[0070]"> </para-num> <div class="description-line" id="p-0066" num="0070">The plurality of solid supports may be generated by:</div>
+</li> <li> <div class="description-line" id="p-0067" num="0000">(a) randomly placing a plurality of solid supports into a plurality of compartments, such that the average number of solid supports in each compartment is less than 1;
+<br/>
+(b) randomly placing a plurality of encoding primers comprising a unique identification sequence and a capture moiety into the plurality of compartments, such that the average number of encoding primers in each compartment is less than 1;
+<br/>
+(c) mixing the plurality of solid supports and the plurality of encoding primers, and causing the encoding primers to be amplified, to generate encoded solid supports;
+<br/>
+wherein steps (a) and (b) can be performed in any order and wherein following step (c), the encoded solid supports can be used in step (ii) of the method of the invention.
+</div>
+</li> <li> <para-num num="[0071]"> </para-num> <div class="description-line" id="p-0068" num="0071">The steps of (i) randomly placing the plurality of single cells into the plurality of compartments and (ii) randomly placing the plurality of solid supports into the plurality of compartments may be performed in any order.</div>
+</li> <li> <para-num num="[0072]"> </para-num> <div class="description-line" id="p-0069" num="0072">The volume of each compartment is preferably such that only a single solid support can fit into each compartment. Alternatively, the size of the solid support may be adjusted such that only a single solid support can fit into each compartment. This helps to prevent more than one solid support being placed into each compartment.</div>
+</li> <li> <para-num num="[0073]"> </para-num> <div class="description-line" id="p-0070" num="0073">Once a cell and a solid support comprising a unique identification sequence and a capture moiety have been placed together in a compartment, nucleic acid is released from each single cell. This may be achieved by lysing the cell under conditions that promote annealing of the target nucleic acid to the capturing moiety of the unique identification sequence. Cells are preferably lysed rapidly to prevent transcriptional changes during cell preparation. Depending on the design of the compartment, the lysis and capturing steps may be simultaneous, or may be performed by sequential addition of suitable reagents.</div>
+</li> <li> <para-num num="[0074]"> </para-num> <div class="description-line" id="p-0071" num="0074">Additional, optional steps may be included, such as washing the cells, denaturing the target nucleic acid and similar operations.</div>
+</li> <li> <para-num num="[0075]"> </para-num> <div class="description-line" id="p-0072" num="0075">For example, when the plurality of compartments are wells on a microwell array, nucleic acid is released from each single cell by flowing lysis buffer over the microwell array and allowing it to diffuse down into the microwells. The lysis buffer is designed to lyse the cells while also promoting RNA capture. Many such buffers are known in the art (Sambrook et al., “Molecular Cloning: A Laboratory Manual), but generally they contain salt, detergent and a buffering agent. For example, an efficient lysis buffer contains 500 mM LiCl, 100 mM Tris-Cl pH 7.5, 1% lithium dodecyl sulfate, 10 mM EDTA and 5 mM DTT.</div>
+</li> <li> <para-num num="[0076]"> </para-num> <div class="description-line" id="p-0073" num="0076">Once the nucleic acid has been released from each single cell, it is then captured via the capture moiety, such that nucleic acid from each single cell is tagged with a unique identification sequence to generate an encoded nucleic acid, e.g. encoded DNA. For example, when the plurality of compartments are wells on a microwell array, once a cell lyses, its RNA spills out and begins diffusing away. As it diffuses, it must pass the capture moiety linked to the solid support (e.g. an encoded bead) loaded on top of the cell, and the targeted RNA fraction is captured in passing.</div>
+</li> <li> <para-num num="[0077]"> </para-num> <div class="description-line" id="p-0074" num="0077">The generation of encoded nucleic acid results in the formation a library of nucleic acid molecules derived from the nucleic acids of one or more cells, each molecule carrying a sequence tag that identifies its cell of origin. The resulting nucleic acid library may be amenable to sequencing on any modern DNA sequencing platform.</div>
+</li> <li> <para-num num="[0078]"> </para-num> <div class="description-line" id="p-0075" num="0078">Once the target nucleic acids have been captured by the capture moiety, the target nucleic acid is linked to the compartment specific identifying sequence. At this point, further processing may proceed in the separate compartments, or the contents of each compartment may be pooled in a single reaction vessel.</div>
+</li> <li> <para-num num="[0079]"> </para-num> <div class="description-line" id="p-0076" num="0079">Finally, the solid supports (e.g. microbeads) are unloaded and collected in a single reaction tube. Unloading can be by pipetting, by magnetic force or by centrifugation.</div>
+</li> <li> <para-num num="[0080]"> </para-num> <div class="description-line" id="p-0077" num="0080">Collected beads are washed and post-processed as a single reaction. Post-processing steps are application specific (see examples, below).</div>
+</li> <li> <para-num num="[0081]"> </para-num> <div class="description-line" id="p-0078" num="0081">There are many possible variations of the described embodiments, provided single cells are captured in compartments which are also made to contain unique identification sequences, e.g. encoding primers. Embodiments of the invention will differ according to how the compartments are formed, e.g. emulsions, droplets, microfluidic chambers, microwell arrays, how the unique identification sequences (e.g. encoding primers) are brought to the chambers (e.g. carried on microbeads, immobilised on a reaction chamber surface, injected by microfluidic valves and ports), what reaction steps are performed in the compartments (e.g. just the nucleic acid capture step, or also reverse transcription, or also optionally some or all of the post-processing steps).</div>
+</li> <li> <para-num num="[0082]"> </para-num> <div class="description-line" id="p-0079" num="0082">In order to carry out the method as efficiently as possible, it is desirable for a high proportion of the compartments to contain a single cell and a single solid support carrying a unique identification sequence and a capture moiety.</div>
+</li> <li> <para-num num="[0083]"> </para-num> <div class="description-line" id="p-0080" num="0083">Using microbeads as exemplary solid supports, the table below lists (for different cell and microbead concentrations) the expected fraction of microbeads that carry RNA from single cells, from double cells and from split cells. Empty microbeads are not counted. The last two columns indicate the number of droplets and microbeads needed to generate about 10K single cells.</div>
+</li> <li> <div class="description-line" id="p-0081" num="0000">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">yields of single cells on single microbeads</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">as a function of input concentrations.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="8" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Micro-</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">#</td>
+<td class="description-td"> </td>
+<td class="description-td">Drop-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">bead</td>
+<td class="description-td">Cell</td>
+<td class="description-td">Single</td>
+<td class="description-td">Double</td>
+<td class="description-td">Split</td>
+<td class="description-td">Drop-</td>
+<td class="description-td">#</td>
+<td class="description-td">let</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">conc.</td>
+<td class="description-td">conc.</td>
+<td class="description-td">cells</td>
+<td class="description-td">cells</td>
+<td class="description-td">cells</td>
+<td class="description-td">lets</td>
+<td class="description-td">Beads</td>
+<td class="description-td">Volume</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="8" nameend="8" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="9" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">10%</td>
+<td class="description-td">10% </td>
+<td class="description-td">86%</td>
+<td class="description-td"> <sup> </sup>4%</td>
+<td class="description-td">9%</td>
+<td class="description-td"> 1M</td>
+<td class="description-td">100K</td>
+<td class="description-td">250</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10%</td>
+<td class="description-td">2%</td>
+<td class="description-td">90%</td>
+<td class="description-td">0.9%</td>
+<td class="description-td">9%</td>
+<td class="description-td"> 5M</td>
+<td class="description-td">500K</td>
+<td class="description-td">1.25</td>
+<td class="description-td">mL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10%</td>
+<td class="description-td">1%</td>
+<td class="description-td">90%</td>
+<td class="description-td">0.5%</td>
+<td class="description-td">9%</td>
+<td class="description-td">10M</td>
+<td class="description-td"> <sup> </sup> 1M</td>
+<td class="description-td">2.5</td>
+<td class="description-td">mL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> 2%</td>
+<td class="description-td">2%</td>
+<td class="description-td">97%</td>
+<td class="description-td"> <sup> </sup>1%</td>
+<td class="description-td">2%</td>
+<td class="description-td">25M</td>
+<td class="description-td">500K</td>
+<td class="description-td">6.25</td>
+<td class="description-td">mL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> 1%</td>
+<td class="description-td">1%</td>
+<td class="description-td">99%</td>
+<td class="description-td">0.5%</td>
+<td class="description-td">1%</td>
+<td class="description-td">100M </td>
+<td class="description-td"> <sup> </sup> 1M</td>
+<td class="description-td">25</td>
+<td class="description-td">mL</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="9" nameend="9" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0084]"> </para-num> <div class="description-line" id="p-0082" num="0084">The table was derived as follows. If objects are distributed randomly among compartments of identical size, the number of objects (e.g. microbeads, cells or template molecules) found in each compartment (e.g. droplet, microwell) follows the Poisson distribution. If the concentration of objects is C and the volume of each compartment is V, then the expected average number of objects per compartments is λ=C/V and the probability of finding exactly x objects in a compartment is given by</div>
+</li> <li> <div class="description-line" id="p-0083" num="0000">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mi>P</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>|</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mi>λ</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<msup>
+<mi>λ</mi>
+<mi>x</mi>
+</msup>
+<mo>⁢</mo>
+<msup>
+<mi>e</mi>
+<mrow>
+<mo>-</mo>
+<mi>λ</mi>
+</mrow>
+</msup>
+</mrow>
+<mrow>
+<mi>x</mi>
+<mo>!</mo>
+</mrow>
+</mfrac>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <div class="description-line" id="p-0084" num="0000">which is the Poisson distribution.</div>
+</li> <li> <para-num num="[0085]"> </para-num> <div class="description-line" id="p-0085" num="0085">C can be controlled by changing the concentration of objects, and V can be controlled within a large range by varying the size of the compartments (e.g. by making different-size wells or by adjusting the relative flow rates of oil and water to make different-sized droplets). Thus, λ can be controlled nearly arbitrarily, and in particular, it can be arbitrarily made smaller than one by simply diluting the objects.</div>
+</li> <li> <para-num num="[0086]"> </para-num> <div class="description-line" id="p-0086" num="0086">When mixing two types of objects (with expected average number of objects per compartments λ<sub>1 </sub>and λ<sub>2</sub>), the probability of getting exactly x and y objects in a compartment is the product of the individual probabilities:</div>
+</li> <li> <div class="description-line" id="p-0087" num="0000">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mi>P</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>,</mo>
+<mrow>
+<mi>y</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>|</mtext>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mrow>
+<mi>P</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>x</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>|</mtext>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mi>P</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>y</mi>
+<mo>⁢</mo>
+<mstyle>
+<mtext>|</mtext>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>λ</mi>
+<mn>1</mn>
+<mi>x</mi>
+</msubsup>
+<mo>⁢</mo>
+<msup>
+<mi>e</mi>
+<mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+</msup>
+</mrow>
+<mrow>
+<mi>x</mi>
+<mo>!</mo>
+</mrow>
+</mfrac>
+<mo>⁢</mo>
+<mfrac>
+<mrow>
+<msubsup>
+<mi>λ</mi>
+<mn>2</mn>
+<mi>y</mi>
+</msubsup>
+<mo>⁢</mo>
+<msup>
+<mi>e</mi>
+<mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</msup>
+</mrow>
+<mrow>
+<mi>y</mi>
+<mo>!</mo>
+</mrow>
+</mfrac>
+</mrow>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+</li> <li> <para-num num="[0087]"> </para-num> <div class="description-line" id="p-0088" num="0087">Using these formulas, the probabilities of the most interesting cases can be calculated<sup>1</sup>, i.e. when there are zero, one or two objects per compartment: <sup>1 </sup>Mathematica code to produce the table: Table[FullSimplify[PDF[PoissonDistribution[Subscript[\[Lambda], 1]], x]PDF[PoissonDistribution[Subscript[\[Lambda], 2]], y], {x&gt;=0, y&gt;=0}]/.{x-&gt;a, y-&gt;b}, {a, 0, 2}, {b, 0, 2}]//Transpose//TableForm</div>
+</li> <li> <div class="description-line" id="p-0089" num="0000">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Probabilities of obtaining compartments with zero, one or two objects.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">x = 0</td>
+<td class="description-td">x = 1</td>
+<td class="description-td">x = 2</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">y = 0</td>
+<td class="description-td">e<sup>−λ</sup> <sup> <sub2>1</sub2> </sup> <sup>−λ</sup> <sup> <sub2>2</sub2> </sup> </td>
+<td class="description-td">e<sup>−λ</sup> <sup> <sub2>1</sub2> </sup> <sup>−λ</sup> <sup> <sub2>2</sub2> </sup>λ<sub>1</sub> </td>
+<td class="description-td">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<msup>
+<mi>e</mi>
+<mrow>
+<mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</msup>
+<mo>⁢</mo>
+<msubsup>
+<mi>λ</mi>
+<mn>1</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</math>
+</maths>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">y = 1</td>
+<td class="description-td">e<sup>−λ</sup> <sup> <sub2>1</sub2> </sup> <sup>−λ</sup> <sup> <sub2>2</sub2> </sup>λ<sub>2</sub> </td>
+<td class="description-td">e<sup>−λ</sup> <sup> <sub2>1</sub2> </sup> <sup>−λ</sup> <sup> <sub2>2</sub2> </sup>λ<sub>1</sub>λ<sub>2</sub> </td>
+<td class="description-td">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<msup>
+<mi>e</mi>
+<mrow>
+<mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</msup>
+<mo>⁢</mo>
+<msubsup>
+<mi>λ</mi>
+<mn>1</mn>
+<mn>2</mn>
+</msubsup>
+<mo>⁢</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</math>
+</maths>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">y = 2</td>
+<td class="description-td">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<msup>
+<mi>e</mi>
+<mrow>
+<mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</msup>
+<mo>⁢</mo>
+<msubsup>
+<mi>λ</mi>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</math>
+</maths>
+</td>
+<td class="description-td">
+<maths id="MATH-US-00006" num="00006">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mn>2</mn>
+</mfrac>
+<mo>⁢</mo>
+<msup>
+<mi>e</mi>
+<mrow>
+<mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</msup>
+<mo>⁢</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+<mo>⁢</mo>
+<msubsup>
+<mi>λ</mi>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</math>
+</maths>
+</td>
+<td class="description-td">
+<maths id="MATH-US-00007" num="00007">
+<math overflow="scroll">
+<mrow>
+<mfrac>
+<mn>1</mn>
+<mn>4</mn>
+</mfrac>
+<mo>⁢</mo>
+<msup>
+<mi>e</mi>
+<mrow>
+<mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>-</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+</msup>
+<mo>⁢</mo>
+<msubsup>
+<mi>λ</mi>
+<mn>1</mn>
+<mn>2</mn>
+</msubsup>
+<mo>⁢</mo>
+<msubsup>
+<mi>λ</mi>
+<mn>2</mn>
+<mn>2</mn>
+</msubsup>
+</mrow>
+</math>
+</maths>
+</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="4" nameend="4" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0088]"> </para-num> <div class="description-line" id="p-0090" num="0088">In the method of the invention, low concentrations of beads and cells are used, so that the probability of getting more than two objects per compartment is negligible.</div>
+</li> <li> <para-num num="[0089]"> </para-num> <div class="description-line" id="p-0091" num="0089">Table 2 gives the probability of finding each type of compartment. Usually, the objects are of more interest. After combining beads and cells in droplets, beads are collected and the probabilities, per bead, that this bead was part of a droplet that contained one or two beads as well as one or two templates are calculated. This requires two modifications to the table. First, (arbitrarily letting x represent beads), the column for x=0 is removed, where there are no beads, and the row for y=0, where there are no cells. Second, the column for x=2 is multiplied by two, since each compartment then contains two beads, and hence the probability of this event per bead is twice as large. Normalising by the total probability, the following formulae<sup>2 </sup>are obtained: <sup>2 </sup>Mathematica code to generate this table: table=Table[FullSimplify[PDF[PoissonDistribution[Subscript[λ,1]],x]xPDF[PoissonDistribution[Subscript[λ,2]],y],[x is 0 y is 0]]/.{x-&gt;a,y-&gt;b},{a, 1, 2},{b, 1, 2}]//Transpose, const=Total[Total[table]], table/const//FullSimplify//TableForm</div>
+</li> <li> <div class="description-line" id="p-0092" num="0000">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Probabilities of finding one or two beads in a single compartment.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">x = 1</td>
+<td class="description-td">x = 2</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">y = 1</td>
+<td class="description-td">
+<maths id="MATH-US-00008" num="00008">
+<math overflow="scroll">
+<mfrac>
+<mn>2</mn>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mn>1</mn>
+<mo>+</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mn>2</mn>
+<mo>+</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mfrac>
+</math>
+</maths>
+</td>
+<td class="description-td">
+<maths id="MATH-US-00009" num="00009">
+<math overflow="scroll">
+<mfrac>
+<mrow>
+<mn>2</mn>
+<mo>⁢</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mn>1</mn>
+<mo>+</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mn>2</mn>
+<mo>+</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mfrac>
+</math>
+</maths>
+</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">y = 2</td>
+<td class="description-td">
+<maths id="MATH-US-00010" num="00010">
+<math overflow="scroll">
+<mfrac>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mn>1</mn>
+<mo>+</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mn>2</mn>
+<mo>+</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mfrac>
+</math>
+</maths>
+</td>
+<td class="description-td">
+<maths id="MATH-US-00011" num="00011">
+<math overflow="scroll">
+<mfrac>
+<mrow>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mn>1</mn>
+<mo>+</mo>
+<msub>
+<mi>λ</mi>
+<mn>1</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mn>2</mn>
+<mo>+</mo>
+<msub>
+<mi>λ</mi>
+<mn>2</mn>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mfrac>
+</math>
+</maths>
+</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0090]"> </para-num> <div class="description-line" id="p-0093" num="0090">These formulae were used to calculate Table 1 above, with the following interpretations:</div>
+</li> <li> <div class="description-line" id="p-0094" num="0000">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 4</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Interpretation of cases shown in Table 1.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Case</td>
+<td class="description-td">Interpretation</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">x = 1, y = 1</td>
+<td class="description-td">Single cells</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">(fraction of cell-carrying beads that carry a single cell)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">x = 1, y = 2</td>
+<td class="description-td">Double cells</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">(two cells on the same bead)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">x = 2, y = 1</td>
+<td class="description-td">Split cells</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">(one cell on two different beads)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">x = 2, y = 2</td>
+<td class="description-td">Split and double</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0091]"> </para-num> <div class="description-line" id="p-0095" num="0091"> <figref idrefs="DRAWINGS">FIG. 8</figref> shows how the probability of the good outcome, i.e. a high probability of obtaining a high proportion of compartments containing a single cell and a single bead.</div>
+</li> <li> <para-num num="[0092]"> </para-num> <div class="description-line" id="p-0096" num="0092">The probability of obtaining a good outcome can be increased arbitrarily by diluting all objects as needed. However, this results in a smaller fraction of beads used, and of cells captured. For some applications (e.g. when the cells are few and precious) it may be desirable to allow a somewhat smaller fraction of single cells on single barcodes, in order to ensure capture of a larger fraction of the cells. For other applications, e.g. when the goal is to detect a rare cell type, it may be much more important to avoid generating spurious signals from mixed cells. Thus the formula and tables above can guide the user in finding the best tradeoff among the parameters, for any given application.</div>
+</li> <li> <para-num num="[0093]"> </para-num> <div class="description-line" id="p-0097" num="0093">For example, the number of solid supports and the number of single cells to be placed into the plurality of compartments may be selected so that the probability of obtaining a single solid support and a single cell together in a single compartment is ≥50%, ≥60%, ≥70%, ≥80%, ≥90%, ≥95%, ≥96%, ≥97%, ≥98% or ≥99%. Using the formulae provided in Table 3, this means that the average number of solid supports per compartment, λ<sub>1</sub>, and the average number of single cells per compartment, λ<sub>2</sub>, may be selected such that 2/(1+λ<sub>1</sub>) (2+λ<sub>2</sub>) ≥50%, ≥60%, ≥70%, ≥80%, ≥90%, ≥95%, ≥96%, ≥97%, ≥98% or ≥99%.</div>
+</li> <li> <para-num num="[0094]"> </para-num> <div class="description-line" id="p-0098" num="0094">Alternatively, the starting concentration of the plurality of solid supports, C<sub>1</sub>, the starting concentration of the plurality of single cells, C<sub>2</sub>, and the volume of each compartment, V, may be selected so that the probability of obtaining a single cell and a single solid support together in a single compartment is ≥50%, ≥60%, ≥70%, ≥80%, ≥90%, ≥95%, ≥96%, ≥97%, ≥98% or ≥99%. Using the formulae provided in Table 3 along with the fact that λ=C/V, this means that C<sub>1</sub>, C<sub>2</sub>, and V may be selected such that 2/[(1+C<sub>1</sub>/V) (2+C<sub>2</sub>/V)] is ≥50%, ≥60%, ≥70%, ≥80%, ≥90%, ≥95%, ≥96%, ≥97%, ≥98% or ≥99%.</div>
+</li> <li> <para-num num="[0095]"> </para-num> <div class="description-line" id="p-0099" num="0095">The nucleic acid released from each single cell may then be sequenced such that the expression profile of each single cell may be determined. Clustering algorithms may be used to find sets of highly similar cells. These cells are the likely candidates for being distinct, stable cell types.</div>
+</li> <li> <para-num num="[0096]"> </para-num> <div class="description-line" id="p-0100" num="0096">The method of the invention allows the quantitative analysis of single cell transcriptomes. The transcriptomes of tens and thousands of single cells may be captured simultaneously in a process taking less than half an hour. Each transcriptome is captured on a custom-made solid support (e.g. a microbead) and encoded with a cell-specific barcode present on each solid support. After pooling all the solid supports and single cells, reverse transcription and circularisation with a platform-specific adapter, the resulting nucleic acid (e.g. cDNA) is ready to sequence without amplification on, for example, Illumina or Complete Genomics platforms. As amplification can be avoided, the data are expected to be highly quantitatively accurate. On the Illumina platform, it would be expected that ten thousand cells per flowcell could be sequenced at a more than ten-fold reduction in cost over the present methods. On the Complete Genomics platform, it would be feasible to sequence a million single cells, achieving an almost hundred-fold reduction in cost.</div>
+</li> <li> <para-num num="[0097]"> </para-num> <div class="description-line" id="p-0101" num="0097">One major application for single-cell transcriptomics is in the analysis of rare cell types. For example, circulating tumor cells (CTCs) can be obtained from patient blood, where typically only a handful of cells are isolated per blood sample. In many cases, the small number of CTCs will be contaminated by a larger number of normal cells, but single-cell RNA-seq could be used to differentiate between them and simultaneously obtain expression data from the tumor.</div>
+</li> <li> <para-num num="[0098]"> </para-num> <div class="description-line" id="p-0102" num="0098">Similarly, the early human embryo by definition contains only rare cell types, which exist only transiently, yet these cells are among the most crucial in the life of any human. To understand embryogenesis, the very first cellular differentiation event (occurring some time prior to the formation of the blastocyst) is a prime model system. Furthermore, the pre-implantation embryo holds the key to many questions about fertility, regenerative capacity and the ground state of human development. These questions could be addressed using transcriptomics, by studying the cascade of events that lead to degradation of the maternal transcriptome, the emergence of the fetal transcriptome, and the interplay between maternal and paternal chromosomes. In this context, transcriptomics has the advantage of being able to use sequence polymorphisms (e.g. SNPs) to distinguish transcripts derived from each of the two parental genomes.</div>
+</li> <li> <para-num num="[0099]"> </para-num> <div class="description-line" id="p-0103" num="0099">Another area that will benefit immensely from single-cell transcriptomics is the study of adult stem cells. These are often rare, quiescent cells, which are capable of regenerating adult tissues. In many cases, stem cells have been shown to exist in multiple states, serving distinct long- and short-term regenerative needs for the organism. Such systems consisting of stem cells, transient cell types and post mitotic differentiated cells are difficult to study, as distinct cell types are intermingled. But with single-cell RNA-seq, each cell type can be extensively sampled simply by taking unbiased samples of cells out of the tissue.</div>
+</li> <li> <para-num num="[0100]"> </para-num> <div class="description-line" id="p-0104" num="0100">A further application area for single-cell transcriptomics is the characterization of transcriptional fluctuations. The cellular state, including its transcriptome, is in constant flux. Dynamic changes in RNA content are associated with cyclic processes, such as the cell cycle in dividing cells and the circadian rhythm. Other fluctuations are stochastic and reflect the fact that transcription is a discrete process composed of many probabilistic steps. Further heterogeneity is introduced by uneven partitioning of the cellular content at cell division. For example, unequal partitioning of mitochondria contributes to cell-to-cell differences in energy metabolism, leading to differences in ATP concentration and ultimately to global differences in transcription rate<sup>19</sup>.</div>
+</li> <li> <para-num num="[0101]"> </para-num> <div class="description-line" id="p-0105" num="0101">Direct transcriptome analysis of large numbers of single cells should open up the study of oscillatory and stochastic regulatory processes in unperturbed cell populations. In a population of putatively identical cells, sets of co-regulated genes can be identified. Each set must be part of a functional process, such as an oscillator or a stochastic process. For example, genes that share a common upstream regulator would presumably show correlated expression. At present, the number of single cells that must be analysed in order to discover covariant genes is unknown, and finding first estimates of these numbers will be a key task in the near future.</div>
+</li> <li> <para-num num="[0102]"> </para-num> <div class="description-line" id="p-0106" num="0102">Furthermore, there is evidence that transcription is subject to strong intrinsic fluctuations<sup>20, 21</sup>. A plausible model to explain this intrinsic noise is the two-state model: each promoter flips stochastically between an active state and a silenced state. If the active state has a short duration, then transcription will occur in short bursts, leading to a rapid accumulation of mRNA, followed by a period of mRNA decay. This model leads to a prediction about the shape of the mRNA copy number distribution which can be tested against experimentally measured distributions<sup>20</sup>. It is important to realise that any model of transcription that leads to a prediction about mRNA distributions (as opposed to the population mean) cannot be tested using bulk measurements, which do not give any information about the variance or any higher moments. Nonetheless, single-cell transcriptome analysis provides only a snapshot in time, and it will remain important to complement this view with dynamic long-term measurements by, e.g. time-lapse microscopy<sup>22</sup>.</div>
+</li> <heading id="h-0008">EXAMPLES</heading>
+<heading id="h-0009">Example 1—Production of Encoded cDNA from Single Cells</heading>
+<li> <para-num num="[0103]"> </para-num> <div class="description-line" id="p-0107" num="0103">This example describes the production of encoded cDNA from single cells. The method involves (i) capturing single cell transcriptomes in a microfluidic device and (ii) encoding those transcriptomes with cell-specific barcodes. The production of encoded cDNA using a droplet-based reaction RNA capture step is illustrated in <figref idrefs="DRAWINGS">FIG. 2</figref>. This method involves two reaction stages.</div>
+</li> <li> <para-num num="[0104]"> </para-num> <div class="description-line" id="p-0108" num="0104">The first stage uses either split-and-pool or emulsion PCR (emPCR) to generate encoded beads, illustrated in <figref idrefs="DRAWINGS">FIGS. 4 and 5</figref>. Custom-manufactured magnetic beads (20 μm diameter polystyrene paramagnetic beads) carrying approximately 10 million oligonucleotides on their surface are used.</div>
+</li> <li> <para-num num="[0105]"> </para-num> <div class="description-line" id="p-0109" num="0105">The second stage uses emulsion or microwell RNA capture followed by cDNA synthesis to generate encoded DNA. The result is to convert the mRNA content of thousands of single cells to encoded cDNA carrying cell-specific identifying sequences. At this stage, a stream of single cells is merged with a stream of encoded beads such that most droplets contain a single bead and a single cell (Poisson statistics). The process is illustrated in <figref idrefs="DRAWINGS">FIG. 2</figref>.</div>
+</li> <li> <para-num num="[0106]"> </para-num> <div class="description-line" id="p-0110" num="0106">A microfluidic droplet generator is used to produce 250 pL droplets that encapsulate two input liquids. The result is to transfer the mRNA content of single cells onto beads carrying bead-specific identifying sequences. Tens of thousands of cells can be processed in millions of droplets, which minimises the risk that more than one cell (or more than one bead) is present in each droplet.</div>
+</li> <li> <para-num num="[0107]"> </para-num> <div class="description-line" id="p-0111" num="0107">The present inventors have designed a custom droplet microfluidic device (Dolomite Microfluidics), which is capable of generating about 100 million droplets in half an hour, merging two input streams (see <figref idrefs="DRAWINGS">FIG. 3</figref>). Three closed-loop pressure-driven pumps push three input liquids into a microfluidic chip. Oil is introduced from the sides and forms the carrier phase. Two aqueous inputs (cells and beads) are introduced in parallel and merge just prior to the junction. The inset (which is an actual micrograph of the junction) illustrates how the inputs do not mix prior to the junction, due to laminar flow, and how droplets are formed with half their contents from each input liquid. After collection of the droplets, the two input liquids mix by diffusion. As the bead solution contains lysis reagents, the cells lyse, their mRNA spills out and is captured on the beads.</div>
+</li> <li> <para-num num="[0108]"> </para-num> <div class="description-line" id="p-0112" num="0108">The droplet generator is a dual-input droplet microfluidic device generating 250 pL droplets. Aqueous streams carrying beads in lysis buffer and cells are brought together just before an X-junction, where pressure from an oil phase is used to generate a monodisperse stream of droplets, each containing an equal mixture of the two input reagents. This causes the cells to lyse and mRNA to be captured on the beads (see <figref idrefs="DRAWINGS">FIG. 3</figref>).</div>
+</li> <li> <para-num num="[0109]"> </para-num> <div class="description-line" id="p-0113" num="0109">A. Preparing Encoded Beads by Split-and-Pool</div>
+</li> <li> <para-num num="[0110]"> </para-num> <div class="description-line" id="p-0114" num="0110">A1. Background</div>
+</li> <li> <para-num num="[0111]"> </para-num> <div class="description-line" id="p-0115" num="0111">Split-and-pool is a combinatorial synthesis strategy (see <figref idrefs="DRAWINGS">FIG. 4</figref>) where a combinatorial library of molecules is built by sequential steps of (1) splitting the reaction mix in multiple vessels; (2) adding to each vessel a different monomer, which is ligated to the molecules present in the vessel; (3) pooling the content of all vessels; (4) repeating this process N times to generate a pooled combinatorial library of polymers.</div>
+</li> <li> <para-num num="[0112]"> </para-num> <div class="description-line" id="p-0116" num="0112">Split-and-pool is used to build a library of encoded beads by sequential ligation of short DNA building blocks (the monomers; a total of 192 different, 8 bp long). Thus, each bead will carry a specific sequence of building blocks. With three rounds of split-and-pool, a total of 192{circumflex over ( )}3=7 million different kinds of beads are produced, each carrying a distinct sequence of building blocks. A key benefit of split-and-pool compared with emulsion PCR is that every bead is productive. That is, every bead gets a specific sequence, and no beads get mixed sequences. In contrast, with emulsion PCR it is necessary to dilute beads and templates to reduce the number of beads that get two templates, but this leads to a majority (most likely &gt;90%) empty beads, which must be discarded.</div>
+</li> <li> <para-num num="[0113]"> </para-num> <div class="description-line" id="p-0117" num="0113"> <figref idrefs="DRAWINGS">FIG. 6</figref> illustrates a design for building a library of encoded beads using split-and-pool analysis. A hairpin adapter that can be cleaved by a restriction enzyme (FauI) in such a way that it leaves a CC overhang and a six basepair barcode sequence (selected among 192 distinct barcodes) is used. Thus, starting with a CC overhang on the beads, each round of split and pool will grow the DNA on the beads by one block and regenerate the beads for the next round. After N such rounds, synthesis is completed by ligating an adapter containing a targeting sequence (here termed TSP1, target-specific primer 1). This could be for example an oligo-dT sequence for targeting all mRNA, or a pool of gene-specific targeting sequences. Illumina adapter sequences (here termed P2A and P2B) are used so that the barcodes can be sequenced separately from the insert.</div>
+</li> <li> <para-num num="[0114]"> </para-num> <div class="description-line" id="p-0118" num="0114">The result is a pool of beads, each carrying (1) Illumina P2A and P2B for sequencing; (2) a bead-specific barcode comprising a sequence of hexamer blocks (where each block is selected among 192 different blocks); and (3) a target-specific primer sequence. The target-specific primer (TSP) can potentially be a mixture of primers, in which case each bead will carry a mixture of TSPs. This can be used to analyse multiple defined targets per cell. In this case, each bead will carry a plurality of target-specific primers, comprising sets of target-specific primers directed against distinct targets.</div>
+</li> <li> <para-num num="[0115]"> </para-num> <div class="description-line" id="p-0119" num="0115">This targeting approach is illustrated schematically in <figref idrefs="DRAWINGS">FIG. 7</figref>.</div>
+</li> <li> <para-num num="[0116]"> </para-num> <div class="description-line" id="p-0120" num="0116">A2. Preparations</div>
+</li> <li> <para-num num="[0117]"> </para-num> <div class="description-line" id="p-0121" num="0117">N sets of splitting plates containing 12 μM hairpins in 5 μL of 1×NEB T4 Ligase Buffer are prepared. With 192 hairpins, there are two plates per set, and 2N plates in total.</div>
+</li> <li> <para-num num="[0118]"> </para-num> <div class="description-line" id="p-0122" num="0118">Double-stranded (ds) immobilised DNA is prepared using the reagents shown in Table 5:</div>
+</li> <li> <div class="description-line" id="p-0123" num="0000">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 5</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Preparation of ds immobilised DNA.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">bio_8T_U_P2A (100 μM)</td>
+<td class="description-td">12 μl</td>
+<td class="description-td">12 μM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">P2A(rc)_9A (100 μM)</td>
+<td class="description-td">20 μl</td>
+<td class="description-td">20 μM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Water</td>
+<td class="description-td">68 μl</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">100 μl </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0119]"> </para-num> <div class="description-line" id="p-0124" num="0119">Beads are prepared as follows. 1 ml (˜2M) of Capture beads (Dynabeads® MyOne™ Streptavidin C1) are used. The beads are bound and resuspended in 200 μl 2×BWT (10 mM Tris-HCl (pH 7.5), 1 mM EDTA, 2 M NaCl and 0.01% (vol/vol) Tween-20). The beads are washed 2 times in 2×BWT and then separated by briefly spinning down (NOT by magnet) to get rid of magnetic debris. The washed beads are then resuspend in 100 μl 2×BWT.</div>
+</li> <li> <para-num num="[0120]"> </para-num> <div class="description-line" id="p-0125" num="0120">The beads are coated by adding 100 μl ds immobilised DNA to 100 μl of beads, followed by incubation at room temperature for 15 minutes. The beads were then washed twice in 1×BWT.</div>
+</li> <li> <para-num num="[0121]"> </para-num> <div class="description-line" id="p-0126" num="0121">The beads are then “split” by being resuspended (on ice and kept cold) in the reaction mix shown in Table 6.</div>
+</li> <li> <div class="description-line" id="p-0127" num="0000">
+<tables id="TABLE-US-00006" num="00006">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 6</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reaction mix for “splitting” the coated beads.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+<td class="description-td">(splitting plate)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Water</td>
+<td class="description-td">850 μl</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">x10 NEB T4 Ligase Buffer</td>
+<td class="description-td">100 μl</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">T4 ligase (400,000 U/ml)</td>
+<td class="description-td"> 50 μl</td>
+<td class="description-td">10 U/μl</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">1000 μl </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0122]"> </para-num> <div class="description-line" id="p-0128" num="0122">The reaction mix is divided into the splitting plates at 5 μl/well in two 96-well plates before being incubated at room temperature for 20 minutes and heat inactivated at 65° C. for 10 min.</div>
+</li> <li> <para-num num="[0123]"> </para-num> <div class="description-line" id="p-0129" num="0123">The beads are immobilized using a magnet and the supernatant removed by washing the beads 3 times in 200 ul 1×BWT. The sample is resuspended in the buffer shown in Table 7. The sample is kept on ice throughout.</div>
+</li> <li> <div class="description-line" id="p-0130" num="0000">
+<tables id="TABLE-US-00007" num="00007">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 7</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Composition of buffer for “pooling the beads”.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final [C]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Water</td>
+<td class="description-td">132 μL</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">x10 CutSmart ™ Buffer</td>
+<td class="description-td"> 15 μL</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">NEB FauI (5000 U/ml)</td>
+<td class="description-td"> 3 μL</td>
+<td class="description-td">15 U in 150 μl</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">150 μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0124]"> </para-num> <div class="description-line" id="p-0131" num="0124">The sample is incubated at 55° C. for 30 minutes and heat inactivated at 65° C. for 20 min. The beads are bound and the supernatant removed by washing the beads 3 times in 200 μl 1×BWT.</div>
+</li> <li> <para-num num="[0125]"> </para-num> <div class="description-line" id="p-0132" num="0125">The procedure is repeated for as many rounds as required from “Splitting” (normally three).</div>
+</li> <li> <para-num num="[0126]"> </para-num> <div class="description-line" id="p-0133" num="0126">The procedure is then repeated from the “splitting” stage, but ligating a target-specific primer (TSP1) adapter instead of a hairpin adapter and omitting the restriction step.</div>
+</li> <li> <para-num num="[0127]"> </para-num> <div class="description-line" id="p-0134" num="0127">The DNA coated Dynabeads® are optionally washed in 200 μl 1×SSC. They are then resuspended in 200 μl of freshly prepared 0.15 M NaOH and incubated at room temperature for 10 minutes. The Dynabeads® coated with biotinylated strand are washed once with 100 μl 0.1M NaOH, once with 100 μl of B&amp;W buffer and once with 100 μl TE buffer. They are then resuspend in 500 μl TE and stored at 4° C.</div>
+</li> <li> <para-num num="[0128]"> </para-num> <div class="description-line" id="p-0135" num="0128">B. Transcriptome Capture and Encoding</div>
+</li> <li> <para-num num="[0129]"> </para-num> <div class="description-line" id="p-0136" num="0129">The emulsifier oil mix is prepared by adding Picosurf2 (Dolomite Microfluidics) to FC-40 at 2% final concentration. The mixture is vortexed thoroughly and incubated at room temperature for 30 minutes.</div>
+</li> <li> <para-num num="[0130]"> </para-num> <div class="description-line" id="p-0137" num="0130">The encoded bead mix is prepared by using the reagents shown in Table 8. The mix is kept on ice until use.</div>
+</li> <li> <div class="description-line" id="p-0138" num="0000">
+<tables id="TABLE-US-00008" num="00008">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 8</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Composition of the encoded bead mix.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td"> </td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5M LiCl</td>
+<td class="description-td">62.5</td>
+<td class="description-td">μL</td>
+<td class="description-td">500 mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1M TrisCl pH 7.5</td>
+<td class="description-td">62.5</td>
+<td class="description-td">μL</td>
+<td class="description-td">100 mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10% Lithium dodecyl</td>
+<td class="description-td">62.5</td>
+<td class="description-td">μL</td>
+<td class="description-td">1%</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">sulfate</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">0.5M EDTA</td>
+<td class="description-td">12.5</td>
+<td class="description-td">μL</td>
+<td class="description-td"> 10 mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">100 mM DTT</td>
+<td class="description-td">31</td>
+<td class="description-td">μL</td>
+<td class="description-td"> 5 mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10K/μL Encoded Beads</td>
+<td class="description-td">50</td>
+<td class="description-td">μL</td>
+<td class="description-td">100K beads</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nuclease-free water</td>
+<td class="description-td">345</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">626</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0131]"> </para-num> <div class="description-line" id="p-0139" num="0131">Note: Less than 50 μL beads can be used, but the yield will be correspondingly reduced.</div>
+</li> <li> <para-num num="[0132]"> </para-num> <div class="description-line" id="p-0140" num="0132">A single-cell suspension is prepared as follows. Tissue-specific protocols are used to dissect and dissociate to a single-cell suspension. Aliquots of 100,000 cells are frozen in 625 μL cell culture medium with 10% DMSO. An aliquot is thawed and kept on ice. Note: It is important to wash the cells thoroughly before freezing, to eliminate extracellular RNA. Debris is cleared by passing cells through a cell strainer. If necessary, debris is removed by a 20% Percoll step-gradient centrifugation.</div>
+</li> <li> <para-num num="[0133]"> </para-num> <div class="description-line" id="p-0141" num="0133">An emulsification step is then carried out as follows.</div>
+</li> <li> <para-num num="[0134]"> </para-num> <div class="description-line" id="p-0142" num="0134">The Encoded Bead mix is loaded on the A pump and the single-cell suspension on the B pump of the droplet generator. 2 mL Emulsifier Oil Mix is loaded on the C pump. The pump is used at 10/10/20 μL/min to generate 80 μm (250 pL) droplets until the reagents run out. The total volume is about 2.5 mL and takes about one hour to collect. The emulsion is collected in a single tube kept on ice.</div>
+</li> <li> <para-num num="[0135]"> </para-num> <div class="description-line" id="p-0143" num="0135">The tube is transferred to a thermocycler and incubated at 72° C. for 15 minutes to lyse the cells and denature and fragment RNA; then 55° C. for four hours followed by 30° C. for one hour to capture target RNAs. The emulsion is chilled on ice. The bead-positive droplets are bound and the rest of the emulsion is carefully removed. The emulsion is broken and the beads are recovered using 5 mL breaking buffer.</div>
+</li> <li> <para-num num="[0136]"> </para-num> <div class="description-line" id="p-0144" num="0136">Post-processing begins with reverse transcription. The beads are bound and resuspended the beads in the mix shown in Table 9 prepared on ice.</div>
+</li> <li> <div class="description-line" id="p-0145" num="0000">
+<tables id="TABLE-US-00009" num="00009">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 9</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Composition of mix used for reverse transcription.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">200 U/μL Superscript</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">10</td>
+<td class="description-td">U/μL</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">II</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5x Superscript II</td>
+<td class="description-td">4 μL</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">buffer</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">20 mM DTT</td>
+<td class="description-td">2 μL</td>
+<td class="description-td">2</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">100 μM dNTP</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">5</td>
+<td class="description-td">μM</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">100 mM MgCl<sub>2</sub> </td>
+<td class="description-td">2 μL</td>
+<td class="description-td">10 mM (13 mM with SSII</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">buffer)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nuclease-free water</td>
+<td class="description-td">10 μL </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">20 μL </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0137]"> </para-num> <div class="description-line" id="p-0146" num="0137">The mix is incubated at 42° C. for exactly ten minutes. The incubation time can be adjusted to change the resulting average cDNA fragment length.</div>
+</li> <li> <para-num num="[0138]"> </para-num> <div class="description-line" id="p-0147" num="0138">Unused primers are then removed as follows. The beads are resuspended in the mix shown in Table 10.</div>
+</li> <li> <div class="description-line" id="p-0148" num="0000">
+<tables id="TABLE-US-00010" num="00010">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 10</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mixture used to resuspend the beads</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">prior to removal of unused primers.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10x Exonuclease I</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">buffer</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nuclease-free water</td>
+<td class="description-td">8 μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10 U/μL Exonuclease I</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">1 U/μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">10 μL </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0139]"> </para-num> <div class="description-line" id="p-0149" num="0139">The beads are incubated in the mixture shown in Table 6 at 37° C. for 30 minutes and then heat inactivated at 80° C. for 20 minutes. The beads are washed twice in TNT buffer.</div>
+</li> <li> <para-num num="[0140]"> </para-num> <div class="description-line" id="p-0150" num="0140">The RNA strand is removed by resuspending the beads in the mix shown in Table 11.</div>
+</li> <li> <div class="description-line" id="p-0151" num="0000">
+<tables id="TABLE-US-00011" num="00011">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 11</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mixture used to resuspend the beads</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">prior to removal of the RNA strand.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10x RNase H buffer</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nuclease-free water</td>
+<td class="description-td">8 μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5 U/μL RNase H</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">1 U/μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">10 μL </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0141]"> </para-num> <div class="description-line" id="p-0152" num="0141">The mixture was incubated at 37° C. for 20 minutes and heat inactivated at 65° C. for 20 minutes. The beads were washed twice in TNT buffer.</div>
+</li> <li> <para-num num="[0142]"> </para-num> <div class="description-line" id="p-0153" num="0142">The second strand was synthesised by resuspending the beads in the mix shown in Table 12 to anneal reverse primers:</div>
+</li> <li> <div class="description-line" id="p-0154" num="0000">
+<tables id="TABLE-US-00012" num="00012">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 12</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reaction mix used to anneal reverse primers.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5M NaCl</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">500</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1M Tris HCl pH 7.5</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">100</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">100 μM TSP2 primer</td>
+<td class="description-td">1 μL</td>
+<td class="description-td">10</td>
+<td class="description-td">μM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">mix</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nuclease-free water</td>
+<td class="description-td">7 μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">10 μL </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0143]"> </para-num> <div class="description-line" id="p-0155" num="0143">The mixture was incubated at 72° C. for 5 minutes and then cooled to 20° C. The beads were washed twice in TNT buffer and resuspended in the mix shown in Table 13 to extend the second strand:</div>
+</li> <li> <div class="description-line" id="p-0156" num="0000">
+<tables id="TABLE-US-00013" num="00013">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 13</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reaction mix used to extend the second strand.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td"> </td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10x NEBuffer2 (NEB)</td>
+<td class="description-td">1</td>
+<td class="description-td">μL</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Klenow (3′-5′ exo<sup>−</sup>)</td>
+<td class="description-td">1</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">BSA (100x)</td>
+<td class="description-td">0.1</td>
+<td class="description-td">μL</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">dNTP</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">250 μM each</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nuclease-free water</td>
+<td class="description-td">8</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">10</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0144]"> </para-num> <div class="description-line" id="p-0157" num="0144">The mixture was washed twice in TNT, and then the second strand was released by incubating in 0.1 M NaOH followed by neutralisation in 0.1 M HCl and Tris.</div>
+</li> <li> <para-num num="[0145]"> </para-num> <div class="description-line" id="p-0158" num="0145">The Encoded cDNA can be used for direct Illumina sequencing. The KAPA Quantification Kit is used to measure molar concentration. The whole library should be sequenced.</div>
+</li> <li> <para-num num="[0146]"> </para-num> <div class="description-line" id="p-0159" num="0146">Alternatively, the library can be amplified, as follows, using reaction mix shown in Table 14.</div>
+</li> <li> <div class="description-line" id="p-0160" num="0000">
+<tables id="TABLE-US-00014" num="00014">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="1" nameend="1" namest="1" rowsep="1">TABLE 14</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="1" nameend="1" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Reaction mix for library amplification.</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td"> </td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10 μM Illumina P1/P2</td>
+<td class="description-td">5</td>
+<td class="description-td">μL</td>
+<td class="description-td">1</td>
+<td class="description-td">μM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">primers</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10 mM dNTP</td>
+<td class="description-td">1</td>
+<td class="description-td">μL</td>
+<td class="description-td"> 200</td>
+<td class="description-td">μM</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5x Phusion HF buffer</td>
+<td class="description-td">10</td>
+<td class="description-td">μL</td>
+<td class="description-td">1x</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2 U/μL Phusion</td>
+<td class="description-td">1</td>
+<td class="description-td">μL</td>
+<td class="description-td">0.04</td>
+<td class="description-td">U/μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">polymerase</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nuclease-free water</td>
+<td class="description-td">23</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">50</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="6" nameend="5" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0147]"> </para-num> <div class="description-line" id="p-0161" num="0147">The library is amplified under the following conditions: 98° C. for 30 s, 12 cycles of [98° C. 10 s, 65° C. 30 s, 72° C. 30 s], 72° C. 5 min, 4° C. The cDNA is purified on AmPure and resuspended in 40 μL. The expected concentration is around 20 nM.</div>
+</li> <li> <para-num num="[0148]"> </para-num> <div class="description-line" id="p-0162" num="0148">Reagents and Equipment</div>
+</li> <li> <div class="description-line" id="p-0163" num="0000">
+<tables id="TABLE-US-00015" num="00015">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Component</td>
+<td class="description-td">Source</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Microfluidic</td>
+<td class="description-td">Dolomite Microfluidics custom design</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">device</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2x BWT</td>
+<td class="description-td">10 mM Tris HCl pH 7.5, 1 mM EDTA,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2M NaCl, 0.02% Tween-20</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Thermostable</td>
+<td class="description-td">NEB M0296S</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">PPase</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Platinum Taq</td>
+<td class="description-td">Life Technologies 10966-026</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Capture Beads</td>
+<td class="description-td">Spherotech 20 μm paramagnetic streptavidin-coated</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">polystyrene beads (custom order SVM-200-4)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">EBT</td>
+<td class="description-td">10 mM Tris pH 7.5, 1 mM EDTA, 0.02% Tween-20</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">ABIL WE09</td>
+<td class="description-td">Degussa</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Tegosoft DEC</td>
+<td class="description-td">Degussa</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mineral oil</td>
+<td class="description-td">Sigma Aldrich M5904</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Breaking Buffer</td>
+<td class="description-td">10 mM Tris-HCl (pH 7.5), 1% Triton-X 100, 1% SDS,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">100 mM NaCl, 1 mM EDTA</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">TNT Buffer</td>
+<td class="description-td">20 mM Tris pH 7.5, 50 mM NaCl, 0.02% Tween</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">SYBR Gold</td>
+<td class="description-td">Life Technologies</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Melt Solution</td>
+<td class="description-td">0.1M NaOH (prepare fresh each time)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Exonuclease I</td>
+<td class="description-td">NEB (BioNordika) M0293S</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">RNase H</td>
+<td class="description-td">NEB (BioNordika) M0297S</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">USER Enzyme</td>
+<td class="description-td">NEB (BioNordika) M5505S</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">CircLigase II</td>
+<td class="description-td">Epicentre (Nordic Biolabs) CL9025K</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Custom oligos</td>
+<td class="description-td">Trilink</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <heading id="h-0010">Example 2—Generating a Cell Map of the Dorsal Root Ganglion</heading>
+<li> <para-num num="[0149]"> </para-num> <div class="description-line" id="p-0164" num="0149">Previously published methods have been applied to cell-type discovery in the dorsal root ganglion. A cell map was generated from 864 single-cell transcriptomes. About ten clusters were identified, which is similar to the approximately ten known cell types in this tissue. Examining known markers, it was found that clusters do indeed correspond to cell types. In <figref idrefs="DRAWINGS">FIG. 9</figref>, four clusters are shown, where each node corresponds to a single cell, and the intensity of staining from black (low) to white (high) corresponds to the expression of the proprioceptive neuron marker Parvalbumin. Expression of Parvalbumin (a marker of proprioceptive neurons) was detected only in Cluster 4, showing that this cluster indeed represents proprioceptive neurons.</div>
+</li> <heading id="h-0011">Example 3—RNA Capture and cDNA Synthesis on Barcoded Beads</heading>
+<li> <para-num num="[0150]"> </para-num> <div class="description-line" id="p-0165" num="0150">Barcoded 20 μm polystyrene beads can bind RNA, and the RNA can be effectively reverse transcribed on them, the cDNA Library can then be amplified from a desired number of beads. This example shows that cDNA library prepared on barcoded beads is comparable with the one synthetized on standard 1 um streptavidin coated paramagnetic polystyrene beads (MyOne Cl Streptavidin beads) loaded by a single-stranded P1A-sequence-flanked polyT oligonucleotide (T8U_P2A-T31). These beads have a high surface-to-volume ratio so are expected to yield an optimal library. As additional comparison T8U_P2A-T31 was bound to 20 um diameter streptavidin coated polystyrene magnetic beads (SVM1-200-4 Spherotech), the same beads as the barcoded.</div>
+</li> <li> <para-num num="[0151]"> </para-num> <div class="description-line" id="p-0166" num="0151">In an ideal situation where a single bead is compartmentalized with a cell in a volume of 25 pL, after lysis one would have an mRNA concentration of 200 ng/ul for an average sized cell. These conditions are possible to reproduce in a big volume (e.g. in a 1.5 mL tube) maintaining the concentration. In this example, however, we worked with a much lower concentration (75 ng/μl) to simulate a worst-case scenario.</div>
+</li> <li> <para-num num="[0152]"> </para-num> <div class="description-line" id="p-0167" num="0152">Barcoded beads were prepared as in EXAMPLE 1, approximately 100,000 beads were used and resuspended directly in 20 ul LiBT.</div>
+</li> <li> <para-num num="[0153]"> </para-num> <div class="description-line" id="p-0168" num="0153">The beads for comparison were prepared as follows: 25 ul of 1 μm diameter MyOne C1 Streptavidin coated beads (stock 10 mg/ml) or 40 ul of 20 μm diameter Streptavidin Magnetic Particles (stock 1% w/v) were resuspended in LiWT, washed tree times: twice by short centrifugation and removal of the supernatant and the third time by binding the beads using a magnetic stand.</div>
+</li> <li> <para-num num="[0154]"> </para-num> <div class="description-line" id="p-0169" num="0154">The beads were then resuspended in 25 μL BWT 2×. Successively, 25 ul of T8U_P2A-T31 10 uM was added to the suspension and the beads were incubated to bind the oligonucleotides for 30 min. After incubation the beads were washed once in 50 ul BWT 1× and once in 60 ul LiBT and finally resuspended in 20 ul LiBT.</div>
+</li> <li> <para-num num="[0155]"> </para-num> <div class="description-line" id="p-0170" num="0155">Human Reference total RNA (Agilent) was used as template, 20 ul of RNA was heated up at 72° C. for 2 minutes. Then the RNA was quickly transferred on ice. The beads, were resuspended in 20 ul LiBT and added to the RNA. The mix was incubated for 5 min at R.T. under agitation.</div>
+</li> <li> <para-num num="[0156]"> </para-num> <div class="description-line" id="p-0171" num="0156">The beads were washed once with 60 ul LiWT, bound again to the magnet and resuspended in 30 ul of RT mix prepared as follows:</div>
+</li> <li> <div class="description-line" id="p-0172" num="0000">
+<tables id="TABLE-US-00016" num="00016">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td"> </td>
+<td class="description-td">Volume x3</td>
+<td class="description-td">Concentration</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Water + Tween 0.02%</td>
+<td class="description-td">28.5</td>
+<td class="description-td">ul</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5M Betaine</td>
+<td class="description-td">15</td>
+<td class="description-td">ul</td>
+<td class="description-td">  0.82M</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5x SuperScript</td>
+<td class="description-td">18</td>
+<td class="description-td">ul</td>
+<td class="description-td">1x</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="6" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">First-strand buffer</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">MgCl<sub>2</sub>[100 mM]</td>
+<td class="description-td">5.4</td>
+<td class="description-td">ul</td>
+<td class="description-td">6</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DTT [100 mM]</td>
+<td class="description-td">4.5</td>
+<td class="description-td">ul</td>
+<td class="description-td">5</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">dNTPs [20 mM]</td>
+<td class="description-td">4.5</td>
+<td class="description-td">ul</td>
+<td class="description-td">1</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Superscript II [200</td>
+<td class="description-td">9</td>
+<td class="description-td">ul</td>
+<td class="description-td">20</td>
+<td class="description-td">U/ul</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">U/μl]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">P2A_PvuI-rTSO (40 uM)</td>
+<td class="description-td">12</td>
+<td class="description-td">ul</td>
+<td class="description-td">5</td>
+<td class="description-td">uM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">90</td>
+<td class="description-td">ul</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="6" nameend="5" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0157]"> </para-num> <div class="description-line" id="p-0173" num="0157">The sample was incubated in a thermal cycler with the program: step1: 1 h at 42° C. step2: 10 min at 70° C.</div>
+</li> <li> <para-num num="[0158]"> </para-num> <div class="description-line" id="p-0174" num="0158">During this time, the beads were checked periodically for sedimentation and resuspended if necessary. Finally the beads were washed twice in 60 ul LiWT and resuspended in 35 ul LiWT.</div>
+</li> <li> <para-num num="[0159]"> </para-num> <div class="description-line" id="p-0175" num="0159">Only a fraction (1.2 ul) of of those beads were used for the following PCR</div>
+</li> <li> <para-num num="[0160]"> </para-num> <div class="description-line" id="p-0176" num="0160">The PCR buffer was prepared as follows:</div>
+</li> <li> <div class="description-line" id="p-0177" num="0000">
+<tables id="TABLE-US-00017" num="00017">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td"> </td>
+<td class="description-td">Volume x3</td>
+<td class="description-td">Final in PCR</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Water + Tween 0.02%</td>
+<td class="description-td">87</td>
+<td class="description-td">ul</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10x Advantage Buffer</td>
+<td class="description-td">11.5</td>
+<td class="description-td">ul</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">dNTPS (20 mM)</td>
+<td class="description-td">2.25</td>
+<td class="description-td">ul</td>
+<td class="description-td">400 uM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">bio-P2A(PCR) [20 uM]</td>
+<td class="description-td">3</td>
+<td class="description-td">ul</td>
+<td class="description-td">530 nM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Advantage Polymerase</td>
+<td class="description-td">4.5</td>
+<td class="description-td">ul</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0161]"> </para-num> <div class="description-line" id="p-0178" num="0161">1.2 ul of the barcoded-cDNA beads (containing between 3100-3400 beads as extimated using a Bürker chamber) were added to 35 ul of PCR buffer.</div>
+</li> <li> <para-num num="[0162]"> </para-num> <div class="description-line" id="p-0179" num="0162">The reaction was incubated in a thermal cycler set up as follows: step1: 1 min at 95° C., step2: 20 sec at 95° C., step3: 4 min at 58° C., step4: 6 min at 68° C., step5: Go to step2 4 times, step6: 20 sec at 95° C., step7: 30 sec at 64° C., step8: 6 min at 68° C., step9: Go to step2 8 times, step10: 20 sec at 95° C., step11: 30 sec at 64° C., step12: 7 min at 68° C., step13: Go to step2 3 times. step14: 10 min at 72° C.</div>
+</li> <li> <para-num num="[0163]"> </para-num> <div class="description-line" id="p-0180" num="0163">The PCR product was quantified and 3 ng was loaded on a Bioanalyzer electrophoretic system resulting in the electrophoregrams shown in <figref idrefs="DRAWINGS">FIGS. 10B to 10D</figref>.</div>
+</li> <li> <para-num num="[0164]"> </para-num> <div class="description-line" id="p-0181" num="0164">Library Preparation for Illumina Sequencing</div>
+</li> <li> <para-num num="[0165]"> </para-num> <div class="description-line" id="p-0182" num="0165">The cDNA library has to be converted sequencing library for Illumina sequencing by adding the other sequence (P1a) required for cluster on an Illumina flow cell. This can be done in one step by means of a Tn5 transposase-based reaction. Tn5 transposase was loaded by mixing 5 ul of 15 uM P1A-ME adapters and 5 ul of the protein 14.5 uM. The mix was incubated at 37° C. for 1 h in a shaker at 500 rpm. 90 ul of 50% glycerol were added to dilute the Tn5 to optimal concentration. The reaction was prepared in the following way:</div>
+</li> <li> <div class="description-line" id="p-0183" num="0000">
+<tables id="TABLE-US-00018" num="00018">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Amplified cDNA (diluted</td>
+<td class="description-td">12</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">to 3.5 ng/ul)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Nuclease-free water</td>
+<td class="description-td">45</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">TAPS buffer*</td>
+<td class="description-td">9</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">100% DMF</td>
+<td class="description-td">9</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Loaded Transposome</td>
+<td class="description-td">11.5</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">stock</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">90</td>
+<td class="description-td">μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0166]"> </para-num> <div class="description-line" id="p-0184" num="0166">The suspension was incubated at 55° C. for 6 minutes. To stop the reaction the tube was put on ice and Streptavidin 1 um paramagnetic beads (MyOnce C1) previously suspended in 30 ul BWT2x were added. The suspension was incubated 20 min at RT, the beads were bound to a magnet and washed three times, alternating TNT with Qiaquick PB buffer.</div>
+</li> <li> <para-num num="[0167]"> </para-num> <div class="description-line" id="p-0185" num="0167">Since this reaction generates 5′ and 3′ fragments bound to the beads (and only the 3′ fragments are the desired target), the 5′ ends were digested and thus destroyed using PvuI restriction enzyme. This was done by resuspending the beads in the following reaction mix:</div>
+</li> <li> <div class="description-line" id="p-0186" num="0000">
+<tables id="TABLE-US-00019" num="00019">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume x1</td>
+<td class="description-td">Final conc.</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Water 0.02% tween</td>
+<td class="description-td">88 μL</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10x CutSmart</td>
+<td class="description-td">10 μL</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">PvuI-HF enzyme (20</td>
+<td class="description-td"> 2 μL</td>
+<td class="description-td">0.4 U/μL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">U/μL)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">100 μL </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0168]"> </para-num> <div class="description-line" id="p-0187" num="0168">The mix was incubated 37° C. for one hour on a shaker to avoid beads precipitation. The beads were washed three times in TNT, resuspended in 15 μl water and incubated for 10 min at 70° C. The beads were bound and discarded the supernatant, containing the eluted sequencing library was kept. The molarity was determined by real-time PCR quantification and electropherograms.</div>
+</li> <heading id="h-0012">Example 4—Sequencing Analysis and Evaluation of the Barcoding Strategy</heading>
+<li> <para-num num="[0169]"> </para-num> <div class="description-line" id="p-0188" num="0169">A library prepared by using approximately 3000 barcoded beads and Human reference RNA was sequenced on an Illumina HiSeq 2000. Index reads using the primer</div>
+</li> <li> <div class="description-line" id="p-0189" num="0000"> <tables id="TABLE-US-00020" num="00020"> <patent-tables colsep="0" frame="none" rowsep="0" tabstyle="monospace"> <table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%"> <tbody><tr class="description-tr"> <td class="description-td"> </td> <td class="description-td">(SEQ ID NO: 1)</td> </tr> <tr class="description-tr"> <td class="description-td"> </td> <td class="description-td">5′-AAATCGGAAGAGCACACGTCTGAACTCCAGTCAC-3′</td> </tr> </tbody></table> </patent-tables> </tables> <br/>
+was used to sequence the barcodes while the main read was sequenced using sequencing primer
+</div>
+</li> <li> <div class="description-line" id="p-0190" num="0000">
+<tables id="TABLE-US-00021" num="00021">
+<patent-tables colsep="0" frame="none" rowsep="0" tabstyle="monospace">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">(SEQ ID NO: 2)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5′-ACCACCGATGCGTCAGATGTGTATAAGAGACAG-3′.</td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0170]"> </para-num> <div class="description-line" id="p-0191" num="0170">The pass-filter barcode sequences with the expected flanking regions were assigned to one of the three categories: ‘3 modules’, ‘2 modules’, ‘other’. The barcoding efficiency was assessed by counting the number of modules and evaluating the presence of mismatches in the modules (<figref idrefs="DRAWINGS">FIG. 11A</figref>). All barcodes that did not have 3-modules were discarded and the rest was used for the following analysis.</div>
+</li> <li> <para-num num="[0171]"> </para-num> <div class="description-line" id="p-0192" num="0171">The number of sequencing reads for every barcode was counted. To distinguish real barcodes from barcodes that arise as artifacts of sequencing or PCR amplification we looked for a sudden drop of counted reads in a sorted list of barcodes, and identified it as local minimum of the first derivative. This minimum corresponded 3256th barcode, a number that strikingly fit with the number of beads used to prepare the library (about 3200; <figref idrefs="DRAWINGS">FIG. 11B</figref>). The top 3256 barcodes accounted for more than 60% of the valid reads (<figref idrefs="DRAWINGS">FIG. 11C</figref>).</div>
+</li> <li> <para-num num="[0172]"> </para-num> <div class="description-line" id="p-0193" num="0172">We mapped against the Human Genome the transcript reads using Bowtie. Reads were then assigned to the correspondent barcode: every barcode got a number of reads ranging from 100 per million to 500 per million with an average of 300 per million (<figref idrefs="DRAWINGS">FIG. 11D</figref>).</div>
+</li> <li> <para-num num="[0173]"> </para-num> <div class="description-line" id="p-0194" num="0173">To assess the variability in capture ability of the beads we calculated the correlation coefficient and plotted scatterplots of the normalized reads (RPM) for random pairs of beads, the average correlation coefficient was 0.8 (<figref idrefs="DRAWINGS">FIGS. 12A to 12D</figref>). Furthermore the scatterplots were comparable with the one would obtain, at a comparable depth of sequencing, using state of the art low throughput single cell RNA-seq technology.</div>
+</li> <heading id="h-0013">Example 5—cDNA Synthesis in Microwell Array</heading>
+<li> <para-num num="[0174]"> </para-num> <div class="description-line" id="p-0195" num="0174">In this example cells and beads are confined in the microwells where cells are lysed, RNA is captured on the beads and reverse transcribed in cDNA. The cDNA is then amplified from a selected number of beads.</div>
+</li> <li> <para-num num="[0175]"> </para-num> <div class="description-line" id="p-0196" num="0175">A PDMS microwell array (<figref idrefs="DRAWINGS">FIG. 13A</figref>) was manufactured using standard procedures, and assembled in a holder (<figref idrefs="DRAWINGS">FIG. 13C</figref>) to form a closed flowcell with inlet and outlet for laminar liquid flow across the surface of the array.</div>
+</li> <li> <para-num num="[0176]"> </para-num> <div class="description-line" id="p-0197" num="0176">Cells and beads were introduced in a flowcell containing a PDMS microwell-array (<figref idrefs="DRAWINGS">FIGS. 5A</figref> and C). The ceiling of the flowcell was coated with Poly-HEMA by distributing on it evenly and only in the chamber 150 ul of Poly-HEMA (10 mg/ml in EtOH 95%) This is left on the surface for 10 minutes and washed away with water and rinsed carefully. The PDMS chip was made hydrophilic by treatment with plasma for 2 minutes. The PDMS chip was positioned and the flowcell was assembled.</div>
+</li> <li> <para-num num="[0177]"> </para-num> <div class="description-line" id="p-0198" num="0177">To wash the PDMS chips and fill the wells 5-10 ml water was flown trough, slowly and avoiding bubbles. Successively 5 ml PBS was flown to prepare the chamber for cell loading.</div>
+</li> <li> <para-num num="[0178]"> </para-num> <div class="description-line" id="p-0199" num="0178">500,000 cells were suspended in 600 ul cold PBS, and the cell suspension was loaded in to chamber. The cells were let sediment in the chamber for 10 minutes, the flow chamber was vortexed 4 times during this period to improve cells entry in the microwells. 250000 P2A_T31-coated 10 um beads were resuspended in 550 ul PBS and loaded in the flow cell. The beads were let sink for 8 min, vortexing 3 times in this time span. 1 ml Lysis buffer was flown through and lysis/RNA hybridization was allowed for 10 min. Microphotographs were taken before and after lysis (<figref idrefs="DRAWINGS">FIG. 13B</figref>). The chamber was washed with 250 ul LiWT followed by 250 ul Superscript First Strand buffer 1×. Chamber was then filled with the following RT buffer</div>
+</li> <li> <div class="description-line" id="p-0200" num="0000">
+<tables id="TABLE-US-00022" num="00022">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td">Volume</td>
+<td class="description-td">Conc in buffer</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Water + Tween 0.02%</td>
+<td class="description-td">171 ul </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5M Betaine</td>
+<td class="description-td">90 ul</td>
+<td class="description-td">  0.82M</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5x SuperScript</td>
+<td class="description-td">108 ul </td>
+<td class="description-td">1x</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">First-strand buffer</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">MgCl<sub>2 </sub>[100 mM]</td>
+<td class="description-td">32 ul</td>
+<td class="description-td">6</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DTT [100 mM]</td>
+<td class="description-td">27 ul</td>
+<td class="description-td">5</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">dNTPs [20 mM]</td>
+<td class="description-td">27 ul</td>
+<td class="description-td">1</td>
+<td class="description-td">mM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Superscript II [200</td>
+<td class="description-td">50 ul</td>
+<td class="description-td">20</td>
+<td class="description-td">U/ul</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">U/μl]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">P2A_PvuI-rTSO (40 uM)</td>
+<td class="description-td">28 ul</td>
+<td class="description-td">5</td>
+<td class="description-td">uM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Total volume</td>
+<td class="description-td">540 ul </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0179]"> </para-num> <div class="description-line" id="p-0201" num="0179">The flow cell was placed in a water bath whose temperature was set at 45° C. and the flow cell was incubated for 2 h.</div>
+</li> <li> <para-num num="[0180]"> </para-num> <div class="description-line" id="p-0202" num="0180">After incubation the beads were harvested. First the 2 ml 0.5×LiBT were flown into the flowcell. Then the flow cell was disassembled, the PDMS chip sliced in 5 pieces. A slice of PDMS chip was dipped in PCR buffer agitated with a pipette tips and vortexed to free the beads in the mix.</div>
+</li> <li> <div class="description-line" id="p-0203" num="0000">
+<tables id="TABLE-US-00023" num="00023">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Reagent</td>
+<td class="description-td"> </td>
+<td class="description-td">Volume</td>
+<td class="description-td">Final in PCR</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="5" nameend="4" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Water + Tween 0.02%</td>
+<td class="description-td">180</td>
+<td class="description-td">ul</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10x Advantage Buffer</td>
+<td class="description-td">23</td>
+<td class="description-td">ul</td>
+<td class="description-td">1x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">dNTPS (20 mM)</td>
+<td class="description-td">5</td>
+<td class="description-td">ul</td>
+<td class="description-td">400 uM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">bio-P2A(PCR) [100 uM]</td>
+<td class="description-td">1.3</td>
+<td class="description-td">ul</td>
+<td class="description-td">530 nM</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Advantage Polymerase</td>
+<td class="description-td">9</td>
+<td class="description-td">ul</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="4" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Sample cDNA on</td>
+<td class="description-td">1.75 ul per</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Beads with LiWT</td>
+<td class="description-td">condition</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="4" nameend="3" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <li> <para-num num="[0181]"> </para-num> <div class="description-line" id="p-0204" num="0181">PDMS was removed and DNA polymerase (Advantage Polymerase mix) was added.</div>
+</li> <li> <para-num num="[0182]"> </para-num> <div class="description-line" id="p-0205" num="0182">The Sample was incubated in a thermal cycler set up as follows: step1: 1 min at 95° C., step2: 20 sec at 95° C., step3: 4 min at 58° C., step4: 6 min at 68° C., step5: Go to step2 4 times, step6: 20 sec at 95° C., step7: 30 sec at 64° C., step8: 6 min at 68° C., step9: Go to step2 8 times, step10: 20 sec at 95° C., step11: 30 sec at 64° C., step12: 7 min at 68° C., step13: Go to step2 6 times. step14: 10 min at 72° C.</div>
+</li> <li> <para-num num="[0183]"> </para-num> <div class="description-line" id="p-0206" num="0183">PCR product was quantified and 3 ng were loaded for electrophoresis (<figref idrefs="DRAWINGS">FIG. 13D</figref>)</div>
+</li> <li> <para-num num="[0184]"> </para-num> <div class="description-line" id="p-0207" num="0184">Buffers</div>
+</li> <li> <para-num num="[0185]"> </para-num> <div class="description-line" id="p-0208" num="0185">TNT</div>
+</li> <li> <para-num num="[0186]"> </para-num> <div class="description-line" id="p-0209" num="0186">20 mM Tris pH 7.5, 50 mM NaCl, 0.02% Tween</div>
+</li> <li> <para-num num="[0187]"> </para-num> <div class="description-line" id="p-0210" num="0187">LiBT</div>
+</li> <li> <para-num num="[0188]"> </para-num> <div class="description-line" id="p-0211" num="0188">20 mM Tris-HCl (pH 7.5), 1.0 M LiCl, 2 mM EDTA, 0.02% Tween</div>
+</li> <li> <para-num num="[0189]"> </para-num> <div class="description-line" id="p-0212" num="0189">LiWT</div>
+</li> <li> <para-num num="[0190]"> </para-num> <div class="description-line" id="p-0213" num="0190">10 mM Tris-HCl (pH 7.5), 0.15 M LiCl, 1 mM EDTA, 0.02% Tween</div>
+</li> <li> <para-num num="[0191]"> </para-num> <div class="description-line" id="p-0214" num="0191">Lysis Buffer</div>
+</li> <li> <para-num num="[0192]"> </para-num> <div class="description-line" id="p-0215" num="0192">10 mM Tris pH7.5, 0.15 M LiCl, 1 mM EDTA, 1% Triton</div>
+</li> <li> <para-num num="[0193]"> </para-num> <div class="description-line" id="p-0216" num="0193">Oligonucleotides Sequences</div>
+</li> <li> <div class="description-line" id="p-0217" num="0000">
+<tables id="TABLE-US-00024" num="00024">
+<patent-tables colsep="0" frame="none" rowsep="0" tabstyle="monospace">
+<table align="left" class="description-table" cols="1" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">T8U_P2A-T31</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(SEQ ID NO: 3)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5′3io-TTTTTTTTUCAAGCAGAAGACGGCATACGAGATTTTTTTTTTTT</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">TTTTTTTTTTTTTTTTTTTT-3′</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">P1A-ME adapter (2 oligos hybridized)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">P1A-ME</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">(SEQ ID NO: 4)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5′-GAATGATACGGCGACCACCGATGCGTCAGATGTGTATAAGAGACAG-</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3′</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">rcME</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">(SEQ ID NO: 5)</td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5′Pho-CTGTCTCTTATACACATCTGACGC</td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+</li> <heading id="h-0014">REFERENCES</heading>
+<li> <div class="description-line" id="p-0218" num="0000">
+</div> </li> <ul>
+<li id="ul0003-0001" num="0194">1. Arendt, D. <i>Nature Reviews Genetics </i>9, 868-882 (2008).</li>
+<li id="ul0003-0002" num="0195">2. Vickaryous, M. K. &amp; Hall, B. K. <i>Biological Reviews of the Cambridge Philosophical Society </i>81, 425-55 (2006).</li>
+<li id="ul0003-0003" num="0196">3. Harris, T. D. et al. <i>Science </i>320, 106-109 (2008).</li>
+<li id="ul0003-0004" num="0197">4. Eid, J. et al. <i>Science </i>323, 133-138 (2009).</li>
+<li id="ul0003-0005" num="0198">5. Schadt, E., Turner, S. &amp; Kasarskis, A. <i>Human Molecular Genetics </i>19, R227-R240 (2010).</li>
+<li id="ul0003-0006" num="0199">6. Casbon, J. A., Osborne, R. J., Brenner, S. &amp; Lichtenstein, C. P. <i>Nucleic acids research </i>39, e81 (2011).</li>
+<li id="ul0003-0007" num="0200">7. Kivioja, T. et al. <i>Nature Methods </i>9, 72-4 (2011).</li>
+<li id="ul0003-0008" num="0201">8. Shiroguchi, K., Jia, T. Z., Sims, P. A. &amp; Xie, X. S. <i>Proceedings of the National Academy of Sciences of the United States of America </i>(2012).</li>
+<li id="ul0003-0009" num="0202">9. Fu, G. K., Hu, J., Wang, P. H. &amp; Fodor, S. P. <i>Proceedings of the National Academy of Sciences of the United States of America </i>108, 9026-31 (2011).</li>
+<li id="ul0003-0010" num="0203">10. Kinde, I., Wu, J., Papadopoulos, N., Kinzler, K. W. &amp; Vogelstein, B. <i>Proceedings of the National Academy of Sciences of the United States of America </i>108, 9530-5 (2011).</li>
+<li id="ul0003-0011" num="0204">11. Eberwine, J. et al. <i>Proceedings of the National Academy of Sciences of the United States of America </i>89, 3010-4 (1992).</li>
+<li id="ul0003-0012" num="0205">12. Hashimshony, T., Wagner, F., Sher, N. &amp; Yanai, I. <i>Cell reports </i>2, 666-73 (2012).</li>
+<li id="ul0003-0013" num="0206">13. Klein, C. A. et al. <i>Nature biotechnology </i>20, 387-92 (2002).</li>
+<li id="ul0003-0014" num="0207">14. Kurimoto, K. et al. <i>Nucleic Acids Research </i>34, e42 (2006).</li>
+<li id="ul0003-0015" num="0208">15. Tang, F. et al. <i>Nat Methods </i>6, 377-82 (2009).</li>
+<li id="ul0003-0016" num="0209">16. Maleszka, R. &amp; Stange, G. <i>Gene </i>202, 39-43 (1997).</li>
+<li id="ul0003-0017" num="0210">17. Islam, S. et al. <i>Genome Research </i>21, 1160-7 (2011).</li>
+<li id="ul0003-0018" num="0211">18. Goetz, J. J. &amp; Trimarchi, J. M. <i>Nature biotechnology </i>30, 763-5 (2012).</li>
+<li id="ul0003-0019" num="0212">19. Johnston, I. G. et al. <i>PLoS computational biology </i>8, e1002416 (2012).</li>
+<li id="ul0003-0020" num="0213">20. Raj, A et al <i>PLoS Biol </i>4, e309 (2006).</li>
+<li id="ul0003-0021" num="0214">21. Raj, A. &amp; Vanoudenaarden, A. <i>Cell </i>135, 216-226 (2008).</li>
+<li id="ul0003-0022" num="0215">22. Endele, M. &amp; Schroeder, T. <i>Annals of the New York Academy of Sciences </i>1266, 18-27 (2012).</li>
+</ul>
+</ul>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">16</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM296303927">
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text"> <b>1</b>: A method for capturing and encoding nucleic acid from a plurality of single cells, wherein the method comprises:
+<div class="claim-text">(i) randomly placing a plurality of solid supports into a plurality of compartments, such that the average number of solid supports per compartment, λ<sub>1</sub>, is less than 1, wherein each solid support carries (a) a unique identification sequence and (b) a capture moiety;</div> <div class="claim-text">(ii) randomly placing a plurality of single cells into the plurality of compartments, such that the average number of cells per compartment, λ<sub>2</sub>, is less than 1;</div> <div class="claim-text">(iii) releasing nucleic acid from each single cell; and</div> <div class="claim-text">(iv) capturing the nucleic acid from each single cell via the capture moiety, such that nucleic acid from each single cell is tagged with a unique identification sequence,</div> <div class="claim-text">wherein steps (i) and (ii) may be performed in any order.</div> </div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text"> <b>2</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the average number of solid supports per compartment, λ<sub>1</sub>, and the average number of single cells per compartment, λ<sub>2</sub>, are selected such that 2/(1+λ<sub>1</sub>)(2+λ<sub>2</sub>)≥90%.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text"> <b>3</b>: The method according to <claim-ref idref="CLM-00002">claim 2</claim-ref>, wherein λ<sub>1 </sub>and λ<sub>2 </sub>are selected such that 2/(1+λ<sub>1</sub>)(2+λ<sub>2</sub>)≥95%.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text"> <b>4</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the plurality of solid supports comprising (a) a unique identification sequence and (b) a capture moiety are generated prior to step (ii) by emulsion PCR.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text"> <b>5</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the plurality of solid supports are generated prior to step (ii) by split-and-pool combinatorial synthesis.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text"> <b>6</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the plurality of compartments are wells of a microwell array.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text"> <b>7</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the plurality of compartments are droplets formed by an emulsifying or droplet microfluidics apparatus.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text"> <b>8</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the compartment volume is selected such that only a single solid support can fit into each compartment.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text"> <b>9</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the solid support is a microbead.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text"> <b>10</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the unique identification sequence is an oligonucleotide.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text"> <b>11</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the capture moiety is a nucleic acid complementary to cellular nucleic acid.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text"> <b>12</b>: The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the unique identification sequence and the capture moiety are both nucleic acid sequences and are part of the same oligonucleotide.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text"> <b>13</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein each solid support carries a plurality of different capture moieties.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text"> <b>14</b>: The method of <claim-ref idref="CLM-00013">claim 13</claim-ref>, wherein the unique identification sequence and the capture moiety are both nucleic acid sequences and are part of the same oligonucleotide and wherein the solid support carries a plurality of oligonucleotides, each comprising a unique identification sequence and a different capture moiety.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text"> <b>15</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the nucleic acid to be captured and encoded is RNA, such as mRNA, rRNA, tRNA, ncRNAs, mitochondrial RNA; nuclear or mitochondrial DNA; or microbial or viral RNA or DNA.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text"> <b>16</b>: The method according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein after step (iv), the method comprises the step of synthesising cDNA from the captured nucleic acid.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

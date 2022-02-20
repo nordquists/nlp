@@ -1,0 +1,1955 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10231219B2 - Data transmission method and device in wireless communication system 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA289255045" source="national office">
+<div class="abstract">A method and a user equipment (UE) for transmitting control information in a wireless communication system are discussed. The method according to one embodiment includes receiving a parameter which indicates whether transmission of a hybrid automatic repeat request acknowledgement (HARQ-ACK) on a physical uplink control channel (PUCCH) and a sounding reference signal (SRS) in one subframe is configured; if the parameter is true, transmitting, in a primary component carrier (CC), the PUCCH, which coincides in a same subframe as the SRS, by using a shortened PUCCH format carrying at least one of the HARQ-ACK and a positive scheduling request (SR); and if the parameter is false, transmitting the PUCCH by using a normal PUCCH format, while not transmitting, in a secondary CC, the SRS which coincides in the same subframe as the PUCCH. The shortened PUCCH format is a shortened PUCCH format 1/1a/1b or a shortened PUCCH format 3.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES186557784">
+<heading id="h-0001">CROSS REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This Application is a Continuation of co-pending U.S. patent application Ser. No. 14/706,816 filed on May 7, 2015, which is a Continuation of U.S. patent application Ser. No. 13/578,567 filed on Feb. 27, 2013 (now U.S. Pat. No. 9,060,376 issued on Jun. 16, 2015), which is filed as the National Phase of PCT/KR2011/000973 filed on Feb. 14, 2011, which claims the benefit under 35 U.S.C. § 119(e) to U.S. Provisional Application No. 61/427,484 filed on Dec. 28, 2010, 61/415,747 filed on Nov. 19, 2010, 61/415,354 filed on Nov. 19, 2010, 61/415,338 filed on Nov. 18, 2010, 61/409,531 filed on Nov. 2, 2010, 61/409,096 filed on Nov. 1, 2010, 61/405,184 filed on Oct. 20, 2010, 61/394,360 filed on Oct. 19, 2010, and 61/303,674 filed on Feb. 12, 2010, and under 35 U.S.C. § 119(a) to Korean Patent Application No. 10-2011-0012416 filed on Feb. 11, 2011, all of which are hereby expressly incorporated by reference into the present application.</div>
+<heading id="h-0002">BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">Field of the Invention</div>
+<div class="description-paragraph" id="p-0004" num="0003">The present invention relates to wireless communication and, more particularly, to a data transmission method and apparatus in a wireless communication system.</div>
+<div class="description-paragraph" id="p-0005" num="0004">Discussion of the Related Art</div>
+<div class="description-paragraph" id="p-0006" num="0005">In wireless communication systems, it is necessary to estimate an uplink channel or a downlink channel for the purpose of the transmission and reception of data, the acquisition of system synchronization, and the feedback of channel information. In wireless communication system environments, fading is generated because of multi-path time latency. A process of restoring a transmit signal by compensating for the distortion of the signal resulting from a sudden change in the environment due to such fading is referred to as channel estimation. It is also necessary to measure the state of a channel for a cell to which a user equipment belongs or other cells. To estimate a channel or measure the state of a channel, a reference signal (RS) which is known to both a transmitter and a receiver can be used.</div>
+<div class="description-paragraph" id="p-0007" num="0006">A subcarrier used to transmit the reference signal is referred to as a reference signal subcarrier, and a subcarrier used to transmit data is referred to as a data subcarrier. In an OFDM system, a method of assigning the reference signal includes a method of assigning the reference signal to all the subcarriers and a method of assigning the reference signal between data subcarriers. The method of assigning the reference signal to all the subcarriers is performed using a signal including only the reference signal, such as a preamble signal, in order to obtain the throughput of channel estimation. If this method is used, the performance of channel estimation can be improved as compared with the method of assigning the reference signal between data subcarriers because the density of reference signals is in general high. However, since the amount of transmitted data is small in the method of assigning the reference signal to all the subcarriers, the method of assigning the reference signal between data subcarriers is used in order to increase the amount of transmitted data. If the method of assigning the reference signal between data subcarriers is used, the performance of channel estimation can be deteriorated because the density of reference signals is low. Accordingly, the reference signals should be properly arranged in order to minimize such deterioration.</div>
+<div class="description-paragraph" id="p-0008" num="0007">A receiver can estimate a channel by separating information about a reference signal from a received signal because it knows the information about a reference signal and can accurately estimate data, transmitted by a transmit stage, by compensating for an estimated channel value. Assuming that the reference signal transmitted by the transmitter is p, channel information experienced by the reference signal during transmission is h, thermal noise occurring in the receiver is n, and the signal received by the receiver is y, it can result in y=h·p+n. Here, since the receiver already knows the reference signal p, it can estimate a channel information value ĥ using Equation 1 in the case in which a Least Square (LS) method is used.
+<br/>
+<i>ĥ=y/p=h+n/p=h+{circumflex over (n)}</i>  Equation 1
+</div>
+<div class="description-paragraph" id="p-0009" num="0008">The accuracy of the channel estimation value ĥ estimated using the reference signal p is determined by the value {circumflex over (n)}. To accurately estimate the value h, the value {circumflex over (n)} must converge on 0. To this end, the influence of the value {circumflex over (n)} has to be minimized by estimating a channel using a large number of reference signals. A variety of algorithms for a better channel estimation performance may exist.</div>
+<div class="description-paragraph" id="p-0010" num="0009">An uplink RS may be divided into a demodulation reference signal (DMRS) and a sounding reference signal (SRS). The DMRS is an RS used in channel estimation for demodulating a received signal. The DMRS may be combined with the transmission of a PUSCH or a PUCCH. The SRS is an RS transmitted from UE to a BS for uplink scheduling. The BS estimates an uplink channel through a received SRS and uses the estimated uplink channel in uplink scheduling.</div>
+<div class="description-paragraph" id="p-0011" num="0010">Meanwhile, a carrier aggregation system means a system which configures a broadband by aggregating one or more carriers having a smaller bandwidth than a broadband that is a target when a wireless communication system tries to support the broadband. In the carrier aggregation system, UE can transmit or receive one carrier or a plurality of carriers at the same time depending on the capabilities of the UE. Transmission technology conventionally used in the carrier aggregation system may be newly defined.</div>
+<div class="description-paragraph" id="p-0012" num="0011">There is a need for a method of transmitting an SRS and data efficiently in a carrier aggregation system.</div>
+<heading id="h-0003">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0013" num="0012">The present invention provides a data transmission method and apparatus in a wireless communication system.</div>
+<div class="description-paragraph" id="p-0014" num="0013">In an aspect, a data transmission method in a wireless communication system is provided. The data transmission method includes transmitting uplink control information (UCI) through a physical uplink control channel (PUCCH) resource allocated to a first CC among a plurality of component carriers (CCs) in a sounding reference signal (SRS) subframe, wherein a second CC among the plurality of CCs in the SRS subframe comprises an SRS single carrier frequency division multiple access (SC-FDMA) symbol reserved for a transmission of an SRS.</div>
+<div class="description-paragraph" id="p-0015" num="0014">The SRS SC-FDMA symbol may be a last SC-FDMA symbol of the SRS subframe.</div>
+<div class="description-paragraph" id="p-0016" num="0015">The PUCCH resource may be allocated based on shortened PUCCH formats 1/1a/1b or a shortened PUCCH format 3.</div>
+<div class="description-paragraph" id="p-0017" num="0016">The data transmission method may further include transmitting the SRS through the SRS SC-FDMA symbol.</div>
+<div class="description-paragraph" id="p-0018" num="0017">The PUCCH resource may be allocated based on one of normal PUCCH formats 1/1a/1b, PUCCH formats 2/2a/2b, and a normal PUCCH format 3.</div>
+<div class="description-paragraph" id="p-0019" num="0018">The SRS may be not transmitted through the SRS SC-FDMA symbol.</div>
+<div class="description-paragraph" id="p-0020" num="0019">The data transmission method may further include transmitting uplink data through a physical uplink shared channel (PUSCH) resource allocated to at least one of the first CC and the second CC.</div>
+<div class="description-paragraph" id="p-0021" num="0020">The PUSCH may be subject to rate matching except the SRS SC-FDMA symbol.</div>
+<div class="description-paragraph" id="p-0022" num="0021">The SRS subframe may be one of a plurality of user equipment (UE)-specific SRS subframes configured by a UE-specific SRS parameter.</div>
+<div class="description-paragraph" id="p-0023" num="0022">The UE-specific SRS parameter may indicate a periodicity and offset of the plurality of UE-specific SRS subframes.</div>
+<div class="description-paragraph" id="p-0024" num="0023">The plurality of UE-specific SRS subframes may be a subset of a plurality of cell-specific SRS subframes configured by a cell-specific SRS parameter.</div>
+<div class="description-paragraph" id="p-0025" num="0024">The SRS subframe may be one of a plurality of cell-specific SRS subframes configured by a cell-specific SRS parameter.</div>
+<div class="description-paragraph" id="p-0026" num="0025">A bandwidth of part of or an entire SRS SC-FDMA symbol may be allocated to the transmission of the SRS.</div>
+<div class="description-paragraph" id="p-0027" num="0026">The PUCCH resource may be indicated by a radio resource control (RRC) message.</div>
+<div class="description-paragraph" id="p-0028" num="0027">In another aspect, a user equipment in a wireless communication system is provided. The user equipment includes a radio frequency (RF) unit transmitting uplink control information (UCI) through a physical uplink control channel (PUCCH) resource allocated to a first CC among a plurality of component carriers (CCs) in a sounding reference signal (SRS) subframe, and a processor connected to the RF unit, wherein a second CC among the plurality of CCs in the SRS subframe comprises an SRS single carrier frequency division multiple access (SC-FDMA) symbol reserved for a transmission of an SRS.</div>
+<div class="description-paragraph" id="p-0029" num="0028">When an SRS and a PUCCH are configured in a carrier aggregation system so that they are transmitted at the same time, data can be efficiently transmitted.</div>
+<description-of-drawings>
+<heading id="h-0004">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 1</figref> shows a wireless communication system.</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows the structure of a radio frame in 3GPP LTE.</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows an example of a resource grid of a single downlink slot.</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows the structure of a downlink subframe.</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows the structure of an uplink subframe.</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 6</figref> shows an example of a transmitter and a receiver which constitute a carrier aggregation system.</div>
+<div class="description-paragraph" id="p-0036" num="0035"> <figref idrefs="DRAWINGS">FIG. 7</figref> and <figref idrefs="DRAWINGS">FIG. 8</figref> are other examples of a transmitter and a receiver which constitute a carrier aggregation system.</div>
+<div class="description-paragraph" id="p-0037" num="0036"> <figref idrefs="DRAWINGS">FIG. 9</figref> shows an example of an asymmetric carrier aggregation system.</div>
+<div class="description-paragraph" id="p-0038" num="0037"> <figref idrefs="DRAWINGS">FIG. 10</figref> is an example of a process of processing an uplink shared channel (UL-SCH) transport channel.</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIGS. 11 to 13</figref> are examples of constructions regarding data transmission methods in proposed SRS subframes.</div>
+<div class="description-paragraph" id="p-0040" num="0039"> <figref idrefs="DRAWINGS">FIGS. 14 to 16</figref> are examples of constructions regarding a data transmission method in a proposed SRS subframe.</div>
+<div class="description-paragraph" id="p-0041" num="0040"> <figref idrefs="DRAWINGS">FIGS. 17 to 19</figref> some examples of constructions regarding a data transmission method in a proposed SRS subframe.</div>
+<div class="description-paragraph" id="p-0042" num="0041"> <figref idrefs="DRAWINGS">FIG. 20</figref> is an embodiment of the proposed data transmission method.</div>
+<div class="description-paragraph" id="p-0043" num="0042"> <figref idrefs="DRAWINGS">FIG. 21</figref> is a block diagram of a BS and UE in which the embodiments of the present invention are embodied.</div>
+</description-of-drawings>
+<heading id="h-0005">DETAILED DESCRIPTION OF THE EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0044" num="0043">The following technique may be used for various wireless communication systems such as code division multiple access (CDMA), a frequency division multiple access (FDMA), time division multiple access (TDMA), orthogonal frequency division multiple access (OFDMA), single carrier-frequency division multiple access (SC-FDMA), and the like. The CDMA may be implemented as a radio technology such as universal terrestrial radio access (UTRA) or CDMA2000. The TDMA may be implemented as a radio technology such as a global system for mobile communications (GSM)/general packet radio service (GPRS)/enhanced data rates for GSM evolution (EDGE). The OFDMA may be implemented by a radio technology such as institute of electrical and electronics engineers (IEEE) 802.11 (Wi-Fi), IEEE 802.16 (WiMAX), IEEE 802.20, E-UTRA (evolved UTRA), and the like. IEEE 802.16m, an evolution of IEEE 802.16e, provides backward compatibility with a system based on IEEE 802.16e. The UTRA is part of a universal mobile telecommunications system (UMTS). 3GPP (3rd generation partnership project) LTE (long term evolution) is part of an evolved UMTS (E-UMTS) using the E-UTRA, which employs the OFDMA in downlink and the SC-FDMA in uplink. LTE-A (advanced) is an evolution of 3GPP LTE.</div>
+<div class="description-paragraph" id="p-0045" num="0044">Hereinafter, for clarification, LTE-A will be largely described, but the technical concept of the present invention is not meant to be limited thereto.</div>
+<div class="description-paragraph" id="p-0046" num="0045"> <figref idrefs="DRAWINGS">FIG. 1</figref> shows a wireless communication system.</div>
+<div class="description-paragraph" id="p-0047" num="0046">The wireless communication system <b>10</b> includes at least one base station (BS) <b>11</b>. Respective BSs <b>11</b> provide a communication service to particular geographical areas <b>15</b> <i>a</i>, <b>15</b> <i>b</i>, and <b>15</b> <i>c </i>(which are generally called cells). Each cell may be divided into a plurality of areas (which are called sectors). A user equipment (UE) <b>12</b> may be fixed or mobile and may be referred to by other names such as MS (mobile station), MT (mobile terminal), UT (user terminal), SS (subscriber station), wireless device, PDA (personal digital assistant), wireless modem, handheld device. The BS <b>11</b> generally refers to a fixed station that communicates with the UE <b>12</b> and may be called by other names such as eNB (evolved-NodeB), BTS (base transceiver system), access point (AP), etc.</div>
+<div class="description-paragraph" id="p-0048" num="0047">In general, a UE belongs to one cell, and the cell to which a UE belongs is called a serving cell. A BS providing a communication service to the serving cell is called a serving BS. The wireless communication system is a cellular system, so a different cell adjacent to the serving cell exists. The different cell adjacent to the serving cell is called a neighbor cell. A BS providing a communication service to the neighbor cell is called a neighbor BS. The serving cell and the neighbor cell are relatively determined based on a UE.</div>
+<div class="description-paragraph" id="p-0049" num="0048">This technique can be used for downlink or uplink. In general, downlink refers to communication from the BS <b>11</b> to the UE <b>12</b>, and uplink refers to communication from the UE <b>12</b> to the BS <b>11</b>. In downlink, a transmitter may be part of the BS <b>11</b> and a receiver may be part of the UE <b>12</b>. In uplink, a transmitter may be part of the UE <b>12</b> and a receiver may be part of the BS <b>11</b>.</div>
+<div class="description-paragraph" id="p-0050" num="0049">The wireless communication system may be any one of a multiple-input multiple-output (MIMO) system, a multiple-input single-output (MISO) system, a single-input single-output (SISO) system, and a single-input multiple-output (SIMO) system. The MIMO system uses a plurality of transmission antennas and a plurality of reception antennas. The MISO system uses a plurality of transmission antennas and a single reception antenna. The SISO system uses a single transmission antenna and a single reception antenna. The SIMO system uses a single transmission antenna and a plurality of reception antennas. Hereinafter, a transmission antenna refers to a physical or logical antenna used for transmitting a signal or a stream, and a reception antenna refers to a physical or logical antenna used for receiving a signal or a stream.</div>
+<div class="description-paragraph" id="p-0051" num="0050"> <figref idrefs="DRAWINGS">FIG. 2</figref> shows the structure of a radio frame in 3GPP LTE.</div>
+<div class="description-paragraph" id="p-0052" num="0051">It may be referred to Paragraph 5 of “Technical Specification Group Radio Access Network; Evolved Universal Terrestrial Radio Access (E-UTRA); Physical channels and modulation (Release 8)” to 3GPP (3rd generation partnership project) TS 36.211 V8.2.0 (2008-03). Referring to <figref idrefs="DRAWINGS">FIG. 2</figref>, the radio frame includes 10 subframes, and one subframe includes two slots. The slots in the radio frame are numbered by #0 to #19. A time taken for transmitting one subframe is called a transmission time interval (TTI). The TTI may be a scheduling unit for a data transmission. For example, a radio frame may have a length of 10 ms, a subframe may have a length of 1 ms, and a slot may have a length of 0.5 ms.</div>
+<div class="description-paragraph" id="p-0053" num="0052">One slot includes a plurality of orthogonal frequency division multiplexing (OFDM) symbols in a time domain and a plurality of subcarriers in a frequency domain. Since 3GPP LTE uses OFDMA in downlink, the OFDM symbols are used to express a symbol period. The OFDM symbols may be called by other names depending on a multiple-access scheme. For example, when a single carrier frequency division multiple access (SC-FDMA) is in use as an uplink multi-access scheme, the OFDM symbols may be called SC-FDMA symbols. A resource block (RB), a resource allocation unit, includes a plurality of continuous subcarriers in a slot. The structure of the radio frame is merely an example. Namely, the number of subframes included in a radio frame, the number of slots included in a subframe, or the number of OFDM symbols included in a slot may vary.</div>
+<div class="description-paragraph" id="p-0054" num="0053">3GPP LTE defines that one slot includes seven OFDM symbols in a normal cyclic prefix (CP) and one slot includes six OFDM symbols in an extended CP.</div>
+<div class="description-paragraph" id="p-0055" num="0054">The wireless communication system may be divided into a frequency division duplex (FDD) scheme and a time division duplex (TDD) scheme. According to the FDD scheme, an uplink transmission and a downlink transmission are made at different frequency bands. According to the TDD scheme, an uplink transmission and a downlink transmission are made during different periods of time at the same frequency band. A channel response of the TDD scheme is substantially reciprocal. This means that a downlink channel response and an uplink channel response are almost the same in a given frequency band. Thus, the TDD-based wireless communication system is advantageous in that the downlink channel response can be obtained from the uplink channel response. In the TDD scheme, the entire frequency band is time-divided for uplink and downlink transmissions, so a downlink transmission by the BS and an uplink transmission by the UE can be simultaneously performed. In a TDD system in which an uplink transmission and a downlink transmission are discriminated in units of subframes, the uplink transmission and the downlink transmission are performed in different subframes.</div>
+<div class="description-paragraph" id="p-0056" num="0055"> <figref idrefs="DRAWINGS">FIG. 3</figref> shows an example of a resource grid of a single downlink slot.</div>
+<div class="description-paragraph" id="p-0057" num="0056">A downlink slot includes a plurality of OFDM symbols in the time domain and N<sub>RB </sub>number of resource blocks (RBs) in the frequency domain. The N<sub>RB </sub>number of resource blocks included in the downlink slot is dependent upon a downlink transmission bandwidth set in a cell. For example, in an LTE system, N<sub>RB </sub>may be any one of 60 to 110. One resource block includes a plurality of subcarriers in the frequency domain. An uplink slot may have the same structure as that of the downlink slot.</div>
+<div class="description-paragraph" id="p-0058" num="0057">Each element on the resource grid is called a resource element. The resource elements on the resource grid can be discriminated by a pair of indexes (k,l) in the slot. Here, k (k=0, . . . , N<sub>RB</sub>×12−1) is a subcarrier index in the frequency domain, and l is an OFDM symbol index in the time domain.</div>
+<div class="description-paragraph" id="p-0059" num="0058">Here, it is illustrated that one resource block includes 7×12 resource elements made up of seven OFDM symbols in the time domain and twelve subcarriers in the frequency domain, but the number of OFDM symbols and the number of subcarriers in the resource block are not limited thereto. The number of OFDM symbols and the number of subcarriers may vary depending on the length of a cyclic prefix (CP), frequency spacing, and the like. For example, in case of a normal CP, the number of OFDM symbols is 7, and in case of an extended CP, the number of OFDM symbols is 6. One of 128, 256, 512, 1024, 1536, and 2048 may be selectively used as the number of subcarriers in one OFDM symbol.</div>
+<div class="description-paragraph" id="p-0060" num="0059"> <figref idrefs="DRAWINGS">FIG. 4</figref> shows the structure of a downlink subframe.</div>
+<div class="description-paragraph" id="p-0061" num="0060">A downlink subframe includes two slots in the time domain, and each of the slots includes seven OFDM symbols in the normal CP. First three OFDM symbols (maximum four OFDM symbols with respect to a 1.4 MHz bandwidth) of a first slot in the subframe corresponds to a control region to which control channels are allocated, and the other remaining OFDM symbols correspond to a data region to which a physical downlink shared channel (PDSCH) is allocated.</div>
+<div class="description-paragraph" id="p-0062" num="0061">The PDCCH may carry a transmission format and a resource allocation of a downlink shared channel (DL-SCH), resource allocation information of an uplink shared channel (UL-SCH), paging information on a PCH, system information on a DL-SCH, a resource allocation of an higher layer control message such as a random access response transmitted via a PDSCH, a set of transmission power control commands with respect to individual UEs in a certain UE group, an activation of a voice over Internet protocol (VoIP), and the like. A plurality of PDCCHs may be transmitted in the control region, and a UE can monitor a plurality of PDCCHs. The PDCCHs are transmitted on one or an aggregation of a plurality of consecutive control channel elements (CCE). The CCE is a logical allocation unit used to provide a coding rate according to the state of a wireless channel. The CCE corresponds to a plurality of resource element groups. The format of the PDCCH and an available number of bits of the PDCCH are determined according to an associative relation between the number of the CCEs and a coding rate provided by the CCEs.</div>
+<div class="description-paragraph" id="p-0063" num="0062">The BS determines a PDCCH format according to a DCI to be transmitted to the UE, and attaches a cyclic redundancy check (CRC) to the DCI. A unique radio network temporary identifier (RNTI) is masked on the CRC according to the owner or the purpose of the PDCCH. In case of a PDCCH for a particular UE, a unique identifier, e.g., a cell-RNTI (C-RNTI), of the UE, may be masked on the CRC. Or, in case of a PDCCH for a paging message, a paging indication identifier, e.g., a paging-RNTI (P-RNTI), may be masked on the CRC. In case of a PDCCH for a system information block (SIB), a system information identifier, e.g., a system information-RNTI (SI-RNTI), may be masked on the CRC. In order to indicate a random access response, i.e., a response to a transmission of a random access preamble of the UE, a random access-RNTI (RA-RNTI) may be masked on the CRC.</div>
+<div class="description-paragraph" id="p-0064" num="0063"> <figref idrefs="DRAWINGS">FIG. 5</figref> shows the structure of an uplink subframe.</div>
+<div class="description-paragraph" id="p-0065" num="0064">An uplink subframe may be divided into a control region and a data region in the frequency domain. A physical uplink control channel (PUCCH) for transmitting uplink control information is allocated to the control region. A physical uplink shared channel (PUCCH) for transmitting data is allocated to the data region. If indicated by a higher layer, the user equipment may support simultaneous transmission of the PUCCH and the PUSCH.</div>
+<div class="description-paragraph" id="p-0066" num="0065">The PUCCH for one UE is allocated in an RB pair. RBs belonging to the RB pair occupy different subcarriers in each of a 1<sup>st </sup>slot and a 2<sup>nd </sup>slot. A frequency occupied by the RBs belonging to the RB pair allocated to the PUCCH changes at a slot boundary. This is called that the RB pair allocated to the PUCCH is frequency-hopped at a slot boundary. Since the UE transmits UL control information over time through different subcarriers, a frequency diversity gain can be obtained. In the figure, m is a location index indicating a logical frequency-domain location of the RB pair allocated to the PUCCH in the subframe.</div>
+<div class="description-paragraph" id="p-0067" num="0066">Uplink control information transmitted on the PUCCH may include a HARQ ACK/NACK, a channel quality indicator (CQI) indicating the state of a downlink channel, a scheduling request (SR) which is an uplink radio resource allocation request, and the like.</div>
+<div class="description-paragraph" id="p-0068" num="0067">The PUSCH is mapped to a uplink shared channel (UL-SCH), a transport channel. Uplink data transmitted on the PUSCH may be a transport block, a data block for the UL-SCH transmitted during the TTI. The transport block may be user information. Or, the uplink data may be multiplexed data. The multiplexed data may be data obtained by multiplexing the transport block for the UL-SCH and control information. For example, control information multiplexed to data may include a CQI, a precoding matrix indicator (PMI), an HARQ, a rank indicator (RI), or the like. Or the uplink data may include only control information.</div>
+<div class="description-paragraph" id="p-0069" num="0068">3GPP LTE-A supports a carrier aggregation system. 3GPP TR 36.815 V9.0.0 (2010-3) may be incorporated herein by reference to describe the carrier aggregation system.</div>
+<div class="description-paragraph" id="p-0070" num="0069">The carrier aggregation system implies a system that configures a wideband by aggregating one or more carriers having a bandwidth smaller than that of a target wideband when the wireless communication system intends to support the wideband. The carrier aggregation system can also be referred to as other terms such as a bandwidth aggregation system or the like. The carrier aggregation system can be divided into a contiguous carrier aggregation system in which carriers are contiguous to each other and a non-contiguous carrier aggregation system in which carriers are separated from each other. In the contiguous carrier aggregation system, a guard band may exist between CCs. A CC which is a target when aggregating one or more CCs can directly use a bandwidth that is used in the legacy system in order to provide backward compatibility with the legacy system. For example, a 3GPP LTE system can support a bandwidth of 1.4 MHz, 3 MHz, 5 MHz, 10 MHz, 15 MHz, and 20 MHz, and a 3GPP LTE-A system can configure a wideband of 20 MHz or higher by using only the bandwidth of the 3GPP LTE system. Alternatively, the wideband can be configured by defining a new bandwidth without having to directly use the bandwidth of the legacy system.</div>
+<div class="description-paragraph" id="p-0071" num="0070">In the carrier aggregation system, a UE can transmit or receive one or a plurality of carriers simultaneously according to capacity. An LTE-A UE can transmit or receive a plurality of carriers simultaneously. An LTE rel-8 UE can transmit or receive only one carrier when each of carriers constituting the carrier aggregation system is compatible with an LTE rel-8 system. Therefore, when the number of carriers used in uplink is equal to the number of carriers used in downlink, it is necessary to configure such that all CCs are compatible with LTE rel-8.</div>
+<div class="description-paragraph" id="p-0072" num="0071">In order to efficiently use the plurality of carriers, the plurality of carriers can be managed in a media access control (MAC). To transmit/receive the plurality of carriers, a transmitter and a receiver both have to be able to transmit/receive the plurality of carriers.</div>
+<div class="description-paragraph" id="p-0073" num="0072"> <figref idrefs="DRAWINGS">FIG. 6</figref> shows an example of a transmitter and a receiver which constitute a carrier aggregation system.</div>
+<div class="description-paragraph" id="p-0074" num="0073">In the transmitter of <figref idrefs="DRAWINGS">FIG. 6(<i>a</i>)</figref>, one MAC transmits and receives data by managing and operating all of n carriers. This is also applied to the receiver of <figref idrefs="DRAWINGS">FIG. 6(<i>b</i>)</figref>. From the perspective of the receiver, one transport block and one HARQ entity may exist per CC. A UE can be scheduled simultaneously for a plurality of CCs. The carrier aggregation system of <figref idrefs="DRAWINGS">FIG. 6</figref> can apply both to a contiguous carrier aggregation system and a non-contiguous carrier aggregation system. The respective carriers managed by one MAC do not have to be contiguous to each other, which results in flexibility in terms of resource management.</div>
+<div class="description-paragraph" id="p-0075" num="0074"> <figref idrefs="DRAWINGS">FIG. 7</figref> and <figref idrefs="DRAWINGS">FIG. 8</figref> are other examples of a transmitter and a receiver which constitute a carrier aggregation system.</div>
+<div class="description-paragraph" id="p-0076" num="0075">In the transmitter of <figref idrefs="DRAWINGS">FIG. 7(<i>a</i>)</figref> and the receiver of <figref idrefs="DRAWINGS">FIG. 7(<i>b</i>)</figref>, one MAC manages only one carrier. That is, the MAC and the carrier are 1:1 mapped. In the transmitter of <figref idrefs="DRAWINGS">FIG. 8(<i>a</i>)</figref> and the receiver of <figref idrefs="DRAWINGS">FIG. 8(<i>b</i>)</figref>, a MAC and a carrier are 1:1 mapped for some carriers, and regarding the remaining carriers, one MAC controls a plurality of CCs. That is, various combinations are possible based on a mapping relation between the MAC and the carrier.</div>
+<div class="description-paragraph" id="p-0077" num="0076">The carrier aggregation system of <figref idrefs="DRAWINGS">FIG. 6</figref> to <figref idrefs="DRAWINGS">FIG. 8</figref> includes n carriers. The respective carriers may be contiguous to each other or may be separated from each other. The carrier aggregation system can apply both to uplink and downlink transmissions. In a TDD system, each carrier is configured to be able to perform uplink transmission and downlink transmission. In an FDD system, a plurality of CCs can be used by dividing them for an uplink usage and a downlink usage. In a typical TDD system, the number of CCs used in uplink transmission is equal to that used in downlink transmission, and each carrier has the same bandwidth. The FDD system can configure an asymmetric carrier aggregation system by allowing the number of carriers and the bandwidth to be different between uplink and downlink transmissions.</div>
+<div class="description-paragraph" id="p-0078" num="0077"> <figref idrefs="DRAWINGS">FIG. 9</figref> shows an example of an asymmetric carrier aggregation system.</div>
+<div class="description-paragraph" id="p-0079" num="0078"> <figref idrefs="DRAWINGS">FIG. 9</figref>-(<i>a</i>) is an example of a carrier aggregation system in which the number of downlink component carriers (CCs) is larger than the number of UL CCs. Downlink CCs #1 and #2 correspond to an UL CC #1, and DL CCs #2 and #4 correspond to an UL CC #2. <figref idrefs="DRAWINGS">FIG. 9</figref>-(<i>b</i>) is an example of a carrier aggregation system in which the number of DL CCs is larger than the number of UL CCs. A DL CC #1 correspond to UL CCs #1 and #2, and a DL CC #2 correspond to UL CCs #2 and #4. Meanwhile, from a viewpoint of UE, there are one transport block and one hybrid automatic repeat request (HARM) entity in each scheduled CC. Each transport block is mapped to one CC only. UE may be mapped to a plurality of CCs at the same time.</div>
+<div class="description-paragraph" id="p-0080" num="0079">In an LTE-A system, there may be a backward-compatible carrier and a non-backward-compatible carrier. The backward-compatible carrier is a carrier capable of accessing the UEs of all LTE releases including LTE rel-8 and LTE-A. The backward-compatible carrier may be operated as a single carrier or may be operated as a CC in a carrier aggregation system. The backward-compatible carrier may be always formed of a pair of uplink and downlink in an FDD system. In contrast, the non-backward-compatible carrier cannot access the UE of a previous LTE release, but can access only the UEs of an LTE release that defines the non-backward-compatible carrier. Furthermore, the non-backward-compatible carrier may be operated as a single carrier or may be operated as a CC in a carrier aggregation system. Meanwhile, a carrier that cannot be operated as a single carrier, but that is included in a carrier aggregation including at least one carrier capable of being operated as a single carrier may be called an extension carrier.</div>
+<div class="description-paragraph" id="p-0081" num="0080">Furthermore, in a carrier aggregation system, a type in which one or more carriers are used may include two types: a cell-specific carrier aggregation system operated by a specific cell or BS and a UE-specific carrier aggregation system operated by UE. If a cell means one backward-compatible carrier or one non-backward-compatible carrier, the term ‘cell-specific’ may be used for one or more carriers which include one carrier represented by a cell. Furthermore, in the type of a carrier aggregation system in an FDD system, the linkage of uplink and downlink may be determined depending on default transmission-reception (Tx-Rx) separation defined in LTE rel-8 or LTE-A.</div>
+<div class="description-paragraph" id="p-0082" num="0081">For example, in LTE rel-8, default Tx-Rx separation is as follows. In uplink and downlink, a carrier frequency may be allocated within a range of 0˜65535 according to an E-UTRA absolute radio frequency channel number (EARFCN). In downlink, a relationship between the EARFCN and a carrier frequency of a MHz unit may be represented by F<sub>DL</sub>=F<sub>DL</sub> <sub>_</sub> <sub>low</sub>+0.1(N<sub>DL</sub>−N<sub>Offs-DL</sub>). In uplink, a relationship between the EARFCN and a carrier frequency of a MHz unit may be represented by F<sub>UL</sub>=F<sub>UL</sub> <sub>_</sub> <sub>low</sub>+0.1(N<sub>UL</sub>-N<sub>Offs-UL</sub>). N<sub>DL </sub>is a downlink EARFCN, and N<sub>UL </sub>is an uplink EARFCN. F<sub>DL-low</sub>, N<sub>Offs-DL</sub>, F<sub>UL-low</sub>, and N<sub>Offs-UL </sub>may be determined by Table 1.</div>
+<div class="description-paragraph" id="p-0083" num="0082">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">E-UTRA</td>
+<td class="description-td">Downlink</td>
+<td class="description-td">Uplink</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">Operating</td>
+<td class="description-td">F<sub>DL</sub> <sub> <sub2>—</sub2> </sub> <sub>low</sub> </td>
+<td class="description-td"> </td>
+<td class="description-td">Range</td>
+<td class="description-td">F<sub>UL</sub> <sub> <sub2>—</sub2> </sub> <sub>low</sub> </td>
+<td class="description-td"> </td>
+<td class="description-td">Range</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Band</td>
+<td class="description-td">(MHz)</td>
+<td class="description-td">N<sub>Offs-DL</sub> </td>
+<td class="description-td">of N<sub>DL</sub> </td>
+<td class="description-td">(MHz)</td>
+<td class="description-td">N<sub>Offs-UL</sub> </td>
+<td class="description-td">of N<sub>UL</sub> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="7" nameend="7" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="7" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">2110</td>
+<td class="description-td">0</td>
+<td class="description-td"> 0-599</td>
+<td class="description-td">1920</td>
+<td class="description-td">18000</td>
+<td class="description-td">18000-18599</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">1930</td>
+<td class="description-td">600</td>
+<td class="description-td"> 600-1199</td>
+<td class="description-td">1850</td>
+<td class="description-td">18600</td>
+<td class="description-td">18600-19199</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">1805</td>
+<td class="description-td">1200</td>
+<td class="description-td">1200-1949</td>
+<td class="description-td">1710</td>
+<td class="description-td">19200</td>
+<td class="description-td">19200-19949</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">2110</td>
+<td class="description-td">1950</td>
+<td class="description-td">1950-2399</td>
+<td class="description-td">1710</td>
+<td class="description-td">19950</td>
+<td class="description-td">19950-20399</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">869</td>
+<td class="description-td">2400</td>
+<td class="description-td">2400-2649</td>
+<td class="description-td">824</td>
+<td class="description-td">20400</td>
+<td class="description-td">20400-20649</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">875</td>
+<td class="description-td">2650</td>
+<td class="description-td">2650-2749</td>
+<td class="description-td">830</td>
+<td class="description-td">20650</td>
+<td class="description-td">20650-20749</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">2620</td>
+<td class="description-td">2750</td>
+<td class="description-td">2750-3449</td>
+<td class="description-td">2500</td>
+<td class="description-td">20750</td>
+<td class="description-td">20750-21449</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">925</td>
+<td class="description-td">3450</td>
+<td class="description-td">3450-3799</td>
+<td class="description-td">880</td>
+<td class="description-td">21450</td>
+<td class="description-td">21450-21799</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">1844.9</td>
+<td class="description-td">3800</td>
+<td class="description-td">3800-4149</td>
+<td class="description-td">1749.9</td>
+<td class="description-td">21800</td>
+<td class="description-td">21800-22149</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">2110</td>
+<td class="description-td">4150</td>
+<td class="description-td">4150-4749</td>
+<td class="description-td">1710</td>
+<td class="description-td">22150</td>
+<td class="description-td">22150-22749</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">1475.9</td>
+<td class="description-td">4750</td>
+<td class="description-td">4750-4999</td>
+<td class="description-td">1427.9</td>
+<td class="description-td">22750</td>
+<td class="description-td">22750-22999</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">12</td>
+<td class="description-td">728</td>
+<td class="description-td">5000</td>
+<td class="description-td">5000-5179</td>
+<td class="description-td">698</td>
+<td class="description-td">23000</td>
+<td class="description-td">23000-23179</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">13</td>
+<td class="description-td">746</td>
+<td class="description-td">5180</td>
+<td class="description-td">5180-5279</td>
+<td class="description-td">777</td>
+<td class="description-td">23180</td>
+<td class="description-td">23180-23279</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">14</td>
+<td class="description-td">758</td>
+<td class="description-td">5280</td>
+<td class="description-td">5280-5379</td>
+<td class="description-td">788</td>
+<td class="description-td">23280</td>
+<td class="description-td">23280-23379</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">. . .</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">17</td>
+<td class="description-td">734</td>
+<td class="description-td">5730</td>
+<td class="description-td">5730-5849</td>
+<td class="description-td">704</td>
+<td class="description-td">23730</td>
+<td class="description-td">23730-23849</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">. . .</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">33</td>
+<td class="description-td">1900</td>
+<td class="description-td">26000</td>
+<td class="description-td">36000-36199</td>
+<td class="description-td">1900</td>
+<td class="description-td">36000</td>
+<td class="description-td">36000-36199</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">34</td>
+<td class="description-td">2010</td>
+<td class="description-td">26200</td>
+<td class="description-td">36200-36349</td>
+<td class="description-td">2010</td>
+<td class="description-td">36200</td>
+<td class="description-td">36200-36349</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">35</td>
+<td class="description-td">1850</td>
+<td class="description-td">26350</td>
+<td class="description-td">36350-36949</td>
+<td class="description-td">1850</td>
+<td class="description-td">36350</td>
+<td class="description-td">36350-36949</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">36</td>
+<td class="description-td">1930</td>
+<td class="description-td">26950</td>
+<td class="description-td">36950-37549</td>
+<td class="description-td">1930</td>
+<td class="description-td">36950</td>
+<td class="description-td">36950-37549</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">37</td>
+<td class="description-td">1910</td>
+<td class="description-td">27550</td>
+<td class="description-td">37550-37749</td>
+<td class="description-td">1910</td>
+<td class="description-td">37550</td>
+<td class="description-td">37550-37749</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">38</td>
+<td class="description-td">2570</td>
+<td class="description-td">27750</td>
+<td class="description-td">37750-38249</td>
+<td class="description-td">2570</td>
+<td class="description-td">37750</td>
+<td class="description-td">37750-38249</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">39</td>
+<td class="description-td">1880</td>
+<td class="description-td">28250</td>
+<td class="description-td">38250-38649</td>
+<td class="description-td">1880</td>
+<td class="description-td">38250</td>
+<td class="description-td">38250-38649</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">40</td>
+<td class="description-td">2300</td>
+<td class="description-td">28650</td>
+<td class="description-td">38650-39649</td>
+<td class="description-td">2300</td>
+<td class="description-td">38650</td>
+<td class="description-td">38650-39649</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="7" nameend="7" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0084" num="0083">The basic separation of an E-UTRA Tx channel and Rx channel may be determined by Table 2.</div>
+<div class="description-paragraph" id="p-0085" num="0084">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Frequency Band</td>
+<td class="description-td">TX-RX carrier centre frequency separation</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1</td>
+<td class="description-td">190 MHz </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2</td>
+<td class="description-td">80 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">3</td>
+<td class="description-td">95 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">4</td>
+<td class="description-td">400 MHz </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">5</td>
+<td class="description-td">45 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">6</td>
+<td class="description-td">45 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">7</td>
+<td class="description-td">120 MHz </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">8</td>
+<td class="description-td">45 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">9</td>
+<td class="description-td">95 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">10</td>
+<td class="description-td">400 MHz </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">11</td>
+<td class="description-td">48 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">12</td>
+<td class="description-td">30 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">13</td>
+<td class="description-td">−31 MHz<sup>  </sup> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">14</td>
+<td class="description-td">−30 MHz<sup>  </sup> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">17</td>
+<td class="description-td">30 MHz</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0086" num="0085">Hereinafter, an uplink reference signal (RS) will be described.</div>
+<div class="description-paragraph" id="p-0087" num="0086">In general, an RS is transmitted as a sequence. Any sequence can be used as a sequence used for an RS sequence without particular restrictions. The RS sequence may be a phase shift keying (PSK)-based computer generated sequence. Examples of the PSK include binary phase shift keying (BPSK), quadrature phase shift keying (QPSK), etc. Alternatively, the RS sequence may be a constant amplitude zero auto-correlation (CAZAC) sequence. Examples of the CAZAC sequence include a Zadoff-Chu (ZC)-based sequence, a ZC sequence with cyclic extension, a ZC sequence with truncation, etc. Alternatively, the RS sequence may be a pseudo-random (PN) sequence. Example of the PN sequence include an m-sequence, a computer generated sequence, a Gold sequence, a Kasami sequence, etc. In addition, the RS sequence may be a cyclically shifted sequence.</div>
+<div class="description-paragraph" id="p-0088" num="0087">The uplink RS can be classified into a demodulation reference signal (DMRS) and a sounding reference signal (SRS). The DMRS is an RS used for channel estimation to demodulate a received signal. The DMRS can be combined with PUSCH or PUCCH transmission. The SRS is an RS transmitted for uplink scheduling by a UE to a BS. The BS estimates an uplink channel by using the received SRS, and the estimated uplink channel is used in uplink scheduling. The SRS is not combined with PUSCH or PUCCH transmission. The same type of base sequences can be used for the DMRS and the SRS. Meanwhile, precoding applied to the DMRS in uplink multi-antenna transmission may be the same as precoding applied to the PUSCH. Cyclic shift separation is a primary scheme for multiplexing the DMRS. In an LTE-A system, the SRS may not be precoded, and may be an antenna-specific RS.</div>
+<div class="description-paragraph" id="p-0089" num="0088">The SRS is an RS transmitted by a relay station to the BS and is an RS which is not related to uplink data or control signal transmission. In general, the SRS may be used for channel quality estimation for frequency selective scheduling in uplink or may be used for other usages. For example, the SRS may be used in power control, initial MCS selection, initial power control for data transmission, etc. In general, the SRS is transmitted in a last SC-FDMA symbol of one subframe.</div>
+<div class="description-paragraph" id="p-0090" num="0089">An operation in UE for the transmission of an SRS is as follows. C<sub>SRS</sub>, that is, a cell-specific SRS transmission bandwidth may be given by a higher layer, and a cell-specific SRS transmission subframe may be given by a higher layer. If UE can select a transmit antenna, the index a(n<sub>SRS</sub>) of a UE antenna that transmits an SRS at a time n<sub>SRS </sub>is given a(n<sub>SRS</sub>)=n<sub>SRS </sub>mod 2 for the full sounding bandwidth or the partial sounding bandwidth when frequency hopping is not available and may be given by Equation 2 when frequency hopping is available.</div>
+<div class="description-paragraph" id="p-0091" num="0090">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mi>a</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<msub>
+<mi>n</mi>
+<mi>SRS</mi>
+</msub>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mo>{</mo>
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msub>
+<mi>n</mi>
+<mi>SRS</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<mo>⌊</mo>
+<mrow>
+<msub>
+<mi>n</mi>
+<mi>SRS</mi>
+</msub>
+<mo>⁢</mo>
+<mstyle>
+<mtext>/</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+<mo>⌋</mo>
+</mrow>
+<mo>+</mo>
+<mrow>
+<mi>β</mi>
+<mo>·</mo>
+<mrow>
+<mo>⌊</mo>
+<mrow>
+<msub>
+<mi>n</mi>
+<mi>SRS</mi>
+</msub>
+<mo>⁢</mo>
+<mstyle>
+<mtext>/</mtext>
+</mstyle>
+<mo>⁢</mo>
+<mi>K</mi>
+</mrow>
+<mo>⌋</mo>
+</mrow>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>K</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.6ex" width="0.6em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>is</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>even</mi>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<msub>
+<mi>n</mi>
+<mi>SRS</mi>
+</msub>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="15.3ex" width="15.3em"> </mspace>
+</mstyle>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mrow>
+<mi>when</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>K</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>is</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>odd</mi>
+</mrow>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0092" num="0091">In Equation 2, B<sub>SRS </sub>indicates an SRS bandwidth, and b<sub>hop </sub>indicates a frequency hopping bandwidth. N<sub>b </sub>may be determined by a predetermined table according to C<sub>SRS </sub>and B<sub>SRS</sub>.</div>
+<div class="description-paragraph" id="p-0093" num="0092">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mrow>
+<mi>K</mi>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∏</mo>
+<mrow>
+<msup>
+<mi>b</mi>
+<mi>′</mi>
+</msup>
+<mo>=</mo>
+<msub>
+<mi>b</mi>
+<mi>hop</mi>
+</msub>
+</mrow>
+<msub>
+<mi>B</mi>
+<mi>SRS</mi>
+</msub>
+</munderover>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mrow>
+<msup>
+<mi>b</mi>
+<mi>′</mi>
+</msup>
+<mo>.</mo>
+</mrow>
+</msub>
+</mrow>
+</mrow>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0094" num="0093">In Equation 2, β may be determined by Equation 3.</div>
+<div class="description-paragraph" id="p-0095" num="0094">
+<maths id="MATH-US-00003" num="00003">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>β</mi>
+<mo>=</mo>
+<mrow>
+<mo>{</mo>
+<mtable>
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+<mtd>
+<mrow>
+<mrow>
+<mi>where</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>K</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>4</mn>
+</mrow>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mrow>
+<mi>otherwise</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="6.4ex" width="6.4em"> </mspace>
+</mstyle>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>3</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0096" num="0095">If one SC-FDMA symbol exists within an uplink pilot time slot (UpPTS) in a TDD system, the one SC-FDMA symbol may be used for SRS transmission. If two SC-FDMA symbols exist within an UpPTS, both the two SC-FDMA symbols may be used for SRS transmission and may be allocated to one UE at the same time.</div>
+<div class="description-paragraph" id="p-0097" num="0096">UE does not always transmit an SRS whenever the transmission of an SRS and the transmission of PUCCH format 2/2a/2b occur within the same subframe at the same time.</div>
+<div class="description-paragraph" id="p-0098" num="0097">If an ackNackSRS-SimultaneousTransmission parameter is false, UE does not always transmit an SRS whenever the transmission of an SRS and the transmission of a PUCCH that carries ACK/NACK and/or a positive SR are performed in the same subframe. Furthermore, if an ackNackSRS-SimultaneousTransmission parameter is true, UE uses a shortened PUCCH format and transmits a PUCCH that carries ACK/NACK and/or a positive SR and an SRS at the same time when the transmission of the SRS and the transmission of the PUCCH that carries ACK/NACK and/or a positive SR are configured in the same subframe. That is, if a PUCCH that carries ACK/NACK and/or a positive SR and an SRS is configured within an SRS subframe configured in a cell specific manner, UE uses a shortened PUCCH format and transmits the PUCCH that carries ACK/NACK and/or a positive SR and the SRS at the same time.</div>
+<div class="description-paragraph" id="p-0099" num="0098">If SRS transmission overlaps with a physical random access channel (PRACH) region for the preamble format 4 or exceeds the range of an uplink system bandwidth configured in a cell, UE does not transmit an SRS.</div>
+<div class="description-paragraph" id="p-0100" num="0099">ackNackSRS-SimultaneousTransmission, that is, a parameter given by a higher layer, determines whether UE supports the simultaneous transmission of a PUCCH that carries ACK/NACK and an SRS within one subframe. If UE is configured to transmit a PUCCH that carries ACK/NACK and an SRS within one subframe at the same time, the UE may transmits the ACK/NACK and the SRS in a cell-specific SRS subframe. Here, a shortened PUCCH format may be used, and the transmission of ACK/NACK or an SR corresponding to a position where the SRS is transmitted is punctured. The shortened PUCCH format is used in the cell-specific SRS subframe even when the UE does not transmit the SRS in the relevant subframe. If UE is configured not to transmit a PUCCH that carries ACK/NACK and an SRS within one subframe at the same time, the UE may use common PUCCH formats 1/1a/1b in order to transmit the ACK/NACK and the SR.</div>
+<div class="description-paragraph" id="p-0101" num="0100">Tables 3 and 4 are examples of a UE-specific SRS configuration that indicates T<sub>SRS</sub>, that is, an SRS transmission periodicity, and T<sub>offset</sub>, that is, an SRS subframe offset. The SRS transmission periodicity T<sub>SRS </sub>may be determined as one of {2, 5, 10, 20, 40, 80, 160, 320} ms.</div>
+<div class="description-paragraph" id="p-0102" num="0101">Table 3 is an example of an SRS configuration in an FDD system.</div>
+<div class="description-paragraph" id="p-0103" num="0102">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">SRS Configuration Index</td>
+<td class="description-td">SRS Periodicity</td>
+<td class="description-td">SRS Subframe Offset</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">I<sub>SRS</sub> </td>
+<td class="description-td">T<sub>SRS </sub>(ms)</td>
+<td class="description-td">T<sub>offset</sub> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">0-1</td>
+<td class="description-td">2</td>
+<td class="description-td">I<sub>SRS</sub> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2-6</td>
+<td class="description-td">5</td>
+<td class="description-td">I<sub>SRS </sub>− 2 </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> 7-16</td>
+<td class="description-td">10</td>
+<td class="description-td">I<sub>SRS </sub>− 7 </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">17-36</td>
+<td class="description-td">20</td>
+<td class="description-td">I<sub>SRS </sub>− 17</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">37-76</td>
+<td class="description-td">40</td>
+<td class="description-td">I<sub>SRS </sub>− 37</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> 77-156</td>
+<td class="description-td">80</td>
+<td class="description-td">I<sub>SRS </sub>− 77</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">157-316</td>
+<td class="description-td">160</td>
+<td class="description-td"> I<sub>SRS </sub>− 157</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">317-636</td>
+<td class="description-td">320</td>
+<td class="description-td"> I<sub>SRS </sub>− 317</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> 637-1023</td>
+<td class="description-td">reserved</td>
+<td class="description-td">reserved</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0104" num="0103">Table 4 is an example of an SRS configuration in a TDD system.</div>
+<div class="description-paragraph" id="p-0105" num="0104">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Configuration Index</td>
+<td class="description-td">SRS Periodicity</td>
+<td class="description-td">SRS Subframe Offset</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">I<sub>SRS</sub> </td>
+<td class="description-td">T<sub>SRS </sub>(ms)</td>
+<td class="description-td">T<sub>offset</sub> </td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">0</td>
+<td class="description-td">2</td>
+<td class="description-td">0, 1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">0, 2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">2</td>
+<td class="description-td">1, 2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">2</td>
+<td class="description-td">0, 3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">2</td>
+<td class="description-td">1, 3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">5</td>
+<td class="description-td">2</td>
+<td class="description-td">0, 4</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">2</td>
+<td class="description-td">1, 4</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">7</td>
+<td class="description-td">2</td>
+<td class="description-td">2, 3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">8</td>
+<td class="description-td">2</td>
+<td class="description-td">2, 4</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">9</td>
+<td class="description-td">2</td>
+<td class="description-td">3, 4</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10-14</td>
+<td class="description-td">5</td>
+<td class="description-td">I<sub>SRS </sub>− 10</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">15-24</td>
+<td class="description-td">10</td>
+<td class="description-td">I<sub>SRS </sub>− 15</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">25-44</td>
+<td class="description-td">20</td>
+<td class="description-td">I<sub>SRS </sub>− 25</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">45-84</td>
+<td class="description-td">40</td>
+<td class="description-td">I<sub>SRS </sub>− 45</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> 85-164</td>
+<td class="description-td">80</td>
+<td class="description-td">I<sub>SRS </sub>− 85</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">165-324</td>
+<td class="description-td">160</td>
+<td class="description-td"> I<sub>SRS </sub>− 165</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">325-644</td>
+<td class="description-td">320</td>
+<td class="description-td"> I<sub>SRS </sub>− 325</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> 645-1023</td>
+<td class="description-td">reserved</td>
+<td class="description-td">reserved</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0106" num="0105">In the case of T<sub>SRS</sub>&gt;2 in a TDD system, an SRS subframe in an FDD system satisfy (10*n<sub>f</sub>+k<sub>SRS</sub>−T<sub>offset</sub>) mod T<sub>SRS</sub>=0. n<sub>f </sub>indicates a frame index, and k<sub>SRS </sub>is a subframe index within a frame in an FDD system. In the case of T<sub>SRS</sub>=2 in a TDD system, 2 SRS resources may be configured within a half frame including at least one uplink subframe, and an SRS subframe satisfies (k<sub>SRS</sub>−T<sub>offset</sub>)mod 5=0.</div>
+<div class="description-paragraph" id="p-0107" num="0106">In a TDD system, k<sub>SRS </sub>may be determined by Table 5.</div>
+<div class="description-paragraph" id="p-0108" num="0107">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" pgwide="1" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="2" nameend="1" namest="offset" rowsep="1">TABLE 5</td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="2" nameend="1" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Subframe index n</td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="5" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1</td>
+<td class="description-td"> </td>
+<td class="description-td">6</td>
+<td class="description-td"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="13" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">1<sup>st </sup>symbol</td>
+<td class="description-td">2<sup>nd </sup>symbol</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">1<sup>st </sup>symbol</td>
+<td class="description-td">2<sup>nd </sup>symbol</td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">0</td>
+<td class="description-td">of UpPTS</td>
+<td class="description-td">of UpPTS</td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">4</td>
+<td class="description-td">5</td>
+<td class="description-td">of UpPTS</td>
+<td class="description-td">of UpPTS</td>
+<td class="description-td">7</td>
+<td class="description-td">8</td>
+<td class="description-td">9</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="13" nameend="12" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+<table align="left" class="description-table" cols="12" colsep="0" rowsep="0" width="100%">
+<tbody><tr class="description-tr">
+<td class="description-td">k<sub>SRS </sub>in case UpPTS</td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">4</td>
+<td class="description-td"> </td>
+<td class="description-td">5</td>
+<td class="description-td">6</td>
+<td class="description-td">7</td>
+<td class="description-td">8</td>
+<td class="description-td">9</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">length of 2 symbols</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">k<sub>SRS </sub>in case UpPTS</td>
+<td class="description-td">1</td>
+<td class="description-td"> </td>
+<td class="description-td">2</td>
+<td class="description-td">3</td>
+<td class="description-td">4</td>
+<td class="description-td"> </td>
+<td class="description-td">6</td>
+<td class="description-td"> </td>
+<td class="description-td">7</td>
+<td class="description-td">8</td>
+<td class="description-td">9</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">length of 1 symbol</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="12" nameend="12" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0109" num="0108">Meanwhile, UE does not always transmit an SRS if the transmission of the SRS and the transmission of a PUSCH, corresponding to the retransmission of the same transport block as part of a random access response grant or a contention-based random access procedure, are performed within the same subframe.</div>
+<div class="description-paragraph" id="p-0110" num="0109">Channel coding for PUSCH transmission is described below.</div>
+<div class="description-paragraph" id="p-0111" num="0110"> <figref idrefs="DRAWINGS">FIG. 10</figref> is an example of a process of processing an uplink shared channel (UL-SCH) transport channel. A coding unit is reached in the form of one maximum transport block at each transmit time interval (TTI).</div>
+<div class="description-paragraph" id="p-0112" num="0111">Referring to <figref idrefs="DRAWINGS">FIG. 10</figref>, at step S<b>100</b>, a cyclic redundancy check (CRC) is attached to a transport block. When the CRC is attached, error detection for an UL-SCH transport block can be supported. All transport blocks may be used to calculate a CRC parity bit. Bits within a transport block transferred in a layer 1 are a<sub>0</sub>, . . . , a<sub>A-1</sub>, and parity bits may be represented by p<sub>0</sub>, . . . , p<sub>L-1</sub>. The size of the transport block is A, and the size of the parity bit is L. a0, that is, the information bit of the smallest order, may be mapped to the most significant bit (MSB) of the transport block.</div>
+<div class="description-paragraph" id="p-0113" num="0112">At step S<b>110</b>, the transport block to which the CRC is attached is segmented into a plurality of code blocks, and a CRC is attached to each of the code blocks. Bits before they are segmented into the code blocks may be represented by b<sub>0</sub>, . . . , b<sub>B-1</sub>, and B is the number of bits within the transport block including the CRC. Bits after they are segmented into the code blocks may be represented by c<sub>r0</sub>, . . . , c<sub>r(Kr-1)</sub>, r is a code block number, and Kr is the number of bits of the code block number r.</div>
+<div class="description-paragraph" id="p-0114" num="0113">At step S<b>120</b>, channel coding is performed on each of the code blocks. The total number of code blocks is C, and the channel coding may be performed on each code block according to a turbo coding scheme. The bits on which the channel coding has been performed may be represented by d<sub>r0</sub> <sup>(i)</sup>, . . . , d<sub>r(Dr-1)</sub> <sup>(i)</sup>, and Dr is the number of bits of an i<sup>th </sup>coded stream of the code block number r. Dr=Kr+4, and i is a coded stream index and may be 0, 1 or 2.</div>
+<div class="description-paragraph" id="p-0115" num="0114">At step S<b>130</b>, rate matching is performed on each code block on which the channel coding has been performed. The rate matching may be performed for code block individually. Bits after the rate matching is performed may be represented by e<sub>r0</sub>, . . . , e<sub>r(Er-1)</sub>, r is a code block number, and Er is the number of rate matched bits of the code block number r.</div>
+<div class="description-paragraph" id="p-0116" num="0115">At step S<b>140</b>, the code blocks on which the rate matching has been performed are concatenated. Bits after the code blocks are concatenated may be represented by f<sub>0</sub>, . . . , f<sub>G-1</sub>, and G is the total number of coded transmission bits other than bits that are used to transmit control information. Here, the control information may be multiplexed with UL-SCH transmission.</div>
+<div class="description-paragraph" id="p-0117" num="0116">At steps S<b>141</b> to S<b>143</b>, channel coding is performed on the control information. The control information may include channel quality information (CQI) and/or CQI including a precoding matrix indicator (PMI), hybrid automatic repeat request (HARQ)-acknowledgement (ACK), and a rank indicator (RI). Or, it is hereinafter assumed that the CQI includes a PMI. A different coding rate is applied to each piece of control information depending on the number of different coding symbols. When the control information is transmitted in a PUSCH, channel coding on CQI, an RI, and HARQ-ACK is independently performed. In the present embodiment, it is assumed that the channel coding is performed on CQI at step S<b>141</b>, the channel coding is performed on an RI at step S<b>142</b>, and the channel coding is performed on HARQ-ACK at step S<b>143</b>, but not limited thereto.</div>
+<div class="description-paragraph" id="p-0118" num="0117">In a TDD system, two types of HARQ-ACK feedback modes of HARQ-ACK bundling and HARQ-ACK multiplexing may be supported by a higher layer. In the TDD HARQ-ACK bundling mode, HARQ-ACK includes one or two information bits. In the TDD HARQ-ACK multiplexing mode, HARQ-ACK includes one to four information bits.</div>
+<div class="description-paragraph" id="p-0119" num="0118">If UE transmits HARQ-ACK bits or RI bits, the number of coded symbols Q′ may be determined by Equation 4.</div>
+<div class="description-paragraph" id="p-0120" num="0119">
+<maths id="MATH-US-00004" num="00004">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>Q</mi>
+<mi>′</mi>
+</msup>
+<mo>=</mo>
+<mrow>
+<mi>min</mi>
+<mo>⁢</mo>
+<mrow>
+<mo> </mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mo>⌈</mo>
+<mfrac>
+<mrow>
+<mi>O</mi>
+<mo>·</mo>
+<msubsup>
+<mi>M</mi>
+<mi>sc</mi>
+<mrow>
+<mi>PUSCH</mi>
+<mo>-</mo>
+<mi>initial</mi>
+</mrow>
+</msubsup>
+<mo>·</mo>
+<msubsup>
+<mi>N</mi>
+<mi>symb</mi>
+<mrow>
+<mi>PUSCH</mi>
+<mo>-</mo>
+<mi>initial</mi>
+</mrow>
+</msubsup>
+<mo>·</mo>
+<msubsup>
+<mi>β</mi>
+<mi>offset</mi>
+<mi>PUSCH</mi>
+</msubsup>
+</mrow>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>r</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>C</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>K</mi>
+<mi>r</mi>
+</msub>
+</mrow>
+</mfrac>
+<mo>⌉</mo>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mn>4</mn>
+<mo>·</mo>
+<msubsup>
+<mi>M</mi>
+<mi>sc</mi>
+<mi>PUSCH</mi>
+</msubsup>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>4</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0121" num="0120">In Equation 4, O is the number of HARQ-ACK bits or RI bits, and M<sub>sc</sub> <sup>PUSCH </sup>is a bandwidth scheduled for PUSCH transmission in the current subframe of a transport block which is represented by the number of subcarriers. N<sub>symb</sub> <sup>PUSCH-initial </sup>is the number of SC-FDMA symbols in each subframe for initial PUSCH transmission in the same transport block and may be determined as N<sub>symb</sub> <sup>PUSCH-initial</sup>=(2*(N<sub>symb</sub> <sup>UL</sup>−1)−N<sub>SRS</sub>). If UE is configured to transmit a PUSCH and an SRS in the same subframe for initial transmission or the allocation of PUSCH resources for initial transmission partially overlaps with a bandwidth allocated for the transmission of a cell-specific SRS subframe and SRS, N<sub>SRS</sub>=1. In the remaining cases, N<sub>SRS</sub>=0. M<sub>sc</sub> <sup>PUSCH-initial</sup>, C, and Kr may be obtained from an initial PDCCH for the same transport block. If there is no DCI format 0 within the initial PDCCH for the same transport block, M<sub>sc</sub> <sup>PUSCH-initial</sup>, C, and Kr may be obtained from a PDCCH that has been semi-persistently allocated most recently when the initial PUSCH for the same transport block has been semi-persistently scheduled and may be obtained from a random access response grant for the same transport block when a PUSCH has been initiated from a random access response grant.</div>
+<div class="description-paragraph" id="p-0122" num="0121">In HARQ-ACK transmission, Q<sub>ACK</sub>=Q<sub>m</sub>*Q′, β<sub>offset</sub> <sup>PUSCH</sup>=β<sub>offset</sub> <sup>HARQ-ACK</sup>. Furthermore, in RI transmission, Q<sub>RI</sub>=Q<sub>m</sub>*Q′, β<sub>offset</sub> <sup>PUSCH</sup>=β<sub>offset</sub> <sup>RI</sup>.</div>
+<div class="description-paragraph" id="p-0123" num="0122">In HARQ-ACK transmission, ACK may be encoded into ‘1’ from a binary number, and NACK may be encoded into ‘0’ from a binary number. If HARQ-ACK is [o<sub>0</sub> <sup>ACK</sup>] including 1-bit information, the HARQ-ACK may be encoded according to Table 6.</div>
+<div class="description-paragraph" id="p-0124" num="0123">
+<tables id="TABLE-US-00006" num="00006">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 6</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Q<sub>m</sub> </td>
+<td class="description-td">Encoded HARQ-ACK</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2</td>
+<td class="description-td">[o<sub>0</sub> <sup>ACK </sup>y]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">4</td>
+<td class="description-td">[o<sub>0</sub> <sup>ACK </sup>y x x]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">6</td>
+<td class="description-td">[o<sub>0</sub> <sup>ACK </sup>y x x x x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0125" num="0124">If HARQ-ACK is [o<sub>0</sub> <sup>ACK </sup>o<sub>1</sub> <sup>ACK</sup>] including 2-bit information, the HARQ-ACK may be encoded according to Table 7. In Table 7, o<sub>2</sub> <sup>ACK</sup>=(o<sub>0</sub> <sup>ACK</sup>+o<sub>1</sub> <sup>ACK</sup>)mod 2.</div>
+<div class="description-paragraph" id="p-0126" num="0125">
+<tables id="TABLE-US-00007" num="00007">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="2" nameend="2" namest="1" rowsep="1">TABLE 7</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Q<sub>m</sub> </td>
+<td class="description-td">Encoded HARQ-ACK</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">[o<sub>0</sub> <sup>ACK </sup>o<sub>1</sub> <sup>ACK </sup>o<sub>2</sub> <sup>ACK </sup>o<sub>0</sub> <sup>ACK </sup>o<sub>1</sub> <sup>ACK </sup>o<sub>2</sub> <sup>ACK</sup>]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">4</td>
+<td class="description-td">[o<sub>0</sub> <sup>ACK </sup>o<sub>1</sub> <sup>ACK </sup>x x o<sub>2</sub> <sup>ACK </sup>o<sub>0</sub> <sup>ACK </sup>x x o<sub>1</sub> <sup>ACK </sup>o<sub>2</sub> <sup>ACK </sup>x x]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">6</td>
+<td class="description-td">[o<sub>0</sub> <sup>ACK </sup>o<sub>1</sub> <sup>ACK </sup>x x x x o<sub>2</sub> <sup>ACK </sup>o<sub>0</sub> <sup>ACK </sup>x x x x o<sub>1</sub> <sup>ACK </sup>o<sub>2</sub> <sup>ACK </sup>x x x x]</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0127" num="0126">In Tables 6 and 7, x and y indicate placeholders for scrambling HARQ-ACK bits for a method of maximizing the Euclidean distance of a modulation symbol for carrying HARQ-ACK information.</div>
+<div class="description-paragraph" id="p-0128" num="0127">When HARQ-ACK includes one or two information bits, in the case of the FDD or TDD HARQ-ACK multiplexing mode, a bit sequence q<sub>0</sub> <sup>ACK</sup>, . . . , q<sub>QACK-1</sub> <sup>ACK </sup>may be obtained by concatenating a plurality of encoded HARQ-ACK block. Here, Q<sub>ACK </sub>is the total number of encoded bits within all the encoded HARQ-ACK blocks. The concatenation of the last HARQ-ACK block may be partially performed in order to match the total length of the bit sequence with Q<sub>ACK</sub>.</div>
+<div class="description-paragraph" id="p-0129" num="0128">In the case of the TDD HARQ-ACK bundling mode, a bit sequence {tilde over (q)}<sub>0</sub> <sup>ACK</sup>, . . . , {tilde over (q)}<sub>Q</sub> <sub> <sub2>ACK</sub2> </sub> <sub>-1</sub> <sup>ACK </sup>may be obtained by concatenating a plurality of encoded HARQ-ACK blocks. Here, Q<sub>ACK </sub>is the total number of encoded bits within all the encoded HARQ-ACK blocks. The concatenation of the last HARQ-ACK block may be partially performed in order to match the total length of the bit sequence with Q<sub>ACK</sub>. A scrambling sequence [w<sub>0</sub> <sup>ACK </sup>w<sub>1</sub> <sup>ACK </sup>w<sub>2</sub> <sup>ACK </sup>w<sub>3</sub> <sup>ACK</sup>] may be determined by Table 8.</div>
+<div class="description-paragraph" id="p-0130" num="0129">
+<tables id="TABLE-US-00008" num="00008">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">i</td>
+<td class="description-td">[w<sub>0</sub> <sup>ACK </sup>w<sub>1</sub> <sup>ACK </sup>w<sub>2</sub> <sup>ACK </sup>w<sub>3</sub> <sup>ACK</sup>]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">0</td>
+<td class="description-td">[1 1 1 1]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1</td>
+<td class="description-td">[1 0 1 0]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2</td>
+<td class="description-td">[1 1 0 0]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">3</td>
+<td class="description-td">[1 0 0 1]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0131" num="0130">If HARQ-ACK is [o<sub>0</sub> <sup>ACK </sup>o<sub>OACK-1</sub> <sup>ACK</sup>] including two or higher information bits (O<sup>ACK</sup>&gt;2), a bit sequence q<sub>0</sub> <sup>ACK</sup>, . . . , q<sub>QACK-1</sub> <sup>ACK </sup>may be obtained by Equation 5.</div>
+<div class="description-paragraph" id="p-0132" num="0131">
+<maths id="MATH-US-00005" num="00005">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msubsup>
+<mi>q</mi>
+<mi>i</mi>
+<mi>ACK</mi>
+</msubsup>
+<mo>=</mo>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>n</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<msup>
+<mi>O</mi>
+<mi>ACK</mi>
+</msup>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<msubsup>
+<mi>o</mi>
+<mi>n</mi>
+<mi>ACK</mi>
+</msubsup>
+<mo>·</mo>
+<msub>
+<mi>M</mi>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>i</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>32</mn>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>,</mo>
+<mi>n</mi>
+</mrow>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>⁢</mo>
+<mi>mod</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>5</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0133" num="0132">In Equation 5, i=0, . . . , Q<sub>ACK</sub>−1.</div>
+<div class="description-paragraph" id="p-0134" num="0133">In RI transmission, the size of a bit of RI feedback corresponding to PDSCH transmission may be determined by assuming a maximum number of layers according to the antenna configuration of a BS and UE. If an RI is [o<sub>0</sub> <sup>RI</sup>] including 1-bit information, the RI may be encoded according to Table 9.</div>
+<div class="description-paragraph" id="p-0135" num="0134">
+<tables id="TABLE-US-00009" num="00009">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 9</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Q<sub>m</sub> </td>
+<td class="description-td">Encoded RI</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2</td>
+<td class="description-td">[o<sub>0</sub> <sup>RI </sup>y]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">4</td>
+<td class="description-td">[o<sub>0</sub> <sup>RI </sup>y x x]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">6</td>
+<td class="description-td">[o<sub>0</sub> <sup>RI </sup>y x x x x</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0136" num="0135">In Table 9, the mapping of [o<sub>0</sub> <sup>RI</sup>] and an RI may be given by Table 10.</div>
+<div class="description-paragraph" id="p-0137" num="0136">
+<tables id="TABLE-US-00010" num="00010">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 10</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">o<sub>0</sub> <sup>RI</sup> </td>
+<td class="description-td">RI</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">0</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1</td>
+<td class="description-td">2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0138" num="0137">If an RI is [o<sub>0</sub> <sup>RI </sup>o<sub>1</sub> <sup>RI</sup>] including 2-bit information, o<sub>0</sub> <sup>RI </sup>corresponds to an MSB from the 2-bit information, and o<sub>1</sub> <sup>RI </sup>corresponds to the least significant bit (LSB) of 2 bits, the RI may be encoded according to Table 11. In Table 11, o<sub>2</sub> <sup>RI</sup>=(o<sub>0</sub> <sup>RI</sup>+o<sub>1</sub> <sup>RI</sup>)mod 2.</div>
+<div class="description-paragraph" id="p-0139" num="0138">
+<tables id="TABLE-US-00011" num="00011">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 11</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">Q<sub>m</sub> </td>
+<td class="description-td">Encoded RI</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">2</td>
+<td class="description-td">[o<sub>0</sub> <sup>RI </sup>o<sub>1</sub> <sup>RI </sup>o<sub>2</sub> <sup>RI </sup>o<sub>0</sub> <sup>RI </sup>o<sub>1</sub> <sup>RI </sup>o<sub>2</sub> <sup>RI</sup>]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">4</td>
+<td class="description-td">[o<sub>0</sub> <sup>RI </sup>o<sub>1</sub> <sup>RI </sup>x x o<sub>2</sub> <sup>RI </sup>o<sub>0</sub> <sup>RI </sup>x x o<sub>1</sub> <sup>RI </sup>o<sub>2</sub> <sup>RI </sup>x x]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">6</td>
+<td class="description-td">[o<sub>0</sub> <sup>RI </sup>o<sub>1</sub> <sup>RI </sup>x x x x o<sub>2</sub> <sup>RI </sup>o<sub>0</sub> <sup>RI </sup>x x x x o<sub>1</sub> <sup>RI </sup>o<sub>2</sub> <sup>RI </sup>x x x x]</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0140" num="0139">In Table 11, the mapping of [o<sub>0</sub> <sup>RI </sup>o<sub>1</sub> <sup>RI</sup>] and an RI may be given by Table 12.</div>
+<div class="description-paragraph" id="p-0141" num="0140">
+<tables id="TABLE-US-00012" num="00012">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1">TABLE 12</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">o<sub>0</sub> <sup>RI </sup>· o<sub>1</sub> <sup>RI</sup> </td>
+<td class="description-td">RI</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">0, 0</td>
+<td class="description-td">1</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">0, 1</td>
+<td class="description-td">2</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1, 0</td>
+<td class="description-td">3</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">1, 1</td>
+<td class="description-td">4</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td align="center" class="description-td" colspan="3" nameend="2" namest="offset" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0142" num="0141">In Tables 6 and 7, x and y indicate placeholders for scrambling HARQ-ACK bits for a method of maximizing the Euclidean distance of a modulation symbol for carrying HARQ-ACK information.</div>
+<div class="description-paragraph" id="p-0143" num="0142">A bit sequence q<sub>0</sub> <sup>RI</sup>, . . . q<sub>QRI-1</sub> <sup>RI </sup>may be obtained by concatenating a plurality of encoded RI blocks. Here, Q<sub>RI </sub>is the total number of encoded bits within all the encoded RI blocks. The concatenation of the last RI block may be partially performed in order to match the total length of the bit sequence with Q<sub>RI</sub>.</div>
+<div class="description-paragraph" id="p-0144" num="0143">If UE transmits CQI bits, the number of coded symbols Q′ may be determined by Equation 6.</div>
+<div class="description-paragraph" id="p-0145" num="0144">
+<maths id="MATH-US-00006" num="00006">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<msup>
+<mi>Q</mi>
+<mi>′</mi>
+</msup>
+<mo>=</mo>
+<mrow>
+<mi>min</mi>
+<mo>⁢</mo>
+<mrow>
+<mo> </mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mo>⌈</mo>
+<mfrac>
+<mrow>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mi>O</mi>
+<mo>+</mo>
+<mi>L</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mo>·</mo>
+<msubsup>
+<mi>M</mi>
+<mi>sc</mi>
+<mrow>
+<mi>PUSCH</mi>
+<mo>-</mo>
+<mi>initial</mi>
+</mrow>
+</msubsup>
+<mo>·</mo>
+<msubsup>
+<mi>N</mi>
+<mi>symb</mi>
+<mrow>
+<mi>PUSCH</mi>
+<mo>-</mo>
+<mi>initial</mi>
+</mrow>
+</msubsup>
+<mo>·</mo>
+<msubsup>
+<mi>β</mi>
+<mi>offset</mi>
+<mi>PUSCH</mi>
+</msubsup>
+</mrow>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>r</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>C</mi>
+<mo>-</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<msub>
+<mi>K</mi>
+<mi>r</mi>
+</msub>
+</mrow>
+</mfrac>
+<mo>⌉</mo>
+</mrow>
+<mo>,</mo>
+<mrow>
+<mrow>
+<msubsup>
+<mi>M</mi>
+<mi>sc</mi>
+<mi>PUSCH</mi>
+</msubsup>
+<mo>·</mo>
+<msubsup>
+<mi>N</mi>
+<mi>symb</mi>
+<mi>PUSCH</mi>
+</msubsup>
+</mrow>
+<mo>-</mo>
+<mfrac>
+<msub>
+<mi>Q</mi>
+<mi>N</mi>
+</msub>
+<msub>
+<mi>Q</mi>
+<mi>m</mi>
+</msub>
+</mfrac>
+</mrow>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mi>Equation</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>6</mn>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0146" num="0145">In Equation 6, O is the number of CQI bits, and L is the number of CRC bits which is given 0 when O≤11 and given 8 in other cases. Furthermore, Q<sub>CQI</sub>=Q<sub>m</sub>*Q′, and β<sub>offset</sub> <sup>PUSCH</sup>=β<sub>offset</sub> <sup>CQI</sup>. If an RI is not sent, Q<sub>RI</sub>=0. M<sub>sc</sub> <sup>PUSCH-initial</sup>, C, and Kr may be obtained from an initial PDCCH for the same transport block. If the DCI format 0 does not exist within the initial PDCCH for the same transport block, M<sub>sc</sub> <sup>PUSCH-initial</sup>, C, and Kr may be obtained from a PDCCH that has been semi-persistently allocated most recently when the initial PUSCH for the same transport block has been semi-persistently scheduled and may be obtained from a random access response grant for the same transport block when a PUSCH has been initiated from a random access response grant. N<sub>symb</sub> <sup>PUSCH-initial </sup>is the number of SC-FDMA symbols in each subframe for the transmission of the initial PUSCH in the same transport block. Regarding UL-SCH data information, G=N<sub>symb</sub> <sup>PUSCH</sup>*M<sub>sc</sub> <sup>PUSCH</sup>*Q<sub>m</sub>−Q<sub>CQI</sub>−Q<sub>R</sub>. Here, M<sub>sc</sub> <sup>PUSCH </sup>is a bandwidth scheduled for PUSCH transmission in the current subframe of a transport block which is represented by the number of subcarriers. N<sub>symb</sub> <sup>PUSCH</sup>=(2*(N<sub>symb</sub> <sup>UL</sup>−1)−N<sub>SRS</sub>). If UE is configured to transmit a PUSCH and an SRS in the same subframe for initial transmission or the allocation of PUSCH resources for the initial transmission partially overlaps with a bandwidth allocated to the transmission of a cell-specific SRS subframe and SRS, N<sub>SRS</sub>=1. In other cases, N<sub>SRS</sub>=0.</div>
+<div class="description-paragraph" id="p-0147" num="0146">In CQI transmission, when the size of a payload is smaller than 11 bits, the channel coding of CQI information is performed based on an input sequence o<sub>0</sub>, . . . , o<sub>O-1</sub>. When the size of a payload is greater than 11 bits, CRC addition, channel coding, and rate matching are performed on the CQI information. The input sequence of the CRC attachment process is o<sub>0</sub>, . . . , o<sub>O-1</sub>. An output sequence to which the CRC has been attached becomes the input sequence of the channel coding process, and the output sequence of the channel coding process becomes the input sequence of the rate matching process. The output sequence of the final channel coding on the CQI information may be represented by q<sub>0</sub>, . . . , q<sub>QCQI-1</sub>.</div>
+<div class="description-paragraph" id="p-0148" num="0147">At step S<b>150</b>, multiplexing is performed on the data and the control information. Here, the HARQ-ACK information exists both in the two slots of a subframe, and it may be mapped to resources adjacent to a DMRS. When the data and the control information are multiplexed, they may be mapped to different modulation symbols. Meanwhile, if one or more UL-SCH transport blocks are transmitted in the subframe of an uplink cell, CQI information may be multiplexed with data on an UL-SCH transport block having the highest modulation and coding scheme (MCS).</div>
+<div class="description-paragraph" id="p-0149" num="0148">At step S<b>160</b>, channel interleaving is performed. The channel interleaving may be performed in connection with PUSCH resource mapping. Modulation symbols may be mapped to a transmit waveform in a time-first mapping manner through the channel interleaving. The HARQ-ACK information may be mapped to resources adjacent to an uplink DMRS, and the RI information may be mapped to the periphery of resources used by the HARQ-ACK information.</div>
+<div class="description-paragraph" id="p-0150" num="0149">A proposed data transmission method is described below. As described above, LTE-A may use a plurality of CCs as transmission resources in a specific cell, and each UE uniquely sets carriers used in downlink or uplink transmission. Furthermore, if an SRS and a PUSCH are allocated to the same subframe in a single carrier, the sounding process of UE is defined in LTE rel-8, but it has not been defined in a carrier aggregation system. Accordingly, the present invention proposes a method of transmitting a PUSCH and an SRS in a carrier aggregation system in which a plurality of CCs exist.</div>
+<div class="description-paragraph" id="p-0151" num="0150">In a carrier aggregation system, the transmission of an SRS is independently configured for each CC. That is, a subframe in which an SRS can be transmitted is independently configured for each CC irrespective of whether the SRS has been actually transmitted. For example, in a specific subframe, a first carrier may be configured so that it transmits an SRS and a second carrier may be configured so that it transmits a PUSCH. As described above, when one carrier transmits an SRS and the other carrier transmits a PUSCH in the same subframe, it is difficult to maintain a single carrier property for the SRS. In particular, a peak-to-average power ratio (PAPR) and cubic metric (CM) characteristics are deteriorated in an SC-FDMA symbol in which an SRS is transmitted. Accordingly, regarding an SRS and a PUSCH transmitted in different CCs in the same subframe, maximum transmit power allocated to each UE may be limited. In particular, when power boosting is applied in order to increase the coverage of an SRS, the maximum transmit power of each UE may be further limited.</div>
+<div class="description-paragraph" id="p-0152" num="0151">Meanwhile, the SRS transmission method may be divided into two types: a periodic SRS transmission method of transmitting an SRS periodically according to an SRS parameter received by radio resource control (RRC) signaling, which is a method defined in LTE rel-8, and an aperiodic SRS transmission method of transmitting an SRS whenever the SRS is necessary based on a message dynamically triggered by a BS. In LTE-A, the aperiodic SRS transmission method may be introduced.</div>
+<div class="description-paragraph" id="p-0153" num="0152">In the periodic SRS transmission method and the aperiodic SRS transmission method, an SRS may be transmitted in a UE-specific SRS subframe determined in a UE-specific manner. In the periodic SRS transmission method defined in LTE rel-8, a cell-specific SRS subframe is periodically configured by a cell-specific SRS parameter, and a periodic SRS is transmitted in a periodic UE-specific SRS subframe configured by a UE-specific SRS parameter in the cell-specific SRS subframe. Here, the periodic UE-specific SRS subframe may be a subset of the cell-specific SRS subframe. The cell-specific SRS parameter may be given by a higher layer. In the aperiodic SRS transmission method, an aperiodic SRS may be transmitted in an aperiodic UE-specific SRS subframe determined by a UE-specific aperiodic SRS parameter. The UE-specific SRS subframe of the aperiodic SRS transmission method may be a subset of the cell-specific SRS subframe as defined in LTE rel-8. Or, the aperiodic UE-specific SRS subframe may be identical with the cell-specific SRS subframe. Like the cell-specific SRS parameter, the UE-specific aperiodic SRS parameter may be given by a higher layer. The UE-specific SRS subframe may be determined by the periodicity of the subframe and the offset of the subframe in Table 3 or Table 4 described above.</div>
+<div class="description-paragraph" id="p-0154" num="0153">Accordingly, the present invention proposes a method of allocating an SRS and a PUCCH/PUSCH at the same time in an SRS subframe determined in a UE-specific or cell-specific manner in a carrier aggregation system, wherein SRS transmission can maintain a single carrier characteristic and transmit power is reduced.</div>
+<div class="description-paragraph" id="p-0155" num="0154">The present invention is described below according to each of PUCCH formats.</div>
+<div class="description-paragraph" id="p-0156" num="0155">1) PUCCH Formats 1/1a/1b</div>
+<div class="description-paragraph" id="p-0157" num="0156">The PUCCH format 1 carries an SR. Here, an on-off keying (OOK) scheme may be applied. The PUCCH format 1a carries ACK/NACK modulated according to a bit phase shift keying (BPSK) scheme for one codeword. The PUCCH format 1b carries ACK/NACK modulated according to a quadrature phase shift keying (QPSK) scheme for two codewords.</div>
+<div class="description-paragraph" id="p-0158" num="0157">In a carrier aggregation system, an SRS and a PUCCH/PUSCH are allocated to the same subframe and transmitted, wherein one of the allocation of the SRS and the allocation of the PUCCH/PUSCH may be given priority in order to maintain the single carrier characteristic of SRS transmission.</div>
+<div class="description-paragraph" id="p-0159" num="0158">First, the SRS may be given priority.</div>
+<div class="description-paragraph" id="p-0160" num="0159">When an SRS and a PUCCH/PUSCH are allocated at the same time through a plurality of CCs in the same subframe, the allocation and transmission of the SRS is given priority. To this end, the transmission of the PUCCH/PUSCH may be limited in the last SC-FDMA symbol to which the SRS is allocated in the corresponding subframe. Here, the PUCCH may use shortened PUCCH formats 1/1a/1b as a method of not transmitting the PUCCH in the last SC-FDMA symbol to which the SRS is allocated. Rate matching or puncturing may be applied to the PUSCH as a method of not transmitting the PUSCH in the last SC-FDMA symbol to which the SRS is allocated. The amount of data to be transmitted may be matched with a maximum amount of PUSCHs in which data is actually transmitted at a transmission time interval (TTI) through the rate matching. In the present invention, the rate matching may be performed except the last SC-FDMA symbol to which the SRS is allocated. Or, in the state in which the amount of data to be transmitted is matched with the maximum amount of data that can be transmitted through the PUSCH within one subframe, puncturing in which transmission through the PUSCH is not performed may be performed on data allocated to the last SC-FDMA symbol to which the SRS is allocated.</div>
+<div class="description-paragraph" id="p-0161" num="0160"> <figref idrefs="DRAWINGS">FIGS. 11 to 13</figref> are examples of constructions regarding data transmission methods in proposed SRS subframes.</div>
+<div class="description-paragraph" id="p-0162" num="0161">The SRS subframe of <figref idrefs="DRAWINGS">FIGS. 11 to 13</figref> is any one of SRS subframes determined in a UE-specific manner. Or, the SRS subframe of <figref idrefs="DRAWINGS">FIGS. 11 to 13</figref> is any one of SRS subframes determined in a cell specific manner.</div>
+<div class="description-paragraph" id="p-0163" num="0162"> <figref idrefs="DRAWINGS">FIG. 11</figref>-(<i>a</i>) is the case where a PUSCH is simultaneously allocated to an UL CC in which an SRS is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for SRS transmission, and a PUSCH may be allocated to the remaining SC-FDMA symbol in order to transmit data. A PUCCH that uses the shortened PUCCH formats 1/1a/1b may be allocated to an UL CC #1 in order to transmit uplink control information (UCI). As described above, in a single carrier system, if the ackNackSRS-SimultaneousTransmission parameter is true, UE uses the shortened PUCCH formats 1/1a/1b when the transmission of an SRS and the transmission of a PUCCH that carries ACK/NACK and/or a positive SR are configured in the same subframe and simultaneously transmits the SRS and the PUCCH that carries ACK/NACK and/or a positive SR. That is, if a PUCCH that carries ACK/NACK and/or a positive SR is configured within an SRS subframe configured in a cell-specific manner, UE uses the shortened PUCCH formats 1/1a/1b and simultaneously transmits the SRS and the PUCCH that carries ACK/NACK and/or a positive SR. If the UL CC #1 is configured so that it uses the shortened PUCCH formats 1/1a/1b and the SRS is configured so that it is transmitted in the UL CC #2 by applying the method to a carrier aggregation system, the shortened PUCCH formats 1/1a/1b in the UL CC #1 and the SRS in the UL CC #2 can be transmitted at the same time.</div>
+<div class="description-paragraph" id="p-0164" num="0163"> <figref idrefs="DRAWINGS">FIG. 11</figref>-(<i>b</i>) is the case where a PUSCH is not allocated to an UL CC in which an SRS is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for SRS transmission, and a PUCCH that uses the shortened PUCCH formats 1/1a/1b may be allocated to an UL CC #1 in order to transmit UCI. As described above, in a single carrier system, if the ackNackSRS-SimultaneousTransmission parameter is true, UE uses the shortened PUCCH formats 1/1a/1b when the transmission of an SRS and the transmission of a PUCCH that carries ACK/NACK and/or a positive SR are configured in the same subframe and simultaneously transmits the SRS and the PUCCH that carries ACK/NACK and/or a positive SR. That is, if a PUCCH that carries ACK/NACK and/or a positive SR is configured within an SRS subframe configured in a cell-specific manner, UE uses the shortened PUCCH formats 1/1a/1b and simultaneously transmits the SRS and the PUCCH that carries ACK/NACK and/or a positive SR. If the UL CC #1 is configured so that it uses the shortened PUCCH formats 1/1a/1b and the SRS is configured so that it is transmitted in the UL CC #2 by applying the method to a carrier aggregation system, the shortened PUCCH formats 1/1a/1b in the UL CC #1 and the SRS in the UL CC #2 can be transmitted at the same time.</div>
+<div class="description-paragraph" id="p-0165" num="0164"> <figref idrefs="DRAWINGS">FIG. 12</figref>-(<i>a</i>) is the case where a PUSCH is simultaneously allocated to an UL CC in which an SRS is transmitted and a PUSCH is also simultaneously allocated to an UL CC in which a PUCCH is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for the transmission of the SRS. <figref idrefs="DRAWINGS">FIG. 12</figref>-(<i>b</i>) is the case where a PUSCH is not allocated to an UL CC in which an SRS is transmitted and a PUSCH is simultaneously allocated to an UL CC in which a PUCCH is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for the transmission of the SRS.</div>
+<div class="description-paragraph" id="p-0166" num="0165"> <figref idrefs="DRAWINGS">FIG. 13</figref> is the case where a PUSCH is simultaneously allocated to an UL CC in which an SRS is transmitted and UCI transmitted through a PUCCH is subject to piggyback through the PUSCH and transmitted together with uplink data. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for the transmission of the SRS, and UCI is transmitted through the PUSCH in an UL CC #1.</div>
+<div class="description-paragraph" id="p-0167" num="0166">In <figref idrefs="DRAWINGS">FIGS. 11 to 13</figref>, the shortened PUCCH format 1/1a/1b is assumed to be used, but not limited thereto. The present invention may be applied to the shortened PUCCH formats 2/2a/2b, the shortened PUCCH format 3, or any PUCCH formats to be subsequently defined instead of the shortened PUCCH formats 1/1a/1b.</div>
+<div class="description-paragraph" id="p-0168" num="0167">A PUSCH may be subject to rate matching except the last SC-FDMA symbol to which an SRS is allocated. The transmission of the PUSCH in a corresponding SRS subframe may be subject to rate matching so that the PUSCH transmission is performed in the remaining SC-FDMA symbols in which the SRS is not transmitted without a limit to a relationship between the transmission bandwidth of the SRS and a bandwidth occupied by the PUSCH. Or, a PUSCH allocated to the last SC-FDMA symbol may be punctured without performing rate matching on the PUSCH. When the PUSCH is subject to the rate matching, a data rate corresponding to one SC-FDMA symbol when data is transmitted through the PUSCH can be reduced, and reliability and coverage of SRS transmission can be improved. Furthermore, from a viewpoint of SRS transmission, a single carrier property can be maintained in the last SC-FDMA symbol of an SRS subframe.</div>
+<div class="description-paragraph" id="p-0169" num="0168">A bandwidth occupied by an SRS in the last SC-FDMA symbol of the SRS subframe in <figref idrefs="DRAWINGS">FIGS. 11 to 13</figref> may be the entire system bandwidth or may be a narrow band or partial bandwidth. Furthermore, the bandwidth occupied by the SRS in the last SC-FDMA symbol of the SRS subframe may be a UE-specific SRS bandwidth defined in LTE rel-8/9 and may be an SRS bandwidth newly defined in LTE-A. A bandwidth occupied by a PUSCH in the remaining SC-FDMA symbols is not limited.</div>
+<div class="description-paragraph" id="p-0170" num="0169">The above-described rate matching or puncturing may be selectively applied according to the transmission mode or channel environment of corresponding UE and may be implicitly indicated through already defined other parameters or may be indicated by explicitly signaling a newly defined parameter. Furthermore, the type of PUCCH format used and whether UCI to be transmitted through a PUCCH is transmitted by piggybacking to a PUSCH, together with uplink data, or not may be implicitly indicated through other parameters or may be indicated by explicitly signaling a newly defined parameter. Here, the indication may be configured in either a cell-specific or UE-specific manner.</div>
+<div class="description-paragraph" id="p-0171" num="0170">Or, if the SRS transmission band of a plurality of UEs is indicated through a higher layer or signaling so that it is multiplexed within one carrier, the rate matching or puncturing of the plurality of UEs may be applied in a cell-specific or carrier-specific manner within at least corresponding carrier.</div>
+<div class="description-paragraph" id="p-0172" num="0171">Or, although the SRS transmission band of a plurality of UEs is indicated through a higher layer or signaling so that it is multiplexed within one carrier, whether the rate matching or puncturing of a PUSCH will be applied or not may be explicitly L1/L2 signalized or RRC signalized in a UE-specific manner.</div>
+<div class="description-paragraph" id="p-0173" num="0172">Or, the PUCCH/PUSCH may be given priority instead of the SRS.</div>
+<div class="description-paragraph" id="p-0174" num="0173">When an SRS and a PUCCH/PUSCH are allocated at the same time through a plurality of CCs in the same subframe, the allocation and transmission of the PUCCH/PUSCH are given priority. That is, the transmission of the SRS may be dropped, uplink data may be transmitted through the allocated PUSCH, and UCI may be transmitted through the normal PUCCH formats 1/1a/1b. Accordingly, the multiplexing capacity and performance of UE can be maintained as in the prior art, and the data rate of PUSCH transmission and quality of service (QoS) of data transmitted through the PUSCH can be guaranteed.</div>
+<div class="description-paragraph" id="p-0175" num="0174">Or whether an SRS will be first allocated or whether a PUCCH/PUSCH will be first allocated may be determined through an RRC message. There is an advantage in that a resource allocation method can be flexibly changed depending on the transmission mode or channel environment of each UE. For example, whether an SRS will be first allocated or whether a PUCCH/PUSCH will be first allocated may be determined according to an RRC message indicating the simultaneous transmission of the PUSCH/PUCCH. That is, if the simultaneous transmission of the PUSCH/PUCCH is indicated, an SRS is given priority and the SRS and the PUCCH/PUSCH are transmitted in an SRS subframe at the same time. If the simultaneous transmission of the PUSCH/PUCCH is not indicated, the PUCCH/PUSCH is given priority and the transmission of an SRS may be dropped. Or, whether an SRS will be first allocated or whether the PUCCH/PUSCH will be first allocated may be determined according to a newly defined RRC message.</div>
+<div class="description-paragraph" id="p-0176" num="0175">Meanwhile, in the above description, the present invention is assumed to be applied to a carrier aggregation system including two or more CCs, but not limited thereto. The present invention may be applied to the case where the number of carriers is 1. That is, if an SRS and a PUCCH/PUSCH are configured within one CC so that they are transmitted at the same time, the present invention may be applied. More particularly, the transmission of an SRS may be given priority, and the shortened PUCCH formats 1/1a/1b and the SRS may be allocated to an SRS subframe and transmitted simultaneously. Accordingly, reliability and coverage of UCI transmission can be increased. Furthermore, from a viewpoint of SRS transmission, a single carrier property can be maintained in the last SC-FDMA symbol of an SRS subframe. Or, the transmission of a PUCCH/PUSCH may be given priority, and the transmission of an SRS may be dropped. Accordingly, uplink data can be transmitted through the allocated PUSCH, and UCI can be transmitted through the normal PUCCH formats 1/1a/1b or the shortened PUCCH formats 1/1a/1b. Accordingly, the multiplexing capacity and performance of UE can be maintained as in the prior art, and the data rate of PUSCH transmission and quality of service (QoS) of data transmitted through the PUSCH can be guaranteed. Whether the transmission of an SRS will be given priority or the transmission of a PUCCH/PUSCH will be given priority may be indicated by a parameter that indicates the simultaneous transmission of ACK/NACK and an SRS defined in LTE rel-8. Or, whether the transmission of an SRS will be first allocated or the transmission of a PUCCH/PUSCH will be first allocated may be determined according to an RRC message that indicates the simultaneous transmission of a PUSCH and a PUCCH. Or, whether the transmission of an SRS will be first allocated or the transmission of a PUCCH/PUSCH will be first allocated may be determined according to a newly defined RRC message.</div>
+<div class="description-paragraph" id="p-0177" num="0176">2) PUCCH Formats 2/2a/2b</div>
+<div class="description-paragraph" id="p-0178" num="0177">The PUCCH format 2 carries a channel quality indicator (CQI) modulated according to various modulation schemes. The PUCCH formats 2a and 2b carry a CQI and ACK/NACK.</div>
+<div class="description-paragraph" id="p-0179" num="0178">In the case of the PUCCH formats 2/2a/2b, like in the PUCCH formats 1/1a/1b, in a carrier aggregation system, an SRS and a PUCCH/PUSCH are allocated at the same subframe and transmitted, wherein any one of the allocation of the SRS and the allocation of the PUCCH/PUSCH may be given priority in order to maintain the single carrier property of SRS transmission.</div>
+<div class="description-paragraph" id="p-0180" num="0179"> <figref idrefs="DRAWINGS">FIGS. 14 to 16</figref> are examples of constructions regarding a data transmission method in a proposed SRS subframe.</div>
+<div class="description-paragraph" id="p-0181" num="0180">The SRS subframe of <figref idrefs="DRAWINGS">FIGS. 14 to 16</figref> may be any one subframe of SRS subframes determined in a UE-specific manner. The SRS subframe of <figref idrefs="DRAWINGS">FIGS. 14 to 16</figref> is any one subframe of SRS subframes determined in a cell specific manner.</div>
+<div class="description-paragraph" id="p-0182" num="0181"> <figref idrefs="DRAWINGS">FIG. 14</figref> is the case where an SRS is given priority over a PUCCH/PUSCH. <figref idrefs="DRAWINGS">FIG. 14</figref>-(<i>a</i>) is the case where the PUSCH is simultaneously allocated to an UL CC in which the SRS is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for the transmission of the SRS, and the PUSCH may be allocated to the remaining SC-FDMA symbols in order to transmit data. A PUCCH that uses the PUCCH formats 2/2a/2b may be allocated to an UL CC #1 in order to transmit UCI. Here, rate matching may be performed on the PUCCH formats 2/2a/2b of the UL CC #1 and the PUSCH of the UL CC #2, except the last SC-FDMA symbol allocated to the SRS, or puncturing is applied to the last SC-FDMA symbol. <figref idrefs="DRAWINGS">FIG. 14</figref>-(<i>b</i>) is the case where a PUSCH is not simultaneously allocated to an UL CC in which an SRS is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for the transmission of the SRS. A PUCCH that uses the PUCCH formats 2/2a/2b may be allocated to an UL CC #1 in order to transmit UCI. Here, rate matching is performed on the PUCCH formats 2/2a/2b of the UL CC #1 except the last SC-FDMA symbol to which the SRS has been performed, or puncturing is applied to the last SC-FDMA symbol.</div>
+<div class="description-paragraph" id="p-0183" num="0182"> <figref idrefs="DRAWINGS">FIG. 15</figref> is the case where a PUCCH/PUSCH is given priority over an SRS. <figref idrefs="DRAWINGS">FIG. 15</figref>-(<i>a</i>) is the case where the PUSCH is simultaneously allocated to an UL CC that is configured to transmit the SRS. The transmission of an SRS in an UL CC #2 may be dropped, and a PUSCH may be allocated to the UL CC #2 in order to transmit data. A PUCCH that uses the PUCCH formats 2/2a/2b may be allocated to an UL CC #1 in order to transmit UCI. <figref idrefs="DRAWINGS">FIG. 14</figref>-(<i>b</i>) is the case where a PUSCH is not simultaneously allocated to an UL CC that is configured to transmit an SRS. The transmission of an SRS in an UL CC #2 is dropped. A PUCCH that uses the PUCCH formats 2/2a/2b may be allocated to an UL CC #1 in order to transmit UCI.</div>
+<div class="description-paragraph" id="p-0184" num="0183"> <figref idrefs="DRAWINGS">FIG. 16</figref> is the case where an SRS is given priority over a PUCCH/PUSCH. <figref idrefs="DRAWINGS">FIG. 16</figref>-(<i>a</i>) is the case where a PUSCH is simultaneously allocated to an UL CC in which an SRS is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for the transmission of the SRS, and a PUSCH may be allocated to the remaining SC-FDMA symbols in order to transmit data. The PUCCH formats 2/2a/2b of an UL CC #1 is dropped. UCI may be subject to piggyback through the PUSCH and transmitted along with uplink data. Here, rate matching is performed on the PUSCH of the UL CC #2 except the last SC-FDMA symbol allocated to the SRS, or puncturing is applied to the last SC-FDMA symbol. <figref idrefs="DRAWINGS">FIG. 16</figref>-(<i>b</i>) is the case where a PUSCH is not simultaneously allocated to an UL CC in which an SRS is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for the transmission of the SRS. The PUCCH formats 2/2a/2b of an UL CC #1 is dropped. UCI may be subject to piggyback through the PUSCH and transmitted along with uplink data.</div>
+<div class="description-paragraph" id="p-0185" num="0184">A bandwidth occupied by an SRS in the last SC-FDMA symbol of the SRS subframe in <figref idrefs="DRAWINGS">FIGS. 14 to 16</figref> may be the entire system bandwidth or may be a narrow band or partial bandwidth. Furthermore, the bandwidth occupied by the SRS in the last SC-FDMA symbol of the SRS subframe may be a UE-specific SRS bandwidth defined in LTE rel-8/9 and may be an SRS bandwidth newly defined in LTE-A. A bandwidth occupied by a PUSCH in the remaining SC-FDMA symbols is not limited.</div>
+<div class="description-paragraph" id="p-0186" num="0185">The above-described rate matching or puncturing may be selectively applied according to the transmission mode or channel environment of corresponding UE and may be implicitly indicated through already defined other parameters or may be indicated by explicitly signaling a newly defined parameter. Furthermore, the type of PUCCH format used and whether UCI to be transmitted through a PUCCH is transmitted by piggybacking to a PUSCH, together with uplink data, or not may be implicitly indicated through other parameters or may be indicated by explicitly signaling a newly defined parameter. Here, the indication may be configured in either a cell-specific or UE-specific manner.</div>
+<div class="description-paragraph" id="p-0187" num="0186">Or, if the SRS transmission band of a plurality of UEs is indicated through a higher layer or signaling so that it is multiplexed within one carrier, the rate matching or puncturing of the plurality of UEs may be applied in a cell-specific or carrier-specific manner within at least corresponding carrier.</div>
+<div class="description-paragraph" id="p-0188" num="0187">Or, although the SRS transmission band of a plurality of UEs is indicated through a higher layer or signaling so that it is multiplexed within one carrier, whether the rate matching or puncturing of a PUSCH will be applied or not may be explicitly L1/L2 signalized or RRC signalized in a UE-specific manner.</div>
+<div class="description-paragraph" id="p-0189" num="0188">3) PUCCH Format 3</div>
+<div class="description-paragraph" id="p-0190" num="0189">The PUCCH format 3 is an extended PUCCH format introduced into LTE-A.</div>
+<div class="description-paragraph" id="p-0191" num="0190">The PUCCH format 3 may be replaced with the PUCCH formats 1/1a/1b or 2/2a/2b of LTE Rel-8 in order to transmit a more payload in carrier aggregation systems, etc. When CQI/precoding matrix indicator (PMI)/rank indicator (RI) are transmitted for each CC like in ACK/NACK feedback information, payload is increased. Accordingly, there is a need for a new PUCCH format.</div>
+<div class="description-paragraph" id="p-0192" num="0191">The present invention may be applied to the PUCCH format 3 like in the methods applied to the PUCCH formats 1/1a/1b and the PUCCH formats 2/2a/2b.</div>
+<div class="description-paragraph" id="p-0193" num="0192"> <figref idrefs="DRAWINGS">FIGS. 17 to 19</figref> some examples of constructions regarding a data transmission method in a proposed SRS subframe. The SRS subframe of <figref idrefs="DRAWINGS">FIGS. 17 to 19</figref> may be any one subframe of SRS subframes determined in a UE-specific manner or the SRS subframe of <figref idrefs="DRAWINGS">FIGS. 17 to 19</figref> may be an one subframe of SRS subframes determined in a cell specific manner.</div>
+<div class="description-paragraph" id="p-0194" num="0193"> <figref idrefs="DRAWINGS">FIG. 17</figref> is the case where an SRS is given priority over a PUCCH/PUSCH. <figref idrefs="DRAWINGS">FIG. 17</figref>-(<i>a</i>) is the case where a PUSCH is simultaneously allocated to an UL CC in which an SRS is transmitted. UE transmits UCI through the shortened PUCCH format 3 and at the same times ends the SRS through another carrier. <figref idrefs="DRAWINGS">FIG. 17</figref>-(<i>b</i>) is the case where a PUSCH is not simultaneously allocated to an UL CC in which an SRS is transmitted. UE transmits UCI through the shortened PUCCH format 3 and at the same time transmits an SRS through another carrier. In a single carrier system, if the ackNackSRS-SimultaneousTransmission parameter is true, UE uses the shortened PUCCH format 3 when the transmission of an SRS and the transmission of a PUCCH that carries ACK/NACK and/or a positive SR are configured in the same subframe and simultaneously transmits the SRS and the PUCCH that carries ACK/NACK and/or a positive SR. That is, if a PUCCH that carries ACK/NACK and/or a positive SR is configured within an SRS subframe configured in a cell-specific manner, UE uses the shortened PUCCH format 3 and simultaneously transmits the SRS and the PUCCH that carries ACK/NACK and/or a positive SR. Accordingly, if an UL CC #1 is configured to use the shortened PUCCH format 3 and an SRS is configured so that it is transmitted in an UL CC #2, the shortened PUCCH format 3 in the UL CC #1 and the SRS in the UL CC #2 can be transmitted at the same time.</div>
+<div class="description-paragraph" id="p-0195" num="0194"> <figref idrefs="DRAWINGS">FIG. 18</figref> is the case where a PUCCH/PUSCH is given priority over an SRS. <figref idrefs="DRAWINGS">FIG. 18</figref>-(<i>a</i>) is the case where a PUSCH is simultaneously allocated to an UL CC configured to transmit an SRS. UE transmits UCI through a normal PUCCH format 3, and the transmission of an SRS in other carriers is dropped. <figref idrefs="DRAWINGS">FIG. 18</figref>-(<i>b</i>) is the case where a PUSCH is not simultaneously allocated to an UL CC configured to transmit an SRS. UE transmits UCI through a normal PUCCH format 3, and the transmission of an SRS in other carriers is dropped.</div>
+<div class="description-paragraph" id="p-0196" num="0195"> <figref idrefs="DRAWINGS">FIG. 19</figref> is the case where an SRS is given priority over a PUCCH/PUSCH. <figref idrefs="DRAWINGS">FIG. 19</figref>-(<i>a</i>) is the case where a PUSCH is simultaneously allocated to an UL CC in which an SRS is transmitted. <figref idrefs="DRAWINGS">FIG. 19</figref>-(<i>b</i>) is the case where a PUSCH is not simultaneously allocated to an UL CC in which an SRS is transmitted. The last SC-FDMA symbol of the SRS subframe of an UL CC #2 is allocated for the transmission of the SRS. The PUCCH format 3 of an UL CC #1 is dropped. UCI may be transmitted through the PUSCH according to a piggyback scheme.</div>
+<div class="description-paragraph" id="p-0197" num="0196">A bandwidth occupied by an SRS in the last SC-FDMA symbol of the SRS subframe in <figref idrefs="DRAWINGS">FIGS. 17 to 19</figref> may be the entire system bandwidth or may be a narrow band or partial bandwidth. Furthermore, the bandwidth occupied by the SRS in the last SC-FDMA symbol of the SRS subframe may be a UE-specific SRS bandwidth defined in LTE rel-8/9 and may be an SRS bandwidth newly defined in LTE-A. A bandwidth occupied by a PUSCH in the remaining SC-FDMA symbols is not limited.</div>
+<div class="description-paragraph" id="p-0198" num="0197">The above-described rate matching or puncturing may be selectively applied according to the transmission mode or channel environment of corresponding UE and may be implicitly indicated through already defined other parameters or may be indicated by explicitly signaling a newly defined parameter. Furthermore, the type of PUCCH format used and whether UCI to be transmitted through a PUCCH is transmitted by piggybacking to a PUSCH, together with uplink data, or not may be implicitly indicated through other parameters or may be indicated by explicitly signaling a newly defined parameter. Here, the indication may be configured in either a cell-specific or UE-specific manner.</div>
+<div class="description-paragraph" id="p-0199" num="0198">Or, if the SRS transmission band of a plurality of UEs is indicated through a higher layer or signaling so that it is multiplexed within one carrier, the rate matching or puncturing of the plurality of UEs may be applied in a cell-specific or carrier-specific manner within at least corresponding carrier.</div>
+<div class="description-paragraph" id="p-0200" num="0199">Or, although the SRS transmission band of a plurality of UEs is indicated through a higher layer or signaling so that it is multiplexed within one carrier, whether the rate matching or puncturing of a PUSCH will be applied or not may be explicitly L1/L2 signalized or RRC signalized in a UE-specific manner.</div>
+<div class="description-paragraph" id="p-0201" num="0200">Meanwhile, in LTE-A, if indication is made by a higher layer, the simultaneous transmission of a PUSCH and a PUCCH may be supported. When the simultaneous transmission of a PUSCH and a PUCCH is possible, a necessity to maintain a single carrier property is reduced. Accordingly, if an SRS, a PUCCH, and a PUSCH are configured so that they are transmitted in one subframe, a new data method may be proposed.</div>
+<div class="description-paragraph" id="p-0202" num="0201">For example, all of an SRS, a PUCCH, and a PUSCH may be transmitted in an SRS subframe. As described above, rate matching or puncturing is performed on a PUSCH in a CC to which an SRS has been allocated and data is transmitted, and a PUSCH is transmitted in a CC to which the SRS has not been allocated. Throughput can be increased because a PUSCH is always transmitted. Reliability of UCI transmission can be guaranteed because an SRS and a PUCCH are transmitted at the same time.</div>
+<div class="description-paragraph" id="p-0203" num="0202">Here, if the transmit power of UE exceeds a maximum transmit power in a corresponding SRS subframe or SC-FDMA symbol, an SRS, a PUCCH, and a PUSCH may be transmitted by adjusting the transmit power according to the priorities of the SRS, the PUCCH, and the PUSCH. The priorities of the SRS, the PUCCH, and the PUSCH may be determined in various ways. For example, the priority may be in order of PUCCH&gt;SRS&gt;PUSCH. Or, the priority may be in order of any one of PUCCH&gt;SRS&gt;PUSCH with UCI&gt;PUSCH, PUCCH&gt;PUSCH&gt;SRS, PUCCH&gt;PUSCH with UCI&gt;PUSCH&gt;SRS, and PUCCH&gt;PUSCH with UCI&gt;SRS&gt;PUSCH.</div>
+<div class="description-paragraph" id="p-0204" num="0203">The present invention may be applied by a parameter, indicating the simultaneous transmission of an SRS, a PUCCH, and a PUSCH, irrespective of whether the PUCCH and the PUSCH are transmitted at the same time. The parameter may be transmitted according to a cell-specific or UE-specific scheme. Furthermore, the parameter may be given by a higher layer through a RRC message. If the parameter does not indicate the simultaneous transmission of an SRS, a PUCCH, and a PUSCH, the methods, such as rate matching or puncturing on a PUSCH, the use of a shortened PUCCH format, or the drop of an SRS, may be used as described above.</div>
+<div class="description-paragraph" id="p-0205" num="0204">In all the above embodiments, one subframe is assumed to be a normal cyclic prefix (CP) including 14 SC-FDMA symbols, but the present invention may also be applied to the case where one subframe is an extended CP including 12 SC-FDMA symbols.</div>
+<div class="description-paragraph" id="p-0206" num="0205"> <figref idrefs="DRAWINGS">FIG. 20</figref> is an embodiment of the proposed data transmission method. At step S<b>100</b>, UE transmits UCI through a PUCCH resource allocated to a first CC among a plurality of CCs in an SRS subframe. A second CC among the plurality of CCs in the SRS subframe includes an SRS SC-FDMA symbol reserved to transmit an SRS.</div>
+<div class="description-paragraph" id="p-0207" num="0206"> <figref idrefs="DRAWINGS">FIG. 21</figref> is a block diagram of a BS and UE in which the embodiments of the present invention are embodied.</div>
+<div class="description-paragraph" id="p-0208" num="0207">The BS <b>800</b> includes a processor <b>810</b>, memory <b>820</b>, and a Radio Frequency (RF) unit <b>830</b>. The processor <b>810</b> implements the proposed functions, processes and/or methods. The layers of a radio interface protocol may be implemented by the processor <b>810</b>. The memory <b>820</b> is connected to the processor <b>810</b>, and it stores various pieces of information for driving the processor <b>810</b>. The RF unit <b>830</b> is connected to the processor <b>810</b>, and it transmits and/or receives radio signals.</div>
+<div class="description-paragraph" id="p-0209" num="0208">The UE <b>900</b> includes a processor <b>910</b>, memory <b>920</b>, and an RF unit <b>930</b>. The RF unit <b>930</b> is connected to the processor <b>910</b>, and it transmits UCI through a PUCCH resource allocated to a first CC among a plurality of CCs in an SRS subframe. Here, a second CC among the plurality of CCs in the SRS subframe may include SRS SC-FDMA symbols reserved for the transmission of an SRS. The processor <b>910</b> implements the proposed functions, processes and/or methods. The layers of a radio interface protocol may be implemented by the processor <b>910</b>. The memory <b>920</b> is connected to the processor <b>910</b>, and its stores various pieces of information for driving the processor <b>910</b>.</div>
+<div class="description-paragraph" id="p-0210" num="0209">The processor <b>910</b> may include an application-specific integrated circuit (ASIC), another chip set, a logical circuit, and/or a data processing unit. The RF unit <b>920</b> may include a baseband circuit for processing radio signals. In software implemented, the aforementioned methods can be implemented with a module (i.e., process, function, etc.) for performing the aforementioned functions. The module may be performed by the processor <b>910</b>. In view of the exemplary systems described herein, methodologies that may be implemented in accordance with the disclosed subject matter have been described with reference to several flow diagrams. While for purposed of simplicity, the methodologies are shown and described as a series of steps or blocks, it is to be understood and appreciated that the claimed subject matter is not limited by the order of the steps or blocks, as some steps may occur in different orders or concurrently with other steps from what is depicted and described herein. Moreover, one skilled in the art would understand that the steps illustrated in the flow diagram are not exclusive and other steps may be included or one or more of the steps in the example flow diagram may be deleted without affecting the scope and spirit of the present disclosure.</div>
+<div class="description-paragraph" id="p-0211" num="0210">What has been described above includes examples of the various aspects. It is, of course, not possible to describe every conceivable combination of components or methodologies for purposes of describing the various aspects, but one of ordinary skill in the art may recognize that many further combinations and permutations are possible. Accordingly, the subject specification is intended to embrace all such alternations, modifications and variations that fall within the spirit and scope of the appended claims.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">14</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM180385837">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method for transmitting control information by a user equipment (UE) in a wireless communication system, the method comprising:
+<div class="claim-text">receiving, by the UE via a higher layer, a parameter which indicates whether transmission of a hybrid automatic repeat request acknowledgement (HARQ-ACK) on a physical uplink control channel (PUCCH) and a sounding reference signal (SRS) in one subframe is configured or not;</div>
+<div class="claim-text">when the parameter is true, transmitting, by the UE in a primary component carrier (CC) among a plurality of CCs for carrier aggregation, at least one of the HARQ-ACK and a positive scheduling request (SR) on the PUCCH, which coincides in a same subframe as the SRS, by using a shortened PUCCH format; and</div>
+<div class="claim-text">when the parameter is false, transmitting, by the UE in the primary CC, at least one of the HARQ-ACK and the positive SR on the PUCCH by using a normal PUCCH format, while not transmitting, in a secondary CC among the plurality of CCs for carrier aggregation, the SRS which coincides in the same subframe as the PUCCH,</div>
+<div class="claim-text">wherein the shortened PUCCH format is a shortened PUCCH format 3.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<div class="claim-text">when the parameter is true, transmitting, by the UE in the secondary CC among the plurality of CCs for carrier aggregation, the SRS in the same subframe.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein, when the parameter is true, the PUCCH is transmitted in cell specific SRS subframes of the primary CC.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the same subframe is one of a plurality of UE-specific subframes configured by a UE-specific parameter.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein the UE-specific parameter indicates a periodicity and offset of the plurality of UE-specific subframes.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. The method of <claim-ref idref="CLM-00004">claim 4</claim-ref>, wherein the plurality of UE-specific subframes is a subset of a plurality of cell-specific subframes configured by a cell-specific parameter.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a bandwidth of part of or an entire single carrier frequency division multiple access (SC-FDMA) symbol is allocated to the transmission of the same subframe.</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. A user equipment (UE) in a wireless communication system, the UE comprising:
+<div class="claim-text">a memory;</div>
+<div class="claim-text">a radio frequency (RF) unit; and</div>
+<div class="claim-text">a processor that is coupled to the memory and the RF unit, and that:
+<div class="claim-text">controls the RF unit to receive, via a higher layer, a parameter which indicates whether transmission of a hybrid automatic repeat request acknowledgement (HARQ-ACK) on a physical uplink control channel (PUCCH) and a sounding reference signal (SRS) in one subframe is configured or not,</div>
+<div class="claim-text">when the parameter is true, controls the RF unit to transmit, in a primary component carrier (CC) among a plurality of CCs for carrier aggregation, at least one of the HARQ-ACK and a positive scheduling request (SR) on the PUCCH, which coincides in a same subframe as the SRS, by using a shortened PUCCH, and</div>
+<div class="claim-text">when the parameter is false, controls the RF unit to transmit, in the primary CC, at least one of the HARQ-ACK and the positive SR on the PUCCH by using a normal PUCCH format, while not transmitting, in a secondary CC among the plurality of CCs for carrier aggregation, the SRS which coincides in the same subframe as the PUCCH,</div>
+</div>
+<div class="claim-text">wherein the shortened PUCCH format is a shortened PUCCH format 3.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The UE of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein, when the parameter is true, the processor further controls the RF unit to transmit, in the secondary CC among the plurality of CCs for carrier aggregation, the SRS in the same subframe.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The UE of <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein, when the parameter is true, the PUCCH is transmitted in cell specific SRS subframes of the primary CC when the parameter is true.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. The UE of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein the same subframe is one of a plurality of UE-specific subframes configured by a UE-specific parameter.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The UE of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the UE-specific parameter indicates a periodicity and offset of the plurality of UE-specific subframes.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The UE of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the plurality of UE-specific subframes is a subset of a plurality of cell-specific subframes configured by a cell-specific parameter.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The UE of <claim-ref idref="CLM-00008">claim 8</claim-ref>, wherein a bandwidth of part of or an entire single carrier frequency division multiple access (SC-FDMA) symbol is allocated to the transmission of the same subframe.</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

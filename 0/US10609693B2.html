@@ -1,0 +1,1298 @@
+
+    <html>
+        <body>
+            <search-app>
+                <article class="result" itemscope="" itemtype="http://schema.org/ScholarlyArticle">
+    <h1 itemprop="pageTitle">US10609693B2 - Method for receiving downlink data channels in multicell-based wireless communication systems and apparatus for same 
+        - Google Patents</h1><section itemprop="abstract" itemscope="">
+<h2>Abstract</h2>
+<div html="" itemprop="content"><abstract lang="EN" load-source="docdb" mxw-id="PA384369534" source="national office">
+<div class="abstract">A method is provided for receiving a user equipment (UE) specific reference signal based-downlink data channel by a UE in a wireless communication system. The UE receives, from a network, a downlink control channel including either first scheduling information or second scheduling information, and receives the UE-specific reference signal based-downlink data channel from the network based on the downlink control channel. When the downlink control channel includes the first scheduling information, antenna ports of a certain reference signal which can be assumed to be quasi co-located with antenna ports of a UE-specific reference signal is configured by an indicator indicating one of two or more parameters configured by a higher layer. When the downlink control channel includes the second scheduling information, the antenna ports of a certain reference signal is configured by a parameter of a minimum index among the two or more parameters.</div>
+</abstract>
+</div>
+</section><section itemprop="description" itemscope="">
+<h2>Description</h2>
+<div html="" itemprop="content"><div class="description" lang="EN" load-source="patent-office" mxw-id="PDES251402788">
+<heading id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+<div class="description-paragraph" id="p-0002" num="0001">This application is a Continuation of U.S. patent application Ser. No. 14/371,912 filed on Jul. 11, 2014, which was filed as the National Phase of PCT/KR2013/001072 on Feb. 12, 2013, which claims the benefit under 35 U.S.C. § 119(e) to U.S. Provisional Application Nos. 61/721,455 filed on Nov. 1, 2012, 61/696,220 filed on Sep. 2, 2012, 61/669,655 filed on Jul. 9, 2012 and 61/597,725 filed on Feb. 11, 2012, all of which are hereby expressly incorporated by reference into the present application.</div>
+<heading id="h-0002">BACKGROUND OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0003" num="0002">Field of the Invention</div>
+<div class="description-paragraph" id="p-0004" num="0003">The present invention relates to a wireless communication system, and more particularly, to a method of receiving a downlink data channel in a multicell-based wireless communication system and an apparatus therefor.</div>
+<div class="description-paragraph" id="p-0005" num="0004">Discussion of the Related Art</div>
+<div class="description-paragraph" id="p-0006" num="0005">3GPP LTE (3<sup>rd </sup>generation partnership project long term evolution, hereinafter abbreviated LTE) communication system is schematically explained as an example of a wireless communication system to which the present invention is applicable.</div>
+<div class="description-paragraph" id="p-0007" num="0006"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a schematic diagram of E-UMTS network structure as one example of a wireless communication system. E-UMTS (evolved universal mobile telecommunications system) is a system evolved from a conventional UMTS (universal mobile telecommunications system). Currently, basic standardization works for the E-UMTS are in progress by 3GPP. E-UMTS is called LTE system in general. Detailed contents for the technical specifications of UMTS and E-UMTS refers to release 7 and release 8 of “3<sup>rd </sup>generation partnership project; technical specification group radio access network”, respectively.</div>
+<div class="description-paragraph" id="p-0008" num="0007">Referring to <figref idrefs="DRAWINGS">FIG. 1</figref>, E-UMTS includes a user equipment (UE), an eNode B (eNB), and an access gateway (hereinafter abbreviated AG) connected to an external network in a manner of being situated at the end of a network (E-UTRAN). The eNode B may be able to simultaneously transmit multi data streams for a broadcast service, a multicast service and/or a unicast service.</div>
+<div class="description-paragraph" id="p-0009" num="0008">One eNode B contains at least one cell. The cell provides a downlink transmission service or an uplink transmission service to a plurality of user equipments by being set to one of 1.25 MHz, 2.5 MHz, 5 MHz, 10 MHz, 15 MHz, and 20 MHz of bandwidths. Different cells can be configured to provide corresponding bandwidths, respectively. An eNode B controls data transmissions/receptions to/from a plurality of the user equipments. For a downlink (hereinafter abbreviated DL) data, the eNode B informs a corresponding user equipment of time/frequency region on which data is transmitted, coding, data size, HARQ (hybrid automatic repeat and request) related information and the like by transmitting DL scheduling information. And, for an uplink (hereinafter abbreviated UL) data, the eNode B informs a corresponding user equipment of time/frequency region usable by the corresponding user equipment, coding, data size, HARQ-related information and the like by transmitting UL scheduling information to the corresponding user equipment. Interfaces for user-traffic transmission or control traffic transmission may be used between eNode Bs. A core network (CN) consists of an AG (access gateway) and a network node for user registration of a user equipment and the like. The AG manages a mobility of the user equipment by a unit of TA (tracking area) consisting of a plurality of cells.</div>
+<div class="description-paragraph" id="p-0010" num="0009">Wireless communication technologies have been developed up to LTE based on WCDMA. Yet, the ongoing demands and expectations of users and service providers are consistently increasing. Moreover, since different kinds of radio access technologies are continuously developed, a new technological evolution is required to have a future competitiveness. Cost reduction per bit, service availability increase, flexible frequency band use, simple structure/open interface and reasonable power consumption of user equipment and the like are required for the future competitiveness.</div>
+<heading id="h-0003">SUMMARY OF THE INVENTION</heading>
+<div class="description-paragraph" id="p-0011" num="0010">Accordingly, the present invention intends to propose a method receiving a downlink data channel in a multicell-based wireless communication system and an apparatus therefor in the following description based on the discussion mentioned earlier in the foregoing description.</div>
+<div class="description-paragraph" id="p-0012" num="0011">To achieve these and other advantages and in accordance with the purpose of the present invention, as embodied and broadly described, according to one embodiment, a method of receiving a UE-specific reference signal based-downlink data channel, which is received by a user equipment in a wireless communication system, includes the steps of receiving information on one or more configurations defining large scale property of the UE-specific reference signal from a network via an upper layer, detecting either first scheduling information or second scheduling information for the UE-specific reference signal based-downlink data channel from the network and receiving the UE-specific reference signal based-downlink data channel based on the detected scheduling information, wherein the first scheduling information includes an indicator indicating one of the one or more configurations and wherein the large scale property of the UE-specific reference signal is defined according to a configuration indicated by the indicator when the first scheduling information is detected and is defined according to a predetermined configuration among the one or more configurations when the second scheduling information is detected.</div>
+<div class="description-paragraph" id="p-0013" num="0012">Meanwhile, to further achieve these and other advantages and in accordance with the purpose of the present invention, according to a different embodiment, a method of transmitting a UE-specific reference signal based-downlink data channel, which is transmitted by a network in a wireless communication system, includes the steps of transmitting information on one or more configurations defining large scale property of the UE-specific reference signal to a user equipment via an upper layer, transmitting either first scheduling information or second scheduling information for the UE-specific reference signal based-downlink data channel to the user equipment and transmitting the UE-specific reference signal based-downlink data channel to the user equipment, wherein the first scheduling information includes an indicator indicating one of the one or more configurations and wherein the large scale property of the UE-specific reference signal is defined according to a configuration indicated by the indicator when the first scheduling information is detected and is defined according to a predetermined configuration among the one or more configurations when the second scheduling information is detected.</div>
+<div class="description-paragraph" id="p-0014" num="0013">Preferably, the predetermined configuration corresponds to a configuration of a minimum index among the one or more configurations.</div>
+<div class="description-paragraph" id="p-0015" num="0014">More preferably, the information on the one or more configurations includes information on a specific reference signal capable of assuming that the UE-specific reference signal is identical to the large scale property. And, the information on the one or more configurations may include information on there is no specific reference signal capable of assuming that the UE-specific reference signal is identical to the large scale property.</div>
+<div class="description-paragraph" id="p-0016" num="0015">In this case, the specific reference signal corresponds to a channel status information-reference signal (CSI-RS). Specifically, the information on the specific reference signal indicates resource configuration information of the specific reference signal.</div>
+<div class="description-paragraph" id="p-0017" num="0016">More preferably, the large scale property corresponds to information on a frequency offset and information on a timing offset for synchronization tracking. More specifically, the large scale property includes at least one selected from the group consisting of Doppler spread, Doppler shift, average delay and delay spread.</div>
+<div class="description-paragraph" id="p-0018" num="0017">According to embodiment of the present invention, a user equipment can efficiently receive a downlink data channel in a multicell-based wireless communication system.</div>
+<div class="description-paragraph" id="p-0019" num="0018">Effects obtainable from the present invention may be non-limited by the above mentioned effect. And, other unmentioned effects can be clearly understood from the following description by those having ordinary skill in the technical field to which the present invention pertains.</div>
+<description-of-drawings>
+<heading id="h-0004">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<div class="description-paragraph" id="p-0020" num="0019"> <figref idrefs="DRAWINGS">FIG. 1</figref> is a schematic diagram of E-UMTS network structure as one example of a wireless communication system;</div>
+<div class="description-paragraph" id="p-0021" num="0020"> <figref idrefs="DRAWINGS">FIG. 2</figref> is a diagram for structures of control and user planes of radio interface protocol between a 3GPP radio access network standard-based user equipment and E-UTRAN;</div>
+<div class="description-paragraph" id="p-0022" num="0021"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a diagram for explaining physical channels used for 3GPP system and a general signal transmission method using the physical channels;</div>
+<div class="description-paragraph" id="p-0023" num="0022"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a diagram for a structure of a radio frame in LTE system;</div>
+<div class="description-paragraph" id="p-0024" num="0023"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a diagram for a structure of a downlink radio frame in LTE system;</div>
+<div class="description-paragraph" id="p-0025" num="0024"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a diagram for a structure of an uplink radio frame in LTE system;</div>
+<div class="description-paragraph" id="p-0026" num="0025"> <figref idrefs="DRAWINGS">FIG. 7</figref> is a diagram for a configuration of a multiple antenna communication system;</div>
+<div class="description-paragraph" id="p-0027" num="0026"> <figref idrefs="DRAWINGS">FIG. 8</figref> and <figref idrefs="DRAWINGS">FIG. 9</figref> are diagrams of a structure of a reference signal in LTE system supportive of downlink transmission using 4 antennas;</div>
+<div class="description-paragraph" id="p-0028" num="0027"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a diagram for an example of assigning a downlink DM-RS defined by a current 3GPP standard document;</div>
+<div class="description-paragraph" id="p-0029" num="0028"> <figref idrefs="DRAWINGS">FIG. 11</figref> is a diagram for an example of a CSI-RS configuration #0 in case of a normal CP among downlink CSI-RS configurations defined by a current 3GPP standard document;</div>
+<div class="description-paragraph" id="p-0030" num="0029"> <figref idrefs="DRAWINGS">FIG. 12</figref> is a diagram for an example of a multi node system in a next generation communication system;</div>
+<div class="description-paragraph" id="p-0031" num="0030"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a diagram for an example of E-PDCCH and PDSCH scheduled by the E-PDCCH;</div>
+<div class="description-paragraph" id="p-0032" num="0031"> <figref idrefs="DRAWINGS">FIG. 14</figref> is a diagram of an example for a user equipment to perform a tracking to obtain synchronization in a multicell-based wireless communication system;</div>
+<div class="description-paragraph" id="p-0033" num="0032"> <figref idrefs="DRAWINGS">FIG. 15</figref> is a diagram of an example for a user equipment to perform a reference signal tracking according to embodiment of the present invention;</div>
+<div class="description-paragraph" id="p-0034" num="0033"> <figref idrefs="DRAWINGS">FIG. 16</figref> is a diagram of a different example for a user equipment to perform a reference signal tracking according to embodiment of the present invention; and</div>
+<div class="description-paragraph" id="p-0035" num="0034"> <figref idrefs="DRAWINGS">FIG. 17</figref> is a block diagram for an example of a communication device according to one embodiment of the present invention.</div>
+</description-of-drawings>
+<heading id="h-0005">DETAILED DESCRIPTION OF THE EMBODIMENTS</heading>
+<div class="description-paragraph" id="p-0036" num="0035">In the following description, compositions of the present invention, effects and other characteristics of the present invention can be easily understood by the embodiments of the present invention explained with reference to the accompanying drawings. Embodiments explained in the following description are examples of the technological features of the present invention applied to 3GPP system.</div>
+<div class="description-paragraph" id="p-0037" num="0036">In this specification, the embodiments of the present invention are explained using an LTE system and an LTE-A system, which is exemplary only. The embodiments of the present invention are applicable to various communication systems corresponding to the above mentioned definition. In particular, although the embodiments of the present invention are described in the present specification on the basis of FDD, this is exemplary only. The embodiments of the present invention may be easily modified and applied to H-FDD or TDD.</div>
+<div class="description-paragraph" id="p-0038" num="0037">And, in the present specification, a base station can be named by such a comprehensive terminology as an RRH (remote radio head), an eNB, a TP (transmission point), an RP (reception point), a relay and the like.</div>
+<div class="description-paragraph" id="p-0039" num="0038"> <figref idrefs="DRAWINGS">FIG. 2</figref>, including (a) and (b), is a diagram for structures of a control plane protocol stack, as shown in <figref idrefs="DRAWINGS">FIG. 2(<i>a</i>)</figref>, and a user plane protocol stack, as shown in <figref idrefs="DRAWINGS">FIG. 2(<i>b</i>)</figref>, of a radio interface protocol between a 3GPP radio access network standard-based user equipment and E-UTRAN. A control plane refers to a path on which control messages used by a user equipment (UE) and a network to manage a call are transmitted. A user plane refers to a path on which such a data generated in an application layer as audio data, internet packet data, and the like are transmitted.</div>
+<div class="description-paragraph" id="p-0040" num="0039">A physical layer, which is a 1<sup>st </sup>layer, provides higher layers with an information transfer service using a physical channel. The physical layer is connected to a medium access control layer situated above via a transport channel (trans antenna port channel). Data moves between the medium access control layer and the physical layer on the transport channel. Data moves between a physical layer of a transmitting side and a physical layer of a receiving side on the physical channel. The physical channel utilizes time and frequency as radio resources. Specifically, the physical layer is modulated by OFDMA (orthogonal frequency division multiple access) scheme in DL and the physical layer is modulated by SC-FDMA (single carrier frequency division multiple access) scheme in UL.</div>
+<div class="description-paragraph" id="p-0041" num="0040">Medium access control (hereinafter abbreviated MAC) layer of a 2<sup>nd </sup>layer provides a service to a radio link control (hereinafter abbreviated RLC) layer, which is a higher layer, on a logical channel. The RLC layer of the 2<sup>nd </sup>layer supports a reliable data transmission. The function of the RLC layer may be implemented by a function block within the MAC. PDCP (packet data convergence protocol) layer of the 2<sup>nd </sup>layer performs a header compression function to reduce unnecessary control information, thereby efficiently transmitting such IP packets as IPv4 packets and IPv6 packets in a narrow band of a radio interface.</div>
+<div class="description-paragraph" id="p-0042" num="0041">Radio resource control (hereinafter abbreviated RRC) layer situated in the lowest location of a 3<sup>rd </sup>layer is defined on a control plane only. The RRC layer is responsible for control of logical channels, transport channels and physical channels in association with a configuration, a re-configuration and a release of radio bearers (hereinafter abbreviated RBs). The RB indicates a service provided by the 2<sup>nd </sup>layer for a data delivery between the user equipment and the network. To this end, the RRC layer of the user equipment and the RRC layer of the network exchange a RRC message with each other. In case that there is an RRC connection (RRC connected) between the user equipment and the RRC layer of the network, the user equipment lies in the state of RRC connected (connected mode). Otherwise, the user equipment lies in the state of RRC idle (idle mode). A non-access stratum (NAS) layer situated at the top of the RRC layer performs such a function as a session management, a mobility management and the like.</div>
+<div class="description-paragraph" id="p-0043" num="0042">A single cell consisting of an eNode B (eNB) is set to one of 1.25 MHz, 2.5 MHz, 5 MHz, 10 MHz, 15 MHz, and 20 MHz of bandwidths and then provides a downlink or uplink transmission service to a plurality of user equipments. Different cells can be configured to provide corresponding bandwidths, respectively.</div>
+<div class="description-paragraph" id="p-0044" num="0043">DL transport channels for transmitting data from a network to a user equipment include a BCH (broadcast channel) for transmitting a system information, a PCH (paging channel) for transmitting a paging message, a downlink SCH (shared channel) for transmitting a user traffic or a control message and the like. DL multicast/broadcast service traffic or a control message may be transmitted on the DL SCH or a separate DL MCH (multicast channel). Meanwhile, UL transport channels for transmitting data from a user equipment to a network include a RACH (random access channel) for transmitting an initial control message, an uplink SCH (shared channel) for transmitting a user traffic or a control message. A logical channel, which is situated above a transport channel and mapped to the transport channel, includes a BCCH (broadcast channel), a PCCH (paging control channel), a CCCH (common control channel), a MCCH (multicast control channel), a MTCH (multicast traffic channel) and the like.</div>
+<div class="description-paragraph" id="p-0045" num="0044"> <figref idrefs="DRAWINGS">FIG. 3</figref> is a diagram for explaining physical channels used for 3GPP system and a general signal transmission method using the physical channels.</div>
+<div class="description-paragraph" id="p-0046" num="0045">If a power of a user equipment is turned on or the user equipment enters a new cell, the user equipment may perform an initial cell search job for matching synchronization with an eNode B and the like [S<b>301</b>]. To this end, the user equipment may receive a primary synchronization channel (P-SCH) and a secondary synchronization channel (S-SCH) from the eNode B, may be synchronized with the eNode B and may then obtain information such as a cell ID and the like. Subsequently, the user equipment may receive a physical broadcast channel from the eNode B and may be then able to obtain intra-cell broadcast information. Meanwhile, the user equipment may receive a downlink reference signal (DL RS) in the initial cell search step and may be then able to check a DL channel state.</div>
+<div class="description-paragraph" id="p-0047" num="0046">Having completed the initial cell search, the user equipment may receive a physical downlink shared channel (PDSCH) according to a physical downlink control channel (PDCCH) and an information carried on the physical downlink control channel (PDCCH). The user equipment may be then able to obtain a detailed system information [S<b>302</b>].</div>
+<div class="description-paragraph" id="p-0048" num="0047">Meanwhile, if a user equipment initially accesses an eNode B or does not have a radio resource for transmitting a signal, the user equipment may be able to perform a random access procedure to complete the access to the eNode B [S<b>303</b> to S<b>306</b>]. To this end, the user equipment may transmit a specific sequence as a preamble on a physical random access channel (PRACH) [S<b>303</b>/S<b>305</b>] and may be then able to receive a response message on PDCCH and the corresponding PDSCH in response to the preamble [S<b>304</b>/S<b>306</b>]. In case of a contention based random access procedure (RACH), it may be able to additionally perform a contention resolution procedure.</div>
+<div class="description-paragraph" id="p-0049" num="0048">Having performed the above mentioned procedures, the user equipment may be able to perform a PDCCH/PDSCH reception [S<b>307</b>] and a PUSCH/PUCCH (physical uplink shared channel/physical uplink control channel) transmission [S<b>308</b>] as a general uplink/downlink signal transmission procedure. In particular, the user equipment receives a DCI (downlink control information) on the PDCCH. In this case, the DCI contains such a control information as an information on resource allocation to the user equipment. The format of the DCI varies in accordance with its purpose.</div>
+<div class="description-paragraph" id="p-0050" num="0049">Meanwhile, control information transmitted to an eNode B from a user equipment via UL or the control information received by the user equipment from the eNode B includes downlink/uplink ACK/NACK signals, CQI (Channel Quality Indicator), PMI (Precoding Matrix Index), RI (Rank Indicator) and the like. In case of 3GPP LTE system, the user equipment may be able to transmit the aforementioned control information such as CQI/PMI/RI and the like on PUSCH and/or PUCCH.</div>
+<div class="description-paragraph" id="p-0051" num="0050"> <figref idrefs="DRAWINGS">FIG. 4</figref> is a diagram for a structure of a radio frame in LTE system.</div>
+<div class="description-paragraph" id="p-0052" num="0051">Referring to <figref idrefs="DRAWINGS">FIG. 4</figref>, one radio frame has a length of 10 ms (327,200×T<sub>S</sub>) and is constructed with 10 subframes in equal size. Each of the subframes has a length of 1 ms and is constructed with two slots. Each of the slots has a length of 0.5 ms (15,360×T<sub>S</sub>). In this case, T<sub>s </sub>indicates a sampling time and is represented as T<sub>s</sub>=1/(15 kHz×2048)=3.2552×10<sup>−8 </sup>(i.e., about 33 ns). The slot includes a plurality of OFDM symbols in a time domain and also includes a plurality of resource blocks (RBs) in a frequency domain. In the LTE system, one resource block includes ‘12 subcarriers×7 or 6 OFDM symbols’. A transmission time interval (III), which is a unit time for transmitting data, can be determined by at least one subframe unit. The aforementioned structure of a radio frame is just exemplary. And, the number of subframes included in a radio frame, the number of slots included in a subframe and the number of OFDM symbols included in a slot may be modified in various ways.</div>
+<div class="description-paragraph" id="p-0053" num="0052"> <figref idrefs="DRAWINGS">FIG. 5</figref> is a diagram for showing an example of a control channel included in a control region of a single subframe in a DL radio frame.</div>
+<div class="description-paragraph" id="p-0054" num="0053">Referring to <figref idrefs="DRAWINGS">FIG. 5</figref>, a subframe consists of 14 OFDM symbols. According to a subframe configuration, the first 1 to 3 OFDM symbols are used for a control region and the other 13˜11 OFDM symbols are used for a data region. In the diagram, R1 to R4 may indicate a reference signal (hereinafter abbreviated RS) or a pilot signal for an antenna 0 to 3. The RS is fixed as a constant pattern in the subframe irrespective of the control region and the data region. The control channel is assigned to a resource to which the RS is not assigned in the control region and a traffic channel is also assigned to a resource to which the RS is not assigned in the data region. The control channel assigned to the control region may include a physical control format indicator channel (PCFICH), a physical hybrid-ARQ indicator channel (PHICH), a physical downlink control channel (PDCCH), and the like.</div>
+<div class="description-paragraph" id="p-0055" num="0054">The PCFICH (physical control format indicator channel) informs a user equipment of the number of OFDM symbols used for the PDCCH on every subframe. The PCFICH is situated at the first OFDM symbol and is configured prior to the PHICH and the PDCCH. The PCFICH consists of 4 resource element groups (REG) and each of the REGs is distributed in the control region based on a cell ID (cell identity). One REG consists of 4 resource elements (RE). The RE may indicate a minimum physical resource defined as ‘one subcarrier×one OFDM symbol’. The value of the PCFICH may indicate the value of 1 to 3 or 2 to 4 according to a bandwidth and is modulated into a QPSK (quadrature phase shift keying).</div>
+<div class="description-paragraph" id="p-0056" num="0055">The PHICH (physical HARQ (hybrid-automatic repeat and request) indicator channel) is used for carrying HARQ ACK/NACK for an UL transmission. In particular, the PHICH indicates a channel to which DL ACK/NACK information is transmitted for UL HARQ. The PHICH consists of a single REG and is scrambled cell-specifically. The ACK/NACK is indicated by 1 bit and modulated into BPSK (binary phase shift keying). The modulated ACK/NACK is spread into a spread factor (SF) 2 or 4. A plurality of PHICHs, which are mapped to a same resource, composes a PHICH group. The number of PHICH, which is multiplexed by the PHICH group, is determined according to the number of spreading code. The PHICH (group) is repeated three times to obtain diversity gain in a frequency domain and/or a time domain.</div>
+<div class="description-paragraph" id="p-0057" num="0056">The PDCCH (physical DL control channel) is assigned to the first n OFDM symbol of a subframe. In this case, the n is an integer more than 1 and indicated by the PCFICH. The PDCCH consists of at least one CCE. The PDCCH informs each of user equipments or a user equipment group of an information on a resource assignment of PCH (paging channel) and DL-SCH (downlink-shared channel), which are transmission channels, an uplink scheduling grant, HARQ information and the like. The PCH (paging channel) and the DL-SCH (downlink-shared channel) are transmitted on the PDSCH. Hence, an eNode B and the user equipment transmit and receive data via the PDSCH in general except a specific control information or a specific service data.</div>
+<div class="description-paragraph" id="p-0058" num="0057">Information on a user equipment (one or a plurality of user equipments) receiving data of PDSCH, a method of receiving and decoding the PDSCH data performed by the user equipment, and the like is transmitted in a manner of being included in the PDCCH. For instance, assume that a specific PDCCH is CRC masked with an RNTI (radio network temporary identity) called “A” and an information on data transmitted using a radio resource (e.g., frequency position) called “B” and a DCI format i.e., a transmission form information (e.g., a transport block size, a modulation scheme, coding information, and the like) called “C” is transmitted via a specific subframe. In this case, the user equipment in a cell monitors the PDCCH using the RNTI information of its own, if there exist at least one or more user equipments having the “A” RNTI, the user equipments receive the PDCCH and the PDSCH, which is indicated by the “B” and the “C”, via the received information on the PDCCH.</div>
+<div class="description-paragraph" id="p-0059" num="0058"> <figref idrefs="DRAWINGS">FIG. 6</figref> is a diagram for a structure of an uplink subframe used in LTE system.</div>
+<div class="description-paragraph" id="p-0060" num="0059">Referring to <figref idrefs="DRAWINGS">FIG. 6</figref>, an UL subframe can be divided into a region to which a physical uplink control channel (PUCCH) carrying control information is assigned and a region to which a physical uplink shared channel (PUSCH) carrying a user data is assigned. A middle part of the subframe is assigned to the PUSCH and both sides of a data region are assigned to the PUCCH in a frequency domain. The control information transmitted on the PUCCH includes an ACK/NACK used for HARQ, a CQI (channel quality indicator) indicating a DL channel status, an RI (rank indicator) for MIMO, an SR (scheduling request) corresponding to an UL resource allocation request, and the like. The PUCCH for a single UE uses one resource block, which occupies a frequency different from each other in each slot within a subframe. In particular, 2 resource blocks assigned to the PUCCH are frequency hopped on a slot boundary. In particular, <figref idrefs="DRAWINGS">FIG. 6</figref> shows an example that the PUCCHs satisfying conditions (e.g., m=0, 1, 2, 3) are assigned to a subframe.</div>
+<div class="description-paragraph" id="p-0061" num="0060">In the following description, MIMO system is explained. The MIMO (multiple-input multiple-output) is a method using a plurality of transmitting antennas and a plurality of receiving antennas. The efficiency in transmitting and receiving data may be enhanced by the MIMO. In particular, by using a plurality of the antennas at a transmitting end or a receiving end in a radio communication system, it may be able to increase a capacity and enhance performance. In the following description, the MIMO may be called a ‘multi antenna’.</div>
+<div class="description-paragraph" id="p-0062" num="0061">In the multiple antenna technology, it may not depend on a single antenna path to receive a whole message. Data is completed in a manner of combining data fragments received from many antennas in one place in the multiple antenna technology instead. When the multiple antenna technology is used, a data transmission speed may be enhanced in a cell area having a specific size or a system coverage may be enlarged while a specific data transmission speed is secured. And, this technology is widely used in a mobile communication terminal, a relay station, and the like. According to the multiple antenna technology, a throughput limitation of a single antenna used by a conventional technology in a mobile communication can be overcome.</div>
+<div class="description-paragraph" id="p-0063" num="0062">A block diagram of a general multi-antenna (MIMO) communication system is depicted in <figref idrefs="DRAWINGS">FIG. 7</figref>.</div>
+<div class="description-paragraph" id="p-0064" num="0063">N<sub>T </sub>number of transmitting antennas are installed in a transmitting end and N<sub>R </sub>number of receiving antennas are installed in a receiving end. As described in the above, in case that both the transmitting end and the receiving end use plural number of antennas, a theoretical channel transmission capacity is increased compared to a case that the plural number of antennas are only used for either the transmitting end or the receiving end. The increase of the channel transmission capacity is proportional to the number of antennas. Thus, a transfer rate is enhanced and frequency efficiency is enhanced. If a maximum transfer rate is represented as R<sub>o </sub>in case of using a single antenna, the transfer rate using multiple antennas can be theoretically increased as much as the maximum transfer rate R<sub>o </sub>multiplied by a rate of increase R<sub>i</sub>, as shown in the following Formula 1. In this case, the R<sub>i </sub>is a smaller value of the N<sub>T </sub>and the N<sub>R</sub>.
+<br/>
+<i>R</i> <sub>i</sub>=min(<i>N</i> <sub>T</sub> <i>,N</i> <sub>R</sub>)  [Formula 1]
+</div>
+<div class="description-paragraph" id="p-0065" num="0064">For instance, MIMO communication system using 4 transmitting antennas and 4 receiving antennas may be able to theoretically obtain the transfer rate of 4 times of a single antenna system. After the theoretical capacity increase of the multi-antenna system is proved in the mid-90s, various technologies for practically enhancing a data transmission rate have been actively studied up to date and several technologies among them are already reflected in such a various wireless communication standard as a 3<sup>rd </sup>generation mobile communication, a next generation wireless LAN and the like.</div>
+<div class="description-paragraph" id="p-0066" num="0065">If we look at the research trend related to the multi-antenna until now, many active researches have been performed for such a study of various points of view as a study on information theory related to a multi-antenna communication capacity calculation in various channel environments and multiple access environment, a study on a radio channel measurement and model deduction of the multi-antenna system, a study on a space-time signal processing technology for enhancing a transmission reliability and a transmission rate, and the like.</div>
+<div class="description-paragraph" id="p-0067" num="0066">In case of mathematically modeling a communication method of the multi-antenna system in order to explain it with more specific way, it can be represented as follows. As shown in <figref idrefs="DRAWINGS">FIG. 7</figref>, assume that there exist N<sub>T </sub>number of transmitting antennas and N<sub>R </sub>number of receiving antennas. First of all, if we look into a transmission signal, since the maximum number of information capable of being transmitted is N<sub>T </sub>in case that there exists N<sub>T </sub>number of transmitting antennas, transmission information can be represented as a vector in the following Formula 2.
+<br/>
+<i>s=└s</i> <sub>1</sub> <i>,s</i> <sub>2</sub> <i>, . . . ,s</i> <sub>N</sub> <sub> <sub2>T</sub2> </sub>┘<sup>T</sup>  [Formula 2]
+</div>
+<div class="description-paragraph" id="p-0068" num="0067">Meanwhile, for each of the transmission informations s<sub>1</sub>, s<sub>2</sub>, . . . s<sub>N</sub> <sub> <sub2>T</sub2> </sub>, a transmit power may be differentiated according to the each of the transmission informations. In this case, if each of the transmit powers is represented as P<sub>1</sub>, P<sub>2</sub>, . . . , P<sub>N</sub> <sub> <sub2>T</sub2> </sub>, transmit power-adjusted transmission information can be represented as a vector in the following Formula 3.
+<br/>
+<i>ŝ</i>=[<i>ŝ</i> <sub>1</sub> <i>,ŝ</i> <sub>2</sub> <i>, . . . ,ŝ</i> <sub>N</sub> <sub> <sub2>T</sub2> </sub>]<sup>T</sup>=[<i>P</i> <sub>1</sub> <i>s</i> <sub>1</sub> <i>,P</i> <sub>2</sub> <i>s</i> <sub>2</sub> <i>, . . . P</i> <sub>N</sub> <sub> <sub2>T</sub2> </sub> <i>s</i> <sub>N</sub> <sub> <sub2>T</sub2> </sub>]<sup>T</sup>  [Formula 3]
+</div>
+<div class="description-paragraph" id="p-0069" num="0068">And, if ŝ is represented using a diagonal matrix P, it can be represented as a following Formula 4.</div>
+<div class="description-paragraph" id="p-0070" num="0069">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mover>
+<mi>s</mi>
+<mo>^</mo>
+</mover>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mi>P</mi>
+<mn>1</mn>
+</msub>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<mn>0</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<msub>
+<mi>P</mi>
+<mn>2</mn>
+</msub>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<mi>⋱</mi>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mn>0</mn>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<msub>
+<mi>P</mi>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mi>s</mi>
+<mn>1</mn>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>s</mi>
+<mn>2</mn>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>s</mi>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mi>Ps</mi>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>Formula</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>4</mn>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0071" num="0070">Meanwhile, let's consider a case that the N<sub>T </sub>number of transmission signal x<sub>1</sub>, x<sub>2</sub>, . . . x<sub>N</sub> <sub> <sub2>T</sub2> </sub>, which is practically transmitted, is configured in a manner of applying a weighted matrix W to the adjusted information vector Ŝ. In this case, the weighted matrix performs a role of distributing the transmission information to each of the antennas according to the situation of the transmission channel and the like. The transmission signal x<sub>1</sub>, x<sub>2</sub>, . . . , x<sub>N</sub> <sub> <sub2>T </sub2> </sub>can be represented using a vector X in the following Formula 5. In this case, W<sub>ij </sub>means a weighting between an i<sup>th </sup>transmitting antenna and j<sup>th </sup>information. The W is called the weighted matrix or a precoding matrix.</div>
+<div class="description-paragraph" id="p-0072" num="0071">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mi>X</mi>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mstyle>
+<mspace height="0.ex" width="0.em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mi>x</mi>
+<mn>1</mn>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>x</mi>
+<mn>2</mn>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>x</mi>
+<mi>i</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>x</mi>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mi>w</mi>
+<mn>11</mn>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>w</mi>
+<mn>12</mn>
+</msub>
+</mtd>
+<mtd>
+<mi>⋯</mi>
+</mtd>
+<mtd>
+<msub>
+<mi>w</mi>
+<mrow>
+<mn>1</mn>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+</mrow>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>w</mi>
+<mn>21</mn>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>w</mi>
+<mn>22</mn>
+</msub>
+</mtd>
+<mtd>
+<mi>⋯</mi>
+</mtd>
+<mtd>
+<msub>
+<mi>w</mi>
+<mrow>
+<mn>2</mn>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+</mrow>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<mi>⋱</mi>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>w</mi>
+<mrow>
+<mi>i</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>w</mi>
+<mrow>
+<mi>i</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<mi>⋯</mi>
+</mtd>
+<mtd>
+<msub>
+<mi>w</mi>
+<msub>
+<mi>iN</mi>
+<mi>T</mi>
+</msub>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+<mtd>
+<mi>⋱</mi>
+</mtd>
+<mtd>
+<mstyle>
+<mspace height="0.3ex" width="0.3em"> </mspace>
+</mstyle>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>w</mi>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+<mo>⁢</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>w</mi>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+<mo>⁢</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<mi>⋯</mi>
+</mtd>
+<mtd>
+<msub>
+<mi>w</mi>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+<mo>⁢</mo>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+</mrow>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+<mo>⁡</mo>
+<mrow>
+<mo>[</mo>
+<mtable>
+<mtr>
+<mtd>
+<msub>
+<mover>
+<mi>s</mi>
+<mo>^</mo>
+</mover>
+<mn>1</mn>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mover>
+<mi>s</mi>
+<mo>^</mo>
+</mover>
+<mn>2</mn>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mover>
+<mi>s</mi>
+<mo>^</mo>
+</mover>
+<mi>j</mi>
+</msub>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mi>⋮</mi>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mover>
+<mi>s</mi>
+<mo>^</mo>
+</mover>
+<msub>
+<mi>N</mi>
+<mi>T</mi>
+</msub>
+</msub>
+</mtd>
+</mtr>
+</mtable>
+<mo>]</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<mrow>
+<mi>W</mi>
+<mo>⁢</mo>
+<mover>
+<mi>s</mi>
+<mo>^</mo>
+</mover>
+</mrow>
+<mo>=</mo>
+<mi>WPs</mi>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mtd>
+<mtd>
+<mrow>
+<mo>[</mo>
+<mrow>
+<mi>Formula</mi>
+<mo>⁢</mo>
+<mstyle>
+<mspace height="0.8ex" width="0.8em"> </mspace>
+</mstyle>
+<mo>⁢</mo>
+<mn>5</mn>
+</mrow>
+<mo>]</mo>
+</mrow>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+</div>
+<div class="description-paragraph" id="p-0073" num="0072">In general, a physical meaning of a rank of a channel matrix may indicate a maximum number capable of transmitting different information from each other in a given channel. Hence, since the rank of the channel matrix is defined by a minimum number of the numbers of row or column independent from each other, the rank of the matrix is configured not to be greater than the number of the row or the column. For instance, the rank of a channel matrix H (rank (H)) is limited as shown in Formula 6.
+<br/>
+rank(<i>H</i>)≤min(<i>N</i> <sub>T</sub> <i>,N</i> <sub>R</sub>)  [Formula 6]
+</div>
+<div class="description-paragraph" id="p-0074" num="0073">And, let's define each of the informations different from each other, which are transmitted using a multi-antenna technology, as a transport stream or simply a stream. The stream can be named a layer. Then, the number of the transport stream is naturally configured not to be greater than the rank of the channel, which is a maximum number capable of transmitting informations different from each other. Hence, the channel matrix H can be represented as Formula 7 in the following.
+<br/>
+# of streams≤rank(<i>H</i>)≤min(<i>N</i> <sub>T</sub> <i>,N</i> <sub>A</sub>)  [Formula 7]
+</div>
+<div class="description-paragraph" id="p-0075" num="0074">In this case, ‘# of streams’ indicates the number of streams. Meanwhile, in this case, it should be cautious that one stream can be transmitted via more than one antenna.</div>
+<div class="description-paragraph" id="p-0076" num="0075">Various methods making one or more streams correspond to many antennas may exist. These methods can be described in accordance with the kind of the multi-antenna technology in the following description. A case of transmitting one stream via many antennas may be called a space diversity scheme and a case of transmitting many streams via many antennas may be called a space multiplexing scheme. Naturally, a hybrid form of the space diversity and the space multiplexing is also available.</div>
+<div class="description-paragraph" id="p-0077" num="0076">Meanwhile, it is expected that a LTE-A system, which is a standard of a next generation mobile communication system, will support a CoMP (coordinated multi point) transmission method, which is not supported by the conventional standard, to enhance a data transmission rate. In this case, the CoMP transmission method is a transmission method for two or more base stations or cells to communicate with the user equipment in a manner of cooperating with each other to enhance a communication performance between the user equipment situated at a radio shadow zone and the base station (a cell or a sector).</div>
+<div class="description-paragraph" id="p-0078" num="0077">The CoMP transmission method can be classified into a join processing (CoMP-joint processing, CoMP-JP) method in the form of a cooperative MIMO via data sharing and a coordinated scheduling/beamforming (CoMP-coordinated scheduling/beamforming, CoMP-CS/CB) method.</div>
+<div class="description-paragraph" id="p-0079" num="0078">According to the joint processing (CoMP-JP) method in DL, a user equipment may be able to instantaneously receive data simultaneously from each of the base stations performing the CoMP transmission method. And, a reception performance can be enhanced in a manner of combining the signals received from each of the base stations (Joint Transmission (JT)). And, it is also possible to consider a method of transmitting a data to the user equipment on a specific timing by one of the base stations performing the CoMP transmission method (Dynamic Point Selection (DPS)). On the other hand, according to the coordinated scheduling/beamforming method (CoMP-CS/CB), the user equipment may be able to instantaneously receive data from a single base station via a beamforming.</div>
+<div class="description-paragraph" id="p-0080" num="0079">According to the joint processing (CoMP-JP) method in UL, each of the base stations may be able to simultaneously receive PUSCH signal from the user equipment (Joint Reception (JR)). On the other hand, according to the coordinated scheduling/beamforming method (CoMP-CS/CB), only a single base station may be able to receive the PUSCH. In this case, the decision to use the coordinated scheduling/beamforming method is determined by the coordinating cells (or base stations).</div>
+<div class="description-paragraph" id="p-0081" num="0080">In the following description, a reference signal is explained in more detail.</div>
+<div class="description-paragraph" id="p-0082" num="0081">In general, a reference signal, which is already known to both a transmitting end and a receiving end, is transmitted from the transmitting end to the receiving end together with data to measure a channel. The reference signal plays not only a role of measuring a channel but also a role of making a demodulation process to be performed in a manner of informing the receiving end of a modulation scheme. The reference signal is classified into a dedicated reference signal (DRS) used for an eNB and a specific user equipment (i.e., UE-specific reference signal) and a cell-specific reference signal used for all UEs in a cell (i.e., common reference signal or cell specific RS (CRS)). The cell-specific reference signal includes a reference signal used for reporting CQI/PMI/RI to an eNB in a manner of measuring CQI/PMI/RI in a user equipment. This sort of reference signal is called a CSI-RS (channel state information-RS).</div>
+<div class="description-paragraph" id="p-0083" num="0082"> <figref idrefs="DRAWINGS">FIG. 8</figref> and <figref idrefs="DRAWINGS">FIG. 9</figref> are diagrams of a structure of a reference signal in LTE system supportive of downlink transmission using 4 antennas. In particular, <figref idrefs="DRAWINGS">FIG. 8</figref> shows a case of a normal cyclic prefix and <figref idrefs="DRAWINGS">FIG. 9</figref> shows a case of an extended cyclic prefix.</div>
+<div class="description-paragraph" id="p-0084" num="0083">Referring to <figref idrefs="DRAWINGS">FIG. 8</figref> and <figref idrefs="DRAWINGS">FIG. 9</figref>, 0 to 3 written on a grid may mean the CRS (common reference signal), which is a cell-specific reference signal, transmitted for the channel measurement and the data demodulation in a manner of corresponding to antenna port 0 to 3, respectively. The cell-specific reference signal CRS can be transmitted to a user equipment via the control information region as well as the data information region.</div>
+<div class="description-paragraph" id="p-0085" num="0084">And, ‘D’ written on the grid may mean a downlink DM-RS (demodulation RS), which is a user-specific RS. The DM-RS supports a single antenna port transmission via the data region, i.e., the PDSCH. The user equipment is signaled whether the DM-RS, which is the user equipment-specific RS, exists or not via an upper layer. <figref idrefs="DRAWINGS">FIG. 8</figref> and <figref idrefs="DRAWINGS">FIG. 9</figref> show an example of the DM-RS corresponding to an antenna port 5. The DM-RSs corresponding to an antenna port 7 to 14, i.e., total 8 antenna ports, are also defined by 3GPP standard document 36.211.</div>
+<div class="description-paragraph" id="p-0086" num="0085"> <figref idrefs="DRAWINGS">FIG. 10</figref> is a diagram for an example of assigning a downlink DM-RS defined by a current 3GPP standard document.</div>
+<div class="description-paragraph" id="p-0087" num="0086">Referring to <figref idrefs="DRAWINGS">FIG. 10</figref>, DM-RSs corresponding to antenna ports {7, 8, 11, 13} are mapped to a DM-RS group 1 using a sequence according to an antenna port and DM-RSs corresponding to antenna ports {9, 10, 12, 14} are mapped to a DM-RS group 2 using a sequence according to an antenna port as well.</div>
+<div class="description-paragraph" id="p-0088" num="0087">Meanwhile, the aforementioned CSI-RS is proposed to perform channel measurement for PDSCH irrespective of a CRS. Unlike the CRS, the CSI-RS can be defined by maximum 32 resource configurations different from each other to reduce inter-cell interference (ICI) in a multicell environment.</div>
+<div class="description-paragraph" id="p-0089" num="0088">CSI-RS (resource) configuration varies according to the number of antenna ports. A CSI-RS is configured to be transmitted by different (resource) configurations between neighboring cells. Unlike the CRS, the CSI-RS supports maximum 8 antenna ports. According to 3GPP standard document, total 8 antenna ports (antenna port 15 to antenna port 22) are assigned as the antenna port for the CSI-RS. <figref idrefs="DRAWINGS">FIG. 11</figref> is a diagram for an example of a CSI-RS (resource) configuration #0 in case of a normal CP among CSI-RS configurations defined by a current 3GPP standard document.</div>
+<div class="description-paragraph" id="p-0090" num="0089">Meanwhile, as various devices requiring high data transmission capacity are emerged and disseminated, data requisites for a cellular network are rapidly increasing in a current wireless communication environment. In order to satisfy high data requisite, communication technologies are developing to a carrier aggregation technology for efficiently using more frequency bands, a multi-antenna technology used for increasing data capacity in a limited frequency, a multi-base station cooperation technology, and the like and the communication environment is evolving in a manner that density of an accessible node is growing in the vicinity of a user.</div>
+<div class="description-paragraph" id="p-0091" num="0090">A system equipped with the node of high density may have higher system performance by means of cooperation between nodes. Compared to a node operating as an independent base station without cooperation, the aforementioned scheme may have superior performance.</div>
+<div class="description-paragraph" id="p-0092" num="0091"> <figref idrefs="DRAWINGS">FIG. 12</figref> is a diagram for an example of a multi node system in a next generation communication system.</div>
+<div class="description-paragraph" id="p-0093" num="0092">Referring to <figref idrefs="DRAWINGS">FIG. 12</figref>, if an individual node operates as a part of antenna group of a cell in a manner that a controller manages transmission and reception of all nodes, it may correspond to a distributed multi node system (DMNS) that forms a single cell. In this case, each of the individual nodes may receive a separate node ID or may operate as a part of antenna within the cell without a separate Node ID. Yet, if nodes have a cell identifier (ID) different from each other, it may correspond to a multi-cell system. If a multi cell is configured by a duplicated form according to coverage, this is called a multi-tier network.</div>
+<div class="description-paragraph" id="p-0094" num="0093">Meanwhile, a Node-B, an eNode-B, a PeNB, a HeNB, an RRH (remote radio head), a relay, a distributed antenna, and the like may become a node and at least one antenna is installed in a node. A node is also called a transmission point. In general, a node indicates an antenna group apart from each other more than a prescribed space, the present invention defines and applies a node as a random antenna group irrespective of a space.</div>
+<div class="description-paragraph" id="p-0095" num="0094">With the help of the introduction of the aforementioned multi-node system, application of various communication schemes is enabled and channel quality enhancement can be performed. Yet, in order to apply the aforementioned MIMO scheme and inter-cell cooperation communication scheme to a multi-node environment, an introduction of a new control channel is required. To this end, a control channel considered as the newly introduced control channel, which corresponds to an E-PDCCH (enhanced-PDCCH), is under discussion. This channel is determined to be assigned to a data region (hereinafter described as PDSCH region) instead of a legacy control region (hereinafter described as PDCCH region). Consequently, control information on a node can be transmitted according to each UE via the E-PDCCH. Hence, a problem of shortage of the legacy PDCCH region can be solved as well. For reference, the E-PDCCH is not provided to a legacy UE. Instead, an LTE-A UE can receive the E-PDCCH only.</div>
+<div class="description-paragraph" id="p-0096" num="0095"> <figref idrefs="DRAWINGS">FIG. 13</figref> is a diagram for an example of E-PDCCH and PDSCH scheduled by E-PDCCH.</div>
+<div class="description-paragraph" id="p-0097" num="0096">Referring to <figref idrefs="DRAWINGS">FIG. 13</figref>, E-PDCCH can be used in a manner of defining a part of PDSCH region, which is generally transmitting data. A UE should perform a blind decoding process to detect presence or non-presence of the E-PDCCH in the UE. The E-PDCCH performs a scheduling operation (i.e., PDSCH, PUSCH control) identical to that of a legacy PDCCH. Yet, if the number of such a UE accessed a node as an RRH increases, more E-PDCCHs are assigned to the PDSCH region. Hence, the number of blind decoding, which should be performed by the UE, increases and complexity may increase as well.</div>
+<div class="description-paragraph" id="p-0098" num="0097">In the following description, an example for a transmission mode of a downlink data channel is described.</div>
+<div class="description-paragraph" id="p-0099" num="0098">Currently, 3GPP LTE standard document, specifically, 3GPP TS 36.213 document defines a transmission mode of a downlink data channel as shown in Table 1 and Table 2 in the following. The transmission mode is set to a user equipment via an upper layer signaling, i.e., RRC signaling.</div>
+<div class="description-paragraph" id="p-0100" num="0099">
+<tables id="TABLE-US-00001" num="00001">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 1</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Transmission</td>
+<td class="description-td"> </td>
+<td class="description-td">Transmission scheme of PDSCH</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">mode</td>
+<td class="description-td">DCI format</td>
+<td class="description-td">corresponding to PDCCH</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Mode 1</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Single-antenna port, port 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 1</td>
+<td class="description-td">Single-antenna port, port 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 2</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 1</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 3</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2A</td>
+<td class="description-td">Large delay CDD or Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 4</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2</td>
+<td class="description-td">Closed-loop spatial multiplexing or</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 5</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 1D</td>
+<td class="description-td">Multi-user MIMO</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 6</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 1B</td>
+<td class="description-td">Closed-loop spatial multiplexing using a</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">transmission layer</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 7</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">If the number of PBCH antenna ports is</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">one, Single-antenna port, port 0 is used,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">otherwise Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 1</td>
+<td class="description-td">Single-antenna port, port 5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 8</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">If the number of PBCH antenna ports is</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">one, Single-antenna port, port 0 is used,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">otherwise Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2B</td>
+<td class="description-td">Dual layer transmission, port 7 and 8 or</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">single-antenna port, port 7 or 8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 9</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Non-MBSFN subframe: If the number of</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PBCH antenna ports is one, Single-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">antenna port, port 0 is used, otherwise</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">MBSFN subframe: Single-antenna port,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">port 7</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2C</td>
+<td class="description-td">Up to 8 layer transmission, ports 7-14 or</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">single-antenna port, port 7 or 8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 10</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Non-MBSFN subframe: If the number of</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">PBCH antenna ports is one, Single-</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">antenna port, port 0 is used, otherwise</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">MBSFN subframe: Single-antenna port,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">port 7</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2D</td>
+<td class="description-td">Up to 8 layer transmission, ports 7-14 or</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td"> </td>
+<td class="description-td">single-antenna port, port 7 or 8</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0101" num="0100">
+<tables id="TABLE-US-00002" num="00002">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 2</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Transmission</td>
+<td class="description-td"> </td>
+<td class="description-td">Transmission scheme of PDSCH</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">mode</td>
+<td class="description-td">DCI format</td>
+<td class="description-td">corresponding to PDCCH</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">Mode 1</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Single-antenna port, port 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 1</td>
+<td class="description-td">Single-antenna port, port 0</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 2</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 1</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 3</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 4</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 5</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 6</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Transmit diversity</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 7</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Single-antenna port, port 5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 1</td>
+<td class="description-td">Single-antenna port, port 5</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 8</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Single-antenna port, port 7</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2B</td>
+<td class="description-td">Single-antenna port, port 7 or 8</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 9</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Single-antenna port, port 7</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2C</td>
+<td class="description-td">Single-antenna port, port 7 or 8,</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Mode 10</td>
+<td class="description-td">DCI format 1A</td>
+<td class="description-td">Single-antenna port, port 7</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td"> </td>
+<td class="description-td">DCI format 2D</td>
+<td class="description-td">Single-antenna port, port 7 or 8,</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0102" num="0101">Referring to Table 1 and Table 2, current 3GPP LTE standard document includes a downlink control information (DCI) format, which is defined according to a type of RNTI masked on PDCCH. In particular, in case of a C-RNTI and an SPS C-RNTI, a transmission mode and a DCI format corresponding to the transmission mode (i.e., a transmission mode-based DCI format) are included in the document. And, a DCI format 1A for a Fall-back mode, which is capable of being applied irrespective of each transmission mode, is defined in the document. Table 1 shows an example of a case that a type of RNTI masked on PDCCH corresponds to a C-RNTI and Table 2 shows an example of a case that the type of RNTI masked on PDCCH corresponds to an SPS C-RNTI.</div>
+<div class="description-paragraph" id="p-0103" num="0102">As an example of an operation of a transmission mode, referring to Table 1, if a user equipment performs a blind decoding on PDCCH masked with C-RNTI and then detects a DCI format 1B, the user equipment decodes PDSCH in an assumption that the PDSCH has been transmitted with a closed-loop spatial multiplexing scheme using a single transmission layer.</div>
+<div class="description-paragraph" id="p-0104" num="0103">In Table 1 and Table 2, a transmission mode 10 indicates a downlink data channel transmission mode of the aforementioned CoMP transmission method. For instance, referring to Table 1, if a user equipment performs a blind decoding on PDCCH masked with C-RNTI and then detects a DCI format 2D, the user equipment decodes PDSCH in an assumption that the PDSCH has been transmitted with a multi-layer transmission scheme based on antenna port 7 to 14, i.e., DM-RS. Or, the user equipment decodes PDSCH in an assumption that the PDSCH has been transmitted with a single antenna transmission scheme based on DM-RS antenna port 7 or 8.</div>
+<div class="description-paragraph" id="p-0105" num="0104">On the contrary, if the user equipment performs blind decoding on PDCCH masked with C-RNTI and then detects a DCI format 1A, a transmission mode varies according to whether a corresponding subframe corresponds to an MBSFN subframe. For instance, if the corresponding subframe corresponds to a non-MBSFN subframe, the user equipment decodes PDSCH in an assumption that the PDSCH has been transmitted with a single antenna transmission scheme based on a CRS of an antenna port 0 or a CRS-based transmit diversity scheme. And, if the corresponding subframe corresponds to an MBSFN subframe, the user equipment decodes the PDSCH in an assumption that the PDSCH has been transmitted with a single antenna transmission based on a DM-RS of an antenna port 7.</div>
+<div class="description-paragraph" id="p-0106" num="0105">In the following, QCL (Quasi Co-Location) between antenna ports is explained.</div>
+<div class="description-paragraph" id="p-0107" num="0106">QCL between antenna ports indicates that all or a part of large-scale properties of a signal (or a radio channel corresponding to a corresponding antenna port) received by a user equipment from a single antenna port may be identical to large-scale properties of a signal (or a radio channel corresponding to a corresponding antenna port) received from a different single antenna port. In this case, the larger-scale properties may include Doppler spread related to frequency offset, Doppler shift, average delay related to timing offset, delay spread and the like. Moreover, the larger-scale properties may include average gain as well.</div>
+<div class="description-paragraph" id="p-0108" num="0107">According to the aforementioned definition, a user equipment cannot assume that the large-scale properties are identical to each other between antenna ports not in the QCL, i.e., NQCL (Non Quasi co-located) antenna ports. In this case, the user equipment should independently perform a tracking procedure to obtain frequency offset, timing offset and the like according to an antenna port.</div>
+<div class="description-paragraph" id="p-0109" num="0108">On the contrary, the user equipment can perform following operations between antenna ports in QCL.</div>
+<div class="description-paragraph" id="p-0110" num="0109">1) The user equipment can identically apply power-delay profile for a radio channel corresponding to a specific antenna port, delay spread, Doppler spectrum and Doppler spread estimation result to a Wiener filter parameter, which is used for estimating a channel for a radio channel corresponding to a different antenna port, and the like.</div>
+<div class="description-paragraph" id="p-0111" num="0110">2) After obtaining time synchronization and frequency synchronization for the specific antenna port, the user equipment can apply identical synchronization to a different antenna port as well.</div>
+<div class="description-paragraph" id="p-0112" num="0111">3) The user equipment can calculate an average value of RSRP (reference signal received power) measurement values of each of the antenna ports in QCL to obtain average gain.</div>
+<div class="description-paragraph" id="p-0113" num="0112">For instance, having received DM-RS based downlink data channel scheduling information (e.g., DCI format 2C) via PDCCH (or E-PDCCH), the user equipment performs channel estimation for PDSCH via a DM-RS sequence indicated by the scheduling information and may be then able to perform data demodulation.</div>
+<div class="description-paragraph" id="p-0114" num="0113">In this case, if a DM-RS antenna port used for demodulating a downlink data channel and a CRS antenna port of a serving cell are in QCL, when the user equipment performs a channel estimation via the DM-RS antenna port, the user equipment can enhance reception capability of the DM-RS based downlink data channel in a manner of applying large-scale properties of a radio channel estimated from a CRS antenna port of the user equipment as it is.</div>
+<div class="description-paragraph" id="p-0115" num="0114">Similarly, if a DM-RS antenna port used for demodulating a downlink data channel and a CSI-RS antenna port of a serving cell are in QCL, when the user equipment perform a channel estimation via the DM-RS antenna port, the user equipment can enhance reception capability of the DM-RS based downlink data channel in a manner of applying large-scale properties of a radio channel estimated from a CSI-RS antenna port of the serving cell as it is.</div>
+<div class="description-paragraph" id="p-0116" num="0115">Based on the aforementioned contents, a method of receiving a downlink data channel in a multicell-based wireless communication system and an apparatus therefor according to the present invention are explained in the following. In particular, the present invention proposes a method of calculating or assuming large-scale properties for each of radio channels from a CoMP set, i.e., TPs participating in CoMP and a method of obtaining synchronization in order for a user equipment to receive a downlink signal in the multicell-based wireless communication system.</div>
+<div class="description-paragraph" id="p-0117" num="0116">The user equipment can obtain synchronization via a primary synchronization signal (PSS) and a secondary synchronization signal (SSS) periodically transmitted from TPs within a CoMP set. After an initial synchronization is obtained, the user equipment calculates timing offset (delay spread and average delay), frequency offset (Doppler spread and Doppler shift) and the like by consistently tracking a reference signal and can maintain the synchronization. As a reference signal for the tracking, a CSI-RS, a CRS or the like can be used. The user equipment maintains the synchronization with TP using information including the timing offset, the frequency offset and the like calculated by the tracking and can demodulate PDSCH. In this case, as defined in LTE system, demodulation of the PDSCH means DM-RS-based demodulation. Using the information including the timing offset, the frequency offset and the like may mean that an antenna port of a DM-RS and an antenna port of a CSI-RS or a CRS, which is a reference signal used for the tracking, are in QCL.</div>
+<div class="description-paragraph" id="p-0118" num="0117"> <figref idrefs="DRAWINGS">FIG. 14</figref> is a diagram of an example for a user equipment to perform a tracking to obtain synchronization in a multicell-based wireless communication system.</div>
+<div class="description-paragraph" id="p-0119" num="0118">Referring to <figref idrefs="DRAWINGS">FIG. 14</figref>, a user equipment operating in a CoMP mode, i.e., the user equipment operating in the aforementioned PDSCH transmission mode 10 can perform tracking for TPs within a CoMP set as well as a current serving cell (or a serving TP). <figref idrefs="DRAWINGS">FIG. 14</figref> shows an example that the user equipment receives a reference signal from a TP A and a reference signal from a TP B to calculate timing offset Δt and frequency offset Δf.</div>
+<div class="description-paragraph" id="p-0120" num="0119">In particular, in case that the TPs within the CoMP set use an identical cell identifier, the user equipment can calculate the timing offset Δt and the frequency offset Δf of each TP in a manner of configuring CSI-RS resources different from each other for every TP and tracking each of the CSI-RSs. On the contrary, in case that the TPs within the CoMP set use cell identifiers different from each other, the user equipment can calculate the timing offset Δt and the frequency offset Δf of each TP in a manner of tracking a CRS differently configured for every TP by a different method except the method of configuring the CSI-RS resources different from each other for every TP.</div>
+<div class="description-paragraph" id="p-0121" num="0120">Meanwhile, if there exist a plurality of information including timing offset and frequency offset which is calculated by the user equipment by tracking a reference signal and it is not able to know information on a TP from which a currently received PDSCH is transmitted, the UE is not able to know information on timing offset and frequency offset becoming a criterion of performing synchronization acquisition and DM-RS based PDSCH demodulation. In particular, the use equipment is not able to know an antenna port of a reference signal, which is in QCL with an antenna port of a DM-RS for the currently received PDSCH.</div>
+<div class="description-paragraph" id="p-0122" num="0121">As a method of selecting an appropriate timing offset and a frequency offset from a plurality of the timing offsets and frequency offsets, it may consider following methods.</div>
+<div class="description-paragraph" id="p-0123" num="0122">1) First of all, a UE may anticipate that a scheduler schedules a TP, which has transmitted a strongest reference signal among a plurality of reference signals tracked by the UE, to transmit PDSCH. Hence, the UE performs the synchronization acquisition and the DM-RS based PDSCH demodulation using the offset information which is calculated by tracking the reference signal measured as the strongest signal. In particular, the UE may assume that the antenna port of the DM-RS for the currently received PDSCH and the antenna port of the reference signal measured as the strongest signal are in QCL.</div>
+<div class="description-paragraph" id="p-0124" num="0123">2) As a different method, a UE may anticipate that PDSCH is simultaneously transmitted from a plurality of TPs among TPs including offsets different from each other within a CoMP set. In this case, the UE can calculate an average value of the offsets calculated from a plurality of the TPs. The UE performs the synchronization acquisition and the DM-RS based PDSCH demodulation using the average offset value. In this case, it may assume that the antenna port of the DM-RS for the currently received PDSCH and a virtual specific antenna port are in QCL. And, it may also understand that a result of tracking the virtual specific antenna port corresponds to the average offset value.</div>
+<div class="description-paragraph" id="p-0125" num="0124">3) As a further different method, a network (e.g., a serving cell) may directly inform a UE of offset information to be used for PDSCH reception and demodulation. The information is semi-statically delivered to the UE via such an upper layer signaling as an RRC layer or can be dynamically delivered via such a physical layer signal as PDCCH. The offset information may correspond to an index or an antenna port of a reference signal set to a TP configured to transmit PDSCH among reference signals tracked by the UE. The UE performs the synchronization acquisition and the DM-RS based PDSCH demodulation using specific offset information corresponding to a result of tracking a reference signal indicated by the network among a plurality of offset information calculated by tracking a plurality of reference signals. In particular, it may assume that the antenna port of the DM-RS for the currently received PDSCH and the antenna port of the reference signal indicated by the network are in QCL.</div>
+<div class="description-paragraph" id="p-0126" num="0125">When a TP transmits a signal, the TP can transmit the signal in a manner of applying scrambling to the signal with a scrambling code to distinguish the signal from a signal transmitted by a different TP. When a UE receives the scrambled signal, the UE can restore the signal by performing a reverse scrambling procedure using a code identical to a code used by the TP.</div>
+<div class="description-paragraph" id="p-0127" num="0126">The scrambling code is a common name for promised information delivered to the UE from the TP in order for the UE to precisely perform PDSCH demodulation. The scrambling code is not limited to a specific signaling. For instance, the scrambling code may correspond to a scrambling sequence put on PDSCH to protect data or reference signal configuration information such as an RE position, sequence and the like of a CRS or a DM-RS necessary for performing PDSCH demodulation. Moreover, the scrambling code may correspond to an index of a component carrier to which the PDSCH is transmitted in case of applying carrier aggregation scheme.</div>
+<div class="description-paragraph" id="p-0128" num="0127">Hence, a scrambling code used for transmitting PDSCH may vary according to every TP within a CoMP set. In particular, in case that a TP transmitting PDSCH is dynamically changing such as a dynamic TP selection (DPS) scheme, a network should dynamically inform a UE of a precise scrambling code necessary for demodulating PDSCH via PDCCH. Hence, the network can inform the UE of the scrambling code used by each TP within the CoMP set to transmit PDSCH and reference signal configuration information of the corresponding TP in advance. The information can be semi-statically transmitted via such an upper layer signaling as an RRC layer signal. Table 3 in the following is an example of the scrambling code of the TP and the reference signal configuration information informed to the UE by the network.</div>
+<div class="description-paragraph" id="p-0129" num="0128">
+<tables id="TABLE-US-00003" num="00003">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="3" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="3" nameend="3" namest="1" rowsep="1">TABLE 3</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">Configuration</td>
+<td class="description-td">Scrambling code</td>
+<td class="description-td">Reference signal</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">1</td>
+<td class="description-td">SCID1</td>
+<td class="description-td">RS-A</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">2</td>
+<td class="description-td">SCID2</td>
+<td class="description-td">RS-B</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">3</td>
+<td class="description-td">SCID3</td>
+<td class="description-td">RS-C</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">. . .</td>
+<td class="description-td">. . .</td>
+<td class="description-td">. . .</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="3" nameend="3" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0130" num="0129">The network can make each of TPs use configurations different from each other, respectively among the configurations depicted in Table 3. Each TP uses a scrambling code and a reference signal of a promised combination according to a determined combination shown in Table 3.</div>
+<div class="description-paragraph" id="p-0131" num="0130">Assume that a reference signal depicted in Table 3 corresponds to a CSI-RS. Since a UE stores such information shown in Table 3 in advance, although the UE receives scrambling code indicator (SCID #) information from the network only, the UE is able to know how a CSI-RS resource, which is used by a TP transmitting PDSCH, is configured, which CSI-RS can be assumed for QCL with a CRS or a DM-RS necessary for performing PDSCH demodulation and the like. Hence, the UE can perform synchronization acquisition and PDSCH demodulation using a plurality of offset information calculated by CSI-RS tracking without a separate signaling from the network for synchronization acquisition.</div>
+<div class="description-paragraph" id="p-0132" num="0131"> <figref idrefs="DRAWINGS">FIG. 15</figref> is a diagram of an example for a user equipment to perform a reference signal tracking according to embodiment of the present invention. As mentioned in the foregoing description, the UE is tracking a reference signal A (RS-A) set to the UE and a reference signal B (RS-B) and can obtain each offset information (i.e., timing offset and frequency offset information based on the reference signal A, timing offset and frequency offset information based on the reference signal B). In this case, the UE is unable to know which timing offset and frequency offset are should be used to obtain synchronization among the two timing offsets and the frequency offsets. In the following, for clarity, the reference signal A and the reference signal B are called a CSI-RS A and a CSI-RS B, respectively.</div>
+<div class="description-paragraph" id="p-0133" num="0132">Referring to <figref idrefs="DRAWINGS">FIG. 15</figref>, a network can inform a UE of a SCID 1 as information necessary for demodulating PDSCH while transmitting the PDSCH via a TP-A. In this case, as mentioned in the foregoing description, the SCID 1 may correspond to a scrambling sequence, DM-RS resource configuration information, or CRS resource configuration information.</div>
+<div class="description-paragraph" id="p-0134" num="0133">In this case, although the UE is unable to know that a TP actually transmitting the PDSCH corresponds to the TP-A, the UE can perform synchronization acquisition and PDSCH demodulation with offset calculated by tracking a CSI-RS A via a pre-stored scrambling code and reference signal configuration information depicted in Table 3. In particular, the UE can assume that an antenna port of a DM-RS or a CRS for a currently received PDSCH and an antenna port of the CSI-RS A are in QCL.</div>
+<div class="description-paragraph" id="p-0135" num="0134"> <figref idrefs="DRAWINGS">FIG. 16</figref> is a diagram of a different example for a user equipment to perform a reference signal tracking according to embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0136" num="0135">Referring to <figref idrefs="DRAWINGS">FIG. 16</figref>, a network can inform a UE of a SCID 2 as information necessary for demodulating PDSCH while transmitting the PDSCH via a TP-B. In this case, although the UE is unable to know that a TP actually transmitting the PDSCH corresponds to the TP-B, the UE can perform synchronization acquisition and PDSCH demodulation with offset calculated by tracking a CSI-RS B via a pre-stored scrambling code and reference signal configuration information depicted in Table 3. In particular, the UE can assume that an antenna port of a DM-RS or a CRS for a currently received PDSCH and an antenna port of the CSI-RS B are in QCL.</div>
+<div class="description-paragraph" id="p-0137" num="0136">In the following, a method of signaling via DM-RS based PDSCH scheduling information, i.e., a DCI format is explained as a method for a network to inform offset information to be used by a UE to receive and demodulate DM-RS (or CRS) based PDSCH, i.e., a method of signaling information on an antenna port where QCL assumption is feasible. In particular, assume a transmission mode 10 defined by LTE system for CoMP downlink transmission in the following description. A DCI format 2D where the DCI format corresponds to a normal mode and a DCI format 1A corresponding to a fallback mode are explained in the following.</div>
+<div class="description-paragraph" id="p-0138" num="0137">And, for clarity, assume a case that PDSCH is transmitted and demodulated based on a DM-RS and an antenna port being QCL with an antenna port of the DM-RS is signaled in the following signaling methods. Yet, it is apparent that the signaling methods can also be applied to a case that the PDSCH is transmitted and demodulated based on a CRS.</div>
+<div class="description-paragraph" id="p-0139" num="0138">&lt;Signaling Method 1—Normal Mode&gt;</div>
+<div class="description-paragraph" id="p-0140" num="0139">When a UE receives a DCI format 2D shown in Table 1 from PDCCH or E-PDCCH as scheduling information of a DM-RS based PDSCH in a multicell wireless communication system, it may consider a method of including whether a corresponding DM-RS antenna port(s) and a different reference signal (e.g., a CRS of a serving cell, a different CSI-RS or the like) are in QCL in the DCI format 2D.</div>
+<div class="description-paragraph" id="p-0141" num="0140">A) First of all, the present invention proposes to define signaling of 1 bit long and dynamically signal whether a QCL assumption with a different reference signal (i.e., a CRS of a serving cell, a different CSI-RS or the like) is feasible. By doing so, when a CoMP DPS scheme is applied, if a DM-RS based PDSCH is transmitted from a TP where the QCL assumption is feasible, demodulation capability of the DM-RS based PDSCH can be enhanced in a manner of transmitting an indicator indicating that QCL assumption with the different reference signal is feasible together with scheduling information of the DM-RS based PDSCH.</div>
+<div class="description-paragraph" id="p-0142" num="0141">B) As a different method, it may consider a method of semi-statically configuring QCL information between a CSI-RS and a DM-RS or QCL information between a CRS and a DM-RS to a plurality of states via RRC signaling and the like and a method of indicating one of a plurality of the states in case of transmitting scheduling information of a DM-RS based PDSCH.</div>
+<div class="description-paragraph" id="p-0143" num="0142">For instance, if an indicator of 2 bits is defined to indicate a state of scheduling information of a DM-RS based PDSCH, each state can be defined as depicted in Table 4 and Table 5.</div>
+<div class="description-paragraph" id="p-0144" num="0143">
+<tables id="TABLE-US-00004" num="00004">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="2" nameend="2" namest="1" rowsep="1">TABLE 4</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">00</td>
+<td class="description-td">NQCL</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">01</td>
+<td class="description-td">CRS of serving cell</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">1<sup>st </sup>Set of QCL pair (configured by RRC layer)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">2<sup>nd </sup>Set of QCL pair (configured by RRC layer)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0145" num="0144">Referring to Table 4, if an indicator of 2-bit long included in the scheduling information of the DM-RS based PDSCH corresponds to “00”, the indicator indicates that a corresponding DM-RS cannot assume QCL with any reference signal, i.e., NQCL. If the indicator corresponds to “01”, it indicates that the corresponding DM-RS can assume QCL with a CRS of a serving cell. And, if the indicator corresponds to “10” or “11”, it indicates a QCL pair predefined via an RRC signaling. In this case, the QCL pair may indicate that QCL is applied between the DM-RS applied to the corresponding PDSCH and a specific CSI-RS. For instance, “1<sup>st </sup>Set of QCL pair” can be configured by QCL assumption between the DM-RS applied to the corresponding PDSCH and a CSI-RS where a resource configuration corresponds to #0. “2<sup>nd </sup>Set of QCL pair” can be configured by QCL assumption between the DM-RS applied to the corresponding PDSCH and a CSI-RS where a resource configuration corresponds to #1.</div>
+<div class="description-paragraph" id="p-0146" num="0145">
+<tables id="TABLE-US-00005" num="00005">
+<patent-tables colsep="0" frame="none" rowsep="0">
+<table align="left" class="description-table" cols="2" colsep="0" rowsep="0" width="100%">
+<thead>
+<tr class="description-tr">
+<td class="description-td" colspan="2" nameend="2" namest="1" rowsep="1">TABLE 5</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</thead>
+<tbody><tr class="description-tr">
+<td class="description-td">00</td>
+<td class="description-td">1<sup>st </sup>Set of QCL pair (configured by RRC layer)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">01</td>
+<td class="description-td">2<sup>nd </sup>Set of QCL pair (configured by RRC layer)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">10</td>
+<td class="description-td">3<sup>rd </sup>Set of QCL pair (configured by RRC layer)</td>
+</tr>
+<tr class="description-tr">
+<td class="description-td">11</td>
+<td class="description-td">4<sup>th </sup>Set of QCL pair (configured by RRC layer)</td>
+</tr>
+<tr class="description-tr">
+<td align="center" class="description-td" colspan="2" nameend="2" namest="1" rowsep="1"> </td>
+</tr>
+</tbody></table>
+</patent-tables>
+</tables>
+</div>
+<div class="description-paragraph" id="p-0147" num="0146">Referring to Table 5, if an indicator of 2-bit long included in the scheduling information of the DM-RS based PDSCH corresponds to “00” to “11”, all of the indicators indicate QCL pair predefined via RRC signaling. In this case, the QCL pair may indicate that QCL is applied between a DM-RS applied to a corresponding PDSCH and a specific CSI-RS.</div>
+<div class="description-paragraph" id="p-0148" num="0147">&lt;Signaling Method—Fallback Mode&gt;</div>
+<div class="description-paragraph" id="p-0149" num="0148">Meanwhile, in the foregoing description, it has been explained that a DCI format for a fallback mode is defined as downlink control information for a specific transmission mode. Since the DCI format for the fallback mode, i.e., a DCI format 1A is applied to an exceptional case including a case that a channel state is rapidly deteriorated and the like, a size of the DCI format 1A is very limitative. Unlike a general DCI format, since the DCI format for the fallback mode, i.e., the DCI format 1A is very limitative in defining a new field, when the DCI format 1A is received as scheduling information of the DM-RS based PDSCH, it is necessary to consider a different method for signaling QCL assumption between a DM-RS and a different reference signal.</div>
+<div class="description-paragraph" id="p-0150" num="0149">For instance, when a transmission mode 10 is configured and scheduling information of PDSCH is received by the DCI format 1A in an MBSFN subframe, as defined in Table 1, a UE should receive the PDSCH based on a specific DM-RS antenna port (e.g., DM-RS antenna port 7 in Table 1). In this case, the UE may fixedly operate to make QCL assumption to be always feasible between the DM-RS antenna port 7 and a CRS antenna port(s) of a serving cell (or a specific CSI-RS antenna port(s)).</div>
+<div class="description-paragraph" id="p-0151" num="0150">In this case, in case of receiving scheduling information of PDSCH by the DCI format 1A in an MBSFN subframe, information on a reference signal capable of fixedly assuming QCL can be semi-statically configured via upper layer signaling.</div>
+<div class="description-paragraph" id="p-0152" num="0151">Or, since the mapping information shown in Table 4 and Table 5 corresponds to information configured in advance irrespective of which format is detected among the DCI format 1A and the DCI format 2D, when the scheduling information of PDSCH is received by the DCI format 1A in the MBSFN subframe, a specific state of the mapping table such as Table 4 and Table 5 is defined as default QCL information and the DM-RS based PDSCH can be demodulated according to the default QCL information.</div>
+<div class="description-paragraph" id="p-0153" num="0152">More preferably, the default QCL information can be defined by a state (e.g., QCL pair indicated when an indicator corresponds to “00”) of a minimum index in a mapping table to be referred by the indicator included in the DCI format 2D.</div>
+<div class="description-paragraph" id="p-0154" num="0153"> <figref idrefs="DRAWINGS">FIG. 17</figref> is a block diagram for an example of a communication device according to one embodiment of the present invention.</div>
+<div class="description-paragraph" id="p-0155" num="0154">Referring to <figref idrefs="DRAWINGS">FIG. 17</figref>, a communication device <b>1700</b> may include a processor <b>1710</b>, a memory <b>1720</b>, an RF module <b>1730</b>, a display module <b>1740</b>, and a user interface module <b>1750</b>.</div>
+<div class="description-paragraph" id="p-0156" num="0155">Since the communication device <b>1700</b> is depicted for clarity of description, prescribed module(s) may be omitted in part. The communication device <b>1700</b> may further include necessary module(s). And, a prescribed module of the communication device <b>1700</b> may be divided into subdivided modules. A processor <b>1710</b> is configured to perform an operation according to the embodiments of the present invention illustrated with reference to drawings. In particular, the detailed operation of the processor <b>1710</b> may refer to the former contents described with reference to <figref idrefs="DRAWINGS">FIG. 1</figref> to <figref idrefs="DRAWINGS">FIG. 16</figref>.</div>
+<div class="description-paragraph" id="p-0157" num="0156">The memory <b>1720</b> is connected with the processor <b>1710</b> and stores an operating system, applications, program codes, data, and the like. The RF module <b>1730</b> is connected with the processor <b>1710</b> and then performs a function of converting a baseband signal to a radio signal or a function of converting a radio signal to a baseband signal. To this end, the RF module <b>1730</b> performs an analog conversion, amplification, a filtering, and a frequency up conversion, or performs processes inverse to the former processes. The display module <b>1740</b> is connected with the processor <b>1710</b> and displays various kinds of informations. And, the display module <b>1740</b> can be implemented using such a well-known component as an LCD (liquid crystal display), an LED (light emitting diode), an OLED (organic light emitting diode) display and the like, by which the present invention may be non-limited. The user interface module <b>1750</b> is connected with the processor <b>1710</b> and can be configured in a manner of being combined with such a well-known user interface as a keypad, a touchscreen and the like.</div>
+<div class="description-paragraph" id="p-0158" num="0157">The above-described embodiments correspond to combinations of elements and features of the present invention in prescribed forms. And, the respective elements or features may be considered as selective unless they are explicitly mentioned. Each of the elements or features can be implemented in a form failing to be combined with other elements or features. Moreover, it is able to implement an embodiment of the present invention by combining elements and/or features together in part. A sequence of operations explained for each embodiment of the present invention can be modified. Some configurations or features of one embodiment can be included in another embodiment or can be substituted for corresponding configurations or features of another embodiment. And, it is apparently understandable that an embodiment is configured by combining claims failing to have relation of explicit citation in the appended claims together or can be included as new claims by amendment after filing an application.</div>
+<div class="description-paragraph" id="p-0159" num="0158">In this disclosure, a specific operation explained as performed by an eNode B may be performed by an upper node of the eNode B in some cases. In particular, in a network constructed with a plurality of network nodes including an eNode B, it is apparent that various operations performed for communication with a user equipment can be performed by an eNode B or other networks except the eNode B. ‘eNode B (eNB)’ may be substituted with such a terminology as a fixed station, a Node B, a base station (BS), an access point (AP) and the like.</div>
+<div class="description-paragraph" id="p-0160" num="0159">Embodiments of the present invention can be implemented using various means. For instance, embodiments of the present invention can be implemented using hardware, firmware, software and/or any combinations thereof. In the implementation by hardware, a method according to each embodiment of the present invention can be implemented by at least one selected from the group consisting of ASICs (application specific integrated circuits), DSPs (digital signal processors), DSPDs (digital signal processing devices), PLDs (programmable logic devices), FPGAs (field programmable gate arrays), processor, controller, microcontroller, microprocessor and the like.</div>
+<div class="description-paragraph" id="p-0161" num="0160">In case of the implementation by firmware or software, a method according to each embodiment of the present invention can be implemented by modules, procedures, and/or functions for performing the above-explained functions or operations. Software code is stored in a memory unit and is then drivable by a processor. The memory unit is provided within or outside the processor to exchange data with the processor through the various means known in public.</div>
+<div class="description-paragraph" id="p-0162" num="0161">While the present invention has been described and illustrated herein with reference to the preferred embodiments thereof, it will be apparent to those skilled in the art that various modifications and variations can be made therein without departing from the spirit and scope of the invention. Thus, it is intended that the present invention covers the modifications and variations of this invention that come within the scope of the appended claims and their equivalents.</div>
+<div class="description-paragraph" id="p-0163" num="0162">Although a method of receiving a downlink data channel in a multicell-based wireless communication system and an apparatus therefor are described with reference to examples applied to 3GPP LTE system, it may be applicable to various kinds of wireless communication systems as well as the 3GPP LTE system.</div>
+</div>
+</div>
+</section><section itemprop="claims" itemscope="">
+<h2>Claims (<span itemprop="count">20</span>)</h2>
+<div html="" itemprop="content"><div class="claims" lang="EN" load-source="patent-office" mxw-id="PCLM246403624">
+<claim-statement>What is claimed is:</claim-statement>
+<div class="claim"> <div class="claim" id="CLM-00001" num="00001">
+<div class="claim-text">1. A method for receiving a user equipment (UE)-specific reference signal based-downlink data channel by a UE in a wireless communication system, the method comprising:
+<div class="claim-text">receiving, from a network, a downlink control channel including either first scheduling information or second scheduling information; and</div>
+<div class="claim-text">receiving the UE-specific reference signal based-downlink data channel from the network based on the downlink control channel,</div>
+<div class="claim-text">wherein, when the downlink control channel includes the first scheduling information, antenna ports of a certain reference signal which can be assumed to be quasi co-located with antenna ports of a UE-specific reference signal are configured by an indicator indicating one of two or more parameters configured by a higher layer, and</div>
+<div class="claim-text">wherein, when the downlink control channel includes the second scheduling information, the antenna ports of a certain reference signal are configured by a parameter of a minimum index among the two or more parameters.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00002" num="00002">
+<div class="claim-text">2. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a large scale property for the UE-specific reference signal is obtained based on the antenna ports of the certain reference signal which is assumed to be quasi co-located with the antenna ports of the UE-specific reference signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00003" num="00003">
+<div class="claim-text">3. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein a large scale property for the UE-specific reference signal comprises at least one of Doppler spread, Doppler shift, average delay and delay spread.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00004" num="00004">
+<div class="claim-text">4. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the certain reference signal is a channel status information-reference signal (CSI-RS).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00005" num="00005">
+<div class="claim-text">5. The method of <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein
+<div class="claim-text">a downlink control information (DCI) format for the first scheduling information corresponding to a normal mode is a DCI format 2D, and</div>
+<div class="claim-text">a DCI format for the second scheduling information corresponding to a fallback mode is a DCI format 1A.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00006" num="00006">
+<div class="claim-text">6. A method for transmitting a user equipment (UE)-specific reference signal based-downlink data channel by a base station (BS) in a wireless communication system, the method comprising:
+<div class="claim-text">transmitting, to the UE, a downlink control channel including either first scheduling information or second scheduling information; and</div>
+<div class="claim-text">transmitting the UE-specific reference signal based-downlink data channel to the UE based on the downlink control channel,</div>
+<div class="claim-text">wherein, when the downlink control channel includes the first scheduling information, antenna ports of a certain reference signal which can be assumed to be quasi co-located with antenna ports of a UE-specific reference signal are configured by an indicator indicating one of two or more parameters configured by a higher layer, and</div>
+<div class="claim-text">wherein, when the downlink control channel includes the second scheduling information, the antenna ports of a certain reference signal are configured by a parameter of a minimum index among the two or more parameters.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00007" num="00007">
+<div class="claim-text">7. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein a large scale property for the UE-specific reference signal is obtained based on the antenna ports of the certain reference signal which is assumed to be quasi co-located with the antenna ports of the UE-specific reference signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00008" num="00008">
+<div class="claim-text">8. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein a large scale property for the UE-specific reference signal comprises at least one of Doppler spread, Doppler shift, average delay and delay spread.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00009" num="00009">
+<div class="claim-text">9. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein the certain reference signal is a channel status information-reference signal (CSI-RS).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00010" num="00010">
+<div class="claim-text">10. The method of <claim-ref idref="CLM-00006">claim 6</claim-ref>, wherein
+<div class="claim-text">a downlink control information (DCI) format for the first scheduling information corresponding to a normal mode is a DCI format 2D, and</div>
+<div class="claim-text">a DCI format for the second scheduling information corresponding to a fallback mode is a DCI format 1A.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00011" num="00011">
+<div class="claim-text">11. A user equipment (UE) in a wireless communication system, the UE comprising:
+<div class="claim-text">a radio frequency (RF) module; and</div>
+<div class="claim-text">a processor operatively coupled with the RF module, and configured to receive a downlink control channel including either first scheduling information or second scheduling information from a network and receive a UE-specific reference signal based-downlink data channel from the network based on the downlink control channel,</div>
+<div class="claim-text">wherein, when the downlink control channel includes the first scheduling information, antenna ports of a certain reference signal which can be assumed to be quasi co-located with antenna ports of a UE-specific reference signal are configured by an indicator indicating one of two or more parameters configured by a higher layer, and</div>
+<div class="claim-text">wherein, when the downlink control channel includes the second scheduling information, the antenna ports of a certain reference signal are configured by a parameter of a minimum index among the two or more parameters.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00012" num="00012">
+<div class="claim-text">12. The UE of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein a large scale property for the UE-specific reference signal is obtained based on the antenna ports of the certain reference signal which is assumed to be quasi co-located with the antenna ports of the UE-specific reference signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00013" num="00013">
+<div class="claim-text">13. The UE of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein a large scale property for the UE-specific reference signal comprises at least one of Doppler spread, Doppler shift, average delay and delay spread.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00014" num="00014">
+<div class="claim-text">14. The UE of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the certain reference signal is a channel status information-reference signal (CSI-RS).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00015" num="00015">
+<div class="claim-text">15. The UE of <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein,
+<div class="claim-text">a downlink control information (DCI) format for the first scheduling information corresponding to a normal mode is a DCI format 2D, and</div>
+<div class="claim-text">a DCI format for the second scheduling information corresponding to a fallback mode is a DCI format 1A.</div>
+</div>
+</div>
+</div> <div class="claim"> <div class="claim" id="CLM-00016" num="00016">
+<div class="claim-text">16. A base station (BS) in a wireless communication system, the BS comprising:
+<div class="claim-text">a radio frequency (RF) module; and</div>
+<div class="claim-text">a processor operatively coupled with the RF module, and configured to transmit a downlink control channel including either first scheduling information or second scheduling information to the UE and transmit a UE-specific reference signal based-downlink data channel to the UE based on the downlink control channel,</div>
+<div class="claim-text">wherein, when the downlink control channel includes the first scheduling information, antenna ports of a certain reference signal which can be assumed to be quasi co-located with antenna ports of a UE-specific reference signal are configured by an indicator indicating one of two or more parameters configured by a higher layer, and</div>
+<div class="claim-text">wherein, when the downlink control channel includes the second scheduling information, the antenna ports of a certain reference signal are configured by a parameter of a minimum index among the two or more parameters.</div>
+</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00017" num="00017">
+<div class="claim-text">17. The BS of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein a large scale property for the UE-specific reference signal is obtained based on the antenna ports of the certain reference signal which is assumed to be quasi co-located with the antenna ports of the UE-specific reference signal.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00018" num="00018">
+<div class="claim-text">18. The BS of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein a large scale property for the UE-specific reference signal comprises at least one of Doppler spread, Doppler shift, average delay and delay spread.</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00019" num="00019">
+<div class="claim-text">19. The BS of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein the certain reference signal is a channel status information-reference signal (CSI-RS).</div>
+</div>
+</div> <div class="claim-dependent"> <div class="claim" id="CLM-00020" num="00020">
+<div class="claim-text">20. The BS of <claim-ref idref="CLM-00016">claim 16</claim-ref>, wherein
+<div class="claim-text">a downlink control information (DCI) format for the first scheduling information corresponding to a normal mode is a DCI format 2D, and</div>
+<div class="claim-text">a DCI format for the second scheduling information corresponding to a fallback mode is a DCI format 1A.</div>
+</div>
+</div>
+</div> </div>
+</div>
+</section>
+                </article>
+            </search-app>
+        </body>
+    </html>
+    

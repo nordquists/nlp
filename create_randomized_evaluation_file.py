@@ -69,7 +69,7 @@ if __name__ == "__main__":
         os.makedirs('./eval')
 
     word_set, samples = read_output_files(files)
-c
+
     create_sample_file(samples)
 
     shuffled_word_list = randomize_word_set(word_set)

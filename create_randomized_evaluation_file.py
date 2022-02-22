@@ -3,6 +3,7 @@ import sys
 import os
 from random import sample
 import hashlib
+import random
 
 NUM_SAMPLES = 100
 

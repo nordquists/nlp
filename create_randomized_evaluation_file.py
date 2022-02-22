@@ -29,7 +29,6 @@ def read_words_from_output_file(filename):
         for line in f:
             items = line.split('\t')
             terms.append(items[0].strip())
-    print(terms)
     return terms
 
 def read_output_files(files):
@@ -43,7 +42,9 @@ def read_output_files(files):
     return word_set, samples
 
 def randomize_word_set(word_set):
-    return random.shuffle(list(word_set))
+    word_list = list(word_set)
+    random.shuffle(word_list)
+    return word_list
 
 def create_sample_file(samples):
     with open('./eval/samples.smpl', "w") as f:
@@ -68,9 +69,7 @@ if __name__ == "__main__":
         os.makedirs('./eval')
 
     word_set, samples = read_output_files(files)
-
-    print(word_set)
-
+c
     create_sample_file(samples)
 
     shuffled_word_list = randomize_word_set(word_set)

@@ -50,7 +50,7 @@ def create_sample_file(samples):
     with open('./eval/samples.smpl', "w") as f:
         for i, sample in enumerate(samples):
             for word in sample:
-                f.write(f"{i}\t{word}")
+                f.write(f"{i}\t{word} \n")
 
 def write_evaluation_file(sampled_words, output_filename):
     with open(f'./eval/{output_filename}.csv', "w") as f:

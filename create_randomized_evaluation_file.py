@@ -1,5 +1,6 @@
 import csv  
 import sys
+import os
 from random import sample
 import hashlib
 
@@ -28,39 +29,45 @@ def read_words_from_output_file(filename):
 
     return terms
 
-def 
-
 def read_output_files(files):
+    samples = list()
     word_set = set()
     for file in files:
-        word_set.union(
-            set(
-                get_sample(
-                    read_words_from_output_file(file)
-                )
-            ))
+        words = get_sample(read_words_from_output_file(file))
+        word_set.union(set(words))
+        samples.append(words)
     
-    return word_set
+    return word_set, samples
 
 def randomize_word_set(word_set):
     return random.shuffle(list(word_set))
 
+def create_sample_file(samples):
+    with open(f'./eval/samples.smpl', "w") as f:
+        for i, sample in enumerate(samples):
+            for word in sample:
+                f.write(f"{i}\t{word}")
 
-
-
+def write_evaluation_file(sampled_words, output_filename):
+    with open(f'./eval/{output_filename}.csv', "w") as f:
+        writer = csv.writer(f)
+        writer.writerow(['word','valid','notes'])
+        for word in sampled_words:
+            writer.writerow([word,'',''])
 
 
 if __name__ == "__main__":
     # We will read in all term files that are passed in with the
     # format: python create_randomized_evaluation_file "file1 file2 file3"
-    files = sys.argv[1].split(' ')
+    files = ['l4_base.out_term_list', 'l4_l3.out_term_list', 'l4_l2.out_term_list', 'l4_l1.out_term_list']
 
-    word_set = read_output_files(files)
+    if not os.path.exists('./eval'):
+        os.makedirs('./eval')
 
+    word_set, samples = read_output_files(files)
 
-
+    create_sample_file(samples)
 
     shuffled_word_list = randomize_word_set(word_set)
 
-
-    pass
+    write_evaluation_file(sampled_words, 'collated_words')

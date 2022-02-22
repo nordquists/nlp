@@ -73,4 +73,4 @@ if __name__ == "__main__":
 
     shuffled_word_list = randomize_word_set(word_set)
 
-    write_evaluation_file(sampled_words, 'collated_words')
+    write_evaluation_file(shuffled_word_list, 'collated_words')

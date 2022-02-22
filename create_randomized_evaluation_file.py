@@ -43,7 +43,7 @@ def randomize_word_set(word_set):
     return random.shuffle(list(word_set))
 
 def create_sample_file(samples):
-    with open(f'./eval/samples.smpl', "w") as f:
+    with open('./eval/samples.smpl', "w") as f:
         for i, sample in enumerate(samples):
             for word in sample:
                 f.write(f"{i}\t{word}")

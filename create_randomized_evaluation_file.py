@@ -37,7 +37,7 @@ def read_output_files(files):
     word_set = set()
     for f in files:
         words = get_sample(read_words_from_output_file(f))
-        word_set.union(set(words))
+        word_set = word_set | set(words)
         samples.append(words)
     
     return word_set, samples

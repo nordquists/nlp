@@ -29,14 +29,14 @@ def read_words_from_output_file(filename):
         for line in f:
             items = line.split('\t')
             terms.append(items[0].strip())
-
+    print(terms)
     return terms
 
 def read_output_files(files):
     samples = list()
     word_set = set()
-    for file in files:
-        words = get_sample(read_words_from_output_file(file))
+    for f in files:
+        words = get_sample(read_words_from_output_file(f))
         word_set.union(set(words))
         samples.append(words)
     

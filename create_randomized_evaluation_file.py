@@ -4,6 +4,8 @@ import os
 from random import sample
 import hashlib
 
+NUM_SAMPLES = 100
+
 def get_sample(terms):
     total_length = len(terms)
     fifth = total_length // 5

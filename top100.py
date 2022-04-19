@@ -39,6 +39,6 @@ if __name__ == '__main__':
 
     top = get_top(words)
     for word in top:
-        print(top)
+        print(word)
 
     write_evaluation_file(top, output_filename)
